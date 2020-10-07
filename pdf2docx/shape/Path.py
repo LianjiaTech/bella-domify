@@ -26,7 +26,8 @@ Paths are created based on DICT data extracted from `pdf2docx.common.pdf` module
 '''
 
 import fitz
-from ..common import pdf
+from ..common.base import lazyproperty
+from ..common import pdf, constants
 from ..common.Collection import BaseCollection
 from ..common.utils import RGB_component, get_main_bbox
 from ..image.Image import ImagesExtractor
@@ -98,13 +99,11 @@ class PathsExtractor:
 class Paths(BaseCollection):
     '''A collection of paths.'''
     
-    @property
+    @lazyproperty
     def bbox(self):
-        if not hasattr(self, '_bbox'):
-            bbox = fitz.Rect()
-            for instance in self._instances: bbox |= instance.bbox
-            self._bbox = bbox
-        return self._bbox
+        bbox = fitz.Rect()
+        for instance in self._instances: bbox |= instance.bbox
+        return bbox
     
     def contains_curve(self, ratio:float):
         ''' Whether any curve paths exist. 
