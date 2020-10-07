@@ -11,6 +11,24 @@ ITP = 72.0
 # tolerant rectangle area
 DR = fitz.Rect(-DM, -DM, DM, DM) / 2.0
 
+# -------------------------------------
+# page parameters
+# -------------------------------------
+DM_PAGE = 5.0 * PT
+FACTOR_PAGE_MARGIN = 0.5     # page margin factor
+
+
+# -------------------------------------
+# path extracting
+# -------------------------------------
+N_BEZIER_SAMPLE = 5
+IGNORE_VEC_GRAPH = False
+FACTOR_RES = 3.0             # improve image resolution
+
+
+# -------------------------------------
+# table parsing
+# -------------------------------------
 # max/min width of table border in docx
 MAX_W_BORDER = 6.0
 MIN_W_BORDER = 0.25
