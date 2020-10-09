@@ -8,8 +8,13 @@ DM = 1.0
 # inch to point
 ITP = 72.0
 
-# tolerant rectangle area
-DR = fitz.Rect(-DM, -DM, DM, DM) / 2.0
+FACTOR_SAME = 0.99
+FACTOR_ALMOST = 0.95
+FACTOR_MOST = 0.90
+FACTOR_MAJOR = 0.75
+FACTOR_A_HALF = 0.5
+FACTOR_A_FEW = 0.1
+FACTOR_FEW = 0.01
 
 # -------------------------------------
 # page parameters
