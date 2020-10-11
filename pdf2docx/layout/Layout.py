@@ -38,10 +38,8 @@ from .Blocks import Blocks
 from ..shape.Shapes import Shapes
 from ..table.TablesConstructor import TablesConstructor
 from ..common.BBox import BBox
-from ..common.base import PlotControl
 from ..common.utils import debug_plot
-from ..common.constants import DM, ITP
-from ..common.pdf import new_page_with_margin
+from ..common import constants
 
 
 class Layout:
