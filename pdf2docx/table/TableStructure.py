@@ -9,8 +9,8 @@ Parsing table structure based on borders.
 
 from ..common.BBox import BBox
 from ..common.base import RectType
-from ..common.utils import RGB_value
-from ..common.constants import DM, MAX_W_BORDER
+from ..common.utils import RGB_value, get_main_bbox
+from ..common import constants
 from ..shape.Shape import Stroke
 from ..shape.Shapes import Shapes
 from ..text.Lines import Lines
@@ -117,10 +117,11 @@ class TableStructure:
                 # modify the cell bbox from border center to inner region
                 inner_bbox = (bbox[0]+w_left/2.0, bbox[1]+w_top/2.0, bbox[2]-w_right/2.0, bbox[3]-w_bottom/2.0)
                 target_bbox = BBox().update_bbox(inner_bbox)
-                shading_rect = shadings.containing_bbox(target_bbox.bbox, threshold=0.9)
-                if shading_rect:
-                    shading_rect.type = RectType.SHADING # ATTENTION: set shaing type
-                    bg_color = shading_rect.color
+                for shading in shadings:
+                    if get_main_bbox(shading.bbox, target_bbox.bbox, threshold=constants.FACTOR_MOST):
+                        shading.type = RectType.SHADING # ATTENTION: set shaing type
+                        bg_color = shading.color
+                        break
                 else:
                     bg_color = None
 
