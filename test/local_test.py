@@ -113,11 +113,12 @@ if __name__ == '__main__':
         'demo-table-bottom', 
         'demo-table-nested', 
         'demo-table-shading', 
+        'demo-table-shading-highlight',
         'demo-table-border-style', 
         'demo-table-align-borders'
     ]
 
-    filename = 'demo-image'
-    local_test(filename, make_test_case=False)
+    filename = 'demo-table-shading-highlight'
+    local_test(filename, compare=False, make_test_case=True)
 
     # for filename in filenames: local_test(filename, make_test_case=True)

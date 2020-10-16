@@ -24,7 +24,7 @@ more link:
 import os
 import json
 
-from pdf2docx import Converter, Layout
+from pdf2docx import Converter, Layout, extract_tables, parse
 from pdf2docx.text.TextSpan import TextSpan
 
 
@@ -198,6 +198,10 @@ class Test_Main(Utility):
     def test_table_shading(self):
         '''sample file focusing on simulating shape with shading cell.'''
         self.init_test('demo-table-shading').verify_layout(threshold=0.95)
+    
+    def test_table_shading_highlight(self):
+        '''test distinguishing table shading and highlight.'''
+        self.init_test('demo-table-shading-highlight').verify_layout(threshold=0.95)
 
     def test_lattice_table(self):
         '''sample file focusing on lattice table with very close text underlines to table borders.'''
@@ -222,13 +226,41 @@ class Test_Main(Utility):
         self.init_test('demo-text-scaling').verify_layout(threshold=0.95)
 
     def test_path_transformation(self):
-        '''sample file focusing on path transformation.
-            In this case, the (0,0) origin is out of the page.
-        '''
+        '''test path transformation. In this case, the (0,0) origin is out of the page.'''
         self.init_test('demo-path-transformation').verify_layout(threshold=0.95)
 
+
+    # ------------------------------------------
+    # table contents
+    # ------------------------------------------
+    def test_extracting_table(self):
+        '''test extracting contents from table.'''
+        filename = 'demo-table'
+        pdf_file = os.path.join(self.sample_dir, f'{filename}.pdf')
+        tables = extract_tables(pdf_file, start=0, end=1)
+
+        # compare the last table
+        sample = [
+            ['Input ', None, None, None, None, None],
+            ['Description A ', 'mm ', '30.34 ', '35.30 ', '19.30 ', '80.21 '],
+            ['Description B ', '1.00 ', '5.95 ', '6.16 ', '16.48 ', '48.81 '],
+            ['Description C ', '1.00 ', '0.98 ', '0.94 ', '1.03 ', '0.32 '],
+            ['Description D ', 'kg ', '0.84 ', '0.53 ', '0.52 ', '0.33 '],
+            ['Description E ', '1.00 ', '0.15 ', None, None, None],
+            ['Description F ', '1.00 ', '0.86 ', '0.37 ', '0.78 ', '0.01 ']
+        ]
+        assert tables[-1]==sample
+
     
-    def test_unnamed_fonts(self):
-        '''Unnamed fonts destroy span bbox, and accordingly line/block layout.
-        '''
-        self.init_test('demo-unnamed-fonts').verify_layout(threshold=0.95)
+    # ------------------------------------------
+    # command line arguments
+    # ------------------------------------------
+    def test_multi_pages(self):
+        '''test converting pdf with multi-pages.'''
+        filename = 'demo'
+        pdf_file = os.path.join(self.sample_dir, f'{filename}.pdf')
+        docx_file = os.path.join(self.output_dir, f'{filename}.docx')    
+        parse(pdf_file, docx_file, start=1, end=5)
+
+        # check file        
+        assert os.path.isfile(docx_file)
