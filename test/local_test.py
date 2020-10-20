@@ -87,7 +87,7 @@ def local_test(filename, make_test_case=False):
         #     f.write(page.getSVGimage(text_as_path=False))
         
         # parse layout
-        cv.make_page(page)
+        cv.debug_page(page)
         
         # # extract tables
         # tables = cv.extract_tables(page)
@@ -118,7 +118,7 @@ if __name__ == '__main__':
         'demo-table-align-borders'
     ]
 
-    filename = 'demo-table-shading-highlight'
-    local_test(filename, compare=False, make_test_case=True)
+    filename = 't4'
+    local_test(filename, compare=False, make_test_case=False)
 
     # for filename in filenames: local_test(filename, make_test_case=True)
