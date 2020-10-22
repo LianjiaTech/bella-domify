@@ -59,9 +59,9 @@ def check_result(pdf_file, docx_file, compare_file_name, make_test_case):
         print(f'Please convert {docx_file} to {docx_pdf_file} in advance.')
 
 
-def local_test(filename, make_test_case=False):
-    pdf_file = os.path.join(output, f'{filename}.pdf')
-    docx_file = os.path.join(output, f'{filename}.docx')
+def local_test(sub_path, filename, compare=False, make_test_case=False):
+    pdf_file = os.path.join(output, sub_path, f'{filename}.pdf')
+    docx_file = os.path.join(output, sub_path, f'{filename}.docx')
 
     cv = Converter(pdf_file, docx_file)
 
@@ -81,7 +81,9 @@ def local_test(filename, make_test_case=False):
         # with open('c.txt', 'w') as f:
         #     f.write(c)
         
-        # print(cv.doc_pdf.xrefObject(94))
+        # print(cv.doc_pdf.xrefObject(6))
+        # print(cv.doc_pdf._getXrefString(7))
+
 
         # with open('x.svg', 'w') as f:
         #     f.write(page.getSVGimage(text_as_path=False))
@@ -118,7 +120,8 @@ if __name__ == '__main__':
         'demo-table-align-borders'
     ]
 
-    filename = 't4'
-    local_test(filename, compare=False, make_test_case=False)
+    sub_path = 'issue-57'
+    filename = 'test1'
+    local_test(sub_path, filename, compare=False, make_test_case=False)
 
     # for filename in filenames: local_test(filename, make_test_case=True)
