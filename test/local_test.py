@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ''' local test file for developing, with pdf2docx installed by
-    `python setpy.py develop`
+    `python setup.py develop`
 '''
 
 import os
@@ -51,7 +51,7 @@ def check_result(pdf_file, docx_file, compare_file_name, make_test_case):
         if make_test_case:
             layout_file = filename.replace('.pdf', '.json')
             print(f'Copy to {layout_file}...')
-            shutil.move(os.path.join(output, 'layout.json'), os.path.join(output, 'layouts', layout_file))
+            shutil.move(os.path.join(os.path.dirname(pdf_file), 'layout.json'), os.path.join(output, 'layouts', layout_file))
 
         print()
 
@@ -120,8 +120,8 @@ if __name__ == '__main__':
         'demo-table-align-borders'
     ]
 
-    sub_path = 'issue-57'
-    filename = 'test1'
-    local_test(sub_path, filename, compare=False, make_test_case=False)
+    sub_path = 'samples'
+    filename = 'demo-table-close-underline'
+    local_test(sub_path, filename, compare=True, make_test_case=True)
 
     # for filename in filenames: local_test(filename, make_test_case=True)
