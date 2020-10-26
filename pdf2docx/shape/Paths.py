@@ -64,7 +64,7 @@ class PathsExtractor:
 
         iso_paths, pixmaps = [], []
         for paths_group in paths_group_list:
-            largest = max(paths_group, key=lambda paths: paths.bbox.getArea())
+            largest = max(paths_group, key=lambda paths: paths.bbox.getArea()) # type: Paths
             if largest.contains_curve(constants.FACTOR_A_FEW):
                 image = largest.to_image(page, constants.FACTOR_RES, constants.FACTOR_ALMOST)
             else:
@@ -99,9 +99,12 @@ class PathsExtractor:
         raw_paths.extend(self.annotation_to_paths(page))
 
         # init Paths
-        instances = [Path(raw_path) for raw_path in raw_paths]
-        self.paths.reset(instances)
-    
+        self.paths.reset([])
+        for raw_path in raw_paths:
+            path = Path(raw_path)
+            # ignore path out of page
+            if path.bbox and not path.bbox.intersects(page.rect): continue
+            self.paths.append(path)
 
     @staticmethod
     def annotation_to_paths(page):
@@ -157,8 +160,12 @@ class Paths(BaseCollection):
             - ratio: don't convert to image if the size of image exceeds this value,
             since we don't prefer converting the whole page to an image.
         '''
+        # ignore images outside page
+        if not self.bbox.intersects(page.rect): return None
+
         # NOTE: the image size shouldn't exceed a limitation.
-        if self.bbox.getArea()/page.rect.getArea()>=ratio: return None        
+        # if self.bbox.getArea()/page.rect.getArea()>=ratio: return None
+
         return ImagesExtractor.clip_page(page, self.bbox, zoom)
     
 
