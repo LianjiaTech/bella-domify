@@ -2,7 +2,6 @@
 
 import random
 from collections import deque
-import fitz
 from fitz.utils import getColorList, getColorInfoList
 from . import pdf
 
@@ -75,24 +74,25 @@ def RGB_value(components:list):
     return color
 
 
-def get_main_bbox(bbox_1:fitz.Rect, bbox_2:fitz.Rect, threshold:float=0.95):
-    ''' If the intersection of bbox_1 and bbox_2 exceeds the threshold, return the union of
-        these two bbox-es; else return None.
+# -------------------------
+# pdf plot
+# -------------------------
+def new_page(doc, width:float, height:float, title:str):
+    ''' Insert a new page with given title.
+        ---
+        Args:
+        - doc: fitz.Document
+        - width, height: page size
+        - title: page title shown in page
     '''
-    # areas
-    b = bbox_1 & bbox_2
-    a1, a2, a = bbox_1.getArea(), bbox_2.getArea(), b.getArea()
+    # insert a new page
+    page = doc.newPage(width=width, height=height)    
 
-    # no intersection
-    if not b: return fitz.Rect()
-
-    # Note: if bbox_1 and bbox_2 intersects with only an edge, b is not empty but b.getArea()=0
-    # so give a small value when they're intersected but the area is zero
-    factor = a/min(a1,a2) if a else 1e-6
-    if factor >= threshold:
-        return bbox_1 | bbox_2
-    else:
-        return fitz.Rect()
+    # plot title at the top-left corner
+    gray = RGB_component_from_name('gray')
+    page.insertText((5, 16), title, color=gray, fontsize=15)
+    
+    return page
 
 
 def debug_plot(title:str):
