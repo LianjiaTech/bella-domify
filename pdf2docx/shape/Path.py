@@ -72,7 +72,52 @@ class R:
                     'color': RGB_value(color)
                 })
         return strokes
+
+
+class C(Segment):
+    '''Bezier curve path with source ("c", p1, p2, p3, p4)'''
+    pass
+
+
+class Segments:
+    '''A sub-path composed of one or more segments.'''
+    def __init__(self, items:list, close_path=False): 
+        self._instances = [] # type: list[Segment]
+        for item in items:
+            if   item[0] == 'l' : self._instances.append(L(item))
+            elif item[0] == 'c' : self._instances.append(C(item))
+            elif item[0] == 're': self._instances.append(R(item))
+        
+        # close path
+        if close_path and len(items)>=2:
+            item = ('l', items[-1][-1], items[0][1])
+            self._instances.append(L(item))
+
+        # calculate bbox
+        self.bbox = self.cal_bbox()
+
     
+    def __iter__(self): return (instance for instance in self._instances)
+
+
+    @property
+    def is_iso_oriented_line(self): return bool(self.bbox) and not bool(self.bbox.getArea())
+
+
+    def cal_bbox(self):
+        '''bbox of Segments. Note for iso-oriented segments, bbox.getArea()==0.'''
+        # rectangle area
+        if len(self._instances)==1 and isinstance(self._instances[0], R):
+            return self._instances[0].rect
+        
+        # calculate bbox of lines and curves area
+        points = []
+        for segment in self._instances: points.extend(segment.points)
+        x0 = min(points, key=lambda point: point[0])[0]
+        y0 = min(points, key=lambda point: point[1])[1]
+        x1 = max(points, key=lambda point: point[0])[0]
+        y1 = max(points, key=lambda point: point[1])[1]
+        return fitz.Rect(x0, y0, x1, y1)
 
 class C:
     '''Bezier curve path with source ("c", p1, p2, p3, p4)'''
@@ -87,6 +132,7 @@ class C:
         return None   
 
 
+
 class Path:
     '''Path extracted from PDF, either/both a stroke or/and a filling.'''
 
@@ -95,8 +141,20 @@ class Path:
         # all path properties
         self.raw = raw if raw else {}
 
-        # path area
-        self.bbox = self.raw['rect']
+        # path segments
+        self.items = [] # type: list[Segments]
+        self.bbox = fitz.Rect()
+        close_path, w = raw['closePath'], raw['width']
+        for segments in self.group_segments(raw['items']):
+            S = Segments(segments, close_path)
+            self.items.append(S)
+
+            # update bbox: note iso-oriented line segments, e.g. S.bbox.getArea()==0
+            rect = S.bbox
+            if S.is_iso_oriented_line: 
+                print(S.bbox, w)
+                rect += (-w, -w, w, w)
+            self.bbox |= rect
 
         # command list
         self.items = [] # type: list[L or R or C]
