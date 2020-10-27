@@ -50,6 +50,7 @@ class ImagesExtractor:
             'image': image.getPNGData()
         }
 
+
     @classmethod
     def clip_page(cls, page:fitz.Page, bbox:fitz.Rect=None, zoom:float=3.0):
         '''Clip page pixmap (without text) according to `bbox` (entire page by default).
@@ -70,9 +71,10 @@ class ImagesExtractor:
         # improve resolution
         # - https://pymupdf.readthedocs.io/en/latest/faq.html#how-to-increase-image-resolution
         # - https://github.com/pymupdf/PyMuPDF/issues/181
-        if bbox is None: bbox = page.rect
+        bbox = page.rect if bbox is None else bbox & page.rect
         image = page.getPixmap(clip=bbox, matrix=fitz.Matrix(zoom, zoom)) # type: fitz.Pixmap
         return cls.to_raw_dict(image, bbox)
+
 
     @classmethod
     def extract_images(cls, page:fitz.Page):
@@ -112,6 +114,46 @@ class ImagesExtractor:
                 raw_dict = cls.to_raw_dict(pix, bbox)
             images.append(raw_dict)
         return images
+
+
+    @staticmethod
+    def recover_pixmap(doc:fitz.Document, item:list):
+        '''Restore pixmap with soft mask considered.
+            ---
+            - doc: fitz document
+            - item: an image item got from page.getImageList()
+
+            Read more:
+            - https://pymupdf.readthedocs.io/en/latest/document.html#Document.getPageImageList        
+            - https://pymupdf.readthedocs.io/en/latest/faq.html#how-to-handle-stencil-masks
+            - https://github.com/pymupdf/PyMuPDF/issues/670
+        '''
+        # data structure of `item`:
+        # (xref, smask, width, height, bpc, colorspace, ...)
+        x = item[0]  # xref of PDF image
+        s = item[1]  # xref of its /SMask
+
+        # base image
+        pix = fitz.Pixmap(doc, x)
+
+        # reconstruct the alpha channel with the smask if exists
+        if s > 0:        
+            # copy of base image, with an alpha channel added
+            pix = fitz.Pixmap(pix, 1)  
+            
+            # create pixmap of the /SMask entry
+            ba = bytearray(fitz.Pixmap(doc, s).samples)
+            for i in range(len(ba)):
+                if ba[i] > 0: ba[i] = 255
+            pix.setAlpha(ba)
+
+        # we may need to adjust something for CMYK pixmaps here -> 
+        # recreate pixmap in RGB color space if necessary
+        # NOTE: pix.colorspace may be None for images with alpha channel values only
+        if pix.colorspace and not pix.colorspace.name in (fitz.csGRAY.name, fitz.csRGB.name):
+            pix = fitz.Pixmap(fitz.csRGB, pix)
+
+        return pix
 
 
 class Image(BBox):
