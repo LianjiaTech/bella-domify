@@ -2,6 +2,7 @@
 
 import random
 from collections import deque
+from collections.abc import Iterable
 from fitz.utils import getColorList, getColorInfoList
 from . import pdf
 
@@ -14,6 +15,19 @@ def is_number(str_number):
     else:
         return True
 
+
+def flatten(items, klass):
+    '''Yield items from any nested iterable.'''
+    for item in items:
+        if isinstance(item, Iterable) and not isinstance(item, klass):
+            yield from flatten(item, klass)
+        else:
+            yield item
+
+
+# -------------------------
+# color methods
+# -------------------------
 def RGB_component_from_name(name:str=''):
     '''Get a named RGB color (or random color) from fitz predefined colors, e.g. 'red' -> (1.0,0.0,0.0).'''
     # get color index
