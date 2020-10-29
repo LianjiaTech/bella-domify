@@ -31,8 +31,7 @@ structure.
 import base64
 import fitz
 from ..common.BBox import BBox
-from ..common.pdf import recover_pixmap
-from ..common.base import BlockType
+from ..common.share import BlockType
 
 
 class ImagesExtractor:

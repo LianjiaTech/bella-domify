@@ -23,7 +23,8 @@ Data structure based on results of `page.getDrawings()`:
 }
 '''
 
-from ..common.utils import RGB_value
+import fitz
+from ..common.share import rgb_value
 
 
 class L:
@@ -43,7 +44,7 @@ class L:
                 'start': tuple(self.p1),
                 'end'  : tuple(self.p2),
                 'width': width,
-                'color': RGB_value(color)
+                'color': rgb_value(color)
             })
         return strokes
 
@@ -69,7 +70,7 @@ class R:
                     'start': points[i],
                     'end'  : points[i+1],
                     'width': width * 2.0, # seems need adjustment by * 2.0
-                    'color': RGB_value(color)
+                    'color': rgb_value(color)
                 })
         return strokes
 
@@ -131,6 +132,12 @@ class C:
         '''Curve path doesn't contribute to table parsing.'''
         return None   
 
+    def to_fill(self, color:list):
+        '''Convert segment closed area to a fill.'''
+        return {
+            'bbox' : list(self.bbox), 
+            'color': rgb_value(color)
+        }
 
 
 class Path:
