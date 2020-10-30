@@ -29,7 +29,7 @@ from .Annot import Annot
 class Paths(Collection):
     '''A collection of paths.'''
 
-    def from_dicts(self, raws:list):
+    def restore(self, raws:list):
         '''Initialize paths from raw data get by `page.getDrawings()`.'''
         rect = (0, 0, self.parent.width, self.parent.height)
         for raw in raws:
