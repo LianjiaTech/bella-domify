@@ -102,9 +102,12 @@ class Shapes(Collection):
         # sort in reading order
         self.sort_in_reading_order()
 
-        # remove shapes out of page
-        page_bbox = (0.0, 0.0, self.parent.width, self.parent.height)
-        f = lambda shape: shape.bbox.intersects(page_bbox)
+        # clean up shapes:
+        # - remove shapes out of page
+        # - remove small shapes
+        page_bbox = self.parent.bbox
+        f = lambda shape: shape.bbox.intersects(page_bbox) and \
+                        (shape.bbox.width>=shape_min_dimension or shape.bbox.height>=shape_min_dimension)
         shapes = filter(f, self._instances)
 
         # merge shapes if:
