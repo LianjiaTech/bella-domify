@@ -8,7 +8,7 @@ import os
 import sys
 import shutil
 from pdf2docx import Converter
-from pdf2docx.common.BBox import BBox
+from pdf2docx.common.Element import Element
 
 script_path = os.path.abspath(__file__) # current script path
 output = os.path.dirname(script_path)
@@ -61,7 +61,7 @@ def compare_layput(filename_source, filename_target, filename_output, threshold=
             source_page.drawRect(target_rect, color=(1,0,0), overlay=True) # current position
 
             # check bbox word by word: ignore small bbox, e.g. single letter bbox
-            if not BBox().update_bbox(source_rect).get_main_bbox(target_rect, threshold):
+            if not Element().update_bbox(source_rect).get_main_bbox(target_rect, threshold):
                 flag = False
                 errs.append((f'{sample[4]} ===> {test[4]}', target_rect, source_rect))
         
