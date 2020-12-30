@@ -14,7 +14,7 @@ Regarding annotation path:
 - https://pymupdf.readthedocs.io/en/latest/vars.html#annotation-types
 
 @created: 2020-09-22
-@author: train8808@gmail.com
+
 '''
 
 
