@@ -175,7 +175,7 @@ class Page:
         '''Store parsed layout.'''
         return {
             'id'    : self.id,
-            'finalized': self.finalized,
+            'finalized': int(self.finalized),
             'width' : self.width,
             'height': self.height,
             'margin': self.margin,
@@ -199,13 +199,10 @@ class Page:
         # initialize shapes: to add rectangles later
         self.shapes.restore(data.get('shapes', []))
 
+        # whether this layout is finalized already
+        self.finalized = data.get('finalized', True)
+
         return self
-
-
-    def serialize(self, filename:str):
-        '''Write layout to specified file.'''
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(self.store(), indent=4))
 
 
     def extract_tables(self):
@@ -266,9 +263,6 @@ class Page:
         # initialize layout
         data = self.__source_from_page(self.fitz_page) if self.fitz_page else {}
         self.restore(data)
-
-        # whether this layout is finalized already
-        self.finalized = data.get('finalized', False)
 
         return self.blocks
 
