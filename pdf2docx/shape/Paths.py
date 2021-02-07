@@ -59,13 +59,6 @@ class Paths(Collection):
         return self.curve_area/area >= ratio if area else False
 
 
-    def append(self, path): self._instances.append(path)
-
-
-    def extend(self, paths):
-        for path in paths: self.append(path)
-
-
     def plot(self, page):
         """Plot paths for debug purpose.
 
