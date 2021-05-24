@@ -43,7 +43,7 @@ from ..shape.Shape import Shape
 class TextSpan(Element):
     '''Object representing text span.'''
     def __init__(self, raw:dict=None):
-        if raw is None: raw = {}
+        raw = raw or {}
         self.color = raw.get('color', 0)
         self.font = raw.get('font', '')
         self.size = raw.get('size', 12.0)
@@ -341,11 +341,32 @@ class TextSpan(Element):
         return span
 
 
-    def make_docx(self, paragraph):
-        '''Add text span to a docx paragraph.'''
-        # set text
-        docx_span = paragraph.add_run(self.text)        
+    def make_docx(self, paragraph, condense:bool=False):
+        '''Add text span to a docx paragraph, and set text style, e.g. font, color, underline, hyperlink, etc.
 
+        .. note::
+            Hyperlink and its style is parsed separately from pdf. For instance, regarding a general hyperlink with an
+            underline, the text and uri is parsed as hyperlink itself, while the underline is treated as a normal text
+            style.
+        '''
+        # Create hyperlink in particular, otherwise add a run directly
+        for style in self.style:
+            if style['type']==RectType.HYPERLINK.value and self.text.strip():
+                docx_run = docx.add_hyperlink(paragraph, style['uri'], self.text)
+                break
+        else:
+            docx_run = paragraph.add_run(self.text)
+        
+        # set text style, e.g. font, underline and highlight
+        self._set_text_format(docx_run)
+
+        # condense charaters to avoid potential line break
+        if condense:
+            docx.set_char_spacing(docx_run, -0.25)
+
+
+    def _set_text_format(self, docx_run):
+        '''Set text format for ``python-docx.run`` object.'''
         # set style
         # https://python-docx.readthedocs.io/en/latest/api/text.html#docx.text.run.Font
 
@@ -397,6 +418,4 @@ class TextSpan(Element):
             
             # same color with text for strike line
             elif t==RectType.STRIKE.value:
-                docx_span.font.strike = True
-
-        
+                docx_run.font.strike = True
