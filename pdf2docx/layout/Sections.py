@@ -32,16 +32,19 @@ class Sections(BaseCollection):
         '''Create sections in docx.'''        
         if not self: return
 
+        def create_dummy_paragraph_for_section(section):
+            p = doc.add_paragraph()
+            line_height = min(section.before_space, 11)
+            pf = reset_paragraph_format(p, line_spacing=Pt(line_height))
+            pf.space_after = Pt(section.before_space-line_height)
+            return p
+
         # ---------------------------------------------------
         # first section
         # ---------------------------------------------------
         # vertical position
-        p = doc.add_paragraph()
-        line_height = min(self[0].before_space, 11)
-        pf = reset_paragraph_format(p, line_spacing=Pt(line_height))
-        pf.space_after = Pt(self[0].before_space-line_height)
-        if self[0].num_cols==2: 
-            doc.add_section(WD_SECTION.CONTINUOUS)
+        section = self[0]
+        p0 = create_dummy_paragraph_for_section(section)
         
         # create first section
         self[0].make_docx(doc)        
@@ -65,8 +68,9 @@ class Sections(BaseCollection):
         # ---------------------------------------------------
         # create floating images
         # ---------------------------------------------------
+        # lazy: assign all float images to the first paragraph
         for image in self.parent.float_images:
-            image.make_docx(p)
+            image.make_docx(p0)
 
 
     def plot(self, page):
