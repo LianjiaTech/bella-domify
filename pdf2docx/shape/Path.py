@@ -28,10 +28,14 @@ import fitz
 from ..common.share import rgb_value
 
 
+
 class Segment:
     '''A segment of path, e.g. a line or a rectangle or a curve.'''
     def __init__(self, item):
         self.points = item[1:]
+    
+    @property
+    def is_iso_oriented(self): return True
 
     @property
     def is_iso_oriented(self): return False
@@ -43,10 +47,9 @@ class L(Segment):
     '''Line path with source ``("l", p1, p2)``.'''
     @property
     def is_iso_oriented(self):
-        '''Whether horizontal or vertical line.'''
         x0, y0 = self.points[0]
         x1, y1 = self.points[1]
-        return abs(x1-x0)<=1e-3 or abs(y1-y0)<=1e-3
+        return abs(x0-x1)<1e-3 or abs(y0-y1)<1e-3
 
     def to_strokes(self, width:float, color:list):
         """Convert to stroke dict.
@@ -114,7 +117,8 @@ class R(Segment):
 
 class C(Segment):
     '''Bezier curve path with source ``("c", p1, p2, p3, p4)``.'''
-    pass
+    @property
+    def is_iso_oriented(self): return False
 
 
 class Segments:
@@ -131,23 +135,21 @@ class Segments:
             item = ('l', items[-1][-1], items[0][1])
             self._instances.append(L(item))
 
-        # calculate bbox
-        self.bbox = self.cal_bbox()
-
     
     def __iter__(self): return (instance for instance in self._instances)
 
 
     @property
-    def is_iso_oriented_line(self): return bool(self.bbox) and not bool(self.bbox.getArea())
+    def is_iso_oriented(self):
+        '''Whether all segments are ISO-oriented or not.'''
+        for instance in self._instances:
+            if not instance.is_iso_oriented: return False
+        return True
 
 
-    def cal_bbox(self):
-        '''Bbox of Segments. 
-        
-        .. note::
-            For iso-oriented segments, ``bbox.getArea()==0``.
-        '''
+    @property
+    def bbox(self):
+        '''Calculate bbox. '''
         # rectangle area
         if len(self._instances)==1 and isinstance(self._instances[0], R):
             return self._instances[0].rect
@@ -159,15 +161,9 @@ class Segments:
         y0 = min(points, key=lambda point: point[1])[1]
         x1 = max(points, key=lambda point: point[0])[0]
         y1 = max(points, key=lambda point: point[1])[1]
-        return fitz.Rect(x0, y0, x1, y1)
+        return fitz.Rect(
+            round(x0, 2), round(y0, 2), round(x1, 2), round(y1, 2))
 
-class C:
-    '''Bezier curve path with source ("c", p1, p2, p3, p4)'''
-    def __init__(self, item):
-        self.p1, self.p2, self.p3, self.p4 = item[1:]
-    
-    @property
-    def is_iso_oriented(self): return False
 
     def to_strokes(self, width:float, color:list):
         """Convert each segment to a ``Stroke`` dict.
