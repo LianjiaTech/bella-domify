@@ -3,7 +3,7 @@
 '''A group of Line objects.
 '''
 
-import logging
+
 import string
 from .Line import Line
 from .TextSpan import TextSpan
@@ -53,43 +53,6 @@ class Lines(ElementCollection):
         for line in self._instances:
             spans.extend(line.image_spans)
         return spans
-
-    
-    def join(self, line_overlap_threshold:float, line_merging_threshold:float):
-        '''Merge lines aligned horizontally, e.g. make inline image as a span in text line.'''
-        # skip if empty
-        if not self._instances: return self
-    
-        # sort lines
-        self.sort()
-
-        # check each line
-        lines = Lines()
-        for line in self._instances:
-
-            # first line
-            if not lines: lines.append(line)
-            
-            # ignore this line if overlap with previous line
-            if line.get_main_bbox(pre_line, threshold=line_overlap_threshold):
-                logging.warning('Ignore Line "%s" due to overlap', line.text)
-                continue
-
-            # add line directly if not aligned horizontally with previous line
-            elif not line.in_same_row(lines[-1]):
-                lines.append(line)
-
-            # if it exists x-distance obviously to previous line,
-            # take it as a separate line as it is
-            elif abs(line.bbox.x0-lines[-1].bbox.x1) > line_merging_threshold:
-                lines.append(line) 
-
-            # now, this line will be append to previous line as a span
-            else:
-                lines[-1].add(list(line.spans))
-
-        # update lines in block
-        self.reset(lines)
 
 
     def split_back(self):
@@ -165,20 +128,12 @@ class Lines(ElementCollection):
         return res
 
 
-    def strip(self, delete_end_line_hyphen:bool):
-        '''Remove redundant blanks of each line and update bbox accordingly.'''
-        # strip each line and update bbox: 
-        # keep at least one blank at both sides in case extra blanks existed
-        strip_status = []
-        strip_status.extend([line.strip() for line in self._instances])
-        stripped = any(strip_status)
-        if stripped: self._parent.update_bbox(self.bbox) # update bbox        
-
-        # word process:
+    def adjust_last_word(self, delete_end_line_hyphen:bool):
+        '''Adjust word at the end of line:
         # - it might miss blank between words from adjacent lines
-        # - it's optional to delete hyphen since it might not at the line end
-        #   after conversion
-
+        # - it's optional to delete hyphen since it might not at the the end 
+           of line after conversion
+        '''
         punc_ex_hyphen = ''.join(c for c in string.punctuation if c!='-')
         def is_end_of_english_word(c):
             return c.isalnum() or (c and c in punc_ex_hyphen)
@@ -208,8 +163,6 @@ class Lines(ElementCollection):
             # number, or English punctuation (excepting hyphen)
             if is_end_of_english_word(end_char.c) and is_end_of_english_word(next_start_char.c):
                 end_char.c += ' ' # add blank in a tricky way
-            
-        return stripped
 
 
     def sort(self):
