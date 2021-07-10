@@ -105,7 +105,6 @@ class TablesConstructor:
     def stream_tables(self, 
                 min_border_clearance:float, 
                 max_border_width:float,
-                float_layout_tolerance:float,
                 line_separate_threshold:float
             ):
         '''Parse table with layout of text/image blocks, and update borders with explicit borders 
@@ -118,7 +117,7 @@ class TablesConstructor:
         table_fillings = self._shapes.table_fillings
 
         # lines in potential stream tables
-        tables_lines = self._blocks.collect_stream_lines(table_fillings, float_layout_tolerance, line_separate_threshold)            
+        tables_lines = self._blocks.collect_stream_lines(table_fillings, line_separate_threshold)            
 
         # define a function to get the vertical boundaries of given table
         X0, Y0, X1, Y1 = self._parent.bbox
@@ -181,9 +180,9 @@ class TablesConstructor:
             # NOTE: shading with any intersections should be counted to avoid missing any candidates
             explicit_shadings, _ = table_fillings.split_with_intersection(rect.bbox) 
 
-            # NOTE: ignore one-row / one-column table and has no explicit shading
-            if not explicit_shadings and (
-                len(table_lines.group_by_physical_rows())==1 or len(table_lines.group_by_columns())==1): continue
+            # NOTE: ignore simple structure table, especially only one cell, which leads to infinite recursion error.
+            if not (explicit_shadings or explicit_strokes) and \
+                TablesConstructor._is_simple_structure(table_lines): continue
 
             # parse stream borders based on lines in cell and explicit borders/shadings
             strokes = self._stream_strokes(table_lines, outer_borders, explicit_strokes, explicit_shadings)
@@ -199,7 +198,21 @@ class TablesConstructor:
         # assign blocks/shapes to each table
         self._blocks.assign_to_tables(tables)
         self._shapes.assign_to_tables(tables)
-        
+
+
+    @staticmethod
+    def _is_simple_structure(lines:Lines):
+        '''Whether current lines represent a simple table:        
+        * only one column -> always flow layout in docx; or
+        * two columns: lines are aligned in each row -> simple paragraph in docx
+        '''
+        num = len(lines.group_by_columns())
+        if num==1:
+            return True
+        elif num==2:
+            return len(lines.group_by_physical_rows())==len(lines.group_by_rows())
+        else:
+            return False
 
 
     @staticmethod
