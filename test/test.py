@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 
 '''
-Testing the layouts between sample pdf and the converted docx.
+To test the pdf conversion and converting quality, the idea is to convert generated docx to pdf,
+then check the image similarity between source pdf page and converted pdf page. Considering the 
+converting quality from docx to pdf, a Windows-based command line tool `OfficeToPDF` is used, in
+addition, an installation of Microsoft Word is required.
 
-NOTE: pdf2docx should be installed in advance.
+To leverage the benefit of Github Action, the testing process is divided into three parts:
+  1. Convert sample pdf to docx with this module.
+  2. Convert generated docx to pdf for comparing. 
+  3. Convert page to image and compare similarity with python-opencv.
 
-The docx is created from parsed layout, so an equivalent but efficient way is to 
-compare parsed layout with banchmark one.
+Test scripts on Part One and Three are applied with two test class respectively in this module,
+so they could be run seperately with pytest command, e.g.
 
-The benchmark layout is also created from parsed layout, but proved to be able to
-create docx with good enough quality.
+- pytest -v test.py::TestConversion for Part One
+- pytest -v test.py::TestQuality for Part Three
 
-Obsoleted method (real-time testing method):
-  - convert sample pdf to docx with this module
-  - convert docx back to pdf (`OfficeToPDF` or online `pylovepdf`, see more link)
-  - compare layouts between sample pdf and comparing pdf
-
-more link:
+Links on MS Word to PDF conversion:
   - https://github.com/cognidox/OfficeToPDF/releases
   - https://github.com/AndyCyberSec/pylovepdf
+  - https://www.e-iceblue.com/Tutorials/Java/Spire.Doc-for-Java/Program-Guide/Conversion/Convert-Word-to-PDF-in-Java.html
 '''
 
 import os
