@@ -317,3 +317,63 @@ class Test_Main(Utility):
 
         # check file        
         assert os.path.isfile(docx_file)
+    
+
+
+class TestQuality:
+    '''Check the quality of converted docx. 
+    Note the docx files must be converted to PDF files in advance.
+    '''
+
+    INDEX_MAP = {
+        'demo-blank.pdf': 1.0,
+        'demo-image-cmyk.pdf': 0.90,
+        'demo-image-transparent.pdf': 0.90,
+        'demo-image-vector-graphic.pdf': 0.90,
+        'demo-image.pdf': 0.90,
+        'demo-path-transformation.pdf': 0.90,
+        'demo-section-spacing.pdf': 0.90,
+        'demo-section.pdf': 0.70,
+        'demo-table-align-borders.pdf': 0.49,
+        'demo-table-border-style.pdf': 0.90,
+        'demo-table-bottom.pdf': 0.90,
+        'demo-table-close-underline.pdf': 0.59,
+        'demo-table-lattice-one-cell.pdf': 0.79,
+        'demo-table-lattice.pdf': 0.75,
+        'demo-table-nested.pdf': 0.84,
+        'demo-table-shading-highlight.pdf': 0.60,
+        'demo-table-shading.pdf': 0.80,
+        'demo-table-stream.pdf': 0.60,
+        'demo-table.pdf': 0.90,
+        'demo-text-alignment.pdf': 0.90,
+        'demo-text-scaling.pdf': 0.80,
+        'demo-text-unnamed-fonts.pdf': 0.80,
+        'demo-text.pdf': 0.80
+    }
+
+    def setup(self):
+        '''create output path if not exist.'''
+        if not os.path.exists(output_path): os.mkdir(output_path)
+
+
+    def test_quality(self):
+        '''Convert page to image and compare similarity.'''
+        for filename in os.listdir(output_path):
+            if not filename.endswith('pdf'): continue
+
+            source_pdf_file = os.path.join(sample_path, filename)
+            target_pdf_file = os.path.join(output_path, filename)
+
+            # open pdf    
+            source_pdf = fitz.open(source_pdf_file)
+            target_pdf = fitz.open(target_pdf_file)
+
+            # compare page count
+            if len(source_pdf)>1: continue # one page sample only
+            assert len(target_pdf)==1, f"\nThe page count of {filename} is incorrect."
+
+            # compare the first page
+            sidx = get_page_similarity(target_pdf[0], source_pdf[0])
+            threshold = TestQuality.INDEX_MAP.get(filename, 0.80)
+            print(f'Checking {filename}: {sidx} v.s. {threshold}')
+            assert sidx>=threshold, 'Significant difference might exist since similarity index is lower than threshold.'
