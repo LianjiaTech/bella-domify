@@ -227,8 +227,13 @@ class Test_Main(Utility):
         self.init_test('demo-image-cmyk').verify_layout(threshold=0.95)
 
     def test_image_transparent(self):
-        '''sample file focusing on transparent images.'''
-        self.init_test('demo-image-transparent').verify_layout(threshold=0.95)
+        '''test transparent images.'''
+        self.convert('demo-image-transparent')
+    
+    def test_image_rotation(self):
+        '''test rotating image due to pdf page rotation.'''
+        self.convert('demo-image-rotation')
+
 
     def test_table_bottom(self):
         '''sample file focusing on page break due to table at the end of page.'''
@@ -331,6 +336,7 @@ class TestQuality:
         'demo-image-transparent.pdf': 0.90,
         'demo-image-vector-graphic.pdf': 0.90,
         'demo-image.pdf': 0.90,
+        'demo-image-rotation.pdf': 0.90,
         'demo-path-transformation.pdf': 0.90,
         'demo-section-spacing.pdf': 0.90,
         'demo-section.pdf': 0.70,
