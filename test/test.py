@@ -214,6 +214,25 @@ class Test_Main(Utility):
         '''sample file focusing on text format, e.g. highlight, underline, strike-through.'''
         self.init_test('demo-text').verify_layout(threshold=0.95)
 
+    def test_text_alignment(self):
+        '''test text alignment.'''
+        self.convert('demo-text-alignment')    
+    
+    def test_unnamed_fonts(self):
+        '''test unnamed fonts which destroys span bbox, and accordingly line/block layout.'''
+        self.convert('demo-text-unnamed-fonts')
+
+    def test_text_scaling(self):
+        '''test font size. In this case, the font size is set precisely with character scaling.'''
+        self.convert('demo-text-scaling')
+    
+    def test_text_hidden(self):
+        '''test hidden text, which is ignore by default.'''
+        self.convert('demo-text-hidden')
+
+    # ------------------------------------------
+    # image styles
+    # ------------------------------------------
     def test_image(self):
         '''sample file focusing on inline-image.'''
         self.init_test('demo-image').verify_layout(threshold=0.95)
@@ -359,6 +378,7 @@ class TestQuality:
         'demo-text-alignment.pdf': 0.90,
         'demo-text-scaling.pdf': 0.80,
         'demo-text-unnamed-fonts.pdf': 0.80,
+        'demo-text-hidden.pdf': 0.90,
         'demo-text.pdf': 0.80
     }
 
