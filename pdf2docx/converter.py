@@ -104,7 +104,8 @@ class Converter:
             'extract_stream_table'           : False,  # don't consider stream table when extracting tables
             'parse_lattice_table'            : True,   # whether parse lattice table or not; may destroy the layout if set False
             'parse_stream_table'             : True,   # whether parse stream table or not; may destroy the layout if set False
-            'delete_end_line_hyphen'         : False   # delete hyphen at the end of a line
+            'delete_end_line_hyphen'         : False,   # delete hyphen at the end of a line
+            'remove_watermark'               : False,  # remove watermark if True
         }
 
     # -----------------------------------------------------------------------
@@ -123,12 +124,12 @@ class Converter:
             pages (list, optional): Range of page indexes to parse. Defaults to None.
             kwargs (dict, optional): Configuration parameters. 
         '''
-        return self.load_pages(start, end, pages) \
+        return self.load_pages(start, end, pages, **kwargs) \
             .parse_document(**kwargs) \
             .parse_pages(**kwargs)
 
 
-    def load_pages(self, start:int=0, end:int=None, pages:list=None):
+    def load_pages(self, start:int=0, end:int=None, pages:list=None, **kwargs):
         '''Step 1 of converting process: open PDF file with ``PyMuPDF``, 
         especially for password encrypted file.
         
@@ -155,7 +156,9 @@ class Converter:
         page_indexes = self._page_indexes(start, end, pages, num)
         for i in page_indexes:
             self._pages[i].skip_parsing = False
-
+        if kwargs['remove_watermark']:
+            for page in self.fitz_doc.pages():
+                self.remove_watermark(page)
         return self
     
 
@@ -378,6 +381,21 @@ class Converter:
             if page.finalized: tables.extend(page.extract_tables(**settings))
 
         return tables
+
+    def remove_watermark(self, page):
+        """ see https://github.com/pymupdf/PyMuPDF/discussions/1855 """
+        # 移除水印
+        page.clean_contents()
+        xref = page.get_contents()[0]  # get xref of resulting /Contents object
+        cont = bytearray(page.read_contents())  # read the contents source as a (modifyable) bytearray
+        if cont.find(b"/Subtype/Watermark") > 0:  # this will confirm a marked-content watermark is present
+            print("marked-content watermark present")
+        while True:
+            i1 = cont.find(b"/Artifact")  # start of definition
+            if i1 < 0: break  # none more left: done
+            i2 = cont.find(b"EMC", i1)  # end of definition
+            cont[i1 - 2: i2 + 3] = b""  # remove the full definition source "q ... EMC"
+        page.parent.update_stream(xref, cont)  # replace the original source
 
     
     def _convert_with_multi_processing(self, docx_filename:str, start:int, end:int, **kwargs):
