@@ -137,6 +137,8 @@ class TextBlock(Block):
                 c = rgb_component_from_name('')                
                 span.plot(page, color=c)
 
+    def extend_plot(self, page):
+        self.plot(page)
 
     def parse_text_format(self, shapes):
         '''Parse text format with style represented by rectangles.

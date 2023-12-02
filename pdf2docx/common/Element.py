@@ -18,7 +18,7 @@ CS. If final coordinates are provided, should update it after creating an empty 
 
 import copy
 import fitz
-from .share import IText
+from .share import IText, rgb_component_from_name
 from . import constants
 
 
@@ -314,5 +314,9 @@ class Element(IText):
 
     
     def plot(self, page, stroke:tuple=(0,0,0), width:float=0.5, fill:tuple=None, dashes:str=None):
+        '''Plot bbox in PDF page for debug purpose.'''
+        page.draw_rect(self.bbox, color=stroke, fill=fill, width=width, dashes=dashes, overlay=False, fill_opacity=0.5)
+
+    def extend_plot(self, page, stroke:tuple=(0,0,0), width:float=0.5, fill:tuple=None, dashes:str=None):
         '''Plot bbox in PDF page for debug purpose.'''
         page.draw_rect(self.bbox, color=stroke, fill=fill, width=width, dashes=dashes, overlay=False, fill_opacity=0.5)

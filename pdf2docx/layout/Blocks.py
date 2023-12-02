@@ -360,6 +360,9 @@ class Blocks(ElementCollection):
         '''Plot blocks in PDF page for debug purpose.'''
         for block in self._instances: block.plot(page)                
 
+    def extend_plot(self, page):
+        '''Plot blocks in PDF page for debug purpose.'''
+        for block in self._instances: block.extend_plot(page)
 
     # ----------------------------------------------------------------------------------
     # internal methods

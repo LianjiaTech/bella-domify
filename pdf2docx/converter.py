@@ -380,6 +380,10 @@ class Converter:
         for page in self._pages:
             if page.finalized: tables.extend(page.extract_tables(**settings))
 
+        if settings['debug']:
+            logging.info('Extracted tables: %s', tables)
+            self.plot(**settings)
+
         return tables
 
     def remove_watermark(self, page):
@@ -397,7 +401,14 @@ class Converter:
             cont[i1 - 2: i2 + 3] = b""  # remove the full definition source "q ... EMC"
         page.parent.update_stream(xref, cont)  # replace the original source
 
-    
+    def plot(self, **kwargs):
+        debug_file = fitz.Document(self.filename_pdf)
+        for page, debug_page in zip(self.pages, debug_file.pages()):
+            if page.skip_parsing:
+                continue
+            page.sections.extend_plot(debug_page)
+        debug_file.save(kwargs['debug_file_name'])
+
     def _convert_with_multi_processing(self, docx_filename:str, start:int, end:int, **kwargs):
         '''Parse and create pages based on page indexes with multi-processing.
 

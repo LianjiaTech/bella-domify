@@ -63,6 +63,8 @@ class ImageBlock(Image, Block):
         '''
         super().plot(page, color=(1,0,0))
 
+    def extend_plot(self, page):
+        self.plot(page)
 
     def make_docx(self, p):
         '''Create floating image behind text. 

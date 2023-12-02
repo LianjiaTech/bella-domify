@@ -82,3 +82,12 @@ class Sections(BaseCollection):
             for column in section:
                 column.plot(page, stroke=(1,1,0), width=1.5) # column bbox
                 column.blocks.plot(page) # blocks
+
+    def extend_plot(self, page):
+        '''Plot all section blocks for debug purpose.'''
+        for section in self:
+            for column in section:
+                try:
+                    column.blocks.extend_plot(page)
+                except AttributeError as e:
+                    print(e)
