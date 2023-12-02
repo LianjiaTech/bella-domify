@@ -166,7 +166,10 @@ class Page(BasePage):
         # check table
         tables = [] # type: list[ list[list[str]] ]
         for table_block in collections:
-            tables.append(table_block.text)
+            if settings.get('extract_table_with_cell_pos', False):
+                tables.append(table_block.text_with_cell_pos())
+            else:
+                tables.append(table_block.text)
 
         return tables
 

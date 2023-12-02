@@ -353,8 +353,8 @@ class Converter:
 
         logging.info('Terminated in %.2fs.', perf_counter()-t0)        
 
-
-    def extract_tables(self, start:int=0, end:int=None, pages:list=None, **kwargs):
+    def extract_tables(self, start:int=0, end:int=None, pages:list=None,
+                       extract_table_with_cell_pos=False, **kwargs):
         '''Extract table contents from specified PDF pages.
 
         Args:
@@ -369,6 +369,7 @@ class Converter:
         # parsing pages first
         settings = self.default_settings
         settings.update(kwargs)
+        settings['extract_table_with_cell_pos'] = extract_table_with_cell_pos
         self.parse(start, end, pages, **settings)
 
         # get parsed tables

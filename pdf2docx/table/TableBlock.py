@@ -35,6 +35,7 @@ from .Row import Row
 from .Rows import Rows
 from ..common.Block import Block
 from ..common import docx
+from ..extend.table.CellExtend import CellExtend
 
 
 class TableBlock(Block):
@@ -82,6 +83,14 @@ class TableBlock(Block):
             list: 2D-list with each element representing text in cell.
         '''
         return [ [cell.text for cell in row] for row in self._rows ]
+
+    def text_with_cell_pos(self):
+        text = []
+        for i, row in enumerate(self._rows):
+            for j, cell in enumerate(row):
+                if cell.blocks or cell.shapes: # cell is not merged
+                    text.append(CellExtend(cell, i, j))
+        return text
 
     @property
     def outer_bbox(self):
