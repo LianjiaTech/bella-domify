@@ -9,6 +9,7 @@ from typing import AnyStr, IO, Union
 import fitz
 from docx import Document
 
+from .extend.page.PagesExtend import PagesExtend
 from .page.Page import Page
 from .page.Pages import Pages
 
@@ -124,10 +125,17 @@ class Converter:
             pages (list, optional): Range of page indexes to parse. Defaults to None.
             kwargs (dict, optional): Configuration parameters. 
         '''
-        return self.load_pages(start, end, pages, **kwargs) \
+        self.load_pages(start, end, pages, **kwargs) \
             .parse_document(**kwargs) \
             .parse_pages(**kwargs)
+        if kwargs['sematic_parse']:
+            self.sematic_parse()
+        return self
 
+    def sematic_parse(self):
+        pages_extend = PagesExtend(self.pages)
+        pages_extend.mark_page_header()
+        pages_extend.mark_page_footer()
 
     def load_pages(self, start:int=0, end:int=None, pages:list=None, **kwargs):
         '''Step 1 of converting process: open PDF file with ``PyMuPDF``, 
