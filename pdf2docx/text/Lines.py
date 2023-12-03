@@ -68,33 +68,42 @@ class Lines(ElementCollection):
         punc = tuple(constants.SENTENCE_END_PUNC)
         start_of_para = end_of_para = False # start/end of paragraph
         start_of_sen = end_of_sen = False   # start/end of sentence
+        prev_font, prev_font_size = None, None
         for row in rows:
+            cur_font, cur_font_size = None, None
+            if row and row[-1].spans:
+                cur_font, cur_font_size = row[-1].spans[-1].font, row[-1].spans[-1].size
+            # when font or font size changes, it's a new sentence, and a new paragraph
+            if prev_font and prev_font_size and cur_font and cur_font_size:
+                if prev_font != cur_font or abs(prev_font_size - cur_font_size) > 0.5:
+                    start_of_sen = start_of_para = True
             end_of_sen = row[-1].text.strip().endswith(punc)
-            w =  row[-1].bbox[2]-row[0].bbox[0]
-
-            # end of a sentense and free space at the end -> end of paragraph
-            if end_of_sen and w/W <= 1.0-line_break_free_space_ratio:
-                end_of_para = True
+            w = row[-1].bbox[2]-row[0].bbox[0]
 
             # start of sentence and free space at the start -> start of paragraph
-            elif start_of_sen and (W-w)/H >= new_paragraph_free_space_ratio:
+            if start_of_sen and (W-w)/H >= new_paragraph_free_space_ratio:
                 start_of_para = True
 
+            # end of a sentense and free space at the end -> end of paragraph
+            elif end_of_sen and w/W <= 1.0-line_break_free_space_ratio:
+                end_of_para = True
+
             # take action
-            if end_of_para:
-                lines.extend(row)
-                res.append(lines)
-                lines = Lines()
-            elif start_of_para:
+            if start_of_para:
                 res.append(lines)
                 lines = Lines()
                 lines.extend(row)
+            elif end_of_para:
+                lines.extend(row)
+                res.append(lines)
+                lines = Lines()
             else:
                 lines.extend(row)
 
             # for next round
             start_of_sen = end_of_sen
             start_of_para = end_of_para = False
+            prev_font, prev_font_size = cur_font, cur_font_size
         
         # close the action
         if lines: res.append(lines)
