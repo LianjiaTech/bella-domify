@@ -32,8 +32,24 @@ class Block(Element):
         self.after_space = raw.get('after_space', 0.0)        
         self.line_space = raw.get('line_space', 0.0)
         self.line_space_type = raw.get('line_space_type', 1) # 0-exactly, 1-relatively
+        self._header = False  # is this block belongs to page header
+        self._footer = False  # is this block belongs to page footer
 
         super().__init__(raw, parent)
+
+    @property
+    def is_header(self):
+        return self._header
+
+    def mark_header(self):
+        self._header = True
+
+    @property
+    def is_footer(self):
+        return self._footer
+
+    def mark_footer(self):
+        self._footer = True
 
 
     @property
