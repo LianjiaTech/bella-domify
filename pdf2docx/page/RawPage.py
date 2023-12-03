@@ -15,8 +15,9 @@ from ..layout.Column import Column
 from ..shape.Shape import Hyperlink
 from ..shape.Shapes import Shapes
 from ..font.Fonts import Fonts
+from ..text.Line import Line
 from ..text.TextSpan import TextSpan
-from ..common.share import debug_plot
+from ..common.share import debug_plot, rgb_component_from_name
 from ..common import constants
 from ..common.Collection import Collection
 
@@ -33,7 +34,7 @@ class RawPage(BasePage, Layout):
         BasePage.__init__(self)
         Layout.__init__(self)
         self.page_engine = page_engine
-    
+
 
     def extract_raw_dict(self, **settings):
         '''Extract source data with page engine. Return a dict with the following structure:
@@ -47,7 +48,7 @@ class RawPage(BasePage, Layout):
         ```
         '''
         raise NotImplementedError
-    
+
     @property
     def text(self):
         '''All extracted text in this page, with images considered as ``<image>``. 
@@ -67,7 +68,7 @@ class RawPage(BasePage, Layout):
         super().restore(raw_dict)
         return self.blocks
 
-    
+
     @debug_plot('Cleaned Shapes')
     def clean_up(self, **settings):
         '''Clean up raw blocks and shapes, e.g. 
@@ -84,11 +85,11 @@ class RawPage(BasePage, Layout):
         self.shapes.clean_up(
             settings['max_border_width'],
             settings['shape_min_dimension'])
-        
+
         return self.shapes
 
 
-    def process_font(self, fonts:Fonts):      
+    def process_font(self, fonts:Fonts):
         '''Update font properties, e.g. font name, font line height ratio, of ``TextSpan``.
         
         Args:
@@ -139,9 +140,9 @@ class RawPage(BasePage, Layout):
 
         # use normal margin if calculated margin is large enough
         return (
-            min(constants.ITP, round(left, 1)), 
-            min(constants.ITP, round(right, 1)), 
-            min(constants.ITP, round(top, 1)), 
+            min(constants.ITP, round(left, 1)),
+            min(constants.ITP, round(right, 1)),
+            min(constants.ITP, round(top, 1)),
             min(constants.ITP, round(bottom, 1)))
 
 
@@ -154,7 +155,7 @@ class RawPage(BasePage, Layout):
         '''
         # bbox
         X0, Y0, X1, _ = self.working_bbox
-    
+
         # collect all blocks (line level) and shapes
         elements = Collection()
         elements.extend(self.blocks)
@@ -162,7 +163,7 @@ class RawPage(BasePage, Layout):
         if not elements: return
 
         # to create section with collected lines        
-        lines = Collection()        
+        lines = Collection()
         sections = []
         def close_section(num_col, elements, y_ref):
             # append to last section if both single column
@@ -173,13 +174,24 @@ class RawPage(BasePage, Layout):
             # otherwise, create new section
             else:
                 section = self._create_section(num_col, elements, (X0, X1), y_ref)
-                if section: 
+                if section:
                     sections.append(section)
 
 
         # check section row by row
         pre_num_col = 1
         y_ref = Y0 # to calculate v-distance between sections
+
+        # detect all possible two-column layout divide position
+        two_column_layout_divide_pos = set()
+        for row in elements.group_by_rows():
+            cols = row.group_by_columns()
+            if len(cols) == 2:
+                left_pos = round(min(cols[0].bbox[2], cols[1].bbox[2]), 0)
+                right_pos = round(max(cols[0].bbox[0], cols[1].bbox[0]), 0)
+                if (left_pos, right_pos) not in two_column_layout_divide_pos:
+                    two_column_layout_divide_pos.add((left_pos, right_pos))
+
         for row in elements.group_by_rows():
             # check column col by col
             cols = row.group_by_columns()
@@ -188,8 +200,12 @@ class RawPage(BasePage, Layout):
             # column check:
             # consider 2-cols only
             if current_num_col>2:
-                current_num_col = 1
-            
+                found_two_column = self.try_regroup_two_columns(two_column_layout_divide_pos, row)
+                if found_two_column:
+                    current_num_col = 2
+                else:
+                    current_num_col = 1
+
             # the width of two columns shouldn't have significant difference
             elif current_num_col==2:
                 u0, v0, u1, v1 = cols[0].bbox
@@ -198,7 +214,7 @@ class RawPage(BasePage, Layout):
                 c1, c2 = x0-X0, X1-x0 # column width
                 w1, w2 = u1-u0, m1-m0 # line width
                 f = 2.0
-                if not 1/f<=c1/c2<=f or w1/c1<0.33 or w2/c2<0.33: 
+                if not 1/f<=c1/c2<=f or w1/c1<0.33 or w2/c2<0.33:
                     current_num_col = 1
 
             # process exceptions
@@ -209,14 +225,14 @@ class RawPage(BasePage, Layout):
                 pos = cols[0].bbox[2]
                 if row.bbox[2]<=pos or row.bbox[0]>pos:
                     current_num_col = 2
-                
+
                 # pre_num_col!=current_num_col => to close section with collected lines,
                 # before that, further check the height of collected lines
                 else:
                     x0, y0, x1, y1 = lines.bbox
                     if y1-y0<settings['min_section_height']:
                         pre_num_col = 1
-                
+
 
             elif pre_num_col==2 and current_num_col==2:
                 # though both 2-cols, they don't align with each other
@@ -229,7 +245,7 @@ class RawPage(BasePage, Layout):
             if current_num_col!=pre_num_col:
                 # process pre-section
                 close_section(pre_num_col, lines, y_ref)
-                if sections: 
+                if sections:
                     y_ref = sections[-1][-1].bbox[3]
 
                 # start potential new section                
@@ -244,7 +260,23 @@ class RawPage(BasePage, Layout):
         close_section(current_num_col, lines, y_ref)
 
         return sections
-    
+
+    def try_regroup_two_columns(self, two_column_divide_pos: set[(float, float)], row):
+        row = sorted(row, key=lambda element: element.bbox[0])
+        find_two_column = False
+        for pos in two_column_divide_pos:
+            if find_two_column:
+                break
+
+            left_pos, right_pos = pos
+            for cur_element, next_element in zip(row, row[1:]):
+                if round(cur_element.bbox[2], 0) > left_pos:
+                    break
+                if round(cur_element.bbox[2], 0) == left_pos and round(next_element.bbox[0], 0) == right_pos:
+                    # found the two-column layout
+                    find_two_column = True
+                    break
+        return find_two_column
 
     @staticmethod
     def _create_section(num_col:int, elements:Collection, h_range:tuple, y_ref:float):
