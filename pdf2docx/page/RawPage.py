@@ -215,7 +215,15 @@ class RawPage(BasePage, Layout):
                 w1, w2 = u1-u0, m1-m0 # line width
                 f = 2.0
                 if not 1/f<=c1/c2<=f or w1/c1<0.33 or w2/c2<0.33:
-                    current_num_col = 1
+                    punc = tuple(constants.SENTENCE_END_PUNC)
+                    if isinstance(cols[0][-1], Line) and cols[0][-1].text.strip().endswith(punc):
+                        # for the last row of tow column section,  the left column may be the final sentence in paragraph,
+                        # so the width of left column may be smaller than the right column, to avoid mismerged into one column,
+                        # we use the gap between the left column and the right column to determine whether
+                        # it is a two column section
+                        current_num_col = 2
+                    else:
+                        current_num_col = 1
 
             # process exceptions
             if pre_num_col==2 and current_num_col==1:
