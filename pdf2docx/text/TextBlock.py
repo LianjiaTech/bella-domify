@@ -138,8 +138,10 @@ class TextBlock(Block):
                 span.plot(page, color=c)
 
     def extend_plot(self, page):
-        blue = rgb_component_from_name('blue')
-        super().plot(page, stroke=blue, dashes='[3.0 3.0] 0', width=1)
+        stroke_color = rgb_component_from_name('blue')
+        if self.is_header or self.is_footer:
+            stroke_color = rgb_component_from_name('BROWN')
+        super().plot(page, stroke=stroke_color, dashes='[3.0 3.0] 0', width=1)
 
     def parse_text_format(self, shapes):
         '''Parse text format with style represented by rectangles.
