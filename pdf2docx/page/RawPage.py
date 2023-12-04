@@ -183,14 +183,7 @@ class RawPage(BasePage, Layout):
         y_ref = Y0 # to calculate v-distance between sections
 
         # detect all possible two-column layout divide position
-        two_column_layout_divide_pos = set()
-        for row in elements.group_by_rows():
-            cols = row.group_by_columns()
-            if len(cols) == 2:
-                left_pos = round(min(cols[0].bbox[2], cols[1].bbox[2]), 0)
-                right_pos = round(max(cols[0].bbox[0], cols[1].bbox[0]), 0)
-                if (left_pos, right_pos) not in two_column_layout_divide_pos:
-                    two_column_layout_divide_pos.add((left_pos, right_pos))
+        two_column_layout_divide_pos = self.detect_two_column_layout_pos(elements)
 
         for row in elements.group_by_rows():
             # check column col by col
@@ -216,11 +209,17 @@ class RawPage(BasePage, Layout):
                 f = 2.0
                 if not 1/f<=c1/c2<=f or w1/c1<0.33 or w2/c2<0.33:
                     punc = tuple(constants.SENTENCE_END_PUNC)
-                    if isinstance(cols[0][-1], Line) and cols[0][-1].text.strip().endswith(punc):
+                    # short column
+                    if (cols[0].bbox[2] - cols[0].bbox[0]) < (cols[1].bbox[2] - cols[1].bbox[0]):
+                        short_col = cols[0]
+                    else:
+                        short_col = cols[1]
+                    if (isinstance(short_col[-1], Line) and short_col[-1].text.strip().endswith(punc)
+                            and pre_num_col==2):
                         # for the last row of tow column section,  the left column may be the final sentence in paragraph,
                         # so the width of left column may be smaller than the right column, to avoid mismerged into one column,
-                        # we use the gap between the left column and the right column to determine whether
-                        # it is a two column section
+                        # if the column is end with sentence_end_punc, and the prev col is two column,
+                        # then it should be two column layout
                         current_num_col = 2
                     else:
                         current_num_col = 1
@@ -268,6 +267,19 @@ class RawPage(BasePage, Layout):
         close_section(current_num_col, lines, y_ref)
 
         return sections
+
+    def detect_two_column_layout_pos(self, elements: Collection):
+        # detect all possible two-column layout divide position
+        two_column_layout_divide_pos = set()
+        for row in elements.group_by_rows():
+            cols = row.group_by_columns()
+            if len(cols) == 2:
+                left_pos = round(min(cols[0].bbox[2], cols[1].bbox[2]), 0)
+                right_pos = round(max(cols[0].bbox[0], cols[1].bbox[0]), 0)
+                if (left_pos, right_pos) not in two_column_layout_divide_pos:
+                    two_column_layout_divide_pos.add((left_pos, right_pos))
+        return two_column_layout_divide_pos
+
 
     def try_regroup_two_columns(self, two_column_divide_pos: set[(float, float)], row):
         row = sorted(row, key=lambda element: element.bbox[0])
