@@ -70,6 +70,8 @@ class Lines(ElementCollection):
         start_of_sen = end_of_sen = False   # start/end of sentence
         prev_font, prev_font_size = None, None
         for row in rows:
+            # mulite lines in a row should be in line order
+            row.sort_in_line_order()
             cur_font, cur_font_size = None, None
             if row and row[-1].spans:
                 cur_font, cur_font_size = row[-1].spans[-1].font, row[-1].spans[-1].size
