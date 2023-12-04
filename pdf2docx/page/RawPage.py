@@ -22,6 +22,13 @@ from ..common import constants
 from ..common.Collection import Collection
 
 
+def is_end_sentence(row):
+    if not row:
+        return False
+    punc = tuple(constants.SENTENCE_END_PUNC)
+    return row.text.strip().endswith(punc)
+
+
 class RawPage(BasePage, Layout):
     '''A wrapper of page engine.'''
 
@@ -193,7 +200,7 @@ class RawPage(BasePage, Layout):
             # column check:
             # consider 2-cols only
             if current_num_col>2:
-                found_two_column = self.try_regroup_two_columns(two_column_layout_divide_pos, row)
+                found_two_column = self.try_regroup_two_columns(two_column_layout_divide_pos, row, pre_num_col)
                 if found_two_column:
                     current_num_col = 2
                 else:
@@ -214,8 +221,8 @@ class RawPage(BasePage, Layout):
                         short_col = cols[0]
                     else:
                         short_col = cols[1]
-                    if (isinstance(short_col[-1], Line) and short_col[-1].text.strip().endswith(punc)
-                            and pre_num_col==2):
+                    if (isinstance(short_col[-1], Line) and is_end_sentence(short_col[-1])
+                            and pre_num_col == 2):
                         # for the last row of tow column section,  the left column may be the final sentence in paragraph,
                         # so the width of left column may be smaller than the right column, to avoid mismerged into one column,
                         # if the column is end with sentence_end_punc, and the prev col is two column,
@@ -240,13 +247,11 @@ class RawPage(BasePage, Layout):
                     if y1-y0<settings['min_section_height']:
                         pre_num_col = 1
 
-
             elif pre_num_col==2 and current_num_col==2:
                 # though both 2-cols, they don't align with each other
                 combine = Collection(lines)
                 combine.extend(row)
                 if len(combine.group_by_columns(sorted=False))==1: current_num_col = 1
-
 
             # finalize pre-section if different from the column count of previous section
             if current_num_col!=pre_num_col:
@@ -280,8 +285,7 @@ class RawPage(BasePage, Layout):
                     two_column_layout_divide_pos.add((left_pos, right_pos))
         return two_column_layout_divide_pos
 
-
-    def try_regroup_two_columns(self, two_column_divide_pos: set[(float, float)], row):
+    def try_regroup_two_columns(self, two_column_divide_pos: set[(float, float)], row, pre_num_col):
         row = sorted(row, key=lambda element: element.bbox[0])
         find_two_column = False
         for pos in two_column_divide_pos:
@@ -294,6 +298,11 @@ class RawPage(BasePage, Layout):
                     break
                 if round(cur_element.bbox[2], 0) == left_pos and round(next_element.bbox[0], 0) == right_pos:
                     # found the two-column layout
+                    find_two_column = True
+                    break
+                if pre_num_col == 2 and round(next_element.bbox[0], 0) == right_pos and is_end_sentence(cur_element):
+                    # for two column layout, the row for end of paragraph in the left column may not
+                    # near the two column divide pos.
                     find_two_column = True
                     break
         return find_two_column
