@@ -447,10 +447,14 @@ class Blocks(ElementCollection):
         def common_vertical_spacing():
             '''Vertical distance with most frequency: a reference of line spacing.'''        
             ref0, ref1 = get_v_bdy(self._instances[0])
+            prev = self._instances[0]
             distances = []
             for block in self._instances[1:]:
                 y0, y1 = get_v_bdy(block)
-                distances.append(round(y0-ref1, 2))
+                if not prev.in_same_row(block):
+                    # do not consider lines in the same row
+                    distances.append(round(y0-ref1, 2))
+                prev = block
                 ref0, ref1 = y0, y1        
             return max(distances, key=distances.count) if distances else 0.0
 
