@@ -68,16 +68,17 @@ class Lines(ElementCollection):
         punc = tuple(constants.SENTENCE_END_PUNC)
         start_of_para = end_of_para = False # start/end of paragraph
         start_of_sen = end_of_sen = False   # start/end of sentence
-        prev_font, prev_font_size = None, None
+        prev_font, prev_font_size, prev_font_bold = None, None, False
         for row in rows:
             # mulite lines in a row should be in line order
             row.sort_in_line_order()
-            cur_font, cur_font_size = None, None
+            cur_font, cur_font_size, cur_font_bold = None, None, False
             if row and row[-1].spans:
-                cur_font, cur_font_size = row[-1].spans[-1].font, row[-1].spans[-1].size
+                last_span = row[-1].spans[-1]
+                cur_font, cur_font_size, cur_font_bold = last_span.font, last_span.size, bool(last_span.flags & 2**4)
             # when font or font size changes, it's a new sentence, and a new paragraph
             if prev_font and prev_font_size and cur_font and cur_font_size:
-                if prev_font != cur_font or abs(prev_font_size - cur_font_size) > 0.5:
+                if prev_font != cur_font or abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
                     start_of_sen = start_of_para = True
             end_of_sen = row[-1].text.strip().endswith(punc)
             w = row[-1].bbox[2]-row[0].bbox[0]
@@ -105,7 +106,7 @@ class Lines(ElementCollection):
             # for next round
             start_of_sen = end_of_sen
             start_of_para = end_of_para = False
-            prev_font, prev_font_size = cur_font, cur_font_size
+            prev_font, prev_font_size, prev_font_bold = cur_font, cur_font_size, cur_font_bold
         
         # close the action
         if lines: res.append(lines)
