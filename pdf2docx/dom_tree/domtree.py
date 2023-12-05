@@ -20,8 +20,10 @@ class Node:
 
     def judge_by_text_font(self, node):
         cur_span = self.element.lines[0].spans[0]
-        cur_span_bold = bool(cur_span.flags & 2 ** 4)
         node_span = node.element.lines[0].spans[0]
+        if (not isinstance(cur_span, TextSpan)) or (not isinstance(node_span, TextSpan)):
+            return False
+        cur_span_bold = bool(cur_span.flags & 2 ** 4)
         node_span_bold = bool(node_span.flags & 2 ** 4)
         if isinstance(cur_span, TextSpan) and isinstance(node_span, TextSpan):
             if cur_span.size < node_span.size:
