@@ -9,6 +9,7 @@ from typing import AnyStr, IO, Union
 import fitz
 from docx import Document
 
+from .dom_tree.domtree import DomTree
 from .extend.page.PagesExtend import PagesExtend
 from .page.Page import Page
 from .page.Pages import Pages
@@ -128,7 +129,7 @@ class Converter:
         self.load_pages(start, end, pages, **kwargs) \
             .parse_document(**kwargs) \
             .parse_pages(**kwargs)
-        if kwargs['sematic_parse']:
+        if kwargs.get('sematic_parse', False):
             self.sematic_parse()
         return self
 
