@@ -317,6 +317,6 @@ class Element(IText):
         '''Plot bbox in PDF page for debug purpose.'''
         page.draw_rect(self.bbox, color=stroke, fill=fill, width=width, dashes=dashes, overlay=False, fill_opacity=0.5)
 
-    def extend_plot(self, page, stroke:tuple=(0,0,0), width:float=0.5, fill:tuple=None, dashes:str=None):
+    def extend_plot(self, page, stroke:tuple=(0,0,0), width:float=0.5, fill:tuple=None, dashes:str=None, overlay:bool=False):
         '''Plot bbox in PDF page for debug purpose.'''
-        page.draw_rect(self.bbox, color=stroke, fill=fill, width=width, dashes=dashes, overlay=False, fill_opacity=0.5)
+        page.draw_rect(self.bbox, color=stroke, fill=fill, width=width, dashes=dashes, overlay=overlay, fill_opacity=0.5)

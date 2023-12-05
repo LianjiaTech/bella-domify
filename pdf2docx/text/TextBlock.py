@@ -141,7 +141,7 @@ class TextBlock(Block):
         stroke_color = rgb_component_from_name('blue')
         if self.is_header or self.is_footer:
             stroke_color = rgb_component_from_name('BROWN')
-        super().plot(page, stroke=stroke_color, dashes='[3.0 3.0] 0', width=1)
+        super().extend_plot(page, stroke=stroke_color,  dashes='[3.0 3.0] 0', width=1, overlay=True)
 
     def parse_text_format(self, shapes):
         '''Parse text format with style represented by rectangles.
