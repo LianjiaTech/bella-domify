@@ -10,12 +10,19 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.lines = LinesExtend(text_block.lines)
         self.ref_tables = []
         self.ref_images = []
+        self.bbox = text_block.bbox
 
+    @property
     def is_text_block(self):
-        return not self.is_image_block()
+        return not self.is_image_block
 
+    @property
     def is_image_block(self):
         return self.block.lines.image_spans
+
+    @property
+    def is_table_block(self):
+        return False
 
     def add_ref_table(self, ref_table):
         self.ref_tables.append(ref_table)

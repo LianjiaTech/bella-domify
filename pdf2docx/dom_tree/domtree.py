@@ -1,15 +1,19 @@
 from typing import List, Optional
 
 from pdf2docx.common.Block import Block
+from pdf2docx.extend.common.BlockExtend import BlockExtend
+from pdf2docx.extend.page.PageExtend import PageExtend
+from pdf2docx.extend.page.PagesExtend import PagesExtend
 from pdf2docx.page import Page
 from pdf2docx.text.TextSpan import TextSpan
 
 
 class Node:
-    def __init__(self, element: Optional[Block], is_root=False):
+    def __init__(self, element: Optional[BlockExtend], page: Optional[PageExtend], is_root=False):
         self.element = element
         self.child = []
         self.is_root = is_root
+        self.page = page
 
     def is_child_of(self, node):
         """Check if self is a child of node"""
@@ -34,8 +38,8 @@ class Node:
         return False
 
     def judge_by_order_list(self, node):
-        return node.element.list_type() and self.element.list_type() \
-            and self.element.list_type() != node.element.list_type()
+        return node.element.block.list_type() and self.element.block.list_type() \
+            and self.element.block.list_type() != node.element.block.list_type()
 
     def add_child(self, node):
         self.child.append(node)
@@ -49,25 +53,40 @@ class Node:
 
 
 class DomTree:
-    def __init__(self, page: Page, elements: List[Block] = None):
-        self.root = Node(None, is_root=True)
+    def __init__(self, pages: PagesExtend):
+        self.root = Node(None, None, is_root=True)
         self.elements = []
-        if elements:
-            self.elements.extend(elements)
-        else:
+        self.node_dict = {} #element->node
+        for page in pages:
             for section in page.sections:
                 for column in section:
                     for block in column.blocks:
-                        self.elements.append(block)
+                        self.elements.append((block, page))
 
     def parse(self):
         stack_path: List[Node] = [self.root]
 
-        for element in self.elements:
+        for (element, page) in self.elements:
+            node = Node(element, page)
+            self.node_dict[element] = node
+            if element.is_table_block:
+                if element.refed_blocks:
+                    # 如果是表格，且有引用, 则添加到首个引用块
+                    self.node_dict[element.refed_blocks[0]].add_child(node)
+                else:
+                    self.root.add_child(node)
+                continue
+            if element.is_image_block:
+                image_span = element.lines.image_spans[0]
+                if image_span.refed_blocks:
+                    # 如果是图片，且有引用, 则添加到首个引用块
+                    self.node_dict[image_span.refed_blocks[0]].add_child(node)
+                else:
+                    self.root.add_child(node)
+                continue
             if not element.is_text_block:
                 # 先分析text block
                 continue
-            node = Node(element)
             while True:
                 if node.is_child_of(stack_path[-1]):
                     # 增加子节点
@@ -91,6 +110,6 @@ class DomTree:
     def _print_tree(self, node, level):
         if node.element:
             # level为缩进层数
-            print("    " * level, node.element.text)
+            print("    " * level, node.element.block.text)
         for child in node.child:
             self._print_tree(child, level + 1)

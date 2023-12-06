@@ -20,12 +20,19 @@ class TableBlockExtend(RelationElement, BlockExtend):
         self.block = table_block
         self.caption_block, self.table_caption = None, None
         self.refed_blocks = []
+        self.bbox = table_block.bbox
 
+    @property
     def is_text_block(self):
         return False
 
+    @property
     def is_image_block(self):
         return False
+
+    @property
+    def is_table_block(self):
+        return True
 
     def relation_construct(self, cur_page, pages):
         self.caption_block, self.table_caption = self.search_table_caption(cur_page)

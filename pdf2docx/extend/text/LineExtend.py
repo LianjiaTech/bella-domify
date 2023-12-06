@@ -24,3 +24,7 @@ class LineExtend(Element, RelationElement):
         for span in self.spans:
             if isinstance(span, ImageSpanExtend):
                 span.relation_construct(cur_page, pages)
+
+    @property
+    def image_spans(self):
+        return [span for span in self.spans if isinstance(span, ImageSpanExtend)]

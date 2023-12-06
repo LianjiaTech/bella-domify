@@ -12,3 +12,6 @@ class LinesExtend(ElementCollection):
         for line in self.lines:
             self.append(LineExtend(line))
 
+    @property
+    def image_spans(self):
+        return [span for line in self for span in line.image_spans]
