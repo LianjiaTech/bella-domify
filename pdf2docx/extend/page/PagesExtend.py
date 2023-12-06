@@ -3,6 +3,8 @@ from collections import Counter
 from typing import List, Optional
 
 from pdf2docx.common.Block import Block
+from pdf2docx.common.Collection import BaseCollection
+from pdf2docx.extend.page.PageExtend import PageExtend
 from pdf2docx.page.Pages import Pages
 
 
@@ -35,9 +37,12 @@ def remove_number(text):
     return text.strip()
 
 
-class PagesExtend:
+class PagesExtend(BaseCollection):
     def __init__(self, pages: Pages):
+        super().__init__()
         self.pages = pages
+        for page in self.pages:
+            self.append(PageExtend(page, self.pages))
 
     def mark_page_header(self):
         """

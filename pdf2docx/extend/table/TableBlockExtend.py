@@ -15,7 +15,7 @@ def search_caption(block: TextBlock):
     return match[0] if match else None
 
 
-class TableExtend:
+class TableBlockExtend:
     def __init__(self, table_block: TableBlock, page_of_table: Page, all_pages: Pages):
         self.table_block = table_block
         self.page_of_table = page_of_table  # table block is in which page
