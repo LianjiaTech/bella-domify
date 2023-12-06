@@ -40,6 +40,13 @@ class Node:
     def add_child(self, node):
         self.child.append(node)
 
+    def union_bbox(self):
+        if not self.child:
+            return
+        for child in self.child:
+            child.union_bbox()
+        [self.element.union_bbox(child.element) for child in self.child]
+
 
 class DomTree:
     def __init__(self, page: Page, elements: List[Block] = None):
@@ -71,7 +78,12 @@ class DomTree:
                 else:
                     stack_path.pop()
         print("parse finished")
+        self.union_bbox()
         self.print_tree()
+
+    def union_bbox(self):
+        for child in self.root.child:
+            child.union_bbox()
 
     def print_tree(self):
         self._print_tree(self.root, 0)
