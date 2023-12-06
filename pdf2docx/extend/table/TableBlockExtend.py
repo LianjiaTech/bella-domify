@@ -1,5 +1,6 @@
 import re
 
+from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
 from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend
 from pdf2docx.table.TableBlock import TableBlock
@@ -14,11 +15,17 @@ def search_caption(block: TextBlockExtend):
     return match[0] if match else None
 
 
-class TableBlockExtend(RelationElement):
+class TableBlockExtend(RelationElement, BlockExtend):
     def __init__(self, table_block: TableBlock):
         self.block = table_block
         self.caption_block, self.table_caption = None, None
         self.refed_blocks = []
+
+    def is_text_block(self):
+        return False
+
+    def is_image_block(self):
+        return False
 
     def relation_construct(self, cur_page, pages):
         self.caption_block, self.table_caption = self.search_table_caption(cur_page)

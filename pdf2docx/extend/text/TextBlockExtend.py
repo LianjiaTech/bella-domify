@@ -1,14 +1,21 @@
+from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
 from pdf2docx.extend.text.LinesExtend import LinesExtend
 from pdf2docx.text.TextBlock import TextBlock
 
 
-class TextBlockExtend(RelationElement):
+class TextBlockExtend(RelationElement, BlockExtend):
     def __init__(self, text_block: TextBlock):
         self.block = text_block
         self.lines = LinesExtend(text_block.lines)
         self.ref_tables = []
         self.ref_images = []
+
+    def is_text_block(self):
+        return not self.is_image_block()
+
+    def is_image_block(self):
+        return self.block.lines.image_spans
 
     def add_ref_table(self, ref_table):
         self.ref_tables.append(ref_table)
