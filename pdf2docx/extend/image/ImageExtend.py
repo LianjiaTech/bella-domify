@@ -36,7 +36,8 @@ class ImageSpanExtend:
                                 image_block_index = len(blocks) - 1  # index of image span in blocks
 
         caption_block, image_caption = None, None
-        for i in range(1, len(blocks)):
+        # search 2 blocks before and after image block
+        for i in range(1, 3):
             prev_block, next_block = None, None
             if image_block_index - i > 0:
                 prev_block = blocks[image_block_index - i]

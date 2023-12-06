@@ -38,7 +38,8 @@ class TableExtend:
                         table_block_index = len(blocks) - 1
         # serach table caption from center to two sides
         caption_block, table_caption = None, None
-        for i in range(1, len(blocks)):
+        # search 2 blocks before and after table block
+        for i in range(1, 3):
             prev_block, next_block = None, None
             if table_block_index - i > 0:
                 prev_block = blocks[table_block_index - i]
