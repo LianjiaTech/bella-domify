@@ -5,6 +5,7 @@
 
 
 import string
+import re
 from .Line import Line
 from .TextSpan import TextSpan
 from ..image.ImageSpan import ImageSpan
@@ -15,6 +16,11 @@ from ..common import constants
 
 class Lines(ElementCollection):
     '''Collection of text lines.'''
+
+    # 有序列表正则表达式
+    ORDERED_LIST_PATTERN = r'^\s*(\d+\.|\d+\、|[\u2460-\u24FF])\s*'
+    # 无序列表正则表达式
+    UNORDERED_LIST_PATTERN = r'^\s*[\u2022\u25E6\u2043\u2219\u25CF]\s+'
 
     @property
     def unique_parent(self):
@@ -29,9 +35,20 @@ class Lines(ElementCollection):
         '''Construct lines from raw dicts list.'''
         for raw in raws:
             line = Line(raw)
+            self.recognize_list(line)
             self.append(line)
         return self
 
+    def recognize_list(self, line:Line):
+        # recognize ordered & unordered list
+        # 基于正则ORDERED_LIST_PATTERN，识别有序列表
+        match = re.match(Lines.ORDERED_LIST_PATTERN, line.text)
+        if match:
+            line.set_order_list(match.group(0))
+        # 基于正则UNORDERED_LIST_PATTERN，识别无序列表
+        match = re.match(Lines.UNORDERED_LIST_PATTERN, line.text)
+        if match:
+            line.set_unorder_list(match.group(0))
 
     @property
     def image_spans(self):

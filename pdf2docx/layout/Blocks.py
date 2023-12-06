@@ -490,6 +490,9 @@ class Blocks(ElementCollection):
                 # image line: create new text block
                 elif block.image_spans or ref_line.image_spans:
                     start_new_block = True
+
+                elif block.order_list or block.unorder_list:
+                    start_new_block = True
                 
                 # lower than common line spacing: needn't to create new text block
                 elif vertical_distance(ref_line, block)<=ref_dis+1.0 and \

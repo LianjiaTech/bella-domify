@@ -51,7 +51,8 @@ class Line(Element):
         super().__init__(raw)
 
         # collect spans
-        self.spans = Spans(parent=self).restore(raw.get('spans', []))        
+        self.spans = Spans(parent=self).restore(raw.get('spans', []))
+        self.tags = {}
 
     
     @property
@@ -84,6 +85,23 @@ class Line(Element):
             lambda span: isinstance(span, ImageSpan), self.spans
         ))
 
+    @property
+    def order_list(self):
+        '''Get list tag of this line. Return ``None`` if this line is not a list item.'''
+        return self.tags.get('order_list', None)
+
+    def set_order_list(self, tag):
+        '''Set list tag of this line.'''
+        self.tags['order_list'] = tag
+
+    @property
+    def unorder_list(self):
+        '''Get bullet tag of this line. Return ``None`` if this line is not a list item.'''
+        return self.tags.get('unorder_list', None)
+
+    def set_unorder_list(self, tag):
+        '''Set bullet tag of this line.'''
+        self.tags['unorder_list'] = tag
 
     @property
     def text_direction(self):
