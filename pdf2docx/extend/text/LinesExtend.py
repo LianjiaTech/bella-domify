@@ -6,9 +6,9 @@ from pdf2docx.text.Lines import Lines
 
 
 class LinesExtend(ElementCollection):
-    def __init__(self, lines: Lines, page_of_lines: Page, pages: Pages):
+    def __init__(self, lines: Lines):
         super().__init__(parent=lines._parent)
         self.lines = lines
         for line in self.lines:
-            self.append(LineExtend(line, page_of_lines, pages))
+            self.append(LineExtend(line))
 

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import re
 from collections import Counter
 from typing import List, Optional
@@ -20,7 +21,6 @@ def _extract_block_text(block):
     else:
         return None
 
-
 def _extract_text(blocks: List[Optional[Block]]):
     if not blocks:
         return
@@ -42,7 +42,11 @@ class PagesExtend(BaseCollection):
         super().__init__()
         self.pages = pages
         for page in self.pages:
-            self.append(PageExtend(page, self.pages))
+            self.append(PageExtend(page))
+
+    def relation_construct(self):
+        for page in self:
+            page.relation_construct(self)
 
     def mark_page_header(self):
         """
