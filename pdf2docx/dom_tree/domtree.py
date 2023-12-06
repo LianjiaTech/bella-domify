@@ -15,8 +15,8 @@ class Node:
         """Check if self is a child of node"""
         if node.is_root:
             return True
-        # 考虑基于字体、缩进等判断父子关系
-        return self.judge_by_text_font(node)
+        # ①考虑基于字体、缩进等判断父子关系；②如果是列表，则判断是否是父节点的子节点
+        return self.judge_by_text_font(node) or self.judge_by_order_list(node)
 
     def judge_by_text_font(self, node):
         cur_span = self.element.lines[0].spans[0]
@@ -32,6 +32,10 @@ class Node:
                 # 如果当前span的字体大小小于等于父节点的字体大小，且当前span不是粗体，父节点是粗体，则认为当前span是父节点的子节点
                 return True
         return False
+
+    def judge_by_order_list(self, node):
+        return node.element.list_type() and self.element.list_type() \
+            and self.element.list_type() != node.element.list_type()
 
     def add_child(self, node):
         self.child.append(node)

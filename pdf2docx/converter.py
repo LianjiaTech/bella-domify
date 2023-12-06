@@ -390,6 +390,7 @@ class Converter:
             if page.finalized: tables.extend(page.extract_tables(**settings))
 
         if settings['debug']:
+            [DomTree(page).parse() for page in self._pages]
             logging.info('Extracted tables: %s', tables)
             self.plot(**settings)
 

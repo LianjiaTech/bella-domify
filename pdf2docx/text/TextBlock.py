@@ -25,24 +25,26 @@ Data structure based on this `link <https://pymupdf.readthedocs.io/en/latest/tex
     }
 '''
 
-from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import (Pt, Inches)
+
 from .Lines import Lines
-from ..image.ImageSpan import ImageSpan
-from ..common.share import RectType, TextAlignment
-from ..common.Block import Block
-from ..common.share import rgb_component_from_name
 from ..common import constants
 from ..common import docx
+from ..common.Block import Block
+from ..common.share import (RectType, TextAlignment)
+from ..common.share import (rgb_component_from_name, lower_round)
+from ..image.ImageSpan import ImageSpan
 
 
 class TextBlock(Block):
     '''Text block.'''
-    def __init__(self, raw:dict=None):
+
+    def __init__(self, raw: dict = None):
         raw = raw or {}
-        
+
         # remove key 'bbox' since it is calculated from contained lines
-        if 'bbox' in raw: raw.pop('bbox') 
+        if 'bbox' in raw: raw.pop('bbox')
         super().__init__(raw)
 
         # collect lines
@@ -98,7 +100,6 @@ class TextBlock(Block):
         '''Count of physical rows.'''
         return len(self.lines.group_by_physical_rows())
 
-
     def store(self):
         res = super().store()
         res.update({
@@ -106,15 +107,20 @@ class TextBlock(Block):
         })
         return res
 
+    def list_type(self):
+        for line in self.lines:
+            if line.order_list:
+                return line.order_list
+            if line.unorder_list:
+                return line.unorder_list
 
     def add(self, line_or_lines):
-        '''Add line or lines to TextBlock.'''        
+        '''Add line or lines to TextBlock.'''
         if isinstance(line_or_lines, (Lines, list, tuple)):
             for line in line_or_lines:
                 self.lines.append(line)
         else:
             self.lines.append(line_or_lines)
-
 
     def plot(self, page):
         '''Plot block/line/span area for debug purpose.
