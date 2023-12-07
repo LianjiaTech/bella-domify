@@ -80,26 +80,27 @@ class PagesExtend(BaseCollection):
             for i, column in enumerate(page.sections[0]):
                 if len(page_header_blocks) <= i:
                     page_header_blocks.append([])
-                if column.blocks:
-                    block = column.blocks[0]
-                    if isinstance(block, TableBlock):
-                        page_header_blocks[i].append(block)
-                        continue
-
-                    image_spans = block.lines.image_spans
-                    if image_spans:
-                        _, y0, _, y1 = image_spans[0].bbox
-                        # if image span is too small, we ignore it
-                        if y1-y0 < 40:
-                            page_header_blocks[i].append(block)
-                        else:
-                            page_header_blocks[i].append(None)
-                    else:
-                        page_header_blocks[i].append(block)
-                else:
-                    page_header_blocks[i].append(None)
+                page_header_blocks[i].append(self.header_footer_block(column))
 
         return page_header_blocks
+
+    def header_footer_block(self, column, header: bool = True):
+        if not column.blocks:
+            return None
+        block = column.blocks[0] if header else column.blocks[-1]
+        if isinstance(block, TableBlock):
+            return block
+
+        image_spans = block.lines.image_spans
+        if image_spans:
+            _, y0, _, y1 = image_spans[0].bbox
+            # if image span is too small, we ignore it
+            if y1 - y0 < 40:
+                return block
+            else:
+                return None
+        else:
+            return block
 
     def _possible_footer_blocks(self):
         # for each page, we collect the last blocks in each column in the last section
@@ -110,16 +111,11 @@ class PagesExtend(BaseCollection):
                 continue
             if not page.sections:
                 continue
-            if last_page_columns and len(page.sections[-1]) != last_page_columns:
-                # if blocks num is not same, we can't mark it as header
-                return []
-            else:
-                last_page_columns = len(page.sections[-1])
 
             for i, column in enumerate(page.sections[-1]):
                 if len(page_footer_blocks) <= i:
                     page_footer_blocks.append([])
-                page_footer_blocks[i].append(column.blocks[-1] if column.blocks else None)
+                page_footer_blocks[i].append(self.header_footer_block(column, False))
 
         return page_footer_blocks
 
