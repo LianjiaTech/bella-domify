@@ -75,6 +75,9 @@ class DomTree:
             for section in page.sections:
                 for column in section:
                     for block in column.blocks:
+                        # 跳过页眉页脚
+                        if block.block.is_header or block.block.is_footer:
+                            continue
                         if debug_pages:
                             self.elements.append((block, page, debug_pages[index]))
                         else:
