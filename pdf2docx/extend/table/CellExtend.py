@@ -1,11 +1,14 @@
+from pdf2docx.common.Element import Element
 from pdf2docx.table.Cell import Cell
 
 
-class CellExtend:
+class CellExtend(Element):
     def __init__(self, cell: Cell, row_index, col_index):
+        super().__init__()
         self._cell = cell
         self.row_index = row_index
         self.col_index = col_index
+        self.bbox = self._cell.bbox
 
     @property
     def start_row(self):

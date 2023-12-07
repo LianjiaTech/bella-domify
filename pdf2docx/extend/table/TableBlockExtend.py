@@ -3,6 +3,7 @@ from typing import Optional, List
 
 from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
+from pdf2docx.extend.table.RowsExtend import RowsExtend
 from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend
 from pdf2docx.table.TableBlock import TableBlock
 
@@ -23,6 +24,7 @@ class TableBlockExtend(RelationElement, BlockExtend):
         self.table_caption: str = None
         self.refed_blocks:List[TextBlockExtend] = []
         self.bbox = table_block.bbox
+        self._rows = RowsExtend(table_block._rows)
 
     @property
     def is_text_block(self):
