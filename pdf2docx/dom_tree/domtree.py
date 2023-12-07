@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import List, Optional
 
 from pdf2docx.common.share import rgb_component_from_name
@@ -42,7 +43,7 @@ class Node:
         return node.element.block.list_type() and self.element.block.list_type() \
             and self.element.block.list_type() != node.element.block.list_type()
 
-    def add_child(self, node):
+    def add_child(self, node:Node):
         self.child.append(node)
 
     def union_bbox(self):
@@ -85,14 +86,25 @@ class DomTree:
 
     def parse(self):
         stack_path: List[Node] = [self.root]
+        prev_text_node: Optional[Node] = None
+        searched_block = set()
 
         for (element, page, debug_page) in self.elements:
+            if element in searched_block:
+                continue
             node = Node(element, page, debug_page)
+            searched_block.add(element)
             self.node_dict[element] = node
             if element.is_table_block:
                 if element.refed_blocks:
                     # 如果是表格，且有引用, 则添加到首个引用块
                     self.node_dict[element.refed_blocks[0]].add_child(node)
+                    caption_node = Node(element.caption_block, page, debug_page)
+                    self.node_dict[element.refed_blocks[0]].add_child(caption_node)
+                    # 添加table caption为已搜索过的块，避免重复搜索
+                    searched_block.add(element.caption_block)
+                elif prev_text_node:
+                    prev_text_node.add_child(node)
                 else:
                     self.root.add_child(node)
                 continue
@@ -101,6 +113,11 @@ class DomTree:
                 if image_span.refed_blocks:
                     # 如果是图片，且有引用, 则添加到首个引用块
                     self.node_dict[image_span.refed_blocks[0]].add_child(node)
+                    caption_node = Node(image_span.caption_block, page, debug_page)
+                    self.node_dict[image_span.refed_blocks[0]].add_child(caption_node)
+                    searched_block.add(image_span.caption_block)
+                elif prev_text_node:
+                    prev_text_node.add_child(node)
                 else:
                     self.root.add_child(node)
                 continue
@@ -113,6 +130,7 @@ class DomTree:
                     stack_path[-1].add_child(node)
                     # 压栈
                     stack_path.append(node)
+                    prev_text_node = node
                     break
                 else:
                     stack_path.pop()

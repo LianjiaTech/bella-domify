@@ -1,4 +1,5 @@
 import re
+from typing import Optional, List
 
 from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
@@ -18,8 +19,9 @@ def search_caption(block: TextBlockExtend):
 class TableBlockExtend(RelationElement, BlockExtend):
     def __init__(self, table_block: TableBlock):
         self.block = table_block
-        self.caption_block, self.table_caption = None, None
-        self.refed_blocks = []
+        self.caption_block: Optional[TextBlockExtend] = None
+        self.table_caption: str = None
+        self.refed_blocks:List[TextBlockExtend] = []
         self.bbox = table_block.bbox
 
     @property
@@ -81,7 +83,7 @@ class TableBlockExtend(RelationElement, BlockExtend):
             for section in page.sections:
                 for column in section:
                     for block in column.blocks:
-                        if isinstance(block, TextBlockExtend):
+                        if block.is_text_block:
                             if self.table_caption in block.block.text and block != self.caption_block:
                                 refed_blocks.append(block)
                                 block.add_ref_table(self)

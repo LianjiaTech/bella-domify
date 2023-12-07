@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pdf2docx.extend.common.RelationConstruct import RelationElement
 from pdf2docx.image.ImageSpan import ImageSpan
 import re
@@ -15,7 +17,8 @@ def search_caption(block):
 class ImageSpanExtend(RelationElement):
     def __init__(self, image_span: ImageSpan):
         self.image_span = image_span
-        self.caption_block, self.image_caption = None, None
+        self.caption_block  = None
+        self.image_caption: str = None
         self.refed_blocks = []
 
 
@@ -65,7 +68,7 @@ class ImageSpanExtend(RelationElement):
             for section in page.sections:
                 for column in section:
                     for block in column.blocks:
-                        if block.block.is_text_block:
+                        if block.is_text_block:
                             if self.image_caption in block.block.text and block != self.caption_block:
                                 ref_blocks.append(block)
                                 block.add_ref_image(self.image_span)
