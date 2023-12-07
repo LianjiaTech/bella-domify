@@ -7,6 +7,7 @@ from pdf2docx.common.Block import Block
 from pdf2docx.common.Collection import BaseCollection
 from pdf2docx.extend.page.PageExtend import PageExtend
 from pdf2docx.page.Pages import Pages
+from pdf2docx.table.TableBlock import TableBlock
 
 
 def _extract_block_text(block):
@@ -28,6 +29,8 @@ def _extract_text(blocks: List[Optional[Block]]):
 
 
 def remove_number(text):
+    if text is None:
+        return None
     # 在页眉，页脚，经常出现次序编号，首先将这些编号去掉,通过剩余文本的相似度，分析是否是页眉页脚
     chinese_number = r'[(一|二|三|四|五|六|七|八|九|十)万]?[(一|二|三|四|五|六|七|八|九)千]?[(一|二|三|四|五|六|七|八|九)百]?[(一|二|三|四|五|六|七|八|九)十]?[(一|二|三|四|五|六|七|八|九)]?'
     # 使用正则表达式，替换符合pattern中的字符为空
@@ -77,7 +80,24 @@ class PagesExtend(BaseCollection):
             for i, column in enumerate(page.sections[0]):
                 if len(page_header_blocks) <= i:
                     page_header_blocks.append([])
-                page_header_blocks[i].append(column.blocks[0] if column.blocks else None)
+                if column.blocks:
+                    block = column.blocks[0]
+                    if isinstance(block, TableBlock):
+                        page_header_blocks[i].append(block)
+                        continue
+
+                    image_spans = block.lines.image_spans
+                    if image_spans:
+                        _, y0, _, y1 = image_spans[0].bbox
+                        # if image span is too small, we ignore it
+                        if y1-y0 < 40:
+                            page_header_blocks[i].append(block)
+                        else:
+                            page_header_blocks[i].append(None)
+                    else:
+                        page_header_blocks[i].append(block)
+                else:
+                    page_header_blocks[i].append(None)
 
         return page_header_blocks
 
@@ -120,6 +140,8 @@ class PagesExtend(BaseCollection):
         text_list = [remove_number(text) if text else None for text in text_list]
         text_counter = Counter(text_list)
         frequency, most_common_text = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
+        if most_common_text is None:
+            return False
         found = False
         if frequency / len(text_list) > 0.5 and frequency > 1:
             found = True
