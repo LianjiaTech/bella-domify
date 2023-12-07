@@ -1,19 +1,20 @@
 from typing import List, Optional
 
-from pdf2docx.common.Block import Block
+from pdf2docx.common.share import rgb_component_from_name
 from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.page.PageExtend import PageExtend
 from pdf2docx.extend.page.PagesExtend import PagesExtend
-from pdf2docx.page import Page
 from pdf2docx.text.TextSpan import TextSpan
 
 
 class Node:
-    def __init__(self, element: Optional[BlockExtend], page: Optional[PageExtend], is_root=False):
+    def __init__(self, element: Optional[BlockExtend], page: Optional[PageExtend], debug_page, is_root=False):
         self.element = element
         self.child = []
         self.is_root = is_root
         self.page = page
+        self.debug_page = debug_page
+        self.order_num_str = None  # 当前元素的有序列表序号 1.1, 1.2.1
 
     def is_child_of(self, node):
         """Check if self is a child of node"""
@@ -51,23 +52,39 @@ class Node:
             child.union_bbox()
         [self.element.union_bbox(child.element) for child in self.child]
 
+    def plot(self):
+        if self.element and self.debug_page:
+            self.element.block.extend_plot(self.debug_page)
+            blue = rgb_component_from_name('blue')
+            yellow = rgb_component_from_name('yellow')
+            self.debug_page.draw_rect((self.element.block.bbox.x0, self.element.block.bbox.y0-8,
+                                       self.element.block.bbox.x0+50, self.element.block.bbox.y0), color=blue,
+                                      fill=blue)
+            self.debug_page.insert_text((self.element.bbox.x0, self.element.bbox.y0),
+                                        self.order_num_str, color=yellow)
+            # 使用pymupdf， 在指定bbox左上角，绘制文字
 
 class DomTree:
-    def __init__(self, pages: PagesExtend):
-        self.root = Node(None, None, is_root=True)
+    def __init__(self, pages: PagesExtend, debug_file=None):
+        self.root = Node(None, None, None, is_root=True)
         self.elements = []
         self.node_dict = {}  # element->node
-        for page in pages:
+        self.debug_file = debug_file
+        debug_pages = [page for page in debug_file.pages()] if debug_file else None
+        for index, page in enumerate(pages):
             for section in page.sections:
                 for column in section:
                     for block in column.blocks:
-                        self.elements.append((block, page))
+                        if debug_pages:
+                            self.elements.append((block, page, debug_pages[index]))
+                        else:
+                            self.elements.append((block, page, None))
 
     def parse(self):
         stack_path: List[Node] = [self.root]
 
-        for (element, page) in self.elements:
-            node = Node(element, page)
+        for (element, page, debug_page) in self.elements:
+            node = Node(element, page, debug_page)
             self.node_dict[element] = node
             if element.is_table_block:
                 if element.refed_blocks:
@@ -97,7 +114,6 @@ class DomTree:
                 else:
                     stack_path.pop()
         print("parse finished")
-        self.union_bbox()
         self.print_tree()
 
     def union_bbox(self):
@@ -112,6 +128,9 @@ class DomTree:
         if node.element:
             # level为缩进层数
             cur_order_str = f"{parent_order_str}.{order}" if parent_order_str else f"{order}"
+            node.order_num_str = cur_order_str  # 记录其有效列表序号
+            if node.debug_page:
+                node.plot()
             print("    " * level + cur_order_str, node.element.block.text)
         for i, child in enumerate(node.child, start=1):
             self._print_tree(child, level + 1, cur_order_str, i)
