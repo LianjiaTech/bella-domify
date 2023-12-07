@@ -422,6 +422,8 @@ class Converter:
         cont = bytearray(page.read_contents())  # read the contents source as a (modifyable) bytearray
         if cont.find(b"/Subtype/Watermark") > 0:  # this will confirm a marked-content watermark is present
             print("marked-content watermark present")
+        else:
+            return  # no watermark found
         while True:
             i1 = cont.find(b"/Artifact")  # start of definition
             if i1 < 0: break  # none more left: done
