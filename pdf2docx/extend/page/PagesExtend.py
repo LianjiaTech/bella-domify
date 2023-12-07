@@ -121,7 +121,7 @@ class PagesExtend(BaseCollection):
         text_counter = Counter(text_list)
         frequency, most_common_text = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
         found = False
-        if frequency / len(text_list) > 0.5:
+        if frequency / len(text_list) > 0.5 and frequency > 1:
             found = True
         if found:
             for block in blocks:
