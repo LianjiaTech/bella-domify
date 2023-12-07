@@ -131,14 +131,7 @@ class Converter:
         self.load_pages(start, end, pages, **kwargs) \
             .parse_document(**kwargs) \
             .parse_pages(**kwargs)
-        if kwargs.get('sematic_parse', False):
-            self.sematic_parse()
         return self
-
-    def sematic_parse(self):
-        pages_extend = PagesExtend(self.pages)
-        pages_extend.mark_page_header()
-        pages_extend.mark_page_footer()
 
     def load_pages(self, start:int=0, end:int=None, pages:list=None, **kwargs):
         '''Step 1 of converting process: open PDF file with ``PyMuPDF``, 
@@ -367,6 +360,30 @@ class Converter:
 
         logging.info('Terminated in %.2fs.', perf_counter()-t0)
 
+    def dom_tree_parse(self, start:int=0, end:int=None, pages:list=None, **kwargs):
+        # parsing pages first
+        settings = self.default_settings
+        settings.update(kwargs)
+        self.parse(start, end, pages, **settings)
+
+        pages_extend = PagesExtend(self._pages)
+        pages_extend.mark_page_header()
+        pages_extend.mark_page_footer()
+        pages_extend.relation_construct()
+
+        if settings['debug']:
+            debug_file = fitz.Document(self.filename_pdf)
+            dom_tree = DomTree(pages_extend, debug_file)
+            dom_tree.parse()
+            debug_file.save(kwargs['debug_file_name'])
+            return dom_tree
+        else:
+            dom_tree = DomTree(pages_extend)
+            dom_tree.parse()
+            return dom_tree
+
+
+
     def extract_tables(self, start:int=0, end:int=None, pages:list=None,
                        extract_table_with_cell_pos=False, **kwargs):
         '''Extract table contents from specified PDF pages.
@@ -386,15 +403,12 @@ class Converter:
         settings['extract_table_with_cell_pos'] = extract_table_with_cell_pos
         self.parse(start, end, pages, **settings)
 
-        pages_extend = PagesExtend(self._pages)
-        pages_extend.relation_construct()
         # get parsed tables
         tables = []
         for page in self._pages:
             if page.finalized: tables.extend(page.extract_tables(**settings))
 
         if settings['debug']:
-            [DomTree(page).parse() for page in self._pages]
             logging.info('Extracted tables: %s', tables)
             self.plot(**settings)
 
