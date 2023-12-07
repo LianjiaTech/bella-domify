@@ -40,7 +40,7 @@ class Node:
         return False
 
     def judge_by_order_list(self, node):
-        return node.element.block.list_type() and self.element.block.list_type() \
+        return self.element.block.list_type() \
             and self.element.block.list_type() != node.element.block.list_type()
 
     def add_child(self, node:Node):
