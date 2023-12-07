@@ -56,7 +56,7 @@ class DomTree:
     def __init__(self, pages: PagesExtend):
         self.root = Node(None, None, is_root=True)
         self.elements = []
-        self.node_dict = {} #element->node
+        self.node_dict = {}  # element->node
         for page in pages:
             for section in page.sections:
                 for column in section:
@@ -105,11 +105,13 @@ class DomTree:
             child.union_bbox()
 
     def print_tree(self):
-        self._print_tree(self.root, 0)
+        self._print_tree(self.root, 0, "", 1)
 
-    def _print_tree(self, node, level):
+    def _print_tree(self, node, level, parent_order_str, order):
+        cur_order_str = parent_order_str
         if node.element:
             # level为缩进层数
-            print("    " * level, node.element.block.text)
-        for child in node.child:
-            self._print_tree(child, level + 1)
+            cur_order_str = f"{parent_order_str}.{order}" if parent_order_str else f"{order}"
+            print("    " * level + cur_order_str, node.element.block.text)
+        for i, child in enumerate(node.child, start=1):
+            self._print_tree(child, level + 1, cur_order_str, i)
