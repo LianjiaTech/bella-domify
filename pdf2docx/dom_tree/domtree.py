@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import List, Optional
 
 from pdf2docx.common.share import rgb_component_from_name
@@ -12,6 +13,7 @@ class Node:
     def __init__(self, element: Optional[BlockExtend], page: Optional[PageExtend], debug_page, is_root=False):
         self.element = element
         self.child = []
+        self.parent = None
         self.is_root = is_root
         self.page = page
         self.debug_page = debug_page
@@ -43,8 +45,21 @@ class Node:
         return self.element.block.list_type() \
             and self.element.block.list_type() != node.element.block.list_type()
 
-    def add_child(self, node:Node):
+    # 找到上一组和当前列表相同类型的节点
+    def recursion_find_same_list_type_node(self, node):
+        # 父节点不是列表，停止递归
+        if self.same_list_type_node(node):
+            return node
+        elif node.parent and not node.parent.is_root:
+            return self.recursion_find_same_list_type_node(node.parent)
+        return None
+
+    def same_list_type_node(self, node):
+        return not node.is_root and self.element.block.list_type() == node.element.block.list_type()
+
+    def add_child(self, node: Node):
         self.child.append(node)
+        node.parent = self
 
     def union_bbox(self):
         if not self.child:
@@ -126,8 +141,18 @@ class DomTree:
                 continue
             while True:
                 if node.is_child_of(stack_path[-1]):
+                    parent_node = stack_path[-1]
+
+                    # 如果是列表，且和上一节点不是同一类型列表，则尝试找到上一组相同类型的列表
+                    if node.element.block.list_type():
+                        same_node = node.recursion_find_same_list_type_node(stack_path[-1])
+                        if same_node:
+                            parent_node = same_node.parent
+                            stack_path.pop()
+                            stack_path.append(parent_node)
+
                     # 增加子节点
-                    stack_path[-1].add_child(node)
+                    parent_node.add_child(node)
                     # 压栈
                     stack_path.append(node)
                     prev_text_node = node
