@@ -9,7 +9,7 @@ h11==0.14.0
 idna==3.6
 lxml==4.9.3
 numpy==1.26.2
-opencv-python-headless==4.5.3.56
+opencv-python==4.8.1.78
 pydantic==2.5.2
 pydantic_core==2.14.5
 PyMuPDF==1.23.6
