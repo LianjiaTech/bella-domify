@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi import File, UploadFile
 
 from pdf2docx import Converter
+from pdf2docx.dom_tree.domtree import DomTreeModel
 
 app = FastAPI()
 
@@ -22,20 +23,15 @@ async def health_liveness():
 async def health_readiness():
     return {"status": "UP"}
 
+
 # 上传文件接口
 @app.post("/pdf/parse/test")
 async def create_upload_file(file: UploadFile = File(...)):
     # 读取file字节流
     contents = await file.read()
     converter = Converter(stream=contents)
-    tables = converter.extract_tables(
-        start=0, end=1,
-        # extract_table_with_cell_pos=True,
-        # remove_watermark=True,
-        # debug=True,
-        # debug_file_name=test_dir + "frt-debug.pdf",
-        sematic_parse=True,
-        # parse_stream_table=False
+    dom_tree = converter.dom_tree_parse(
+        remove_watermark=True,
+        parse_stream_table=False
     )
-
-    return {"filename": file.filename}
+    return DomTreeModel(dom_tree=dom_tree)

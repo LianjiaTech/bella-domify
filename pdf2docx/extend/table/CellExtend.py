@@ -1,5 +1,44 @@
+from __future__ import annotations
+from pydantic import BaseModel, PrivateAttr, computed_field
+
 from pdf2docx.common.Element import Element
 from pdf2docx.table.Cell import Cell
+
+
+class CellExtendModel(BaseModel):
+    _cell: CellExtend = PrivateAttr()
+
+    def __init__(self, cell):
+        super().__init__()
+        self._cell = cell
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    @computed_field
+    @property
+    def text(self) -> str:
+        return self._cell.text
+
+    @computed_field
+    @property
+    def start_row(self) -> int:
+        return self._cell.start_row
+
+    @computed_field
+    @property
+    def end_row(self) -> int:
+        return self._cell.end_row
+
+    @computed_field
+    @property
+    def start_col(self) -> int:
+        return self._cell.start_col
+
+    @computed_field
+    @property
+    def end_col(self) -> int:
+        return self._cell.end_col
 
 
 class CellExtend(Element):

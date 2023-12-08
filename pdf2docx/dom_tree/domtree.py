@@ -1,12 +1,44 @@
 from __future__ import annotations
+from typing import List, Optional, Union, Any
 
-from typing import List, Optional
+from pydantic import BaseModel, computed_field, PrivateAttr
 
 from pdf2docx.common.share import rgb_component_from_name
 from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.page.PageExtend import PageExtend
 from pdf2docx.extend.page.PagesExtend import PagesExtend
+from pdf2docx.extend.table.TableBlockExtend import TableBlockExtend, TableBlockModel
+from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend, TextBlockModel
 from pdf2docx.text.TextSpan import TextSpan
+
+
+class NodeModel(BaseModel):
+    _node: Node = PrivateAttr()
+
+    def __init__(self, node):
+        super().__init__()
+        self._node = node
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    @computed_field
+    @property
+    def child(self) -> List[NodeModel]:
+        child_model = []
+        for child in self._node.child:
+            child_model.append(NodeModel(node=child))
+        return child_model
+
+    @computed_field
+    @property
+    def element(self) -> Union[TextBlockModel, TableBlockModel, None]:
+        if isinstance(self._node.element, TextBlockExtend):
+            return TextBlockModel(block=self._node.element)
+        elif isinstance(self._node.element, TableBlockExtend):
+            return TableBlockModel(block=self._node.element)
+        else:
+            return None
 
 
 class Node:
@@ -45,18 +77,6 @@ class Node:
         return self.element.block.list_type() \
             and self.element.block.list_type() != node.element.block.list_type()
 
-    # 找到上一组和当前列表相同类型的节点
-    def recursion_find_same_list_type_node(self, node):
-        # 父节点不是列表，停止递归
-        if self.same_list_type_node(node):
-            return node
-        elif node.parent and not node.parent.is_root:
-            return self.recursion_find_same_list_type_node(node.parent)
-        return None
-
-    def same_list_type_node(self, node):
-        return not node.is_root and self.element.block.list_type() == node.element.block.list_type()
-
     def add_child(self, node: Node):
         self.child.append(node)
         node.parent = self
@@ -73,14 +93,31 @@ class Node:
             self.element.block.extend_plot(self.debug_page)
             blue = rgb_component_from_name('blue')
             yellow = rgb_component_from_name('yellow')
-            self.debug_page.draw_rect((self.element.block.bbox.x0, self.element.block.bbox.y0-8,
-                                       self.element.block.bbox.x0+50, self.element.block.bbox.y0), color=blue,
+            self.debug_page.draw_rect((self.element.block.bbox.x0, self.element.block.bbox.y0 - 8,
+                                       self.element.block.bbox.x0 + 50, self.element.block.bbox.y0), color=blue,
                                       fill=blue)
             self.debug_page.insert_text((self.element.bbox.x0, self.element.bbox.y0),
                                         self.order_num_str, color=yellow)
-            # 使用pymupdf， 在指定bbox左上角，绘制文字
+
+
+class DomTreeModel(BaseModel):
+    _dom_tree: DomTree = PrivateAttr()
+
+    def __init__(self, dom_tree, **data: Any):
+        super().__init__(**data)
+        self._dom_tree = dom_tree
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    @computed_field
+    @property
+    def root(self) -> NodeModel:
+        return NodeModel(node=self._dom_tree.root)
+
 
 class DomTree:
+
     def __init__(self, pages: PagesExtend, debug_file=None):
         self.root = Node(None, None, None, is_root=True)
         self.elements = []

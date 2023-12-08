@@ -1,8 +1,12 @@
+from __future__ import annotations
 import re
 from typing import Optional, List
 
+from pydantic import BaseModel, computed_field, PrivateAttr
+
 from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
+from pdf2docx.extend.table.RowExtend import RowExtendModel
 from pdf2docx.extend.table.RowsExtend import RowsExtend
 from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend
 from pdf2docx.table.TableBlock import TableBlock
@@ -17,12 +21,30 @@ def search_caption(block: TextBlockExtend):
     return match[0] if match else None
 
 
+class TableBlockModel(BaseModel):
+    _block: TableBlockExtend = PrivateAttr()
+    block_type: str = "table"
+
+    def __init__(self, block):
+        super().__init__()
+        self._block = block
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    @computed_field
+    @property
+    def rows(self) -> List[RowExtendModel]:
+        return [RowExtendModel(row) for row in self._block._rows]
+
+
 class TableBlockExtend(RelationElement, BlockExtend):
     def __init__(self, table_block: TableBlock):
+        super().__init__()
         self.block = table_block
         self.caption_block: Optional[TextBlockExtend] = None
         self.table_caption: str = None
-        self.refed_blocks:List[TextBlockExtend] = []
+        self.refed_blocks: List[TextBlockExtend] = []
         self.bbox = table_block.bbox
         self._rows = RowsExtend(table_block._rows)
 
