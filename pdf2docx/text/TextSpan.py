@@ -69,6 +69,8 @@ class TextSpan(Element):
         # positive to expand space, otherwise condense
         # just an attribute placeholder: not used yet
         self.char_spacing = raw.get('char_spacing', 0.0)
+
+        self.pseudo_bold = raw.get('pseudo_bold', False)
         
         # init text span element
         super().__init__(raw)
@@ -396,9 +398,9 @@ class TextSpan(Element):
         # bit 2: serifed (2^2)
         # bit 3: monospaced (2^3)
         # bit 4: bold (2^4)
-        docx_span.superscript = bool(self.flags & 2**0)
-        docx_span.italic = bool(self.flags & 2**1)
-        docx_span.bold = bool(self.flags & 2**4)
+        docx_run.superscript = bool(self.flags & 2**0)
+        docx_run.italic = bool(self.flags & 2**1)
+        docx_run.bold = bool(self.flags & 2**4) or self.pseudo_bold
 
         # font name
         font_name = self.font

@@ -63,8 +63,8 @@ class Node:
         node_span = node.element.lines[0].spans[0]
         if (not isinstance(cur_span, TextSpan)) or (not isinstance(node_span, TextSpan)):
             return False
-        cur_span_bold = bool(cur_span.flags & 2 ** 4)
-        node_span_bold = bool(node_span.flags & 2 ** 4)
+        cur_span_bold = bool(cur_span.flags & 2 ** 4) or cur_span.pseudo_bold
+        node_span_bold = bool(node_span.flags & 2 ** 4) or cur_span_bold.pseudo_bold
         if isinstance(cur_span, TextSpan) and isinstance(node_span, TextSpan):
             if cur_span.size < node_span.size:
                 return True

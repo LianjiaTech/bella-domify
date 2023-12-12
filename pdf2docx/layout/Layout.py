@@ -71,10 +71,44 @@ class Layout:
 
     def restore(self, data:dict):
         '''Restore Layout from parsed results.'''
+        self._assign_pseudo_bold(data)
         self.blocks.restore(data.get('blocks', []))
+
         self.shapes.restore(data.get('shapes', []))
         return self
 
+    def _assign_pseudo_bold(self, data:dict):
+        # 将从text_trace中获取到的底层伪粗体信息，附加到span上
+        spans = []
+        for block in data.get('blocks'):
+            if 'lines' not in block: continue
+            for line in block['lines']:
+                if 'spans' not in line: continue
+                spans.extend(line['spans'])
+        spans = [(span, ''.join([char['c'] for char in span['chars']])) for span in spans]
+        pseudo_bold = data.get('pseudo_bold')
+        spans_index, pseudo_bold_index = 0, 0 # spans和pseudo_bold的搜索索引
+        while True:
+            if spans_index >= len(spans): break
+            if pseudo_bold_index >= len(pseudo_bold): break
+            span_text = spans[spans_index][1]
+            pseudo_bold_span_text = ''
+            span_font_pseubo_bold = False
+            while pseudo_bold_index < len(pseudo_bold):
+                pseudo_bold_span_text += pseudo_bold[pseudo_bold_index].chars
+                # 如果span_text以pseudo_bold_span_text开头，或者span_text包含pseudo_bold_span_text，且伪粗体标记与上一个伪粗体标记相同
+                # 则pseudo_bold_index对应的span属于spans_index对应的span
+                if span_text.startswith(pseudo_bold_span_text) or (
+                        pseudo_bold[pseudo_bold_index].chars in span_text and
+                        span_font_pseubo_bold == pseudo_bold[pseudo_bold_index].pseudo_bold
+                ):
+                    span_font_pseubo_bold = pseudo_bold[pseudo_bold_index].pseudo_bold
+                    pseudo_bold_index += 1
+                else:
+                    break
+            # 添加伪粗体标记
+            spans[spans_index][0]['pseudo_bold'] = span_font_pseubo_bold
+            spans_index += 1
 
     def assign_blocks(self, blocks:list):
         '''Add blocks (line or table block) to this layout. 
