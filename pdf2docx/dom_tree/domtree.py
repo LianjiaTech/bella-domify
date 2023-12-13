@@ -32,6 +32,11 @@ class NodeModel(BaseModel):
 
     @computed_field
     @property
+    def order_num(self) -> Optional[str]:
+        return self._node.order_num_str
+
+    @computed_field
+    @property
     def element(self) -> Union[TextBlockModel, TableBlockModel, None]:
         if isinstance(self._node.element, TextBlockExtend):
             return TextBlockModel(block=self._node.element)
@@ -64,7 +69,7 @@ class Node:
         if (not isinstance(cur_span, TextSpan)) or (not isinstance(node_span, TextSpan)):
             return False
         cur_span_bold = bool(cur_span.flags & 2 ** 4) or cur_span.pseudo_bold
-        node_span_bold = bool(node_span.flags & 2 ** 4) or cur_span_bold.pseudo_bold
+        node_span_bold = bool(node_span.flags & 2 ** 4) or node_span.pseudo_bold
         if isinstance(cur_span, TextSpan) and isinstance(node_span, TextSpan):
             if cur_span.size < node_span.size:
                 return True

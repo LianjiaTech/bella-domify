@@ -71,7 +71,8 @@ class Layout:
 
     def restore(self, data:dict):
         '''Restore Layout from parsed results.'''
-        self._assign_pseudo_bold(data)
+        if data.get('blocks'):
+            self._assign_pseudo_bold(data)
         self.blocks.restore(data.get('blocks', []))
 
         self.shapes.restore(data.get('shapes', []))
