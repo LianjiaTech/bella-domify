@@ -7,13 +7,20 @@ from pdf2docx.table.Cell import Cell
 
 class CellExtendModel(BaseModel):
     _cell: CellExtend = PrivateAttr()
+    _talbe_order_num: str = PrivateAttr()
 
-    def __init__(self, cell):
+    def __init__(self, cell, table_order_num:str):
         super().__init__()
         self._cell = cell
+        self._talbe_order_num = table_order_num
 
     class Config:
         arbitrary_types_allowed = True
+
+    @computed_field
+    @property
+    def order_num(self) -> str:
+        return self._talbe_order_num + '.' + "-".join([str(self.start_row), str(self.end_row), str(self.start_col), str(self.end_col)])
 
     @computed_field
     @property

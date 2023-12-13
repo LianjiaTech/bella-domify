@@ -41,7 +41,7 @@ class NodeModel(BaseModel):
         if isinstance(self._node.element, TextBlockExtend):
             return TextBlockModel(block=self._node.element)
         elif isinstance(self._node.element, TableBlockExtend):
-            return TableBlockModel(block=self._node.element)
+            return TableBlockModel(block=self._node.element, order_num=self.order_num)
         else:
             return None
 

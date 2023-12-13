@@ -23,11 +23,13 @@ def search_caption(block: TextBlockExtend):
 
 class TableBlockModel(BaseModel):
     _block: TableBlockExtend = PrivateAttr()
+    _order_num: str = PrivateAttr()
     block_type: str = "table"
 
-    def __init__(self, block):
+    def __init__(self, block, order_num:str):
         super().__init__()
         self._block = block
+        self._order_num = order_num
 
     class Config:
         arbitrary_types_allowed = True
@@ -35,7 +37,7 @@ class TableBlockModel(BaseModel):
     @computed_field
     @property
     def rows(self) -> List[RowExtendModel]:
-        return [RowExtendModel(row) for row in self._block._rows]
+        return [RowExtendModel(row, table_order_num=self._order_num) for row in self._block._rows]
 
 
 class TableBlockExtend(RelationElement, BlockExtend):

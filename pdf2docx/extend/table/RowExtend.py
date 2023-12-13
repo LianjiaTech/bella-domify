@@ -16,10 +16,12 @@ class RowExtend(Element):
 
 class RowExtendModel(BaseModel):
     _row: RowExtend = PrivateAttr()
+    _talbe_order_num: str = PrivateAttr()
 
-    def __init__(self, row):
+    def __init__(self, row, table_order_num:str):
         super().__init__()
         self._row = row
+        self._talbe_order_num = table_order_num
 
     class Config:
         arbitrary_types_allowed = True
@@ -27,4 +29,4 @@ class RowExtendModel(BaseModel):
     @computed_field
     @property
     def cells(self) -> list[CellExtendModel]:
-        return [CellExtendModel(cell=cell) for cell in self._row._cells]
+        return [CellExtendModel(cell=cell, table_order_num=self._talbe_order_num) for cell in self._row._cells]
