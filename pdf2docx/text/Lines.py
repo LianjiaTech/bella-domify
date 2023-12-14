@@ -114,7 +114,8 @@ class Lines(ElementCollection):
 
         # skip if only one row
         num = len(rows)
-        if num == 1: return rows
+        if num == 1:
+            return [[rows[0], False, False]]
 
         # standard row width with first row excluded, considering potential indentation of fist line
         W = max(row[-1].bbox[2] - row[0].bbox[0] for row in rows[1:])
@@ -127,6 +128,7 @@ class Lines(ElementCollection):
         start_of_para = end_of_para = False  # start/end of paragraph
         start_of_sen = end_of_sen = False  # start/end of sentence
         prev_font, prev_font_size, prev_font_bold = None, None, False
+        first_line_start_of_paragraph, last_line_end_of_paragraph = False, False
         for row in rows:
             # mulite lines in a row should be in line order
             row.sort_in_line_order()
@@ -153,12 +155,16 @@ class Lines(ElementCollection):
 
             # take action
             if start_of_para:
-                res.append(lines)
+                if lines:
+                    res.append((lines, first_line_start_of_paragraph, last_line_end_of_paragraph))
+                first_line_start_of_paragraph, last_line_end_of_paragraph = True, False
                 lines = Lines()
                 lines.extend(row)
             elif end_of_para:
                 lines.extend(row)
-                res.append(lines)
+                last_line_end_of_paragraph = True
+                res.append((lines, first_line_start_of_paragraph, last_line_end_of_paragraph))
+                first_line_start_of_paragraph, last_line_end_of_paragraph = False, False
                 lines = Lines()
             else:
                 lines.extend(row)
@@ -169,9 +175,17 @@ class Lines(ElementCollection):
             prev_font, prev_font_size, prev_font_bold = cur_font, cur_font_size, cur_font_bold
 
         # close the action
-        if lines: res.append(lines)
+        if lines: res.append((lines,first_line_start_of_paragraph, last_line_end_of_paragraph))
 
         return res
+
+    # def is_end_of_paragraph_line(self, line:Line, **settings):
+    #     punc = tuple(constants.SENTENCE_END_PUNC)
+    #     end_of_sen = line.text.strip().endswith(punc)
+    #     settings['line_break_free_space_ratio'],
+    #     settings['new_paragraph_free_space_ratio']
+    #     return end_of_sen and w / W <= 1.0 - line_break_free_space_ratio:
+    #             end_of_para = True
 
     def adjust_last_word(self, delete_end_line_hyphen: bool):
         '''Adjust word at the end of line:

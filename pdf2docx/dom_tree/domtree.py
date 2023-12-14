@@ -157,7 +157,7 @@ class DomTree:
                 while cur_talbe.next_continuous_table:
                     next_table = cur_talbe.next_continuous_table
                     searched_block.add(next_table)
-                    element.merge_table(next_table)
+                    element.merge(next_table)
                     cur_talbe = next_table
 
                 if element.refed_blocks:
@@ -188,6 +188,13 @@ class DomTree:
             if not element.is_text_block:
                 # 先分析text block
                 continue
+
+            cur_paragraph = node.element
+            while cur_paragraph.next_continuous_paragraph:
+                next_paragraph = cur_paragraph.next_continuous_paragraph
+                searched_block.add(next_paragraph)
+                node.element.merge(next_paragraph)
+                cur_paragraph = next_paragraph
             while True:
                 if node.is_child_of(stack_path[-1]):
                     parent_node = stack_path[-1]
@@ -226,6 +233,6 @@ class DomTree:
             node.order_num_str = cur_order_str  # 记录其有效列表序号
             if node.debug_page:
                 node.plot()
-            print("    " * level + cur_order_str, node.element.block.text)
+            print("    " * level + cur_order_str, node.element.text)
         for i, child in enumerate(node.child, start=1):
             self._print_tree(child, level + 1, cur_order_str, i)

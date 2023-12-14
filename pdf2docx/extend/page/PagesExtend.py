@@ -51,10 +51,15 @@ class PagesExtend(BaseCollection):
         for page in self:
             page.relation_construct(self)
         self.table_continous_relation_construct()
+        self.paragraph_continous_relation_construct()
 
     def table_continous_relation_construct(self):
         for page, next_page in zip(self, self[1:]):
             page.table_continous_relation_construct(next_page)
+
+    def paragraph_continous_relation_construct(self):
+        for page, next_page in zip(self, self[1:]):
+            page.paragraph_continous_relation_construct(next_page)
 
     def mark_page_header(self):
         """

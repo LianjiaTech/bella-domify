@@ -530,13 +530,19 @@ class Blocks(ElementCollection):
             # add split blocks if necessary
             lines_list = block.lines.split_vertically_by_text(line_break_free_space_ratio, 
                                                                 new_paragraph_free_space_ratio)
-            if len(lines_list)==1:
-                blocks.append(block)
-            else:
-                for lines in lines_list:
-                    text_block = TextBlock()
-                    text_block.add(lines)
-                    blocks.append(text_block)
+            for lines, first_line_start_of_paragraph, last_line_end_of_paragraph in lines_list:
+                text_block = TextBlock(first_line_start_of_paragraph=first_line_start_of_paragraph,
+                                       last_line_end_of_paragraph=last_line_end_of_paragraph)
+                text_block.add(lines)
+                blocks.append(text_block)
+            # if len(lines_list)==1:
+            #     blocks.append(block)
+            # else:
+            #     for lines, first_line_start_of_paragraph, last_line_end_of_paragraph in lines_list:
+            #         text_block = TextBlock(first_line_start_of_paragraph=first_line_start_of_paragraph,
+            #                                last_line_end_of_paragraph=last_line_end_of_paragraph)
+            #         text_block.add(lines)
+            #         blocks.append(text_block)
 
         return blocks
 

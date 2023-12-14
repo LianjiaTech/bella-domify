@@ -64,7 +64,7 @@ class TableBlockExtend(RelationElement, BlockExtend):
     def is_table_block(self):
         return True
 
-    def merge_table(self, table_extend: TableBlockExtend):
+    def merge(self, table_extend: TableBlockExtend):
         '''Merge two table blocks.'''
         self._rows.merge_rows(table_extend._rows)
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 
 from pydantic import BaseModel, computed_field
 
@@ -26,7 +26,7 @@ class TextBlockModel(BaseModel):
     def text(self) -> Union[str, None]:
         if self._block.is_image_block:
             return None
-        return self._block.block.text
+        return self._block.text
 
     @computed_field
     @property
@@ -56,6 +56,17 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.ref_tables = []
         self.ref_images = []
         self.bbox = text_block.bbox
+        self.next_continuous_paragraph: Optional[TextBlockExtend] = None
+        self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
+
+    @property
+    def text(self):
+        return "".join([line.text for line in self.lines])
+
+    @property
+    def raw_text(self):
+        return "".join([line.raw_text for line in self.lines])
+
 
     @property
     def is_text_block(self):
@@ -78,3 +89,15 @@ class TextBlockExtend(RelationElement, BlockExtend):
     def relation_construct(self, cur_page, pages):
         for line in self.lines:
             line.relation_construct(cur_page, pages)
+
+    def paragraph_continous_relation_construct(self, next_paragraph: TextBlockExtend):
+        '''Construct relation between two continuous paragraph blocks.'''
+        # 如果当前段落最后一行不是段落结束句, 并且下一段落的第一句不是段落句起始句, 则两段落连续
+        if not self.block.last_line_end_of_paragraph and not next_paragraph.block.first_line_start_of_paragraph:
+            self.next_continuous_paragraph = next_paragraph
+            next_paragraph.prev_continuous_paragraph = self
+
+
+    def merge(self, next_paragraph: TextBlockExtend):
+        '''Merge two paragraph blocks.'''
+        self.lines.merge(next_paragraph.lines)

@@ -40,7 +40,7 @@ from ..image.ImageSpan import ImageSpan
 class TextBlock(Block):
     '''Text block.'''
 
-    def __init__(self, raw: dict = None):
+    def __init__(self, raw: dict = None, first_line_start_of_paragraph: bool = False, last_line_end_of_paragraph: bool = False):
         raw = raw or {}
 
         # remove key 'bbox' since it is calculated from contained lines
@@ -52,6 +52,8 @@ class TextBlock(Block):
 
         # set type
         self.set_text_block()
+        self.first_line_start_of_paragraph = first_line_start_of_paragraph
+        self.last_line_end_of_paragraph = last_line_end_of_paragraph
 
 
     @property
