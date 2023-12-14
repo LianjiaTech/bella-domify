@@ -49,6 +49,8 @@ class TableBlockExtend(RelationElement, BlockExtend):
         self.refed_blocks: List[TextBlockExtend] = []
         self.bbox = table_block.bbox
         self._rows = RowsExtend(table_block._rows)
+        self.next_continuous_table: Optional[TableBlockExtend] = None
+        self.prev_continuous_table: Optional[TableBlockExtend] = None
 
     @property
     def is_text_block(self):
@@ -61,6 +63,15 @@ class TableBlockExtend(RelationElement, BlockExtend):
     @property
     def is_table_block(self):
         return True
+
+    def merge_table(self, table_extend: TableBlockExtend):
+        '''Merge two table blocks.'''
+        self._rows.merge_rows(table_extend._rows)
+
+    def table_continous_relation_construct(self, table_extend: TableBlockExtend):
+        '''Construct relation between two continuous table blocks.'''
+        self.next_continuous_table = table_extend
+        table_extend.prev_continuous_table = self
 
     def relation_construct(self, cur_page, pages):
         self.caption_block, self.table_caption = self.search_table_caption(cur_page)

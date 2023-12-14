@@ -153,6 +153,13 @@ class DomTree:
             searched_block.add(element)
             self.node_dict[element] = node
             if element.is_table_block:
+                cur_talbe = element
+                while cur_talbe.next_continuous_table:
+                    next_table = cur_talbe.next_continuous_table
+                    searched_block.add(next_table)
+                    element.merge_table(next_table)
+                    cur_talbe = next_table
+
                 if element.refed_blocks:
                     # 如果是表格，且有引用, 则添加到首个引用块
                     self.node_dict[element.refed_blocks[0]].add_child(node)
