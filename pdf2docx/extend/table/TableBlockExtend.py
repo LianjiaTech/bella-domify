@@ -53,6 +53,10 @@ class TableBlockExtend(RelationElement, BlockExtend):
         self.prev_continuous_table: Optional[TableBlockExtend] = None
 
     @property
+    def text(self):
+        return self.block.text
+
+    @property
     def is_text_block(self):
         return False
 
