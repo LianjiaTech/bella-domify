@@ -28,6 +28,12 @@ def is_end_sentence(row):
     punc = tuple(constants.SENTENCE_END_PUNC)
     return row.text.strip().endswith(punc)
 
+def is_same_font(col1, col2):
+    row1 = col1[-1].spans[-1]
+    row2 = col2[0].spans[0]
+    if not isinstance(row1, TextSpan) or not isinstance(row2, TextSpan):
+        return False
+    return row1.font == row2.font and  row1.pseudo_bold == row2.pseudo_bold and abs(row1.size - row2.size) < 0.1
 
 class RawPage(BasePage, Layout):
     '''A wrapper of page engine.'''
@@ -221,7 +227,9 @@ class RawPage(BasePage, Layout):
                         short_col = cols[0]
                     else:
                         short_col = cols[1]
-                    if (isinstance(short_col[-1], Line) and is_end_sentence(short_col[-1])
+                    if isinstance(cols[0][-1], Line) and isinstance(cols[1][0], Line) and not is_same_font(cols[0], cols[1]):
+                        current_num_col = 2
+                    elif (isinstance(short_col[-1], Line) and is_end_sentence(short_col[-1])
                             and pre_num_col == 2):
                         # for the last row of tow column section,  the left column may be the final sentence in paragraph,
                         # so the width of left column may be smaller than the right column, to avoid mismerged into one column,
@@ -272,6 +280,7 @@ class RawPage(BasePage, Layout):
         close_section(current_num_col, lines, y_ref)
 
         return sections
+
 
     def detect_two_column_layout_pos(self, elements: Collection):
         # detect all possible two-column layout divide position
