@@ -141,6 +141,17 @@ class DomTree:
                         else:
                             self.elements.append((block, page, None))
 
+    def get_text_block(self):
+        return self._get_text_block(self.root)
+
+    def _get_text_block(self, node: Node) -> list[str]:
+        texts = []
+        if node.element and node.element.is_text_block:
+            texts.append(node.element.text)
+        for child in node.child:
+            texts.extend(self._get_text_block(child))
+        return texts
+
     def parse(self):
         stack_path: List[Node] = [self.root]
         prev_text_node: Optional[Node] = None
