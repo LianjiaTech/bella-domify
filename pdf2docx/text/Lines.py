@@ -136,11 +136,10 @@ class Lines(ElementCollection):
             if row and row[-1].spans:
                 last_span = row[-1].spans[-1]
                 if isinstance(last_span, TextSpan):
-                    cur_font, cur_font_size, cur_font_bold = last_span.font, last_span.size, bool(last_span.flags & 2 ** 4)
+                    cur_font, cur_font_size, cur_font_bold = last_span.font, last_span.size, bool(last_span.flags & 2 ** 4) or last_span.pseudo_bold
             # when font or font size changes, it's a new sentence, and a new paragraph
             if prev_font and prev_font_size and cur_font and cur_font_size:
-                if prev_font != cur_font or abs(
-                        prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
+                if abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
                     start_of_sen = start_of_para = True
             end_of_sen = row[-1].text.strip().endswith(punc)
             w = row[-1].bbox[2] - row[0].bbox[0]
