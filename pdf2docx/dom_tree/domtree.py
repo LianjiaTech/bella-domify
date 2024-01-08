@@ -171,7 +171,7 @@ class DomTree:
                     element.merge(next_table)
                     cur_talbe = next_table
 
-                if element.refed_blocks:
+                if element.refed_blocks and element.refed_blocks[0] in self.node_dict:
                     # 如果是表格，且有引用, 则添加到首个引用块
                     self.node_dict[element.refed_blocks[0]].add_child(node)
                     caption_node = Node(element.caption_block, page, debug_page)
@@ -185,7 +185,7 @@ class DomTree:
                 continue
             if element.is_image_block:
                 image_span = element.lines.image_spans[0]
-                if image_span.refed_blocks:
+                if image_span.refed_blocks and image_span.refed_blocks[0] in self.node_dict:
                     # 如果是图片，且有引用, 则添加到首个引用块
                     self.node_dict[image_span.refed_blocks[0]].add_child(node)
                     caption_node = Node(image_span.caption_block, page, debug_page)
