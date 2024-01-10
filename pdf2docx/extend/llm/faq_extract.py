@@ -1,9 +1,11 @@
+import asyncio
 import logging
 from json import JSONDecodeError
 from typing import Optional
 from pydantic import BaseModel, parse_obj_as
 import json
 import openai
+from openai import AsyncOpenAI
 
 FAQ_EXTRACT_PROMPT = """
 将下面的FAQ大块文本内容，切分为小块QA，按照JSON格式返回, 如果对应问题不存在答案，不返回QA对。
@@ -114,8 +116,3 @@ if __name__ == '__main__':
     """
     import openai
 
-    response = openai.chat.completions.create(
-        messages=[{"role": "user", "content": PROMPT.format(page_content=text[:1000])}],
-        temperature=0.001,
-        model="gpt-3.5-turbo-16k")
-    is_faq = response.choices[0].message.content

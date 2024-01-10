@@ -1,4 +1,7 @@
+import asyncio
+import concurrent.futures
 import logging
+from typing import Optional
 
 import openai
 
@@ -25,9 +28,11 @@ class FAQ_LLM_DomTree(DomTree):
         text_blocks = self.extract_text_block()
         page_content = "".join("".join(text_block) for text_block in text_blocks)
         # 为避免大模型误判，多次判断，进行投票
-        vote_res = [self._is_faq(page_content[:2000]) for _ in range(3)]
-        # 选择票数最多的结果
-        return max(vote_res, key=vote_res.count)
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            # 提交每个接口调用任务到线程池，并得到一个Future对象列表
+            vote_res = list(executor.map(self._is_faq, [page_content[:2000] for _ in range(3)]))
+            # 选择票数最多的结果
+            return max(vote_res, key=vote_res.count)
 
     def _is_faq(self, page_content: str, *, model="gpt-3.5-turbo-16k") -> bool:
         prompt = self.__class__.PROMPT.format(page_content=page_content)
@@ -41,13 +46,17 @@ class FAQ_LLM_DomTree(DomTree):
 
     def parse(self):
         text_blocks = self.extract_text_block()
+        inputs_texts = ["\n".join(blocks) for blocks in text_blocks]
+        logging.info("start faq extract")
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            # 提交每个接口调用任务到线程池，并得到一个Future对象列表
+            faqs = list(executor.map(faq_extract, inputs_texts))
+        logging.info("end faq extract")
         qa_pair = []
-        for blocks in text_blocks:
-            faq_text = "".join(blocks)
-            fqas = faq_extract(faq_text)
-            if fqas:
-                qa_pair.extend(fqas)
+        [qa_pair.extend(faq) for faq in faqs if faq]
+
         merged = self._merge_qa_pair(qa_pair)
+        logging.info("merge end")
         for index, qa in enumerate(merged, start=1):
             qa_block = self._construct_text_block(qa)
             # 将当前节点挂载到根节点下
@@ -88,7 +97,7 @@ class FAQ_LLM_DomTree(DomTree):
                 most_similarity_a = max(a_similarity.items(), key=lambda x: x[1])
                 if most_similarity_a[1] > similarity_threhold:
                     similarity_qa = a2_dict[most_similarity_a[0]]
-                    if not(qa.Q in similarity_qa.Q or similarity_qa.Q in qa.Q):
+                    if not (qa.Q in similarity_qa.Q or similarity_qa.Q in qa.Q):
                         continue
                     if len(similarity_qa.Q) >= len(qa.Q):  # 相同A，保留Q更长的提取项
                         continue
@@ -160,4 +169,3 @@ class FAQ_LLM_DomTree(DomTree):
             next_page_part = next_page_block[:overlap_blocks] if next_page_block else []
             blocks.append(prev_part + cur_page_part + next_page_part)
         return blocks
-
