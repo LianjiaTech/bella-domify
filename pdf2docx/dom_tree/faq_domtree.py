@@ -137,7 +137,7 @@ class FAQ_LLM_DomTree(DomTree):
                     searched_block.add(next_table)
                     element.merge(next_table)
                     cur_talbe = next_table
-                table_text = "\n".join('\t'.join(row) for row in element.text)
+                table_text = "\n".join('\t'.join(cell for cell in row if cell) for row in element.text)
                 page_text_blocks.append(table_text)
             elif element.is_image_block:
                 continue
