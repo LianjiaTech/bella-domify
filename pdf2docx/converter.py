@@ -10,11 +10,12 @@ import fitz
 from docx import Document
 
 from .dom_tree.domtree import DomTree
+from .dom_tree.faq_domtree import FAQ_LLM_DomTree
 from .extend.page.PagesExtend import PagesExtend
 from .extend.text.LineExtend import LineExtend
 from .page.Page import Page
 from .page.Pages import Pages
-from .extend.table.TableBlockExtend import  TableBlockExtend
+from .extend.table.TableBlockExtend import TableBlockExtend
 
 # check PyMuPDF>=1.19.x
 if list(map(int, fitz.VersionBind.split("."))) < [1, 19, 0]:
@@ -23,7 +24,7 @@ if list(map(int, fitz.VersionBind.split("."))) < [1, 19, 0]:
 # logging
 logging.basicConfig(
     level=logging.INFO,
-    format="[%(levelname)s] %(message)s")
+    format="%(asctime)s- [%(levelname)s] %(message)s")
 
 
 class Converter:
@@ -38,7 +39,7 @@ class Converter:
     '''
 
     def __init__(
-        self, pdf_file: str = None, password: str = None, stream: bytes = None
+            self, pdf_file: str = None, password: str = None, stream: bytes = None
     ):
         '''Initialize fitz object with given pdf file path.
 
@@ -63,60 +64,64 @@ class Converter:
         # initialize empty pages container
         self._pages = Pages()
 
+    @property
+    def fitz_doc(self):
+        return self._fitz_doc
 
     @property
-    def fitz_doc(self): return self._fitz_doc
+    def pages(self):
+        return self._pages
 
-    @property
-    def pages(self): return self._pages
-
-
-    def close(self): self._fitz_doc.close()
-
+    def close(self):
+        self._fitz_doc.close()
 
     @property
     def default_settings(self):
         '''Default parsing parameters.'''
         return {
-            'debug'                          : False,  # plot layout if True
-            'ocr'                            : 0,      # ocr status: 0 - no ocr; 1 - to do ocr; 2 - ocr-ed pdf
-            'ignore_page_error'              : True,   # not break the conversion process due to failure of a certain page if True
-            'multi_processing'               : False,  # convert pages with multi-processing if True
-            'cpu_count'                      : 0,      # working cpu count when convert pages with multi-processing
-            'min_section_height'             : 20.0,   # The minimum height of a valid section.
-            'connected_border_tolerance'     : 0.5,    # two borders are intersected if the gap lower than this value
-            'max_border_width'               : 6.0,    # max border width
-            'min_border_clearance'           : 2.0,    # the minimum allowable clearance of two borders
-            'float_image_ignorable_gap'      : 5.0,    # float image if the intersection exceeds this value
-            'page_margin_factor_top'         : 0.5,    # [0,1] reduce top margin by factor
-            'page_margin_factor_bottom'      : 0.5,    # [0,1] reduce bottom margin by factor
-            'shape_min_dimension'            : 2.0,    # ignore shape if both width and height is lower than this value
-            'max_line_spacing_ratio'         : 1.5,    # maximum line spacing ratio: line spacing / line height
-            'line_overlap_threshold'         : 0.9,    # [0,1] delete line if the intersection to other lines exceeds this value
-            'line_break_width_ratio'         : 0.5,    # break line if the ratio of line width to entire layout bbox is lower than this value
-            'line_break_free_space_ratio'    : 0.1,    # break line if the ratio of free space to entire line exceeds this value
-            'line_separate_threshold'        : 5.0,    # two separate lines if the x-distance exceeds this value
-            'new_paragraph_free_space_ratio' : 0.85,   # new paragraph if the ratio of free space to line height exceeds this value
-            'lines_left_aligned_threshold'   : 1.0,    # left aligned if d_x0 of two lines is lower than this value (Pt)
-            'lines_right_aligned_threshold'  : 1.0,    # right aligned if d_x1 of two lines is lower than this value (Pt)
-            'lines_center_aligned_threshold' : 2.0,    # center aligned if delta center of two lines is lower than this value
-            'clip_image_res_ratio'           : 4.0,    # resolution ratio (to 72dpi) when clipping page image
-            'min_svg_gap_dx'                 : 15.0,   # merge adjacent vector graphics if the horizontal gap is less than this value
-            'min_svg_gap_dy'                 : 2.0,    # merge adjacent vector graphics if the vertical gap is less than this value
-            'min_svg_w'                      : 2.0,    # ignore vector graphics if the bbox width is less than this value
-            'min_svg_h'                      : 2.0,    # ignore vector graphics if the bbox height is less than this value
-            'extract_stream_table'           : False,  # don't consider stream table when extracting tables
-            'parse_lattice_table'            : True,   # whether parse lattice table or not; may destroy the layout if set False
-            'parse_stream_table'             : True,   # whether parse stream table or not; may destroy the layout if set False
-            'delete_end_line_hyphen'         : False,   # delete hyphen at the end of a line
-            'remove_watermark'               : False,  # remove watermark if True
+            'debug': False,  # plot layout if True
+            'ocr': 0,  # ocr status: 0 - no ocr; 1 - to do ocr; 2 - ocr-ed pdf
+            'ignore_page_error': True,  # not break the conversion process due to failure of a certain page if True
+            'multi_processing': False,  # convert pages with multi-processing if True
+            'cpu_count': 0,  # working cpu count when convert pages with multi-processing
+            'min_section_height': 20.0,  # The minimum height of a valid section.
+            'connected_border_tolerance': 0.5,  # two borders are intersected if the gap lower than this value
+            'max_border_width': 6.0,  # max border width
+            'min_border_clearance': 2.0,  # the minimum allowable clearance of two borders
+            'float_image_ignorable_gap': 5.0,  # float image if the intersection exceeds this value
+            'page_margin_factor_top': 0.5,  # [0,1] reduce top margin by factor
+            'page_margin_factor_bottom': 0.5,  # [0,1] reduce bottom margin by factor
+            'shape_min_dimension': 2.0,  # ignore shape if both width and height is lower than this value
+            'max_line_spacing_ratio': 1.5,  # maximum line spacing ratio: line spacing / line height
+            'line_overlap_threshold': 0.9,  # [0,1] delete line if the intersection to other lines exceeds this value
+            'line_break_width_ratio': 0.5,
+            # break line if the ratio of line width to entire layout bbox is lower than this value
+            'line_break_free_space_ratio': 0.1,
+            # break line if the ratio of free space to entire line exceeds this value
+            'line_separate_threshold': 5.0,  # two separate lines if the x-distance exceeds this value
+            'new_paragraph_free_space_ratio': 0.85,
+            # new paragraph if the ratio of free space to line height exceeds this value
+            'lines_left_aligned_threshold': 1.0,  # left aligned if d_x0 of two lines is lower than this value (Pt)
+            'lines_right_aligned_threshold': 1.0,  # right aligned if d_x1 of two lines is lower than this value (Pt)
+            'lines_center_aligned_threshold': 2.0,
+            # center aligned if delta center of two lines is lower than this value
+            'clip_image_res_ratio': 4.0,  # resolution ratio (to 72dpi) when clipping page image
+            'min_svg_gap_dx': 15.0,  # merge adjacent vector graphics if the horizontal gap is less than this value
+            'min_svg_gap_dy': 2.0,  # merge adjacent vector graphics if the vertical gap is less than this value
+            'min_svg_w': 2.0,  # ignore vector graphics if the bbox width is less than this value
+            'min_svg_h': 2.0,  # ignore vector graphics if the bbox height is less than this value
+            'extract_stream_table': False,  # don't consider stream table when extracting tables
+            'parse_lattice_table': True,  # whether parse lattice table or not; may destroy the layout if set False
+            'parse_stream_table': True,  # whether parse stream table or not; may destroy the layout if set False
+            'delete_end_line_hyphen': False,  # delete hyphen at the end of a line
+            'remove_watermark': False,  # remove watermark if True
         }
 
     # -----------------------------------------------------------------------
     # Parsing process: load -> analyze document -> parse pages -> make docx
     # -----------------------------------------------------------------------
 
-    def parse(self, start:int=0, end:int=None, pages:list=None, **kwargs):
+    def parse(self, start: int = 0, end: int = None, pages: list = None, **kwargs):
         '''Parse pages in three steps:
         * open PDF file with ``PyMuPDF``
         * analyze whole document, e.g. page section, header/footer and margin
@@ -133,7 +138,7 @@ class Converter:
             .parse_pages(**kwargs)
         return self
 
-    def load_pages(self, start:int=0, end:int=None, pages:list=None, **kwargs):
+    def load_pages(self, start: int = 0, end: int = None, pages: list = None, **kwargs):
         '''Step 1 of converting process: open PDF file with ``PyMuPDF``, 
         especially for password encrypted file.
         
@@ -165,7 +170,6 @@ class Converter:
                 self.remove_watermark(page)
         return self
 
-
     def parse_document(self, **kwargs):
         '''Step 2 of converting process: analyze whole document, e.g. page section,
         header/footer and margin.'''
@@ -173,7 +177,6 @@ class Converter:
 
         self._pages.parse(self.fitz_doc, **kwargs)
         return self
-
 
     def parse_pages(self, **kwargs):
         '''Step 3 of converting process: parse pages, e.g. paragraph, image and table.'''
@@ -193,7 +196,6 @@ class Converter:
                     raise ConversionException(f'Error when parsing page {pid}: {e}')
 
         return self
-
 
     def make_docx(self, docx_filename=None, **kwargs):
         '''Step 4 of converting process: create docx file with converted pages.
@@ -228,7 +230,7 @@ class Converter:
         docx_file = Document()
         num_pages = len(parsed_pages)
         for i, page in enumerate(parsed_pages, start=1):
-            if not page.finalized: continue # ignore unparsed pages
+            if not page.finalized: continue  # ignore unparsed pages
             pid = page.id + 1
             logging.info('(%d/%d) Page %d', i, num_pages, pid)
             try:
@@ -242,7 +244,6 @@ class Converter:
         # save docx
         docx_file.save(filename)
 
-
     # -----------------------------------------------------------------------
     # Store / restore parsed results
     # -----------------------------------------------------------------------
@@ -251,12 +252,11 @@ class Converter:
         '''Store parsed pages in dict format.'''
         return {
             'filename': os.path.basename(self.filename_pdf),
-            'page_cnt': len(self._pages), # count of all pages
-            'pages'   : [page.store() for page in self._pages if page.finalized], # parsed pages only
+            'page_cnt': len(self._pages),  # count of all pages
+            'pages': [page.store() for page in self._pages if page.finalized],  # parsed pages only
         }
 
-
-    def restore(self, data:dict):
+    def restore(self, data: dict):
         '''Restore pages from parsed results.'''
         # init empty pages if necessary
         if not self._pages:
@@ -268,25 +268,22 @@ class Converter:
             idx = raw_page.get('id', -1)
             self._pages[idx].restore(raw_page)
 
-
-    def serialize(self, filename:str):
+    def serialize(self, filename: str):
         '''Write parsed pages to specified JSON file.'''
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(json.dumps(self.store(), indent=4))
 
-
-    def deserialize(self, filename:str):
+    def deserialize(self, filename: str):
         '''Load parsed pages from specified JSON file.'''
         with open(filename, 'r') as f:
             data = json.load(f)
         self.restore(data)
 
-
     # -----------------------------------------------------------------------
     # high level methods, e.g. convert, extract table
     # -----------------------------------------------------------------------
 
-    def debug_page(self, i:int, docx_filename:str=None, debug_pdf:str=None, layout_file:str=None, **kwargs):
+    def debug_page(self, i: int, docx_filename: str = None, debug_pdf: str = None, layout_file: str = None, **kwargs):
         '''Parse, create and plot single page for debug purpose.
         
         Args:
@@ -300,10 +297,10 @@ class Converter:
         # file path for this debug pdf: demo.pdf -> debug_demo.pdf
         path, filename = os.path.split(self.filename_pdf)
         if not debug_pdf: debug_pdf = os.path.join(path, f'debug_{filename}')
-        if not layout_file: layout_file  = os.path.join(path, 'layout.json')
+        if not layout_file: layout_file = os.path.join(path, 'layout.json')
         kwargs.update({
-            'debug'         : True,
-            'debug_doc'     : fitz.Document(),
+            'debug': True,
+            'debug_doc': fitz.Document(),
             'debug_filename': debug_pdf
         })
 
@@ -350,7 +347,7 @@ class Converter:
         # input check
         if pages and settings['multi_processing']:
             raise ConversionException('Multi-processing works for continuous pages '
-                                    'specified by "start" and "end" only.')
+                                      'specified by "start" and "end" only.')
 
         # convert page by page
         if settings['multi_processing']:
@@ -358,9 +355,9 @@ class Converter:
         else:
             self.parse(start, end, pages, **settings).make_docx(docx_filename, **settings)
 
-        logging.info('Terminated in %.2fs.', perf_counter()-t0)
+        logging.info('Terminated in %.2fs.', perf_counter() - t0)
 
-    def dom_tree_parse(self, start:int=0, end:int=None, pages:list=None, **kwargs):
+    def dom_tree_parse(self, start: int = 0, end: int = None, pages: list = None, **kwargs):
         # parsing pages first
         settings = self.default_settings
         settings.update(kwargs)
@@ -371,20 +368,16 @@ class Converter:
         pages_extend.mark_page_footer()
         pages_extend.relation_construct()
 
-        if settings['debug']:
-            debug_file = fitz.Document(self.filename_pdf)
-            dom_tree = DomTree(pages_extend, debug_file)
-            dom_tree.parse()
+        debug_file = fitz.Document(self.filename_pdf) if settings['debug'] else None
+        dom_trees = [FAQ_LLM_DomTree(pages_extend, debug_file), DomTree(pages_extend, debug_file)]
+        dom_tree = max((dom_tree for dom_tree in dom_trees if dom_tree.is_appropriate()), key=lambda x: x.priority)
+        dom_tree.parse()
+        if settings['debug'] and debug_file:
             debug_file.save(kwargs['debug_file_name'])
-            return dom_tree
-        else:
-            dom_tree = DomTree(pages_extend)
-            dom_tree.parse()
-            return dom_tree
+        return dom_tree
 
 
-
-    def extract_tables(self, start:int=0, end:int=None, pages:list=None,
+    def extract_tables(self, start: int = 0, end: int = None, pages: list = None,
                        extract_table_with_cell_pos=False, **kwargs):
         '''Extract table contents from specified PDF pages.
 
@@ -439,7 +432,7 @@ class Converter:
             page.sections.extend_plot(debug_page)
         debug_file.save(kwargs['debug_file_name'])
 
-    def _convert_with_multi_processing(self, docx_filename:str, start:int, end:int, **kwargs):
+    def _convert_with_multi_processing(self, docx_filename: str, start: int, end: int, **kwargs):
         '''Parse and create pages based on page indexes with multi-processing.
 
         Reference:
@@ -448,9 +441,9 @@ class Converter:
         '''
         # make vectors of arguments for the processes
         cpu = min(kwargs['cpu_count'], cpu_count()) if kwargs['cpu_count'] else cpu_count()
-        prefix = 'pages' # json file writing parsed pages per process
+        prefix = 'pages'  # json file writing parsed pages per process
         vectors = [(i, cpu, start, end, self.filename_pdf, self.password,
-                            kwargs, f'{prefix}-{i}.json') for i in range(cpu)]
+                    kwargs, f'{prefix}-{i}.json') for i in range(cpu)]
 
         # start parsing processes
         pool = Pool()
@@ -465,7 +458,6 @@ class Converter:
 
         # create docx file
         self.make_docx(docx_filename, **kwargs)
-
 
     @staticmethod
     def _parse_pages_per_cpu(vector):
@@ -495,10 +487,10 @@ class Converter:
         num_pages = len(all_indexes)
 
         # page segment processed by this cpu
-        m = int(num_pages/cpu)
+        m = int(num_pages / cpu)
         n = num_pages % cpu
-        seg_size = m + int(idx<n)
-        seg_from = (m+1)*idx + min(n-idx, 0)
+        seg_size = m + int(idx < n)
+        seg_from = (m + 1) * idx + min(n - idx, 0)
         seg_to = min(seg_from + seg_size, num_pages)
         page_indexes = [all_indexes[i] for i in range(seg_from, seg_to)]
 
@@ -513,7 +505,6 @@ class Converter:
             .serialize(json_filename)
         cv.close()
 
-
     @staticmethod
     def _page_indexes(start, end, pages, pdf_len):
         '''Parsing arguments.'''
@@ -526,13 +517,14 @@ class Converter:
 
         return indexes
 
-
     @staticmethod
-    def _color_output(msg): return f'\033[1;36m{msg}\033[0m'
+    def _color_output(msg):
+        return f'\033[1;36m{msg}\033[0m'
 
 
 class ConversionException(Exception):
     pass
+
 
 class MakedocxException(ConversionException):
     pass

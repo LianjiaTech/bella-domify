@@ -122,12 +122,12 @@ class DomTreeModel(BaseModel):
 
 
 class DomTree:
-
-    def __init__(self, pages: PagesExtend, debug_file=None):
+    def __init__(self, pages: PagesExtend, debug_file=None, *, priority=0):
         self.root = Node(None, None, None, is_root=True)
         self.elements = []
         self.node_dict = {}  # element->node
         self.debug_file = debug_file
+        self._priority = priority
         debug_pages = [page for page in debug_file.pages()] if debug_file else None
         for index, page in enumerate(pages):
             for section in page.sections:
@@ -140,6 +140,19 @@ class DomTree:
                             self.elements.append((block, page, debug_pages[index]))
                         else:
                             self.elements.append((block, page, None))
+
+    def is_appropriate(self) -> bool:
+        """
+        当前DomTree解析是否适用于当前文档
+        """
+        return True
+
+    @property
+    def priority(self) -> int:
+        """
+        如果存在多个DomTree可用，优先级高的会被优先选中
+        """
+        return self._priority
 
     def get_text_block(self):
         return self._get_text_block(self.root)
