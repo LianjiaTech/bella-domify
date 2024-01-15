@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import time
 from json import JSONDecodeError
 from typing import Optional
 from pydantic import BaseModel, parse_obj_as
@@ -65,12 +66,21 @@ def parse_faq(faq_json_str) -> Optional[list[FAQ]]:
 
 
 def faq_extract(faq_text: str) -> list[FAQ]:
-    max_retrys = 3
+    max_retrys = 5
     extract = None
     while max_retrys > 0 and extract is None:
-        json_str = _faq_extract(faq_text)
+        try:
+            json_str = _faq_extract(faq_text)
+        except openai.RateLimitError as ratelimit_error:
+            logging.error(rf'faq_extract ratelimit error: {faq_text}, {ratelimit_error}')
+            time.sleep(10)
+            continue
+        except Exception as exception:
+            logging.error(rf'faq_extract error: {faq_text}, {exception}')
+            break
         logging.info(rf'faq_extract: {json_str}')
         extract = parse_faq(json_str)
+        max_retrys -= 1
     return extract
 
 
@@ -114,5 +124,9 @@ if __name__ == '__main__':
     原因分析:文本字段中可能存在换行符
     解决方案: 1、找到可能存在换行符的字段(一般是用户手动输入的字段，比如评论) 
     """
-    import openai
-
+    try:
+        _faq_extract(text, model="gpt-4-0613")
+    except openai.PermissionDeniedError as e:
+        print('PermissionDeniedError')
+    except Exception as e:
+        print(e)
