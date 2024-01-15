@@ -48,7 +48,7 @@ class FAQ_LLM_DomTree(DomTree):
         text_blocks = self.extract_text_block()
         inputs_texts = ["\n".join(blocks) for blocks in text_blocks]
         logging.info("start faq extract")
-        with concurrent.futures.ThreadPoolExecutor() as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             # 提交每个接口调用任务到线程池，并得到一个Future对象列表
             faqs = list(executor.map(faq_extract, inputs_texts))
         logging.info("end faq extract")
