@@ -18,7 +18,7 @@ from pdf2docx import Converter, parse
 test_dir = '../test_document/'
 converter = Converter(test_dir + "奥丁QA.pdf")
 dom_tree = converter.dom_tree_parse(
-    start=0, end=3,
+    start=0, end=2,
     remove_watermark=True,
     debug=True,
     debug_file_name=test_dir + "奥丁QA-debug.pdf",

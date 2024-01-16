@@ -1,6 +1,7 @@
 import asyncio
 import concurrent.futures
 import logging
+import time
 from typing import Optional
 
 import openai
@@ -36,10 +37,21 @@ class FAQ_LLM_DomTree(DomTree):
 
     def _is_faq(self, page_content: str, *, model="gpt-3.5-turbo-16k") -> bool:
         prompt = self.__class__.PROMPT.format(page_content=page_content)
-        response = openai.chat.completions.create(
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.001,
-            model=model)
+        max_retry = 5
+        response = None
+        while max_retry > 0 and response is None:
+            try:
+                response = openai.chat.completions.create(
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.001,
+                    model=model)
+            except openai.RateLimitError:
+                max_retry -= 1
+                time.sleep(10)
+            except Exception:
+                break
+        if response is None:
+            return False
         is_faq = response.choices[0].message.content
         logging.info("判断是否为FAQ文档: %s", is_faq)
         return is_faq == "True" or is_faq == "true"
