@@ -17,11 +17,18 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 
+from settings.ini_config import config
+
 # 基础类
 Base = declarative_base()
 
 # sqlalchemy的mysql链接url
-url = "mysql+pymysql://riskManager:123456@m10625.mars.test.mysql.ljnode.com:10625/risk_manager?charset=utf8mb4"
+user_name = config.get('DATABASE', 'USERNAME')
+password = config.get('DATABASE', 'PASSWORD')
+host = config.get('DATABASE', 'HOST')
+port = config.get('DATABASE', 'PORT')
+database = config.get('DATABASE', 'DB')
+url = f"mysql+pymysql://{user_name}:{password}@{host}:{port}/{database}?charset=utf8mb4"
 # 创建引擎
 engine = create_engine(
     url,

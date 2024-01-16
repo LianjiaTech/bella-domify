@@ -3,11 +3,12 @@ import uuid
 import boto3
 import requests
 from fastapi import UploadFile
+from settings.ini_config import config
 
-ak = 'Q265N5ELG32TT7UWO8YJ'
-sk = 'fcFeEgba8PY5kUMFfznnGwmA8390hhKa8rckLWJD'
-bucket_name = 'cv-aigc'
-endpoint = 'https://storage.lianjia.com'
+ak = config.get('S3', 'AK')
+sk = config.get('S3', 'SK')
+bucket_name = config.get('S3', 'BUCKET_NAME')
+endpoint = config.get('S3', 'ENDPOINT')
 s3 = boto3.client("s3", aws_access_key_id=ak, aws_secret_access_key=sk, endpoint_url=endpoint)
 
 
