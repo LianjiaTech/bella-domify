@@ -18,22 +18,28 @@ def execute_parse_task():
             time.sleep(10)
             continue
         dom_tree = parse_pdf_file(task.file_key)
+        call_back_url = task.callback_url.format(taskNo=task.task_id)
         if dom_tree is None:
             update_task_status_by_id(task.task_id, 'error')
+            call_back(task.task_id, call_back_url, {})
             continue
         time.sleep(2)
         parse_res = dom_tree.model_dump_json()
         parse_file_key = upload_text_content(parse_res)
         upload_task_parse_res(task.task_id, parse_file_key)
-        call_back_url = task.callback_url.format(taskNo=task.task_id)
         # 发送post请求，传递dom_tree
-        try:
-            response = requests.post(call_back_url, json=dom_tree.model_dump())
-            if response.status_code != 200:
-                logging.error(f"pdf解析回调失败，task_id={task.task_id}, callback_url={call_back_url}, "
-                              f"status_code={response.status_code}")
-        except Exception as e:
-            logging.error(f"pdf解析回调失败，task_id={task.task_id}, callback_url={call_back_url}, error={e}")
+        call_back(task.task_id, call_back_url, dom_tree.model_dump())
+
+
+def call_back(task_id, callback_url, json_body):
+    # 发送post请求，传递dom_tree
+    try:
+        response = requests.post(callback_url, json=json_body)
+        if response.status_code != 200:
+            logging.error(f"pdf解析回调失败，task_id={task_id}, callback_url={callback_url}, "
+                          f"status_code={response.status_code}")
+    except Exception as e:
+        logging.error(f"pdf解析回调失败，task_id={task_id}, callback_url={callback_url}, error={e}")
 
 
 def parse_pdf_file(file_key: str) -> Optional[DomTreeModel]:
