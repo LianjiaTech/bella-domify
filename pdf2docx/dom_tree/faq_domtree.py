@@ -27,7 +27,7 @@ class FAQ_LLM_DomTree(DomTree):
 
     def is_appropriate(self) -> bool:
         text_blocks = self.extract_text_block()
-        page_content = "".join("".join(text_block) for text_block in text_blocks)
+        page_content = "\n".join("".join(text_block) for text_block in text_blocks)
         # 为避免大模型误判，多次判断，进行投票
         with concurrent.futures.ThreadPoolExecutor() as executor:
             # 提交每个接口调用任务到线程池，并得到一个Future对象列表
@@ -35,7 +35,7 @@ class FAQ_LLM_DomTree(DomTree):
             # 选择票数最多的结果
             return max(vote_res, key=vote_res.count)
 
-    def _is_faq(self, page_content: str, *, model="gpt-3.5-turbo-16k") -> bool:
+    def _is_faq(self, page_content: str, *, model="gpt-4") -> bool:
         prompt = self.__class__.PROMPT.format(page_content=page_content)
         max_retry = 5
         response = None
@@ -48,7 +48,8 @@ class FAQ_LLM_DomTree(DomTree):
             except openai.RateLimitError:
                 max_retry -= 1
                 time.sleep(10)
-            except Exception:
+            except Exception as e:
+                logging.error("openai chat error: %s", e)
                 break
         if response is None:
             return False
