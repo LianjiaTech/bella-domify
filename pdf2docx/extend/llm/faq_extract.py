@@ -24,7 +24,7 @@ FAQ文本：
 """
 
 
-def _faq_extract(faq_text: str, *, model="gpt-3.5-turbo-1106"):
+def _faq_extract(faq_text: str, *, model="gpt-3.5-turbo-16k"):
     faq_text = faq_text.replace('"', '\\"')
     prompt = FAQ_EXTRACT_PROMPT.format(faq_text=faq_text)
     response = openai.chat.completions.create(
