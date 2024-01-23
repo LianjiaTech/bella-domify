@@ -9,7 +9,7 @@ if env == "test":
     config.read('settings/test.ini')
 else:
     config = configparser.ConfigParser()
-    config.read('prod.ini')
+    config.read('settings/prod.ini')
 
 
 
