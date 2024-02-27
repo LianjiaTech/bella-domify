@@ -18,6 +18,7 @@ idna==3.6
 jellyfish==1.0.3
 jmespath==1.0.1
 Levenshtein==0.23.0
+loguru==0.7.2
 lxml==4.9.3
 numpy==1.26.2
 openai==1.6.1

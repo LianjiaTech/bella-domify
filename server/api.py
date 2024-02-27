@@ -9,6 +9,9 @@ from fastapi import File, UploadFile
 
 from pdf2docx import Converter
 from pdf2docx.dom_tree.domtree import DomTreeModel
+from server.log.log_config import log_config
+
+log_config()  # 初始化日志配置
 
 app = FastAPI()
 
