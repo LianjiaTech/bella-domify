@@ -24,6 +24,11 @@ class TextBlockModel(BaseModel):
 
     @computed_field
     @property
+    def metadata(self) -> Optional[dict]:
+        return self._block.metadata
+
+    @computed_field
+    @property
     def text(self) -> Union[str, None]:
         if self._block.is_image_block:
             return None
@@ -44,12 +49,16 @@ class TextBlockModel(BaseModel):
 
     @computed_field
     @property
-    def image_s3_link(self) -> Union[str, None]:
-        return self._block.image_s3_link
+    def image_base64_str(self) -> Union[str, None]:
+        # if self.block_type == "image":
+        #     image_span = self._block.lines.image_spans[0]
+        #     bytes = image_span.image_span.image
+        #     return base64.b64encode(bytes).decode('utf-8')
+        return None
 
 
 class TextBlockExtend(RelationElement, BlockExtend):
-    def __init__(self, text_block: TextBlock):
+    def __init__(self, text_block: TextBlock, metadata: Optional[dict] = None):
         super().__init__()
         self.block = text_block
         self.lines = LinesExtend(text_block.lines)
@@ -58,9 +67,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.bbox = text_block.bbox
         self.next_continuous_paragraph: Optional[TextBlockExtend] = None
         self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
-        self.image_s3_link = None
-        self.is_catalog = 0
-        self.page_num = 0  # -1:无页码
+        self.metadata = metadata
 
     @property
     def text(self):
@@ -69,7 +76,6 @@ class TextBlockExtend(RelationElement, BlockExtend):
     @property
     def raw_text(self):
         return "".join([line.raw_text for line in self.lines])
-
 
     @property
     def is_text_block(self):

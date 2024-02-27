@@ -77,18 +77,27 @@ class FAQ_LLM_DomTree(DomTree):
         merged = self._merge_qa_pair(qa_pair)
         logging.info("merge end")
         for index, qa in enumerate(merged, start=1):
-            qa_block = self._construct_text_block(qa)
             # 将当前节点挂载到根节点下
-            node = Node(qa_block, None, None)
+            node = self._construct_qa_node(qa)
             node.order_num_str = str(index)
             self.root.add_child(node)
 
-    def _construct_text_block(self, qa: FAQ) -> TextBlockExtend:
-        spans = [{'text': f'Q:{qa.Q}\n, A:{qa.A}', 'bbox': [1, 2, 3, 4]}]
+    def _construct_qa_node(self, qa: FAQ) -> Node:
+        q_block = self._construct_text_block(qa.Q, "Q")
+        a_block = self._construct_text_block(qa.A, "A")
+        q_node = Node(q_block, None, None)
+        a_node = Node(a_block, None, None)
+        qa_node = Node(None, None, None)
+        qa_node.add_child(q_node)
+        qa_node.add_child(a_node)
+        return qa_node
+
+    def _construct_text_block(self, text: Optional[str], qa_type: str) -> TextBlockExtend:
+        spans = [{'text': text, 'bbox': [1, 2, 3, 4]}]
         lines = [{'spans': spans, 'bbox': [1, 2, 3, 4]}]
         raws = {'lines': lines}
         text_block = TextBlock(raws)
-        return TextBlockExtend(text_block)
+        return TextBlockExtend(text_block, metadata={'qa_type': qa_type})
 
     def _merge_qa_pair(self, faqs: list[FAQ]) -> list[FAQ]:
         q2_dict = {}
