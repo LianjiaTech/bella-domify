@@ -116,8 +116,9 @@ class Lines(ElementCollection):
         '''
         rows = self.group_by_physical_rows()
         # skip if only one row
-        if len(rows) == 1:
-            return [[rows[0], False, False]]
+        num = len(rows)
+        if num == 1:
+            return [[rows[0], True, True]]
 
         # check row by row
         res = []
