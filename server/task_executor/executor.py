@@ -15,8 +15,8 @@ from ..context import user_context, DEFAULT_USER
 
 def execute_parse_task():
     while True:
+        task = get_pdf_parse_task()
         try:
-            task = get_pdf_parse_task()
             if task is None:
                 time.sleep(2)
                 continue

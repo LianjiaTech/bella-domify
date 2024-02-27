@@ -78,15 +78,17 @@ class FAQ_LLM_DomTree(DomTree):
         logging.info("merge end")
         for index, qa in enumerate(merged, start=1):
             # 将当前节点挂载到根节点下
-            node = self._construct_qa_node(qa)
+            node = self._construct_qa_node(qa, index)
             node.order_num_str = str(index)
             self.root.add_child(node)
 
-    def _construct_qa_node(self, qa: FAQ) -> Node:
+    def _construct_qa_node(self, qa: FAQ, index) -> Node:
         q_block = self._construct_text_block(qa.Q, "Q")
         a_block = self._construct_text_block(qa.A, "A")
         q_node = Node(q_block, None, None)
+        q_node.order_num_str = str(index) + ".1"
         a_node = Node(a_block, None, None)
+        a_node.order_num_str = str(index) + ".2"
         qa_node = Node(None, None, None)
         qa_node.add_child(q_node)
         qa_node.add_child(a_node)
