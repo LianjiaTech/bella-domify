@@ -41,7 +41,8 @@ engine = create_engine(
     # 多久之后对链接池中的链接进行一次回收
     pool_recycle=1,
     # 查看原生语句（未格式化）
-    echo=False
+    echo=False,
+    pool_pre_ping=True,
 )
 
 

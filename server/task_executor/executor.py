@@ -13,22 +13,25 @@ from .s3 import get_file, upload_text_content
 
 def execute_parse_task():
     while True:
-        task = get_pdf_parse_task()
-        if task is None:
-            time.sleep(10)
-            continue
-        dom_tree = parse_pdf_file(task.file_key)
-        call_back_url = task.callback_url.format(taskNo=task.task_id)
-        if dom_tree is None:
-            update_task_status_by_id(task.task_id, 'error')
-            call_back(task.task_id, call_back_url, {})
-            continue
-        time.sleep(2)
-        parse_res = dom_tree.model_dump_json()
-        parse_file_key = upload_text_content(parse_res)
-        upload_task_parse_res(task.task_id, parse_file_key)
-        # 发送post请求，传递dom_tree
-        call_back(task.task_id, call_back_url, dom_tree.model_dump())
+        try:
+            task = get_pdf_parse_task()
+            if task is None:
+                time.sleep(10)
+                continue
+            dom_tree = parse_pdf_file(task.file_key)
+            call_back_url = task.callback_url.format(taskNo=task.task_id)
+            if dom_tree is None:
+                update_task_status_by_id(task.task_id, 'error')
+                call_back(task.task_id, call_back_url, {})
+                continue
+            time.sleep(2)
+            parse_res = dom_tree.model_dump_json()
+            parse_file_key = upload_text_content(parse_res)
+            upload_task_parse_res(task.task_id, parse_file_key)
+            # 发送post请求，传递dom_tree
+            call_back(task.task_id, call_back_url, dom_tree.model_dump())
+        except Exception as e:
+            logging.error(f"解析任务失败，error={e}")
 
 
 def call_back(task_id, callback_url, json_body):
