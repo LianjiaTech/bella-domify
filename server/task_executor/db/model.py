@@ -1,7 +1,6 @@
 from datetime import datetime
 from threading import Thread
 from typing import Optional
-from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.orm import scoped_session
 from sqlalchemy import (
     create_engine,
@@ -13,9 +12,10 @@ from sqlalchemy import (
     DateTime,
     Boolean,
     UniqueConstraint,
-    Index
+    Index, update
 )
 from sqlalchemy.ext.declarative import declarative_base
+from sqlmodel import SQLModel, select, Session, Field
 
 from settings.ini_config import config
 
@@ -46,17 +46,20 @@ engine = create_engine(
 )
 
 
-class DocumenParseTask(Base):
+class DocumenParseTask(SQLModel, table=True):
     __tablename__ = 'document_parse_task'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    task_id = Column(String(128), nullable=False, comment='任务id')
-    file_key = Column(String(255), nullable=False, comment='文件key(s3)')
-    parse_result_file_key = Column(String(255), nullable=False, comment='解析结果文件key(s3)', default='')
-    file_type = Column(Enum('pdf', 'word', 'other'), nullable=False, comment='文件类型')
-    file_status = Column(Enum('wait', 'running', 'done', 'error', 'canceled'), nullable=False, comment='文件状态')
-    create_time = Column(DateTime, nullable=False, comment='创建时间', default=datetime.now)
-    update_time = Column(DateTime, nullable=False, comment='更新时间', default=datetime.now, onupdate=datetime.now)
-    callback_url = Column(String(256), nullable=False, comment='回调地址', default='')
+    id: int = Field(sa_column=Column(Integer, primary_key=True, autoincrement=True))
+    task_id: str = Field(sa_column=Column(String(128), nullable=False, comment='任务id'))
+    file_key: str = Field(sa_column=Column(String(255), nullable=False, comment='文件key(s3)'))
+    parse_result_file_key: str = Field(
+        sa_column=Column(String(255), nullable=False, comment='解析结果文件key(s3)', default=''))
+    file_type: str = Field(sa_column=Column(Enum('pdf', 'word', 'other'), nullable=False, comment='文件类型'))
+    file_status: str = Field(
+        sa_column=Column(Enum('wait', 'running', 'done', 'error', 'canceled'), nullable=False, comment='文件状态'))
+    create_time: datetime = Field(sa_column=Column(DateTime, nullable=False, comment='创建时间', default=datetime.now))
+    update_time: datetime = Field(
+        sa_column=Column(DateTime, nullable=False, comment='更新时间', default=datetime.now, onupdate=datetime.now))
+    callback_url: str = Field(sa_column=Column(String(256), nullable=False, comment='回调地址', default=''))
 
     def __repr__(self):
         return "<DocumenParseTask(task_id='%s', file_key='%s', file_type='%s', file_status='%s')>" % (
@@ -79,36 +82,53 @@ def create_task(*, task_id, file_key, file_type, callback_url):
 
 def get_wait_task() -> Optional[DocumenParseTask]:
     with Session(engine) as session:
-        session.begin()
-        task = (session.query(DocumenParseTask)
-                .filter(DocumenParseTask.file_status == 'wait')
-                .order_by(DocumenParseTask.create_time)
-                .with_for_update()
-                .first())
+        statement = select(DocumenParseTask).where(DocumenParseTask.file_status == 'wait').limit(1)
+        task = session.exec(statement).one_or_none()
         if task is None:
-            session.commit()
             return None
-        else:
-            print(f"get_task:{task.task_id}, {task.file_status},{datetime.now()}")
-            update_task_status_by_id(task.task_id, 'running', session=session)
-            session.expunge(task)
-            session.commit()
-            print(f"release transaction:{task.task_id} {datetime.now()}")
-            return task
+        # lock_running_task(task.task_id, session=session)
+        if not lock_running_task(task.task_id, session=session):
+            return None
+        session.refresh(task)
+        return task
+
+        # session.begin()
+        # task = (session.query(DocumenParseTask)
+        #         .filter(DocumenParseTask.file_status == 'wait')
+        #         .order_by(DocumenParseTask.create_time)
+        #         .with_for_update()
+        #         .first())
+        # if task is None:
+        #     session.commit()
+        #     return None
+        # else:
+        #     print(f"get_task:{task.task_id}, {task.file_status},{datetime.now()}")
+        #     update_task_status_by_id(task.task_id, 'running', session=session)
+        #     session.expunge(task)
+        #     session.commit()
+        #     print(f"release transaction:{task.task_id} {datetime.now()}")
+        #     return task
 
 
-def update_task_status_by_id(task_id, status, *, session):
-    (session.query(DocumenParseTask)
-     .filter(DocumenParseTask.task_id == task_id)
-     .update({'file_status': status}))
+def lock_running_task(task_id, *, session):
+    return (session.query(DocumenParseTask)
+            .filter(DocumenParseTask.task_id == task_id)
+            .filter(DocumenParseTask.file_status == 'wait')
+            .update({'file_status': 'running'}))
 
 
-def upload_task_parse_res(task_id: str, parse_result_file_key: str):
+def update_task_status_by_id(task_id, status, ):
     with Session(engine) as session:
         (session.query(DocumenParseTask)
          .filter(DocumenParseTask.task_id == task_id)
-         .update({'file_status': 'done', 'parse_result_file_key': parse_result_file_key}))
-        session.commit()
+         .update({'file_status': status}))
+
+
+def upload_task_parse_res(task_id: str, file_status, parse_result_file_key: str):
+    with Session(engine) as session:
+        statement = update(DocumenParseTask).where(DocumenParseTask.task_id == task_id) \
+            .values(file_status=file_status, parse_result_file_key=parse_result_file_key)
+        session.exec(statement)
 
 
 if __name__ == '__main__':
