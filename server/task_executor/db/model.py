@@ -89,6 +89,7 @@ def get_wait_task() -> Optional[DocumenParseTask]:
         # lock_running_task(task.task_id, session=session)
         if not lock_running_task(task.task_id, session=session):
             return None
+        session.commit()
         session.refresh(task)
         return task
 
@@ -129,6 +130,7 @@ def upload_task_parse_res(task_id: str, file_status, parse_result_file_key: str)
         statement = update(DocumenParseTask).where(DocumenParseTask.task_id == task_id) \
             .values(file_status=file_status, parse_result_file_key=parse_result_file_key)
         session.exec(statement)
+        session.commit()
 
 
 if __name__ == '__main__':
