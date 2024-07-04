@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+
 from setuptools import find_packages, setup
 
 DESCRIPTION = 'Open source Python library converting pdf to docx.'
@@ -14,7 +15,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.5.6a1'
+        version = '0.1'
 
     return version
 
@@ -45,23 +46,23 @@ def load_requirements(fname):
     return requirements
 
 setup(
-    name="pdf2docx",    
+    name="document_parser",
     version=get_version("version.txt"),
-    keywords=["pdf-to-word", "pdf-to-docx"],
+    keywords=["document-parser"],
     description=DESCRIPTION,
     long_description=load_long_description("README.md"),
     long_description_content_type="text/markdown",
-    license="GPL v3", 
-    author="dothinking",
-    author_email="train8808@gmail.com",
-    url="https://github.com/dothinking/pdf2docx",
+    license="GPL v3",
+    author=["tangxiaolong", "luxu", "zhangxiaojia"],
+    author_email=["tangxiaolong@ke.com", "luxu002@ke.com", "zhangxiaojia002@ke.com"],
+    url="https://git.lianjia.com/ai-arch/document_parse",
     packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
-    include_package_data=True,    
+    include_package_data=True,
     zip_safe=False,
     install_requires=load_requirements("requirements.txt"),
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [
             "pdf2docx=pdf2docx.main:main"
-            ]},
+        ]},
 )
