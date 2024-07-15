@@ -72,7 +72,8 @@ class Section(BaseCollection):
 
     def parse(self, **settings):
         '''Parse section layout.'''
-        for column in self: column.parse(**settings)        
+        for column in self:
+            column.parse(**settings)
         return self
     
 

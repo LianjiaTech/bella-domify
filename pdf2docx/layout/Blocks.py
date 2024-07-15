@@ -434,18 +434,21 @@ class Blocks(ElementCollection):
             return bbox[idx0], bbox[idx1]
 
         def vertical_distance(block1, block2):
+            '''两个block中间的间距的高度'''
             u0, u1 = get_v_bdy(block1)
             v0, v1 = get_v_bdy(block2)
             return round(v0-u1, 2)
         
         def line_height(line:Line):
             '''The height of line span with most characters.'''
+            '''计算最大行高'''
             span = max(line.spans, key=lambda s: len(s.text))
             h = span.bbox.height if line.is_horizontal_text else span.bbox.width
             return round(h, 2)
 
         def common_vertical_spacing():
-            '''Vertical distance with most frequency: a reference of line spacing.'''        
+            '''返回行间距（出现频率最多的）'''
+            '''Vertical distance with most frequency: a reference of line spacing.'''
             ref0, ref1 = get_v_bdy(self._instances[0])
             prev = self._instances[0]
             distances = []
@@ -488,9 +491,11 @@ class Blocks(ElementCollection):
                     start_new_block = False
                 
                 # image line: create new text block
+                # 图像
                 elif block.image_spans or ref_line.image_spans:
                     start_new_block = True
 
+                # 判断是否是有序列表or无序列表开头
                 elif block.order_list or block.unorder_list:
                     start_new_block = True
                 

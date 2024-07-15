@@ -118,8 +118,8 @@ class Lines(ElementCollection):
             return [[rows[0], False, False]]
 
         # standard row width with first row excluded, considering potential indentation of fist line
-        W = max(row[-1].bbox[2] - row[0].bbox[0] for row in rows[1:])
-        H = sum(row[0].bbox[3] - row[0].bbox[1] for row in rows) / num
+        W = max(row[-1].bbox[2] - row[0].bbox[0] for row in rows[1:])  # 整行宽度
+        H = sum(row[0].bbox[3] - row[0].bbox[1] for row in rows) / num  # 最大行高
 
         # check row by row
         res = []
@@ -141,30 +141,34 @@ class Lines(ElementCollection):
             if prev_font and prev_font_size and cur_font and cur_font_size:
                 if abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
                     start_of_sen = start_of_para = True
-            end_of_sen = row[-1].text.strip().endswith(punc)
-            w = row[-1].bbox[2] - row[0].bbox[0]
+            end_of_sen = row[-1].text.strip().endswith(punc)  # 句子是否结束（结尾是否为结束标点）
+            w = row[-1].bbox[2] - row[0].bbox[0]  # 当前行的总宽度
 
             # start of sentence and free space at the start -> start of paragraph
+            # 这里在判断当前行的最前面是否有个缩进
             if start_of_sen and (W - w) / H >= new_paragraph_free_space_ratio:
                 start_of_para = True
 
             # end of a sentense and free space at the end -> end of paragraph
+            # 这里在判断是否句子结束，并且后面有个空白区
             elif end_of_sen and w / W <= 1.0 - line_break_free_space_ratio:
                 end_of_para = True
 
-            # take action
+            # 如果是段落首句，将之前缓存的lines放入结果res，然后将当前row放入缓存lines
             if start_of_para:
                 if lines:
                     res.append((lines, first_line_start_of_paragraph, last_line_end_of_paragraph))
                 first_line_start_of_paragraph, last_line_end_of_paragraph = True, False
                 lines = Lines()
                 lines.extend(row)
+            # 如果是段落尾句，将之前缓存的lines放入结果res，清空缓存lines
             elif end_of_para:
                 lines.extend(row)
                 last_line_end_of_paragraph = True
                 res.append((lines, first_line_start_of_paragraph, last_line_end_of_paragraph))
                 first_line_start_of_paragraph, last_line_end_of_paragraph = False, False
                 lines = Lines()
+            # 如果都不是，则将当前row继续放入缓存lines
             else:
                 lines.extend(row)
 

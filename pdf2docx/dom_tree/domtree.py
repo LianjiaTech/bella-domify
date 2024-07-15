@@ -166,16 +166,19 @@ class DomTree:
         return texts
 
     def parse(self):
+        # 初始化
         stack_path: List[Node] = [self.root]
         prev_text_node: Optional[Node] = None
         searched_block = set()
 
+        # 遍历解析
         for (element, page, debug_page) in self.elements:
             if element in searched_block:
                 continue
             node = Node(element, page, debug_page)
             searched_block.add(element)
             self.node_dict[element] = node
+            # 处理表格块
             if element.is_table_block:
                 cur_talbe = element
                 while cur_talbe.next_continuous_table:
@@ -196,6 +199,7 @@ class DomTree:
                 else:
                     self.root.add_child(node)
                 continue
+            # 处理图片块
             if element.is_image_block:
                 image_span = element.lines.image_spans[0]
                 if image_span.refed_blocks and image_span.refed_blocks[0] in self.node_dict:
@@ -209,16 +213,18 @@ class DomTree:
                 else:
                     self.root.add_child(node)
                 continue
+            # 处理文本块
             if not element.is_text_block:
                 # 先分析text block
                 continue
-
             cur_paragraph = node.element
             while cur_paragraph.next_continuous_paragraph:
                 next_paragraph = cur_paragraph.next_continuous_paragraph
                 searched_block.add(next_paragraph)
                 node.element.merge(next_paragraph)
                 cur_paragraph = next_paragraph
+
+            # 处理层级关系
             while True:
                 if node.is_child_of(stack_path[-1]):
                     parent_node = stack_path[-1]

@@ -14,22 +14,21 @@ from ..common import constants
 class Sections(BaseCollection):
 
     def restore(self, raws:list):
-        """Restore sections from source dicts."""        
+        """Restore sections from source dicts."""
         self.reset()
         for raw in raws:
             section = Section().restore(raw)
             self.append(section)
         return self
-    
 
     def parse(self, **settings):
         '''Parse layout under section level.'''
-        for section in self: section.parse(**settings)
+        for section in self:
+            section.parse(**settings)
         return self
 
-
     def make_docx(self, doc):
-        '''Create sections in docx.'''        
+        '''Create sections in docx.'''
         if not self: return
 
         # mark paragraph index before creating current page
@@ -48,9 +47,11 @@ class Sections(BaseCollection):
         section = self[0]
         if section.before_space > constants.MINOR_DIST:
             create_dummy_paragraph_for_section(section)
-        
+
         # create first section
-        self[0].make_docx(doc)        
+        if section.num_cols==2:
+            doc.add_section(WD_SECTION.CONTINUOUS)
+        section.make_docx(doc)
 
         # ---------------------------------------------------
         # more sections
@@ -64,7 +65,7 @@ class Sections(BaseCollection):
             p = doc.paragraphs[-2] # -1 is the section break
             pf = p.paragraph_format
             pf.space_after = Pt(section.before_space)
-            
+
             # section content
             section.make_docx(doc)
 
@@ -78,7 +79,7 @@ class Sections(BaseCollection):
 
     def plot(self, page):
         '''Plot all section blocks for debug purpose.'''
-        for section in self: 
+        for section in self:
             for column in section:
                 column.plot(page, stroke=(1,1,0), width=1.5) # column bbox
                 column.blocks.plot(page) # blocks

@@ -358,20 +358,24 @@ class Converter:
         logging.info('Terminated in %.2fs.', perf_counter() - t0)
 
     def dom_tree_parse(self, start: int = 0, end: int = None, pages: list = None, **kwargs):
-        # parsing pages first
+        '''
+        解析pdf文件，构建文档对象模型（DOM）树
+        '''
+        # 首先 解析页面
         settings = self.default_settings
         settings.update(kwargs)
         self.parse(start, end, pages, **settings)
 
-        pages_extend = PagesExtend(self._pages)
+        pages_extend = PagesExtend(self._pages)  # 页面扩展对象
         pages_extend.mark_page_header()
         pages_extend.mark_page_footer()
         pages_extend.relation_construct()
 
         debug_file = fitz.Document(self.filename_pdf) if settings['debug'] else None
+        # 筛选出最合适最合适的dom_tree
         dom_trees = [FAQ_LLM_DomTree(pages_extend, debug_file), DomTree(pages_extend, debug_file)]
-        dom_tree = max((dom_tree for dom_tree in dom_trees if dom_tree.is_appropriate()), key=lambda x: x.priority)
-        dom_tree.parse()
+        dom_tree = max((dom_tree_i for dom_tree_i in dom_trees if dom_tree_i.is_appropriate()), key=lambda x: x.priority)
+        dom_tree.parse()  # 开始解析
         if settings['debug'] and debug_file:
             debug_file.save(kwargs['debug_file_name'])
         return dom_tree
