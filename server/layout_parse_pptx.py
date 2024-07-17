@@ -10,15 +10,14 @@
 # ===============================================================
 import io
 import json
-from constants import IMAGE, TEXT, TABLE
-
 from io import BytesIO
 
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER_TYPE
 
-import s3_service
-import utils
+from server import s3_service
+from server import utils
+from server.constants import IMAGE, TEXT, TABLE
 
 
 def analyze_placeholder(shape):
