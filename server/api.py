@@ -1,6 +1,10 @@
 # fastapi定义接口
 import logging
 from threading import Thread
+
+import uvicorn
+
+from server import layout_parse
 from .task_executor.task_manager import create_pdf_parse_task
 from .task_executor.executor import execute_parse_task
 
@@ -44,6 +48,14 @@ async def create_upload_file(file: UploadFile = File(...)):
     return DomTreeModel(dom_tree=dom_tree)
 
 
+# 文件解析-获取版面信息
+@app.post("/parse/getLayoutData")
+async def create_upload_file(file_name: str = Form(...), file_url_object: UploadFile = File(...)):
+    # 读取file字节流
+    contents = await file_url_object.read()
+    return layout_parse.layout_data_parse(file_name, contents)
+
+
 @app.post("/async/pdf/parse")
 async def async_parse(file: UploadFile = File(...), callback_url: str = Form(...)):
     # 读取file字节流
@@ -62,3 +74,7 @@ async def startup_event():
     print("Starting background task...")
     thread = Thread(target=execute_parse_task)
     thread.start()
+
+
+if __name__ == "__main__":
+    uvicorn.run("server.api:app", host="127.0.0.1", port=8080, reload=True)
