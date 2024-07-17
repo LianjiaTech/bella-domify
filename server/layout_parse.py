@@ -11,7 +11,7 @@
 from pdf2docx import Converter
 from pdf2docx.dom_tree.domtree import DomTreeModel
 import layout_parse_pptx
-import layout_parse_docx
+# import layout_parse_docx
 
 
 def layout_data_parse(file_name: str = None, file: bytes = None):
