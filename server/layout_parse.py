@@ -10,7 +10,7 @@
 # ===============================================================
 from pdf2docx import Converter
 from pdf2docx.dom_tree.domtree import DomTreeModel
-import layout_parse_pptx
+from server import layout_parse_pptx
 # import layout_parse_docx
 
 
