@@ -87,12 +87,10 @@ class S3(object):
         path = '/%s/%s' % (self.bucket_name, filename)
         return '%s%s' % (domain, path)
 
-
-def s3_upload(filename, data):
-    s3 = S3()
-    s3.upload_file(data=data, filename=filename, is_sign=True)
-    response = s3.get_url(filename=filename)
-    return response
+    def s3_upload(self, filename, data):
+        self.upload_file(data=data, filename=filename, is_sign=True)
+        response = self.get_url(filename=filename)
+        return response
 
 
 if __name__ == "__main__":
@@ -106,5 +104,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"读取文件失败: {e}")
 
-    response = s3_upload(filename=file_name, data=buf_data)
+    s3 = S3()
+    response = s3.s3_upload(filename=file_name, data=buf_data)
     print(response)

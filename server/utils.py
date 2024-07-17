@@ -11,8 +11,10 @@
 import time
 import random
 from server.constants import IMAGE
-from server import s3_service
+from server.s3_service import S3
 from io import BytesIO
+
+s3 = S3()
 
 
 def get_random_name():
@@ -22,7 +24,7 @@ def get_random_name():
 
 def build_image_item(image_blob, bbox=(0, 0)):
     filename = IMAGE + get_random_name()
-    image_s3_url = s3_service.s3_upload(filename=filename, data=BytesIO(image_blob))
+    image_s3_url = s3.s3_upload(filename=filename, data=BytesIO(image_blob))
     if bbox == (0, 0):
         return dict(text=image_s3_url, type=IMAGE)
     else:
