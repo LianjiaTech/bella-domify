@@ -76,5 +76,5 @@ async def startup_event():
     thread.start()
 
 
-if __name__ == "__main__":
-    uvicorn.run("server.api:app", host="127.0.0.1", port=8080, reload=True)
+# if __name__ == "__main__":
+#     uvicorn.run("server.api:app", host="127.0.0.1", port=8080, reload=True)
