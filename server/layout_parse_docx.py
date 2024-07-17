@@ -10,15 +10,13 @@
 # ===============================================================
 import io
 import json
-from io import BytesIO
 
 from docx import Document, ImagePart
 from docx.oxml import CT_Picture
 from docx.text.paragraph import Paragraph
 
-from server import s3_service
 from server import utils
-from server.constants import IMAGE, TEXT, TABLE
+from server.constants import TEXT, TABLE
 
 
 def find_image(doc: Document, paragraph: Paragraph):
@@ -32,10 +30,7 @@ def find_image(doc: Document, paragraph: Paragraph):
     return image
 
 
-def build_image_item(image_blob):
-    filename = IMAGE + utils.get_random_name()
-    image_s3_url = s3_service.s3_upload(filename=filename, data=BytesIO(image_blob))
-    return dict(text=image_s3_url, type=IMAGE)
+
 
 
 def layout_parse(file):
@@ -56,7 +51,7 @@ def layout_parse(file):
                 # 检查段落中的图片
                 image = find_image(doc, paragraph)
                 if image is not None:
-                    layouts.append(build_image_item(image.blob))
+                    layouts.append(utils.build_image_item(image.blob))
             elif element.tag.endswith('tbl'):
                 # 处理表格
                 table = element
