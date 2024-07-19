@@ -10,7 +10,7 @@
 # ===============================================================
 from pdf2docx import Converter
 from pdf2docx.dom_tree.domtree import DomTreeModel
-from server import layout_parse_pptx, layout_parse_docx
+from server import layout_parse_pptx, layout_parse_docx, layout_parse_pdf
 
 
 def layout_data_parse(file_name: str = None, file: bytes = None):
@@ -23,18 +23,8 @@ def layout_data_parse(file_name: str = None, file: bytes = None):
     if file_extension == 'pptx':
         return layout_parse_pptx.layout_parse(file)
     elif file_extension == 'pdf':
-        return layout_parse_pdf(file)
+        return layout_parse_pdf.layout_parse(file)
     elif file_extension == 'docx':
         return layout_parse_docx.layout_parse(file)
     else:
         raise ValueError("异常：不支持的文件类型")
-
-
-def layout_parse_pdf(file):
-    # 读取file字节流
-    converter = Converter(stream=file)
-    dom_tree = converter.dom_tree_parse(
-        remove_watermark=True,
-        parse_stream_table=False
-    )
-    return DomTreeModel(dom_tree=dom_tree)
