@@ -30,9 +30,6 @@ def find_image(doc: Document, paragraph: Paragraph):
     return image
 
 
-
-
-
 def layout_parse(file):
     layouts = []
 

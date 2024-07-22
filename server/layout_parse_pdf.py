@@ -9,7 +9,6 @@
 #
 # ===============================================================
 import json
-
 import fitz
 
 from server import utils

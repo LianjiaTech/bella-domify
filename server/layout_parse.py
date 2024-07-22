@@ -8,8 +8,6 @@
 #    @Description   : 
 #
 # ===============================================================
-from pdf2docx import Converter
-from pdf2docx.dom_tree.domtree import DomTreeModel
 from server import layout_parse_pptx, layout_parse_docx, layout_parse_pdf
 
 
