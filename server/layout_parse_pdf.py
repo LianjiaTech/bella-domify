@@ -46,7 +46,7 @@ def layout_parse(file):
 
 if __name__ == "__main__":
 
-    file_name = '/Users/lucio/code/others/工作内容/工作内容2024/0709多文件类型解析代码调研/demo_table.pdf'
+    file_name = 'demo_table.pdf'
 
     # 读取本地文件
     try:
