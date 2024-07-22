@@ -24,7 +24,6 @@ def layout_parse(file):
     pptx_stream = io.BytesIO(file)
     pr = Presentation(pptx_stream)
     # 遍历幻灯片中的所有形状
-    page_num = 1
     for slide in pr.slides:
         for shape in slide.shapes:
             try:

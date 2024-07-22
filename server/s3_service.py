@@ -3,24 +3,12 @@ import time
 
 import boto3
 
-# public_s3 = {
-#     "ACCESS_KEY": s3_settings.ACCESS_KEY,
-#     "SECERT_ACCESS_KEY": s3_settings.SECERT_ACCESS_KEY,
-#     "REGION_NAME": s3_settings.REGION_NAME,
-#     "BUCKET_NAME": s3_settings.BUCKET_NAME,
-#     "ENDPOINT_URL": s3_settings.ENDPOINT_URL,
-#     # "DOMAIN": "https://img.ljcdn.com"
-#     "DOMAIN": s3_settings.DOMAIN
-# }
-
-# openapi-assistant
 public_s3 = {
     "ACCESS_KEY": "QACGA0JKK1D24X92E67C",
     "SECERT_ACCESS_KEY": "SChMFsXKA9fcllrJnsscYmVtwCmR1GguUBRZuuBD",
     "REGION_NAME": "cn-north-1",
     "BUCKET_NAME": "openapi-assistant",
     "ENDPOINT_URL": "http://storage.lianjia.com",
-    # "DOMAIN": "https://img.ljcdn.com"
     "DOMAIN": "https://img.ljcdn.com"
 }
 
@@ -95,7 +83,7 @@ class S3(object):
 
 if __name__ == "__main__":
 
-    file_name = '/Users/lucio/code/others/工作内容/工作内容2024/0709多文件类型解析代码调研/demo.pptx'
+    file_name = 'demo.pptx'
 
     # 读取本地文件
     try:
