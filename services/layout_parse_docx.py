@@ -15,8 +15,8 @@ from docx import Document, ImagePart
 from docx.oxml import CT_Picture
 from docx.text.paragraph import Paragraph
 
-from server import utils
-from server.constants import TEXT, TABLE
+from utils import general_util
+from services.constants import TEXT, TABLE
 
 
 def find_image(doc: Document, paragraph: Paragraph):
@@ -48,7 +48,7 @@ def layout_parse(file):
                 # 检查段落中的图片
                 image = find_image(doc, paragraph)
                 if image is not None:
-                    layouts.append(utils.build_image_item(image.blob))
+                    layouts.append(general_util.build_image_item(image.blob))
             elif element.tag.endswith('tbl'):
                 # 处理表格
                 table = element

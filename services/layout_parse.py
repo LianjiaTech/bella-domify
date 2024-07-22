@@ -8,10 +8,10 @@
 #    @Description   : 
 #
 # ===============================================================
-from server import layout_parse_pptx, layout_parse_docx, layout_parse_pdf
+from services import layout_parse_pptx, layout_parse_docx, layout_parse_pdf
 
 
-def layout_data_parse(file_name: str = None, file: bytes = None):
+def parse(file_name: str = None, file: bytes = None):
     # 检查文件名是否包含后缀
     if '.' not in file_name:
         raise ValueError("异常：文件名没有包含后缀")

@@ -11,8 +11,8 @@
 import json
 import fitz
 
-from server import utils
-from server.constants import TEXT, TABLE
+from utils import general_util
+from services.constants import TEXT, TABLE
 
 
 def trans_block2text(block):
@@ -37,7 +37,7 @@ def layout_parse(file):
             if block["type"] == 0:  # 文字块
                 layouts.append(dict(text=trans_block2text(block), type=TEXT))
             elif block["type"] == 1:  # 图片块
-                layouts.append(utils.build_image_item(block.get("image")))
+                layouts.append(general_util.build_image_item(block.get("image")))
             elif block["type"] == 2:  # 表格块（假设表格是用线条绘制的）
                 layouts.append((TABLE, block["lines"]))
 

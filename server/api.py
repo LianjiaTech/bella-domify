@@ -4,7 +4,7 @@ from threading import Thread
 
 import uvicorn
 
-from server import layout_parse
+from services import layout_parse, domtree_parse
 from .task_executor.task_manager import create_pdf_parse_task
 from .task_executor.executor import execute_parse_task
 
@@ -40,20 +40,15 @@ async def health_readiness():
 async def create_upload_file(file: UploadFile = File(...)):
     # 读取file字节流
     contents = await file.read()
-    converter = Converter(stream=contents)
-    dom_tree = converter.dom_tree_parse(
-        remove_watermark=True,
-        parse_stream_table=False
-    )
-    return DomTreeModel(dom_tree=dom_tree)
+    return domtree_parse.parse(contents)
 
 
 # 文件解析-获取版面信息
-@app.post("/parse/getLayoutData")
+@app.post("/document/layout/parse")
 async def create_upload_file(file_name: str = Form(...), file_url_object: UploadFile = File(...)):
     # 读取file字节流
     contents = await file_url_object.read()
-    return layout_parse.layout_data_parse(file_name, contents)
+    return layout_parse.parse(file_name, contents)
 
 
 @app.post("/async/pdf/parse")

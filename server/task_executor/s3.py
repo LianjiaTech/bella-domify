@@ -1,7 +1,7 @@
 import uuid
 
 import boto3
-import requests
+import io
 from fastapi import UploadFile
 from settings.ini_config import config
 
@@ -12,16 +12,19 @@ endpoint = config.get('S3', 'ENDPOINT')
 s3 = boto3.client("s3", aws_access_key_id=ak, aws_secret_access_key=sk, endpoint_url=endpoint)
 
 
-def upload_file(file: UploadFile) -> str:
+def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> str:
     # s3 上传文件
-    content = file.file.read()
-    filename = file.filename
+    if file:
+        content = file.file.read()
+        stream = io.BytesIO(content)
+        filename = file.filename
+
     # gen uuid for file-key
     file_key = uuid.uuid4().hex + filename
 
     # 上传文件至s3
     s3.put_object(Bucket=bucket_name,
-                  Body=content,
+                  Body=stream,
                   Key=file_key)
     return file_key
 

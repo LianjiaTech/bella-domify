@@ -14,8 +14,8 @@ import json
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER_TYPE
 
-from server import utils
-from server.constants import TEXT, TABLE
+from utils import general_util
+from services.constants import TEXT, TABLE
 
 
 def layout_parse(file):
@@ -31,7 +31,7 @@ def layout_parse(file):
                 if shape.shape_type == MSO_SHAPE_TYPE.PLACEHOLDER:  # 14
                     placeholder_type = shape.placeholder_format.type
                     if placeholder_type == PP_PLACEHOLDER_TYPE.PICTURE:  # 18
-                        layouts.append(utils.build_image_item(shape.image.blob))
+                        layouts.append(general_util.build_image_item(shape.image.blob))
                     else:
                         # 文字占位符
                         text = shape.text
@@ -39,7 +39,7 @@ def layout_parse(file):
 
                 # 图片
                 elif shape.shape_type == MSO_SHAPE_TYPE.PICTURE:  # 13
-                    layouts.append(utils.build_image_item(shape.image.blob))
+                    layouts.append(general_util.build_image_item(shape.image.blob))
 
                 # 文字
                 elif shape.shape_type == MSO_SHAPE_TYPE.TEXT_BOX:  # 17
