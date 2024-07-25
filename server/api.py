@@ -68,5 +68,20 @@ async def startup_event():
     thread = Thread(target=execute_parse_task)
     thread.start()
 
+
+app.include_router(router)
+
+
+@app.on_event("startup")
+async def startup_event():
+    print("Application startup")
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    print("Application shutdown")
+
 # if __name__ == "__main__":
+#     import uvicorn
+#
 #     uvicorn.run("server.api:app", host="127.0.0.1", port=8080, reload=True)
