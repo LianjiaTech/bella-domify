@@ -69,7 +69,63 @@ async def startup_event():
     thread.start()
 
 
+## 历史path兼容，下个版本删除
+router_without_prefix = APIRouter()
+
+
+@router_without_prefix.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+
+@router_without_prefix.get("/actuator/health/liveness")
+async def health_liveness():
+    return {"status": "UP"}
+
+
+@router_without_prefix.get("/actuator/health/readiness")
+async def health_readiness():
+    return {"status": "UP"}
+
+
+# 上传文件接口
+@router_without_prefix.post("/pdf/parse/test")
+async def create_upload_file(file: UploadFile = File(...)):
+    # 读取file字节流
+    contents = await file.read()
+    return domtree_parse.parse(contents)
+
+
+# 文件解析-获取版面信息
+@router_without_prefix.post("/document/layout/parse")
+async def create_upload_file(file_name: str = Form(...), file_url_object: UploadFile = File(...)):
+    # 读取file字节流
+    contents = await file_url_object.read()
+    return layout_parse.parse(file_name, contents)
+
+
+@router_without_prefix.post("/async/pdf/parse")
+async def async_parse(file: UploadFile = File(...), callback_url: str = Form(...)):
+    # 读取file字节流
+    return create_pdf_parse_task(file, callback_url)
+
+
+# 定义回调接口，url中包含pathvariable
+@router_without_prefix.post("/async/pdf/parse/callback/{taskNo}")
+async def async_parse_callback(taskNo: str = Path(..., title="The task number"), task: dict = Body(...)):
+    logging.info("接收回调")
+    print(taskNo, task)
+
+
+@router_without_prefix.on_event("startup")
+async def startup_event():
+    print("Starting background task...")
+    thread = Thread(target=execute_parse_task)
+    thread.start()
+
+
 app.include_router(router)
+app.include_router(router_without_prefix)
 
 
 @app.on_event("startup")
