@@ -58,8 +58,7 @@ def layout_parse(file):
                 print(f"处理元素时出错，type: {shape.shape_type}，errmsg：{str(e)}")
                 continue
 
-    result = {"data": {"layouts": layouts}}
-    return result
+    return layouts
 
 
 if __name__ == "__main__":
