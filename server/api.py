@@ -23,12 +23,12 @@ async def root():
     return {"message": "Hello World"}
 
 
-@router.get("/actuator/health/liveness")
+@app.get("/actuator/health/liveness")
 async def health_liveness():
     return {"status": "UP"}
 
 
-@router.get("/actuator/health/readiness")
+@app.get("/actuator/health/readiness")
 async def health_readiness():
     return {"status": "UP"}
 
