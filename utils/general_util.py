@@ -10,12 +10,10 @@
 # ===============================================================
 from services.constants import IMAGE
 from server.task_executor import s3
+from services.SimpleBlock import SimpleBlock
 
 
-def build_image_item(image_blob, bbox=(0, 0)):
+def build_image_item(image_blob):
     file_key = s3.upload_file(stream=image_blob)
     image_s3_url = s3.get_file_url(file_key)
-    if bbox == (0, 0):
-        return dict(text=image_s3_url, type=IMAGE)
-    else:
-        return dict(text=image_s3_url, type=IMAGE, bbox=bbox)
+    return SimpleBlock(type=IMAGE, text=image_s3_url)

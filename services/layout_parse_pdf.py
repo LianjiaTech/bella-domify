@@ -9,10 +9,13 @@
 #
 # ===============================================================
 import json
+
 import fitz
 
-from utils import general_util
-from services.constants import TEXT, TABLE
+from services.SimpleBlock import SimpleBlock
+from services.constants import TEXT, IMAGE
+from services.layout_parse_utils import _possible_holder_blocks, mark_holder_by_text_similarity, \
+    get_s3_links_for_simple_block_batch
 
 
 def trans_block2text(block):
@@ -24,24 +27,41 @@ def trans_block2text(block):
 
 
 def layout_parse(file):
-    layouts = []
-
+    page_list = []  # 所有页面list
     pdf_document = fitz.Document(stream=file)
 
     # 遍历每一页
     for page_num in range(len(pdf_document)):
+        page_content = []
         page = pdf_document.load_page(page_num)
         blocks = page.get_text("dict")["blocks"]
-
-        for block in blocks:
+        # 发现blocks的顺序不定，有页面下方的页码被排在第一位的情况，故排序
+        blocks_sorted = sorted(blocks, key=lambda b: (b['bbox'][1], b['bbox'][0]))
+        for block in blocks_sorted:
             if block["type"] == 0:  # 文字块
-                layouts.append(dict(text=trans_block2text(block), type=TEXT))
+                text = trans_block2text(block)
+                if text and not text.isspace():
+                    page_content.append(SimpleBlock(type=TEXT, page_num=page_num, text=text))
             elif block["type"] == 1:  # 图片块
-                layouts.append(general_util.build_image_item(block.get("image")))
-            elif block["type"] == 2:  # 表格块（假设表格是用线条绘制的）
-                layouts.append((TABLE, block["lines"]))
+                page_content.append(SimpleBlock(type=IMAGE, page_num=page_num, image_bytes=block.get("image")))
+        page_list.append(page_content)
 
-    return layouts
+    # 页眉识别
+    page_header_blocks = _possible_holder_blocks(page_list, header=True)
+    found_header = mark_holder_by_text_similarity(page_header_blocks, header=True)
+    # 页脚识别
+    page_footer_blocks = _possible_holder_blocks(page_list, header=False)
+    found_footer = mark_holder_by_text_similarity(page_footer_blocks, header=False)
+    # 过滤无用元素
+    filtered_list = []
+    for page_item in page_list:
+        for simple_block in page_item:
+            if not simple_block.is_header and not simple_block.is_footer:
+                filtered_list.append(simple_block)
+
+    # SimpleBlock的list批量获取S3链接，并返回目标结构
+    result = get_s3_links_for_simple_block_batch(filtered_list)
+    return result
 
 
 if __name__ == "__main__":
