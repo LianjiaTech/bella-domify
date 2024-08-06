@@ -10,6 +10,7 @@ from pdf2docx.dom_tree.domtree import DomTreeModel
 from .db.model import upload_task_parse_res
 from .task_manager import get_pdf_parse_task
 from .s3 import get_file, upload_text_content
+from ..context import user_context
 
 
 def execute_parse_task():
@@ -28,6 +29,7 @@ def execute_parse_task():
 def execute_pdf_parse_task(task):
     call_back_url = None
     try:
+        user_context.set(task.user_id)
         call_back_url = task.callback_url.format(taskNo=task.task_id)
         dom_tree = parse_pdf_file(task.file_key)
         parse_res = dom_tree.model_dump_json()
@@ -41,6 +43,8 @@ def execute_pdf_parse_task(task):
         upload_task_parse_res(task.task_id, 'error', parse_file_key)
         if call_back_url is not None:
             call_back(task.task_id, call_back_url, {})
+    finally:
+        user_context.clear()
 
 
 def call_back(task_id, callback_url, json_body):

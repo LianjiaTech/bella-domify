@@ -1,5 +1,4 @@
 import uuid
-from threading import Thread
 
 from fastapi import UploadFile
 import boto3
@@ -28,10 +27,10 @@ def upload_pdf_file(file: UploadFile) -> str:
     return file_key
 
 
-def create_pdf_parse_task(file: UploadFile, callback_url) -> str:
+def create_pdf_parse_task(file: UploadFile, callback_url, user: str) -> str:
     file_key = upload_pdf_file(file)
     task_id = uuid.uuid4().hex
-    create_task_in_db(task_id=task_id, file_key=file_key, file_type='pdf', callback_url = callback_url)
+    create_task_in_db(task_id=task_id, file_key=file_key, file_type='pdf', callback_url=callback_url, user=user)
     return task_id
 
 

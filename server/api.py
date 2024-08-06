@@ -8,8 +8,12 @@ from fastapi import Form, Path, Body
 
 from server.log.log_config import log_config
 from services import layout_parse, domtree_parse
+from .context import user_context
 from .task_executor.executor import execute_parse_task
 from .task_executor.task_manager import create_pdf_parse_task
+
+# TODO 兼容阶段，业务方添加 user 之后下掉
+DEFAULT_USER = "1000000020353701"
 
 log_config()  # 初始化日志配置
 
@@ -35,7 +39,8 @@ async def health_readiness():
 
 # 上传文件接口
 @router.post("/pdf/parse/test")
-async def create_upload_file(file: UploadFile = File(...)):
+async def create_upload_file(file: UploadFile = File(...), user: str = Form(default=None)):
+    user_context.set(user or DEFAULT_USER)
     # 读取file字节流
     contents = await file.read()
     return domtree_parse.parse(contents)
@@ -43,16 +48,18 @@ async def create_upload_file(file: UploadFile = File(...)):
 
 # 文件解析-获取版面信息
 @router.post("/document/layout/parse")
-async def create_upload_file(file_name: str = Form(...), file_url_object: UploadFile = File(...)):
+async def create_upload_file(file_name: str = Form(...), file_url_object: UploadFile = File(...), 
+                             user: str = Form(default=None)):
+    user_context.set(user or DEFAULT_USER)
     # 读取file字节流
     contents = await file_url_object.read()
     return layout_parse.parse(file_name, contents)
 
 
 @router.post("/async/pdf/parse")
-async def async_parse(file: UploadFile = File(...), callback_url: str = Form(...)):
+async def async_parse(file: UploadFile = File(...), callback_url: str = Form(...), user: str = Form(default=None)):
     # 读取file字节流
-    return create_pdf_parse_task(file, callback_url)
+    return create_pdf_parse_task(file, callback_url, user or DEFAULT_USER)
 
 
 # 定义回调接口，url中包含pathvariable

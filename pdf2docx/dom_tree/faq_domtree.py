@@ -1,8 +1,8 @@
-import asyncio
 import concurrent.futures
 import logging
 import time
-from typing import Optional
+
+from functools import partial
 
 import openai
 
@@ -13,6 +13,7 @@ import textdistance
 
 from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend
 from pdf2docx.text.TextBlock import TextBlock
+from server.context import user_context
 
 
 class FAQ_LLM_DomTree(DomTree):
@@ -31,11 +32,12 @@ class FAQ_LLM_DomTree(DomTree):
         # 为避免大模型误判，多次判断，进行投票
         with concurrent.futures.ThreadPoolExecutor() as executor:
             # 提交每个接口调用任务到线程池，并得到一个Future对象列表
-            vote_res = list(executor.map(self._is_faq, [page_content[:2000] for _ in range(3)]))
+            vote_res = list(executor.map(partial(self._is_faq, user=user_context.get()), 
+                                         [page_content[:2000] for _ in range(3)]))
             # 选择票数最多的结果
             return max(vote_res, key=vote_res.count)
 
-    def _is_faq(self, page_content: str, *, model="gpt-4") -> bool:
+    def _is_faq(self, page_content: str, *, model="gpt-4", user: str = "") -> bool:
         prompt = self.__class__.PROMPT.format(page_content=page_content)
         max_retry = 5
         response = None
@@ -44,7 +46,9 @@ class FAQ_LLM_DomTree(DomTree):
                 response = openai.chat.completions.create(
                     messages=[{"role": "user", "content": prompt}],
                     temperature=0.001,
-                    model=model)
+                    model=model,
+                    user=user
+                )
             except openai.RateLimitError:
                 max_retry -= 1
                 time.sleep(10)
@@ -63,7 +67,7 @@ class FAQ_LLM_DomTree(DomTree):
         logging.info("start faq extract")
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             # 提交每个接口调用任务到线程池，并得到一个Future对象列表
-            faqs = list(executor.map(faq_extract, inputs_texts))
+            faqs = list(executor.map(partial(faq_extract, user=user_context.get()), inputs_texts))
         logging.info("end faq extract")
         qa_pair = []
         [qa_pair.extend(faq) for faq in faqs if faq]

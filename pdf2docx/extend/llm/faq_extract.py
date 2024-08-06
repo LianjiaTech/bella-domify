@@ -1,4 +1,3 @@
-import asyncio
 import logging
 import time
 from json import JSONDecodeError
@@ -6,31 +5,37 @@ from typing import Optional
 from pydantic import BaseModel, parse_obj_as
 import json
 import openai
-from openai import AsyncOpenAI
+from jinja2 import Template
 
 FAQ_EXTRACT_PROMPT = """
-将下面的FAQ大块文本内容，切分为小块QA，按照JSON格式返回, 如果对应问题不存在答案，不返回QA对。
-例如：
+将下面的FAQ大块文本内容，切分为小块QA，如果对应问题不存在答案，不返回QA对。
+
+## 要求
+- 返回格式为 JSON 格式，不是 Markdown 的 JSON 格式
+
+## 下面给你几个例子，请你作为参考：
 FAQ文本为:
 Q：如何添加登录访问权限，A：请联系张子枫进行权限配置。
 问题：测试环境登录不上去了，怎么办？答案：请检查是否连接了VPN。
 如何打开百度地图？
-返回JSON格式: 
-[{{"Q":"如何添加登录访问权限","A":\"请联系张子枫进行权限配置"}},{{"Q":"测试环境登录不上去了，怎么办","A":"请检查是否连接了VPN"}}]
-===========
+返回: 
+[{"Q":"如何添加登录访问权限","A":"请联系张子枫进行权限配置。"},{"Q":"测试环境登录不上去了，怎么办","A":"请检查是否连接了VPN。"}]
+
+## 下面请你回答
 FAQ文本：
-{faq_text}
-返回JSON格式:
+{{faq_text}}
+返回:
 """
 
 
-def _faq_extract(faq_text: str, *, model="gpt-3.5-turbo-16k"):
-    faq_text = faq_text.replace('"', '\\"')
-    prompt = FAQ_EXTRACT_PROMPT.format(faq_text=faq_text)
+def _faq_extract(faq_text: str, *, model="gpt-4o", user: str = "") -> str:
+    prompt = Template(FAQ_EXTRACT_PROMPT).render(faq_text=faq_text)
     response = openai.chat.completions.create(
         messages=[{"role": "user", "content": prompt}],
         temperature=0.001,
-        model=model)
+        model=model,
+        user=user
+    )
     return response.choices[0].message.content
 
 
@@ -51,7 +56,8 @@ class FAQ(BaseModel):
 
 def parse_faq(faq_json_str) -> Optional[list[FAQ]]:
     try:
-        # faq_json_str = faq_json_str.replace("\\", "\\\\") # \\进行转义
+        if faq_json_str.startswith("```json"):
+            faq_json_str = faq_json_str[7:-3]
         json_obj = json.loads(faq_json_str, strict=False)
         return [parse_obj_as(FAQ, json_dict) for json_dict in json_obj]
     except JSONDecodeError:
@@ -65,12 +71,12 @@ def parse_faq(faq_json_str) -> Optional[list[FAQ]]:
             return None
 
 
-def faq_extract(faq_text: str) -> list[FAQ]:
+def faq_extract(faq_text: str, user: str = "") -> list[FAQ]:
     max_retrys = 5
     extract = None
     while max_retrys > 0 and extract is None:
         try:
-            json_str = _faq_extract(faq_text)
+            json_str = _faq_extract(faq_text, user=user)
         except openai.RateLimitError as ratelimit_error:
             logging.error(rf'faq_extract ratelimit error: {faq_text}, {ratelimit_error}')
             time.sleep(10)

@@ -4,16 +4,8 @@ import os
 
 env = os.getenv("ENVTYPE", "test")
 # Read local file `settings.ini`.
+config = configparser.ConfigParser()
 if env == "test":
-    config = configparser.ConfigParser()
-    config.read('settings/test.ini')
+    config.read(os.path.join(os.path.dirname(__file__), "test.ini"))
 else:
-    config = configparser.ConfigParser()
-    config.read('settings/prod.ini')
-
-
-
-
-
-
-
+    config.read(os.path.join(os.path.dirname(__file__), "prod.ini"))
