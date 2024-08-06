@@ -8,12 +8,9 @@ from fastapi import Form, Path, Body
 
 from server.log.log_config import log_config
 from services import layout_parse, domtree_parse
-from .context import user_context
+from .context import user_context, DEFAULT_USER
 from .task_executor.executor import execute_parse_task
 from .task_executor.task_manager import create_pdf_parse_task
-
-# TODO 兼容阶段，业务方添加 user 之后下掉
-DEFAULT_USER = "1000000020353701"
 
 log_config()  # 初始化日志配置
 
