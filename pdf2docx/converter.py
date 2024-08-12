@@ -331,7 +331,7 @@ class Converter:
         self.parse(start, end, pages, **settings)
 
         pages_extend = PagesExtend(self._pages)  # 页面扩展对象
-        pages_extend.mark_page_header()
+        # pages_extend.mark_page_header()
         pages_extend.mark_page_footer()
         pages_extend.relation_construct()
 

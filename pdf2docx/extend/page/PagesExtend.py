@@ -145,6 +145,7 @@ class PagesExtend(BaseCollection):
         text_list = _extract_text(blocks)
         text_list = [remove_number(text) if text else None for text in text_list]
         text_counter = Counter(text_list)
+        # 抽取纯文本后，最大的频次的文本
         frequency, most_common_text = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
         if most_common_text is None:
             return False

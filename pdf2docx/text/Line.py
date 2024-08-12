@@ -54,7 +54,9 @@ class Line(Element):
         self.spans = Spans(parent=self).restore(raw.get('spans', []))
         self.tags = {}
 
-    
+        # 是否页眉
+        self.is_header = 0
+
     @property
     def text(self):
         '''Joining span text. Note image is translated to a placeholder ``<image>``.'''
