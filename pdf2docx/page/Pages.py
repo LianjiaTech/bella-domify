@@ -11,6 +11,7 @@ from shapely.geometry import box
 from .RawPageFactory import RawPageFactory
 from ..common.Collection import BaseCollection
 from ..font.Fonts import Fonts
+from ..shape.Shape import Stroke
 
 
 class Pages(BaseCollection):
@@ -189,7 +190,7 @@ def get_first_text_height(page):
 def get_first_line_height(page):
     # todo asdf = page.sections[1][0].shapes[0].x0
     for stroke in page.shapes:
-        if is_header_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width):
+        if isinstance(stroke, Stroke) and is_header_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width):
             return stroke.y1
     return 0
 

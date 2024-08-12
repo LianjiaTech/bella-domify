@@ -70,6 +70,7 @@ class TableBlockExtend(RelationElement, BlockExtend):
 
     def merge(self, table_extend: TableBlockExtend):
         '''Merge two table blocks.'''
+        # todo 这里只merge了rows，没有merge text
         self._rows.merge_rows(table_extend._rows)
 
     def table_continous_relation_construct(self, table_extend: TableBlockExtend):
