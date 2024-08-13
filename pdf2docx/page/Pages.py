@@ -49,7 +49,7 @@ class Pages(BaseCollection):
             raw_page.clean_up(**settings)
 
             # process font properties
-            raw_page.process_font(fonts)            
+            raw_page.process_font(fonts)
 
             # after this step, we can get some basic properties
             # NOTE: floating images are detected when cleaning up blocks, so collect them here
@@ -85,8 +85,6 @@ class Pages(BaseCollection):
             sections = raw_page.parse_section(**settings)
             page.sections.extend(sections)
 
-        print()
-
     @staticmethod
     def _parse_document(raw_pages: list):
         '''Parse structure in document/pages level, e.g. header, footer'''
@@ -101,8 +99,6 @@ class Pages(BaseCollection):
                 if line.bbox[3] != 0 and line.bbox[3] < header_height:
                     page_header_list.append(line)
             all_header_list.append(page_header_list)
-
-        print()
 
         # 每页候选页眉元素数量
         item_count_list = [len(page_header_list) for page_header_list in all_header_list]
@@ -141,7 +137,6 @@ class Pages(BaseCollection):
 
         # 通过区域去除页眉
         for i, page in enumerate(raw_pages):
-            print()
             for line in page.blocks:
                 if "<image>" in line.text:
                     if line.bbox[3] != 0 and line.bbox[1] <= confirmed_header_height:
@@ -149,7 +144,6 @@ class Pages(BaseCollection):
                 else:
                     if line.bbox[3] != 0 and line.bbox[3] <= confirmed_header_height:
                         line.is_header = 1
-        print()
 
 
 # 页眉区划定
@@ -160,13 +154,10 @@ def possible_header_height(raw_pages):
     for raw_page in raw_pages:
         # 页眉高度阈值
         first_line_height = get_first_line_height(raw_page)
-        first_text_height = get_first_text_height(raw_page)
         if first_line_height:
             header_height_list.append(first_line_height)
         else:
-            header_height_list.append(min(first_text_height, raw_page.height / 10))
-        print()
-    print()
+            header_height_list.append(raw_page.height / 10)
 
     text_counter = Counter(header_height_list)
     frequency, most_common_value = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
@@ -177,20 +168,12 @@ def possible_header_height(raw_pages):
     return 0
 
 
-# 获取首次出现文字高度
-def get_first_text_height(page):
-    for line in page.blocks:
-        if line.text and line.bbox[3] != 0:
-            return line.bbox[3]
-    assert ("")  # todo 删除此行就ok
-    return 0
-
-
 # 获取首次出现大横线高度
 def get_first_line_height(page):
     # todo asdf = page.sections[1][0].shapes[0].x0
     for stroke in page.shapes:
-        if isinstance(stroke, Stroke) and is_header_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width):
+        if (isinstance(stroke, Stroke)
+                and is_header_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
             return stroke.y1
     return 0
 
@@ -216,7 +199,6 @@ def is_position_matching(rect1, rect2):
     # 计算面积
     inter_area = intersection.area
     union_area = union.area
-    print("占比:", inter_area / union_area)
 
     return inter_area > 0.7 * union_area
 
