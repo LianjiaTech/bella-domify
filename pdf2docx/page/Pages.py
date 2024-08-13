@@ -107,7 +107,7 @@ class Pages(BaseCollection):
         possible_header_list = next(
             page_header_list for page_header_list in all_header_list if len(page_header_list) == most_common_length)
 
-        # 开始标记页眉元素
+        # 开始纵向对比，确定页眉元素
         for candidate_line in possible_header_list:
             # 图片
             if "<image>" in candidate_line.text:
@@ -132,6 +132,8 @@ class Pages(BaseCollection):
                     candidate_line.is_header = 1
 
         confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
+        if not confirmed_header:  # 若没有识别到任何页眉元素
+            return
 
         confirmed_header_height = max([header_line.bbox[3] for header_line in confirmed_header])
 
