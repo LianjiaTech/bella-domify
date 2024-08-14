@@ -13,6 +13,8 @@ from ..common.Collection import BaseCollection
 from ..font.Fonts import Fonts
 from ..shape.Shape import Stroke
 
+EXIST_HEADER_HORIZONTAL_LINE = 0
+
 
 class Pages(BaseCollection):
     '''A collection of ``Page``.'''
@@ -89,7 +91,7 @@ class Pages(BaseCollection):
     def _parse_document(raw_pages: list):
         '''Parse structure in document/pages level, e.g. header, footer'''
         # 页眉区
-        header_height = possible_header_height(raw_pages) + 2
+        header_height = possible_header_height(raw_pages) + 10
         # 收集页眉元素
         all_header_list = []
 
@@ -100,12 +102,10 @@ class Pages(BaseCollection):
                     page_header_list.append(line)
             all_header_list.append(page_header_list)
 
-        # 每页候选页眉元素数量
-        item_count_list = [len(page_header_list) for page_header_list in all_header_list]
-        most_common_length = Counter(item_count_list).most_common(1)[0][0]
-        # 找到第一个频数最大的
-        possible_header_list = next(
-            page_header_list for page_header_list in all_header_list if len(page_header_list) == most_common_length)
+        # 所有疑似页眉元素
+        possible_header_list = []
+        for page_header_list in all_header_list:
+            possible_header_list.extend(page_header_list)
 
         # 开始纵向对比，确定页眉元素
         for candidate_line in possible_header_list:
@@ -117,7 +117,7 @@ class Pages(BaseCollection):
                         if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
                             include_cnt += 1
                             break
-                if include_cnt / len(raw_pages) > 0.5 and include_cnt > 1:
+                if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
                     candidate_line.is_header = 1
             # 文字
             elif candidate_line.text:
@@ -128,7 +128,7 @@ class Pages(BaseCollection):
                                 line.bbox, candidate_line.bbox):
                             include_cnt += 1
                             break
-                if include_cnt / len(raw_pages) > 0.5 and include_cnt > 1:
+                if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
                     candidate_line.is_header = 1
 
         confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
@@ -148,11 +148,15 @@ class Pages(BaseCollection):
                         line.is_header = 1
 
 
+def get_frequency_threshold():
+    global EXIST_HEADER_HORIZONTAL_LINE
+    return 2 if EXIST_HEADER_HORIZONTAL_LINE else 3
+
+
 # 页眉区划定
 def possible_header_height(raw_pages):
     header_height_list = []
     # 处理页眉
-    i = 0
     for raw_page in raw_pages:
         # 页眉高度阈值
         first_line_height = get_first_line_height(raw_page)
@@ -165,17 +169,18 @@ def possible_header_height(raw_pages):
     frequency, most_common_value = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
     if most_common_value is None:
         return 0
-    if frequency / len(header_height_list) > 0.5 and frequency > 1:
+    if frequency / len(header_height_list) >= 0.4 and frequency >= get_frequency_threshold():
         return most_common_value
     return 0
 
 
 # 获取首次出现大横线高度
 def get_first_line_height(page):
-    # todo asdf = page.sections[1][0].shapes[0].x0
     for stroke in page.shapes:
         if (isinstance(stroke, Stroke)
                 and is_header_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
+            global EXIST_HEADER_HORIZONTAL_LINE
+            EXIST_HEADER_HORIZONTAL_LINE = 1
             return stroke.y1
     return 0
 
