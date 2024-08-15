@@ -37,7 +37,7 @@ class FAQ_LLM_DomTree(DomTree):
             # 选择票数最多的结果
             return max(vote_res, key=vote_res.count)
 
-    def _is_faq(self, page_content: str, *, model="gpt-4", user: str = "") -> bool:
+    def _is_faq(self, page_content: str, *, model="gpt-4o", user: str = "") -> bool:
         prompt = self.__class__.PROMPT.format(page_content=page_content)
         max_retry = 5
         response = None
@@ -46,6 +46,7 @@ class FAQ_LLM_DomTree(DomTree):
                 response = openai.chat.completions.create(
                     messages=[{"role": "user", "content": prompt}],
                     temperature=0.001,
+                    top_p=0.01,
                     model=model,
                     user=user
                 )
