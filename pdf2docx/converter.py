@@ -332,7 +332,7 @@ class Converter:
 
         pages_extend = PagesExtend(self._pages)  # 页面扩展对象
         # pages_extend.mark_page_header()
-        pages_extend.mark_page_footer()
+        # pages_extend.mark_page_footer()
         pages_extend.relation_construct()
 
         debug_file = fitz.Document(self.filename_pdf) if settings['debug'] else None

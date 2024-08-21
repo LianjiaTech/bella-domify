@@ -54,8 +54,14 @@ class Line(Element):
         self.spans = Spans(parent=self).restore(raw.get('spans', []))
         self.tags = {}
 
-        # 是否页眉
-        self.is_header = 0
+        self.is_header = 0  # 是否页眉
+        self.is_footer = 0  # 是否页脚
+        self.is_catalog = 0  # 是否目录
+
+    @property
+    def is_useless(self):
+        '''非正文的，无用信息'''
+        return self.is_header or self.is_footer or self.is_catalog
 
     @property
     def text(self):

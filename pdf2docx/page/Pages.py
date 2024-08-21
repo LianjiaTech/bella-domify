@@ -12,8 +12,10 @@ from .RawPageFactory import RawPageFactory
 from ..common.Collection import BaseCollection
 from ..font.Fonts import Fonts
 from ..shape.Shape import Stroke
+from ..layout.Blocks import Blocks
 
-EXIST_HEADER_HORIZONTAL_LINE = 0
+EXIST_HEADER_HORIZONTAL_LINE = 0  # 存在页眉的水平线
+EXIST_FOOTER_HORIZONTAL_LINE = 0  # 存在页脚的水平线
 
 
 class Pages(BaseCollection):
@@ -90,36 +92,32 @@ class Pages(BaseCollection):
     @staticmethod
     def _parse_document(raw_pages: list, pages: list):
         '''Parse structure in document/pages level, e.g. header, footer'''
-        # 解析页眉
-        _parser_headers(raw_pages)
-        # 解析封面
-        _parser_cover(raw_pages, pages)
+
+        # 页眉页脚识别
+        identify_header(raw_pages)
+        identify_footer(raw_pages)
+        # 去除页眉页脚
+        for raw_page in raw_pages:
+            raw_page.blocks = Blocks(instances=[line for line in raw_page.blocks if not line.is_useless],
+                                     parent=raw_page)
+        #
+        # for raw_page in raw_pages:
+        #     for line in raw_page.blocks:
+        #         if not line.is_useless:
+
+        # 目录处理，在页眉页脚过滤后进行
+        identify_catalog(raw_pages)
+        # 去除目录
+        for raw_page in raw_pages:
+            raw_page.blocks = Blocks(instances=[line for line in raw_page.blocks if not line.is_useless],
+                                     parent=raw_page)
 
 
-def _parser_cover(raw_pages: list, pages: list):
-    """判断是否为封面
-    只解析第一页。判断为封面条件为：首先去掉图片，然后判断空白区域 > 50% 则为封面
+def identify_header(raw_pages: list):
     """
-    raw_text = ""
-    first_page_size = raw_pages[0].shapes.bbox.width * raw_pages[0].shapes.bbox.height
-    blank_size = first_page_size
-    for line in raw_pages[0].blocks:
-        # 不算页眉、footer、图片
-        if line.is_header or line.image_spans:
-            continue
-        # TODO 暂未考虑 line 重叠的情况
-        blank_size -= (line.bbox.width * line.bbox.height)
-        raw_text += line.raw_text
-    is_cover = first_page_size == 0.0 or blank_size / first_page_size > 0.5 and len(raw_text) < 200
-    if is_cover:
-        for line in raw_pages[0].blocks:
-            line.tags["Cover"] = 1
-        # TODO 暂时删除封面
-        raw_pages.pop(0)
-        pages.pop(0)
+    识别页眉
+    """
 
-
-def _parser_headers(raw_pages: list):
     # 页眉区
     header_height = possible_header_height(raw_pages) + 10
     # 收集页眉元素
@@ -147,7 +145,7 @@ def _parser_headers(raw_pages: list):
                     if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_header_frequency_threshold():
                 candidate_line.is_header = 1
         # 文字
         elif candidate_line.text:
@@ -158,7 +156,7 @@ def _parser_headers(raw_pages: list):
                             line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_header_frequency_threshold():
                 candidate_line.is_header = 1
 
     confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
@@ -178,9 +176,118 @@ def _parser_headers(raw_pages: list):
                     line.is_header = 1
 
 
-def get_frequency_threshold():
+def identify_footer(raw_pages: list):
+    """
+    识别页脚
+    """
+
+    # 页脚区
+    footer_height = (raw_pages[0].height * 9 / 10) - 10
+    # 收集页脚元素
+    all_footer_list = []
+
+    for i, page in enumerate(raw_pages):
+        page_footer_list = []
+        for line in page.blocks:
+            if line.bbox[1] != 0 and footer_height < line.bbox[1]:
+                page_footer_list.append(line)
+        all_footer_list.append(page_footer_list)
+
+    # 所有疑似页脚元素
+    possible_footer_list = []
+    for page_footer_list in all_footer_list:
+        possible_footer_list.extend(page_footer_list)
+
+    # 开始纵向对比，确定页脚元素
+    for candidate_line in possible_footer_list:
+        # 图片
+        if "<image>" in candidate_line.text:
+            include_cnt = 0
+            for page_footer_list in all_footer_list:
+                for line in page_footer_list:
+                    if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
+                        include_cnt += 1
+                        break
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_footer_frequency_threshold():
+                candidate_line.is_footer = 1
+        # 文字
+        elif candidate_line.text:
+            include_cnt = 0
+            for page_footer_list in all_footer_list:
+                for line in page_footer_list:
+                    if remove_number(candidate_line.text) == remove_number(line.text) and is_position_matching(
+                            line.bbox, candidate_line.bbox):
+                        include_cnt += 1
+                        break
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_footer_frequency_threshold():
+                candidate_line.is_footer = 1
+
+    confirmed_footer = [candidate_line for candidate_line in possible_footer_list if candidate_line.is_footer == 1]
+    if not confirmed_footer:  # 若没有识别到任何页脚元素
+        return
+
+    confirmed_footer_height = min([footer_line.bbox[1] for footer_line in confirmed_footer])
+
+    # 通过区域去除页脚
+    for i, page in enumerate(raw_pages):
+        for line in page.blocks:
+            # 页脚部分图片和文字处理相同，必须整个bbox处于页脚区
+            if confirmed_footer_height <= line.bbox[1]:
+                line.is_footer = 1
+                print(line.text)
+
+
+def identify_catalog(raw_pages: list):
+    """
+    目录识别
+
+    目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
+    """
+    pattern = r'(.)\1{9,}\d+'
+    catalog_found = False
+    potential_catalog_lines = []
+    search_range = max(5, len(raw_pages) // 3)
+
+    for page in raw_pages[:search_range]:
+        print()
+        for line in page.blocks:
+            text = line.text.strip().replace(' ', '')
+
+            if not catalog_found:
+                # 检查是否包含“目录”两个字
+                if "目录" in text or "目次" in text:  # 此判断不重要，此步骤是为了将目录体前面的一行也标记为目录（该行可能为"目 录"、"目次"、"􏰂􏰃"等特殊字符）
+                    catalog_found = True
+                    potential_catalog_lines = [line]
+            else:
+                # 检查是否匹配正则表达式
+                if re.search(pattern, text):
+                    potential_catalog_lines.append(line)
+                else:
+                    # 目录已找全
+                    if len(potential_catalog_lines) >= 4:  # 除目录行外至少有3行匹配
+                        for catalog_line in potential_catalog_lines:
+                            catalog_line.is_catalog = 1
+                            print(catalog_line.text)
+                        return
+                    # 并非真正目录，重置，继续寻找
+                    else:
+                        catalog_found = False
+                        potential_catalog_lines = []
+    else:
+        if len(potential_catalog_lines) >= 4:  # 除目录行外至少有3行匹配
+            for catalog_line in potential_catalog_lines:
+                catalog_line.is_catalog = 1
+                print(catalog_line.text)
+    return
+
+def get_header_frequency_threshold():
     global EXIST_HEADER_HORIZONTAL_LINE
     return 2 if EXIST_HEADER_HORIZONTAL_LINE else 3
+
+
+def get_footer_frequency_threshold():
+    global EXIST_FOOTER_HORIZONTAL_LINE
+    return 2 if EXIST_FOOTER_HORIZONTAL_LINE else 3
 
 
 # 页眉区划定
@@ -199,16 +306,51 @@ def possible_header_height(raw_pages):
     frequency, most_common_value = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
     if most_common_value is None:
         return 0
-    if frequency / len(header_height_list) >= 0.4 and frequency >= get_frequency_threshold():
+    if frequency / len(header_height_list) >= 0.4 and frequency >= get_header_frequency_threshold():
+        return most_common_value
+    return 0
+
+
+# 页脚区划定
+def possible_footer_height(raw_pages):
+    footer_height_list = []
+    # 处理页脚
+    for raw_page in raw_pages:
+        # 页脚高度阈值
+        last_line_height = get_last_line_height(raw_page)
+        if last_line_height:
+            footer_height_list.append(last_line_height)
+        else:
+            footer_height_list.append(raw_page.height * 9 / 10)
+
+    text_counter = Counter(footer_height_list)
+    frequency, most_common_value = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
+    if most_common_value is None:
+        return 0
+    if frequency / len(footer_height_list) >= 0.4 and frequency >= get_footer_frequency_threshold():
         return most_common_value
     return 0
 
 
 # 获取首次出现大横线高度
 def get_first_line_height(page):
+    height = 0
     for stroke in page.shapes:
         if (isinstance(stroke, Stroke)
-                and is_header_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
+                and is_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
+            global EXIST_FOOTER_HORIZONTAL_LINE
+            EXIST_FOOTER_HORIZONTAL_LINE = 1
+            height = stroke.y1
+        return height
+    else:
+        return 0
+
+
+# 获取末次出现大横线高度
+def get_last_line_height(page):
+    for stroke in page.shapes:
+        if (isinstance(stroke, Stroke)
+                and is_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
             global EXIST_HEADER_HORIZONTAL_LINE
             EXIST_HEADER_HORIZONTAL_LINE = 1
             return stroke.y1
@@ -216,7 +358,7 @@ def get_first_line_height(page):
 
 
 # 计算线段是否为页眉横线
-def is_header_horizontal_line(x0, y0, x1, y1, width):
+def is_horizontal_line(x0, y0, x1, y1, width):
     # 宽度大于页面的2/3，且线条粗细小于3
     if (width * 2 / 3) < x1 - x0 and y1 - y0 < 3:
         return True
