@@ -173,11 +173,11 @@ class RawPage(BasePage, Layout):
         elements = Collection()
         elements.extend(self.blocks)
         elements.extend(self.shapes)
-        if not elements: return
-
+        
         # 过滤页眉
         elements = Collection([item for item in elements if not (isinstance(item, Line) and item.is_header == 1)])
-
+        if not elements: return
+        
         # to create section with collected lines
         lines = Collection()
         sections = []

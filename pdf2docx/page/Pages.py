@@ -72,7 +72,7 @@ class Pages(BaseCollection):
         # NOTE: blocks structure might be changed in this step, e.g. promote page header/footer,
         # so blocks structure based process, e.g. calculating margin, parse section should be 
         # run after this step.
-        Pages._parse_document(raw_pages)
+        Pages._parse_document(raw_pages, pages)
 
         # ---------------------------------------------
         # 3. parse structure in page level, e.g. page margin, section
@@ -88,64 +88,92 @@ class Pages(BaseCollection):
             page.sections.extend(sections)
 
     @staticmethod
-    def _parse_document(raw_pages: list):
+    def _parse_document(raw_pages: list, pages: list):
         '''Parse structure in document/pages level, e.g. header, footer'''
-        # 页眉区
-        header_height = possible_header_height(raw_pages) + 10
-        # 收集页眉元素
-        all_header_list = []
+        # 解析页眉
+        _parser_headers(raw_pages)
+        # 解析封面
+        _parser_cover(raw_pages, pages)
 
-        for i, page in enumerate(raw_pages):
-            page_header_list = []
-            for line in page.blocks:
-                if line.bbox[3] != 0 and line.bbox[3] < header_height:
-                    page_header_list.append(line)
-            all_header_list.append(page_header_list)
 
-        # 所有疑似页眉元素
-        possible_header_list = []
-        for page_header_list in all_header_list:
-            possible_header_list.extend(page_header_list)
+def _parser_cover(raw_pages: list, pages: list):
+    """判断是否为封面
+    只解析第一页。判断为封面条件为：首先去掉图片，然后判断空白区域 > 50% 则为封面
+    """
+    first_page_size = raw_pages[0].width * raw_pages[0].height
+    blank_size = first_page_size
+    for line in raw_pages[0].blocks:
+        # 不算页眉、footer、图片
+        if line.is_header or line.image_spans:
+            continue
+        # TODO 暂未考虑 line 重叠的情况
+        blank_size -= (line.bbox.width * line.bbox.height)
+    is_cover = blank_size / first_page_size > 0.5
+    if is_cover:
+        for line in raw_pages[0].blocks:
+            line.tags["Cover"] = 1
+    # TODO 暂时删除封面
+    raw_pages.pop(0)
+    pages.pop(0)
 
-        # 开始纵向对比，确定页眉元素
-        for candidate_line in possible_header_list:
-            # 图片
-            if "<image>" in candidate_line.text:
-                include_cnt = 0
-                for page_header_list in all_header_list:
-                    for line in page_header_list:
-                        if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
-                            include_cnt += 1
-                            break
-                if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
-                    candidate_line.is_header = 1
-            # 文字
-            elif candidate_line.text:
-                include_cnt = 0
-                for page_header_list in all_header_list:
-                    for line in page_header_list:
-                        if remove_number(candidate_line.text) == remove_number(line.text) and is_position_matching(
-                                line.bbox, candidate_line.bbox):
-                            include_cnt += 1
-                            break
-                if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
-                    candidate_line.is_header = 1
 
-        confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
-        if not confirmed_header:  # 若没有识别到任何页眉元素
-            return
+def _parser_headers(raw_pages: list):
+    # 页眉区
+    header_height = possible_header_height(raw_pages) + 10
+    # 收集页眉元素
+    all_header_list = []
 
-        confirmed_header_height = max([header_line.bbox[3] for header_line in confirmed_header])
+    for i, page in enumerate(raw_pages):
+        page_header_list = []
+        for line in page.blocks:
+            if line.bbox[3] != 0 and line.bbox[3] < header_height:
+                page_header_list.append(line)
+        all_header_list.append(page_header_list)
 
-        # 通过区域去除页眉
-        for i, page in enumerate(raw_pages):
-            for line in page.blocks:
-                if "<image>" in line.text:
-                    if line.bbox[3] != 0 and line.bbox[1] <= confirmed_header_height:
-                        line.is_header = 1
-                else:
-                    if line.bbox[3] != 0 and line.bbox[3] <= confirmed_header_height:
-                        line.is_header = 1
+    # 所有疑似页眉元素
+    possible_header_list = []
+    for page_header_list in all_header_list:
+        possible_header_list.extend(page_header_list)
+
+    # 开始纵向对比，确定页眉元素
+    for candidate_line in possible_header_list:
+        # 图片
+        if "<image>" in candidate_line.text:
+            include_cnt = 0
+            for page_header_list in all_header_list:
+                for line in page_header_list:
+                    if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
+                        include_cnt += 1
+                        break
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
+                candidate_line.is_header = 1
+        # 文字
+        elif candidate_line.text:
+            include_cnt = 0
+            for page_header_list in all_header_list:
+                for line in page_header_list:
+                    if remove_number(candidate_line.text) == remove_number(line.text) and is_position_matching(
+                            line.bbox, candidate_line.bbox):
+                        include_cnt += 1
+                        break
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_frequency_threshold():
+                candidate_line.is_header = 1
+
+    confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
+    if not confirmed_header:  # 若没有识别到任何页眉元素
+        return
+
+    confirmed_header_height = max([header_line.bbox[3] for header_line in confirmed_header])
+
+    # 通过区域去除页眉
+    for i, page in enumerate(raw_pages):
+        for line in page.blocks:
+            if "<image>" in line.text:
+                if line.bbox[3] != 0 and line.bbox[1] <= confirmed_header_height:
+                    line.is_header = 1
+            else:
+                if line.bbox[3] != 0 and line.bbox[3] <= confirmed_header_height:
+                    line.is_header = 1
 
 
 def get_frequency_threshold():
