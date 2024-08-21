@@ -100,7 +100,8 @@ def _parser_cover(raw_pages: list, pages: list):
     """判断是否为封面
     只解析第一页。判断为封面条件为：首先去掉图片，然后判断空白区域 > 50% 则为封面
     """
-    first_page_size = raw_pages[0].width * raw_pages[0].height
+    raw_text = ""
+    first_page_size = raw_pages[0].shapes.bbox.width * raw_pages[0].shapes.bbox.height
     blank_size = first_page_size
     for line in raw_pages[0].blocks:
         # 不算页眉、footer、图片
@@ -108,13 +109,14 @@ def _parser_cover(raw_pages: list, pages: list):
             continue
         # TODO 暂未考虑 line 重叠的情况
         blank_size -= (line.bbox.width * line.bbox.height)
-    is_cover = blank_size / first_page_size > 0.5
+        raw_text += line.raw_text
+    is_cover = first_page_size == 0.0 or blank_size / first_page_size > 0.5 and len(raw_text) < 200
     if is_cover:
         for line in raw_pages[0].blocks:
             line.tags["Cover"] = 1
-    # TODO 暂时删除封面
-    raw_pages.pop(0)
-    pages.pop(0)
+        # TODO 暂时删除封面
+        raw_pages.pop(0)
+        pages.pop(0)
 
 
 def _parser_headers(raw_pages: list):
