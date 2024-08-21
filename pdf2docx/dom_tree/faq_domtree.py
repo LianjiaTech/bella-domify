@@ -1,4 +1,5 @@
 import concurrent.futures
+import copy
 import logging
 import time
 
@@ -133,7 +134,8 @@ class FAQ_LLM_DomTree(DomTree):
         text_blocks = []
         page_text_blocks = []
 
-        for (element, page, debug_page) in self.elements:
+        for (ele, page, debug_page) in self.elements:
+            element = copy.deepcopy(ele)
             if page != prev_page:
                 start_new_page = True
             else:
