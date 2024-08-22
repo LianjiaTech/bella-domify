@@ -15,7 +15,6 @@ from ..shape.Shape import Stroke
 from ..layout.Blocks import Blocks
 
 EXIST_HEADER_HORIZONTAL_LINE = 0  # 存在页眉的水平线
-EXIST_FOOTER_HORIZONTAL_LINE = 0  # 存在页脚的水平线
 
 
 class Pages(BaseCollection):
@@ -234,7 +233,7 @@ def identify_footer(raw_pages: list):
                     if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_footer_frequency_threshold():
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= 3:
                 candidate_line.is_footer = 1
         # 文字
         elif candidate_line.text:
@@ -245,7 +244,7 @@ def identify_footer(raw_pages: list):
                             line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_footer_frequency_threshold():
+            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= 3:
                 candidate_line.is_footer = 1
 
     confirmed_footer = [candidate_line for candidate_line in possible_footer_list if candidate_line.is_footer == 1]
@@ -265,11 +264,6 @@ def identify_footer(raw_pages: list):
 def get_header_frequency_threshold():
     global EXIST_HEADER_HORIZONTAL_LINE
     return 2 if EXIST_HEADER_HORIZONTAL_LINE else 3
-
-
-def get_footer_frequency_threshold():
-    global EXIST_FOOTER_HORIZONTAL_LINE
-    return 2 if EXIST_FOOTER_HORIZONTAL_LINE else 3
 
 
 # 页眉区划定
@@ -299,8 +293,8 @@ def get_first_line_height(page):
     for stroke in page.shapes:
         if (isinstance(stroke, Stroke)
                 and is_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
-            global EXIST_FOOTER_HORIZONTAL_LINE
-            EXIST_FOOTER_HORIZONTAL_LINE = 1
+            global EXIST_HEADER_HORIZONTAL_LINE
+            EXIST_HEADER_HORIZONTAL_LINE = 1
             height = stroke.y1
         return height
     else:
