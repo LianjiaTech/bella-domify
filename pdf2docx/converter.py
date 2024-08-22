@@ -344,7 +344,6 @@ class Converter:
             debug_file.save(kwargs['debug_file_name'])
         return dom_tree
 
-
     def extract_tables(self, start: int = 0, end: int = None, pages: list = None,
                        extract_table_with_cell_pos=False, **kwargs):
         '''Extract table contents from specified PDF pages.

@@ -53,6 +53,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.next_continuous_paragraph: Optional[TextBlockExtend] = None
         self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
         self.image_s3_link = None
+        self.is_catalog = 0
 
     @property
     def text(self):

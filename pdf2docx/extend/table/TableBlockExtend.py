@@ -51,6 +51,7 @@ class TableBlockExtend(RelationElement, BlockExtend):
         self._rows = RowsExtend(table_block._rows)
         self.next_continuous_table: Optional[TableBlockExtend] = None
         self.prev_continuous_table: Optional[TableBlockExtend] = None
+        self.is_catalog = 0
 
     @property
     def text(self):

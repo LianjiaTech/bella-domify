@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import concurrent.futures
+import logging
+import re
 from typing import List, Optional
 from typing import Union, Any
 
@@ -144,6 +146,60 @@ class DomTree:
                         else:
                             self.elements.append((block, page, None))
 
+    def parse_catalog(self):
+        """
+        目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
+        """
+        logging.info('parse_catalog [start]')
+
+        pattern = re.compile(r'(.)\1{9,}\d+')
+        catalog_lines = []
+        previous_line = None
+        search_range = len(self.elements) // 3
+
+        for block, page, debug_page in self.elements[:search_range]:
+            if type(block) != TextBlockExtend:
+                continue
+            text = block.text.strip().replace(' ', '')
+
+            if len(pattern.findall(text)) >= 3:  # 如果在一个block找到多次匹配，那么命中了包含多行目录体的block
+                block.is_catalog = 1
+                if is_catalog_title(previous_line):
+                    previous_line.is_catalog = 1
+                continue
+
+            if pattern.search(text):
+                catalog_lines.append(block)
+                if len(catalog_lines) == 3:
+                    # 检查前一个line是否是"目录"两个字
+                    if is_catalog_title(previous_line):
+                        catalog_lines.insert(0, previous_line)
+            else:
+                # 目录已找全
+                if len(catalog_lines) >= 3:
+                    for catalog_line in catalog_lines:
+                        if catalog_line:
+                            catalog_line.is_catalog = 1
+                    break
+                # 并非真正目录，重置，继续寻找
+                else:
+                    catalog_lines = []
+                    previous_line = block
+        else:
+            if len(catalog_lines) >= 3:
+                for catalog_line in catalog_lines:
+                    if catalog_line:
+                        catalog_line.is_catalog = 1
+
+        # todo 暂时去除目录
+        self.elements = [(block, page, debug_page)
+                         for block, page, debug_page in self.elements
+                         if type(block) != TextBlockExtend or not block.is_catalog]
+
+        logging.info('parser_catalog [finish]')
+
+        return
+
     def is_appropriate(self) -> bool:
         """
         当前DomTree解析是否适用于当前文档
@@ -168,12 +224,7 @@ class DomTree:
             texts.extend(self._get_text_block(child))
         return texts
 
-    def parse(self):
-        # 初始化
-        stack_path: List[Node] = [self.root]
-        prev_text_node: Optional[Node] = None
-        searched_block = set()
-
+    def add_image_s3_link(self):
         # 构建树结构件前，先把图片的s3链接附上
         tasks_to_process = []
         for (element, page, debug_page) in self.elements:
@@ -182,6 +233,19 @@ class DomTree:
         # 多进程获取S3链接
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
             executor.map(lambda text_block_extend: text_block_extend.get_image_s3_link(), tasks_to_process)
+
+    def parse(self):
+
+        # 先解析目录
+        self.parse_catalog()
+
+        # 初始化
+        stack_path: List[Node] = [self.root]
+        prev_text_node: Optional[Node] = None
+        searched_block = set()
+
+        # 添加图片s3链接
+        self.add_image_s3_link()
 
         # 遍历解析
         for (element, page, debug_page) in self.elements:
@@ -278,3 +342,10 @@ class DomTree:
             print("    " * level + cur_order_str, node.element.text)
         for i, child in enumerate(node.child, start=1):
             self._print_tree(child, level + 1, cur_order_str, i)
+
+
+def is_catalog_title(block):
+    """
+    目录标题判断
+    """
+    return block and ("目录" in block.text.strip().replace(' ', '') or "目次" in block.text.strip().replace(' ', ''))

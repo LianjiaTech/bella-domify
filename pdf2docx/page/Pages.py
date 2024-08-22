@@ -99,9 +99,6 @@ class Pages(BaseCollection):
         # 封面解析
         _parser_cover(raw_pages, pages)
 
-        # 目录解析
-        _parser_catalog(raw_pages)
-
 
 def _parser_cover(raw_pages: list, pages: list):
     """判断是否为封面
@@ -140,18 +137,6 @@ def _parser_header_and_footer(raw_pages: list):
             Blocks(instances=[line for line in raw_page.blocks if not line.is_useless], parent=raw_page)
 
     logging.info('parser_header_and_footer [finish]')
-
-
-def _parser_catalog(raw_pages: list):
-    logging.info('parser_catalog [start]')
-
-    identify_catalog(raw_pages)
-    # 去除目录
-    for raw_page in raw_pages:
-        raw_page.blocks = \
-            Blocks(instances=[line for line in raw_page.blocks if not line.is_useless], parent=raw_page)
-
-    logging.info('parser_catalog [finish]')
 
 
 def identify_header(raw_pages: list):
@@ -275,94 +260,6 @@ def identify_footer(raw_pages: list):
             # 页脚部分图片和文字处理相同，必须整个bbox处于页脚区
             if confirmed_footer_height <= line.bbox[1]:
                 line.is_footer = 1
-                print(line.text)
-
-
-def identify_catalog1(raw_pages: list):
-    """
-    目录识别
-
-    目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
-    """
-    pattern = r'(.)\1{9,}\d+'
-    catalog_found = False
-    potential_catalog_lines = []
-    search_range = max(5, len(raw_pages) // 3)
-
-    for page in raw_pages[:search_range]:
-        print()
-        for line in page.blocks:
-            text = line.text.strip().replace(' ', '')
-
-            if not catalog_found:
-                # 检查是否包含“目录”两个字
-                if "目录" in text or "目次" in text:  # 此判断不重要，此步骤是为了将目录体前面的一行也标记为目录（该行可能为"目 录"、"目次"、"􏰂􏰃"等特殊字符）
-                    catalog_found = True
-                    potential_catalog_lines = [line]
-            else:
-                # 检查是否匹配正则表达式
-                if re.search(pattern, text):
-                    potential_catalog_lines.append(line)
-                else:
-                    # 目录已找全
-                    if len(potential_catalog_lines) >= 4:  # 除目录行外至少有3行匹配
-                        for catalog_line in potential_catalog_lines:
-                            catalog_line.is_catalog = 1
-                            print(catalog_line.text)
-                        return
-                    # 并非真正目录，重置，继续寻找
-                    else:
-                        catalog_found = False
-                        potential_catalog_lines = []
-    else:
-        if len(potential_catalog_lines) >= 4:  # 除目录行外至少有3行匹配
-            for catalog_line in potential_catalog_lines:
-                catalog_line.is_catalog = 1
-                print(catalog_line.text)
-    return
-
-
-def identify_catalog(raw_pages: list):
-    """
-    目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
-    """
-    pattern = re.compile(r'(.)\1{9,}\d+')
-    catalog_lines = []
-    previous_line = None
-    search_range = max(5, len(raw_pages) // 3)
-
-    for page in raw_pages[:search_range]:
-        print()
-        for line in page.blocks:
-            text = line.text.strip().replace(' ', '')
-            if pattern.search(text):
-                catalog_lines.append(line)
-                if len(catalog_lines) == 3:
-                    # 检查前一个line是否是"目录"两个字
-                    if (previous_line and ("目录" in previous_line.text.strip().replace(' ', '')
-                                           or "目次" in previous_line.text.strip().replace(' ', ''))):
-                        catalog_lines.insert(0, previous_line)
-            else:
-                # 目录已找全
-                if len(catalog_lines) >= 3:
-                    for catalog_line in catalog_lines:
-                        if catalog_line:
-                            catalog_line.is_catalog = 1
-                            print(catalog_line.text)
-                    return
-                # 并非真正目录，重置，继续寻找
-                else:
-                    catalog_lines = []
-                    previous_line = line
-
-    # 如果目录在最后一页
-    if len(catalog_lines) >= 3:
-        for catalog_line in catalog_lines:
-            if catalog_line:
-                catalog_line.is_catalog = 1
-                print(catalog_line.text)
-
-    return
 
 
 def get_header_frequency_threshold():
