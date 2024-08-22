@@ -93,24 +93,53 @@ class Pages(BaseCollection):
     def _parse_document(raw_pages: list, pages: list):
         '''Parse structure in document/pages level, e.g. header, footer'''
 
-        # 页眉页脚识别
-        identify_header(raw_pages)
-        identify_footer(raw_pages)
-        # 去除页眉页脚
-        for raw_page in raw_pages:
-            raw_page.blocks = Blocks(instances=[line for line in raw_page.blocks if not line.is_useless],
-                                     parent=raw_page)
-        #
-        # for raw_page in raw_pages:
-        #     for line in raw_page.blocks:
-        #         if not line.is_useless:
+        # 页眉页脚解析
+        _parser_header_and_footer(raw_pages)
 
-        # 目录处理，在页眉页脚过滤后进行
-        identify_catalog(raw_pages)
-        # 去除目录
-        for raw_page in raw_pages:
-            raw_page.blocks = Blocks(instances=[line for line in raw_page.blocks if not line.is_useless],
-                                     parent=raw_page)
+        # 封面解析
+        _parser_cover(raw_pages, pages)
+
+        # 目录解析
+        _parser_catalog(raw_pages)
+
+
+def _parser_cover(raw_pages: list, pages: list):
+    """判断是否为封面
+    只解析第一页。判断为封面条件为：首先去掉图片，然后判断空白区域 > 50% 则为封面
+    """
+    raw_text = ""
+    first_page_size = raw_pages[0].shapes.bbox.width * raw_pages[0].shapes.bbox.height
+    blank_size = first_page_size
+    for line in raw_pages[0].blocks:
+        # 不算页眉、footer、图片
+        if line.is_header or line.image_spans:
+            continue
+        # TODO 暂未考虑 line 重叠的情况
+        blank_size -= (line.bbox.width * line.bbox.height)
+        raw_text += line.raw_text
+    is_cover = first_page_size == 0.0 or blank_size / first_page_size > 0.5 and len(raw_text) < 200
+    if is_cover:
+        for line in raw_pages[0].blocks:
+            line.tags["Cover"] = 1
+        # TODO 暂时删除封面
+        raw_pages.pop(0)
+        pages.pop(0)
+
+
+def _parser_header_and_footer(raw_pages: list):
+    identify_header(raw_pages)
+    identify_footer(raw_pages)
+    for raw_page in raw_pages:
+        raw_page.blocks = \
+            Blocks(instances=[line for line in raw_page.blocks if not line.is_useless], parent=raw_page)
+
+
+def _parser_catalog(raw_pages: list):
+    identify_catalog(raw_pages)
+    # 去除目录
+    for raw_page in raw_pages:
+        raw_page.blocks = \
+            Blocks(instances=[line for line in raw_page.blocks if not line.is_useless], parent=raw_page)
 
 
 def identify_header(raw_pages: list):
@@ -298,7 +327,8 @@ def identify_catalog(raw_pages: list):
                 catalog_lines.append(line)
                 if len(catalog_lines) == 3:
                     # 检查前一个line是否是"目录"两个字
-                    if previous_line and ("目录" in previous_line.text.strip().replace(' ', '') or "目次" in previous_line.text.strip().replace(' ', '')):
+                    if (previous_line and ("目录" in previous_line.text.strip().replace(' ', '')
+                                           or "目次" in previous_line.text.strip().replace(' ', ''))):
                         catalog_lines.insert(0, previous_line)
             else:
                 # 目录已找全
