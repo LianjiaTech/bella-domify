@@ -8,7 +8,7 @@ from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
 from pdf2docx.extend.text.LinesExtend import LinesExtend
 from pdf2docx.text.TextBlock import TextBlock
-import base64
+from server.task_executor import s3
 
 
 class TextBlockModel(BaseModel):
@@ -38,14 +38,8 @@ class TextBlockModel(BaseModel):
 
     @computed_field
     @property
-    def image_base64_str(self) -> Union[str, None]:
-        # if self.block_type == "image":
-        #     image_span = self._block.lines.image_spans[0]
-        #     bytes = image_span.image_span.image
-        #     return base64.b64encode(bytes).decode('utf-8')
-        return None
-
-
+    def image_s3_link(self) -> Union[str, None]:
+        return self._block.image_s3_link
 
 
 class TextBlockExtend(RelationElement, BlockExtend):
@@ -58,6 +52,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.bbox = text_block.bbox
         self.next_continuous_paragraph: Optional[TextBlockExtend] = None
         self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
+        self.image_s3_link = None
 
     @property
     def text(self):
@@ -80,6 +75,13 @@ class TextBlockExtend(RelationElement, BlockExtend):
     def is_table_block(self):
         return False
 
+    def get_image_s3_link(self):
+        if self.is_image_block:
+            image_span = self.lines.image_spans[0]
+            bytes = image_span.image_span.image
+            file_key = s3.upload_file(stream=bytes)
+            self.image_s3_link = s3.get_file_url(file_key)
+
     def add_ref_table(self, ref_table):
         self.ref_tables.append(ref_table)
 
@@ -96,7 +98,6 @@ class TextBlockExtend(RelationElement, BlockExtend):
         if not self.block.last_line_end_of_paragraph and not next_paragraph.block.first_line_start_of_paragraph:
             self.next_continuous_paragraph = next_paragraph
             next_paragraph.prev_continuous_paragraph = self
-
 
     def merge(self, next_paragraph: TextBlockExtend):
         '''Merge two paragraph blocks.'''

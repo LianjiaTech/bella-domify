@@ -1,5 +1,8 @@
 from __future__ import annotations
-from typing import List, Optional, Union, Any
+
+import concurrent.futures
+from typing import List, Optional
+from typing import Union, Any
 
 from pydantic import BaseModel, computed_field, PrivateAttr
 
@@ -170,6 +173,15 @@ class DomTree:
         stack_path: List[Node] = [self.root]
         prev_text_node: Optional[Node] = None
         searched_block = set()
+
+        # 构建树结构件前，先把图片的s3链接附上
+        tasks_to_process = []
+        for (element, page, debug_page) in self.elements:
+            if element.is_image_block:
+                tasks_to_process.append(element)
+        # 多进程获取S3链接
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+            executor.map(lambda text_block_extend: text_block_extend.get_image_s3_link(), tasks_to_process)
 
         # 遍历解析
         for (element, page, debug_page) in self.elements:
