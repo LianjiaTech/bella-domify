@@ -107,6 +107,8 @@ def _parser_cover(raw_pages: list, pages: list):
     """判断是否为封面
     只解析第一页。判断为封面条件为：首先去掉图片，然后判断空白区域 > 50% 则为封面
     """
+    logging.info('parser_cover [start]')
+
     raw_text = ""
     first_page_size = raw_pages[0].shapes.bbox.width * raw_pages[0].shapes.bbox.height
     blank_size = first_page_size
@@ -125,21 +127,31 @@ def _parser_cover(raw_pages: list, pages: list):
         raw_pages.pop(0)
         pages.pop(0)
 
+    logging.info('parser_cover [finish]')
+
 
 def _parser_header_and_footer(raw_pages: list):
+    logging.info('parser_header_and_footer [start]')
+
     identify_header(raw_pages)
     identify_footer(raw_pages)
     for raw_page in raw_pages:
         raw_page.blocks = \
             Blocks(instances=[line for line in raw_page.blocks if not line.is_useless], parent=raw_page)
 
+    logging.info('parser_header_and_footer [finish]')
+
 
 def _parser_catalog(raw_pages: list):
+    logging.info('parser_catalog [start]')
+
     identify_catalog(raw_pages)
     # 去除目录
     for raw_page in raw_pages:
         raw_page.blocks = \
             Blocks(instances=[line for line in raw_page.blocks if not line.is_useless], parent=raw_page)
+
+    logging.info('parser_catalog [finish]')
 
 
 def identify_header(raw_pages: list):
