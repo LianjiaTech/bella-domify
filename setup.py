@@ -15,10 +15,20 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.1.0'
-        # version = '0.1.1.0‘  页眉新方案上线
+        version = '0.1.2.0'
+
+        """
+        发包命令：
+        python setup.py bdist_wheel upload -r ke
+
+        版本说明：
+        version = '0.1.1.0‘  页眉新方案上线；
+        version = '0.1.2.0‘  目录、封面识别并去除；接口解析接口图片附带S3链接；
+        
+        """
 
     return version
+
 
 # Load README.md for long description
 def load_long_description(fname):
@@ -29,6 +39,7 @@ def load_long_description(fname):
         long_description = DESCRIPTION
 
     return long_description
+
 
 def load_requirements(fname):
     try:
