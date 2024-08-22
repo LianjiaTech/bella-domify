@@ -237,7 +237,7 @@ def identify_footer(raw_pages: list):
                 print(line.text)
 
 
-def identify_catalog(raw_pages: list):
+def identify_catalog1(raw_pages: list):
     """
     目录识别
 
@@ -280,6 +280,49 @@ def identify_catalog(raw_pages: list):
                 print(catalog_line.text)
     return
 
+
+def identify_catalog(raw_pages: list):
+    """
+    目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
+    """
+    pattern = re.compile(r'(.)\1{9,}\d+')
+    catalog_lines = []
+    previous_line = None
+    search_range = max(5, len(raw_pages) // 3)
+
+    for page in raw_pages[:search_range]:
+        print()
+        for line in page.blocks:
+            text = line.text.strip().replace(' ', '')
+            if pattern.search(text):
+                catalog_lines.append(line)
+                if len(catalog_lines) == 3:
+                    # 检查前一个line是否是"目录"两个字
+                    if previous_line and ("目录" in previous_line.text.strip().replace(' ', '') or "目次" in previous_line.text.strip().replace(' ', '')):
+                        catalog_lines.insert(0, previous_line)
+            else:
+                # 目录已找全
+                if len(catalog_lines) >= 3:
+                    for catalog_line in catalog_lines:
+                        if catalog_line:
+                            catalog_line.is_catalog = 1
+                            print(catalog_line.text)
+                    return
+                # 并非真正目录，重置，继续寻找
+                else:
+                    catalog_lines = []
+                    previous_line = line
+
+    # 如果目录在最后一页
+    if len(catalog_lines) >= 3:
+        for catalog_line in catalog_lines:
+            if catalog_line:
+                catalog_line.is_catalog = 1
+                print(catalog_line.text)
+
+    return
+
+
 def get_header_frequency_threshold():
     global EXIST_HEADER_HORIZONTAL_LINE
     return 2 if EXIST_HEADER_HORIZONTAL_LINE else 3
@@ -311,27 +354,6 @@ def possible_header_height(raw_pages):
     return 0
 
 
-# 页脚区划定
-def possible_footer_height(raw_pages):
-    footer_height_list = []
-    # 处理页脚
-    for raw_page in raw_pages:
-        # 页脚高度阈值
-        last_line_height = get_last_line_height(raw_page)
-        if last_line_height:
-            footer_height_list.append(last_line_height)
-        else:
-            footer_height_list.append(raw_page.height * 9 / 10)
-
-    text_counter = Counter(footer_height_list)
-    frequency, most_common_value = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
-    if most_common_value is None:
-        return 0
-    if frequency / len(footer_height_list) >= 0.4 and frequency >= get_footer_frequency_threshold():
-        return most_common_value
-    return 0
-
-
 # 获取首次出现大横线高度
 def get_first_line_height(page):
     height = 0
@@ -344,17 +366,6 @@ def get_first_line_height(page):
         return height
     else:
         return 0
-
-
-# 获取末次出现大横线高度
-def get_last_line_height(page):
-    for stroke in page.shapes:
-        if (isinstance(stroke, Stroke)
-                and is_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
-            global EXIST_HEADER_HORIZONTAL_LINE
-            EXIST_HEADER_HORIZONTAL_LINE = 1
-            return stroke.y1
-    return 0
 
 
 # 计算线段是否为页眉横线
