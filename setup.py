@@ -22,8 +22,8 @@ def get_version(fname):
         python setup.py bdist_wheel upload -r ke
 
         版本说明：
-        version = '0.1.1.0‘  页眉新方案上线；
-        version = '0.1.2.0‘  目录、封面识别并去除；接口解析接口图片附带S3链接；
+        version = '0.1.1.0‘  20240816   页眉新方案上线；
+        version = '0.1.2.0‘  20240822   目录、封面识别并去除；接口解析接口图片附带S3链接；
         
         """
 
