@@ -153,6 +153,7 @@ class DomTree:
         logging.info('parse_catalog [start]')
 
         pattern = re.compile(r'(.)\1{9,}\d+')
+        found_catalog = False
         catalog_lines = []
         previous_line = None
         search_range = len(self.elements) // 3
@@ -163,9 +164,10 @@ class DomTree:
             text = block.text.strip().replace(' ', '')
 
             if len(pattern.findall(text)) >= 3:  # 如果在一个block找到多次匹配，那么命中了包含多行目录体的block
-                block.is_catalog = 1
+                found_catalog = True
+                catalog_lines.append(block)
                 if is_catalog_title(previous_line):
-                    previous_line.is_catalog = 1
+                    catalog_lines.insert(0, previous_line)
                 continue
 
             if pattern.search(text):
@@ -176,26 +178,22 @@ class DomTree:
                         catalog_lines.insert(0, previous_line)
             else:
                 # 目录已找全
-                if len(catalog_lines) >= 3:
-                    for catalog_line in catalog_lines:
-                        if catalog_line:
-                            catalog_line.is_catalog = 1
+                if len(catalog_lines) >= 3 or found_catalog:
                     break
                 # 并非真正目录，重置，继续寻找
                 else:
                     catalog_lines = []
                     previous_line = block
-        else:
-            if len(catalog_lines) >= 3:
-                for catalog_line in catalog_lines:
-                    if catalog_line:
-                        catalog_line.is_catalog = 1
 
         # 目录识别结果打印
-        print("目录识别结果：")
-        for block, page, debug_page in self.elements[:search_range]:
-            if isinstance(block, TextBlockExtend) and block.is_catalog:
-                print(block.text)
+        if len(catalog_lines) >= 3 or found_catalog:
+            print("\n【识别目录结果】\n")
+            for catalog_line in catalog_lines:
+                if catalog_line:
+                    catalog_line.is_catalog = 1
+                    print(catalog_line.text)
+        else:
+            print("\n【未识别到目录】\n")
 
         # todo 暂时去除目录
         self.elements = [(block, page, debug_page)
@@ -328,8 +326,7 @@ class DomTree:
                 else:
                     stack_path.pop()
 
-        logging.info('-----------------------------------------')
-        logging.info('file parse finished. parse tree:')
+        print("\n【文件结构树】\n")
         self.print_tree()
 
     def union_bbox(self):

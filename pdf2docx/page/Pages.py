@@ -131,7 +131,7 @@ def _parser_cover(raw_pages: list, pages: list):
         raw_pages.pop(0)
         pages.pop(0)
 
-    print("是否存在封面：", "是" if is_cover else "否")
+    print("\n【识别封面结果】" + "存在" if is_cover else "不存在\n")
     logging.info('parser_cover [finish]')
 
 
@@ -195,11 +195,11 @@ def identify_header(raw_pages: list):
 
     confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
     if not confirmed_header:  # 若没有识别到任何页眉元素
-        print("未识别到页眉")
+        print("\n【未识别到页眉】\n")
         return
 
     confirmed_header_height = max([header_line.bbox[3] for header_line in confirmed_header])
-    print("页眉区域高度：", confirmed_header_height, "px (", round(raw_pages[0].height, 1), "px )")
+    print("\n【页眉区域高度】", confirmed_header_height, "px (", round(raw_pages[0].height, 1), "px )\n")
 
     # 通过区域去除页眉
     for i, page in enumerate(raw_pages):
@@ -260,12 +260,12 @@ def identify_footer(raw_pages: list):
 
     confirmed_footer = [candidate_line for candidate_line in possible_footer_list if candidate_line.is_footer == 1]
     if not confirmed_footer:  # 若没有识别到任何页脚元素
-        print("未识别到页脚")
+        print("\n【未识别到页脚】\n")
         return
 
     confirmed_footer_height = min([footer_line.bbox[1] for footer_line in confirmed_footer])
 
-    print("页脚区域高度：", confirmed_footer_height, "px (", round(raw_pages[0].height, 1), "px )")
+    print("\n【页脚区域高度】", confirmed_footer_height, "px (", round(raw_pages[0].height, 1), "px )\n")
 
     # 通过区域去除页脚
     for i, page in enumerate(raw_pages):
