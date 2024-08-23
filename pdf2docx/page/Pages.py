@@ -195,6 +195,7 @@ def identify_header(raw_pages: list):
 
     confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
     if not confirmed_header:  # 若没有识别到任何页眉元素
+        print("未识别到页眉")
         return
 
     confirmed_header_height = max([header_line.bbox[3] for header_line in confirmed_header])
@@ -259,6 +260,7 @@ def identify_footer(raw_pages: list):
 
     confirmed_footer = [candidate_line for candidate_line in possible_footer_list if candidate_line.is_footer == 1]
     if not confirmed_footer:  # 若没有识别到任何页脚元素
+        print("未识别到页脚")
         return
 
     confirmed_footer_height = min([footer_line.bbox[1] for footer_line in confirmed_footer])
