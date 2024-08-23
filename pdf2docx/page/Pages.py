@@ -110,12 +110,20 @@ def _parser_cover(raw_pages: list, pages: list):
     blank_size = first_page_size
     for line in raw_pages[0].blocks:
         # 不算页眉、footer、图片
-        if line.is_header or line.image_spans:
+        if line.is_useless or line.image_spans:
             continue
         # TODO 暂未考虑 line 重叠的情况
         blank_size -= (line.bbox.width * line.bbox.height)
         raw_text += line.raw_text
-    is_cover = first_page_size == 0.0 or blank_size / first_page_size > 0.5 and len(raw_text) < 200
+
+    is_cover = (len(raw_pages) >= 3  # 至少有 3 页
+                and len(raw_text) <= 200  # 文本长度小于 200
+                and (
+                        first_page_size == 0.0  # 去除页眉、页脚、图片后，第一页为空
+                        or blank_size / first_page_size > 0.5  # 空白区域 > 50%
+                )
+                )
+
     if is_cover:
         for line in raw_pages[0].blocks:
             line.tags["Cover"] = 1
@@ -123,6 +131,7 @@ def _parser_cover(raw_pages: list, pages: list):
         raw_pages.pop(0)
         pages.pop(0)
 
+    print("是否存在封面：", "是" if is_cover else "否")
     logging.info('parser_cover [finish]')
 
 
@@ -189,6 +198,7 @@ def identify_header(raw_pages: list):
         return
 
     confirmed_header_height = max([header_line.bbox[3] for header_line in confirmed_header])
+    print("页眉区域高度：", confirmed_header_height, "px (", round(raw_pages[0].height, 1), "px )")
 
     # 通过区域去除页眉
     for i, page in enumerate(raw_pages):
@@ -252,6 +262,8 @@ def identify_footer(raw_pages: list):
         return
 
     confirmed_footer_height = min([footer_line.bbox[1] for footer_line in confirmed_footer])
+
+    print("页脚区域高度：", confirmed_footer_height, "px (", round(raw_pages[0].height, 1), "px )")
 
     # 通过区域去除页脚
     for i, page in enumerate(raw_pages):

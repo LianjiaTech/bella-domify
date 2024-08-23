@@ -191,6 +191,12 @@ class DomTree:
                     if catalog_line:
                         catalog_line.is_catalog = 1
 
+        # 目录识别结果打印
+        print("目录识别结果：")
+        for block, page, debug_page in self.elements[:search_range]:
+            if isinstance(block, TextBlockExtend) and block.is_catalog:
+                print(block.text)
+
         # todo 暂时去除目录
         self.elements = [(block, page, debug_page)
                          for block, page, debug_page in self.elements
@@ -321,7 +327,9 @@ class DomTree:
                     break
                 else:
                     stack_path.pop()
-        print("parse finished")
+
+        logging.info('-----------------------------------------')
+        logging.info('file parse finished. parse tree:')
         self.print_tree()
 
     def union_bbox(self):
