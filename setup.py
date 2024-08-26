@@ -15,7 +15,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.3.0'
+        version = '0.1.3.1'
 
         """
         发包命令：
