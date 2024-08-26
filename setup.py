@@ -15,7 +15,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.3.1'
+        version = '0.1.3.2'
 
         """
         发包命令：
@@ -25,7 +25,8 @@ def get_version(fname):
         version = '0.1.1.0‘  20240816   页眉新方案上线；
         version = '0.1.2.0‘  20240822   目录、封面识别并去除；接口解析接口图片附带S3链接；
         version = '0.1.3.0‘  20240823   封面识别前提大于3页(含)
-        version = '0.1.3.1‘  20240826   读取config强校验去除
+        version = '0.1.3.1‘  20240826   parser日志输出优化
+        version = '0.1.3.2‘  20240826   读取config强校验去除
         
         """
 
