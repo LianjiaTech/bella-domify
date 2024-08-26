@@ -131,7 +131,7 @@ def _parser_cover(raw_pages: list, pages: list):
         raw_pages.pop(0)
         pages.pop(0)
 
-    print("\n【识别封面结果】" + "存在" if is_cover else "不存在\n")
+    print("\n【识别封面结果】" + "存在\n" if is_cover else "不存在\n")
     logging.info('parser_cover [finish]')
 
 
