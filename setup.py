@@ -8,6 +8,7 @@ from setuptools import find_packages, setup
 DESCRIPTION = 'Open source Python library converting pdf to docx.'
 EXCLUDE_FROM_PACKAGES = ["build", "dist", "test"]
 
+
 # read version number from version.txt, otherwise alpha version
 # Github CI can create version.txt dynamically.
 def get_version(fname):
@@ -79,5 +80,6 @@ setup(
     entry_points={
         "console_scripts": [
             "pdf2docx=pdf2docx.main:main"
-        ]},
+        ]
+    },
 )
