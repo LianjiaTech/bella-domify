@@ -217,8 +217,8 @@ def identify_footer(raw_pages: list):
     识别页脚
     """
 
-    # 页脚区
-    footer_height = (raw_pages[0].height * 9 / 10) - 10
+    # 页脚区: 页脚一般没有大横线、故召回时应该放大一些范围，这里取 20%
+    footer_height = (raw_pages[0].height * 8 / 10) - 10
     # 收集页脚元素
     all_footer_list = []
 
