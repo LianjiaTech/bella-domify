@@ -344,7 +344,13 @@ class DomTree:
             node.order_num_str = cur_order_str  # 记录其有效列表序号
             if node.debug_page:
                 node.plot()
-            print("    " * level + cur_order_str, node.element.text)
+            try:
+                # 尝试打印节点文本
+                print("    " * level + cur_order_str, node.element.text)
+            except UnicodeEncodeError:
+                print("\n【节点含特殊字符】" + cur_order_str)
+                print("    " * level + cur_order_str, "")
+
         for i, child in enumerate(node.child, start=1):
             self._print_tree(child, level + 1, cur_order_str, i)
 
