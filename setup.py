@@ -16,7 +16,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.3.5'
+        version = '0.1.3.6'
 
         """
         发包命令：
@@ -29,7 +29,7 @@ def get_version(fname):
         version = '0.1.3.1‘  20240826   parser日志输出优化
         version = '0.1.3.2‘  20240826   读取config强校验去除
         version = '0.1.3.4‘  20240829   修复特殊字符引起的解析结果打印异常;页脚阈值放宽;
-        version = '0.1.3.5‘  20240830   不常见字体兼容；
+        version = '0.1.3.6‘  20240830   不常见字体兼容；
         
         """
 

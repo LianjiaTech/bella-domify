@@ -30,6 +30,7 @@ this `link <https://pymupdf.readthedocs.io/en/latest/textpage.html>`_::
 '''
 
 import fitz
+import os
 from docx.shared import Pt, RGBColor
 from docx.oxml.ns import qn
 from .Char import Char
@@ -123,8 +124,10 @@ class TextSpan(Element):
         try:
             font = fitz.Font(font_name)
         except RuntimeError:
-            # print(f"警告: 无法找到名为 '{font_name}' 的内置字体，使用备用字体 'Helvetica'。")
-            font = fitz.Font('Helvetica')
+            # 'Arial.ttf'，路径为 'document_parse/resource/Arial.ttf'
+            font = fitz.Font(
+                fontfile=os.path.join(os.getcwd().split('document_parse')[0], 'document_parse', 'resource', 'Arial.ttf')
+            )
         new_length = font.text_length(self.text, fontsize=self.size)
         if new_length > self.bbox.width:
             self.size *= self.bbox.width / new_length
