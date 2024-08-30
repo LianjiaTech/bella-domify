@@ -120,7 +120,11 @@ class TextSpan(Element):
         self.font = font_name
 
         # compute text length under new font with that size
-        font = fitz.Font(font_name)
+        try:
+            font = fitz.Font(font_name)
+        except RuntimeError:
+            # print(f"警告: 无法找到名为 '{font_name}' 的内置字体，使用备用字体 'Helvetica'。")
+            font = fitz.Font('Helvetica')
         new_length = font.text_length(self.text, fontsize=self.size)
         if new_length > self.bbox.width:
             self.size *= self.bbox.width / new_length
