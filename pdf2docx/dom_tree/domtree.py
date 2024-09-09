@@ -142,6 +142,7 @@ class DomTree:
                         if block.block.is_header or block.block.is_footer:
                             continue
                         if debug_pages:
+                            block.page_num = [page.page.id]
                             self.elements.append((block, page, debug_pages[index]))
                         else:
                             self.elements.append((block, page, None))

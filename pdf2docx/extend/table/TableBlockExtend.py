@@ -25,11 +25,13 @@ class TableBlockModel(BaseModel):
     _block: TableBlockExtend = PrivateAttr()
     _order_num: str = PrivateAttr()
     block_type: str = "table"
+    page_num: List[int] = []
 
     def __init__(self, block, order_num:str):
         super().__init__()
         self._block = block
         self._order_num = order_num
+        self.page_num = block.page_num
 
     class Config:
         arbitrary_types_allowed = True

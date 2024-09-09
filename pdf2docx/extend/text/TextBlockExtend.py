@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Union, Optional
+from typing import List
 
 from pydantic import BaseModel, computed_field
 
@@ -27,6 +28,11 @@ class TextBlockModel(BaseModel):
         if self._block.is_image_block:
             return None
         return self._block.text
+
+    @computed_field
+    @property
+    def page_num(self) -> List[int]:
+        return self._block.page_num
 
     @computed_field
     @property
