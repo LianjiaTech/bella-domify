@@ -14,7 +14,8 @@ from ..font.Fonts import Fonts
 from ..shape.Shape import Stroke
 from ..layout.Blocks import Blocks
 
-EXIST_HEADER_HORIZONTAL_LINE = 0  # 存在页眉的水平线
+FREQUENCY_THRESHOLD_TIMES = 2       # 频次阈值
+FREQUENCY_THRESHOLD_RATE = 0.4      # 频率阈值 原因：某些文档单双页的页眉不同，所以该值要小于0.5
 
 
 class Pages(BaseCollection):
@@ -179,7 +180,7 @@ def identify_header(raw_pages: list):
                     if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_header_frequency_threshold():
+            if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
                 candidate_line.is_header = 1
         # 文字
         elif candidate_line.text:
@@ -190,7 +191,7 @@ def identify_header(raw_pages: list):
                             line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= get_header_frequency_threshold():
+            if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
                 candidate_line.is_header = 1
 
     confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
@@ -244,7 +245,7 @@ def identify_footer(raw_pages: list):
                     if "<image>" in line.text and is_position_matching(line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= 3:
+            if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
                 candidate_line.is_footer = 1
         # 文字
         elif candidate_line.text:
@@ -255,7 +256,7 @@ def identify_footer(raw_pages: list):
                             line.bbox, candidate_line.bbox):
                         include_cnt += 1
                         break
-            if include_cnt / len(raw_pages) >= 0.4 and include_cnt >= 3:
+            if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
                 candidate_line.is_footer = 1
 
     confirmed_footer = [candidate_line for candidate_line in possible_footer_list if candidate_line.is_footer == 1]
@@ -275,11 +276,6 @@ def identify_footer(raw_pages: list):
                 line.is_footer = 1
 
 
-def get_header_frequency_threshold():
-    global EXIST_HEADER_HORIZONTAL_LINE
-    return 2 if EXIST_HEADER_HORIZONTAL_LINE else 3
-
-
 # 页眉区划定
 def possible_header_height(raw_pages):
     header_height_list = []
@@ -296,7 +292,7 @@ def possible_header_height(raw_pages):
     frequency, most_common_value = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
     if most_common_value is None:
         return 0
-    if frequency / len(header_height_list) >= 0.4 and frequency >= get_header_frequency_threshold():
+    if frequency / len(header_height_list) >= FREQUENCY_THRESHOLD_RATE and frequency >= FREQUENCY_THRESHOLD_TIMES:
         return most_common_value
     return 0
 
@@ -307,8 +303,6 @@ def get_first_line_height(page):
     for stroke in page.shapes:
         if (isinstance(stroke, Stroke)
                 and is_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
-            global EXIST_HEADER_HORIZONTAL_LINE
-            EXIST_HEADER_HORIZONTAL_LINE = 1
             height = stroke.y1
         return height
     else:
