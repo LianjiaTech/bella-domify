@@ -8,11 +8,23 @@
 #    @Description   : 
 #
 # ===============================================================
+import concurrent.futures
+import re
 from collections import Counter
 
-from pdf2docx.extend.page.PagesExtend import remove_number
 from services.constants import TEXT, IMAGE
-import concurrent.futures
+
+
+def remove_number(text):
+    if text is None:
+        return None
+    # 在页眉，页脚，经常出现次序编号，首先将这些编号去掉,通过剩余文本的相似度，分析是否是页眉页脚
+    chinese_number = r'[(一|二|三|四|五|六|七|八|九|十)万]?[(一|二|三|四|五|六|七|八|九)千]?[(一|二|三|四|五|六|七|八|九)百]?[(一|二|三|四|五|六|七|八|九)十]?[(一|二|三|四|五|六|七|八|九)]?'
+    # 使用正则表达式，替换符合pattern中的字符为空
+    text = re.sub(chinese_number, '', text)
+    # 替换所有的数字为空
+    text = re.sub(r'\d+', '', text)
+    return text.strip()
 
 
 def _possible_holder_blocks(page_list, header: bool = True):

@@ -9,14 +9,12 @@ from typing import AnyStr, IO, Union
 import fitz
 from docx import Document
 
+from .config import DEFAULT_SETTINGS
 from .dom_tree.domtree import DomTree
 from .dom_tree.faq_domtree import FAQ_LLM_DomTree
 from .extend.page.PagesExtend import PagesExtend
-from .extend.text.LineExtend import LineExtend
 from .page.Page import Page
 from .page.Pages import Pages
-from .extend.table.TableBlockExtend import TableBlockExtend
-from .config import DEFAULT_SETTINGS
 
 # check PyMuPDF>=1.19.x
 if list(map(int, fitz.VersionBind.split("."))) < [1, 19, 0]:
@@ -331,8 +329,6 @@ class Converter:
         self.parse(start, end, pages, **settings)
 
         pages_extend = PagesExtend(self._pages)  # 页面扩展对象
-        # pages_extend.mark_page_header()
-        # pages_extend.mark_page_footer()
         pages_extend.relation_construct()
 
         debug_file = fitz.Document(self.filename_pdf) if settings['debug'] else None
