@@ -71,6 +71,10 @@ class Converter:
     def pages(self):
         return self._pages
 
+    @property
+    def pages_extend(self):
+        return self._pages_extend
+
     def close(self):
         self._fitz_doc.close()
 
@@ -97,7 +101,8 @@ class Converter:
         '''
         self.load_pages(start, end, pages, **kwargs) \
             .parse_document(**kwargs) \
-            .parse_pages(**kwargs)
+            .parse_pages(**kwargs) \
+            .relation_construct(**kwargs)
         return self
 
     def load_pages(self, start: int = 0, end: int = None, pages: list = None, **kwargs):
@@ -157,6 +162,13 @@ class Converter:
                 else:
                     raise ConversionException(f'Error when parsing page {pid}: {e}')
 
+        return self
+
+    def relation_construct(self, **kwargs):
+        logging.info(self._color_output('[4/4] build elements relations...'))
+        # 页面扩展对象
+        self._pages_extend = PagesExtend(self._pages)
+        self.pages_extend.relation_construct()
         return self
 
     def make_docx(self, docx_filename=None, **kwargs):
@@ -328,13 +340,11 @@ class Converter:
         settings.update(kwargs)
         self.parse(start, end, pages, **settings)
 
-        pages_extend = PagesExtend(self._pages)  # 页面扩展对象
-        pages_extend.relation_construct()
-
         debug_file = fitz.Document(self.filename_pdf) if settings['debug'] else None
         # 筛选出最合适最合适的dom_tree
-        dom_trees = [FAQ_LLM_DomTree(pages_extend, debug_file), DomTree(pages_extend, debug_file)]
-        dom_tree = max((dom_tree_i for dom_tree_i in dom_trees if dom_tree_i.is_appropriate()), key=lambda x: x.priority)
+        dom_trees = [FAQ_LLM_DomTree(self.pages_extend, debug_file), DomTree(self.pages_extend, debug_file)]
+        dom_tree = max((dom_tree_i for dom_tree_i in dom_trees if dom_tree_i.is_appropriate()),
+                       key=lambda x: x.priority)
         dom_tree.parse()  # 开始解析
         if settings['debug'] and debug_file:
             debug_file.save(kwargs['debug_file_name'])
