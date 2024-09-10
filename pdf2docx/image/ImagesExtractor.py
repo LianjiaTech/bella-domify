@@ -12,6 +12,7 @@ Both raster images and vector graphics are considered:
 
 import logging
 import fitz
+import numpy as np
 from ..common.Collection import Collection
 from ..common.share import BlockType
 from ..common.algorithm import (recursive_xy_cut, inner_contours, xy_project_profile)
@@ -121,6 +122,17 @@ class ImagesExtractor:
         fun = lambda a, b: a[0].intersects(b[0])
         groups = ic.group(fun)
 
+        def process_image(image):
+            if image.colorspace.n == 2:  # 2 for grayscale + alpha
+                # 提取第一个通道（灰度通道）
+                img_array = np.frombuffer(image.samples, dtype=np.uint8).reshape(image.height, image.width, 2)
+                gray_image = img_array[:, :, 0]
+                # 创建一个新的 Pixmap 对象，只包含灰度通道
+                image = fitz.Pixmap(fitz.csGRAY, gray_image.tobytes(), image.width, image.height)
+            if image.colorspace.n not in (1, 3):  # 1 for grayscale, 3 for RGB
+                image = fitz.Pixmap(fitz.csRGB, image)  # Convert to RGB
+            return image
+
         # step 3: check each group
         images = []
         for group in groups:
@@ -145,7 +157,12 @@ class ImagesExtractor:
                 
                 # rotate image with opencv if page is rotated
                 else:
-                    raw_dict = self._to_raw_dict(pix, bbox)
+                    try:
+                        raw_dict = self._to_raw_dict(process_image(pix), bbox)
+                    except RuntimeError as e:
+                        print(f"Error processing image: {e}")
+                        continue  # 跳过无法处理的图像
+
                     if rotation: 
                         raw_dict['image'] = self._rotate_image(pix, -rotation)
 

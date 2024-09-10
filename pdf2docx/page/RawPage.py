@@ -296,7 +296,8 @@ class RawPage(BasePage, Layout):
         return two_column_layout_divide_pos
 
     def try_regroup_two_columns(self, two_column_divide_pos: set[(float, float)], row, pre_num_col):
-        row = sorted(row, key=lambda element: element.bbox[0])
+        row_line = [i for i in row if isinstance(i, Line)]
+        row = sorted(row_line, key=lambda element: element.bbox[0])
         find_two_column = False
         for pos in two_column_divide_pos:
             if find_two_column:

@@ -111,7 +111,7 @@ def _parser_cover(raw_pages: list, pages: list):
     blank_size = first_page_size
     for line in raw_pages[0].blocks:
         # 不算页眉、footer、图片
-        if line.is_useless or line.image_spans:
+        if line.is_header or line.is_footer or line.image_spans:
             continue
         # TODO 暂未考虑 line 重叠的情况
         blank_size -= (line.bbox.width * line.bbox.height)
@@ -143,7 +143,7 @@ def _parser_header_and_footer(raw_pages: list):
     identify_footer(raw_pages)
     for raw_page in raw_pages:
         raw_page.blocks = \
-            Blocks(instances=[line for line in raw_page.blocks if not line.is_useless], parent=raw_page)
+            Blocks(instances=[line for line in raw_page.blocks if (not line.is_header and not line.is_footer)], parent=raw_page)
 
     logging.info('parser_header_and_footer [finish]')
 
