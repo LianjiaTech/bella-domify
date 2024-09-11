@@ -656,7 +656,7 @@ def cal_accuracy(confusion_matrix):
     # 计算总的准确率
     overall_accuracy = total_correct / total_elements
 
-    logger.info(f"版面元素准确率:\t\t{overall_accuracy:.2f}  ({total_correct:.1f} / {total_elements:.0f})")
+    logger.info(f"版面元素准确率：\t\t{overall_accuracy:.2f}  ({total_correct:.1f} / {total_elements:.0f})")
 
 
 def generate_report():
@@ -671,7 +671,7 @@ def generate_report():
 
 
 def main():
-    # beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
+    beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
     generate_report()
 
 
