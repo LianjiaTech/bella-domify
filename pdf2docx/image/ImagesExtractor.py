@@ -122,17 +122,6 @@ class ImagesExtractor:
         fun = lambda a, b: a[0].intersects(b[0])
         groups = ic.group(fun)
 
-        def process_image(image):
-            if image.colorspace.n == 2:  # 2 for grayscale + alpha
-                # 提取第一个通道（灰度通道）
-                img_array = np.frombuffer(image.samples, dtype=np.uint8).reshape(image.height, image.width, 2)
-                gray_image = img_array[:, :, 0]
-                # 创建一个新的 Pixmap 对象，只包含灰度通道
-                image = fitz.Pixmap(fitz.csGRAY, gray_image.tobytes(), image.width, image.height)
-            if image.colorspace.n not in (1, 3):  # 1 for grayscale, 3 for RGB
-                image = fitz.Pixmap(fitz.csRGB, image)  # Convert to RGB
-            return image
-
         # step 3: check each group
         images = []
         for group in groups:
@@ -158,7 +147,7 @@ class ImagesExtractor:
                 # rotate image with opencv if page is rotated
                 else:
                     try:
-                        raw_dict = self._to_raw_dict(process_image(pix), bbox)
+                        raw_dict = self._to_raw_dict(pix, bbox)
                     except RuntimeError as e:
                         print(f"Error processing image: {e}")
                         continue  # 跳过无法处理的图像
@@ -355,8 +344,14 @@ class ImagesExtractor:
         # we may need to adjust something for CMYK pixmaps here -> 
         # recreate pixmap in RGB color space if necessary
         # NOTE: pix.colorspace may be None for images with alpha channel values only
-        if pix.colorspace and not pix.colorspace.name in (fitz.csGRAY.name, fitz.csRGB.name):
-            pix = fitz.Pixmap(fitz.csRGB, pix)
+        # 原代码如下，目的是将异常的颜色空间进行转化，此处常规的也转化一下保证对象后续的tobytes()方法能正确调用
+        # if pix.colorspace and not pix.colorspace.name in (fitz.csGRAY.name, fitz.csRGB.name):
+        #     pix = fitz.Pixmap(fitz.csRGB, pix)
+        if pix.colorspace:
+            if pix.colorspace.name == fitz.csGRAY.name:
+                pix = fitz.Pixmap(fitz.csGRAY, pix)
+            else:
+                pix = fitz.Pixmap(fitz.csRGB, pix)
 
         return pix
 
