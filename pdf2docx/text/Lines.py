@@ -151,7 +151,7 @@ class Lines(ElementCollection):
 
             # end of a sentense and free space at the end -> end of paragraph
             # 这里在判断是否句子结束，并且后面有个空白区
-            elif end_of_sen and w / W <= 1.0 - line_break_free_space_ratio:
+            elif w / W <= 1.0 - line_break_free_space_ratio:
                 end_of_para = True
 
             # 如果是段落首句，将之前缓存的lines放入结果res，然后将当前row放入缓存lines
