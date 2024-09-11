@@ -60,6 +60,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
         self.image_s3_link = None
         self.is_catalog = 0
+        self.page_num = 0  # -1:无页码
 
     @property
     def text(self):
