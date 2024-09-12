@@ -413,7 +413,7 @@ def find_mapping(logger_block, parser_nodes_ori, label_nodes_ori):
     for item in label_nodes_badcase:
         order_num_str = item["order_num"]
         text_str = item["text"]
-        logger_block.info(f"------------------------\norder_num:{order_num_str}")
+        logger_block.info(f"------------------------\norder_num: {order_num_str}")
         logger_block.info(f"{text_str}\n\n")
 
     if len(mapping) != len(edit_dist_all_nodes):
