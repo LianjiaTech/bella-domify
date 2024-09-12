@@ -18,6 +18,7 @@ from statistics import mean
 import pandas as pd
 import logging
 import datetime
+import parse_output as beike_parse_output
 
 
 def log_setting(log_file=""):
@@ -664,7 +665,7 @@ def generate_report():
 
 
 def main():
-    # beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
+    beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
     generate_report()
 
 
