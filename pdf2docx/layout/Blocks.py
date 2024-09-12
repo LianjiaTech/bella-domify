@@ -5,6 +5,9 @@ and a combination of ``Line`` and ``TableBlock`` during parsing process.
 '''
 
 import logging
+import re
+from collections import Counter
+
 from docx.shared import Pt
 from ..common import constants
 from ..common.Collection import ElementCollection
@@ -454,13 +457,21 @@ class Blocks(ElementCollection):
             return max(distances, key=distances.count) if distances else 0.0
         
         def is_retraction(block, left_x):
-            """判断是否是缩进的文本块。判断 block 左边界是不是大于 Page 左边界的 1.5 个字符宽度
+            """判断是否是缩进的文本块。判断 block 左边界是不是大于 Column 左边界的 1.5 个字符宽度
             
             .. note::
                 left_x: Page 的文本的左边界
             """
             return (block.bbox[0] - left_x) > 1.5 * (block.bbox[2] - block.bbox[0]) / len(block.text)
-
+        
+        def is_center_aligned(block, left_x, right_x):
+            """判断是否是居中对齐的文本块。判断 block 左右边界是否在 Column 的中间
+            1. 文本只有最长的 90%
+            2. 文本中心与 Column 中心的距离小于 5
+            """
+            return right_x > 0 and (block.bbox[2] - block.bbox[0]) / (right_x - left_x + 1e-6) < 0.9 and \
+                abs((block.bbox[2] + block.bbox[0]) - (right_x + left_x)) < 5
+        
         # create text block based on lines
         blocks = [] # type: list[TextBlock | TableBlock]
         lines = []  # type: list[Line]
@@ -475,11 +486,12 @@ class Blocks(ElementCollection):
         # 计算文本行完整的左边界
         text_blocks = [block for block in self._instances if not isinstance(block, TableBlock)]
         if text_blocks:
-            text_left_x = min([block.bbox[0] for block in text_blocks])
+            text_left_x = Counter([int(block.bbox[0]) for block in text_blocks]).most_common(1)[0][0]
+            text_right_x = Counter([int(block.bbox[2]) for block in text_blocks]).most_common(1)[0][0]
             has_retraction = any([is_retraction(b, text_left_x) for b in text_blocks])
         else:
             has_retraction = False
-            text_left_x = 0
+            text_left_x, text_right_x = 0, 0
         
         # check line by line
         ref_dis = common_vertical_spacing()
@@ -493,6 +505,10 @@ class Blocks(ElementCollection):
             # check two adjacent text lines
             else:
                 ref_line = lines[-1] if lines else None
+                
+                vec_dis = vertical_distance(ref_line, block) if ref_line else None
+                pre_vec_dis = vertical_distance(lines[-2], ref_line) if len(lines) > 1 else None
+                
                 # first line or in same row with previous line: needn't to create new text block
                 if not ref_line or ref_line.in_same_row(block):
                     start_new_block = False
@@ -502,16 +518,22 @@ class Blocks(ElementCollection):
                 # 判断是否是有序列表or无序列表开头
                 elif block.order_list or block.unorder_list:
                     start_new_block = True
+                # 前一句结尾未结束标点
+                elif re.match(r".*[,，'‘“;；:：、·\-\[{\(（【《<]$", ref_line.text):
+                    start_new_block = False
+                # 居中文本与非居中文本切分到不同 block
+                elif is_center_aligned(block, text_left_x, text_right_x) != \
+                        is_center_aligned(ref_line, text_left_x, text_right_x):
+                    start_new_block = True
                 # 如果有缩进的，优先用段落合并逻辑
                 elif has_retraction:
                     start_new_block = is_retraction(block, text_left_x)
+                elif pre_vec_dis is not None and abs(vec_dis - pre_vec_dis) < 2:
+                    start_new_block = False
                 # lower than common line spacing: needn't to create new text block
                 elif vertical_distance(ref_line, block) <= ref_dis + 1.0:
                     start_new_block = False
-                elif len(lines) > 1 and vertical_distance(ref_line, block) == vertical_distance(ref_line, lines[-2]):
-                    start_new_block = False
                 else:
-                    # TODO 单行成段的情况需要考虑
                     start_new_block = True
                 
                 if start_new_block:

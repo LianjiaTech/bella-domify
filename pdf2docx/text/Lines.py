@@ -147,7 +147,7 @@ class Lines(ElementCollection):
                         bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
                 # 2 当前行的字体和字号与上一行不同时，判断为段首
                 # when font or font size changes, it's a new sentence, and a new paragraph
-                if prev_font_bold and prev_font_size and cur_font_bold and cur_font_size:
+                if prev_font_size and cur_font_size:
                     if abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
                         start_of_para = True
 
