@@ -100,7 +100,8 @@ class Lines(ElementCollection):
             spans.extend(line.image_spans)
         return spans
 
-    def split_vertically_by_text(self, line_break_free_space_ratio: float, new_paragraph_free_space_ratio: float):
+    def split_vertically_by_text(self, line_break_free_space_ratio: float, new_paragraph_free_space_ratio: float,
+                                 text_left_x: float, text_right_x: float):
         '''Split lines into separate paragraph by checking text. The parent text block consists of 
         lines with similar line spacing, while lines in other paragraph might be counted when the
         paragraph spacing is relatively small. So, it's necessary to split those lines by checking
@@ -109,86 +110,67 @@ class Lines(ElementCollection):
         .. note::
             Considered only normal reading direction, from left to right, from top
             to bottom.
+        
+        .. return::
+            [[block, is_start_of_para, is_end_of_para], ...]
         '''
         rows = self.group_by_physical_rows()
-
         # skip if only one row
-        num = len(rows)
-        if num == 1:
+        if len(rows) == 1:
             return [[rows[0], False, False]]
-
-        # standard row width with first row excluded, considering potential indentation of fist line
-        W = max(row[-1].bbox[2] - row[0].bbox[0] for row in rows[1:])  # 整行宽度
-        H = sum(row[0].bbox[3] - row[0].bbox[1] for row in rows) / num  # 最大行高
 
         # check row by row
         res = []
         lines = Lines()
-        punc = tuple(constants.SENTENCE_END_PUNC)
-        start_of_para = end_of_para = False  # start/end of paragraph
-        start_of_sen = end_of_sen = False  # start/end of sentence
-        prev_font, prev_font_size, prev_font_bold = None, None, False
-        first_line_start_of_paragraph, last_line_end_of_paragraph = False, False
+        start_of_para, end_of_para = False, False  # start/end of paragraph
+        prev_row = None
+
         for row in rows:
-            # mulite lines in a row should be in line order
+            # multi lines in a row should be in line order
             row.sort_in_line_order()
-            cur_font, cur_font_size, cur_font_bold = None, None, False
-            if row and row[-1].spans:
-                last_span = row[-1].spans[-1]
-                if isinstance(last_span, TextSpan):
-                    cur_font, cur_font_size, cur_font_bold = last_span.font, last_span.size, bool(last_span.flags & 2 ** 4) or last_span.pseudo_bold
-            # when font or font size changes, it's a new sentence, and a new paragraph
-            if prev_font and prev_font_size and cur_font and cur_font_size:
-                if abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
-                    start_of_sen = start_of_para = True
-            end_of_sen = row[-1].text.strip().endswith(punc)  # 句子是否结束（结尾是否为结束标点）
-            w = row[-1].bbox[2] - row[0].bbox[0]  # 当前行的总宽度
 
-            # start of sentence and free space at the start -> start of paragraph
-            # 这里在判断当前行的最前面是否有个缩进
-            if start_of_sen and (W - w) / H >= new_paragraph_free_space_ratio:
+            # 1 首行缩进则判断为段首
+            word_w = (row[0].bbox[2] - row[0].bbox[0]) / len(row[0].text)
+            if row and row[0] and row[0].bbox[0] - text_left_x > (word_w * 1.2):
                 start_of_para = True
+            elif prev_row:
+                # 获取上一行的字体、字号、粗体信息
+                prev_font, prev_font_size, prev_font_bold = None, None, False
+                if prev_row[-1].spans and isinstance((prev_last_span := prev_row[-1].spans[-1]), TextSpan):
+                    prev_font, prev_font_size, prev_font_bold = prev_last_span.font, prev_last_span.size, \
+                        bool(prev_last_span.flags & 2 ** 4) or prev_last_span.pseudo_bold
+                # 获取当前行的字体、字号、粗体信息
+                cur_font, cur_font_size, cur_font_bold = None, None, False
+                if row and row[-1].spans and isinstance((first_span := row[-1].spans[0]), TextSpan):
+                    cur_font, cur_font_size, cur_font_bold = first_span.font, first_span.size, \
+                        bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
+                # 2 当前行的字体和字号与上一行不同时，判断为段首
+                # when font or font size changes, it's a new sentence, and a new paragraph
+                if prev_font_bold and prev_font_size and cur_font_bold and cur_font_size:
+                    if abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
+                        start_of_para = True
 
-            # end of a sentense and free space at the end -> end of paragraph
-            # 这里在判断是否句子结束，并且后面有个空白区
-            elif w / W <= 1.0 - line_break_free_space_ratio:
+            if text_right_x - row[-1].bbox[2] > 2 * word_w:
                 end_of_para = True
 
             # 如果是段落首句，将之前缓存的lines放入结果res，然后将当前row放入缓存lines
             if start_of_para:
                 if lines:
-                    res.append((lines, first_line_start_of_paragraph, last_line_end_of_paragraph))
-                first_line_start_of_paragraph, last_line_end_of_paragraph = True, False
+                    res.append((lines, start_of_para, end_of_para))
                 lines = Lines()
-                lines.extend(row)
+            lines.extend(row)
             # 如果是段落尾句，将之前缓存的lines放入结果res，清空缓存lines
-            elif end_of_para:
-                lines.extend(row)
-                last_line_end_of_paragraph = True
-                res.append((lines, first_line_start_of_paragraph, last_line_end_of_paragraph))
-                first_line_start_of_paragraph, last_line_end_of_paragraph = False, False
+            if end_of_para:
+                res.append((lines, start_of_para, end_of_para))
                 lines = Lines()
-            # 如果都不是，则将当前row继续放入缓存lines
-            else:
-                lines.extend(row)
-
             # for next round
-            start_of_sen = end_of_sen
             start_of_para = end_of_para = False
-            prev_font, prev_font_size, prev_font_bold = cur_font, cur_font_size, cur_font_bold
+            prev_row = row
 
         # close the action
-        if lines: res.append((lines,first_line_start_of_paragraph, last_line_end_of_paragraph))
-
+        if lines:
+            res.append((lines, start_of_para, end_of_para))
         return res
-
-    # def is_end_of_paragraph_line(self, line:Line, **settings):
-    #     punc = tuple(constants.SENTENCE_END_PUNC)
-    #     end_of_sen = line.text.strip().endswith(punc)
-    #     settings['line_break_free_space_ratio'],
-    #     settings['new_paragraph_free_space_ratio']
-    #     return end_of_sen and w / W <= 1.0 - line_break_free_space_ratio:
-    #             end_of_para = True
 
     def adjust_last_word(self, delete_end_line_hyphen: bool):
         '''Adjust word at the end of line:

@@ -422,12 +422,12 @@ class Blocks(ElementCollection):
         else:
             blocks.append(block)
 
-
-    def _join_lines_vertically(self, max_line_spacing_ratio:float):
+    def _join_lines_vertically(self, max_line_spacing_ratio: float):
         '''Create text blocks by merge lines with same properties (spacing, font, size) in 
         vertical direction. At this moment, the block instance is either Line or TableBlock.
         '''
         idx0, idx1 = (1, 3) if self.is_horizontal_text else (0, 2)
+        
         def get_v_bdy(block):
             '''Coordinates of block top and bottom boundaries.'''
             bbox = block.bbox
@@ -438,16 +438,8 @@ class Blocks(ElementCollection):
             u0, u1 = get_v_bdy(block1)
             v0, v1 = get_v_bdy(block2)
             return round(v0-u1, 2)
-        
-        def line_height(line:Line):
-            '''The height of line span with most characters.'''
-            '''计算最大行高'''
-            span = max(line.spans, key=lambda s: len(s.text))
-            h = span.bbox.height if line.is_horizontal_text else span.bbox.width
-            return round(h, 2)
 
         def common_vertical_spacing():
-            '''返回行间距（出现频率最多的）'''
             '''Vertical distance with most frequency: a reference of line spacing.'''
             ref0, ref1 = get_v_bdy(self._instances[0])
             prev = self._instances[0]
@@ -460,10 +452,19 @@ class Blocks(ElementCollection):
                 prev = block
                 ref0, ref1 = y0, y1        
             return max(distances, key=distances.count) if distances else 0.0
+        
+        def is_retraction(block, left_x):
+            """判断是否是缩进的文本块。判断 block 左边界是不是大于 Page 左边界的 1.5 个字符宽度
+            
+            .. note::
+                left_x: Page 的文本的左边界
+            """
+            return (block.bbox[0] - left_x) > 1.5 * (block.bbox[2] - block.bbox[0]) / len(block.text)
 
         # create text block based on lines
-        blocks = [] # type: list[TextBlock]
+        blocks = [] # type: list[TextBlock | TableBlock]
         lines = []  # type: list[Line]
+        
         def close_text_block():
             if not lines: return
             block = TextBlock()
@@ -471,50 +472,54 @@ class Blocks(ElementCollection):
             blocks.append(block)
             lines.clear()
 
+        # 计算文本行完整的左边界
+        text_blocks = [block for block in self._instances if not isinstance(block, TableBlock)]
+        if text_blocks:
+            text_left_x = min([block.bbox[0] for block in text_blocks])
+            has_retraction = any([is_retraction(b, text_left_x) for b in text_blocks])
+        else:
+            has_retraction = False
+            text_left_x = 0
+        
         # check line by line
         ref_dis = common_vertical_spacing()
         for block in self._instances:
-            
             # if current is a table block:
             # - finish previous text block; and
             # - add this table block directly 
             if isinstance(block, TableBlock):
                 close_text_block()
                 blocks.append(block)
-            
             # check two adjacent text lines
             else:
                 ref_line = lines[-1] if lines else None
-
                 # first line or in same row with previous line: needn't to create new text block
                 if not ref_line or ref_line.in_same_row(block):
                     start_new_block = False
-                
                 # image line: create new text block
-                # 图像
                 elif block.image_spans or ref_line.image_spans:
                     start_new_block = True
-
                 # 判断是否是有序列表or无序列表开头
                 elif block.order_list or block.unorder_list:
                     start_new_block = True
-                
+                # 如果有缩进的，优先用段落合并逻辑
+                elif has_retraction:
+                    start_new_block = is_retraction(block, text_left_x)
                 # lower than common line spacing: needn't to create new text block
-                elif vertical_distance(ref_line, block)<=ref_dis+1.0 and \
-                    ref_dis<=max_line_spacing_ratio*line_height(ref_line):
+                elif vertical_distance(ref_line, block) <= ref_dis + 1.0:
                     start_new_block = False
-                
+                elif len(lines) > 1 and vertical_distance(ref_line, block) == vertical_distance(ref_line, lines[-2]):
+                    start_new_block = False
                 else:
+                    # TODO 单行成段的情况需要考虑
                     start_new_block = True
                 
-                if start_new_block: close_text_block()
+                if start_new_block:
+                    close_text_block()
                 lines.append(block)
-
         # don't forget last group
         close_text_block()
-       
         return blocks
-
 
     @staticmethod
     def _split_text_block_vertically(instances:list, line_break_free_space_ratio:float, new_paragraph_free_space_ratio:float):
@@ -532,22 +537,17 @@ class Blocks(ElementCollection):
                 blocks.append(block)
                 continue
             
+            # 计算文本行完整的左右边界
+            text_left_x = min([block.bbox[0] for block in instances if block.is_text_block])
+            text_right_x = max([block.bbox[2] for block in instances if block.is_text_block])
             # add split blocks if necessary
-            lines_list = block.lines.split_vertically_by_text(line_break_free_space_ratio, 
-                                                                new_paragraph_free_space_ratio)
+            lines_list = block.lines.split_vertically_by_text(
+                line_break_free_space_ratio, new_paragraph_free_space_ratio, text_left_x, text_right_x)
             for lines, first_line_start_of_paragraph, last_line_end_of_paragraph in lines_list:
                 text_block = TextBlock(first_line_start_of_paragraph=first_line_start_of_paragraph,
                                        last_line_end_of_paragraph=last_line_end_of_paragraph)
                 text_block.add(lines)
                 blocks.append(text_block)
-            # if len(lines_list)==1:
-            #     blocks.append(block)
-            # else:
-            #     for lines, first_line_start_of_paragraph, last_line_end_of_paragraph in lines_list:
-            #         text_block = TextBlock(first_line_start_of_paragraph=first_line_start_of_paragraph,
-            #                                last_line_end_of_paragraph=last_line_end_of_paragraph)
-            #         text_block.add(lines)
-            #         blocks.append(text_block)
 
         return blocks
 
