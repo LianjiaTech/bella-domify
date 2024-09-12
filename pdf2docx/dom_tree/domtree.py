@@ -141,8 +141,8 @@ class DomTree:
                         # 跳过页眉页脚
                         if block.block.is_header or block.block.is_footer:
                             continue
+                        block.page_num = [page.page.id]
                         if debug_pages:
-                            block.page_num = [page.page.id]
                             self.elements.append((block, page, debug_pages[index]))
                         else:
                             self.elements.append((block, page, None))

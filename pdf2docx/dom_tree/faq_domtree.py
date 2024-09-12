@@ -2,16 +2,15 @@ import concurrent.futures
 import copy
 import logging
 import time
-
 from functools import partial
+from typing import Optional
 
 import openai
-
-from pdf2docx.dom_tree.domtree import DomTree, Node
-from pdf2docx.extend.page.PagesExtend import PagesExtend
-from pdf2docx.extend.llm.faq_extract import faq_extract, FAQ
 import textdistance
 
+from pdf2docx.dom_tree.domtree import DomTree, Node
+from pdf2docx.extend.llm.faq_extract import faq_extract, FAQ
+from pdf2docx.extend.page.PagesExtend import PagesExtend
 from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend
 from pdf2docx.text.TextBlock import TextBlock
 from server.context import user_context
