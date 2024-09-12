@@ -10,6 +10,7 @@
 # ===============================================================
 import json
 import re
+import os
 from collections import defaultdict
 from difflib import SequenceMatcher
 import copy
@@ -17,18 +18,20 @@ from statistics import mean
 import pandas as pd
 import logging
 import datetime
-import parse_output as beike_parse_output
 
 
-def log_setting():
+def log_setting(log_file=""):
+    if not log_file:
+        # 默认日志
+        log_file = 'reports/output_indicators_' + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + '.txt'
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+
     # 创建一个日志记录器
-    logger = logging.getLogger('my_logger')
+    logger = logging.getLogger(log_file)
     logger.setLevel(logging.INFO)  # 设置日志级别
     formatter = logging.Formatter('%(message)s')
 
-    # 创建一个文件处理器，将日志写入文件
-    file_handler = logging.FileHandler(
-        'reports/output_indicators_' + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + '.txt', mode='w')
+    file_handler = logging.FileHandler(log_file, mode='w')
     file_handler.setLevel(logging.INFO)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
@@ -353,7 +356,7 @@ def tree2list_label(order_num, tree):
     return nodes
 
 
-def find_mapping(parser_nodes_ori, label_nodes_ori):
+def find_mapping(logger_block, parser_nodes_ori, label_nodes_ori):
     """找到两棵树之间的映射关系"""
     parser_nodes = copy.deepcopy(parser_nodes_ori)
     label_nodes = copy.deepcopy(label_nodes_ori)
@@ -362,6 +365,8 @@ def find_mapping(parser_nodes_ori, label_nodes_ori):
     see_1v1 = []
 
     mapping = defaultdict(list)
+
+    label_nodes_badcase = copy.deepcopy(label_nodes)
 
     for label_node in label_nodes:
         if label_node["order_num"] in mapping:
@@ -382,6 +387,7 @@ def find_mapping(parser_nodes_ori, label_nodes_ori):
                 edit_dist_1v1_nodes.append(edit_dist)
                 see_1v1.append((lable_text, parser_text))
                 parser_nodes.remove(parser_node)
+                label_nodes_badcase.remove(label_node)
                 break
             elif lable_text in parser_text:
                 mapping[label_node["order_num"]].append(parser_node["order_num"])
@@ -392,8 +398,8 @@ def find_mapping(parser_nodes_ori, label_nodes_ori):
                 continue
 
     print("1v1节点个数：", len(edit_dist_1v1_nodes))
-    for i in see_1v1:
-        print(i)
+    # for i in see_1v1:
+    #     print(i)
     # print("1v1节点编辑距离：", edit_dist_1v1_nodes)
     if edit_dist_1v1_nodes:
         print("1v1节点编辑距离：", round(mean(edit_dist_1v1_nodes), 4))
@@ -402,6 +408,13 @@ def find_mapping(parser_nodes_ori, label_nodes_ori):
     edit_dist_all_nodes = copy.deepcopy(edit_dist_1v1_nodes)
     edit_dist_all_nodes.extend([0] * (len(label_nodes) - len(edit_dist_1v1_nodes)))
     print("所有节点编辑距离：", round(mean(edit_dist_all_nodes), 4))
+
+    # 打印badcase
+    for item in label_nodes_badcase:
+        order_num_str = item["order_num"]
+        text_str = item["text"]
+        logger_block.info(f"------------------------\norder_num:{order_num_str}")
+        logger_block.info(f"{text_str}\n\n")
 
     if len(mapping) != len(edit_dist_all_nodes):
         raise
@@ -414,10 +427,6 @@ def get_node_info(label_nodes, index):
             return label_node
     else:
         raise
-
-
-# def get_parser_node_info(parser_nodes, index):
-#     pass
 
 
 def evaluate_layout(mapping, label_nodes, parser_nodes):
@@ -472,7 +481,6 @@ def evaluate_layout(mapping, label_nodes, parser_nodes):
 
 
 def evaluation_single(file_name, parser=""):
-
     print("评测文件：", file_name)
     print("评测引擎：", parser)
 
@@ -482,24 +490,27 @@ def evaluation_single(file_name, parser=""):
         parser_nodes = tree2list_beike(beike_tree["root"])
         pc_edges_parser = get_pc_edges_beike("", beike_tree["root"]["child"])
         print()
-
     elif parser == "ali":
         parser_json = load_json("parse_json/ali/" + file_name + '_result_ali.json')
         parser_nodes = tree2list_ali(parser_json)
         pc_edges_parser = get_pc_edges_ali(parser_json)
+    # elif parser == "adobe":
+    #     parser_json = load_json("adobe/structuredData" + file_name + '_chi.json')
+    #     parser_nodes = tree2list_adobe(parser_json)
     else:
         raise "解析引擎未实现"
 
     # 标注结果获取
     label_tree = load_json("label_json/" + file_name + '_GT_label.json')
     pc_edges_label = get_pc_edges_label("root", label_tree["root"])
-
     label_nodes = tree2list_label("1", label_tree["root"])
 
     # 找到映射关系
-    mapping, edit_dist_all_nodes = find_mapping(parser_nodes, label_nodes)
+    block_badcase_log = "reports/" + parser + "/block_badcase_" + file_name + ".txt"
+    logger_block = log_setting(block_badcase_log)
+    mapping, edit_dist_all_nodes = find_mapping(logger_block, parser_nodes, label_nodes)
     mapping = dict(sorted(mapping.items(), reverse=False))
-    print(json.dumps(mapping, indent=2, ensure_ascii=False))
+    # print(json.dumps(mapping, indent=2, ensure_ascii=False))
 
     confusion_matrix = evaluate_layout(mapping, label_nodes, parser_nodes)
 
@@ -562,24 +573,6 @@ def get_pc_edges_label(order_num, label_tree):
         pc_edges.update(pc_edges_item)
 
     return pc_edges
-
-
-def evaluation_adobe(file_name):
-    print("评测文件：", file_name)
-    print("评测引擎：", "adobe")
-
-    label_tree = load_json(file_name + '_GT_label.json')
-    label_nodes = tree2list_label("1", label_tree["root"])
-
-    parser_json = load_json("adobe/structuredData" + file_name + '_chi.json')
-    parser_nodes = tree2list_adobe(parser_json)
-
-    # 找到映射关系
-    mapping, edit_dist_all_nodes = find_mapping(parser_nodes, label_nodes)
-    mapping = dict(sorted(mapping.items(), reverse=False))
-
-    print(json.dumps(mapping, indent=2, ensure_ascii=False))
-    print()
 
 
 def evaluation(parser_name):
@@ -671,7 +664,7 @@ def generate_report():
 
 
 def main():
-    beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
+    # beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
     generate_report()
 
 
