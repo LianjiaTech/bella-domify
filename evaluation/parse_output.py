@@ -28,7 +28,7 @@ root_dir = os.getcwd().split("document_parse")[0] + "document_parse/"
 
 # 评测集文件名
 file_list = [
-    "评测文件1-喵回QA_3页",
+    # "评测文件1-喵回QA_3页",
     "《贝壳入职管理制度》5页",
     "《贝壳离职管理制度V3.0》5页",
     "中文论文Demo中文文本自动校对综述_4页",
