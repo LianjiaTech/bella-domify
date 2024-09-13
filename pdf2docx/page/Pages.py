@@ -74,7 +74,7 @@ class Pages(BaseCollection):
         # NOTE: blocks structure might be changed in this step, e.g. promote page header/footer,
         # so blocks structure based process, e.g. calculating margin, parse section should be 
         # run after this step.
-        Pages._parse_document(raw_pages, pages)
+        Pages._parse_document(raw_pages, pages, **settings)
 
         # ---------------------------------------------
         # 3. parse structure in page level, e.g. page margin, section
@@ -90,14 +90,15 @@ class Pages(BaseCollection):
             page.sections.extend(sections)
 
     @staticmethod
-    def _parse_document(raw_pages: list, pages: list):
+    def _parse_document(raw_pages: list, pages: list, **settings):
         '''Parse structure in document/pages level, e.g. header, footer'''
 
         # 页眉页脚解析
         _parser_header_and_footer(raw_pages)
 
         # 封面解析
-        _parser_cover(raw_pages, pages)
+        if settings.get("filter_catalog") != False:
+            _parser_cover(raw_pages, pages)
 
 
 def _parser_cover(raw_pages: list, pages: list):

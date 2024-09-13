@@ -239,10 +239,11 @@ class DomTree:
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
             executor.map(lambda text_block_extend: text_block_extend.get_image_s3_link(), tasks_to_process)
 
-    def parse(self):
+    def parse(self, **settings):
 
         # 先解析目录
-        self.parse_catalog()
+        if settings.get("filter_cover") != False:
+            self.parse_catalog()
 
         # 初始化
         stack_path: List[Node] = [self.root]

@@ -62,7 +62,7 @@ class FAQ_LLM_DomTree(DomTree):
         logging.info("判断是否为FAQ文档: %s", is_faq)
         return is_faq == "True" or is_faq == "true"
 
-    def parse(self):
+    def parse(self, **settings):
         text_blocks = self.extract_text_block()
         inputs_texts = ["\n".join(blocks) for blocks in text_blocks]
         logging.info("start faq extract")

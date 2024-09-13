@@ -345,7 +345,7 @@ class Converter:
         dom_trees = [FAQ_LLM_DomTree(self.pages_extend, debug_file), DomTree(self.pages_extend, debug_file)]
         dom_tree = max((dom_tree_i for dom_tree_i in dom_trees if dom_tree_i.is_appropriate()),
                        key=lambda x: x.priority)
-        dom_tree.parse()  # 开始解析
+        dom_tree.parse(**settings)  # 开始解析
         if settings['debug'] and debug_file:
             debug_file.save(kwargs['debug_file_name'])
         return dom_tree

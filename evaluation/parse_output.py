@@ -102,8 +102,8 @@ def parse():
             debug=True,
             debug_file_name=documents_dir + file_name + "-debug.pdf",
             parse_stream_table=False,
-            parse_catalog=False,
-            parse_=False,
+            filter_catalog=False,  # 默认会过滤 False:不过滤
+            filter_cover=False,    # 默认会过滤 False:不过滤
         )
 
         dom_tree_model = DomTreeModel(dom_tree=dom_tree)
