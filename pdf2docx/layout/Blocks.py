@@ -264,9 +264,7 @@ class Blocks(ElementCollection):
         blocks = self._join_lines_vertically(max_line_spacing_ratio)
 
         # split text block by checking text
-        blocks = self._split_text_block_vertically(blocks,
-            line_break_free_space_ratio, 
-            new_paragraph_free_space_ratio)
+        blocks = self._split_text_block_vertically(blocks, line_break_free_space_ratio, new_paragraph_free_space_ratio)
         
         self.reset(blocks)
 
@@ -519,7 +517,7 @@ class Blocks(ElementCollection):
                 elif block.order_list or block.unorder_list:
                     start_new_block = True
                 # 前一句结尾未结束标点
-                elif re.match(r".*[,，'‘“;；:：、·\-\[{\(（【《<]$", ref_line.text):
+                elif re.match(r".*[,，'‘“;；:：、·\-\[{(（【《<]$", ref_line.text):
                     start_new_block = False
                 # 居中文本与非居中文本切分到不同 block
                 elif is_center_aligned(block, text_left_x, text_right_x) != \
@@ -552,16 +550,21 @@ class Blocks(ElementCollection):
             to bottom.
         '''
         blocks = [] # type: list[TextBlock]
+        if any([block.is_text_block for block in instances]):
+            # 计算文本行完整的左右边界
+            text_left_x = min([block.bbox[0] for block in instances if block.is_text_block])
+            text_right_x = max([block.bbox[2] for block in instances if block.is_text_block])
+        
         for block in instances:
-
             # add block if this isn't a text block
             if not block.is_text_block: 
                 blocks.append(block)
                 continue
             
             # 计算文本行完整的左右边界
-            text_left_x = min([block.bbox[0] for block in instances if block.is_text_block])
-            text_right_x = max([block.bbox[2] for block in instances if block.is_text_block])
+            if len(block.lines) >= 3:
+                text_left_x = min([line.bbox[0] for line in block.lines])
+                text_right_x = max([line.bbox[2] for line in block.lines])
             # add split blocks if necessary
             lines_list = block.lines.split_vertically_by_text(
                 line_break_free_space_ratio, new_paragraph_free_space_ratio, text_left_x, text_right_x)
@@ -570,7 +573,6 @@ class Blocks(ElementCollection):
                                        last_line_end_of_paragraph=last_line_end_of_paragraph)
                 text_block.add(lines)
                 blocks.append(text_block)
-
         return blocks
 
 
