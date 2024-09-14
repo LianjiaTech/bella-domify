@@ -42,26 +42,6 @@ class Lines(ElementCollection):
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)层面\s*",
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)方面\s*"
     ]
-    # 无序列表正则表达式
-    UNORDERED_LIST_PATTERN = [
-        r'^\s*\u2022\s+',  # 圆点符号
-        r'^\s*\u25E6\s+',  # 空心圆点符号
-        r'^\s*\u2043\s+',  # 短横线
-        r'^\s*\u2219\s+',  # 小实心圆
-        r'^\s*\u25CF\s+',  # 大实心圆
-        r'^\s*\u25A0\s+',  # 实心方块
-        r'^\s*\u25B2\s+',  # 实心上三角形
-        r'^\s*\u25BC\s+',  # 实心下三角形
-        r'^\s*\u25C6\s+',  # 实心菱形
-        r'^\s*\u25CB\s+',  # 空心圆圈
-        r'^\s*\u25D8\s+',  # 反向空心圆圈
-        r'^\s*\u2605\s+',  # 实心星形
-        r'^\s*\u2606\s+',  # 空心星形
-        r'^\s*\u2660\s+',  # 黑桃符号
-        r'^\s*\u2663\s+',  # 梅花符号
-        r'^\s*\u2665\s+',  # 红心符号
-        r'^\s*\u2666\s+'  # 方块符号
-    ]
 
     @property
     def unique_parent(self):
@@ -85,12 +65,22 @@ class Lines(ElementCollection):
             match = re.match(rule, line.text)
             if match:
                 line.set_order_list(index + 1)
-                break
-        for index, rule in enumerate(Lines.UNORDERED_LIST_PATTERN):
-            match = re.match(rule, line.text)
+                return
+
+        def is_special_start_character(s):
+            if not s:
+                return False, None
+            # 定义一个正则表达式模式，匹配非字母数字、空格、中文字符和常用标点符号
+            pattern = re.compile(r'^[^\w\s\u4e00-\u9fff.,!?;:\[\]()\\/\'"“”‘’]')
+            match = pattern.match(s)
             if match:
-                line.set_unorder_list(index + 1)
-                break
+                return True, match.group(0)
+            return False, None
+
+        result, char = is_special_start_character(line.text)
+        if result:
+            line.set_unorder_list(char)
+            return
 
     @property
     def image_spans(self):
@@ -116,9 +106,11 @@ class Lines(ElementCollection):
         '''
         rows = self.group_by_physical_rows()
         # skip if only one row
-        num = len(rows)
-        if num == 1:
-            return [[rows[0], True, True]]
+        if len(rows) == 1:
+            if rows[0][0].is_list():
+                return [[rows[0], True, True]]
+            else:
+                return [[rows[0], False, False]]
 
         # check row by row
         res = []
@@ -157,7 +149,8 @@ class Lines(ElementCollection):
             # 如果是段落首句，将之前缓存的lines放入结果res，然后将当前row放入缓存lines
             if start_of_para:
                 if lines:
-                    res.append((lines, start_of_para, end_of_para))
+                    # 识别出是新一段的开始，说明之前缓存的段落已经结束
+                    res.append((lines, start_of_para, True))
                 lines = Lines()
             lines.extend(row)
             # 如果是段落尾句，将之前缓存的lines放入结果res，清空缓存lines

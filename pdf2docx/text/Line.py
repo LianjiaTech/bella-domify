@@ -80,13 +80,16 @@ class Line(Element):
             if span.text.strip(): return False
         return True
 
-
     @property
     def image_spans(self):
         '''Get image spans in this Line.'''
         return list(filter(
             lambda span: isinstance(span, ImageSpan), self.spans
         ))
+
+    def is_list(self):
+        '''Check if this line is a list item.'''
+        return self.order_list or self.unorder_list
 
     @property
     def order_list(self):
