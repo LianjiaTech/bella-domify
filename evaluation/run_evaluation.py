@@ -23,9 +23,8 @@ import parse_output as beike_parse_output
 
 def log_setting(log_file=""):
     if not log_file:
-        # 默认日志
-        log_file = 'reports/output_indicators_' + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + '.txt'
-    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+        raise "log_file is none"
+    # os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
     # 创建一个日志记录器
     logger = logging.getLogger(log_file)
@@ -46,7 +45,7 @@ def log_setting(log_file=""):
     return logger
 
 
-logger = log_setting()
+logger = log_setting(log_file='reports/output_indicators_' + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + '.txt')
 
 print_setting = {
     "PRINT_1V1_TEXT": 1,  # 打印1v1映射的text
@@ -357,7 +356,7 @@ def tree2list_label(order_num, tree):
     return nodes
 
 
-def find_mapping(logger_block, parser_nodes_ori, label_nodes_ori):
+def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
     """找到两棵树之间的映射关系"""
     parser_nodes = copy.deepcopy(parser_nodes_ori)
     label_nodes = copy.deepcopy(label_nodes_ori)
@@ -411,11 +410,15 @@ def find_mapping(logger_block, parser_nodes_ori, label_nodes_ori):
     print("所有节点编辑距离：", round(mean(edit_dist_all_nodes), 4))
 
     # 打印badcase
+    logger_badcase.info("*"*100)
+    logger_badcase.info(f"\nfile_name: {file_name}\nblock切分 badcase count: {len(label_nodes_badcase)}\n")
+    logger_badcase.info("*"*100)
+    logger_badcase.info("badcase明细如下：")
     for item in label_nodes_badcase:
         order_num_str = item["order_num"]
         text_str = item["text"]
-        logger_block.info(f"------------------------\norder_num: {order_num_str}")
-        logger_block.info(f"{text_str}\n\n")
+        logger_badcase.info(f"------------------------\n\nfile_name: {file_name}\norder_num: {order_num_str}")
+        logger_badcase.info(f"{text_str}\n")
 
     if len(mapping) != len(edit_dist_all_nodes):
         raise
@@ -481,7 +484,7 @@ def evaluate_layout(mapping, label_nodes, parser_nodes):
     # print("版面识别正确个数：", len(layout_right_list))
 
 
-def evaluation_single(file_name, parser=""):
+def evaluation_single(logger_badcase, file_name, parser=""):
     print("评测文件：", file_name)
     print("评测引擎：", parser)
 
@@ -507,9 +510,7 @@ def evaluation_single(file_name, parser=""):
     label_nodes = tree2list_label("1", label_tree["root"])
 
     # 找到映射关系
-    block_badcase_log = "reports/" + parser + "/block_badcase_" + file_name + ".txt"
-    logger_block = log_setting(block_badcase_log)
-    mapping, edit_dist_all_nodes = find_mapping(logger_block, parser_nodes, label_nodes)
+    mapping, edit_dist_all_nodes = find_mapping(logger_badcase, file_name, parser_nodes, label_nodes)
     mapping = dict(sorted(mapping.items(), reverse=False))
     # print(json.dumps(mapping, indent=2, ensure_ascii=False))
 
@@ -590,9 +591,11 @@ def evaluation(parser_name):
     struct_all_count = 0
     struct_mapping = {}
 
+    logger_badcase = log_setting("reports/" + parser_name + "/badcase_" + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + ".txt")
+
     for file_name in file_list:
         confusion_matrix, edit_dist_file_nodes, mapping, right_cnt, all_count, right_mapping = \
-            (evaluation_single(file_name, parser_name))
+            (evaluation_single(logger_badcase, file_name, parser_name))
 
         confusion_matrix_list.append(confusion_matrix)
         edit_dist_allfile.extend(edit_dist_file_nodes)
