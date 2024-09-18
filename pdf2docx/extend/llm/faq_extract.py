@@ -12,6 +12,7 @@ FAQ_EXTRACT_PROMPT = """
 
 ## 要求
 - 返回格式为 JSON 格式，不是 Markdown 的 JSON 格式
+- Q和A都是字符串，不要输出成list或者其他数据类型
 
 ## 下面给你几个例子，请你作为参考：
 FAQ文本为:

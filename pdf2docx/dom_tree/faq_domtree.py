@@ -29,13 +29,17 @@ class FAQ_LLM_DomTree(DomTree):
     def is_appropriate(self) -> bool:
         text_blocks = self.extract_text_block()
         page_content = "\n".join("".join(text_block) for text_block in text_blocks)
-        # 为避免大模型误判，多次判断，进行投票
+        # 20240918 三次采样从开头的2000个字符，改成：文件首、中、尾的各2000个字符
+        middle_start = max(len(page_content) // 2 - 1000, 0)
+        middle_end = middle_start + 2000
+        # 为避免大模型误判，多次判断
         with concurrent.futures.ThreadPoolExecutor() as executor:
             # 提交每个接口调用任务到线程池，并得到一个Future对象列表
-            vote_res = list(executor.map(partial(self._is_faq, user=user_context.get()), 
-                                         [page_content[:2000] for _ in range(3)]))
-            # 选择票数最多的结果
-            return max(vote_res, key=vote_res.count)
+            vote_res = list(executor.map(partial(self._is_faq, user=user_context.get()),
+                                         [page_content[:2000], page_content[middle_start:middle_end],
+                                          page_content[-2000:]]))
+            # 三次都为FAQ才判定为FAQ
+            return all(vote_res)
 
     def _is_faq(self, page_content: str, *, model="gpt-4o", user: str = "") -> bool:
         prompt = self.__class__.PROMPT.format(page_content=page_content)
