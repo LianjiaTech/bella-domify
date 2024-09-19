@@ -18,7 +18,8 @@ class Lines(ElementCollection):
 
     # 有序列表正则表达式
     ORDERED_LIST_PATTERN = [
-        r'^\s*(\d+\.|[\u2488-\u249B])\s*',  # 数字后跟点
+        r'^\s*\d+\.\s*',  # 数字后跟点
+        r'^\s*[\u2488-\u249B]\s*',  # 数字后跟点
         r'^\s*\d+、\s*',  # 数字后跟顿号
         r'^\s*[一二三四五六七八九十百千万]+、\s*',  # 中文数字后跟顿号
         r'^\s*\d+[\)\]】）]\s*',  # 数字后跟右括号
@@ -30,6 +31,7 @@ class Lines(ElementCollection):
         r'^\s*[\u2460-\u2473]\s*',  # （①, ②, ③, ..., ⑲）
         r'^\s*[\u2474-\u2487]\s*',  # （⑴, ⑵, ⑶, ..., ⒇）
         r'^\s*[\u24B6-\u24E9]\s*',  # （Ⓐ, Ⓑ, Ⓒ, ..., ⓩ）
+        r'^\s*\[\d+\]\s*',          # （[1],[2],[3] ... [11]）
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)项\s*",
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)步\s*",
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)点\s*",
@@ -62,9 +64,9 @@ class Lines(ElementCollection):
     def recognize_list(self, line: Line):
         # recognize ordered & unordered list
         for index, rule in enumerate(Lines.ORDERED_LIST_PATTERN):
-            match = re.match(rule, line.text)
-            if match:
+            if match := re.match(rule, line.text):
                 line.set_order_list(index + 1)
+                line.list_tag = match.group(0)
                 return
 
         def is_special_start_character(s):
@@ -72,14 +74,14 @@ class Lines(ElementCollection):
                 return False, None
             # 定义一个正则表达式模式，匹配非字母数字、空格、中文字符和常用标点符号
             pattern = re.compile(r'^[^\w\s\u4e00-\u9fff.,!?;:\[\]()\\/\'"“”‘’]')
-            match = pattern.match(s)
-            if match:
+            if match := pattern.match(s):
                 return True, match.group(0)
             return False, None
 
         result, char = is_special_start_character(line.text)
         if result:
             line.set_unorder_list(char)
+            line.list_tag = char
             return
 
     @property
@@ -90,8 +92,7 @@ class Lines(ElementCollection):
             spans.extend(line.image_spans)
         return spans
 
-    def split_vertically_by_text(self, line_break_free_space_ratio: float, new_paragraph_free_space_ratio: float,
-                                 text_left_x: float, text_right_x: float):
+    def split_vertically_by_text(self, text_left_x: float, text_right_x: float):
         '''Split lines into separate paragraph by checking text. The parent text block consists of 
         lines with similar line spacing, while lines in other paragraph might be counted when the
         paragraph spacing is relatively small. So, it's necessary to split those lines by checking
@@ -110,7 +111,7 @@ class Lines(ElementCollection):
             if rows[0][0].is_list():
                 return [[rows[0], True, True]]
             else:
-                return [[rows[0], False, False]]
+                return [[rows[0], True, False]]
 
         # check row by row
         res = []
@@ -121,10 +122,17 @@ class Lines(ElementCollection):
         for row in rows:
             # multi lines in a row should be in line order
             row.sort_in_line_order()
-
-            # 1 首行缩进则判断为段首
             word_w = (row[0].bbox[2] - row[0].bbox[0]) / len(row[0].text)
-            if row and row[0] and row[0].bbox[0] - text_left_x > (word_w * 1.2):
+            
+            # 1. 列表项缩进特殊处理，例如
+            #   【1】 xxxxxx
+            #        xxxxxx
+            if row and not row[0].is_list() and lines and lines[0].is_list() and \
+                    text_right_x - lines[0].bbox[2] < 1.5 * word_w and \
+                    row[0].bbox[0] - lines[0].bbox[0] < (word_w * (len(lines[0].list_tag) + 1.5)):
+                start_of_para = False
+            # 2 首行缩进则判断为段首
+            elif row and row[0] and row[0].bbox[0] - text_left_x > (word_w * 1.2):
                 start_of_para = True
             elif prev_row:
                 # 获取上一行的字体、字号、粗体信息
@@ -137,9 +145,15 @@ class Lines(ElementCollection):
                 if row and row[-1].spans and isinstance((first_span := row[-1].spans[0]), TextSpan):
                     cur_font, cur_font_size, cur_font_bold = first_span.font, first_span.size, \
                         bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
-                # 2 当前行的字体和字号与上一行不同时，判断为段首
+                # 2. 当前一句没有结束时，判断为非段首
+                if re.match(r".*[,，'‘“;；、·\-\[{(（【《<]$", prev_row[-1].text):
+                    start_of_para = False
+                elif len(re.findall(r"[‘“\[{(（【《]", prev_row[-1].text, re.DOTALL)) > len(re.findall(r"[’”\]})）】》]", prev_row[-1].text, re.DOTALL)) \
+                        and len(re.findall(r"[‘“\[{(（【《]", prev_row[-1].text + row[0].text, re.DOTALL)) == len(re.findall(r"[’”\]})）】》]", prev_row[-1].text + row[0].text, re.DOTALL)):
+                    start_of_para = False
+                # 3 当前行的字体和字号与上一行不同时，判断为段首
                 # when font or font size changes, it's a new sentence, and a new paragraph
-                if prev_font_size and cur_font_size:
+                elif prev_font_size and cur_font_size:
                     if abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
                         start_of_para = True
 

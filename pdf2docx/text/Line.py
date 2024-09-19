@@ -99,6 +99,14 @@ class Line(Element):
     def set_order_list(self, tag):
         '''Set list tag of this line.'''
         self.tags['order_list'] = tag
+    
+    @property
+    def list_tag(self):
+        return self.tags.get("list_tag", None)
+    
+    @list_tag.setter
+    def list_tag(self, tag):
+        self.tags["list_tag"] = tag
 
     @property
     def unorder_list(self):

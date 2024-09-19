@@ -5,10 +5,11 @@ and a combination of ``Line`` and ``TableBlock`` during parsing process.
 '''
 
 import logging
+import math
 import re
-from collections import Counter
 
 from docx.shared import Pt
+
 from ..common import constants
 from ..common.Collection import ElementCollection
 from ..common.share import (BlockType, lower_round, rgb_value)
@@ -264,7 +265,7 @@ class Blocks(ElementCollection):
         blocks = self._join_lines_vertically(max_line_spacing_ratio)
 
         # split text block by checking text
-        blocks = self._split_text_block_vertically(blocks, line_break_free_space_ratio, new_paragraph_free_space_ratio)
+        blocks = self._split_text_block_vertically(blocks)
         
         self.reset(blocks)
 
@@ -427,31 +428,22 @@ class Blocks(ElementCollection):
         '''Create text blocks by merge lines with same properties (spacing, font, size) in 
         vertical direction. At this moment, the block instance is either Line or TableBlock.
         '''
-        idx0, idx1 = (1, 3) if self.is_horizontal_text else (0, 2)
-        
-        def get_v_bdy(block):
-            '''Coordinates of block top and bottom boundaries.'''
-            bbox = block.bbox
-            return bbox[idx0], bbox[idx1]
-
         def vertical_distance(block1, block2):
             '''两个block中间的间距的高度'''
-            u0, u1 = get_v_bdy(block1)
-            v0, v1 = get_v_bdy(block2)
-            return round(v0-u1, 2)
+            idx0, idx1 = (1, 3) if self.is_horizontal_text else (0, 2)
+            u0, u1 = block1.bbox[idx0], block1.bbox[idx1]
+            v0, v1 = block2.bbox[idx0], block2.bbox[idx1]
+            return math.ceil(max(v0-u1, 0))
 
         def common_vertical_spacing():
             '''Vertical distance with most frequency: a reference of line spacing.'''
-            ref0, ref1 = get_v_bdy(self._instances[0])
             prev = self._instances[0]
             distances = []
             for block in self._instances[1:]:
-                y0, y1 = get_v_bdy(block)
                 if not prev.in_same_row(block):
                     # do not consider lines in the same row
-                    distances.append(round(y0-ref1, 2))
+                    distances.append(vertical_distance(prev, block))
                 prev = block
-                ref0, ref1 = y0, y1        
             return max(distances, key=distances.count) if distances else 0.0
         
         def is_retraction(block, left_x):
@@ -470,6 +462,45 @@ class Blocks(ElementCollection):
             return right_x > 0 and (block.bbox[2] - block.bbox[0]) / (right_x - left_x + 1e-6) < 0.9 and \
                 abs((block.bbox[2] + block.bbox[0]) - (right_x + left_x)) < 5
         
+        def cal_text_border_group(blocks):
+            """对 blocks 根据行间距分组，按照分组计算行的左右边界，以及是否有缩进。
+            
+            Args:
+                blocks: List[Block]
+            Returns:
+                Dict[int, Tuple[Tuple[int, int], Bool]]
+                    key 为 block 的 index，
+                    value 为 ((left_x, right_x), has_retraction)
+            """
+            group_blocks = {}
+            tmp_blocks = []
+            
+            def _flush(tmp_blocks, group_blocks):
+                if tmp_blocks:
+                    x_p = (min([int(tb[1].bbox[0]) for tb in tmp_blocks]), max([int(tb[1].bbox[2]) for tb in tmp_blocks]))
+                    _retraction = any([is_retraction(tb[1], x_p[0]) for tb in tmp_blocks])
+                    for tb in tmp_blocks:
+                        group_blocks[tb[0]] = (x_p, _retraction)
+                    tmp_blocks.clear()
+            
+            for i, block in enumerate(blocks):
+                if isinstance(block, TableBlock):
+                    _flush(tmp_blocks, group_blocks)
+                else:
+                    pre_line = tmp_blocks[-1][1] if tmp_blocks else None
+                    pre_pre_line = lines[-2] if len(lines) > 1 else None
+                    # 第一行，或者和前一行在同一行
+                    if not pre_line or pre_line.in_same_row(block):
+                        pass
+                    # 当前行和前一行的行距和之前的行距差不多表示是同一个 block
+                    elif pre_pre_line and vertical_distance(pre_line, block) - vertical_distance(pre_pre_line, pre_line) < 3:
+                        pass
+                    else:
+                        _flush(tmp_blocks, group_blocks)
+                    tmp_blocks.append((i, block))
+                _flush(tmp_blocks, group_blocks)
+            return group_blocks
+        
         # create text block based on lines
         blocks = [] # type: list[TextBlock | TableBlock]
         lines = []  # type: list[Line]
@@ -481,19 +512,17 @@ class Blocks(ElementCollection):
             blocks.append(block)
             lines.clear()
 
-        # 计算文本行完整的左边界
-        text_blocks = [block for block in self._instances if not isinstance(block, TableBlock)]
-        if text_blocks:
-            text_left_x = Counter([int(block.bbox[0]) for block in text_blocks]).most_common(1)[0][0]
-            text_right_x = Counter([int(block.bbox[2]) for block in text_blocks]).most_common(1)[0][0]
-            has_retraction = any([is_retraction(b, text_left_x) for b in text_blocks])
-        else:
-            has_retraction = False
-            text_left_x, text_right_x = 0, 0
+        # 计算文本行完整的左右边界
+        g_text_left_x, g_text_right_x = 0, 0
+        if text_blocks := [block for block in self._instances if not isinstance(block, TableBlock)]:
+            g_text_left_x = min([int(block.bbox[0]) for block in text_blocks])
+            g_text_right_x = max([int(block.bbox[2]) for block in text_blocks])
+
+        group_blocks = cal_text_border_group(self._instances)
         
         # check line by line
         ref_dis = common_vertical_spacing()
-        for block in self._instances:
+        for idx, block in enumerate(self._instances):
             # if current is a table block:
             # - finish previous text block; and
             # - add this table block directly 
@@ -506,7 +535,8 @@ class Blocks(ElementCollection):
                 
                 vec_dis = vertical_distance(ref_line, block) if ref_line else None
                 pre_vec_dis = vertical_distance(lines[-2], ref_line) if len(lines) > 1 else None
-                
+                next_vec_dis = vertical_distance(block, self._instances[idx+1]) if idx < len(lines)-1 else None
+
                 # first line or in same row with previous line: needn't to create new text block
                 if not ref_line or ref_line.in_same_row(block):
                     start_new_block = False
@@ -514,20 +544,26 @@ class Blocks(ElementCollection):
                 elif block.image_spans or ref_line.image_spans:
                     start_new_block = True
                 # 判断是否是有序列表or无序列表开头
-                elif block.order_list or block.unorder_list:
+                elif block.is_list():
                     start_new_block = True
                 # 前一句结尾未结束标点
-                elif re.match(r".*[,，'‘“;；:：、·\-\[{(（【《<]$", ref_line.text):
+                elif re.match(r".*[,，'‘“;；、·\-\[{(（【《<]$", ref_line.text):
                     start_new_block = False
-                # 居中文本与非居中文本切分到不同 block
-                elif is_center_aligned(block, text_left_x, text_right_x) != \
-                        is_center_aligned(ref_line, text_left_x, text_right_x):
-                    start_new_block = True
+                # 前一句非闭合括号
+                elif len(re.findall(r"[‘“\[{(（【《]", ref_line.text, re.DOTALL)) > len(re.findall(r"[’”\]})）】》]", ref_line.text, re.DOTALL)) \
+                        and len(re.findall(r"[‘“\[{(（【《]", ref_line.text + block.text, re.DOTALL)) == len(re.findall(r"[’”\]})）】》]", ref_line.text + block.text, re.DOTALL)):
+                    start_new_block = False
+                # 按照版面中行间距划分块
+                elif pre_vec_dis is not None and vec_dis - pre_vec_dis < 3:
+                    start_new_block = False
                 # 如果有缩进的，优先用段落合并逻辑
-                elif has_retraction:
-                    start_new_block = is_retraction(block, text_left_x)
-                elif pre_vec_dis is not None and abs(vec_dis - pre_vec_dis) < 2:
-                    start_new_block = False
+                elif has_retraction := group_blocks[idx][1]:
+                    start_new_block = is_retraction(block, group_blocks[idx][0][0])
+                elif next_vec_dis is not None and vec_dis - next_vec_dis > 5:
+                    start_new_block = True
+                # 居中文本与非居中文本切分到不同 block
+                elif is_center_aligned(block, g_text_left_x, g_text_right_x) != is_center_aligned(ref_line, g_text_left_x, g_text_right_x):
+                    start_new_block = True
                 # lower than common line spacing: needn't to create new text block
                 elif vertical_distance(ref_line, block) <= ref_dis + 1.0:
                     start_new_block = False
@@ -542,7 +578,7 @@ class Blocks(ElementCollection):
         return blocks
 
     @staticmethod
-    def _split_text_block_vertically(instances:list, line_break_free_space_ratio:float, new_paragraph_free_space_ratio:float):
+    def _split_text_block_vertically(instances: list):
         '''Split text block into separate paragraph based on punctuation of sentence.
 
         .. note::
@@ -562,12 +598,12 @@ class Blocks(ElementCollection):
                 continue
             
             # 计算文本行完整的左右边界
+            # 例如标题这类只有单行的文本，如果只用本 block 的左右边距无法得到缩进和居中的逻辑
             if len(block.lines) >= 3:
                 text_left_x = min([line.bbox[0] for line in block.lines])
                 text_right_x = max([line.bbox[2] for line in block.lines])
             # add split blocks if necessary
-            lines_list = block.lines.split_vertically_by_text(
-                line_break_free_space_ratio, new_paragraph_free_space_ratio, text_left_x, text_right_x)
+            lines_list = block.lines.split_vertically_by_text(text_left_x, text_right_x)
             for lines, first_line_start_of_paragraph, last_line_end_of_paragraph in lines_list:
                 text_block = TextBlock(first_line_start_of_paragraph=first_line_start_of_paragraph,
                                        last_line_end_of_paragraph=last_line_end_of_paragraph)
