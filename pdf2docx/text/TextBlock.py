@@ -111,10 +111,8 @@ class TextBlock(Block):
 
     def list_type(self):
         for line in self.lines:
-            if line.order_list:
-                return line.order_list
-            if line.unorder_list:
-                return line.unorder_list
+            if line.list_type:
+                return line.list_type
 
     def add(self, line_or_lines):
         '''Add line or lines to TextBlock.'''

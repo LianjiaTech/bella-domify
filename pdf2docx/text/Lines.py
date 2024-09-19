@@ -65,7 +65,7 @@ class Lines(ElementCollection):
         # recognize ordered & unordered list
         for index, rule in enumerate(Lines.ORDERED_LIST_PATTERN):
             if match := re.match(rule, line.text):
-                line.set_order_list(index + 1)
+                line.list_type = index + 1
                 line.list_tag = match.group(0)
                 return
 
@@ -80,7 +80,7 @@ class Lines(ElementCollection):
 
         result, char = is_special_start_character(line.text)
         if result:
-            line.set_unorder_list(char)
+            line.list_type = char
             line.list_tag = char
             return
 
@@ -108,7 +108,7 @@ class Lines(ElementCollection):
         rows = self.group_by_physical_rows()
         # skip if only one row
         if len(rows) == 1:
-            if rows[0][0].is_list():
+            if rows[0][0].is_list:
                 return [[rows[0], True, True]]
             else:
                 return [[rows[0], True, False]]
@@ -127,7 +127,7 @@ class Lines(ElementCollection):
             # 1. 列表项缩进特殊处理，例如
             #   【1】 xxxxxx
             #        xxxxxx
-            if row and not row[0].is_list() and lines and lines[0].is_list() and \
+            if row and not row[0].is_list and lines and lines[0].is_list and \
                     text_right_x - lines[0].bbox[2] < 1.5 * word_w and \
                     row[0].bbox[0] - lines[0].bbox[0] < (word_w * (len(lines[0].list_tag) + 1.5)):
                 start_of_para = False

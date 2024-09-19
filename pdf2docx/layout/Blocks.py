@@ -544,7 +544,7 @@ class Blocks(ElementCollection):
                 elif block.image_spans or ref_line.image_spans:
                     start_new_block = True
                 # 判断是否是有序列表or无序列表开头
-                elif block.is_list():
+                elif block.is_list:
                     start_new_block = True
                 # 前一句结尾未结束标点
                 elif re.match(r".*[,，'‘“;；、·\-\[{(（【《<]$", ref_line.text):

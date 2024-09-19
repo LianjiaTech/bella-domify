@@ -86,19 +86,11 @@ class Line(Element):
         return list(filter(
             lambda span: isinstance(span, ImageSpan), self.spans
         ))
-
+    
+    @property
     def is_list(self):
         '''Check if this line is a list item.'''
-        return self.order_list or self.unorder_list
-
-    @property
-    def order_list(self):
-        '''Get list tag of this line. Return ``None`` if this line is not a list item.'''
-        return self.tags.get('order_list', None)
-
-    def set_order_list(self, tag):
-        '''Set list tag of this line.'''
-        self.tags['order_list'] = tag
+        return self.list_type is not None
     
     @property
     def list_tag(self):
@@ -107,15 +99,15 @@ class Line(Element):
     @list_tag.setter
     def list_tag(self, tag):
         self.tags["list_tag"] = tag
-
+    
     @property
-    def unorder_list(self):
-        '''Get bullet tag of this line. Return ``None`` if this line is not a list item.'''
-        return self.tags.get('unorder_list', None)
-
-    def set_unorder_list(self, tag):
-        '''Set bullet tag of this line.'''
-        self.tags['unorder_list'] = tag
+    def list_type(self):
+        """列表类型，用列表匹配的规则表示"""
+        return self.tags.get("list_type", None)
+    
+    @list_type.setter
+    def list_type(self, list_type):
+        self.tags["list_type"] = list_type
 
     @property
     def text_direction(self):
