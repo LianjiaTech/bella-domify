@@ -16,7 +16,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.3.9'
+        version = '0.1.3.10'
 
         """
         发包命令：
@@ -31,7 +31,7 @@ def get_version(fname):
         version = '0.1.3.4‘  20240829   修复特殊字符引起的解析结果打印异常;页脚阈值放宽;
         version = '0.1.3.6‘  20240830   不常见字体兼容；
         version = '0.1.3.7‘  20240912   FAQ文件QA切分输出；
-        version = '0.1.3.9‘  20240919   大文件oom问题优化；
+        version = '0.1.3.10‘  20240919   大文件oom问题优化；
         
         """
 
