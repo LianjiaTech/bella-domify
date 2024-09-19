@@ -25,8 +25,9 @@ class FAQ_LLM_DomTree(DomTree):
     {page_content}
     """
 
-    def __init__(self, pages: PagesExtend, debug_file=None):
+    def __init__(self, pages: PagesExtend, debug_file=None, fitz_doc=None):
         super().__init__(pages, debug_file, priority=2)
+        self._fitz_doc = fitz_doc
 
     def is_appropriate(self) -> bool:
         sample_result = self.extract_text_average_sample()
@@ -155,7 +156,7 @@ class FAQ_LLM_DomTree(DomTree):
         page_count: 20
         piece_list: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
         """
-        page_count = len(self.debug_file)
+        page_count = len(self._fitz_doc)
         # 抽样次数
         piece_num = 10
         piece = page_count / piece_num
@@ -164,7 +165,7 @@ class FAQ_LLM_DomTree(DomTree):
         sample_result = []
 
         for page_num in piece_list:
-            page = self.debug_file.load_page(page_num)  # 加载页面
+            page = self._fitz_doc.load_page(page_num)  # 加载页面
             text = page.get_text()  # 提取文字
             sample_result.append(text)
         return sample_result
