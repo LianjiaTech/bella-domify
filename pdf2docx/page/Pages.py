@@ -300,12 +300,12 @@ def possible_header_height(raw_pages):
 
 # 获取首次出现大横线高度
 def get_first_line_height(page):
-    height = 0
     for stroke in page.shapes:
         if (isinstance(stroke, Stroke)
-                and is_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)):
+                and is_horizontal_line(stroke.x0, stroke.y0, stroke.x1, stroke.y1, page.width)
+                and stroke.y1 < (page.height / 4)):
             height = stroke.y1
-        return height
+            return height
     else:
         return 0
 
