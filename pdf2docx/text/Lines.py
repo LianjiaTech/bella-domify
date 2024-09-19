@@ -132,7 +132,7 @@ class Lines(ElementCollection):
                     row[0].bbox[0] - lines[0].bbox[0] < (word_w * (len(lines[0].list_tag) + 1.5)):
                 start_of_para = False
             # 2 首行缩进则判断为段首
-            elif row and row[0] and row[0].bbox[0] - text_left_x > (word_w * 1.2):
+            elif row and row[0] and row[0].bbox[0] - text_left_x > (word_w * 1.5):
                 start_of_para = True
             elif prev_row:
                 # 获取上一行的字体、字号、粗体信息
@@ -145,15 +145,9 @@ class Lines(ElementCollection):
                 if row and row[-1].spans and isinstance((first_span := row[-1].spans[0]), TextSpan):
                     cur_font, cur_font_size, cur_font_bold = first_span.font, first_span.size, \
                         bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
-                # 2. 当前一句没有结束时，判断为非段首
-                if re.match(r".*[,，'‘“;；、·\-\[{(（【《<]$", prev_row[-1].text):
-                    start_of_para = False
-                elif len(re.findall(r"[‘“\[{(（【《]", prev_row[-1].text, re.DOTALL)) > len(re.findall(r"[’”\]})）】》]", prev_row[-1].text, re.DOTALL)) \
-                        and len(re.findall(r"[‘“\[{(（【《]", prev_row[-1].text + row[0].text, re.DOTALL)) == len(re.findall(r"[’”\]})）】》]", prev_row[-1].text + row[0].text, re.DOTALL)):
-                    start_of_para = False
                 # 3 当前行的字体和字号与上一行不同时，判断为段首
                 # when font or font size changes, it's a new sentence, and a new paragraph
-                elif prev_font_size and cur_font_size:
+                if prev_font_size and cur_font_size:
                     if abs(prev_font_size - cur_font_size) > 0.5 or prev_font_bold != cur_font_bold:
                         start_of_para = True
 
