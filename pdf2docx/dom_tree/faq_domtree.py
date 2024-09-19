@@ -1,6 +1,7 @@
 import concurrent.futures
 import copy
 import logging
+import math
 import time
 from functools import partial
 from typing import Optional
@@ -18,6 +19,7 @@ from server.context import user_context
 
 class FAQ_LLM_DomTree(DomTree):
     PROMPT = """
+    你将得到从一个pdf文件的某一页提取出的文字内容
     判断一下内容是否属于FAQ文档，如果是，输出:True，否则输出:False
     ==================
     {page_content}
@@ -27,19 +29,15 @@ class FAQ_LLM_DomTree(DomTree):
         super().__init__(pages, debug_file, priority=2)
 
     def is_appropriate(self) -> bool:
-        text_blocks = self.extract_text_block()
-        page_content = "\n".join("".join(text_block) for text_block in text_blocks)
-        # 20240918 三次采样从开头的2000个字符，改成：文件首、中、尾的各2000个字符
-        middle_start = max(len(page_content) // 2 - 1000, 0)
-        middle_end = middle_start + 2000
-        # 为避免大模型误判，多次判断
+        sample_result = self.extract_text_average_sample()
+        # 多次采样判断
         with concurrent.futures.ThreadPoolExecutor() as executor:
             # 提交每个接口调用任务到线程池，并得到一个Future对象列表
-            vote_res = list(executor.map(partial(self._is_faq, user=user_context.get()),
-                                         [page_content[:2000], page_content[middle_start:middle_end],
-                                          page_content[-2000:]]))
-            # 三次都为FAQ才判定为FAQ
-            return all(vote_res)
+            vote_res = list(executor.map(partial(self._is_faq, user=user_context.get()), sample_result))
+            # 选择票数最多的结果
+            is_faq_doc = vote_res.count(False) <= 2
+            print(f"\n【是否按FAQ文档解析】{is_faq_doc}\n")
+            return is_faq_doc
 
     def _is_faq(self, page_content: str, *, model="gpt-4o", user: str = "") -> bool:
         prompt = self.__class__.PROMPT.format(page_content=page_content)
@@ -141,6 +139,35 @@ class FAQ_LLM_DomTree(DomTree):
             a2_dict[qa.A] = qa
             q2_dict[qa.Q] = qa
         return qa_pair
+
+    def extract_text_average_sample(self):
+        """
+        抽样页数随总页数变化 示例：
+        page_count: 2
+        piece_list: [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+
+        page_count: 6
+        piece_list: [0, 0, 1, 1, 2, 3, 3, 4, 4, 5]
+
+        page_count: 10
+        piece_list: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        page_count: 20
+        piece_list: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+        """
+        page_count = len(self.debug_file)
+        # 抽样次数
+        piece_num = 10
+        piece = page_count / piece_num
+        piece_list = [math.floor(piece * i) for i in range(piece_num)]
+        # 抽样结果
+        sample_result = []
+
+        for page_num in piece_list:
+            page = self.debug_file.load_page(page_num)  # 加载页面
+            text = page.get_text()  # 提取文字
+            sample_result.append(text)
+        return sample_result
 
     def extract_text_block(self) -> list[list[str]]:
         searched_block = set()

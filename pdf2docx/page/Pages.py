@@ -168,7 +168,7 @@ def identify_header(raw_pages: list):
 
     # 所有疑似页眉元素
     possible_header_list = []
-    for page_header_list in all_header_list:
+    for page_header_list in all_header_list[:30]:  # 考虑性能，只拿前30页的元素来认定
         possible_header_list.extend(page_header_list)
 
     # 开始纵向对比，确定页眉元素
@@ -233,7 +233,7 @@ def identify_footer(raw_pages: list):
 
     # 所有疑似页脚元素
     possible_footer_list = []
-    for page_footer_list in all_footer_list:
+    for page_footer_list in all_footer_list[:30]:  # 考虑性能，只拿前30页的元素来认定
         possible_footer_list.extend(page_footer_list)
 
     # 开始纵向对比，确定页脚元素
