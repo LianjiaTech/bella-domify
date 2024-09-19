@@ -506,8 +506,10 @@ def evaluation_single(logger_badcase, file_name, parser=""):
 
     # 标注结果获取
     label_tree = load_json("label_json/" + file_name + '_GT_label.json')
-    pc_edges_label = get_pc_edges_label("root", label_tree["root"])
     label_nodes = tree2list_label("1", label_tree["root"])
+    # 父子边
+    pc_edges_label = get_pc_edges_label("root", label_tree["root"])
+
 
     # 找到映射关系
     mapping, edit_dist_all_nodes = find_mapping(logger_badcase, file_name, parser_nodes, label_nodes)
