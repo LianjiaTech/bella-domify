@@ -49,12 +49,8 @@ class TextBlockModel(BaseModel):
 
     @computed_field
     @property
-    def image_base64_str(self) -> Union[str, None]:
-        # if self.block_type == "image":
-        #     image_span = self._block.lines.image_spans[0]
-        #     bytes = image_span.image_span.image
-        #     return base64.b64encode(bytes).decode('utf-8')
-        return None
+    def image_s3_link(self) -> Union[str, None]:
+        return self._block.image_s3_link
 
 
 class TextBlockExtend(RelationElement, BlockExtend):
