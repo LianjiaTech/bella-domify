@@ -452,7 +452,11 @@ class Blocks(ElementCollection):
             .. note::
                 left_x: Page 的文本的左边界
             """
-            return (block.bbox[0] - left_x) > 1.5 * (block.bbox[2] - block.bbox[0]) / len(block.text)
+            if isinstance(block, Lines):
+                word_w = (block[0].bbox[2] - block[0].bbox[0]) / len(block[0].text)
+            else:
+                word_w = (block.bbox[2] - block.bbox[0]) / len(block.text)
+            return (block.bbox[0] - left_x) > 1.5 * word_w
         
         def is_center_aligned(block, left_x, right_x):
             """判断是否是居中对齐的文本块。判断 block 左右边界是否在 Column 的中间
@@ -462,7 +466,7 @@ class Blocks(ElementCollection):
             return right_x > 0 and (block.bbox[2] - block.bbox[0]) / (right_x - left_x + 1e-6) < 0.9 and \
                 abs((block.bbox[2] + block.bbox[0]) - (right_x + left_x)) < 5
         
-        def cal_text_border_group(blocks):
+        def cal_text_border_group(blocks, ref_dis):
             """对 blocks 根据行间距分组，按照分组计算行的左右边界，以及是否有缩进。
             
             Args:
@@ -478,7 +482,11 @@ class Blocks(ElementCollection):
             def _flush(tmp_blocks, group_blocks):
                 if tmp_blocks:
                     x_p = (min([int(tb[1].bbox[0]) for tb in tmp_blocks]), max([int(tb[1].bbox[2]) for tb in tmp_blocks]))
-                    _retraction = any([is_retraction(tb[1], x_p[0]) for tb in tmp_blocks])
+                    # temp_blocks 中可能一行的文本被分成多个 Line，因此需要合并后再计算是否有缩进
+                    tmp_lines = Lines()
+                    [tmp_lines.append(tb[1]) for tb in tmp_blocks]
+                    rows = tmp_lines.group_by_physical_rows()   # 同一行的多个 Line 合并到一个 row 中
+                    _retraction = any([is_retraction(r, x_p[0]) for r in rows])
                     for tb in tmp_blocks:
                         group_blocks[tb[0]] = (x_p, _retraction)
                     tmp_blocks.clear()
@@ -495,10 +503,12 @@ class Blocks(ElementCollection):
                     # 当前行和前一行的行距和之前的行距差不多表示是同一个 block
                     elif pre_pre_line and vertical_distance(pre_line, block) - vertical_distance(pre_pre_line, pre_line) < 3:
                         pass
+                    elif vertical_distance(pre_line, block) <= ref_dis:
+                        pass
                     else:
                         _flush(tmp_blocks, group_blocks)
                     tmp_blocks.append((i, block))
-                _flush(tmp_blocks, group_blocks)
+            _flush(tmp_blocks, group_blocks)
             return group_blocks
         
         # create text block based on lines
@@ -517,11 +527,10 @@ class Blocks(ElementCollection):
         if text_blocks := [block for block in self._instances if not isinstance(block, TableBlock)]:
             g_text_left_x = min([int(block.bbox[0]) for block in text_blocks])
             g_text_right_x = max([int(block.bbox[2]) for block in text_blocks])
-
-        group_blocks = cal_text_border_group(self._instances)
         
         # check line by line
         ref_dis = common_vertical_spacing()
+        group_blocks = cal_text_border_group(self._instances, ref_dis)
         for idx, block in enumerate(self._instances):
             # if current is a table block:
             # - finish previous text block; and
@@ -537,6 +546,8 @@ class Blocks(ElementCollection):
                 pre_vec_dis = vertical_distance(lines[-2], ref_line) if len(lines) > 1 else None
                 next_vec_dis = vertical_distance(block, self._instances[idx+1]) if idx < len(lines)-1 else None
 
+                word_w = (block.bbox[2] - block.bbox[0]) / len(block.text)
+
                 # first line or in same row with previous line: needn't to create new text block
                 if not ref_line or ref_line.in_same_row(block):
                     start_new_block = False
@@ -546,6 +557,10 @@ class Blocks(ElementCollection):
                 # 判断是否是有序列表or无序列表开头
                 elif block.is_list:
                     start_new_block = True
+                # 列表缩进特殊处理，不能走下面的缩进逻辑
+                elif lines[0].is_list and group_blocks[idx][0][0] - lines[-1].bbox[2] < 1.5 * word_w \
+                        and block.bbox[0] - lines[0].bbox[0] < (word_w * (len(lines[0].list_tag) + 1.5)):
+                    start_new_block = False
                 # 前一句结尾未结束标点
                 elif re.match(r".*[,，'‘“;；、·\-\[{(（【《<]$", ref_line.text):
                     start_new_block = False

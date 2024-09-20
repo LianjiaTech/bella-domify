@@ -42,7 +42,8 @@ class Lines(ElementCollection):
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)个\s*",
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)阶段\s*",
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)层面\s*",
-        r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)方面\s*"
+        r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)方面\s*",
+        r".*\s*(.)\1{9,}\s*\d+\s*$"                            # 目录项
     ]
 
     @property
@@ -73,7 +74,7 @@ class Lines(ElementCollection):
             if not s:
                 return False, None
             # 定义一个正则表达式模式，匹配非字母数字、空格、中文字符和常用标点符号
-            pattern = re.compile(r'^[^\w\s\u4e00-\u9fff.,!?;:\[\]()\\/\'"“”‘’]')
+            pattern = re.compile(r'^[^\w\s\u4e00-\u9fff.,!?;:\[\](){}\\/\'"“”‘’]')
             if match := pattern.match(s):
                 return True, match.group(0)
             return False, None
