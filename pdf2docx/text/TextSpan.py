@@ -121,13 +121,7 @@ class TextSpan(Element):
         self.font = font_name
 
         # compute text length under new font with that size
-        try:
-            font = fitz.Font(font_name)
-        except RuntimeError:
-            # 'Arial.ttf'，路径为 'document_parse/resource/Arial.ttf'
-            font = fitz.Font(
-                fontfile=os.path.join(os.getcwd().split('document_parse')[0], 'document_parse', 'resource', 'Arial.ttf')
-            )
+        font = fitz.Font(font_name)
         new_length = font.text_length(self.text, fontsize=self.size)
         if new_length > self.bbox.width:
             self.size *= self.bbox.width / new_length

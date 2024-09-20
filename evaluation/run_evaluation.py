@@ -356,6 +356,18 @@ def tree2list_label(order_num, tree):
     return nodes
 
 
+def clean_text(text):
+    # 去除空格、制表符、换行符
+    text = re.sub(r'\s+', '', text)
+    # 判断是否目录，类似于"..........100"
+    pattern = re.compile(r'(.)\1{9,}')
+    if bool(pattern.search(text)):
+        text = re.sub(r'\.{2,}', '<目录体中连续点点点>', text)
+        print(text)
+
+    return text
+
+
 def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
     """找到两棵树之间的映射关系"""
     parser_nodes = copy.deepcopy(parser_nodes_ori)
@@ -374,10 +386,12 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
             raise
         mapping[label_node["order_num"]] = []
 
-        lable_text = re.sub(r'\s+', '', label_node["text"])
+        # 清洗lable_text
+        lable_text = clean_text(label_node["text"])
         lable_page = label_node["page_num"]
         for parser_node in parser_nodes:
-            parser_text = re.sub(r'\s+', '', parser_node["text"])
+            # 清洗parser_text
+            parser_text = clean_text(parser_node["text"])
             parser_page = parser_node["page_num"]
             if lable_page != parser_page:
                 continue
