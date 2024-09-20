@@ -253,7 +253,7 @@ def tree2list_ali(parser_json):
         text = element["text"].replace(" ", "")
         page_num = element["pageNum"][0]
 
-        if not text:
+        if not text and not (type == "figure" or subType == "picture"):
             continue
         if type in ["head", "head_image", "head_pagenum", "header_line",
                     "foot", "foot_image", "foot_pagenum", ]:
@@ -273,6 +273,7 @@ def tree2list_ali(parser_json):
                 layout_type = "TableName"
             elif type == "figure":
                 layout_type = "Figure"
+                text = "<image>"
             else:
                 raise
 
@@ -393,7 +394,7 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
             # 清洗parser_text
             parser_text = clean_text(parser_node["text"])
             parser_page = parser_node["page_num"]
-            if lable_page != parser_page:
+            if lable_page != -1 and lable_page != parser_page:  # label页码如果标记为-1，即可此处不做页码限制
                 continue
             edit_dist = round(edit_distance(lable_text, parser_text), 2)
             if edit_dist >= 0.8:  # 编辑距离在2以内
@@ -689,28 +690,29 @@ def main():
 
 
 if __name__ == "__main__":
+    logger_tmp = log_setting("reports/tmp.txt")
 
     # 单个文件 ---------------------------------------------------
-    # evaluation_single("《贝壳入职管理制度》5页", "beike")
-    # evaluation_single("《贝壳入职管理制度》5页", "ali")
-
-    # evaluation_single("《贝壳离职管理制度V3.0》5页", "beike")
-    # evaluation_single("《贝壳离职管理制度V3.0》5页", "ali")
-
-    # evaluation_single("中文论文Demo中文文本自动校对综述_4页", "beike")
-    # evaluation_single("中文论文Demo中文文本自动校对综述_4页", "ali")
-
-    # evaluation_single("自制_4页", "beike")
-    # evaluation_single("自制_4页", "ali")
+    # evaluation_single(logger_tmp, "《贝壳入职管理制度》5页", "beike")
+    # evaluation_single(logger_tmp, "《贝壳入职管理制度》5页", "ali")
     #
-    # evaluation_single("花桥学院业务核算指引_6页", "beike")
-    # evaluation_single("花桥学院业务核算指引_6页", "ali")
+    # evaluation_single(logger_tmp, "《贝壳离职管理制度V3.0》5页", "beike")
+    # evaluation_single(logger_tmp, "《贝壳离职管理制度V3.0》5页", "ali")
     #
-    # evaluation_single("英文论文Demo_前3页", "beike")
-    # evaluation_single("英文论文Demo_前3页", "ali")
+    # evaluation_single(logger_tmp, "中文论文Demo中文文本自动校对综述_4页", "beike")
+    # evaluation_single(logger_tmp, "中文论文Demo中文文本自动校对综述_4页", "ali")
     #
-    # evaluation_single("评测文件9-博学_13页", "beike")
-    # evaluation_single("评测文件9-博学_13页", "ali")
+    # evaluation_single(logger_tmp, "自制_4页", "beike")
+    # evaluation_single(logger_tmp, "自制_4页", "ali")
+    #
+    # evaluation_single(logger_tmp, "花桥学院业务核算指引_6页", "beike")
+    # evaluation_single(logger_tmp, "花桥学院业务核算指引_6页", "ali")
+    #
+    # evaluation_single(logger_tmp, "英文论文Demo_前3页", "beike")
+    # evaluation_single(logger_tmp, "英文论文Demo_前3页", "ali")
+    #
+    # evaluation_single(logger_tmp, "评测文件9-博学_13页", "beike")
+    # evaluation_single(logger_tmp, "评测文件9-博学_13页", "ali")
 
     main()
 
