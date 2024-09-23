@@ -16,7 +16,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.3.13'
+        version = '0.1.4.0'
 
         """
         发包命令：
@@ -35,6 +35,14 @@ def get_version(fname):
         version = '0.1.3.11'  20240919   image_s3_link属性丢失问题修复；
         version = '0.1.3.12'  20240920   特殊字体的默认读入设置改为Helvetica；
         version = '0.1.3.13'  20240923   block切分准确率：0.96；
+        
+        version = '0.1.4.0'  20240923   block优化里程碑（同0.1.3.13）；
+        ----------------------------------------
+        block切分准确率：		0.96  (425 / 442)
+        版面元素准确率：		0.40  (176.0 / 442)
+        层级结构准确率：		0.65  (273 / 423)
+        
+        
         
         """
 
