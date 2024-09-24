@@ -8,7 +8,7 @@ from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
 from pdf2docx.extend.table.RowExtend import RowExtendModel
 from pdf2docx.extend.table.RowsExtend import RowsExtend
-from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend
+from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend, BaseBlockModel
 from pdf2docx.table.TableBlock import TableBlock
 
 
@@ -21,7 +21,7 @@ def search_caption(block: TextBlockExtend):
     return match[0] if match else None
 
 
-class TableBlockModel(BaseModel):
+class TableBlockModel(BaseBlockModel):
     _block: TableBlockExtend = PrivateAttr()
     _order_num: str = PrivateAttr()
     block_type: str = "table"

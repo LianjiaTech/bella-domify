@@ -128,7 +128,7 @@ def tree2list_beike(tree):
 
     if tree.get("element"):
         node_type = tree.get("element", {}).get("block_type")
-        layout_type = beike_layout_map[node_type]
+        layout_type = tree.get("element", {}).get("layout_type")
         page_num = node.get("element", {})["page_num"][0]
         if node_type == "text":
             text = node.get("element", {}).get("text", "")
@@ -526,13 +526,15 @@ def evaluation_single(logger_badcase, file_name, parser=""):
     pc_edges_label = get_pc_edges_label("root", label_tree["root"])
 
 
-    # 找到映射关系
+    # 映射关系 和 block切分正确率
     mapping, edit_dist_all_nodes = find_mapping(logger_badcase, file_name, parser_nodes, label_nodes)
     mapping = dict(sorted(mapping.items(), reverse=False))
     # print(json.dumps(mapping, indent=2, ensure_ascii=False))
 
+    # 版面元素正确率
     confusion_matrix = evaluate_layout(mapping, label_nodes, parser_nodes)
 
+    # 层级关系正确率
     struct_right_cnt, struct_all_count, right_mapping = cal_structure_accuracy(pc_edges_label, pc_edges_parser, mapping, file_name)
 
     return confusion_matrix, edit_dist_all_nodes, mapping, struct_right_cnt, struct_all_count, right_mapping
@@ -637,9 +639,9 @@ def evaluation(parser_name):
     # 每种类型的准确率
     cal_accuracy(total_confusion_matrix)
 
-    print("找到的父子节点：")
-    for k, v in struct_mapping.items():
-        print(k+"的父节点"+v)
+    # print("找到的父子节点：")
+    # for k, v in struct_mapping.items():
+    #     print(k+"的父节点"+v)
 
 
     # print("全部文档非1v1映射节点数：", len([x for x in edit_dist_allfile if x == 0]))

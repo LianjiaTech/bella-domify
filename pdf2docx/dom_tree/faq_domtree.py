@@ -21,8 +21,11 @@ class FAQ_LLM_DomTree(DomTree):
     PROMPT = """
     你将得到从一个pdf文件的某一页提取出的文字内容
     判断一下内容是否属于FAQ文档，如果是，输出:True，否则输出:False
+    如果返回的文字内容是空，输出True
+    直接输出True或者False，不要输出包括理由等其他任何字符；
     ==================
-    {page_content}
+    文字内容：{page_content}
+    ==================
     """
 
     def __init__(self, pages: PagesExtend, debug_file=None, fitz_doc=None):

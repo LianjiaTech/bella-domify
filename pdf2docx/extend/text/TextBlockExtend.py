@@ -12,15 +12,49 @@ from pdf2docx.text.TextBlock import TextBlock
 from server.task_executor import s3
 
 
-class TextBlockModel(BaseModel):
+class BaseBlockModel(BaseModel):
+    class Config:
+        arbitrary_types_allowed = True
+
+    @computed_field
+    @property
+    def layout_type(self) -> str:
+        block_type_mapping = {
+            # "Catalog": "text",
+            "Title": "text",
+            # "List": "text",
+            "Formula": "text",
+            "Code": "text",
+            "Text": "text",
+
+            # "Figure": "image",
+            "FigureName": "text",
+            "FigureNote": "text",
+
+            # "Table": "table",
+            "TableName": "text",
+            "TableNote": "text",
+        }
+        # 所属部分 优先级最高
+        if self._block.is_catalog:
+            return "Catalog"
+        # 元素类型
+        elif self.block_type == "image":
+            return "Figure"
+        elif self._block.is_table_block:
+            return "Table"
+        elif self._block.block.list_type():
+            return "List"
+        else:
+            return "Text"
+
+
+class TextBlockModel(BaseBlockModel):
     _block: TextBlockExtend
 
     def __init__(self, block):
         super().__init__()
         self._block = block
-
-    class Config:
-        arbitrary_types_allowed = True
 
     @computed_field
     @property
