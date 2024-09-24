@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pdf2docx.extend.common.RelationConstruct import RelationElement
 from pdf2docx.image.ImageSpan import ImageSpan
 import re
@@ -7,11 +5,11 @@ import re
 
 def search_caption(block):
     '''Check if block is table caption.'''
-    """for figure caption, it should contains word like 图， Figure, Fig, 
-    with zeor or more space and zero or more number"""
-    pattern = r'(图|Figure|Fig)[\s]*[0-9]+'
-    match = re.match(pattern, block.block.text)
-    return match[0] if match else None
+    pattern = r'^\s*(图|Figure|figure|Fig|fig)\s*[0-9|-]+'
+    if block and (match := re.match(pattern, block.block.text)):
+        block.is_figure_name = 1
+        return match[0]
+    return None
 
 
 class ImageSpanExtend(RelationElement):

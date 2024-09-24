@@ -43,6 +43,10 @@ class BaseBlockModel(BaseModel):
             return "Figure"
         elif self._block.is_table_block:
             return "Table"
+        elif self._block.is_table_name:
+            return "TableName"
+        elif self._block.is_figure_name:
+            return "FigureName"
         elif self._block.block.list_type():
             return "List"
         else:
@@ -98,6 +102,11 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.next_continuous_paragraph: Optional[TextBlockExtend] = None
         self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
         self.metadata = metadata
+        self.image_s3_link = None
+        self.is_catalog = 0
+        self.page_num = 0  # -1:无页码
+        self.is_table_name = 0
+        self.is_figure_name = 0
 
     @property
     def text(self):

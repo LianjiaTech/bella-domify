@@ -2,7 +2,7 @@ from __future__ import annotations
 import re
 from typing import Optional, List
 
-from pydantic import BaseModel, computed_field, PrivateAttr
+from pydantic import computed_field, PrivateAttr
 
 from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
@@ -14,11 +14,11 @@ from pdf2docx.table.TableBlock import TableBlock
 
 def search_caption(block: TextBlockExtend):
     '''Check if block is table caption.'''
-    """for table caption, it should contains word like 表， 图表, table, Table, tab, Tab, 
-    with zeor or more space and zero or more number"""
-    pattern = r'(表|图表|table|Table|tab|Tab)[\s]*[0-9]+'
-    match = re.match(pattern, block.block.text)
-    return match[0] if match else None
+    pattern = r'^\s*(表|图表|table|Table|tab|Tab)\s*[0-9|-]+'
+    if block and (match := re.match(pattern, block.block.text)):
+        block.is_table_name = 1
+        return match[0]
+    return None
 
 
 class TableBlockModel(BaseBlockModel):
