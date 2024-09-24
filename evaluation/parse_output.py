@@ -79,12 +79,12 @@ def output(dom_tree_model, file_name):
     sorted_data = sort_json(json_compatible_data)
     json_string = json.dumps(sorted_data, ensure_ascii=False, indent=4)
 
-    print(json_string)
+    # print(json_string)
 
     json_dir = root_dir + "evaluation/parse_json/beike/"
     with open(json_dir + file_name + '_beike.json', 'w', encoding='utf-8') as file:
         # json.dump(sorted_data, file, indent=4, ensure_ascii=False)
-        print(sorted_data)
+        # print(sorted_data)
         json_str = json.dumps(sorted_data, ensure_ascii=False, separators=(',', ':'))
 
         file.write(json_str)

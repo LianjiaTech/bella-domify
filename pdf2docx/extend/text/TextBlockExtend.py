@@ -21,11 +21,11 @@ class BaseBlockModel(BaseModel):
     def layout_type(self) -> str:
         block_type_mapping = {
             # "Catalog": "text",
-            "Title": "text",
+            # "Title": "text",
             # "List": "text",
             "Formula": "text",
             "Code": "text",
-            "Text": "text",
+            # "Text": "text",
 
             # "Figure": "image",
             "FigureName": "text",
@@ -47,8 +47,10 @@ class BaseBlockModel(BaseModel):
             return "TableName"
         elif self._block.is_figure_name:
             return "FigureName"
-        elif self._block.block.list_type():
-            return "List"
+        elif self._block.is_title:
+            return "Title"
+        # elif self._block.block.list_type():
+        #     return "List"
         else:
             return "Text"
 

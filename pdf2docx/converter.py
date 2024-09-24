@@ -342,7 +342,8 @@ class Converter:
 
         debug_file = fitz.Document(self.filename_pdf) if settings['debug'] else None
         # 筛选出最合适最合适的dom_tree
-        dom_trees = [FAQ_LLM_DomTree(self.pages_extend, debug_file, self._fitz_doc), DomTree(self.pages_extend, debug_file)]
+        dom_trees = [FAQ_LLM_DomTree(self.pages_extend, debug_file, self._fitz_doc),
+                     DomTree(self.pages_extend, debug_file, self._fitz_doc)]
         dom_tree = max((dom_tree_i for dom_tree_i in dom_trees if dom_tree_i.is_appropriate()),
                        key=lambda x: x.priority)
         dom_tree.parse(**settings)  # 开始解析

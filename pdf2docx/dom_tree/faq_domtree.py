@@ -7,6 +7,7 @@ from functools import partial
 from typing import Optional
 
 import openai
+import requests
 import textdistance
 
 from pdf2docx.dom_tree.domtree import DomTree, Node
@@ -29,8 +30,7 @@ class FAQ_LLM_DomTree(DomTree):
     """
 
     def __init__(self, pages: PagesExtend, debug_file=None, fitz_doc=None):
-        super().__init__(pages, debug_file, priority=2)
-        self._fitz_doc = fitz_doc
+        super().__init__(pages, debug_file, fitz_doc, priority=2)
 
     def is_appropriate(self) -> bool:
         sample_result = self.extract_text_average_sample()
@@ -54,11 +54,15 @@ class FAQ_LLM_DomTree(DomTree):
                     temperature=0.001,
                     top_p=0.01,
                     model=model,
-                    user=user
+                    user=user,
+                    timeout=20  # 超时时间为30秒
                 )
             except openai.RateLimitError:
                 max_retry -= 1
                 time.sleep(10)
+            except requests.exceptions.Timeout:
+                logging.error("请求超时")
+                break
             except Exception as e:
                 logging.error("openai chat error: %s", e)
                 break

@@ -3,6 +3,7 @@ from __future__ import annotations
 import concurrent.futures
 import logging
 import re
+import fitz
 from typing import List, Optional
 from typing import Union, Any
 
@@ -127,11 +128,12 @@ class DomTreeModel(BaseModel):
 
 
 class DomTree:
-    def __init__(self, pages: PagesExtend, debug_file=None, *, priority=0):
+    def __init__(self, pages: PagesExtend, debug_file=None, fitz_doc=None, *, priority=0):
         self.root = Node(None, None, None, is_root=True)
         self.elements = []
         self.node_dict = {}  # element->node
         self.debug_file = debug_file
+        self._fitz_doc = fitz_doc
         self._priority = priority
         debug_pages = [page for page in debug_file.pages()] if debug_file else None
         for index, page in enumerate(pages):
@@ -147,7 +149,7 @@ class DomTree:
                         else:
                             self.elements.append((block, page, None))
 
-    def parse_catalog(self):
+    def parse_catalog(self, need_filter=False):
         """
         目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
         """
@@ -196,14 +198,35 @@ class DomTree:
         else:
             print("\n【未识别到目录】\n")
 
-        # todo 暂时去除目录
-        self.elements = [(block, page, debug_page)
-                         for block, page, debug_page in self.elements
-                         if type(block) != TextBlockExtend or not block.is_catalog]
+        if need_filter:
+            self.elements = [(block, page, debug_page)
+                             for block, page, debug_page in self.elements
+                             if type(block) != TextBlockExtend or not block.is_catalog]
 
         logging.info('parser_catalog [finish]')
 
         return
+
+    def get_title_list(self):
+        title_list = []  # 从目录提取出的title
+        toc_data = fitz.utils.get_toc(self._fitz_doc)
+        for item in toc_data:
+            level, title, page = item
+            title_list.append(title.strip().replace(' ', ''))
+        return title_list
+
+    def parse_title(self):
+        """
+        元素识别，title
+        """
+        title_list = self.get_title_list()
+        for block, page, debug_page in self.elements:
+            if type(block) != TextBlockExtend:
+                continue
+
+            text = block.text.strip().replace(' ', '')
+            if text in title_list:
+                block.is_title = 1
 
     def is_appropriate(self) -> bool:
         """
@@ -242,8 +265,9 @@ class DomTree:
     def parse(self, **settings):
 
         # 先解析目录
-        if settings.get("filter_cover") != False:
-            self.parse_catalog()
+        self.parse_catalog(settings.get("filter_cover"))
+
+        self.parse_title()
 
         # 初始化
         stack_path: List[Node] = [self.root]
