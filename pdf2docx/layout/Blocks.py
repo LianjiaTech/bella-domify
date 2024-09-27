@@ -24,6 +24,15 @@ from ..image.ImageBlock import ImageBlock
 from ..table.TableBlock import TableBlock
 
 
+def is_center_aligned(block, left_x, right_x):
+    """判断是否是居中对齐的文本块。判断 block 左右边界是否在 Column 的中间
+    1. 文本宽度小于总宽度的 90%
+    2. 文本中心与 Column 中心的距离小于 5
+    """
+    return right_x > 0 and (block.bbox[2] - block.bbox[0]) / (right_x - left_x + 1e-6) < 0.9 and \
+        abs((block.bbox[2] + block.bbox[0])/2 - (right_x + left_x)/2) < 30  # 中线相差50像素
+
+
 class Blocks(ElementCollection):
     '''Block collections.'''
     def __init__(self, instances:list=None, parent=None):
@@ -266,7 +275,10 @@ class Blocks(ElementCollection):
 
         # split text block by checking text
         blocks = self._split_text_block_vertically(blocks)
-        
+
+        # 根据字体等识别title
+        blocks = self._identify_title(blocks)
+
         self.reset(blocks)
 
 
@@ -458,14 +470,6 @@ class Blocks(ElementCollection):
                 word_w = (block.bbox[2] - block.bbox[0]) / len(block.text)
             return (block.bbox[0] - left_x) > 1.5 * word_w
         
-        def is_center_aligned(block, left_x, right_x):
-            """判断是否是居中对齐的文本块。判断 block 左右边界是否在 Column 的中间
-            1. 文本只有最长的 90%
-            2. 文本中心与 Column 中心的距离小于 5
-            """
-            return right_x > 0 and (block.bbox[2] - block.bbox[0]) / (right_x - left_x + 1e-6) < 0.9 and \
-                abs((block.bbox[2] + block.bbox[0]) - (right_x + left_x)) < 5
-        
         def cal_text_border_group(blocks, ref_dis):
             """对 blocks 根据行间距分组，按照分组计算行的左右边界，以及是否有缩进。
             
@@ -626,6 +630,52 @@ class Blocks(ElementCollection):
                 blocks.append(text_block)
         return blocks
 
+    @staticmethod
+    def _identify_title(instances: list):
+        '''
+        '''
+        blocks = []  # type: list[TextBlock]
+        if any([block.is_text_block for block in instances]):
+            # 计算文本行完整的左右边界
+            text_left_x = min([block.bbox[0] for block in instances if block.is_text_block])
+            text_right_x = max([block.bbox[2] for block in instances if block.is_text_block])
+
+        for block, next_block in zip(instances, instances[1:]):
+            # add block if this isn't a text block
+            if not block.is_text_block:
+                blocks.append(block)
+                continue
+
+            # 当前行的字体、字号、粗体信息
+            cur_font, cur_font_size, cur_font_bold = None, None, False
+            if block.lines and block.lines[-1].spans and isinstance((first_span := block.lines[-1].spans[0]), TextSpan):
+                cur_font, cur_font_size, cur_font_bold = first_span.font, first_span.size, \
+                    bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
+            cur_is_center = is_center_aligned(block, text_left_x, text_right_x)
+
+            if not next_block.is_text_block:
+                if cur_is_center:
+                    block.is_title = 1
+                blocks.append(block)
+                continue
+
+            # 下一行的字体、字号、粗体信息
+            next_font, next_font_size, next_font_bold = None, None, False
+            if next_block.lines[-1].spans and isinstance((next_last_span := next_block.lines[-1].spans[-1]), TextSpan):
+                next_font, next_font_size, next_font_bold = next_last_span.font, next_last_span.size, \
+                    bool(next_last_span.flags & 2 ** 4) or next_last_span.pseudo_bold
+
+            # 判断是否有变化
+            if cur_is_center and (
+                    (next_font_size and cur_font_size and abs(cur_font_size - next_font_size) > 0)  # 两行相比 字号变小了
+                    or (cur_font_bold and not next_font_bold)                                       # 两行相比 加粗变没了
+                    or (cur_font and next_font and cur_font != next_font)                           # 两行相比 字体变化了
+            ):
+                block.is_title = 1
+            blocks.append(block)
+
+        blocks.append(instances[-1])  # 最后一行暂时无法判断是否title
+        return blocks
 
     def _parse_block_horizontal_spacing(self, *args):
         '''Calculate external horizontal space for text blocks, i.e. alignment mode and left spacing 

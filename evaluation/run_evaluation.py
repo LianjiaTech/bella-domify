@@ -129,6 +129,8 @@ def tree2list_beike(tree):
     if tree.get("element"):
         node_type = tree.get("element", {}).get("block_type")
         layout_type = tree.get("element", {}).get("layout_type")
+
+
         page_num = node.get("element", {})["page_num"][0]
         if node_type == "text":
             text = node.get("element", {}).get("text", "")
@@ -137,6 +139,10 @@ def tree2list_beike(tree):
             text = " | ".join(cell["text"] for row in rows for cell in row.get("cells"))
         else:
             text = "<image>"
+
+        has_child = 1 if tree.get("child") else 0
+        if layout_type == "Text" and has_child and len(text) < 20:
+            layout_type = "Title"
 
         order_num = node.get("order_num")
 

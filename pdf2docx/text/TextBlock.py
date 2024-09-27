@@ -39,6 +39,7 @@ from ..image.ImageSpan import ImageSpan
 
 class TextBlock(Block):
     '''Text block.'''
+    is_title = 0
 
     def __init__(self, raw: dict = None, first_line_start_of_paragraph: bool = False, last_line_end_of_paragraph: bool = False):
         raw = raw or {}
