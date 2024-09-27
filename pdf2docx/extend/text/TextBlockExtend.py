@@ -105,7 +105,6 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
         self.metadata = metadata
         self.image_s3_link = None
-        self.is_catalog = 0
         self.page_num = 0  # -1:无页码
         self.is_table_name = 0
         self.is_figure_name = 0
@@ -129,6 +128,10 @@ class TextBlockExtend(RelationElement, BlockExtend):
     @property
     def is_table_block(self):
         return False
+    
+    @property
+    def is_catalog(self):
+        return any([line.is_catalog for line in self.lines])
 
     def get_image_s3_link(self):
         if self.is_image_block:

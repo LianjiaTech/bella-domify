@@ -14,8 +14,8 @@ from ..font.Fonts import Fonts
 from ..shape.Shape import Stroke
 from ..layout.Blocks import Blocks
 
-FREQUENCY_THRESHOLD_TIMES = 2       # 频次阈值
-FREQUENCY_THRESHOLD_RATE = 0.4      # 频率阈值 原因：某些文档单双页的页眉不同，所以该值要小于0.5
+FREQUENCY_THRESHOLD_TIMES = 2  # 频次阈值
+FREQUENCY_THRESHOLD_RATE = 0.4  # 频率阈值 原因：某些文档单双页的页眉不同，所以该值要小于0.5
 
 
 class Pages(BaseCollection):
@@ -97,11 +97,13 @@ class Pages(BaseCollection):
         _parser_header_and_footer(raw_pages)
 
         # 封面解析
-        if settings.get("filter_catalog") != False:
-            _parser_cover(raw_pages, pages)
+        _parser_cover(raw_pages, pages, settings.get("filter_cover"))
+
+        # 目录解析
+        parse_catalog(raw_pages, pages, settings.get("filter_catalog"))
 
 
-def _parser_cover(raw_pages: list, pages: list):
+def _parser_cover(raw_pages: list, pages: list, need_filter=False):
     """判断是否为封面
     只解析第一页。判断为封面条件为：首先去掉图片，然后判断空白区域 > 50% 则为封面
     """
@@ -129,12 +131,67 @@ def _parser_cover(raw_pages: list, pages: list):
     if is_cover:
         for line in raw_pages[0].blocks:
             line.tags["Cover"] = 1
-        # TODO 暂时删除封面
-        raw_pages.pop(0)
-        pages.pop(0)
+        if need_filter:
+            raw_pages.pop(0)
+            pages.pop(0)
 
     print("\n【识别封面结果】" + ("存在\n" if is_cover else "不存在\n"))
     logging.info('parser_cover [finish]')
+
+
+def parse_catalog(raw_pages, pages, need_filter=False):
+    """
+    目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
+    """
+    logging.info('parse_catalog [start]')
+
+    pattern = re.compile(r'(.)\1{9,}\d+')
+    found_catalog = False
+    catalog_blocks = []
+    previous_blocks = None
+
+    search_range = max(3, len(raw_pages) // 3)
+    blocks_list = [r for page in raw_pages[:search_range] for r in page.blocks.group_by_physical_rows(sorted=True)]
+    for blocks in blocks_list:
+        text = "".join([block.text.strip().replace(' ', '') for block in blocks])
+        if len(pattern.findall(text)) >= 3:  # 如果在一个block找到多次匹配，那么命中了包含多行目录体的block
+            found_catalog = True
+            catalog_blocks.append(blocks)
+            if is_catalog_title(previous_blocks):
+                catalog_blocks.insert(0, previous_blocks)
+            continue
+
+        if pattern.search(text):
+            catalog_blocks.append(blocks)
+            if len(catalog_blocks) == 3:
+                # 检查前一个line是否是"目录"两个字
+                if is_catalog_title(previous_blocks):
+                    catalog_blocks.insert(0, previous_blocks)
+        else:
+            # 目录已找全
+            if len(catalog_blocks) >= 3 or found_catalog:
+                break
+            # 并非真正目录，重置，继续寻找
+            else:
+                catalog_blocks = []
+                previous_blocks = blocks
+
+    # 目录识别结果打印
+    if len(catalog_blocks) >= 3 or found_catalog:
+        print("\n【识别目录结果】\n")
+        page_lines = {str(r.bbox): r for page in raw_pages[:search_range] for r in page.blocks}
+        for c_blocks in catalog_blocks:
+            if line := page_lines.get(str(c_blocks[0].bbox)):
+                line.is_catalog = 1
+            print("".join([c_block.text for c_block in c_blocks]))
+    else:
+        print("\n【未识别到目录】\n")
+
+    if need_filter:
+        catalog_blocks_bbox = [block.bbox for blocks in catalog_blocks for block in blocks]
+        for page in raw_pages[:search_range]:
+            page.blocks = [block for block in page.blocks if block.bbox not in catalog_blocks_bbox]
+    logging.info('parser_catalog [finish]')
 
 
 def _parser_header_and_footer(raw_pages: list):
@@ -144,7 +201,8 @@ def _parser_header_and_footer(raw_pages: list):
     identify_footer(raw_pages)
     for raw_page in raw_pages:
         raw_page.blocks = \
-            Blocks(instances=[line for line in raw_page.blocks if (not line.is_header and not line.is_footer)], parent=raw_page)
+            Blocks(instances=[line for line in raw_page.blocks if (not line.is_header and not line.is_footer)],
+                   parent=raw_page)
 
     logging.info('parser_header_and_footer [finish]')
 
@@ -345,3 +403,10 @@ def remove_number(text):
     # 替换所有的数字为空
     text = re.sub(r'\d+', '', text)
     return text.strip()
+
+
+def is_catalog_title(blocks):
+    """
+    目录标题判断
+    """
+    return blocks and "".join([b.text for b in blocks]).strip().replace(" ", "") in ["目录", "目次"]

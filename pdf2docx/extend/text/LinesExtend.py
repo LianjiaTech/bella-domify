@@ -18,3 +18,7 @@ class LinesExtend(ElementCollection):
     def merge(self, other: LinesExtend):
         for line in other.lines:
             self.append(LineExtend(line))
+    
+    @property
+    def is_catalog(self):
+        return any([line.is_catalog for line in self.lines])

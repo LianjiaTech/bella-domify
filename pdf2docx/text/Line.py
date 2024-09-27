@@ -57,20 +57,17 @@ class Line(Element):
         self.is_header = 0  # 是否页眉
         self.is_footer = 0  # 是否页脚
 
-
     @property
     def text(self):
         '''Joining span text. Note image is translated to a placeholder ``<image>``.'''
         spans_text = [span.text for span in self.spans]
         return ''.join(spans_text)
 
-
     @property
     def raw_text(self):
         '''Joining span text with image ignored.'''
         spans_text = [span.text for span in self.spans if isinstance(span, TextSpan)]
         return ''.join(spans_text)
-
 
     @property
     def white_space_only(self):
@@ -108,6 +105,15 @@ class Line(Element):
     @list_type.setter
     def list_type(self, list_type):
         self.tags["list_type"] = list_type
+    
+    @property
+    def is_catalog(self):
+        '''Check if this line is a catalog item.'''
+        return self.tags.get("Catalog", 0)
+    
+    @is_catalog.setter
+    def is_catalog(self, is_catalog: int):
+        self.tags["Catalog"] = is_catalog
 
     @property
     def text_direction(self):
@@ -123,12 +129,9 @@ class Line(Element):
         else:
             return TextDirection.IGNORE
 
-
     def strip(self):
         '''Remove redundant blanks at the begin/end span.'''
         return self.spans.strip()
-
-
 
     def store(self):
         res = super().store()
@@ -144,7 +147,6 @@ class Line(Element):
 
         return res
 
-
     def add(self, span_or_list):
         '''Add span list to current Line.
         
@@ -157,11 +159,9 @@ class Line(Element):
         else:
             self.add_span(span_or_list)
 
-
     def add_span(self, span:Element):
         '''Add span to current Line.'''
         self.spans.append(span)
-
 
     def intersects(self, rect):
         '''Create new Line object with spans contained in given bbox.
@@ -187,7 +187,6 @@ class Line(Element):
 
         return line
 
-
     def make_docx(self, p):
         '''Create docx line, i.e. a run in ``python-docx``.'''
         # tab stop before this line to ensure horizontal position
@@ -200,4 +199,3 @@ class Line(Element):
 
         # line break
         if self.line_break: p.add_run('\n')
-            

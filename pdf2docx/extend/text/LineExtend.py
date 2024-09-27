@@ -29,7 +29,6 @@ class LineExtend(Element, RelationElement):
     def image_spans(self):
         return [span for span in self.spans if isinstance(span, ImageSpanExtend)]
 
-
     @property
     def text(self) -> str:
         return self.line.text
@@ -37,3 +36,7 @@ class LineExtend(Element, RelationElement):
     @property
     def raw_text(self) -> str:
         return self.line.raw_text
+    
+    @property
+    def is_catalog(self):
+        return self.line.is_catalog

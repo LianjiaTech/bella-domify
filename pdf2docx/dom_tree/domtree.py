@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import concurrent.futures
-import logging
-import re
 import fitz
 from typing import List, Optional
 from typing import Union, Any
@@ -149,64 +147,6 @@ class DomTree:
                         else:
                             self.elements.append((block, page, None))
 
-    def parse_catalog(self, need_filter=False):
-        """
-        目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
-        """
-        logging.info('parse_catalog [start]')
-
-        pattern = re.compile(r'(.)\1{9,}\d+')
-        found_catalog = False
-        catalog_lines = []
-        previous_line = None
-        search_range = len(self.elements) // 3
-
-        for block, page, debug_page in self.elements[:search_range]:
-            if type(block) != TextBlockExtend:
-                continue
-            text = block.text.strip().replace(' ', '')
-
-            if len(pattern.findall(text)) >= 3:  # 如果在一个block找到多次匹配，那么命中了包含多行目录体的block
-                found_catalog = True
-                catalog_lines.append(block)
-                if is_catalog_title(previous_line):
-                    catalog_lines.insert(0, previous_line)
-                continue
-
-            if pattern.search(text):
-                catalog_lines.append(block)
-                if len(catalog_lines) == 3:
-                    # 检查前一个line是否是"目录"两个字
-                    if is_catalog_title(previous_line):
-                        catalog_lines.insert(0, previous_line)
-            else:
-                # 目录已找全
-                if len(catalog_lines) >= 3 or found_catalog:
-                    break
-                # 并非真正目录，重置，继续寻找
-                else:
-                    catalog_lines = []
-                    previous_line = block
-
-        # 目录识别结果打印
-        if len(catalog_lines) >= 3 or found_catalog:
-            print("\n【识别目录结果】\n")
-            for catalog_line in catalog_lines:
-                if catalog_line:
-                    catalog_line.is_catalog = 1
-                    print(catalog_line.text)
-        else:
-            print("\n【未识别到目录】\n")
-
-        if need_filter:
-            self.elements = [(block, page, debug_page)
-                             for block, page, debug_page in self.elements
-                             if type(block) != TextBlockExtend or not block.is_catalog]
-
-        logging.info('parser_catalog [finish]')
-
-        return
-
     def get_title_list(self):
         title_list = []  # 从目录提取出的title
         toc_data = fitz.utils.get_toc(self._fitz_doc)
@@ -263,10 +203,6 @@ class DomTree:
             executor.map(lambda text_block_extend: text_block_extend.get_image_s3_link(), tasks_to_process)
 
     def parse(self, **settings):
-
-        # 先解析目录
-        self.parse_catalog(settings.get("filter_cover"))
-
         self.parse_title()
 
         # 初始化
@@ -379,10 +315,3 @@ class DomTree:
 
         for i, child in enumerate(node.child, start=1):
             self._print_tree(child, level + 1, cur_order_str, i)
-
-
-def is_catalog_title(block):
-    """
-    目录标题判断
-    """
-    return block and ("目录" in block.text.strip().replace(' ', '') or "目次" in block.text.strip().replace(' ', ''))

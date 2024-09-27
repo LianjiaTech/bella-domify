@@ -4,7 +4,6 @@ from pdf2docx.common.Element import Element
 class BlockExtend(Element):
     def __init__(self):
         super().__init__()
-        self.is_catalog = 0
         self.page_num = 0  # -1:无页码
         self.is_title = 0
 
