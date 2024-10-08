@@ -14,6 +14,7 @@ from ..font.Fonts import Fonts
 from ..shape.Shape import Stroke
 from ..layout.Blocks import Blocks
 
+PAGE_MARGIN = 90
 FREQUENCY_THRESHOLD_TIMES = 2  # 频次阈值
 FREQUENCY_THRESHOLD_RATE = 0.4  # 频率阈值 原因：某些文档单双页的页眉不同，所以该值要小于0.5
 
@@ -111,10 +112,17 @@ def _parser_cover(raw_pages: list, pages: list, need_filter=False):
 
     raw_text = ""
     first_page_size = raw_pages[0].shapes.bbox.width * raw_pages[0].shapes.bbox.height
+    if first_page_size == 0:
+        first_page_size = max(raw_pages[0].width - PAGE_MARGIN * 2, 0) * max(raw_pages[0].height - PAGE_MARGIN * 2, 0)
     blank_size = first_page_size
     for line in raw_pages[0].blocks:
         # 不算页眉、footer、图片
-        if line.is_header or line.is_footer or line.image_spans:
+        if line.is_header or line.is_footer:
+            continue
+        # 过滤面积占比较大的图片，这部分图片可能是背景图
+        if line.image_spans:
+            if (img_size := line.bbox.width * line.bbox.height) / first_page_size < 0.6:
+                blank_size -= img_size
             continue
         # TODO 暂未考虑 line 重叠的情况
         blank_size -= (line.bbox.width * line.bbox.height)
