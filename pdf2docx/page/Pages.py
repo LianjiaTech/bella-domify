@@ -5,6 +5,7 @@
 import logging
 import re
 from collections import Counter
+import fitz
 
 from shapely.geometry import box
 
@@ -19,6 +20,15 @@ FREQUENCY_THRESHOLD_TIMES = 2  # 频次阈值
 FREQUENCY_THRESHOLD_RATE = 0.4  # 频率阈值 原因：某些文档单双页的页眉不同，所以该值要小于0.5
 
 
+def get_title_list(fitz_doc):
+    title_list = []  # 从目录提取出的title
+    toc_data = fitz.utils.get_toc(fitz_doc)
+    for item in toc_data:
+        level, title, page = item
+        title_list.append(title.strip().replace(' ', ''))
+    return title_list
+
+
 class Pages(BaseCollection):
     '''A collection of ``Page``.'''
 
@@ -29,6 +39,11 @@ class Pages(BaseCollection):
             fitz_doc (fitz.Document): ``PyMuPDF`` Document instance.
             settings (dict): Parsing parameters.
         '''
+        # 返回的元数据
+        metadata = {
+            "catalog_title_list": get_title_list(fitz_doc)
+        }
+
         # ---------------------------------------------
         # 0. extract fonts properties, especially line height ratio
         # ---------------------------------------------
@@ -75,7 +90,7 @@ class Pages(BaseCollection):
         # NOTE: blocks structure might be changed in this step, e.g. promote page header/footer,
         # so blocks structure based process, e.g. calculating margin, parse section should be 
         # run after this step.
-        Pages._parse_document(raw_pages, pages, **settings)
+        metadata = Pages._parse_document(raw_pages, pages, metadata, **settings)
 
         # ---------------------------------------------
         # 3. parse structure in page level, e.g. page margin, section
@@ -90,8 +105,10 @@ class Pages(BaseCollection):
             sections = raw_page.parse_section(**settings)
             page.sections.extend(sections)
 
+        return metadata
+
     @staticmethod
-    def _parse_document(raw_pages: list, pages: list, **settings):
+    def _parse_document(raw_pages: list, pages: list, metadata: dict, **settings):
         '''Parse structure in document/pages level, e.g. header, footer'''
 
         # 页眉页脚解析
@@ -101,7 +118,23 @@ class Pages(BaseCollection):
         _parser_cover(raw_pages, pages, settings.get("filter_cover"))
 
         # 目录解析
-        parse_catalog(raw_pages, pages, settings.get("filter_catalog"))
+        catalog_title_list = parse_catalog(raw_pages, pages, settings.get("filter_catalog"))
+        metadata["catalog_title_list"].extend(catalog_title_list)
+
+        # Title识别(根据文字内容)
+        parse_title(raw_pages, pages, metadata)
+
+        return metadata
+
+
+def parse_title(raw_pages, pages, metadata):
+    for i, page in enumerate(raw_pages):
+        for line in page.blocks:
+            text = line.text.strip().replace(' ', '')
+            if text in metadata["catalog_title_list"]:
+                line.is_in_catalog = 1
+            else:
+                line.is_in_catalog = 0
 
 
 def _parser_cover(raw_pages: list, pages: list, need_filter=False):
@@ -152,6 +185,7 @@ def parse_catalog(raw_pages, pages, need_filter=False):
     目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
     """
     logging.info('parse_catalog [start]')
+    catalog_title_list = []
 
     pattern = re.compile(r'(.)\1{9,}\d+')
     found_catalog = False
@@ -191,7 +225,10 @@ def parse_catalog(raw_pages, pages, need_filter=False):
         for c_blocks in catalog_blocks:
             if line := page_lines.get(str(c_blocks[0].bbox)):
                 line.is_catalog = 1
-            print("".join([c_block.text for c_block in c_blocks]))
+            catalog_item = "".join([c_block.text for c_block in c_blocks])
+            catalog_title = re.sub(pattern, '', catalog_item.strip().replace(' ', ''))
+            catalog_title_list.append(catalog_title)
+            print(catalog_item)
     else:
         print("\n【未识别到目录】\n")
 
@@ -200,6 +237,7 @@ def parse_catalog(raw_pages, pages, need_filter=False):
         for page in raw_pages[:search_range]:
             page.blocks = [block for block in page.blocks if block.bbox not in catalog_blocks_bbox]
     logging.info('parser_catalog [finish]')
+    return catalog_title_list
 
 
 def _parser_header_and_footer(raw_pages: list):

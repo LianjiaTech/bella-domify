@@ -37,6 +37,8 @@ class Converter:
     * Finally, generate docx with ``python-docx``.
     '''
 
+    metadata = {}
+
     def __init__(
             self, pdf_file: str = None, password: str = None, stream: bytes = None
     ):
@@ -142,7 +144,8 @@ class Converter:
         header/footer and margin.'''
         logging.info(self._color_output('[2/4] Analyzing document...'))
 
-        self._pages.parse(self.fitz_doc, **kwargs)
+        self.metadata = self._pages.parse(self.fitz_doc, **kwargs)
+
         return self
 
     def parse_pages(self, **kwargs):

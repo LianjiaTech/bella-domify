@@ -140,10 +140,6 @@ def tree2list_beike(tree):
         else:
             text = "<image>"
 
-        has_child = 1 if tree.get("child") else 0
-        if layout_type == "Text" and has_child and len(text) < 20:
-            layout_type = "Title"
-
         order_num = node.get("order_num")
 
         node_info = {

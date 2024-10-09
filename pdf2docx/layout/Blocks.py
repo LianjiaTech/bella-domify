@@ -633,6 +633,7 @@ class Blocks(ElementCollection):
     @staticmethod
     def _identify_title(instances: list):
         '''
+        line层 识别title
         '''
         blocks = []  # type: list[TextBlock]
         if any([block.is_text_block for block in instances]):
@@ -641,8 +642,14 @@ class Blocks(ElementCollection):
             text_right_x = max([block.bbox[2] for block in instances if block.is_text_block])
 
         for block, next_block in zip(instances, instances[1:]):
-            # add block if this isn't a text block
+            # 非文字块，无法认定为Title
             if not block.is_text_block:
+                blocks.append(block)
+                continue
+
+            # 在目录中，直接判定为title
+            if any([line.is_in_catalog for line in block.lines]):
+                block.is_title = 1
                 blocks.append(block)
                 continue
 
@@ -651,8 +658,10 @@ class Blocks(ElementCollection):
             if block.lines and block.lines[-1].spans and isinstance((first_span := block.lines[-1].spans[0]), TextSpan):
                 cur_font, cur_font_size, cur_font_bold = first_span.font, first_span.size, \
                     bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
+            # 文字居中
             cur_is_center = is_center_aligned(block, text_left_x, text_right_x)
 
+            # 认定规则：当前文字块居中，下个块非文字块，则认定Title
             if not next_block.is_text_block:
                 if cur_is_center:
                     block.is_title = 1
@@ -665,7 +674,7 @@ class Blocks(ElementCollection):
                 next_font, next_font_size, next_font_bold = next_last_span.font, next_last_span.size, \
                     bool(next_last_span.flags & 2 ** 4) or next_last_span.pseudo_bold
 
-            # 判断是否有变化
+            # 认定规则：居中 且 格式有变化
             if cur_is_center and (
                     (next_font_size and cur_font_size and abs(cur_font_size - next_font_size) > 0)  # 两行相比 字号变小了
                     or (cur_font_bold and not next_font_bold)                                       # 两行相比 加粗变没了

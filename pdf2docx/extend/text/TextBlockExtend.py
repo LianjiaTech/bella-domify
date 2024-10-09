@@ -133,6 +133,10 @@ class TextBlockExtend(RelationElement, BlockExtend):
     def is_catalog(self):
         return any([line.is_catalog for line in self.lines])
 
+    # @property
+    # def is_title(self):
+    #     return self.block.is_title
+
     def get_image_s3_link(self):
         if self.is_image_block:
             image_span = self.lines.image_spans[0]
