@@ -427,9 +427,9 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
     print("所有节点编辑距离：", round(mean(edit_dist_all_nodes), 4))
 
     # 打印badcase
-    logger_badcase.info("*"*100)
+    logger_badcase.info("*"*100+"文件分隔")
+    logger_badcase.info("*"*50+"block切分 badcase：")
     logger_badcase.info(f"\nfile_name: {file_name}\nblock切分 badcase count: {len(label_nodes_badcase)}\n")
-    logger_badcase.info("*"*100)
     logger_badcase.info("badcase明细如下：")
     for item in label_nodes_badcase:
         order_num_str = item["order_num"]
@@ -524,6 +524,7 @@ def evaluation_single(logger_badcase, file_name, parser=""):
     # 标注结果获取
     label_tree = load_json("label_json/" + file_name + '_GT_label.json')
     label_nodes = tree2list_label("1", label_tree["root"])
+    label_order2text_dic = get_order2text(label_nodes)
     # 父子边
     pc_edges_label = get_pc_edges_label("root", label_tree["root"])
 
@@ -537,28 +538,48 @@ def evaluation_single(logger_badcase, file_name, parser=""):
     confusion_matrix = evaluate_layout(mapping, label_nodes, parser_nodes)
 
     # 层级关系正确率
-    struct_right_cnt, struct_all_count, right_mapping = cal_structure_accuracy(pc_edges_label, pc_edges_parser, mapping, file_name)
+    struct_right_cnt, struct_all_count, right_mapping, error_mapping = cal_structure_accuracy(pc_edges_label, pc_edges_parser, mapping, file_name)
 
-    return confusion_matrix, edit_dist_all_nodes, mapping, struct_right_cnt, struct_all_count, right_mapping
+    # 打印层级badcase
+    logger_badcase.info("*"*50+"层级badcase(未找到的父子关系)：")
+    logger_badcase.info(f"\nfile_name: {file_name}\n层级 badcase count: {len(error_mapping)}\n")
+    logger_badcase.info("badcase明细如下：")
+    for k, v in error_mapping.items():
+        logger_badcase.info(f"------------------------\n\nfile_name: {file_name}")
+        logger_badcase.info(k+"的父节点"+v)
+        logger_badcase.info("\n父亲：")
+        logger_badcase.info(label_order2text_dic[v])
+        logger_badcase.info("\n孩子：")
+        logger_badcase.info(label_order2text_dic[k])
+        logger_badcase.info("")
+
+    return confusion_matrix, edit_dist_all_nodes, mapping, struct_right_cnt, struct_all_count, right_mapping, error_mapping
+
+
+def get_order2text(label_nodes):
+    label_order2text_dic = {}
+    for label_node in label_nodes:
+        label_order2text_dic[label_node["order_num"]] = label_node["text"]
+    return label_order2text_dic
 
 
 def cal_structure_accuracy(pc_edges_label, pc_edges_parser, mapping, file_name):
     right_mapping = {}
+    error_mapping = {}
     all_count = len(pc_edges_label)
     right_cnt = 0
     for child, father in pc_edges_label.items():
         child_map = mapping.get(child, [])
         father_map = mapping.get(father, [])
-        if len(child_map) != 1 or len(father_map) != 1:
-            continue
-        elif pc_edges_parser.get(child_map[0]) == father_map[0]:
+        if (len(child_map) == 1 and len(father_map) == 1) and pc_edges_parser.get(child_map[0]) == father_map[0]:
             right_cnt += 1
             right_mapping[file_name+child] = father
-
+        else:
+            error_mapping[child] = father
 
     print(f"\n结构准确率:{right_cnt * 1.0 / all_count:.2f}  ({right_cnt} / {all_count})")
 
-    return right_cnt, all_count, right_mapping
+    return right_cnt, all_count, right_mapping, error_mapping
 
 
 def get_pc_edges_beike(order_num_father, data):
@@ -615,7 +636,7 @@ def evaluation(parser_name):
     logger_badcase = log_setting("reports/" + parser_name + "/badcase_" + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + ".txt")
 
     for file_name in file_list:
-        confusion_matrix, edit_dist_file_nodes, mapping, right_cnt, all_count, right_mapping = \
+        confusion_matrix, edit_dist_file_nodes, mapping, right_cnt, all_count, right_mapping, error_mapping = \
             (evaluation_single(logger_badcase, file_name, parser_name))
 
         confusion_matrix_list.append(confusion_matrix)
