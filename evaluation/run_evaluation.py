@@ -568,6 +568,7 @@ def cal_structure_accuracy(pc_edges_label, pc_edges_parser, mapping, file_name):
     error_mapping = {}
     all_count = len(pc_edges_label)
     right_cnt = 0
+    error_cnt = 0
     for child, father in pc_edges_label.items():
         child_map = mapping.get(child, [])
         father_map = mapping.get(father, [])
@@ -575,9 +576,11 @@ def cal_structure_accuracy(pc_edges_label, pc_edges_parser, mapping, file_name):
             right_cnt += 1
             right_mapping[file_name+child] = father
         else:
+            error_cnt += 1
+
             error_mapping[child] = father
 
-    print(f"\n结构准确率:{right_cnt * 1.0 / all_count:.2f}  ({right_cnt} / {all_count})")
+    print(f"\n结构准确率:{right_cnt * 1.0 / all_count:.2f}  ({right_cnt} / {all_count})  {file_name}")
 
     return right_cnt, all_count, right_mapping, error_mapping
 

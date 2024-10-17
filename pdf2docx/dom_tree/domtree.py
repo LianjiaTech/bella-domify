@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import concurrent.futures
-import fitz
+import re
 from typing import List, Optional
 from typing import Union, Any
 
@@ -64,8 +64,50 @@ class Node:
         """Check if self is a child of node"""
         if node.is_root:
             return True
-        # ①考虑基于字体、缩进等判断父子关系；②如果是列表，则判断是否是父节点的子节点
-        return self.judge_by_text_font(node) or self.judge_by_order_list(node)
+
+        # Title节点不能是普通text的子节点，只能是另一个Title的子节点
+        if not self.judge_by_title(node):
+            return False
+
+        # 目录的子节点认定
+        if not self.judge_by_catalog(node):
+            return False
+
+        # 考虑基于字体、缩进等判断父子关系；
+        if self.judge_by_text_font(node):
+            return True
+
+        # 如果是列表，则判断是否是父节点的子节点
+        if not self.judge_by_order_list(node):
+            return False
+
+        return True
+
+        # # ①考虑基于字体、缩进等判断父子关系；②如果是列表，则判断是否是父节点的子节点
+        # return self.judge_by_text_font(node) or self.judge_by_order_list(node)
+
+    def judge_by_title(self, node):
+        # Title节点，只能是Title的子节点，不能是text的子节点
+        cur_span_is_title = self.element.is_title
+        node_span_is_title = node.element.is_title
+        if cur_span_is_title and not node_span_is_title:
+            return False
+
+        return True
+
+    def judge_by_catalog(self, node):
+        # 特殊条件：目录节点下只能包含目录项
+        pattern = re.compile(r'(.)\1{9,}\d+')
+
+        # 目录的子节点，只能是目录项
+        if "目录" in node.element.text and not pattern.search(self.element.text.strip().replace(' ', '')):
+            return False
+
+        # 目录项和目录项不能作为父子节点
+        if pattern.search(self.element.text.strip().replace(' ', '')) and pattern.search(node.element.text.strip().replace(' ', '')):
+            return False
+
+        return True
 
     def judge_by_text_font(self, node):
         cur_span = self.element.lines[0].spans[0]
@@ -83,12 +125,36 @@ class Node:
         return False
 
     def judge_by_order_list(self, node):
-        return self.element.block.list_type() \
-            and self.element.block.list_type() != node.element.block.list_type()
+        """
+        list层级相同不能认定为父节点
+        text也可视作一种层级
+
+        普通文本不可以作为普通文本的子节点（应为兄弟）
+        (1)不可以作为（2）的子节点（应为兄弟）
+
+        """
+        return self.element.block.list_type() != node.element.block.list_type()
+
+    # 找到上一组和当前列表相同类型的节点
+    def recursion_find_same_list_type_node(self, node):
+        # 如果对照节点是相同的list类型，则找到并返回
+        if self.same_list_type_node(node):
+            return node
+        # 如果对照节点有父节点，且父节点不是root，则递归对照父节点
+        elif node.parent and not node.parent.is_root:
+            return self.recursion_find_same_list_type_node(node.parent)
+        return None
+
+    def same_list_type_node(self, node):
+        return not node.is_root and self.element.block.list_type() == node.element.block.list_type()
 
     def add_child(self, node: Node):
         self.child.append(node)
         node.parent = self
+
+    def add_brother(self, node: Node):
+        self.parent.child.append(node)
+        node.parent = self.parent
 
     def union_bbox(self):
         if not self.child:
@@ -216,6 +282,11 @@ class DomTree:
                     searched_block.add(element.caption_block)
                 elif prev_text_node:
                     prev_text_node.add_child(node)
+                    # todo 这部分依赖title识别要准确，之后加
+                    # if prev_text_node.element.block.list_type() or prev_text_node.element.is_title:
+                    #     prev_text_node.add_child(node)
+                    # else:
+                    #     prev_text_node.add_brother(node)
                 else:
                     self.root.add_child(node)
                 continue
@@ -230,13 +301,17 @@ class DomTree:
                     searched_block.add(image_span.caption_block)
                 elif prev_text_node:
                     prev_text_node.add_child(node)
+                    # if prev_text_node.element.block.list_type() or prev_text_node.element.is_title:
+                    #     prev_text_node.add_child(node)
+                    # else:
+                    #     prev_text_node.add_brother(node)
                 else:
                     self.root.add_child(node)
                 continue
-            # 处理文本块
             if not element.is_text_block:
                 # 先分析text block
                 continue
+
             cur_paragraph = node.element
             while cur_paragraph.next_continuous_paragraph:
                 next_paragraph = cur_paragraph.next_continuous_paragraph

@@ -108,6 +108,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.page_num = 0  # -1:无页码
         self.is_table_name = 0
         self.is_figure_name = 0
+        self.is_title = text_block.is_title
 
     @property
     def text(self):
