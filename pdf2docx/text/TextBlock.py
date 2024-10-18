@@ -115,6 +115,11 @@ class TextBlock(Block):
             if line.list_type:
                 return line.list_type
 
+    # def list_first_item(self):
+    #     for line in self.lines:
+    #         if hasattr(line, 'list_first_item') and line.list_first_item:
+    #             return line.list_first_item
+
     def add(self, line_or_lines):
         '''Add line or lines to TextBlock.'''
         if isinstance(line_or_lines, (Lines, list, tuple)):

@@ -325,6 +325,7 @@ class DomTree:
                     parent_node = stack_path[-1]
 
                     # 如果是列表，且和上一节点不是同一类型列表，则尝试找到上一组相同类型的列表
+                    # if node.element.block.list_type() and not node.element.block.list_first_item(): # todo
                     if node.element.block.list_type():
                         same_node = node.recursion_find_same_list_type_node(stack_path[-1])
                         if same_node:

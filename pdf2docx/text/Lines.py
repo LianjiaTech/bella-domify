@@ -49,6 +49,40 @@ class Lines(ElementCollection):
         r"^\s*第(?:[一二三四五六七八九十百千万]+|\d+)方面\s*",
         r".*\s*(.)\1{9,}\s*\d+\s*$"                            # 目录项
     ]
+    # 记得同步修改ORDERED_LIST_FIRST_ITEM_PATTERN！！！
+
+    ORDERED_LIST_FIRST_ITEM_PATTERN = [
+        r'^\s*1\.\s*',  # 数字1后跟点
+        r'^\s*[\u2488]\s*',  # 数字1后跟点
+        r'^\s*1、\s*',  # 数字1后跟顿号
+        r'^\s*一、\s*',  # 中文数字一后跟顿号
+        r'^\s*1[\)\]】）]\s*',  # 数字1后跟右括号
+        r'^\s*[\(\[【（]1[\)\]】）]\s*',  # 数字1左右括号
+        r'^\s*一[\)\]】）]\s*',  # 中文数字一后跟右括号
+        r'^\s*[\(\[【（]一[\)\]】）]\s*',  # 中文数字一左右括号
+        r'^\s*a[\)\]】）]\s*',  # 小写英文字母a后跟右括号
+        r'^\s*A[\)\]】）]\s*',  # 大写英文字母A后跟右括号
+        r'^\s*[\u2460]\s*',  # （①）
+        r'^\s*[\u2474]\s*',  # （⑴）
+        r'^\s*[\u24B6]\s*',  # （Ⓐ）
+        r'^\s*\[1\]\s*',  # （[1]）
+        r"^\s*第(?:一|1)篇\s*",
+        r"^\s*第(?:一|1)章\s*",
+        r"^\s*第(?:一|1)节\s*",
+        r"^\s*第(?:一|1)条\s*",
+        r"^\s*第(?:一|1)项\s*",
+        r"^\s*第(?:一|1)步\s*",
+        r"^\s*第(?:一|1)点\s*",
+        r"^\s*第(?:一|1)部分\s*",
+        r"^\s*第(?:一|1)部\s*",
+        r"^\s*第(?:一|1)段\s*",
+        r"^\s*第(?:一|1)例\s*",
+        r"^\s*第(?:一|1)个\s*",
+        r"^\s*第(?:一|1)阶段\s*",
+        r"^\s*第(?:一|1)层面\s*",
+        r"^\s*第(?:一|1)方面\s*",
+        r".*\s*(.)\1{9,}\s*1\s*$"  # 目录项
+    ]
 
     @property
     def unique_parent(self):
@@ -67,11 +101,19 @@ class Lines(ElementCollection):
         return self
 
     def recognize_list(self, line: Line):
+
+        # def recognize_list_first_item(text, index):
+        #     if re.match(Lines.ORDERED_LIST_PATTERN[index], text):
+        #         return True
+        #     else:
+        #         return False
+
         # recognize ordered & unordered list
         for index, rule in enumerate(Lines.ORDERED_LIST_PATTERN):
             if match := re.match(rule, line.text):
                 line.list_type = index + 1
                 line.list_tag = match.group(0)
+                # line.list_first_item = recognize_list_first_item(line.text, index)
                 return
 
         def is_special_start_character(s):
