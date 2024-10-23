@@ -56,6 +56,7 @@ class Line(Element):
 
         self.is_header = 0  # 是否页眉
         self.is_footer = 0  # 是否页脚
+        self.is_in_catalog = 0  # 是否在目录中
 
     @property
     def text(self):
