@@ -115,7 +115,10 @@ class Pages(BaseCollection):
         _parser_header_and_footer(raw_pages)
 
         # 封面解析
-        _parser_cover(raw_pages, pages, settings.get("filter_cover"))
+        try:
+            _parser_cover(raw_pages, pages, settings.get("filter_cover"))
+        except Exception as e:
+            logging.error(f"Parser cover failed: {e}")
 
         # 目录解析
         catalog_title_list = parse_catalog(raw_pages, pages, settings.get("filter_catalog"))
@@ -147,6 +150,8 @@ def _parser_cover(raw_pages: list, pages: list, need_filter=False):
     first_page_size = raw_pages[0].shapes.bbox.width * raw_pages[0].shapes.bbox.height
     if first_page_size == 0:
         first_page_size = max(raw_pages[0].width - PAGE_MARGIN * 2, 0) * max(raw_pages[0].height - PAGE_MARGIN * 2, 0)
+        if first_page_size == 0:
+            return
     blank_size = first_page_size
     for line in raw_pages[0].blocks:
         # 不算页眉、footer、图片
