@@ -324,6 +324,79 @@ def tree2list_ali(parser_json):
     return nodes
 
 
+def tree2list_unstructured(parser_json):
+    nodes = []
+    """
+    Element type	Description
+    
+    Formula	            An element containing formulas in a document.
+    FigureCaption	    An element for capturing text associated with figure captions.
+    NarrativeText	    NarrativeText is an element consisting of multiple, well-formulated sentences. This excludes elements such titles, headers, footers, and captions.
+    ListItem	        ListItem is a NarrativeText element that is part of a list.
+    Title	            A text element for capturing titles.
+    Address	            A text element for capturing physical addresses.
+    EmailAddress	    A text element for capturing email addresses.
+    Image	            A text element for capturing image metadata.
+    PageBreak	        An element for capturing page breaks.
+    Table	            An element for capturing tables.
+    Header	            An element for capturing document headers.
+    Footer	            An element for capturing document footers.
+    CodeSnippet	        An element for capturing code snippets.
+    PageNumber	        An element for capturing page numbers.
+    UncategorizedText	Base element for capturing free text from within document.
+    """
+
+    layout_map = {
+        "Formula": "Formula",  # 公式
+        "FigureCaption": "FigureName",  # 图题
+        "NarrativeText": "Text",  # 段落
+        "ListItem": "Text",  # 段落 todo 暂时不输出list
+        "Title": "Title",
+        "Address": "Text",
+        "EmailAddress": "Text",
+        "Image": "Figure",
+        "PageBreak": "",  # 暂时未发现这个枚举值
+        "Table": "Table",
+        "Header": "",  # 页眉
+        "Footer": "",  # 页脚
+        "CodeSnippet": "Code",
+        "PageNumber": "",  # 页码
+        "UncategorizedText": "Text",
+
+    }
+
+    elements = parser_json
+    for element in elements:
+        type = element["type"]
+        text = element["text"].replace(" ", "")
+        page_num = element["pageNum"]
+
+        if type in ["PageBreak", "Header", "Footer", "PageNumber", "UncategorizedText" ]:
+            continue
+
+        # text修正
+        layout_type = layout_map[type]
+        if type == "Image":
+            text = "<image>"
+        elif type == "table":
+            text = text.replace("|\n", "").replace("---|", "").replace(" ", "")[1:]
+
+
+        node_info = {
+            "type": type,
+            "layout_type": layout_type,
+            "order_num": element["element_id"],
+            "text": text.strip(),
+            "page_num": page_num,
+            # "element": tree.get("element", {})
+        }
+        nodes.append(node_info)
+
+    return nodes
+
+
+
+
 def tree2list_label(order_num, tree):
     """遍历树并返回所有节点的路径和文本"""
     nodes = []
@@ -518,6 +591,10 @@ def evaluation_single(logger_badcase, file_name, parser=""):
     # elif parser == "adobe":
     #     parser_json = load_json("adobe/structuredData" + file_name + '_chi.json')
     #     parser_nodes = tree2list_adobe(parser_json)
+    elif parser == "unstructured":
+        parser_json = load_json("parse_json/ali/" + file_name + '.json')
+        parser_nodes = tree2list_unstructured(parser_json)
+        pc_edges_parser = get_pc_edges_unstructured(parser_json)
     else:
         raise "解析引擎未实现"
 
@@ -606,6 +683,17 @@ def get_pc_edges_ali(parser_json):
         child = item["uniqueId"]
         # if
         pc_edges[child] = father
+    return pc_edges
+
+
+def get_pc_edges_unstructured(parser_json):
+    pc_edges = {}
+    data = parser_json
+    for item in data:
+        if item["metadata"].get("parent_id"):
+            father = item["metadata"]["parent_id"]
+            child = item["element_id"]
+            pc_edges[child] = father
     return pc_edges
 
 
@@ -705,6 +793,7 @@ def generate_report():
     parser_list = [
         "beike",
         "ali",
+        "unstructured",
     ]
     for parser in parser_list:
         logger.info(f"评测引擎:{parser}")
