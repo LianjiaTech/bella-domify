@@ -240,7 +240,8 @@ def parse_catalog(raw_pages, pages, need_filter=True):
     if need_filter:
         catalog_blocks_bbox = [block.bbox for blocks in catalog_blocks for block in blocks]
         for page in raw_pages[:search_range]:
-            page.blocks = [block for block in page.blocks if block.bbox not in catalog_blocks_bbox]
+            page.blocks = Blocks(instances=[line for line in page.blocks if line.bbox not in catalog_blocks_bbox],
+                                 parent=page)
     logging.info('parser_catalog [finish]')
     return catalog_title_list
 
