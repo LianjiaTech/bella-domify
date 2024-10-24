@@ -121,7 +121,7 @@ class Pages(BaseCollection):
             logging.error(f"Parser cover failed: {e}")
 
         # 目录解析
-        catalog_title_list = parse_catalog(raw_pages, pages, settings.get("filter_catalog"))
+        catalog_title_list = parse_catalog(raw_pages, pages, settings.get("filter_catalog", True))
         metadata["catalog_title_list"].extend(catalog_title_list)
 
         # Title识别(根据文字内容)
@@ -185,7 +185,7 @@ def _parser_cover(raw_pages: list, pages: list, need_filter=False):
     logging.info('parser_cover [finish]')
 
 
-def parse_catalog(raw_pages, pages, need_filter=False):
+def parse_catalog(raw_pages, pages, need_filter=True):
     """
     目录识别，通过正则表达式匹配目录的特征，目录认定要求：一个短字符串的line + 至少连续3个line能被目录正则式匹配
     """
