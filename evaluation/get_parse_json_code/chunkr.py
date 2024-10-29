@@ -71,15 +71,13 @@ def get_single_file_parse(file_name):
 
     file_all_name = f"{test_dir}{file_name}.pdf"
 
-
     task_id = upload_task(file_all_name)
     print(file_name)
     print(task_id)
 
-
     while True:
         result = get_result(task_id)
-        if result["status"] != "Starting":
+        if result["status"] in ["Succeeded"]:
             data = result["output"]
             json_elements = json.dumps(data, ensure_ascii=False, indent=2)
 

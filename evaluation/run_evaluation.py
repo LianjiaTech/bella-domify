@@ -24,7 +24,7 @@ import parse_output as beike_parse_output
 def log_setting(log_file=""):
     if not log_file:
         raise "log_file is none"
-    # os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
     # 创建一个日志记录器
     logger = logging.getLogger(log_file)
@@ -350,11 +350,11 @@ def tree2list_unstructured(parser_json):
         "Formula": "Formula",  # 公式
         "FigureCaption": "FigureName",  # 图题
         "NarrativeText": "Text",  # 段落
-        "ListItem": "Text",  # 段落 todo 暂时不输出list
+        "ListItem": "List",  # 段落 todo 暂时不输出list
         "Title": "Title",
         "Address": "Text",
         "EmailAddress": "Text",
-        "Image": "Figure",
+        "Image": "Figure",  # 图片
         "PageBreak": "",  # 暂时未发现这个枚举值
         "Table": "Table",
         "Header": "",  # 页眉
@@ -369,17 +369,17 @@ def tree2list_unstructured(parser_json):
     for element in elements:
         type = element["type"]
         text = element["text"].replace(" ", "")
-        page_num = element["pageNum"]
+        page_num = element["metadata"]["page_number"]
 
-        if type in ["PageBreak", "Header", "Footer", "PageNumber", "UncategorizedText" ]:
+        if type in ["PageBreak", "Header", "Footer", "PageNumber"]:
             continue
 
         # text修正
         layout_type = layout_map[type]
         if type == "Image":
             text = "<image>"
-        elif type == "table":
-            text = text.replace("|\n", "").replace("---|", "").replace(" ", "")[1:]
+        # elif type == "Table":
+        #     text = text.replace("|\n", "").replace("---|", "").replace(" ", "")[1:]
 
 
         node_info = {
@@ -387,7 +387,7 @@ def tree2list_unstructured(parser_json):
             "layout_type": layout_type,
             "order_num": element["element_id"],
             "text": text.strip(),
-            "page_num": page_num,
+            "page_num": page_num -1,
             # "element": tree.get("element", {})
         }
         nodes.append(node_info)
@@ -395,6 +395,131 @@ def tree2list_unstructured(parser_json):
     return nodes
 
 
+def tree2list_paoding(parser_json):
+    nodes = []
+    """
+    paragraphs	string	段落元素块
+    tables	string	表格元素块
+    images	string	图片元素块
+    page_header	string	页眉元素块
+    page_footer	string	页脚元素块
+    footnotes
+    """
+
+    layout_map = {
+        "paragraphs": "Text",  #
+        "tables": "Table",  #
+        "images": "Figure",  #
+        "page_headers": "Text",  #
+        "page_footers": "Text",  #
+        "footnotes": "FigureNote",  #
+        "shapes": "Figure",  # 线框图
+    }
+
+    pdf_elements = parser_json["pdf_elements"]
+    elements = []
+    for page_item in pdf_elements:
+        page_num = page_item["page"]
+        for element in page_item["elements"]:
+            element["page_num"] = page_num
+            elements.append(element)
+
+    for element in elements:
+        ori_type = element["element_type"]
+        text = element.get("text", "").replace(" ", "")
+
+        if ori_type in ["page_headers", "page_footers"]:
+            continue
+
+        # text修正
+        layout_type = layout_map[ori_type]
+        if ori_type == "images":
+            text = "<image>"
+        elif ori_type == "tables":
+            mylist = []
+            for k, v in element["cells"].items():
+                mylist.append(v["value"])
+            text = "|".join(mylist).replace(" ", "")
+        if ori_type not in layout_map:
+            raise
+
+        node_info = {
+            "ori_type": ori_type,
+            "layout_type": layout_type,
+            "order_num": str(element["origin_index"]),
+            "text": text.strip(),
+            "page_num": element["page_num"],
+            # "element": tree.get("element", {})
+        }
+        nodes.append(node_info)
+
+    return nodes
+
+
+def tree2list_chunkr(parser_json):
+    nodes = []
+    """
+  | "Title"
+  | "Section header"
+  | "Text"
+  | "List item"
+  | "Table"
+  | "Picture"
+  | "Caption"
+  | "Formula"
+  | "Footnote"
+  | "Page header"
+  | "Page footer"
+    """
+
+    layout_map = {
+        "Title": "Title",  #
+        "Section header": "Title",  #
+        "Text": "Text",  #
+        "List item": "List",  #
+        "Table": "Table",  #
+        "Picture": "Figure",  #
+        "Caption": "FigureNote",  # 图注表注？？
+        "Formula": "Formula",  # 公式
+        "Footnote": "",  # 脚注、注释（没有任何元素被识别为这个）
+        "Page header": "",  # 页眉
+        "Page footer": "",  # 页脚
+    }
+
+    elements = []
+    for item in parser_json:
+        elements.extend(item["segments"])
+
+    print()
+
+    for element in elements:
+        type = element["segment_type"]
+        text = element["content"].replace(" ", "")
+        page_num = element["page_number"]
+
+        if not text:
+            continue
+
+        # text修正
+        layout_type = layout_map[type]
+        if layout_type == "Figure":
+            text = "<image>"
+        elif layout_type == "Table":
+            # text = element["content"].replace(" ", "|")
+            text = element["markdown"].replace(" ", "").replace("||", "|").replace("|\n", "")[1:]
+            print()
+
+        node_info = {
+            "type": type,
+            "layout_type": layout_type,
+            "order_num": element["segment_id"],
+            "text": text.strip(),
+            "page_num": page_num - 1,
+            # "element": tree.get("element", {})
+        }
+        nodes.append(node_info)
+
+    return nodes
 
 
 def tree2list_label(order_num, tree):
@@ -580,21 +705,29 @@ def evaluation_single(logger_badcase, file_name, parser=""):
 
     # 解析结果获取
     if parser == "beike":
-        beike_tree = load_json("parse_json/beike/" + file_name + '_beike.json')
+        beike_tree = load_json(f"parse_json/{parser}/" + file_name + '_beike.json')
         parser_nodes = tree2list_beike(beike_tree["root"])
         pc_edges_parser = get_pc_edges_beike("", beike_tree["root"]["child"])
         print()
     elif parser == "ali":
-        parser_json = load_json("parse_json/ali/" + file_name + '_result_ali.json')
+        parser_json = load_json(f"parse_json/{parser}/" + file_name + '_result_ali.json')
         parser_nodes = tree2list_ali(parser_json)
         pc_edges_parser = get_pc_edges_ali(parser_json)
     # elif parser == "adobe":
     #     parser_json = load_json("adobe/structuredData" + file_name + '_chi.json')
     #     parser_nodes = tree2list_adobe(parser_json)
     elif parser == "unstructured":
-        parser_json = load_json("parse_json/ali/" + file_name + '.json')
+        parser_json = load_json(f"parse_json/{parser}/" + file_name + '.json')
         parser_nodes = tree2list_unstructured(parser_json)
         pc_edges_parser = get_pc_edges_unstructured(parser_json)
+    elif parser == "chunkr":
+        parser_json = load_json(f"parse_json/{parser}/" + file_name + '.json')
+        parser_nodes = tree2list_chunkr(parser_json)
+        pc_edges_parser = {}
+    elif parser == "paoding":
+        parser_json = load_json(f"parse_json/{parser}/" + file_name + '.json')
+        parser_nodes = tree2list_paoding(parser_json)
+        pc_edges_parser = get_pc_edges_paoding(parser_json)
     else:
         raise "解析引擎未实现"
 
@@ -697,6 +830,44 @@ def get_pc_edges_unstructured(parser_json):
     return pc_edges
 
 
+def get_pc_edges_paoding(parser_json):
+    pc_edges = {}
+    data = parser_json["syllabus"]["children"]
+
+    def record_relationship(father, children_range):
+        form_child = children_range[0]
+        to_child = children_range[1]
+        children_list = list(range(form_child, to_child))
+        for i in children_list:
+            if str(i) != str(father) and str(i) not in pc_edges:
+                pc_edges[str(i)] = str(father)
+
+    def get_pc_edge_recursive(father, children):
+
+        # 先记录所有list中第一个元素的父节点
+        if father:
+            for child in children:
+                if str(child["range"][0]) not in pc_edges:
+                    pc_edges[str(child["range"][0])] = str(father)
+
+        print()
+        for item in children:
+            # 如果没有children直接记录
+            if not item["children"]:
+                # 例如：  29   [29:32]   先记录30、31的父节点29
+                record_relationship(item["element"], item["range"])
+
+            else:
+                get_pc_edge_recursive(item["element"], item["children"])
+                record_relationship(item["element"], item["range"])
+
+    get_pc_edge_recursive(None, data)
+
+    pc_edges_order = dict(sorted(pc_edges.items(), key=lambda item: int(item[0])))
+
+    return pc_edges_order
+
+
 def get_pc_edges_label(order_num, label_tree):
     pc_edges = {}
     child = label_tree.get("child", {})
@@ -794,6 +965,8 @@ def generate_report():
         "beike",
         "ali",
         "unstructured",
+        "chunkr",
+        "paoding",
     ]
     for parser in parser_list:
         logger.info(f"评测引擎:{parser}")
@@ -815,6 +988,7 @@ if __name__ == "__main__":
     #
     # evaluation_single(logger_tmp, "《贝壳离职管理制度V3.0》5页", "beike")
     # evaluation_single(logger_tmp, "《贝壳离职管理制度V3.0》5页", "ali")
+    # evaluation_single(logger_tmp, "《贝壳离职管理制度V3.0》5页", "unstructured")
     #
     # evaluation_single(logger_tmp, "中文论文Demo中文文本自动校对综述_4页", "beike")
     # evaluation_single(logger_tmp, "中文论文Demo中文文本自动校对综述_4页", "ali")
