@@ -248,7 +248,7 @@ class Converter:
     def serialize(self, filename: str):
         '''Write parsed pages to specified JSON file.'''
         with open(filename, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(self.store(), indent=4))
+            f.write(json.dumps(self.store(), indent=2))
 
     def deserialize(self, filename: str):
         '''Load parsed pages from specified JSON file.'''

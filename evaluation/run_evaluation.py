@@ -122,6 +122,7 @@ def tree2list_beike(tree):
     if tree.get("element"):
         node_type = tree.get("element", {}).get("block_type")
         layout_type = tree.get("element", {}).get("layout_type")
+        bbox = tree.get("element", {}).get("bbox")
 
         page_num = node.get("element", {})["page_num"][0]
         if node_type == "text":
@@ -140,6 +141,7 @@ def tree2list_beike(tree):
             "order_num": order_num,
             "text": text,
             "page_num": page_num,
+            "bbox": bbox,
             # "element": tree.get("element", {})
         }
         nodes.append(node_info)
@@ -276,32 +278,6 @@ def tree2list_ali(parser_json):
             if (type == "figure" or subType == "picture"):
                 text = "<image>"
 
-        # # 后处理
-        # if subType == "cate":
-        #     node_info = {
-        #         "type": type,
-        #         "subType": subType,
-        #         "layout_type": layout_type,
-        #         # "order_num": element["index"],
-        #         "order_num": element["uniqueId"],
-        #         "text": text.strip(),
-        #         # "element": tree.get("element", {})
-        #     }
-        #     cate_list.append(node_info)
-        #     continue
-        # if cate_list and subType != "cate":
-        #     text_merge = "".join([node["text"] for node in cate_list])
-        #     node_info = {
-        #         "type": cate_list[0]["type"],
-        #         "subType": "cate",
-        #         "layout_type": cate_list[0]["layout_type"],
-        #         "order_num": cate_list[0]["order_num"],
-        #         "text": text_merge,
-        #         # "element": tree.get("element", {})
-        #     }
-        #     nodes.append(node_info)
-        #     cate_list = []
-
         node_info = {
             "type": type,
             "subType": subType,
@@ -309,7 +285,7 @@ def tree2list_ali(parser_json):
             "order_num": element["uniqueId"],
             "text": text.strip(),
             "page_num": page_num,
-            # "element": tree.get("element", {})
+            "bbox": element["pos"],
         }
         nodes.append(node_info)
 
@@ -617,15 +593,16 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
     print("所有节点编辑距离：", round(mean(edit_dist_all_nodes), 4))
 
     # 打印badcase
-    logger_badcase.info("*"*100+"文件分隔")
-    logger_badcase.info("*"*50+"block切分 badcase：")
-    logger_badcase.info(f"\nfile_name: {file_name}\nblock切分 badcase count: {len(label_nodes_badcase)}\n")
-    logger_badcase.info("badcase明细如下：")
-    for item in label_nodes_badcase:
-        order_num_str = item["order_num"]
-        text_str = item["text"]
-        logger_badcase.info(f"------------------------\n\nfile_name: {file_name}\norder_num: {order_num_str}")
-        logger_badcase.info(f"{text_str}\n")
+    if logger_badcase:
+        logger_badcase.info("*"*100+"文件分隔")
+        logger_badcase.info("*"*50+"block切分 badcase：")
+        logger_badcase.info(f"\nfile_name: {file_name}\nblock切分 badcase count: {len(label_nodes_badcase)}\n")
+        logger_badcase.info("badcase明细如下：")
+        for item in label_nodes_badcase:
+            order_num_str = item["order_num"]
+            text_str = item["text"]
+            logger_badcase.info(f"------------------------\n\nfile_name: {file_name}\norder_num: {order_num_str}")
+            logger_badcase.info(f"{text_str}\n")
 
     if len(mapping) != len(edit_dist_all_nodes):
         raise
@@ -691,15 +668,48 @@ def evaluate_layout(mapping, label_nodes, parser_nodes):
     # print("版面识别正确个数：", len(layout_right_list))
 
 
+def label_tree_add_bbox(order_num, beike_parser_nodes, label_tree, mapping):
+    element = label_tree.get("element", {})
+    child = label_tree.get("child", {})
+
+    # 处理element
+    if element:
+        element["bbox"] = [0, 0, 0, 0]
+
+        # 找到对应的节点
+        if len(mapping.get(order_num)) == 1:
+            order_num_beike = mapping.get(order_num)[0]
+            # 找到bbox
+            for node in beike_parser_nodes:
+                if node["order_num"] == order_num_beike:
+                    if (element.get("text") and node.get("text") and
+                            (element["text"].strip()[:2] != node["text"].strip()[:2]
+                             or element["text"].strip()[-2:] != node["text"].strip()[-2:])):
+                        print("文字不完全相同")
+                        print("parser:" + node["text"])
+                        print("label:" + element["text"])
+                        print("")
+
+                    element["bbox"] = node["bbox"]
+                    break
+
+    # 处理child
+    for child_order_num, data in child.items():
+        label_tree_add_bbox(str(child_order_num), beike_parser_nodes, data, mapping)
+
+    return
+
+
+
 def evaluation_single(logger_badcase, file_name, parser=""):
     print("评测文件：", file_name)
     print("评测引擎：", parser)
 
     # 解析结果获取
     if parser == "beike":
-        beike_tree = load_json(f"parse_json/{parser}/" + file_name + '_beike.json')
-        parser_nodes = tree2list_beike(beike_tree["root"])
-        pc_edges_parser = get_pc_edges_beike("", beike_tree["root"]["child"])
+        parser_json = load_json(f"parse_json/{parser}/" + file_name + '_beike.json')
+        parser_nodes = tree2list_beike(parser_json["root"])
+        pc_edges_parser = get_pc_edges_beike("", parser_json["root"]["child"])
         print()
     elif parser == "ali":
         parser_json = load_json(f"parse_json/{parser}/" + file_name + '_result_ali.json')
@@ -969,6 +979,25 @@ def generate_report():
 def main():
     beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
     generate_report()
+
+
+def label_json_add_bbox_by_beike_parse():
+
+    for file_name in file_list:
+        # 解析结果
+        parser_json = load_json(f"parse_json/beike/" + file_name + '_beike.json')
+        parser_nodes = tree2list_beike(parser_json["root"])
+
+        # 标注结果
+        label_tree = load_json("label_json/" + file_name + '_GT_label.json')
+        label_nodes = tree2list_label("1", label_tree["root"])
+
+        # 映射关系
+        mapping, edit_dist_all_nodes = find_mapping("", file_name, parser_nodes, label_nodes)
+        mapping = dict(sorted(mapping.items(), reverse=False))
+
+        label_tree_add_bbox("root", parser_nodes, label_tree["root"], mapping)
+        beike_parse_output.output(label_tree, file_name, "evaluation/label_json/", "_GT_label.json")
 
 
 if __name__ == "__main__":

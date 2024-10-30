@@ -73,21 +73,13 @@ def sort_json(data):
         return data
 
 
-def output(dom_tree_model, file_name):
+def output(dom_tree_model, file_name, json_dir, file_suffix=".json"):
     # 打印 JSON，使用自定义排序函数
     _, json_compatible_data = convert_to_json(dom_tree_model)
     sorted_data = sort_json(json_compatible_data)
-    json_string = json.dumps(sorted_data, ensure_ascii=False, indent=4)
 
-    # print(json_string)
-
-    json_dir = root_dir + "evaluation/parse_json/beike/"
-    with open(json_dir + file_name + '_beike.json', 'w', encoding='utf-8') as file:
-        # json.dump(sorted_data, file, indent=4, ensure_ascii=False)
-        # print(sorted_data)
-        json_str = json.dumps(sorted_data, ensure_ascii=False, separators=(',', ':'))
-
-        file.write(json_str)
+    with open(root_dir + json_dir + file_name + file_suffix, 'w') as json_file:
+        json.dump(sorted_data, json_file, indent=2, ensure_ascii=False)
 
 
 def parse():
@@ -108,7 +100,7 @@ def parse():
 
         dom_tree_model = DomTreeModel(dom_tree=dom_tree)
 
-        output(dom_tree_model, file_name)
+        output(dom_tree_model, file_name, "evaluation/parse_json/beike/")
         print(f"解析完毕：{file_name}")
 
 

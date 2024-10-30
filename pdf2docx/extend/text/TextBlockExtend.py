@@ -54,6 +54,11 @@ class BaseBlockModel(BaseModel):
         else:
             return "Text"
 
+    @computed_field
+    @property
+    def bbox(self) -> list:
+        return list(self._block.bbox)
+
 
 class TextBlockModel(BaseBlockModel):
     _block: TextBlockExtend
