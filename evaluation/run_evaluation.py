@@ -115,13 +115,6 @@ def edit_distance(s1, s2):
 
 def tree2list_beike(tree):
     """遍历树并返回所有节点的路径和文本"""
-    beike_layout_map = {
-        "text": "Text",
-        "table": "Table",
-        "image": "Figure",
-
-        # "list" : "List",
-    }
 
     nodes = []
     node = tree
@@ -129,7 +122,6 @@ def tree2list_beike(tree):
     if tree.get("element"):
         node_type = tree.get("element", {}).get("block_type")
         layout_type = tree.get("element", {}).get("layout_type")
-
 
         page_num = node.get("element", {})["page_num"][0]
         if node_type == "text":
