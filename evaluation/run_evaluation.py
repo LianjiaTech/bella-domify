@@ -674,7 +674,7 @@ def label_tree_add_bbox(order_num, beike_parser_nodes, label_tree, mapping):
 
     # 处理element
     if element:
-        element["bbox"] = [0, 0, 0, 0]
+        element["bbox"] = []
 
         # 找到对应的节点
         if len(mapping.get(order_num)) == 1:
@@ -682,13 +682,15 @@ def label_tree_add_bbox(order_num, beike_parser_nodes, label_tree, mapping):
             # 找到bbox
             for node in beike_parser_nodes:
                 if node["order_num"] == order_num_beike:
-                    if (element.get("text") and node.get("text") and
-                            (element["text"].strip()[:2] != node["text"].strip()[:2]
-                             or element["text"].strip()[-2:] != node["text"].strip()[-2:])):
+                    if (
+                            element.get("text") and node.get("text")
+                            and (element["text"].strip().replace(" ", "").replace("-", "") != node["text"].strip().replace(" ", "").replace("-", ""))
+                    ):
                         print("文字不完全相同")
-                        print("parser:" + node["text"])
-                        print("label:" + element["text"])
+                        print("parse:" + node["text"].strip().replace(" ", "").replace("-", ""))
+                        print("label:" + element["text"].strip().replace(" ", "").replace("-", ""))
                         print("")
+                        element["bbox_need_check"] = ""
 
                     element["bbox"] = node["bbox"]
                     break
@@ -1027,6 +1029,7 @@ if __name__ == "__main__":
     # evaluation_single(logger_tmp, "评测文件9-博学_13页", "ali")
 
     main()
+    # label_json_add_bbox_by_beike_parse()
 
     # 说明：运行该文件会直接输出最新的评测指标到reports/output_indicators文件中
     # 步骤：
