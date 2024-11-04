@@ -16,7 +16,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.5.4'
+        version = '0.1.5.5'
 
     return version
 
@@ -99,5 +99,6 @@ setup(
     version = '0.1.5.1'  20241023   bug修复；
     version = '0.1.5.2'  20241023   bug修复；
     version = '0.1.5.4'  20241024   目录过滤，默认值改为是；
+    version = '0.1.5.5'  20241104   页眉阈值优化；
 
 """
