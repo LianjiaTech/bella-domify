@@ -265,7 +265,7 @@ def identify_header(raw_pages: list):
     """
 
     # 页眉区
-    header_height = possible_header_height(raw_pages) + 10
+    header_height = possible_header_height(raw_pages)
     # 收集页眉元素
     all_header_list = []
 
@@ -393,7 +393,7 @@ def possible_header_height(raw_pages):
     # 处理页眉
     for raw_page in raw_pages:
         # 页眉高度阈值
-        first_line_height = get_first_line_height(raw_page)
+        first_line_height = get_first_line_height(raw_page) + 5
         if first_line_height:
             header_height_list.append(first_line_height)
         else:
