@@ -11,15 +11,28 @@
 import json
 import re
 import os
+import time
 from collections import defaultdict
 from difflib import SequenceMatcher
 import copy
 from statistics import mean
 import pandas as pd
 import logging
+import fitz
 import datetime
 import parse_output as beike_parse_output
+from shapely.geometry import box
 
+# 评测集文件名
+file_list = [
+    "《贝壳入职管理制度》5页",
+    "《贝壳离职管理制度V3.0》5页",
+    "中文论文Demo中文文本自动校对综述_4页",
+    "自制_4页",
+    "花桥学院业务核算指引_6页",
+    "英文论文Demo_前3页",
+    "评测文件9-博学_13页",
+]
 
 def log_setting(log_file=""):
     if not log_file:
@@ -52,18 +65,6 @@ print_setting = {
     "PRINT_MAP": 1,  # 打印映射关系
     "PRINT_MAP_": 1,  # 打印映射关系
 }
-
-# 评测集文件名
-file_list = [
-    # "评测文件1-喵回QA_3页",
-    "《贝壳入职管理制度》5页",
-    "《贝壳离职管理制度V3.0》5页",
-    "中文论文Demo中文文本自动校对综述_4页",
-    "自制_4页",
-    "花桥学院业务核算指引_6页",
-    "英文论文Demo_前3页",
-    "评测文件9-博学_13页",
-]
 
 
 block_type_mapping = {
@@ -490,12 +491,103 @@ def tree2list_chunkr(parser_json):
     return nodes
 
 
+def tree2list_surya(file_name, parser_json):
+
+    """
+    Caption 、
+    Footnote 、
+    Formula 、
+    List-item 、
+    Page-footer 、
+    Page-header 、
+    Picture 、
+    Figure 、
+    Section-header 、
+    Table 、
+    Text 、
+    Title
+    """
+
+    layout_map = {
+        "Caption": "Title",  #
+        "Footnote": "FigureNote",  # todo
+        "Formula": "Formula",  #
+        "List-item": "List",  #
+        "Page-footer": "其他—页脚",  #
+        "Page-header": "其他—页眉",  #
+        "Picture": "Figure",  #
+        "Figure": "Figure",  #
+        "Section-header": "Title",  # todo
+        "Table": "Table",  #
+        "Text": "Text",  #
+        "Title": "Title",  #
+    }
+
+    def bbox_trans_surya2beike(file_name, page_bbox_surya, bbox_surya):
+        page_bbox_beike = {
+            "《贝壳入职管理制度》5页": [595, 841],
+            "《贝壳离职管理制度V3.0》5页": [595, 841],
+            "中文论文Demo中文文本自动校对综述_4页": [595, 841],
+            "自制_4页": [595, 841],
+            "花桥学院业务核算指引_6页": [595, 841],
+            "英文论文Demo_前3页": [595, 841],
+            "评测文件9-博学_13页": [595, 841],
+        }
+
+        width_surya = page_bbox_surya[2]
+        height_surya = page_bbox_surya[3]
+
+        bbox_beike = [
+            bbox_surya[0] / width_surya * page_bbox_beike[file_name][0],
+            bbox_surya[1] / height_surya * page_bbox_beike[file_name][1],
+            bbox_surya[2] / width_surya * page_bbox_beike[file_name][0],
+            bbox_surya[3] / height_surya * page_bbox_beike[file_name][1],
+        ]
+
+        return bbox_beike
+
+    # 生成一个主键
+    def unique_id_generator():
+        id = 1
+        while True:
+            yield str(id)
+            id += 1
+
+    order_num = unique_id_generator()
+
+    nodes = []
+    for page_num, page in enumerate(parser_json):
+        bboxes = page["bboxes"]
+        image_bbox = page["image_bbox"]
+
+        for block in page["bboxes"]:
+            if block["label"] not in layout_map:
+                print("not in layout_map")
+                print(block["label"])
+                raise
+
+            if block["label"] in ["Page-footer", "Page-header"]:
+                continue
+
+            node_info = {
+                "page_num": page_num,  # 从0开始
+                "order_num": next(order_num),
+                "layout_type": layout_map[block["label"]],
+                "type": block["label"],
+                "bbox": bbox_trans_surya2beike(file_name, image_bbox, block["bbox"]),
+            }
+            nodes.append(node_info)
+
+    return nodes
+
+
 def tree2list_label(order_num, tree):
     """遍历树并返回所有节点的路径和文本"""
     nodes = []
     if tree.get("element"):
         node = tree
         layout_type = node.get("element", {}).get("block_type")
+        bbox = node.get("element", {}).get("bbox")
         page_num = node.get("element", {})["page_num"][0]
         node_type = block_type_mapping[layout_type]
 
@@ -517,7 +609,7 @@ def tree2list_label(order_num, tree):
             "order_num": order_num,
             "text": text.replace(" ", ""),
             "page_num": page_num,
-            # "element": tree.get("element", {})
+            "bbox": bbox,
         }
         nodes.append(node_info)
     for order_num, child in tree.get("child", {}).items():
@@ -609,6 +701,101 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
     return dict(mapping), edit_dist_all_nodes
 
 
+def calculate_box_relationship(label_node, parser_node):
+    bbox1 = label_node["bbox"]
+    bbox2 = parser_node["bbox"]
+    if not bbox1 or not bbox2:
+        raise
+
+    # 创建两个矩形
+    label_box = box(bbox1[0], bbox1[1], bbox1[2], bbox1[3])
+    parse_box = box(bbox2[0], bbox2[1], bbox2[2], bbox2[3])
+
+    # 计算交集和并集
+    intersection = label_box.intersection(parse_box)
+    union = label_box.union(parse_box)
+
+    # 计算面积
+    inter_area = intersection.area
+    union_area = union.area
+
+    if not inter_area:
+        return "无重叠"
+    elif inter_area / union_area > 0.60:
+        return "基本吻合"
+    # elif inter_area / label_box.area > 0.60:
+    #     return "检测框覆盖"
+    else:
+        return "检测框太小"
+
+    # if inter_area > 0.6 * union_area:
+    #     return "基本吻合"
+    # elif inter_area > rect1_box.area * 0.90:
+    #     return "检测框太小"
+    # elif inter_area > rect2_box.area * 0.90:
+    #     return "检测框覆盖"
+    # elif inter_area:  # 有重叠，无关系
+    #     print(label_node["text"])
+    #     print(parser_node["order_num"])
+    #     print(inter_area/rect1_box.area)
+    #     print(inter_area/rect2_box.area)
+    # else:  # 无重叠
+    #     return "无重叠"
+
+
+def find_mapping_by_bbox(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
+    parser_nodes = copy.deepcopy(parser_nodes_ori)
+    label_nodes = copy.deepcopy(label_nodes_ori)
+    mapping = defaultdict(list)
+    mapping_ref = defaultdict(list)
+    aim_page_num = 0
+
+    for label_node in label_nodes:
+        label_page_num = label_node["page_num"]
+        if aim_page_num != label_page_num:
+            print("开启新地一页-----------------------------------------")
+            aim_page_num = label_page_num
+        mapping[label_node["order_num"]] = []
+        mapping_ref[str(label_node["page_num"])+label_node["text"]] = []
+
+        for parser_node in parser_nodes:
+            parse_page_num = parser_node["page_num"]
+            if label_page_num != parse_page_num:
+                continue
+
+            relationship = calculate_box_relationship(label_node, parser_node)
+
+            parse_order_num = parser_node["order_num"]
+            label_text = label_node["text"]
+
+            if relationship == "基本吻合":
+                print(f"surya框{parse_order_num},基本吻合,文字:{label_text}")
+                mapping[label_node["order_num"]] = [parser_node["order_num"]]
+                mapping_ref[str(label_node["page_num"])+label_node["text"]] = [parser_node["order_num"]]
+                break
+            if relationship == "检测框覆盖":
+                # 检测框覆盖，可以直接得出解析的元素类型
+                print(f"surya框{parse_order_num},检测框覆盖,文字:{label_text}")
+                mapping[label_node["order_num"]].append(parser_node["order_num"])
+                mapping_ref[str(label_node["page_num"])+label_node["text"]].append(parser_node["order_num"])
+
+                continue
+            elif relationship == "检测框太小":
+                # 检测框太小，可能该block有多个检测结果
+                print(f"surya框{parse_order_num},检测框太小,文字:{label_text}")
+                mapping[label_node["order_num"]].append(parser_node["order_num"])
+                mapping_ref[str(label_node["page_num"])+label_node["text"]].append(parser_node["order_num"])
+
+                continue
+
+    for text, value_list in mapping_ref.items():
+        print("\nlabel块：")
+        print(text)
+        print("检测框:")
+        print(value_list)
+    return mapping
+
+
 def get_node_info(label_nodes, index):
     for label_node in label_nodes:
         if label_node["order_num"] == index:
@@ -645,9 +832,9 @@ def evaluate_layout(mapping, label_nodes, parser_nodes):
                 parser_node = get_node_info(parser_nodes, parser_index)
                 if layout_type == parser_node["layout_type"]:
                     layout_right_list.append(label_node)
-                    print("【1vN right】label:", layout_type, "parse:", parser_node["layout_type"], parser_node["text"])
+                    print("【1vN right】label:", layout_type, "parse:", parser_node["layout_type"], parser_node.get("text"))
                 else:
-                    print("【1vN wrong】label:", layout_type, "parse:", parser_node["layout_type"], parser_node["text"])
+                    print("【1vN wrong】label:", layout_type, "parse:", parser_node["layout_type"], parser_node.get("text"))
 
             acc = len(layout_right_list) * 1.0 / len(parser_index_list)
             confusion_matrix.loc["label_" + layout_type, parse_str + parser_node["layout_type"]] += acc
@@ -701,6 +888,39 @@ def label_tree_add_bbox(order_num, beike_parser_nodes, label_tree, mapping):
 
     return
 
+
+def surya_nodes_add_bbox(order_num, beike_parser_nodes, label_tree, mapping):
+    element = label_tree.get("element", {})
+    child = label_tree.get("child", {})
+
+    # 处理element
+    if element:
+        element["bbox"] = []
+
+        # 找到对应的节点
+        if len(mapping.get(order_num)) == 1:
+            order_num_beike = mapping.get(order_num)[0]
+            # 找到bbox
+            for node in beike_parser_nodes:
+                if node["order_num"] == order_num_beike:
+                    if (
+                            element.get("text") and node.get("text")
+                            and (element["text"].strip().replace(" ", "").replace("-", "") != node["text"].strip().replace(" ", "").replace("-", ""))
+                    ):
+                        print("文字不完全相同")
+                        print("parse:" + node["text"].strip().replace(" ", "").replace("-", ""))
+                        print("label:" + element["text"].strip().replace(" ", "").replace("-", ""))
+                        print("")
+                        element["bbox_need_check"] = ""
+
+                    element["bbox"] = node["bbox"]
+                    break
+
+    # 处理child
+    for child_order_num, data in child.items():
+        label_tree_add_bbox(str(child_order_num), beike_parser_nodes, data, mapping)
+
+    return
 
 
 def evaluation_single(logger_badcase, file_name, parser=""):
@@ -885,62 +1105,6 @@ def get_pc_edges_label(order_num, label_tree):
     return pc_edges
 
 
-def evaluation(parser_name):
-
-    confusion_matrix_list = []
-    edit_dist_allfile = []
-    edit_dist_allfile2 = []
-
-    count_1v1 = 0
-    count_1vm = 0
-    count_nomap = 0
-
-    struct_right_cnt = 0
-    struct_all_count = 0
-    struct_mapping = {}
-
-    logger_badcase = log_setting("reports/" + parser_name + "/badcase_" + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + ".txt")
-
-    for file_name in file_list:
-        confusion_matrix, edit_dist_file_nodes, mapping, right_cnt, all_count, right_mapping, error_mapping = \
-            (evaluation_single(logger_badcase, file_name, parser_name))
-
-        confusion_matrix_list.append(confusion_matrix)
-        edit_dist_allfile.extend(edit_dist_file_nodes)
-        edit_dist_allfile2.append(edit_dist_file_nodes)
-
-        count_1v1 += len([v for k, v in mapping.items() if len(v) == 1])
-        count_1vm += len([v for k, v in mapping.items() if len(v) > 1])
-        count_nomap += len([v for k, v in mapping.items() if len(v) == 0])
-        struct_right_cnt += right_cnt
-        struct_all_count += all_count
-        struct_mapping.update(right_mapping)
-
-    total_confusion_matrix = sum(confusion_matrix_list)
-    print(total_confusion_matrix.to_string())
-
-    # logger.info(f"总节点数：{len(edit_dist_allfile)}")
-    # logger.info(f"1v1映射节点数：{len([x for x in edit_dist_allfile if x > 0])}\n")
-
-    real_1v1_count = len([x for x in edit_dist_allfile if x > 0])  # 这里是指相似度大于0.8的节点；目标映射数为1并不是真正的相似度大于0.8
-
-    logger.info(f"block切分准确率：\t\t{mean(edit_dist_allfile):.2f}  ({real_1v1_count} / {len(edit_dist_allfile)})")
-    # 每种类型的准确率
-    cal_accuracy(total_confusion_matrix)
-
-    # print("找到的父子节点：")
-    # for k, v in struct_mapping.items():
-    #     print(k+"的父节点"+v)
-
-
-    # print("全部文档非1v1映射节点数：", len([x for x in edit_dist_allfile if x == 0]))
-
-    # print("全部文档1v1映射节点数：", count_1v1)
-    # print("全部文档多映射节点数：", count_1vm)
-    # print("全部文档无映射节点数：", count_nomap)
-    logger.info(f"层级结构准确率：\t\t{struct_right_cnt * 1.0 / struct_all_count:.2f}  ({struct_right_cnt} / {struct_all_count})\n\n")
-
-
 def cal_accuracy(confusion_matrix):
     # 计算每个标签的准确率
     accuracies = {}
@@ -1002,6 +1166,163 @@ def label_json_add_bbox_by_beike_parse():
         beike_parse_output.output(label_tree, file_name, "evaluation/label_json/", "_GT_label.json")
 
 
+def evaluation_surya():
+    confusion_matrix_list = []
+
+    for file_name in file_list:
+        print("evaluation_surya begin:" + file_name)
+        # 解析结果
+        parser_json = load_json(f"parse_json/surya/" + file_name + '.json')
+        parser_nodes = tree2list_surya(file_name, parser_json[file_name])
+
+        # 标注结果
+        label_tree = load_json("label_json/" + file_name + '_GT_label.json')
+        label_nodes = tree2list_label("1", label_tree["root"])
+        label_nodes = sorted(label_nodes, key=lambda x: x['page_num'])
+
+        mapping = find_mapping_by_bbox("", file_name, parser_nodes, label_nodes)
+        mapping = dict(sorted(mapping.items(), reverse=False))
+        # print(json.dumps(mapping, indent=2, ensure_ascii=False))
+
+        new_dict = get_revers_map(mapping)
+        print("surya统计：")
+        print(len(label_nodes))
+        print(len([1 for k, v in new_dict.items() if len(v) == 1]))
+
+        # 版面元素正确率
+        confusion_matrix = evaluate_layout(mapping, label_nodes, parser_nodes)
+        confusion_matrix_list.append(confusion_matrix)
+
+    total_confusion_matrix = sum(confusion_matrix_list)
+    print(total_confusion_matrix.to_string())
+
+    # 每种类型的准确率
+    cal_accuracy(total_confusion_matrix)
+
+
+def get_revers_map(original_dict):
+    original_dict = {k: v for k, v in original_dict.items() if len(v) == 1}
+
+    # 新的字典
+    new_dict = {}
+    # 遍历原始字典
+    for key, values in original_dict.items():
+        for value in values:
+            if value in new_dict:
+                new_dict[value].append(key)
+            else:
+                new_dict[value] = [key]
+
+    new_dict = {k: v for k, v in new_dict.items() if len(v) == 1}
+    return new_dict
+
+# def surya_json_add_beike_bbox():
+#     for file_name in file_list:
+#         # 解析结果
+#         parser_json = load_json(f"parse_json/surya/" + file_name + '.json')
+#         parser_nodes = tree2list_surya(file_name, parser_json[file_name])
+#
+#         # 标注结果
+#         label_tree = load_json("label_json/" + file_name + '_GT_label.json')
+#         label_nodes = tree2list_label("1", label_tree["root"])
+#
+#         mapping = find_mapping_by_bbox("", file_name, parser_nodes, label_nodes)
+#         mapping = dict(sorted(mapping.items(), reverse=False))
+#         # print(json.dumps(mapping, indent=2, ensure_ascii=False))
+
+
+# 输surya识别layout之后的pdf预览
+def surya_view():
+    for file_name in file_list:
+        # 解析结果
+        parser_json = load_json(f"parse_json/surya/" + file_name + '.json')
+        parser_nodes = tree2list_surya(file_name, parser_json[file_name])
+
+        debug_file = fitz.Document(f"documents/" + file_name + '.pdf')
+        debug_pages = [page for page in debug_file.pages()]
+        for parse_node in parser_nodes:
+            order_num = parse_node["order_num"]
+            page_num = parse_node["page_num"]
+            bbox = parse_node["bbox"]
+            layout_type = parse_node["layout_type"]
+            type = parse_node["type"]
+
+            # draw_text = type
+            # draw_text = layout_type
+            draw_text = f"{order_num} {layout_type}"
+            draw_box(debug_pages[page_num], draw_text, fitz.Rect(bbox))
+        debug_file.save(f"documents/" + file_name + '_surya_ori.pdf')
+
+
+def draw_box(page, name, bbox):
+    white = (255 / 255, 255 / 255, 255 / 255)
+    black = (0 / 255, 0 / 255, 0 / 255)
+
+    # Page画框框
+    page.draw_rect(bbox, color=(0, 0, 0), fill=None, width=0.5, dashes=None, overlay=True, fill_opacity=0.5)
+    # Page画名字的框框
+    page.draw_rect((bbox.x0, bbox.y0 - 8, bbox.x0 + len(name)*5.5, bbox.y0), color=black, fill=black, overlay=True)
+    # Page画名字的text
+    page.insert_text((bbox.x0, bbox.y0), name, color=white)
+
+
+
+def evaluation(parser_name):
+
+    confusion_matrix_list = []
+    edit_dist_allfile = []
+    edit_dist_allfile2 = []
+
+    count_1v1 = 0
+    count_1vm = 0
+    count_nomap = 0
+
+    struct_right_cnt = 0
+    struct_all_count = 0
+    struct_mapping = {}
+
+    logger_badcase = log_setting("reports/" + parser_name + "/badcase_" + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + ".txt")
+
+    for file_name in file_list:
+        confusion_matrix, edit_dist_file_nodes, mapping, right_cnt, all_count, right_mapping, error_mapping = \
+            (evaluation_single(logger_badcase, file_name, parser_name))
+
+        confusion_matrix_list.append(confusion_matrix)
+        edit_dist_allfile.extend(edit_dist_file_nodes)
+        edit_dist_allfile2.append(edit_dist_file_nodes)
+
+        count_1v1 += len([v for k, v in mapping.items() if len(v) == 1])
+        count_1vm += len([v for k, v in mapping.items() if len(v) > 1])
+        count_nomap += len([v for k, v in mapping.items() if len(v) == 0])
+        struct_right_cnt += right_cnt
+        struct_all_count += all_count
+        struct_mapping.update(right_mapping)
+
+    total_confusion_matrix = sum(confusion_matrix_list)
+    print(total_confusion_matrix.to_string())
+
+    # logger.info(f"总节点数：{len(edit_dist_allfile)}")
+    # logger.info(f"1v1映射节点数：{len([x for x in edit_dist_allfile if x > 0])}\n")
+
+    real_1v1_count = len([x for x in edit_dist_allfile if x > 0])  # 这里是指相似度大于0.8的节点；目标映射数为1并不是真正的相似度大于0.8
+
+    logger.info(f"block切分准确率：\t\t{mean(edit_dist_allfile):.2f}  ({real_1v1_count} / {len(edit_dist_allfile)})")
+    # 每种类型的准确率
+    cal_accuracy(total_confusion_matrix)
+
+    # print("找到的父子节点：")
+    # for k, v in struct_mapping.items():
+    #     print(k+"的父节点"+v)
+
+
+    # print("全部文档非1v1映射节点数：", len([x for x in edit_dist_allfile if x == 0]))
+
+    # print("全部文档1v1映射节点数：", count_1v1)
+    # print("全部文档多映射节点数：", count_1vm)
+    # print("全部文档无映射节点数：", count_nomap)
+    logger.info(f"层级结构准确率：\t\t{struct_right_cnt * 1.0 / struct_all_count:.2f}  ({struct_right_cnt} / {struct_all_count})\n\n")
+
+
 if __name__ == "__main__":
     logger_tmp = log_setting("reports/tmp.txt")
 
@@ -1029,7 +1350,12 @@ if __name__ == "__main__":
     # evaluation_single(logger_tmp, "评测文件9-博学_13页", "ali")
 
     main()
-    # label_json_add_bbox_by_beike_parse()
+
+    # label_json_add_bbox_by_beike_parse  # 根据贝壳解析结果给label添加bbox的（影响大，不要随意执行）
+    # surya_json_add_beike_bbox()  # 添加转化后的bbox
+
+    # evaluation_surya()
+    # surya_view()
 
     # 说明：运行该文件会直接输出最新的评测指标到reports/output_indicators文件中
     # 步骤：
