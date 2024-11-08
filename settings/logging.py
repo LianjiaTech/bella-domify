@@ -2,7 +2,7 @@ from pydantic.v1 import BaseSettings
 import os
 
 # base_path = os.path.dirname(os.path.dirname((os.path.abspath(__file__))))
-base_path = "/data0/www/applogs/"
+base_path = "/data0/www/applogs"
 
 
 class Settings(BaseSettings):
