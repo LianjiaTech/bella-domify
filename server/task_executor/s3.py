@@ -21,6 +21,13 @@ inner_point = 'https://storage.lianjia.com'
 end_point = 'https://img.ljcdn.com'
 
 
+# 计算md5值
+def calculate_md5(stream: bytes) -> str:
+    md5_hash = hashlib.md5()
+    md5_hash.update(stream)
+    return md5_hash.hexdigest()
+
+
 def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> str:
     # s3 上传文件
     if file:
@@ -30,6 +37,23 @@ def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> s
 
     # gen uuid for file-key
     file_key = uuid.uuid4().hex + filename
+
+    # 上传文件至s3
+    s3.put_object(Bucket=bucket_name,
+                  Body=stream,
+                  Key=file_key)
+    return file_key
+
+
+def upload_file_by_md5(file: UploadFile = None, stream: bytes = None, filename="") -> str:
+    # s3 上传文件
+    if file:
+        content = file.file.read()
+        stream = io.BytesIO(content)
+        filename = file.filename
+
+    # gen uuid for file-key
+    file_key = "document_parse_result_" + calculate_md5(stream)
 
     # 上传文件至s3
     s3.put_object(Bucket=bucket_name,

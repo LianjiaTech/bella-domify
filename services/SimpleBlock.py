@@ -10,11 +10,13 @@
 # ===============================================================
 from server.task_executor import s3
 from services.constants import IMAGE
+from services.layout_parse_utils import llm_image2text
 
 
 class SimpleBlock:
     def __init__(self, text="", type="", page_num=0, is_header=False, is_footer=False, image_bytes=None):
         self.text = text
+        self.ocr_text = ""
         self.type = type  # 枚举值：IMAGE, TEXT, TABLE
         self.page_num = page_num
         self.is_header = is_header
@@ -24,6 +26,7 @@ class SimpleBlock:
     def get_result(self):
         return {
             "text": self.text,
+            "ocr_text": self.ocr_text,
             "type": self.type,
             "page_num": self.page_num,
         }
@@ -33,6 +36,7 @@ class SimpleBlock:
             file_key = s3.upload_file(stream=self.image_bytes)
             image_s3_url = s3.get_file_url(file_key)
             self.text = image_s3_url
+            self.ocr_text = llm_image2text(self.text)
             return True
 
     def mark_holder(self, header: bool = True):

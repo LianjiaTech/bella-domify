@@ -16,7 +16,7 @@ from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER_TYPE
 
 from services.SimpleBlock import SimpleBlock
 from services.constants import TEXT, TABLE, IMAGE
-from services.layout_parse_utils import get_s3_links_for_simple_block_batch
+from services.layout_parse_utils import get_s3_links_for_simple_block_batch, trans_simple_block_list2string
 
 
 def layout_parse(file):
@@ -59,7 +59,8 @@ def layout_parse(file):
 
     # SimpleBlock的list批量获取S3链接，并返回目标结构
     result = get_s3_links_for_simple_block_batch(simple_block_list)
-    return result
+    file_text = trans_simple_block_list2string(result)
+    return file_text
 
 
 if __name__ == "__main__":

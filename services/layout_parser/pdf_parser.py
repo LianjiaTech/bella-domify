@@ -15,7 +15,7 @@ import fitz
 from services.SimpleBlock import SimpleBlock
 from services.constants import TEXT, IMAGE
 from services.layout_parse_utils import _possible_holder_blocks, mark_holder_by_text_similarity, \
-    get_s3_links_for_simple_block_batch
+    get_s3_links_for_simple_block_batch, trans_simple_block_list2string
 
 
 def trans_block2text(block):
@@ -61,7 +61,8 @@ def layout_parse(file):
 
     # SimpleBlock的list批量获取S3链接，并返回目标结构
     result = get_s3_links_for_simple_block_batch(filtered_list)
-    return result
+    file_text = trans_simple_block_list2string(result)
+    return file_text
 
 
 if __name__ == "__main__":
