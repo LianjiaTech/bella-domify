@@ -929,7 +929,7 @@ def evaluation_single(logger_badcase, file_name, parser=""):
 
     # 解析结果获取
     if parser == "beike":
-        parser_json = load_json(f"parse_json/{parser}/" + file_name + '_beike.json')
+        parser_json = load_json(f"parse_json/{parser}/" + file_name + '.json')
         parser_nodes = tree2list_beike(parser_json["root"])
         pc_edges_parser = get_pc_edges_beike("", parser_json["root"]["child"])
         print()

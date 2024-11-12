@@ -8,14 +8,14 @@
 #    @Description   :
 #
 # ===============================================================
-import json
 import csv
 from io import BytesIO, StringIO
+import os
 
 
 def layout_parse(file):
     # 尝试将二进制文件内容解码为文本
-    charsets = ['utf-8-sig', 'utf-8', 'latin1', 'iso-8859-1']
+    charsets = ['gbk', 'utf-8', 'utf-8-sig', 'latin1', 'iso-8859-1']
     for charset in charsets:
         print(charset)
         try:
@@ -37,11 +37,13 @@ def layout_parse(file):
 
 if __name__ == "__main__":
 
+    file_path = os.path.abspath(__file__).split("document_parse")[0] + "document_parse/test/samples/file_type_demo/"
+
     file_name = 'demo.csv'
 
     # 读取本地文件
     try:
-        with open(file_name, 'rb') as file:
+        with open(file_path + file_name, 'rb') as file:
             buf_data = file.read()
     except Exception as e:
         print(f"读取文件失败: {e}")

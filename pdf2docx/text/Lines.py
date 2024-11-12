@@ -110,14 +110,14 @@ class Lines(ElementCollection):
     def recognize_list(self, line: Line):
 
         # def recognize_list_first_item(text, index):
-        #     if re.match(Lines.ORDERED_LIST_PATTERN[index], text):
+        #     if re.match(Lines.ORDERED_LIST_PATTERN[index], text.replace(" ", "")):
         #         return True
         #     else:
         #         return False
 
         # recognize ordered & unordered list
         for index, rule in enumerate(Lines.ORDERED_LIST_PATTERN):
-            if match := re.match(rule, line.text):
+            if match := re.match(rule, line.text.replace(" ", "")):
                 line.list_type = index + 1
                 line.list_tag = match.group(0)
                 # line.list_first_item = recognize_list_first_item(line.text, index)

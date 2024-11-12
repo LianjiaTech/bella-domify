@@ -8,16 +8,30 @@
 #    @Description   :
 #
 # ===============================================================
-import json
+import xlrd
+from io import BytesIO
 import os
+import io
+from docx import Document
+import mammoth
+import docx2txt
 
 
-def layout_parse(file):
-    try:
-        text = file.decode('utf-8')
-    except UnicodeDecodeError:
-        raise ValueError("异常：文件内容无法解码为 UTF-8 文本")
 
+def layout_parse1(byte_data):
+    file_stream = io.BytesIO(byte_data)
+    doc = Document(file_stream)
+    full_text = []
+    for para in doc.paragraphs:
+        full_text.append(para.text)
+    return '\n'.join(full_text)
+
+
+def layout_parse(file_bytes):
+    with io.BytesIO(file_bytes) as file_stream:
+        with open('temp.doc', 'wb') as temp_file:
+            temp_file.write(file_stream.read())
+        text = docx2txt.process('temp.doc')
     return text
 
 
@@ -25,19 +39,7 @@ if __name__ == "__main__":
 
     file_path = os.path.abspath(__file__).split("document_parse")[0] + "document_parse/test/samples/file_type_demo/"
 
-    # file_name = 'demo.txt'
-    # file_name = 'demo.md'
-    # file_name = 'demo.json'
-    # file_name = 'demo.jsonl'
-    # file_name = 'demo.py'
-    # file_name = 'demo.c'
-    # file_name = 'demo.cpp'
-    # file_name = 'demo.java'
-    # file_name = 'demo.js'
-    # file_name = 'demo.sh'
-    # file_name = 'demo.xml'
-    # file_name = 'demo.yaml'
-    file_name = 'demo.html'
+    file_name = 'demo.doc'
 
     # 读取本地文件
     try:

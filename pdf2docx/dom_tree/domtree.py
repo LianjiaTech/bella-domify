@@ -16,6 +16,15 @@ from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend, TextBlockModel
 from pdf2docx.text.TextSpan import TextSpan
 
 
+def judge_title_by_child(parent_node):
+    # 非叶子节点、文字节点、且非目录 则判定为Title
+    if (not parent_node.is_root
+            and parent_node.element.is_text_block
+            and not parent_node.element.is_catalog
+            and len(parent_node.element.text) < 25):
+        parent_node.element.is_title = 1
+
+
 class NodeModel(BaseModel):
     _node: Node = PrivateAttr()
 
@@ -282,6 +291,7 @@ class DomTree:
                     searched_block.add(element.caption_block)
                 elif prev_text_node:
                     prev_text_node.add_child(node)
+                    judge_title_by_child(prev_text_node)
                     # todo 这部分依赖title识别要准确，之后加
                     # if prev_text_node.element.block.list_type() or prev_text_node.element.is_title:
                     #     prev_text_node.add_child(node)
@@ -301,6 +311,7 @@ class DomTree:
                     searched_block.add(image_span.caption_block)
                 elif prev_text_node:
                     prev_text_node.add_child(node)
+                    judge_title_by_child(prev_text_node)
                     # if prev_text_node.element.block.list_type() or prev_text_node.element.is_title:
                     #     prev_text_node.add_child(node)
                     # else:
@@ -336,11 +347,7 @@ class DomTree:
                     # 增加子节点
                     parent_node.add_child(node)
                     # 非叶子节点、文字节点、且非目录 则判定为Title
-                    if (not parent_node.is_root
-                            and parent_node.element.is_text_block
-                            and not parent_node.element.is_catalog
-                            and len(parent_node.element.text) < 20):
-                        parent_node.element.is_title = 1
+                    judge_title_by_child(parent_node)
 
                     # 压栈
                     stack_path.append(node)

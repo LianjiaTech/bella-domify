@@ -17,9 +17,13 @@ import multiprocessing
 from server.task_executor import s3
 from common.tool.chubaofs_tool import ChuBaoFSTool
 
-from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser
+from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, csv_parser
 from services.domtree_parser import pdf_parser as pdf_domtree_parser
 from utils import general_util
+from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
+from io import IOBase
+import io
+
 
 
 # 开始解析
@@ -54,7 +58,17 @@ def layout_parse(file_name: str = None, file: bytes = None):
         return pdf_parser.layout_parse(file)
     elif file_extension == 'docx':
         return docx_parser.layout_parse(file)
-    elif file_extension in ["txt", "md", "json", "jsonl", "py", "c", "cpp", "java", "js", "sh", "xml", "yaml", ]:
+    elif file_extension == 'csv':
+        return csv_parser.layout_parse(file)
+    elif file_extension == 'doc':
+        docx_stream = io.BytesIO(file)
+        file = convert_docx_to_pdf_in_memory(docx_stream)
+        return docx_parser.layout_parse(file)
+    elif file_extension == 'xlsx':
+        return xlsx_parser.layout_parse(file)
+    elif file_extension == 'xls':
+        return xls_parser.layout_parse(file)
+    elif file_extension in ["txt", "md", "json", "jsonl", "py", "c", "cpp", "java", "js", "sh", "xml", "yaml", "html"]:
         return txt_parser.layout_parse(file)
     else:
         raise ValueError("异常：不支持的文件类型")

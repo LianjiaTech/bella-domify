@@ -316,11 +316,11 @@ def identify_header(raw_pages: list):
     # 通过区域去除页眉
     for i, page in enumerate(raw_pages):
         for line in page.blocks:
-            if "<image>" in line.text:
+            if "<image>" in line.text:  # 图片上边界在阈值以上
                 if line.bbox[3] != 0 and line.bbox[1] <= confirmed_header_height:
                     line.is_header = 1
-            else:
-                if line.bbox[3] != 0 and line.bbox[3] <= confirmed_header_height:
+            else:  # 文字高度中点在阈值以上
+                if line.bbox[3] != 0 and (line.bbox[1] + line.bbox[3]) / 2 <= confirmed_header_height:
                     line.is_header = 1
 
 
@@ -393,9 +393,9 @@ def possible_header_height(raw_pages):
     # 处理页眉
     for raw_page in raw_pages:
         # 页眉高度阈值
-        first_line_height = get_first_line_height(raw_page) + 5
+        first_line_height = get_first_line_height(raw_page)
         if first_line_height:
-            header_height_list.append(first_line_height)
+            header_height_list.append(first_line_height + 5)
         else:
             header_height_list.append(raw_page.height / 10)
 

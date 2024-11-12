@@ -99,7 +99,16 @@ class Converter:
             start (int, optional): First page to process. Defaults to 0, the first page.
             end (int, optional): Last page to process. Defaults to None, the last page.
             pages (list, optional): Range of page indexes to parse. Defaults to None.
-            kwargs (dict, optional): Configuration parameters. 
+            kwargs (dict, optional): Configuration parameters.
+
+
+        parse_document
+        包含 list的识别
+
+        parse_pages
+        递归解析：包含line的合并和拆分
+
+
         '''
         self.load_pages(start, end, pages, **kwargs) \
             .parse_document(**kwargs) \
@@ -345,8 +354,11 @@ class Converter:
 
         debug_file = fitz.Document(self.filename_pdf) if settings['debug'] else None
         # 筛选出最合适最合适的dom_tree
-        dom_trees = [FAQ_LLM_DomTree(self.pages_extend, debug_file, self._fitz_doc),
-                     DomTree(self.pages_extend, debug_file, self._fitz_doc)]
+        if settings.get("ignore_faq"):
+            dom_trees = [DomTree(self.pages_extend, debug_file, self._fitz_doc)]
+        else:
+            dom_trees = [FAQ_LLM_DomTree(self.pages_extend, debug_file, self._fitz_doc),
+                         DomTree(self.pages_extend, debug_file, self._fitz_doc)]
         dom_tree = max((dom_tree_i for dom_tree_i in dom_trees if dom_tree_i.is_appropriate()),
                        key=lambda x: x.priority)
         dom_tree.parse(**settings)  # 开始解析
