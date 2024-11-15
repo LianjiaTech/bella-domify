@@ -32,7 +32,7 @@ def layout_parse(file):
         pdf_document = fitz.Document(stream=file)
     except fitz.fitz.FileDataError as e:
         logging.error('layout_parse解析失败。[文件类型]pdf [原因]非pdf类型或损坏的pdf文件 [Exception]:%s', e)
-        return {}
+        return ""
         # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
 
     # 遍历每一页
