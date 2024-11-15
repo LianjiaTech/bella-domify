@@ -11,12 +11,12 @@
 import json
 
 import fitz
-
+from services.ParserResult import ParserResult, ParserCode
 from services.SimpleBlock import SimpleBlock
 from services.constants import TEXT, IMAGE
 from services.layout_parse_utils import _possible_holder_blocks, mark_holder_by_text_similarity, \
     get_s3_links_for_simple_block_batch, trans_simple_block_list2string
-
+import logging
 
 def trans_block2text(block):
     text = ""
@@ -28,7 +28,12 @@ def trans_block2text(block):
 
 def layout_parse(file):
     page_list = []  # 所有页面list
-    pdf_document = fitz.Document(stream=file)
+    try:
+        pdf_document = fitz.Document(stream=file)
+    except fitz.fitz.FileDataError as e:
+        logging.error('layout_parse解析失败。[文件类型]pdf [原因]非pdf类型或损坏的pdf文件 [Exception]:%s', e)
+        return {}
+        # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
 
     # 遍历每一页
     for page_num in range(len(pdf_document)):
@@ -48,10 +53,10 @@ def layout_parse(file):
 
     # 页眉识别
     page_header_blocks = _possible_holder_blocks(page_list, header=True)
-    found_header = mark_holder_by_text_similarity(page_header_blocks, header=True)
+    mark_holder_by_text_similarity(page_header_blocks, header=True)
     # 页脚识别
     page_footer_blocks = _possible_holder_blocks(page_list, header=False)
-    found_footer = mark_holder_by_text_similarity(page_footer_blocks, header=False)
+    mark_holder_by_text_similarity(page_footer_blocks, header=False)
     # 过滤无用元素
     filtered_list = []
     for page_item in page_list:
@@ -62,7 +67,9 @@ def layout_parse(file):
     # SimpleBlock的list批量获取S3链接，并返回目标结构
     result = get_s3_links_for_simple_block_batch(filtered_list)
     file_text = trans_simple_block_list2string(result)
+
     return file_text
+    # return ParserResult(parser_data=file_text).to_json()
 
 
 if __name__ == "__main__":

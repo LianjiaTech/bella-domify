@@ -8,6 +8,14 @@ from setuptools import find_packages, setup
 DESCRIPTION = 'Open source Python library converting pdf to docx.'
 EXCLUDE_FROM_PACKAGES = ["build", "dist", "test"]
 
+VERSION = "0.1.5.5"
+
+
+# 获取主版本号
+# 输入0.1.5.5 输出0.1.5
+def get_main_version(version):
+    return version.rsplit('.', 1)[0]
+
 
 # read version number from version.txt, otherwise alpha version
 # Github CI can create version.txt dynamically.
@@ -16,7 +24,7 @@ def get_version(fname):
         with open(fname, "r", encoding="utf-8") as f:
             version = f.readline().strip()
     else:
-        version = '0.1.5.5'
+        version = VERSION
 
     return version
 
@@ -48,28 +56,30 @@ def load_requirements(fname):
 
     return requirements
 
-setup(
-    name="document_parser",
-    version=get_version("version.txt"),
-    keywords=["document-parser"],
-    description=DESCRIPTION,
-    long_description=load_long_description("README.md"),
-    long_description_content_type="text/markdown",
-    license="GPL v3",
-    author=["tangxiaolong", "luxu", "zhangxiaojia"],
-    author_email=["tangxiaolong@ke.com", "luxu002@ke.com", "zhangxiaojia002@ke.com"],
-    url="https://git.lianjia.com/ai-arch/document_parse",
-    packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
-    include_package_data=True,
-    zip_safe=False,
-    install_requires=load_requirements("requirements.txt"),
-    python_requires=">=3.6",
-    entry_points={
-        "console_scripts": [
-            "pdf2docx=pdf2docx.main:main"
-        ]
-    },
-)
+
+if __name__ == "__main__":
+    setup(
+        name="document_parser",
+        version=get_version("version.txt"),
+        keywords=["document-parser"],
+        description=DESCRIPTION,
+        long_description=load_long_description("README.md"),
+        long_description_content_type="text/markdown",
+        license="GPL v3",
+        author=["tangxiaolong", "luxu", "zhangxiaojia"],
+        author_email=["tangxiaolong@ke.com", "luxu002@ke.com", "zhangxiaojia002@ke.com"],
+        url="https://git.lianjia.com/ai-arch/document_parse",
+        packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
+        include_package_data=True,
+        zip_safe=False,
+        install_requires=load_requirements("requirements.txt"),
+        python_requires=">=3.6",
+        entry_points={
+            "console_scripts": [
+                "pdf2docx=pdf2docx.main:main"
+            ]
+        },
+    )
 
 """
 发包命令：

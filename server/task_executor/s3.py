@@ -6,6 +6,7 @@ import uuid
 from urllib.parse import urlparse, urlunparse
 
 import boto3
+import json
 from fastapi import UploadFile
 
 from settings.ini_config import config
@@ -19,13 +20,6 @@ s3 = boto3.client("s3", aws_access_key_id=ak, aws_secret_access_key=sk, endpoint
 # 内网替换为外网
 inner_point = 'https://storage.lianjia.com'
 end_point = 'https://img.ljcdn.com'
-
-
-# 计算md5值
-def calculate_md5(stream: bytes) -> str:
-    md5_hash = hashlib.md5()
-    md5_hash.update(stream)
-    return md5_hash.hexdigest()
 
 
 def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> str:
@@ -45,28 +39,19 @@ def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> s
     return file_key
 
 
-def upload_file_by_md5(file: UploadFile = None, stream: bytes = None, filename="") -> str:
-    # s3 上传文件
-    if file:
-        content = file.file.read()
-        stream = io.BytesIO(content)
-        filename = file.filename
-
-    # gen uuid for file-key
-    file_key = "document_parse_result_" + calculate_md5(stream)
-
-    # 上传文件至s3
-    s3.put_object(Bucket=bucket_name,
-                  Body=stream,
-                  Key=file_key)
-    return file_key
-
-
 def upload_text_content(text: str) -> str:
     # text to bytes
     file_key = uuid.uuid4().hex + ".txt"
     s3.put_object(Bucket=bucket_name,
                   Body=text.encode("utf-8"),
+                  Key=file_key)
+    return file_key
+
+
+def upload_dict_content(data: dict, file_key: str) -> str:
+    json_data = json.dumps(data)
+    s3.put_object(Bucket=bucket_name,
+                  Body=json_data,
                   Key=file_key)
     return file_key
 

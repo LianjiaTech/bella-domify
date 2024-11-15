@@ -54,7 +54,8 @@ class ChuBaoFSTool:
 if __name__ == "__main__":
 
     chubao = ChuBaoFSTool()
-    file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
+    # file_path = "1000000023008327/app_data/belle/默认/《贝壳离职管理制度V3.0》5页.pdf"
+    file_path = "1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
     stream = chubao.read_file(file_path)
     print()
     # file_type = get_file_type(file_path)

@@ -38,10 +38,6 @@ def get_pdf_parse_task():
     return get_wait_task()
 
 
-def get_kafka_pdf_parse_task():
-    return
-
-
 def get_file_url(file_key):
     # s3, 获取文件加签url
     return s3.generate_presigned_url('get_object', Params={'Bucket': bucket_name, 'Key': file_key},

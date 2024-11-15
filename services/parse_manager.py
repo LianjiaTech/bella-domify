@@ -8,22 +8,23 @@
 #    @Description   :
 #
 # ===============================================================
+import io
 import json
+import multiprocessing
+import logging
 
 import requests
+from fastapi import HTTPException
+from fastapi.encoders import jsonable_encoder
 
-import multiprocessing
-
-from server.task_executor import s3
+import services.s3_service as s3_service
 from common.tool.chubaofs_tool import ChuBaoFSTool
-
-from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, csv_parser
 from services.domtree_parser import pdf_parser as pdf_domtree_parser
+from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, \
+    csv_parser, pic_parser
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
-from io import IOBase
-import io
-
+from services.ParserResult import ParserResult, ParserCode
 
 
 # 开始解析
@@ -34,6 +35,18 @@ DOCUMENT_PARSE_LAYOUT_FINISH = "document_parse_layout_finish"
 DOCUMENT_PARSE_DOMTREE_FINISH = "document_parse_domtree_finish"
 # 全部解析完毕
 DOCUMENT_PARSE_FINISH = "document_parse_finish"
+# 解析失败
+DOCUMENT_PARSE_FAIL = "document_parse_fail"
+
+percent_map = {
+    DOCUMENT_PARSE_BEGIN: 0,
+    DOCUMENT_PARSE_LAYOUT_FINISH: 50,
+    DOCUMENT_PARSE_DOMTREE_FINISH: 50,
+    DOCUMENT_PARSE_FINISH: 100,
+    DOCUMENT_PARSE_FAIL: 100,
+}
+
+chubao = ChuBaoFSTool()
 
 
 def validate_parameters(file_name, file):
@@ -70,58 +83,95 @@ def layout_parse(file_name: str = None, file: bytes = None):
         return xls_parser.layout_parse(file)
     elif file_extension in ["txt", "md", "json", "jsonl", "py", "c", "cpp", "java", "js", "sh", "xml", "yaml", "html"]:
         return txt_parser.layout_parse(file)
+    elif file_extension in ["png", "jpeg", "jpg", "bmp"]:
+        return pic_parser.layout_parse(file)
     else:
         raise ValueError("异常：不支持的文件类型")
 
 
 def domtree_parse(file_name: str = None, file: bytes = None):
+
+    # json转换
+    def convert_to_json(obj):
+        json_compatible_data = jsonable_encoder(obj)
+        json_string = json.dumps(json_compatible_data, ensure_ascii=False, indent=2)
+        return json_string, json_compatible_data
+
     # 参数检验
     validate_parameters(file_name, file)
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
     # 根据后缀判断文件类型
     if file_extension == 'pdf':
-        return pdf_domtree_parser.pdf_parse(file)
+        try:
+            dom_tree_model = pdf_domtree_parser.pdf_parse(file)
+            _, json_compatible_data = convert_to_json(dom_tree_model)
+            return json_compatible_data
+            # return ParserResult(parser_data=json_compatible_data).to_json()
+        except Exception as e:
+            logging.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
+            return {}
+            # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
+
     else:
-        return []
+        return {}
 
 
-def worker(func, return_dict, key):
-    result = func()
+def worker(func, args, return_dict, key):
+    result = func(*args)
     return_dict[key] = result
 
 
 # layout解析
-def layout_parse_and_callback(file_id, file_name, contents):
-    # 获取版面解析结果
-    result = layout_parse(file_name, contents)
-    # 解析结果存S3
+def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
+    try:
+        # 获取版面解析结果
+        layout_parse_result = layout_parse(file_name, contents)
+        # 解析失败，直接回调
+        if not layout_parse_result:
+            callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+            return layout_parse_result
 
-    # 解析完毕回调fileAPI和bella
-    callback_file_api(file_id, DOCUMENT_PARSE_LAYOUT_FINISH)
-    callback_bella_api(file_id, DOCUMENT_PARSE_LAYOUT_FINISH)
-
-
-    return result
+        # 解析结果存S3
+        parse_result = {"layout_parse": layout_parse_result, "domtree_parse": {}}
+        s3_service.upload_s3_parse_result(contents, parse_result)
+        # 解析完毕回调
+        callback_after_parse(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
+    except Exception as e:
+        print(f"Exception layout_parse_and_callback: {e}")
+        return ""
+    return layout_parse_result
 
 
 # domtree解析
-def domtree_parse_and_callback(file_id, file_name, contents):
-    # 获取domtree解析结果
-    result = domtree_parse(file_name, contents)
-    # 解析结果存S3
+def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
+    try:
+        # 获取domtree解析结果
+        domtree_parse_result = domtree_parse(file_name, contents)
+        # 解析失败，直接回调
+        if not domtree_parse_result:
+            callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+            return domtree_parse_result
 
-    # 解析完毕回调fileAPI和bella
-    callback_file_api(file_id, DOCUMENT_PARSE_DOMTREE_FINISH)
-    callback_bella_api(file_id, DOCUMENT_PARSE_LAYOUT_FINISH)
+        # 解析结果存S3
+        parse_result = {"layout_parse": "", "domtree_parse": domtree_parse_result}
+        s3_service.upload_s3_parse_result(contents, parse_result)
+        # 解析完毕回调
+        callback_after_parse(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
+    except Exception as e:
+        print(f"Exception domtree_parse_and_callback: {e}")
+        return {}
+    return domtree_parse_result
 
-    return result
 
+def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
+    # stream = chubao.read_file(file_id)
 
-def parse_result_layout_and_domtree(file_name, stream):
-    file_id = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
+    # file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
+    # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳离职管理制度V3.0》5页.pdf"
+    file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
+    stream = chubao.read_file(file_path)
 
-    file_type = ""
     # 读取文件流内容
     contents = stream.read()
     stream.close()
@@ -129,79 +179,117 @@ def parse_result_layout_and_domtree(file_name, stream):
     # 多进程并行解析
     manager = multiprocessing.Manager()
     return_dict = manager.dict()
-
-    p1 = multiprocessing.Process(target=worker, args=(layout_parse_and_callback, (file_id, file_name, contents), return_dict, 'layout_parse'))
-    p2 = multiprocessing.Process(target=worker, args=(domtree_parse_and_callback, (file_id, file_name, contents), return_dict, 'domtree_parse'))
-
+    p1 = multiprocessing.Process(target=worker, args=(
+        layout_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'layout_parse'))
+    p2 = multiprocessing.Process(target=worker, args=(
+        domtree_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'domtree_parse'))
     p1.start()
     p2.start()
     p1.join()
     p2.join()
+    # 解析结果存S3
+    parse_result = dict(return_dict)
+    s3_service.upload_s3_parse_result(contents, parse_result)
+    # 解析完毕回调
+    if not return_dict.get("layout_parse") and not return_dict.get("domtree_parse"):
+        callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+    else:
+        callback_after_parse(file_id, DOCUMENT_PARSE_FINISH, callbacks)
 
-    # 解析完毕回调fileAPI和bella
-    callback_file_api(file_id, DOCUMENT_PARSE_FINISH)
-    callback_bella_api(file_id, DOCUMENT_PARSE_FINISH)
+    return parse_result
 
 
-def get_s3_parse_result(file_name, bytes_stream):
-    file_key = s3.upload_file_by_md5(stream=bytes_stream)
-    s3_result = s3.get_file_text_content(file_key)
-    # json.loads(s3_result)
-    return s3_result
+# 串行接口
+def parse_result_layout_and_domtree_sync(file_name, contents):
+    layout_parse_result = layout_parse(file_name, contents)
+    domtree_parse_result = domtree_parse(file_name, contents)
+    parse_result = {"layout_parse": layout_parse_result, "domtree_parse": domtree_parse_result}
+    return parse_result
 
 
-def upload_s3_result(bytes_stream):
-    file_key = s3.upload_file_by_md5(stream=bytes_stream)
-    image_s3_url = s3.get_file_url(file_key)
-    pass
+def callback_after_parse(file_id, status_code, callbacks):
+    # 解析完毕回调fileAPI
+    # callback_file_api(file_id, status_code)
+    # 业务方回调
+    for callback in callbacks:
+        callback_other_api(file_id, status_code, callback)
 
 
 def callback_file_api(file_id, status_code):
-    postprocessor_name = ""  # todo
-    api_key = ""  # todo
-
+    # return
+    postprocessor_name = "document_parser"  # todo luxu
+    api_key = ""  # todo luxu
     url = f"http://localhost:8080/v1/files/{file_id}/postprocessors/{postprocessor_name}/progress"
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
     data = {
-        "status": "",
-        "percent": 20
+        "file_id": file_id,
+        "status": status_code,
+        "message": "",
+        "percent": percent_map[status_code]
     }
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
 
-    response = requests.post(url, headers=headers, json=data)
+        print(f"状态码: {response.status_code}")
+        print(f"响应内容: {response.json()}")
+        print(f"callback_file_api 调用成功 状态:{status_code}")
+        return True
 
-    print(response.status_code)
-    print(response.json())
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP 错误: {http_err}")
+    except requests.exceptions.RequestException as req_err:
+        print(f"请求异常: {req_err}")
+    return False
 
 
-def callback_bella_api(file_id, status_code):
-    postprocessor_name = ""  # todo
-    api_key = ""  # todo
-
-    url = f"http://localhost:8080/v1/files/{file_id}/postprocessors/{postprocessor_name}/progress"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
+def callback_other_api(file_id, status_code, callback_url):
+    # return  # todo luxu
     data = {
-        "status": "",
-        "percent": 20
+        "file_id": file_id,
+        "status": status_code,
+        "message": "",
+        "percent": percent_map[status_code]
     }
+    try:
+        response = requests.post(callback_url, json=data)
+        response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
 
-    response = requests.post(url, headers=headers, json=data)
+        print(f"状态码: {response.status_code}")
+        print(f"响应内容: {response.json()}")
+        print(f"callback_file_api 调用成功 状态:{status_code}")
+        return True
 
-    print(response.status_code)
-    print(response.json())
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP 错误: {http_err}")
+    except requests.exceptions.RequestException as req_err:
+        print(f"请求异常: {req_err}")
+    return False
+
+
+def api_get_result_service(file_id):
+    s3_result = s3_service.get_s3_parse_result(file_id)
+    if s3_result:  # 解析结果存在
+        return s3_result
+    else:
+        raise HTTPException(status_code=404, detail="解析结果不存在")
 
 
 if __name__ == "__main__":
-    chubao = ChuBaoFSTool()
-    file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
+    import os
+
+    os.environ["OPENAI_API_KEY"] = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
+    os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
+
+    # file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
+    # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳离职管理制度V3.0》5页.pdf"
+    file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
     stream = chubao.read_file(file_path)
 
-    parse_result_layout_and_domtree("评测文件8-交易知识15-rag-测试.pdf", stream)
+    parse_result_layout_and_domtree("评测文件8-交易知识15-rag-测试.pdf", stream, [])
     # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
 
     print()

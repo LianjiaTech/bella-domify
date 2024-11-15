@@ -10,7 +10,7 @@
 # ===============================================================
 from server.task_executor import s3
 from services.constants import IMAGE
-from services.layout_parse_utils import llm_image2text
+from utils.general_util import llm_image2text
 
 
 class SimpleBlock:
@@ -26,7 +26,7 @@ class SimpleBlock:
     def get_result(self):
         return {
             "text": self.text,
-            "ocr_text": self.ocr_text,
+            "ocr_result": self.ocr_text,
             "type": self.type,
             "page_num": self.page_num,
         }
@@ -37,7 +37,7 @@ class SimpleBlock:
             image_s3_url = s3.get_file_url(file_key)
             self.text = image_s3_url
             self.ocr_text = llm_image2text(self.text)
-            return True
+        return True
 
     def mark_holder(self, header: bool = True):
         if header:

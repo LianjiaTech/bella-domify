@@ -12,17 +12,7 @@ import concurrent.futures
 import re
 from collections import Counter
 
-import openai
-from services.constants import IMAGE, TEXT, TABLE
-
-import logging
-
-import time
-from server.context import user_context
-import requests
-
-
-
+from services.constants import TABLE
 from services.constants import TEXT, IMAGE
 
 
@@ -91,7 +81,9 @@ def get_s3_links_for_simple_block_batch(simple_block_list):
     result = []
     # 多进程获取S3链接
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-        executor.map(lambda simple_block: simple_block.generate_s3_url(), simple_block_list)
+        futures = [executor.submit(simple_block.generate_s3_url) for simple_block in simple_block_list]
+        for future in concurrent.futures.as_completed(futures):
+            future.result()  # 等待每个任务完成
 
     for simple_block in simple_block_list:
         result.append(simple_block.get_result())
@@ -104,57 +96,9 @@ def trans_simple_block_list2string(simple_block_list):
         if simple_block["type"] in [TEXT, TABLE]:
             doc_text = doc_text + simple_block["text"]
         else:  # IMAGE
-            doc_text = doc_text + simple_block["ocr_text"]
+            doc_text = doc_text + simple_block["ocr_result"]
     return doc_text
 
 
-def llm_image2text(image_url):
-    PROMPT = """
-    请从图片中提取出文本信息，非文本信息必须直接忽略。没有文本信息则直接返回‘无’，否则直接输出文字结果。
-    """
-    url = "https://img.ljcdn.com/cv-aigc/76e9cfcb31ed4e18bb302ba38d6af8ec?ak=Q265N5ELG32TT7UWO8YJ&exp=1730979408&ts=1730975808&sign=b8040a653584e4029f762da0c2dd250d"
-    # url =  "https://img.ljcdn.com/cv-aigc/126f24e2bc0f4d2ab94e22b33d68b76f?ak=Q265N5ELG32TT7UWO8YJ&exp=1730981105&ts=1730977505&sign=1d1ff1da9ec59da244c8d408fdcd77fb"
-
-    max_retry = 2
-    response = None
-    while max_retry > 0 and response is None:
-        try:
-            response = openai.chat.completions.create(
-                messages=[
-                    {"role": "system", "content": PROMPT},
-                    {"role": "user", "content": url},
-                ],
-                temperature=0.001,
-                top_p=0.01,
-                model="gpt-4o",
-                # model="gpt-3.5-turbo",
-                user=user_context.get(),
-                timeout=20  # 超时时间为30秒
-            )
-        except openai.RateLimitError:
-            max_retry -= 1
-            time.sleep(10)
-        except requests.exceptions.Timeout:
-            logging.error("请求超时")
-            break
-        except Exception as e:
-            logging.error("openai chat error: %s", e)
-            break
-    if response is None:
-        return False
-    ocr_text = response.choices[0].message.content
-    print(ocr_text)
-
-    if ocr_text == "无":
-        return ""
-    else:
-        return ocr_text
-
-
 if __name__ == "__main__":
-    import os
-    os.environ["OPENAI_API_KEY"] = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
-    os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
-    from server.context import user_context
-    user_context.set("1000000023008327")
-    print(llm_image2text(""))
+    pass

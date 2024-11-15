@@ -10,7 +10,6 @@ from server.log.log_config import log_config
 from services import parse_manager
 from services.domtree_parser import pdf_parser
 from .context import user_context, DEFAULT_USER
-from .task_executor.executor import execute_parse_task
 from .task_executor.executor import listen_parse_task_layout_and_domtree
 from .task_executor.task_manager import create_pdf_parse_task
 
@@ -45,7 +44,7 @@ async def create_upload_file(file: UploadFile = File(...), user: str = Form(defa
     return pdf_parser.pdf_parse(contents)
 
 
-# 文件解析-获取版面信息(废弃待删除)  # todo
+# 文件解析-获取版面信息
 @router.post("/document/layout/parse")
 async def create_upload_file(file_name: str = Form(...), file_url_object: UploadFile = File(...), 
                              user: str = Form(default=None)):
@@ -55,14 +54,21 @@ async def create_upload_file(file_name: str = Form(...), file_url_object: Upload
     return parse_manager.layout_parse(file_name, contents)
 
 
-# 文件解析-获取结构信息和字符串信息
+# 文件解析-获取结构信息和字符串信息(直接解析)
 @router.post("/document/parse")
 async def document_parse(file_name: str = Form(...), file_url_object: UploadFile = File(...),
                          user: str = Form(default=None)):
     user_context.set(user or DEFAULT_USER)
     # 读取file字节流
     contents = await file_url_object.read()
-    return parse_manager.layout_parse(file_name, contents)
+    return parse_manager.parse_result_layout_and_domtree_sync(file_name, contents)
+
+
+# 文件解析-获取结构信息和字符串信息 by file_id
+@router.get("/document/parse/{file_id}")
+async def document_parse(file_id: str = Path(...)):
+    # 读取file字节流
+    return parse_manager.api_get_result_service(file_id)
 
 
 @router.post("/async/pdf/parse")
