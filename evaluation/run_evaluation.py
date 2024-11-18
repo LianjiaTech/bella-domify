@@ -22,17 +22,8 @@ import fitz
 import datetime
 import parse_output as beike_parse_output
 from shapely.geometry import box
+from constant import file_list
 
-# 评测集文件名
-file_list = [
-    "《贝壳入职管理制度》5页",
-    "《贝壳离职管理制度V3.0》5页",
-    "中文论文Demo中文文本自动校对综述_4页",
-    "自制_4页",
-    "花桥学院业务核算指引_6页",
-    "英文论文Demo_前3页",
-    "评测文件9-博学_13页",
-]
 
 def log_setting(log_file=""):
     if not log_file:
@@ -526,6 +517,8 @@ def tree2list_surya(file_name, parser_json):
     def bbox_trans_surya2beike(file_name, page_bbox_surya, bbox_surya):
         page_bbox_beike = {
             "《贝壳入职管理制度》5页": [595, 841],
+            "《贝壳入职管理制度》": [595, 841],
+            "《贝壳离职管理制度V3.0》": [595, 841],
             "《贝壳离职管理制度V3.0》5页": [595, 841],
             "中文论文Demo中文文本自动校对综述_4页": [595, 841],
             "自制_4页": [595, 841],

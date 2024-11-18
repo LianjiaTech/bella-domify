@@ -4,6 +4,7 @@
 '''
 import re
 import string
+from collections import Counter
 
 from .Line import Line
 from .TextSpan import TextSpan
@@ -173,6 +174,19 @@ class Lines(ElementCollection):
         start_of_para, end_of_para = False, False  # start/end of paragraph
         prev_row = None
 
+        # 获取lines中频数最高的属性
+        def get_lines_frequent_attr(lines: Lines, attr_name):
+            if attr_name in ["font", "size"]:
+                attribute_list = [getattr(span, attr_name) for line in lines for span in line.spans]
+            elif attr_name in ["pseudo_bold"]:
+                # flags代表用于表示文本的格式化属性，每一位代表不同的格式化属性(粗体、斜体、下划线)
+                attribute_list = [getattr(span, attr_name) or bool(span.flags & 2 ** 4) for line in lines for span in line.spans]
+            else:
+                raise
+            attribute_counter = Counter(attribute_list)
+            most_common_value = attribute_counter.most_common(1)[0][0]
+            return most_common_value
+
         for row in rows:
             # multi lines in a row should be in line order
             row.sort_in_line_order()
@@ -192,13 +206,15 @@ class Lines(ElementCollection):
                 # 获取上一行的字体、字号、粗体信息
                 prev_font, prev_font_size, prev_font_bold = None, None, False
                 if prev_row[-1].spans and isinstance((prev_last_span := prev_row[-1].spans[-1]), TextSpan):
-                    prev_font, prev_font_size, prev_font_bold = prev_last_span.font, prev_last_span.size, \
-                        bool(prev_last_span.flags & 2 ** 4) or prev_last_span.pseudo_bold
+                    prev_font = get_lines_frequent_attr(prev_row, "font")
+                    prev_font_size = get_lines_frequent_attr(prev_row, "size")
+                    prev_font_bold = get_lines_frequent_attr(prev_row, "pseudo_bold")
                 # 获取当前行的字体、字号、粗体信息
                 cur_font, cur_font_size, cur_font_bold = None, None, False
                 if row and row[-1].spans and isinstance((first_span := row[-1].spans[0]), TextSpan):
-                    cur_font, cur_font_size, cur_font_bold = first_span.font, first_span.size, \
-                        bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
+                    cur_font = get_lines_frequent_attr(row, "font")
+                    cur_font_size = get_lines_frequent_attr(row, "size")
+                    cur_font_bold = get_lines_frequent_attr(row, "pseudo_bold")
                 # 3 当前行的字体和字号与上一行不同时，判断为段首
                 # when font or font size changes, it's a new sentence, and a new paragraph
                 if prev_font_size and cur_font_size:

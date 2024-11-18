@@ -15,6 +15,8 @@ from pdf2docx import Converter, parse
 from pdf2docx.dom_tree.domtree import DomTreeModel
 import json
 from fastapi.encoders import jsonable_encoder
+from constant import file_list
+
 
 from server.context import user_context
 user_context.set("1000000023008327")
@@ -25,18 +27,6 @@ os.environ["OPENAI_API_KEY"] = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
 os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
 
 root_dir = os.getcwd().split("document_parse")[0] + "document_parse/"
-
-# 评测集文件名
-file_list = [
-    # "评测文件1-喵回QA_3页",
-    "《贝壳入职管理制度》5页",
-    "《贝壳离职管理制度V3.0》5页",
-    "中文论文Demo中文文本自动校对综述_4页",
-    "自制_4页",
-    "花桥学院业务核算指引_6页",
-    "英文论文Demo_前3页",
-    "评测文件9-博学_13页",
-]
 
 
 def convert_to_json(obj):
