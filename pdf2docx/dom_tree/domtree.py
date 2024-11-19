@@ -180,7 +180,7 @@ class Node:
             blue = rgb_component_from_name('blue')
             yellow = rgb_component_from_name('yellow')
             self.debug_page.draw_rect((self.element.block.bbox.x0, self.element.block.bbox.y0 - 8,
-                                       self.element.block.bbox.x0 + 50, self.element.block.bbox.y0), color=blue,
+                                       self.element.block.bbox.x0 + len(self.order_num_str) * 5.5, self.element.block.bbox.y0), color=blue,
                                       fill=blue)
             self.debug_page.insert_text((self.element.bbox.x0, self.element.bbox.y0),
                                         self.order_num_str, color=yellow)

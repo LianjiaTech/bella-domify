@@ -20,3 +20,18 @@ class ColumnExtend(RelationElement):
         for block in self.blocks:
             block.relation_construct(cur_page, pages)
 
+    def table_continous_relation_construct(self, next_col):
+        cur_blocks = [block for block in self.blocks
+                      if not block.block.is_header and not block.block.is_footer]
+        next_blocks = [block for block in next_col.blocks
+                       if not block.block.is_header and not block.block.is_footer]
+        if cur_blocks and next_blocks and cur_blocks[-1].is_table_block and next_blocks[0].is_table_block:
+            cur_blocks[-1].table_continous_relation_construct(next_blocks[0])
+
+    def paragraph_continous_relation_construct(self, next_col):
+        cur_blocks = [block for block in self.blocks
+                      if not block.block.is_header and not block.block.is_footer]
+        next_blocks = [block for block in next_col.blocks
+                       if not block.block.is_header and not block.block.is_footer]
+        if cur_blocks and next_blocks and cur_blocks[-1].is_text_block and next_blocks[0].is_text_block:
+            cur_blocks[-1].paragraph_continous_relation_construct(next_blocks[0])

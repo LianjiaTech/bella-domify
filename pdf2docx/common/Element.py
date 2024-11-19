@@ -311,7 +311,6 @@ class Element(IText):
     def store(self):
         '''Store properties in raw dict.'''
         return { 'bbox': tuple([x for x in self.bbox]) }
-
     
     def plot(self, page, stroke:tuple=(0,0,0), width:float=0.5, fill:tuple=None, dashes:str=None):
         '''Plot bbox in PDF page for debug purpose.'''
