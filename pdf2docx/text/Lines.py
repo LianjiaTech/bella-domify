@@ -19,14 +19,18 @@ class Lines(ElementCollection):
 
     # 有序列表正则表达式
     ORDERED_LIST_PATTERN = [
-        r'^\s*\d+\.\d+\.\d+\.\d+\.\d+\.\d+\.\d+',  # 数字后跟点 1.2.3.4.5.6.7
-        r'^\s*\d+\.\d+\.\d+\.\d+\.\d+\.\d+',  # 数字后跟点
-        r'^\s*\d+\.\d+\.\d+\.\d+\.\d+',  # 数字后跟点
-        r'^\s*\d+\.\d+\.\d+\.\d+',  # 数字后跟点
-        r'^\s*\d+\.\d+\.\d+',  # 数字后跟点 1.23.45
-        r'^\s*\d+\.\d+',  # 数字后跟点 匹配案例：1.23 和 1.23.
-        r'^\s*\d+\.[^\d]',  # 数字后跟点 1.
-        # r'^\s*\d+\.\s*',  # 数字后跟点
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*',  # 1.2.3.4.5.6.
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*',  # 1.2.3.4.5.6
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*',  # 1.2.3.4.5.
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*',  # 1.2.3.4.5
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*',  # 1.2.3.4.
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*',  # 1.2.3.4
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*\.\s*',  # 1.2.3.
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*\d+\s*',  # 1.2.3
+        r'^\s*\d+\s*\.\s*\d+\s*\.\s*',  # 1.2.
+        r'^\s*\d+\s*\.\s*\d+\s*',  # 1.2
+        r'^\s*\d+\s*\.\s*',  # 1.
+
         r'^\s*[\u2488-\u249B]\s*',  # 数字后跟点
         r'^\s*\d+、\s*',  # 数字后跟顿号
         r'^\s*[一二三四五六七八九十百千万]+、\s*',  # 中文数字后跟顿号
@@ -118,7 +122,7 @@ class Lines(ElementCollection):
 
         # recognize ordered & unordered list
         for index, rule in enumerate(Lines.ORDERED_LIST_PATTERN):
-            if match := re.match(rule, line.text.replace(" ", "")):
+            if match := re.match(rule, line.text):
                 line.list_type = index + 1
                 line.list_tag = match.group(0)
                 # line.list_first_item = recognize_list_first_item(line.text, index)
