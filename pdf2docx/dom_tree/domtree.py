@@ -123,12 +123,14 @@ class Node:
         node_span = node.element.lines[0].spans[0]
         if (not isinstance(cur_span, TextSpan)) or (not isinstance(node_span, TextSpan)):
             return False
-        cur_span_bold = bool(cur_span.flags & 2 ** 4) or cur_span.pseudo_bold
-        node_span_bold = bool(node_span.flags & 2 ** 4) or node_span.pseudo_bold
+
+        cur_font, cur_size, cur_bold = self.element.lines.get_font_size_bold()
+        node_font, node_size, node_bold = node.element.lines.get_font_size_bold()
+
         if isinstance(cur_span, TextSpan) and isinstance(node_span, TextSpan):
-            if cur_span.size < node_span.size:
+            if cur_size < node_size:
                 return True
-            elif cur_span.size <= node_span.size and (not cur_span_bold) and node_span_bold:
+            elif cur_size <= node_size and (not cur_bold) and node_bold:
                 # 如果当前span的字体大小小于等于父节点的字体大小，且当前span不是粗体，父节点是粗体，则认为当前span是父节点的子节点
                 return True
         return False

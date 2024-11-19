@@ -22,7 +22,7 @@ import fitz
 import datetime
 import parse_output as beike_parse_output
 from shapely.geometry import box
-from constant import file_list
+from constant import file_list, parser_list
 
 
 def log_setting(log_file=""):
@@ -1122,13 +1122,6 @@ def cal_accuracy(confusion_matrix):
 
 
 def generate_report():
-    parser_list = [
-        "beike",
-        "ali",
-        "unstructured",
-        "chunkr",
-        "paoding",
-    ]
     for parser in parser_list:
         logger.info(f"评测引擎:{parser}")
         logger.info(f"------------------")

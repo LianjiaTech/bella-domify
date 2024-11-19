@@ -147,6 +147,30 @@ class Lines(ElementCollection):
             spans.extend(line.image_spans)
         return spans
 
+    # 获取lines的字体字号与加粗
+    def get_font_size_bold(self):
+
+        # 字体
+        font_list = [span.font for line in self._instances for span in line.spans]
+        font_counter = Counter(font_list)
+        font_most_common_value = font_counter.most_common(1)[0][0]
+
+        # 字号
+        size_list = [span.size for line in self._instances for span in line.spans]
+        size_counter = Counter(size_list)
+        size_most_common_value = size_counter.most_common(1)[0][0]
+
+        # 加粗
+        # flags代表用于表示文本的格式化属性，每一位代表不同的格式化属性(粗体、斜体、下划线)
+        # 全为True时，才返回加粗（一半文字加粗一半不加粗，应视为不加粗的文字块）
+        if all([bool(span.flags & 2 ** 4) for line in self._instances for span in line.spans]) or all(
+                [span.pseudo_bold for line in self._instances for span in line.spans]):
+            bold_most_common_value = True
+        else:
+            bold_most_common_value = False
+
+        return font_most_common_value, size_most_common_value, bold_most_common_value
+
     def split_vertically_by_text(self, text_left_x: float, text_right_x: float):
         '''Split lines into separate paragraph by checking text. The parent text block consists of 
         lines with similar line spacing, while lines in other paragraph might be counted when the
@@ -174,19 +198,6 @@ class Lines(ElementCollection):
         start_of_para, end_of_para = False, False  # start/end of paragraph
         prev_row = None
 
-        # 获取lines中频数最高的属性
-        def get_lines_frequent_attr(lines: Lines, attr_name):
-            if attr_name in ["font", "size"]:
-                attribute_list = [getattr(span, attr_name) for line in lines for span in line.spans]
-            elif attr_name in ["pseudo_bold"]:
-                # flags代表用于表示文本的格式化属性，每一位代表不同的格式化属性(粗体、斜体、下划线)
-                attribute_list = [getattr(span, attr_name) or bool(span.flags & 2 ** 4) for line in lines for span in line.spans]
-            else:
-                raise
-            attribute_counter = Counter(attribute_list)
-            most_common_value = attribute_counter.most_common(1)[0][0]
-            return most_common_value
-
         for row in rows:
             # multi lines in a row should be in line order
             row.sort_in_line_order()
@@ -206,15 +217,11 @@ class Lines(ElementCollection):
                 # 获取上一行的字体、字号、粗体信息
                 prev_font, prev_font_size, prev_font_bold = None, None, False
                 if prev_row[-1].spans and isinstance((prev_last_span := prev_row[-1].spans[-1]), TextSpan):
-                    prev_font = get_lines_frequent_attr(prev_row, "font")
-                    prev_font_size = get_lines_frequent_attr(prev_row, "size")
-                    prev_font_bold = get_lines_frequent_attr(prev_row, "pseudo_bold")
+                    prev_font, prev_font_size, prev_font_bold = prev_row.get_font_size_bold()
                 # 获取当前行的字体、字号、粗体信息
                 cur_font, cur_font_size, cur_font_bold = None, None, False
                 if row and row[-1].spans and isinstance((first_span := row[-1].spans[0]), TextSpan):
-                    cur_font = get_lines_frequent_attr(row, "font")
-                    cur_font_size = get_lines_frequent_attr(row, "size")
-                    cur_font_bold = get_lines_frequent_attr(row, "pseudo_bold")
+                    cur_font, cur_font_size, cur_font_bold = row.get_font_size_bold()
                 # 3 当前行的字体和字号与上一行不同时，判断为段首
                 # when font or font size changes, it's a new sentence, and a new paragraph
                 if prev_font_size and cur_font_size:

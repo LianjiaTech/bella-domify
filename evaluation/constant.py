@@ -29,3 +29,12 @@ file_list = [
     "英文论文Demo_前3页",
     "评测文件9-博学_13页",
 ]
+
+# 评测解析器
+parser_list = [
+    "beike",
+    # "ali",
+    # "unstructured",
+    # "chunkr",
+    # "paoding",
+]

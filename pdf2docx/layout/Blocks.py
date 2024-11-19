@@ -643,7 +643,7 @@ class Blocks(ElementCollection):
 
         for block, next_block in zip(instances, instances[1:]):
             # 非文字块，无法认定为Title
-            if not block.is_text_block:
+            if not block.is_text_block or block.lines[0].image_spans:
                 blocks.append(block)
                 continue
 
@@ -653,26 +653,19 @@ class Blocks(ElementCollection):
                 blocks.append(block)
                 continue
 
-            # 当前行的字体、字号、粗体信息
-            cur_font, cur_font_size, cur_font_bold = None, None, False
-            if block.lines and block.lines[-1].spans and isinstance((first_span := block.lines[-1].spans[0]), TextSpan):
-                cur_font, cur_font_size, cur_font_bold = first_span.font, first_span.size, \
-                    bool(first_span.flags & 2 ** 4) or first_span.pseudo_bold
             # 文字居中
             cur_is_center = is_center_aligned(block, text_left_x, text_right_x)
-
             # 认定规则：当前文字块居中，下个块非文字块，则认定Title
-            if not next_block.is_text_block:
+            if not next_block.is_text_block or next_block.lines[0].image_spans:
                 if cur_is_center:
                     block.is_title = 1
                 blocks.append(block)
                 continue
 
+            # 当前行的字体、字号、粗体信息
+            cur_font, cur_font_size, cur_font_bold = block.lines.get_font_size_bold()
             # 下一行的字体、字号、粗体信息
-            next_font, next_font_size, next_font_bold = None, None, False
-            if next_block.lines[-1].spans and isinstance((next_last_span := next_block.lines[-1].spans[-1]), TextSpan):
-                next_font, next_font_size, next_font_bold = next_last_span.font, next_last_span.size, \
-                    bool(next_last_span.flags & 2 ** 4) or next_last_span.pseudo_bold
+            next_font, next_font_size, next_font_bold = next_block.lines.get_font_size_bold()
 
             # 认定规则：居中 且 格式有变化
             if cur_is_center and (

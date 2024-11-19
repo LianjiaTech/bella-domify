@@ -22,3 +22,6 @@ class LinesExtend(ElementCollection):
     @property
     def is_catalog(self):
         return any([line.is_catalog for line in self.lines])
+
+    def get_font_size_bold(self):
+        return self.lines.get_font_size_bold()
