@@ -54,4 +54,4 @@ if __name__ == "__main__":
     file_key = "document_parse_result_86bf45d968cb1da2065a4e9fc41e2ef8"
     s3_result = s3.get_file_text_content(file_key)
     s3_result_json = json.loads(s3_result)
-    print(s3_result_json)
+    # print(s3_result_json)
