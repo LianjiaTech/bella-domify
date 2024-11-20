@@ -11,10 +11,6 @@
 from server.task_executor import s3
 import hashlib
 import json
-import setup
-
-# 最新的大版本
-current_version = setup.get_main_version(setup.VERSION)
 
 
 # 计算md5值
