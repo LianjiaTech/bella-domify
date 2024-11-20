@@ -76,7 +76,7 @@ def layout_parse(file_name: str = None, file: bytes = None):
     elif file_extension == 'doc':
         docx_stream = io.BytesIO(file)
         file = convert_docx_to_pdf_in_memory(docx_stream)
-        return docx_parser.layout_parse(file)
+        return pdf_parser.layout_parse(file)
     elif file_extension == 'xlsx':
         return xlsx_parser.layout_parse(file)
     elif file_extension == 'xls':

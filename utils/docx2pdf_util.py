@@ -15,6 +15,7 @@ import multiprocessing
 import re
 import subprocess
 from io import IOBase
+import logging
 
 import fitz
 from services.layout_parser import pdf_parser
@@ -24,6 +25,7 @@ lock = multiprocessing.Lock()
 
 
 def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
+    logging.info('convert_docx_to_pdf')
     # 使用 unoconv 将 DOCX 转换为 PDF 并将输出重定向到管道
     with lock:
         process = subprocess.Popen(
