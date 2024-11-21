@@ -25,7 +25,7 @@ from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_par
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
 from services.ParserResult import ParserResult, ParserCode
-
+from services.constants import FILE_API_URL, OPENAI_API_KEY
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -106,15 +106,15 @@ def domtree_parse(file_name: str = None, file: bytes = None):
         try:
             dom_tree_model = pdf_domtree_parser.pdf_parse(file)
             _, json_compatible_data = convert_to_json(dom_tree_model)
-            return json_compatible_data
+            return True, json_compatible_data
             # return ParserResult(parser_data=json_compatible_data).to_json()
         except Exception as e:
             logging.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
-            return {}
+            return False, {}
             # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
 
     else:
-        return {}
+        return True, {}
 
 
 def worker(func, args, return_dict, key):
@@ -134,7 +134,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
 
         # 解析结果存S3
         parse_result = {"layout_parse": layout_parse_result, "domtree_parse": {}}
-        s3_service.upload_s3_parse_result(contents, parse_result)
+        s3_service.upload_s3_parse_result(file_id, parse_result)
         # 解析完毕回调
         callback_after_parse(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
@@ -147,34 +147,39 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
 def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
     try:
         # 获取domtree解析结果
-        domtree_parse_result = domtree_parse(file_name, contents)
+        parse_succeed, parse_result = domtree_parse(file_name, contents)
         # 解析失败，直接回调
-        if not domtree_parse_result:
+        if not parse_succeed:
             callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
-            return domtree_parse_result
+            return {}
 
         # 解析结果存S3
-        parse_result = {"layout_parse": "", "domtree_parse": domtree_parse_result}
-        s3_service.upload_s3_parse_result(contents, parse_result)
+        all_parse_result = {"layout_parse": "", "domtree_parse": parse_result}
+        s3_service.upload_s3_parse_result(file_id, all_parse_result)
         # 解析完毕回调
         callback_after_parse(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
         print(f"Exception domtree_parse_and_callback: {e}")
         return {}
-    return domtree_parse_result
+    return parse_result
+
+
+def retrieve_file(file_id):
+    url = f"{FILE_API_URL}/v1/files/{file_id}/content"  # todo luxu  try逻辑，如果取不到
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+    response = requests.get(url, headers=headers)
+    return response.content
 
 
 def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
-    # stream = chubao.read_file(file_id)
-
-    # file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
-    # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳离职管理制度V3.0》5页.pdf"
-    file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
-    stream = chubao.read_file(file_path)
 
     # 读取文件流内容
-    contents = stream.read()
-    stream.close()
+    contents = retrieve_file(file_id)
+
+    # # 单进程
+    # layout_parse_result = layout_parse(file_name, contents)
+    # domtree_parse_result = domtree_parse(file_name, contents)
+    # parse_result = {"layout_parse": layout_parse_result, "domtree_parse": domtree_parse_result}
 
     # 多进程并行解析
     manager = multiprocessing.Manager()
@@ -187,14 +192,18 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     p2.start()
     p1.join()
     p2.join()
-    # 解析结果存S3
     parse_result = dict(return_dict)
-    s3_service.upload_s3_parse_result(contents, parse_result)
+
+    # 解析结果存S3
+    s3_service.upload_s3_parse_result(file_id, parse_result)
     # 解析完毕回调
-    if not return_dict.get("layout_parse") and not return_dict.get("domtree_parse"):
-        callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+    if not parse_result.get("layout_parse") and not parse_result.get("domtree_parse"):
+        # 两个解析都没结果，返回失败
+        status_code = DOCUMENT_PARSE_FAIL
     else:
-        callback_after_parse(file_id, DOCUMENT_PARSE_FINISH, callbacks)
+        status_code = DOCUMENT_PARSE_FINISH
+
+    callback_after_parse(file_id, status_code, callbacks)
 
     return parse_result
 
@@ -209,19 +218,17 @@ def parse_result_layout_and_domtree_sync(file_name, contents):
 
 def callback_after_parse(file_id, status_code, callbacks):
     # 解析完毕回调fileAPI
-    # callback_file_api(file_id, status_code)
+    callback_file_api(file_id, status_code)
     # 业务方回调
     for callback in callbacks:
         callback_other_api(file_id, status_code, callback)
 
 
 def callback_file_api(file_id, status_code):
-    # return
-    postprocessor_name = "document_parser"  # todo luxu
-    api_key = ""  # todo luxu
-    url = f"http://localhost:8080/v1/files/{file_id}/postprocessors/{postprocessor_name}/progress"
+    postprocessor_name = "document_parser"
+    url = f"{FILE_API_URL}/v1/files/{file_id}/progress/{postprocessor_name}"
     headers = {
-        "Authorization": f"Bearer {api_key}",
+        "Authorization": f"Bearer {OPENAI_API_KEY}",
         "Content-Type": "application/json"
     }
     data = {
@@ -247,7 +254,6 @@ def callback_file_api(file_id, status_code):
 
 
 def callback_other_api(file_id, status_code, callback_url):
-    # return  # todo luxu
     data = {
         "file_id": file_id,
         "status": status_code,

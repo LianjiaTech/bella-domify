@@ -84,11 +84,11 @@ async def async_parse_callback(taskNo: str = Path(..., title="The task number"),
     print(taskNo, task)
 
 
-# @router.on_event("startup")
-# async def startup_event():
-#     print("Starting background task...")
-#     thread = Thread(target=listen_parse_task_layout_and_domtree)
-#     thread.start()
+@router.on_event("startup")
+async def startup_event():
+    print("Starting background task...")
+    thread = Thread(target=listen_parse_task_layout_and_domtree)
+    thread.start()
 
 
 ## 历史path兼容，下个版本删除

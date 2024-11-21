@@ -12,6 +12,8 @@ from server.task_executor import s3
 import hashlib
 import json
 
+PREFIX_PARSE_RESULT = "document_parse_result_"
+
 
 # 计算md5值
 def calculate_md5(stream: bytes) -> str:
@@ -22,15 +24,20 @@ def calculate_md5(stream: bytes) -> str:
 
 # 解析结果获取
 def get_s3_parse_result(file_id):
-    file_key = get_file_key_by_file_id(file_id)
-    s3_result = s3.get_file_text_content(file_key)
-    s3_result_json = json.loads(s3_result)
+    try:
+        file_key = get_file_key_by_file_id(file_id)
+        s3_result = s3.get_file_text_content(file_key)
+        s3_result_json = json.loads(s3_result)
+    except Exception as e:
+        print(e)
+        return
+
     return s3_result_json
 
 
 # 解析结果上传
-def upload_s3_parse_result(bytes_stream, parse_result):
-    file_key = get_parse_result_file_key(bytes_stream)
+def upload_s3_parse_result(file_id, parse_result):
+    file_key = get_file_key_by_file_id(file_id)
     s3.upload_dict_content(parse_result, file_key)
     print("file_key")
     print(file_key)
@@ -39,14 +46,14 @@ def upload_s3_parse_result(bytes_stream, parse_result):
 
 # 根据md5获取文件S3上传名字
 def get_parse_result_file_key(stream: bytes = None) -> str:
-    file_key = "document_parse_result_" + calculate_md5(stream)
+    file_key = PREFIX_PARSE_RESULT + calculate_md5(stream)
     return file_key
 
 
 # 根据file_id获取文件S3上传名字
 def get_file_key_by_file_id(file_id) -> str:
     # return "document_parse_" + current_version + file_id
-    return "document_parse_" + file_id
+    return PREFIX_PARSE_RESULT + file_id
 
 
 if __name__ == "__main__":

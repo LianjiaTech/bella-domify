@@ -22,7 +22,7 @@ def listen_parse_task_layout_and_domtree():
     kafka_conf = {
         'bootstrap.servers': config.get('KAFKA', 'servers'),  # Kafka服务器地址
         'group.id': config.get('KAFKA', 'group_id'),  # 消费者组ID
-        'auto.offset.reset': 'earliest'  # 从最早的消息开始消费
+        'auto.offset.reset': 'earliest',  # 从最早的消息开始消费
     }
     # 创建消费者实例
     consumer = Consumer(kafka_conf)
@@ -35,6 +35,7 @@ def listen_parse_task_layout_and_domtree():
 
             if msg is None:
                 time.sleep(2)
+                print("msg is None")
                 continue
             if msg.error():
                 raise KafkaException(msg.error())
@@ -48,10 +49,10 @@ def listen_parse_task_layout_and_domtree():
                 message_json = json.loads(message_value)
                 file_id = message_json.get("data", {}).get("id", "")
                 file_name = message_json.get("data", {}).get("filename", "")
-                user = message_json.get("data", {}).get("filename", "")
-                metadata = message_json.get("data", {}).get("metadata", {})
+                user = message_json.get("data", {}).get("user", "")
+                metadata = json.loads(message_json.get("meta_data", {}))
                 post_processors = metadata.get("post_processors", [])
-                callbacks = metadata.get("post_processors", [])
+                callbacks = metadata.get("callbacks", [])
                 if "file_parse" in post_processors:
                     print("Message consumed and offset committed.")
                     user_context.set(user)

@@ -13,3 +13,9 @@
 IMAGE = "image"
 TEXT = "text"
 TABLE = "table"
+
+# file_api测试地址
+FILE_API_URL = "http://test-file-api.ttb.test.ke.com"
+
+
+OPENAI_API_KEY = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
