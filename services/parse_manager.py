@@ -211,7 +211,7 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
 # 串行接口
 def parse_result_layout_and_domtree_sync(file_name, contents):
     layout_parse_result = layout_parse(file_name, contents)
-    domtree_parse_result = domtree_parse(file_name, contents)
+    parse_succeed, domtree_parse_result = domtree_parse(file_name, contents)
     parse_result = {"layout_parse": layout_parse_result, "domtree_parse": domtree_parse_result}
     return parse_result
 
