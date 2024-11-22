@@ -177,6 +177,26 @@ class Lines(ElementCollection):
 
         return font_most_common_value, size_most_common_value, bold_most_common_value
 
+    # 获取lines是否全部下滑线
+    def get_if_all_underline(self):
+        # 全为True时，才返回True
+        if all([bool(span.flags & 2 ** 5) for line in self._instances for span in line.spans]):
+            underline_most_common_value = True
+        else:
+            underline_most_common_value = False
+
+        return underline_most_common_value
+
+    # 获取lines是否是超链接
+    def get_if_first_line_link(self):
+        style = self._instances[0].spans[0].style
+        if style:
+            uri = style[0].get("uri")
+            if uri:
+                return True
+
+        return False
+
     def split_vertically_by_text(self, text_left_x: float, text_right_x: float):
         '''Split lines into separate paragraph by checking text. The parent text block consists of 
         lines with similar line spacing, while lines in other paragraph might be counted when the

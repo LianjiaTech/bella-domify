@@ -69,17 +69,28 @@ class Node:
         self.debug_page = debug_page
         self.order_num_str = None  # 当前元素的有序列表序号 1.1, 1.2.1
 
+
+    def identify_catalog_by_mulu(self):
+        if "目录" in self.element.text.replace(' ', ''):
+            self.element.is_catalog = True
+
+
+    def identify_catalog_by_father(self, father_node):
+        if father_node.element and father_node.element.is_catalog:
+            self.element.is_catalog = True
+
+
     def is_child_of(self, node):
         """Check if self is a child of node"""
         if node.is_root:
             return True
 
-        # Title节点不能是普通text的子节点，只能是另一个Title的子节点
-        if not self.judge_by_title(node):
-            return False
-
         # 目录的子节点认定
         if not self.judge_by_catalog(node):
+            return False
+
+        # Title节点不能是普通text的子节点，只能是另一个Title的子节点
+        if not self.judge_by_title(node):
             return False
 
         # 考虑基于字体、缩进等判断父子关系；
@@ -109,10 +120,11 @@ class Node:
         pattern = re.compile(r'(.)\1{9,}\d+')
 
         # 目录的子节点，只能是目录项
-        if "目录" in node.element.text and not pattern.search(self.element.text.strip().replace(' ', '')):
-            return False
+        if "目录" in node.element.text.replace(' ', ''):
+            if not pattern.search(self.element.text.strip().replace(' ', '')) and not self.element.lines.get_if_first_line_link():
+                return False
 
-        # # 目录项和目录项不能作为父子节点  todo luxu 为啥加了不行
+        # # 目录项和目录项不能作为父子节点  !!提醒，此项不能加，因为目录也是有层级结构的，目录项之间也有父子关系
         # if pattern.search(self.element.text.strip().replace(' ', '')) and pattern.search(node.element.text.strip().replace(' ', '')):
         #     return False
 
@@ -350,6 +362,9 @@ class DomTree:
                     parent_node.add_child(node)
                     # 非叶子节点、文字节点、且非目录 则判定为Title
                     judge_title_by_child(parent_node)
+                    # 依赖层级，判定目录
+                    node.identify_catalog_by_mulu()
+                    node.identify_catalog_by_father(parent_node)
 
                     # 压栈
                     stack_path.append(node)

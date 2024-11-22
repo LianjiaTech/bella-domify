@@ -983,6 +983,7 @@ def evaluation_single(logger_badcase, file_name, parser=""):
     return confusion_matrix, edit_dist_all_nodes, mapping, struct_right_cnt, struct_all_count, right_mapping, error_mapping
 
 
+# 通过order获取text
 def get_order2text(label_nodes):
     label_order2text_dic = {}
     for label_node in label_nodes:

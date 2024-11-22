@@ -25,3 +25,6 @@ class LinesExtend(ElementCollection):
 
     def get_font_size_bold(self):
         return self.lines.get_font_size_bold()
+
+    def get_if_first_line_link(self):
+        return self.lines.get_if_first_line_link()

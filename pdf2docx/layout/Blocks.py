@@ -642,12 +642,12 @@ class Blocks(ElementCollection):
             text_right_x = max([block.bbox[2] for block in instances if block.is_text_block])
 
         for block, next_block in zip(instances, instances[1:]):
-            # 非文字块，无法认定为Title
+            # 认定规则：非文字块，认定为非Title
             if not block.is_text_block or block.lines[0].image_spans:
                 blocks.append(block)
                 continue
 
-            # 在目录中，直接判定为title
+            # 认定规则：在目录中，直接判定为title
             if any([line.is_in_catalog for line in block.lines]):
                 block.is_title = 1
                 blocks.append(block)
@@ -666,6 +666,11 @@ class Blocks(ElementCollection):
             cur_font, cur_font_size, cur_font_bold = block.lines.get_font_size_bold()
             # 下一行的字体、字号、粗体信息
             next_font, next_font_size, next_font_bold = next_block.lines.get_font_size_bold()
+
+            next_is_center = is_center_aligned(next_block, text_left_x, text_right_x)
+            # 认定规则：当前文字块居中，下个块是文字块，且下行文字不居中  # todo 可扩大策略为：下一行满行也是居中，但也应该算进去
+            if cur_is_center and not next_is_center:
+                block.is_title = 1
 
             # 认定规则：居中 且 格式有变化
             if cur_is_center and (

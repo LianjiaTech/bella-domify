@@ -114,6 +114,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.is_table_name = 0
         self.is_figure_name = 0
         self.is_title = text_block.is_title
+        self.is_catalog = self.get_is_catalog()
 
     @property
     def text(self):
@@ -135,8 +136,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
     def is_table_block(self):
         return False
     
-    @property
-    def is_catalog(self):
+    def get_is_catalog(self):
         return any([line.is_catalog for line in self.lines])
 
     def get_image_s3_link(self):
