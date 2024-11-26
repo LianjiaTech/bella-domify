@@ -249,6 +249,10 @@ def parse_catalog(raw_pages, pages, need_filter=True):
 def _parser_header_and_footer(raw_pages: list):
     logging.info('parser_header_and_footer [start]')
 
+    # 如果是横向的页面，则不识别页眉页脚（此处目的为暂时不处理ppt转的pdf）
+    if raw_pages[0].height < raw_pages[0].width:
+        return
+
     identify_header(raw_pages)
     identify_footer(raw_pages)
     for raw_page in raw_pages:
