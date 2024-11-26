@@ -120,6 +120,8 @@ class Node:
         pattern = re.compile(r'(.)\1{9,}\d+')
 
         # 目录的子节点，只能是目录项
+        # 第一种目录项：“文字......x”
+        # 第二种目录项：带链接
         if "目录" in node.element.text.replace(' ', ''):
             if not pattern.search(self.element.text.strip().replace(' ', '')) and not self.element.lines.get_if_first_line_link():
                 return False
