@@ -35,19 +35,27 @@ def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
             stderr=subprocess.PIPE
         )
 
-        # 读取 PDF 数据
-        pdf_data, error = process.communicate(input=docx_stream.read())
+        try:
+            # 读取 PDF 数据，设置超时时间为60秒
+            pdf_data, error = process.communicate(input=docx_stream.read(), timeout=60)
 
-        if process.returncode != 0:
-            raise Exception(f"Conversion failed: {error.decode('utf-8')}")
+            if process.returncode != 0:
+                logging.error(f"Conversion failed: {error.decode('utf-8')}")
+                return
 
-        # 将 PDF 数据存储在 BytesIO 对象中
-        pdf_stream = io.BytesIO(pdf_data)
+            # 将 PDF 数据存储在 BytesIO 对象中
+            pdf_stream = io.BytesIO(pdf_data)
 
-        if is_mime_email(pdf_stream):
-            raise Exception(f"Conversion failed: 不支持非原生的doc格式")
+            if is_mime_email(pdf_stream):
+                logging.error(f"Conversion failed: 不支持非原生的doc格式")
+                return
 
-        return pdf_stream
+            return pdf_stream
+
+        except subprocess.TimeoutExpired:
+            process.kill()
+            logging.error("Conversion failed: Process timed out after 60 seconds")
+            return
 
 
 def is_mime_email(pdf_stream):
