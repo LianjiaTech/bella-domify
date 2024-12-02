@@ -31,6 +31,8 @@ def remove_number(text):
 def _possible_holder_blocks(page_list, header: bool = True):
     page_header_blocks = []
     for page_item in page_list:
+        if not page_item:
+            continue
         if header:
             page_header_blocks.append(page_item[0])
         else:
