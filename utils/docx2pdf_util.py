@@ -25,37 +25,41 @@ lock = multiprocessing.Lock()
 
 
 def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
-    logging.info('convert_docx_to_pdf')
-    # 使用 unoconv 将 DOCX 转换为 PDF 并将输出重定向到管道
-    with lock:
-        process = subprocess.Popen(
-            ['unoconv', '-f', 'pdf', '--stdin', '--stdout'],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
+    logging.info('Starting DOCX to PDF conversion')
 
-        try:
-            # 读取 PDF 数据，设置超时时间为60秒
-            pdf_data, error = process.communicate(input=docx_stream.read(), timeout=60)
+    try:
+
+        with lock:
+            process = subprocess.Popen(
+                ['unoconv', '-f', 'pdf', '--stdin', '--stdout'],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
+
+            try:
+                pdf_data, error = process.communicate(input=docx_stream.read(), timeout=60)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                logging.error("Conversion failed: Process timed out after 60 seconds")
+                return
 
             if process.returncode != 0:
                 logging.error(f"Conversion failed: {error.decode('utf-8')}")
                 return
 
-            # 将 PDF 数据存储在 BytesIO 对象中
             pdf_stream = io.BytesIO(pdf_data)
 
             if is_mime_email(pdf_stream):
-                logging.error(f"Conversion failed: 不支持非原生的doc格式")
+                logging.error("Conversion failed: 不支持非原生的doc格式")
                 return
 
+            logging.info('Conversion successful')
             return pdf_stream
 
-        except subprocess.TimeoutExpired:
-            process.kill()
-            logging.error("Conversion failed: Process timed out after 60 seconds")
-            return
+    except Exception as e:
+        logging.error(f"Conversion failed: {str(e)}")
+        return
 
 
 def is_mime_email(pdf_stream):
