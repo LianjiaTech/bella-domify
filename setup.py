@@ -8,7 +8,7 @@ from setuptools import find_packages, setup
 DESCRIPTION = 'Open source Python library converting pdf to docx.'
 EXCLUDE_FROM_PACKAGES = ["build", "dist", "test"]
 
-VERSION = "0.1.6.0"
+VERSION = "0.1.6.1"
 
 
 # 获取主版本号
@@ -111,5 +111,6 @@ if __name__ == "__main__":
     version = '0.1.5.4'  20241024   目录过滤，默认值改为是；
     version = '0.1.5.5'  20241104   页眉阈值优化；
     version = '0.1.6.0'  20241126   block优化（跨列合并、单行文字字号不统一等）横版pdf忽略页眉识别；
+    version = '0.1.6.1'  20241206   bug修复，获取字体等统计量时兼容image；
 
 """
