@@ -157,20 +157,20 @@ class Lines(ElementCollection):
     def get_font_size_bold(self):
 
         # 字体
-        font_list = [span.font for line in self._instances for span in line.spans]
+        font_list = [span.font for line in self._instances for span in line.spans if hasattr(span, 'font')]
         font_counter = Counter(font_list)
         font_most_common_value = font_counter.most_common(1)[0][0]
 
         # 字号
-        size_list = [span.size for line in self._instances for span in line.spans]
+        size_list = [span.size for line in self._instances for span in line.spans if hasattr(span, 'size')]
         size_counter = Counter(size_list)
         size_most_common_value = size_counter.most_common(1)[0][0]
 
         # 加粗
         # flags代表用于表示文本的格式化属性，每一位代表不同的格式化属性(粗体、斜体、下划线)
         # 全为True时，才返回加粗（一半文字加粗一半不加粗，应视为不加粗的文字块）
-        if all([bool(span.flags & 2 ** 4) for line in self._instances for span in line.spans]) or all(
-                [span.pseudo_bold for line in self._instances for span in line.spans]):
+        if all([bool(span.flags & 2 ** 4) for line in self._instances for span in line.spans if hasattr(span, 'flags')]) or all(
+                [span.pseudo_bold for line in self._instances for span in line.spans if hasattr(span, 'pseudo_bold')]):
             bold_most_common_value = True
         else:
             bold_most_common_value = False

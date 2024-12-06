@@ -50,7 +50,7 @@ def listen_parse_task_layout_and_domtree():
                 file_id = message_json.get("data", {}).get("id", "")
                 file_name = message_json.get("data", {}).get("filename", "")
                 user = message_json.get("data", {}).get("user", "")
-                metadata = json.loads(message_json.get("meta_data", {}))
+                metadata = json.loads(message_json.get("metadata", {}))
                 post_processors = metadata.get("post_processors", [])
                 callbacks = metadata.get("callbacks", [])
                 if "file_parse" in post_processors:
