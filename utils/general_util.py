@@ -32,8 +32,6 @@ def llm_image2text(image_url):
     PROMPT = """
     请从图片中提取出文本信息，非文本信息必须直接忽略。没有文本信息则直接返回‘无’，否则直接输出文字结果。
     """
-    url = "https://img.ljcdn.com/cv-aigc/76e9cfcb31ed4e18bb302ba38d6af8ec?ak=Q265N5ELG32TT7UWO8YJ&exp=1730979408&ts=1730975808&sign=b8040a653584e4029f762da0c2dd250d"
-    # url =  "https://img.ljcdn.com/cv-aigc/126f24e2bc0f4d2ab94e22b33d68b76f?ak=Q265N5ELG32TT7UWO8YJ&exp=1730981105&ts=1730977505&sign=1d1ff1da9ec59da244c8d408fdcd77fb"
 
     max_retry = 2
     response = None
@@ -95,4 +93,14 @@ if __name__ == "__main__":
     os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
     from server.context import user_context
     user_context.set("1000000023008327")
-    print(llm_image2text(""))
+
+    # from server.task_executor import s3
+    #
+    # with open('/Users/lucio/Downloads/瓷砖踢脚线4.png', 'rb') as file:
+    #     image_bytes = file.read()
+    #
+    # file_key = s3.upload_file(stream=image_bytes)
+    # image_s3_url = s3.get_file_url(file_key)
+    #
+    # print(image_s3_url)
+    print(llm_image2text("https://img.ljcdn.com/cv-aigc/d8530cfa14334458b6c5b43e232c483f?ak=Q265N5ELG32TT7UWO8YJ&exp=1733486661&ts=1733483061&sign=9113a47e7dababdd117cef161505ff81"))

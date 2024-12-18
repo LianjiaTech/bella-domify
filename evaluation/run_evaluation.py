@@ -11,6 +11,7 @@
 import json
 import re
 import os
+from markdown_it import MarkdownIt
 import time
 from collections import defaultdict
 from difflib import SequenceMatcher
@@ -98,6 +99,34 @@ def load_json(file_path):
         # 读取 JSON 数据
         data = json.load(file)
     return data
+
+
+def load_markdown(file_path):
+    # 读取Markdown文件内容
+    with open(file_path, 'r', encoding='utf-8') as file:
+        markdown_content = file.read()
+
+    # 初始化Markdown解析器
+    md = MarkdownIt()
+
+    # 解析Markdown内容为tokens
+    tokens = md.parse(markdown_content)
+
+    contents = [token.content for token in tokens if token.content]
+
+    nodes = []
+    for index, content in enumerate(contents):
+
+        node_info = {
+            "page_num": -1,  # 从0开始
+            "order_num": str(index),
+            "type": "Text",
+            "layout_type": "Text",
+            "text": content.strip(),
+        }
+        nodes.append(node_info)
+
+    return nodes
 
 
 def edit_distance(s1, s2):
@@ -647,7 +676,7 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
             # 清洗parser_text
             parser_text = clean_text(parser_node["text"])
             parser_page = parser_node["page_num"]
-            if lable_page != -1 and lable_page != parser_page:  # label页码如果标记为-1，即可此处不做页码限制
+            if lable_page != -1 and parser_page != -1 and lable_page != parser_page:  # label页码如果标记为-1，即可此处不做页码限制
                 continue
             edit_dist = round(edit_distance(lable_text, parser_text), 2)
             if edit_dist >= 0.8:  # 编辑距离在2以内
@@ -945,8 +974,11 @@ def evaluation_single(logger_badcase, file_name, parser=""):
         parser_json = load_json(f"parse_json/{parser}/" + file_name + '.json')
         parser_nodes = tree2list_paoding(parser_json)
         pc_edges_parser = get_pc_edges_paoding(parser_json)
+    elif parser == "llamaparse":
+        parser_nodes = load_markdown(f"parse_json/{parser}/" + file_name + '.pdf.md')
+        pc_edges_parser = {}
     else:
-        raise "解析引擎未实现"
+        raise "未实现的解析引擎"
 
     # 标注结果获取
     label_tree = load_json("label_json/" + file_name + '_GT_label.json')
@@ -1342,7 +1374,7 @@ if __name__ == "__main__":
     # surya_json_add_beike_bbox()  # 添加转化后的bbox
 
     # evaluation_surya()
-    # surya_view()
+    # surya_view()  # surya看效果
 
     # 说明：运行该文件会直接输出最新的评测指标到reports/output_indicators文件中
     # 步骤：
