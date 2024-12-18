@@ -37,4 +37,6 @@ parser_list = [
     # "unstructured",
     # "chunkr",
     # "paoding",
+
+    # "llamaparse",
 ]

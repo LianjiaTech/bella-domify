@@ -24,8 +24,8 @@ from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_par
     csv_parser, pic_parser
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
-from services.ParserResult import ParserResult, ParserCode
 from services.constants import FILE_API_URL, OPENAI_API_KEY
+from server.context import user_context
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -117,7 +117,9 @@ def domtree_parse(file_name: str = None, file: bytes = None):
         return True, {}
 
 
-def worker(func, args, return_dict, key):
+def worker(func, args, return_dict, key, user):
+    # 在子进程中设置上下文变量的值
+    user_context.set(user)
     result = func(*args)
     return_dict[key] = result
 
@@ -183,11 +185,12 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
 
     # 多进程并行解析
     manager = multiprocessing.Manager()
+    user = user_context.get()
     return_dict = manager.dict()
     p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'layout_parse'))
+        layout_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'layout_parse', user))
     p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'domtree_parse'))
+        domtree_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'domtree_parse', user))
     p1.start()
     p2.start()
     p1.join()
@@ -240,10 +243,7 @@ def callback_file_api(file_id, status_code):
     try:
         response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-
-        print(f"状态码: {response.status_code}")
-        print(f"响应内容: {response.json()}")
-        print(f"callback_file_api 调用成功 状态:{status_code}")
+        print(f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
@@ -263,10 +263,7 @@ def callback_other_api(file_id, status_code, callback_url):
     try:
         response = requests.post(callback_url, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-
-        print(f"状态码: {response.status_code}")
-        print(f"响应内容: {response.json()}")
-        print(f"callback_file_api 调用成功 状态:{status_code}")
+        print(f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:

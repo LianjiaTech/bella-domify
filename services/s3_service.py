@@ -39,8 +39,7 @@ def get_s3_parse_result(file_id):
 def upload_s3_parse_result(file_id, parse_result):
     file_key = get_file_key_by_file_id(file_id)
     s3.upload_dict_content(parse_result, file_key)
-    print("file_key")
-    print(file_key)
+    print(f"解析结果上传成功 file_key:{file_key}")
     return True
 
 

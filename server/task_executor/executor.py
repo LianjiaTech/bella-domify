@@ -55,7 +55,8 @@ def listen_parse_task_layout_and_domtree():
                 callbacks = metadata.get("callbacks", [])
                 if "file_parse" in post_processors:
                     print("Message consumed and offset committed.")
-                    user_context.set(user)
+                    # user_context.set(user)
+                    user_context.set("23008327")  # todo luxu
                     parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
                 else:
                     print("Message not consumed.")
