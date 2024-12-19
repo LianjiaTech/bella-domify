@@ -17,7 +17,6 @@ def layout_parse(file):
     # 尝试将二进制文件内容解码为文本
     charsets = ['gbk', 'utf-8', 'utf-8-sig', 'latin1', 'iso-8859-1']
     for charset in charsets:
-        print(charset)
         try:
             input_stream = BytesIO(file)
             input_stream = StringIO(input_stream.read().decode(charset))

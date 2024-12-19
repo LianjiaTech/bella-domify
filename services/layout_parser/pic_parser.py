@@ -9,7 +9,7 @@
 #
 # ===============================================================
 
-import json
+import logging
 import os
 from server.task_executor import s3
 from utils.general_util import llm_image2text
@@ -22,7 +22,7 @@ def layout_parse(file):
         ocr_text = llm_image2text(image_s3_url)
 
     except Exception as e:
-        print(f"pic_parser Exception occurred: {e}")
+        logging.error(f"pic_parser Exception occurred: {e}")
         ocr_text = ""
 
     return ocr_text

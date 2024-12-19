@@ -11,7 +11,6 @@
 import json
 
 import fitz
-from services.ParserResult import ParserResult, ParserCode
 from services.SimpleBlock import SimpleBlock
 from services.constants import TEXT, IMAGE
 from services.layout_parse_utils import _possible_holder_blocks, mark_holder_by_text_similarity, \

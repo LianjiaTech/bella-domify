@@ -10,6 +10,7 @@
 # ===============================================================
 import io
 import json
+import logging
 
 from docx import Document, ImagePart
 from docx.oxml import CT_Picture
@@ -60,7 +61,7 @@ def layout_parse(file):
                 if table_text:
                     simple_block_list.append(SimpleBlock(type=TABLE, text=table_text))
         except Exception as e:
-            print(f"处理元素时出错，type: {element}，errmsg：{str(e)}")
+            logging.error(f"处理元素时出错，type: {element}，errmsg：{str(e)}")
             continue
 
     # SimpleBlock的list批量获取S3链接，并返回目标结构

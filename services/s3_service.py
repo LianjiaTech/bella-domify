@@ -8,9 +8,11 @@
 #    @Description   : 
 #
 # ===============================================================
-from server.task_executor import s3
 import hashlib
 import json
+import logging
+
+from server.task_executor import s3
 
 PREFIX_PARSE_RESULT = "document_parse_result_"
 
@@ -29,7 +31,7 @@ def get_s3_parse_result(file_id):
         s3_result = s3.get_file_text_content(file_key)
         s3_result_json = json.loads(s3_result)
     except Exception as e:
-        print(e)
+        logging.error(e)
         return
 
     return s3_result_json
@@ -39,7 +41,7 @@ def get_s3_parse_result(file_id):
 def upload_s3_parse_result(file_id, parse_result):
     file_key = get_file_key_by_file_id(file_id)
     s3.upload_dict_content(parse_result, file_key)
-    print(f"解析结果上传成功 file_key:{file_key}")
+    logging.info(f"解析结果上传成功 file_key:{file_key}")
     return True
 
 

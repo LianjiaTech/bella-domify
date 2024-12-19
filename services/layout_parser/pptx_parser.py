@@ -10,6 +10,7 @@
 # ===============================================================
 import io
 import json
+import logging
 
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER_TYPE
@@ -54,7 +55,7 @@ def layout_parse(file):
                         simple_block_list.append(SimpleBlock(type=TABLE, text=table_text))
 
             except Exception as e:
-                print(f"处理元素时出错，type: {shape.shape_type}，errmsg：{str(e)}")
+                logging.error(f"处理元素时出错，type: {shape.shape_type}，errmsg：{str(e)}")
                 continue
 
     # SimpleBlock的list批量获取S3链接，并返回目标结构

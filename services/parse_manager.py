@@ -10,8 +10,8 @@
 # ===============================================================
 import io
 import json
-import multiprocessing
 import logging
+import multiprocessing
 
 import requests
 from fastapi import HTTPException
@@ -19,14 +19,14 @@ from fastapi.encoders import jsonable_encoder
 
 import services.s3_service as s3_service
 from common.tool.chubaofs_tool import ChuBaoFSTool
+from server.context import user_context
+from services.constants import OPENAI_API_KEY
 from services.domtree_parser import pdf_parser as pdf_domtree_parser
 from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, \
     csv_parser, pic_parser
+from settings.ini_config import config
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
-from services.constants import OPENAI_API_KEY
-from server.context import user_context
-from settings.ini_config import config
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -144,7 +144,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         # 解析完毕回调
         callback_after_parse(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
-        print(f"Exception layout_parse_and_callback: {e}")
+        logging.info(f"Exception layout_parse_and_callback: {e}")
         return ""
     return layout_parse_result
 
@@ -165,7 +165,7 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
         # 解析完毕回调
         callback_after_parse(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
-        print(f"Exception domtree_parse_and_callback: {e}")
+        logging.info(f"Exception domtree_parse_and_callback: {e}")
         return {}
     return parse_result
 
@@ -248,13 +248,13 @@ def callback_file_api(file_id, status_code):
     try:
         response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-        print(f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
+        logging.info(f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
-        print(f"HTTP 错误: {http_err}")
+        logging.info(f"HTTP 错误: {http_err}")
     except requests.exceptions.RequestException as req_err:
-        print(f"请求异常: {req_err}")
+        logging.info(f"请求异常: {req_err}")
     return False
 
 
@@ -268,13 +268,13 @@ def callback_other_api(file_id, status_code, callback_url):
     try:
         response = requests.post(callback_url, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-        print(f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
+        logging.info(f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
-        print(f"HTTP 错误: {http_err}")
+        logging.info(f"HTTP 错误: {http_err}")
     except requests.exceptions.RequestException as req_err:
-        print(f"请求异常: {req_err}")
+        logging.info(f"请求异常: {req_err}")
     return False
 
 
@@ -300,5 +300,4 @@ if __name__ == "__main__":
     parse_result_layout_and_domtree("评测文件8-交易知识15-rag-测试.pdf", stream, [])
     # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
 
-    print()
     # file_type = get_file_type(file_path)

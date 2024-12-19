@@ -35,14 +35,14 @@ def listen_parse_task_layout_and_domtree():
 
             if msg is None:
                 time.sleep(2)
-                print("msg is None")
+                logging.info("msg is None")
                 continue
             if msg.error():
                 raise KafkaException(msg.error())
 
             # 解析消息内容
             message_value = msg.value().decode('utf-8')
-            print(f"Received message: {message_value}")
+            logging.info(f"Received message: {message_value}")
 
             # 判断是否需要文件解析处理
             try:
@@ -56,17 +56,17 @@ def listen_parse_task_layout_and_domtree():
                 post_processors = metadata.get("post_processors", [])
                 callbacks = metadata.get("callbacks", [])
                 if "file_parse" in post_processors:
-                    print("Message consumed and offset committed.")
+                    logging.info("Message consumed and offset committed.")
                     user_context.set(user)
                     parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
                 else:
-                    print("Message not consumed.")
+                    logging.info("Message not consumed.")
                 consumer.commit(msg)
 
             except json.JSONDecodeError:
-                print("Failed to decode JSON message.")
+                logging.error("Failed to decode JSON message.")
             except Exception as e:
-                print(f"Exception occurred: {e}")
+                logging.error(f"Exception occurred: {e}")
                 # # 提交偏移量，标记消息为已处理
                 # consumer.commit(msg)
 

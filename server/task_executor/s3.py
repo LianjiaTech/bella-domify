@@ -7,6 +7,7 @@ from urllib.parse import urlparse, urlunparse
 
 import boto3
 import json
+import logging
 from fastapi import UploadFile
 
 from settings.ini_config import config
@@ -92,7 +93,7 @@ def get_sign_url_with_given_end_time(uri, start_time: int, expire_seconds: int) 
     try:
         decode_path = urllib.parse.unquote(path)
     except Exception as e:
-        print(e)
+        logging.error(e)
         decode_path = path
 
     expire_time = start_time + expire_seconds
