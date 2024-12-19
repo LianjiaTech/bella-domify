@@ -141,7 +141,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         # 解析失败，直接回调
         if not layout_result_json:
             callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
-            return layout_result_json
+            return layout_result_text
 
         # 解析结果存S3
         parse_result = {
@@ -155,7 +155,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
     except Exception as e:
         logging.info(f"Exception layout_parse_and_callback: {e}")
         return ""
-    return layout_result_json
+    return layout_result_text
 
 
 # domtree解析
