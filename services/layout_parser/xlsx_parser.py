@@ -37,7 +37,9 @@ def layout_parse(byte_data):
             all_content += "\n"
         all_content += "\n"
 
-    return all_content
+    result_text = all_content
+    result_json = all_content
+    return result_json, result_text
 
 
 if __name__ == "__main__":

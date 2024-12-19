@@ -27,7 +27,10 @@ def layout_parse(file):
                 line = ",".join(record).replace("\n", "\u2028")
                 lines.append(line)
 
-            return "\n".join(lines) + "\n"
+            result_text = "\n".join(lines) + "\n"
+            result_json = "\n".join(lines) + "\n"  # todo 待确定文件解析结果结构
+            return result_json, result_text
+
         except UnicodeDecodeError:
             continue
 

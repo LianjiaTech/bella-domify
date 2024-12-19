@@ -51,7 +51,7 @@ async def create_upload_file(file_name: str = Form(...), file_url_object: Upload
     user_context.set(user or DEFAULT_USER)
     # 读取file字节流
     contents = await file_url_object.read()
-    return parse_manager.layout_parse(file_name, contents)
+    return parse_manager.layout_parse(file_name, contents)[0]   # todo luxu 临时保证老接口结构不变，后续修改
 
 
 # 文件解析-获取结构信息和字符串信息(直接解析)

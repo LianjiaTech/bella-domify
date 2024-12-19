@@ -63,9 +63,9 @@ def layout_parse(file):
                 continue
 
     # SimpleBlock的list批量获取S3链接，并返回目标结构
-    result = get_s3_links_for_simple_block_batch(simple_block_list)
-    file_text = trans_simple_block_list2string(result)
-    return file_text
+    result_json = get_s3_links_for_simple_block_batch(simple_block_list)
+    result_text = trans_simple_block_list2string(result_json)
+    return result_json, result_text
 
 
 if __name__ == "__main__":

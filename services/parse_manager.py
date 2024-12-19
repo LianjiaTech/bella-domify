@@ -132,21 +132,25 @@ def worker(func, args, return_dict, key, user):
 def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
     try:
         # 获取版面解析结果
-        layout_parse_result = layout_parse(file_name, contents)
+        layout_result_json, layout_result_text = layout_parse(file_name, contents)
         # 解析失败，直接回调
-        if not layout_parse_result:
+        if not layout_result_json:
             callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
-            return layout_parse_result
+            return layout_result_json
 
         # 解析结果存S3
-        parse_result = {"layout_parse": layout_parse_result, "domtree_parse": {}}
+        parse_result = {
+            "layout_parse": layout_result_text,
+            "layout_parse_json": layout_result_json,
+            "domtree_parse": {}
+        }
         s3_service.upload_s3_parse_result(file_id, parse_result)
         # 解析完毕回调
         callback_after_parse(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
         logging.info(f"Exception layout_parse_and_callback: {e}")
         return ""
-    return layout_parse_result
+    return layout_result_json
 
 
 # domtree解析
@@ -218,9 +222,13 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
 
 # 串行接口
 def parse_result_layout_and_domtree_sync(file_name, contents):
-    layout_parse_result = layout_parse(file_name, contents)
+    layout_result_json, layout_result_text = layout_parse(file_name, contents)
     parse_succeed, domtree_parse_result = domtree_parse(file_name, contents)
-    parse_result = {"layout_parse": layout_parse_result, "domtree_parse": domtree_parse_result}
+    parse_result = {
+        "layout_parse": layout_result_text,
+        "layout_parse_json": layout_result_json,
+        "domtree_parse": domtree_parse_result
+    }
     return parse_result
 
 

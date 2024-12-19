@@ -10,7 +10,6 @@
 # ===============================================================
 
 import logging
-import os
 from server.task_executor import s3
 from utils.general_util import llm_image2text
 
@@ -25,7 +24,9 @@ def layout_parse(file):
         logging.error(f"pic_parser Exception occurred: {e}")
         ocr_text = ""
 
-    return ocr_text
+    result_text = ocr_text
+    result_json = ocr_text
+    return result_json, result_text
 
 
 if __name__ == "__main__":

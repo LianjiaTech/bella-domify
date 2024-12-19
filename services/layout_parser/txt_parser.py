@@ -18,7 +18,9 @@ def layout_parse(file):
     except UnicodeDecodeError:
         raise ValueError("异常：文件内容无法解码为 UTF-8 文本")
 
-    return text
+    result_text = text
+    result_json = text
+    return result_json, result_text
 
 
 if __name__ == "__main__":
