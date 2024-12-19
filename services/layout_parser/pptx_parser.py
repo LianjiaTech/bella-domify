@@ -36,11 +36,15 @@ def layout_parse(file):
                         simple_block_list.append(SimpleBlock(type=IMAGE, image_bytes=shape.image.blob))
                     else:
                         # 文字占位符
-                        simple_block_list.append(SimpleBlock(type=TEXT, text=shape.text))
+                        simple_block_list.append(SimpleBlock(type=TEXT, text=""))
                 # 图片
                 elif shape.shape_type == MSO_SHAPE_TYPE.PICTURE:  # 13
-                    simple_block_list.append(SimpleBlock(type=IMAGE, image_bytes=shape.image.blob))
+                    try:
+                        simple_block_list.append(SimpleBlock(type=IMAGE, image_bytes=shape.image.blob))
+                    except Exception as e:
+                        simple_block_list.append(SimpleBlock(type=IMAGE, image_bytes=None))
                 # 文字
+                # todo ppt中组合可能无法解析
                 elif shape.shape_type == MSO_SHAPE_TYPE.TEXT_BOX:  # 17
                     if shape.text:
                         simple_block_list.append(SimpleBlock(type=TEXT, text=shape.text))

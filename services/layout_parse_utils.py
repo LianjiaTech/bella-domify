@@ -96,9 +96,9 @@ def trans_simple_block_list2string(simple_block_list):
     doc_text = ""
     for simple_block in simple_block_list:
         if simple_block["type"] in [TEXT, TABLE]:
-            doc_text = doc_text + simple_block["text"]
+            doc_text = doc_text + "；" + simple_block["text"]
         else:  # IMAGE
-            doc_text = doc_text + simple_block["ocr_result"]
+            doc_text = doc_text + "；" + simple_block["ocr_result"]
     return doc_text
 
 

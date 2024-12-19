@@ -32,7 +32,7 @@ class SimpleBlock:
         }
 
     def generate_s3_url(self):
-        if self.type == IMAGE:
+        if self.type == IMAGE and self.image_bytes:
             file_key = s3.upload_file(stream=self.image_bytes)
             image_s3_url = s3.get_file_url(file_key)
             self.text = image_s3_url
