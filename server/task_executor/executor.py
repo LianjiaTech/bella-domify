@@ -27,7 +27,7 @@ def listen_parse_task_layout_and_domtree():
     # 创建消费者实例
     consumer = Consumer(kafka_conf)
     # 订阅主题
-    consumer.subscribe([config.get('KAFKA', 'topic')])  # todo luxu
+    consumer.subscribe([config.get('KAFKA', 'topic')])
     try:
         while True:
             # 拉取消息
@@ -49,14 +49,15 @@ def listen_parse_task_layout_and_domtree():
                 message_json = json.loads(message_value)
                 file_id = message_json.get("data", {}).get("id", "")
                 file_name = message_json.get("data", {}).get("filename", "")
-                user = message_json.get("data", {}).get("user", "")
                 metadata = json.loads(message_json.get("metadata", {}))
+                user = metadata.get("user", "")
+                if not user:
+                    raise ValueError("user为空, 无法进行文件解析")
                 post_processors = metadata.get("post_processors", [])
                 callbacks = metadata.get("callbacks", [])
                 if "file_parse" in post_processors:
                     print("Message consumed and offset committed.")
-                    # user_context.set(user)
-                    user_context.set("23008327")  # todo luxu
+                    user_context.set(user)
                     parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
                 else:
                     print("Message not consumed.")

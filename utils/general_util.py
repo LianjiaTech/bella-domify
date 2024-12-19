@@ -12,6 +12,7 @@ import openai
 import time
 import logging
 import requests
+from server.context import user_context
 
 
 def get_file_type(file_path: str) -> str:
@@ -28,7 +29,6 @@ def get_file_type(file_path: str) -> str:
 
 
 def llm_image2text(image_url):
-    # return "4o OCR暂时关闭"  # todo luxu
     PROMPT = """
     请从图片中提取出文本信息，非文本信息必须直接忽略。没有文本信息则直接返回‘无’，否则直接输出文字结果。
     """
@@ -55,9 +55,7 @@ def llm_image2text(image_url):
                 temperature=0.001,
                 top_p=0.01,
                 model="gpt-4o",
-                # model="gpt-3.5-turbo",
-                user="23008327",  # todo luxu
-                # user=user_context.get(),
+                user=user_context.get(),
                 timeout=30  # 超时时间为30秒
             )
         except openai.RateLimitError:
@@ -91,8 +89,7 @@ if __name__ == "__main__":
     import os
     os.environ["OPENAI_API_KEY"] = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
     os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
-    from server.context import user_context
-    user_context.set("1000000023008327")
+    # user_context.set("1000000023008327")
 
     # from server.task_executor import s3
     #

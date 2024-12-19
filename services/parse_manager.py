@@ -24,8 +24,9 @@ from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_par
     csv_parser, pic_parser
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
-from services.constants import FILE_API_URL, OPENAI_API_KEY
+from services.constants import OPENAI_API_KEY
 from server.context import user_context
+from settings.ini_config import config
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -37,6 +38,9 @@ DOCUMENT_PARSE_DOMTREE_FINISH = "document_parse_domtree_finish"
 DOCUMENT_PARSE_FINISH = "document_parse_finish"
 # 解析失败
 DOCUMENT_PARSE_FAIL = "document_parse_fail"
+
+FILE_API_URL = config.get('FILEAPI', 'URL')
+
 
 percent_map = {
     DOCUMENT_PARSE_BEGIN: 0,
@@ -166,8 +170,9 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
     return parse_result
 
 
+# 从FileAPI获取文件
 def retrieve_file(file_id):
-    url = f"{FILE_API_URL}/v1/files/{file_id}/content"  # todo luxu  try逻辑，如果取不到
+    url = f"{FILE_API_URL}/v1/files/{file_id}/content"
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
     response = requests.get(url, headers=headers)
     return response.content
