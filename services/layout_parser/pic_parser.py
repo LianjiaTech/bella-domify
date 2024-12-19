@@ -22,7 +22,7 @@ def layout_parse(file):
         ocr_text = llm_image2text(image_s3_url)
 
     except Exception as e:
-        print(f"Exception occurred: {e}")
+        print(f"pic_parser Exception occurred: {e}")
         ocr_text = ""
 
     return ocr_text
