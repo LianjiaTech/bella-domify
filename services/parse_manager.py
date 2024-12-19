@@ -92,7 +92,7 @@ def layout_parse(file_name: str = None, file: bytes = None):
         result_json, result_text = pic_parser.layout_parse(file)
     else:
         raise ValueError("异常：不支持的文件类型")
-    logging.info(f'domtree_parse解析完毕 文件名：{file_name}')
+    logging.info(f'layout_parse解析完毕 文件名：{file_name}')
     return result_json, result_text
 
 
