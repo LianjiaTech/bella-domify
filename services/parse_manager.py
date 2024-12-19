@@ -68,29 +68,32 @@ def layout_parse(file_name: str = None, file: bytes = None):
     validate_parameters(file_name, file)
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
+    logging.info(f'layout_parse解析开始 文件名：{file_name}')
     # 根据后缀判断文件类型
     if file_extension == 'pptx':
-        return pptx_parser.layout_parse(file)
+        result_json, result_text = pptx_parser.layout_parse(file)
     elif file_extension == 'pdf':
-        return pdf_parser.layout_parse(file)
+        result_json, result_text = pdf_parser.layout_parse(file)
     elif file_extension == 'docx':
-        return docx_parser.layout_parse(file)
+        result_json, result_text = docx_parser.layout_parse(file)
     elif file_extension == 'csv':
-        return csv_parser.layout_parse(file)
+        result_json, result_text = csv_parser.layout_parse(file)
     elif file_extension == 'doc':
         docx_stream = io.BytesIO(file)
         file = convert_docx_to_pdf_in_memory(docx_stream)
-        return pdf_parser.layout_parse(file)
+        result_json, result_text = pdf_parser.layout_parse(file)
     elif file_extension == 'xlsx':
-        return xlsx_parser.layout_parse(file)
+        result_json, result_text = xlsx_parser.layout_parse(file)
     elif file_extension == 'xls':
-        return xls_parser.layout_parse(file)
+        result_json, result_text = xls_parser.layout_parse(file)
     elif file_extension in ["txt", "md", "json", "jsonl", "py", "c", "cpp", "java", "js", "sh", "xml", "yaml", "html"]:
-        return txt_parser.layout_parse(file)
+        result_json, result_text = txt_parser.layout_parse(file)
     elif file_extension in ["png", "jpeg", "jpg", "bmp"]:
-        return pic_parser.layout_parse(file)
+        result_json, result_text = pic_parser.layout_parse(file)
     else:
         raise ValueError("异常：不支持的文件类型")
+    logging.info(f'domtree_parse解析完毕 文件名：{file_name}')
+    return result_json, result_text
 
 
 def domtree_parse(file_name: str = None, file: bytes = None):
@@ -105,11 +108,13 @@ def domtree_parse(file_name: str = None, file: bytes = None):
     validate_parameters(file_name, file)
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
+    logging.info(f'domtree_parse解析开始 文件名：{file_name}')
     # 根据后缀判断文件类型
     if file_extension == 'pdf':
         try:
             dom_tree_model = pdf_domtree_parser.pdf_parse(file)
             _, json_compatible_data = convert_to_json(dom_tree_model)
+            logging.info(f'domtree_parse解析完毕 文件名：{file_name}')
             return True, json_compatible_data
             # return ParserResult(parser_data=json_compatible_data).to_json()
         except Exception as e:
