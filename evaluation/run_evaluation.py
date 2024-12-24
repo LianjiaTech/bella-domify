@@ -8,21 +8,24 @@
 #    @Description   : 
 #
 # ===============================================================
+import copy
+import datetime
 import json
-import re
+import logging
 import os
-from markdown_it import MarkdownIt
-import time
+import re
 from collections import defaultdict
 from difflib import SequenceMatcher
-import copy
 from statistics import mean
-import pandas as pd
-import logging
+
 import fitz
-import datetime
-import parse_output as beike_parse_output
+import markdown
+import pandas as pd
+from bs4 import BeautifulSoup
+from markdown_it import MarkdownIt
 from shapely.geometry import box
+
+import parse_output as beike_parse_output
 from constant import file_list, parser_list
 
 
@@ -108,25 +111,147 @@ def load_markdown(file_path):
 
     # 初始化Markdown解析器
     md = MarkdownIt()
-
     # 解析Markdown内容为tokens
     tokens = md.parse(markdown_content)
 
-    contents = [
-        part
-        for token in tokens if token.content
-        for part in re.split(r'(?<!\|)\n', token.content)
-        if part
-    ]
+    tag2type = {
+        "h1": "Title",
+        "p": "Text",
+        "ol": "List",
+        "li": "List",
+    }
 
+    def compress_items(type_list):
+        if "List" in type_list:
+            return "List"
+        elif "Title" in type_list:
+            return "Title"
+        else:
+            return "Text"
+
+    def extract_table(text):
+        if text[0] == "|" and text[-1] == "|":
+            return text, ""
+        # 使用正则表达式匹配从第一个到最后一个竖线之间的内容
+        match = re.search(r'\|.*?\|', text, re.DOTALL)
+        if match:
+            table_text = match.group(0)
+            left_text = text.replace(table_text, '', 1)
+            return table_text, left_text
+        return None, text
+
+    def cut_string(s):
+        first_index = s.find("|")
+        last_index = s.rfind("|")
+
+        if first_index == -1 or last_index == -1 or first_index == last_index:
+            return "", s
+
+        # 切出字符
+        cut_part = s[first_index:last_index + 1]
+        # 剩余的字符串
+        remaining_part = s[:first_index] + s[last_index + 1:]
+
+        return cut_part, remaining_part
+
+    current_element = None
+    contents = []
+    index = 0
+    for token in tokens:
+        item_type = tag2type.get(token.tag)
+        if token.type.endswith('_open'):
+            # 开始一个新的元素
+            if current_element:
+                current_element["type"].append(item_type)
+            else:
+                # if "|\n" in content:
+                #     chunk_type = "Table"
+
+                current_element = {
+                    'type': [item_type],
+                    'text': '',
+                }
+        elif token.type == 'inline':
+            # 添加内容到当前元素
+            if current_element:
+                ori_text = token.content.strip().replace(" ", "")
+                table_text, left_text = cut_string(ori_text)
+                if table_text:
+                    current_element_new = {
+                        'page_num': -1,
+                        'order_num': str(index),
+                        'type': "Table",
+                        'layout_type': "Table",
+                        'text': table_text.replace("---|", ""),
+                    }
+                    index += 1
+                    contents.append(current_element_new)
+                    current_element['text'] = left_text
+                else:
+                    current_element['text'] = left_text
+
+        elif token.type.endswith('_close'):
+            # 结束当前元素并添加到列表
+            if current_element:
+                if not current_element['text']:
+                    current_element = None
+                    continue
+                current_element["page_num"] = -1
+                current_element["order_num"] = str(index)
+                current_element["type"] = compress_items(current_element["type"])
+                current_element["layout_type"] = current_element["type"]
+
+                index += 1
+                contents.append(current_element)
+                current_element = None
+
+    return contents
+
+
+def load_markdown2(file_path):
+
+    def extract_table(text):
+        # 使用正则表达式匹配从第一个到最后一个竖线之间的内容
+        match = re.search(r'\|.*\|', text, re.DOTALL)
+        if match:
+            return match.group(0)
+        return None
+
+    # 读取Markdown文件内容
+    with open(file_path, 'r', encoding='utf-8') as file:
+        markdown_content = file.read()
+
+    # 将Markdown转换为HTML
+    html = markdown.markdown(markdown_content)
+
+    # 使用BeautifulSoup解析HTML
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # 提取元素及其内容
     nodes = []
-    for index, content in enumerate(contents):
+    for index, element in enumerate(soup.find_all()):
+        tag_name = element.name
+        content = element.get_text(strip=True)
+
+        table_content = None
+        if extract_table(content):
+            pass
+
+        if "|\n" in content:
+            chunk_type = "Table"
+        elif tag_name == "h1":
+            chunk_type = "Title"
+        elif tag_name == "p":
+            chunk_type = "Text"
+        else:
+            chunk_type = ""
+            print()
 
         node_info = {
             "page_num": -1,  # 从0开始
             "order_num": str(index),
-            "type": "Text",
-            "layout_type": "Text",
+            "type": chunk_type,
+            "layout_type": chunk_type,
             "text": content.strip().replace("---|", "").replace(" ", ""),
         }
         nodes.append(node_info)
@@ -985,7 +1110,7 @@ def evaluation_single(logger_badcase, file_name, parser=""):
         pc_edges_parser = get_pc_edges_paoding(parser_json)
     elif parser == "llamaparse":
         parser_nodes = load_markdown(f"parse_json/{parser}/" + file_name + '.pdf.md')
-        pc_edges_parser = {}
+        pc_edges_parser = get_pc_edges_llamaparse(parser_nodes)
     else:
         raise "未实现的解析引擎"
 
@@ -1125,6 +1250,18 @@ def get_pc_edges_paoding(parser_json):
     pc_edges_order = dict(sorted(pc_edges.items(), key=lambda item: int(item[0])))
 
     return pc_edges_order
+
+
+def get_pc_edges_llamaparse(parser_json):
+    pc_edges_parser = {}
+    father = ""
+
+    for node in parser_json:
+        if node["type"] == "Title":
+            father = node["order_num"]
+        elif father:
+            pc_edges_parser[node["order_num"]] = father
+    return pc_edges_parser
 
 
 def get_pc_edges_label(order_num, label_tree):

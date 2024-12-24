@@ -36,11 +36,11 @@ def get_result(file_name, need_save=True):
         data = {
             # 'auto_mode': True,
             # 'fast_mode': True,
-            'continuous_mode': True,
+            'continuous_mode': False,
             'premium_mode': True,
             'input_url': '',
             'structured_output': False,
-            'disable_ocr': True,
+            'disable_ocr': False,
             'disable_image_extraction': False,
             'annotate_links': False,
             'do_not_unroll_columns': False,
