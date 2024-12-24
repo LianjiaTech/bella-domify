@@ -50,7 +50,7 @@ def log_setting(log_file=""):
     return logger
 
 
-logger = log_setting(log_file='reports/output_indicators_' + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + '.txt')
+logger = log_setting(log_file='reports/all/output_indicators_' + datetime.datetime.now().strftime('%Y%m%d_%H点%M分') + '.txt')
 
 print_setting = {
     "PRINT_1V1_TEXT": 1,  # 打印1v1映射的text
@@ -112,7 +112,12 @@ def load_markdown(file_path):
     # 解析Markdown内容为tokens
     tokens = md.parse(markdown_content)
 
-    contents = [token.content for token in tokens if token.content]
+    contents = [
+        part
+        for token in tokens if token.content
+        for part in re.split(r'(?<!\|)\n', token.content)
+        if part
+    ]
 
     nodes = []
     for index, content in enumerate(contents):
@@ -122,7 +127,7 @@ def load_markdown(file_path):
             "order_num": str(index),
             "type": "Text",
             "layout_type": "Text",
-            "text": content.strip(),
+            "text": content.strip().replace("---|", "").replace(" ", ""),
         }
         nodes.append(node_info)
 
@@ -131,7 +136,11 @@ def load_markdown(file_path):
 
 def edit_distance(s1, s2):
     """计算两个字符串的编辑距离"""
-    return SequenceMatcher(None, s1, s2).ratio()
+    # 这个函数有个bug，计算编辑距离时不是对称的，暂时先把短的放前边，会好一点
+    if len(s1) > len(s2):
+        return SequenceMatcher(None, s2, s1).ratio()
+    else:
+        return SequenceMatcher(None, s1, s2).ratio()
 
 
 def tree2list_beike(tree):
@@ -1283,7 +1292,6 @@ def draw_box(page, name, bbox):
     page.draw_rect((bbox.x0, bbox.y0 - 8, bbox.x0 + len(name)*5.5, bbox.y0), color=black, fill=black, overlay=True)
     # Page画名字的text
     page.insert_text((bbox.x0, bbox.y0), name, color=white)
-
 
 
 def evaluation(parser_name):
