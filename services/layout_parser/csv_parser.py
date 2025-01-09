@@ -9,8 +9,12 @@
 #
 # ===============================================================
 import csv
-from io import BytesIO, StringIO
 import os
+from io import BytesIO, StringIO
+
+from services.SimpleBlock import SimpleBlock
+from services.constants import TEXT
+from services.layout_parse_utils import get_s3_links_for_simple_block_batch
 
 
 def layout_parse(file):
@@ -28,7 +32,7 @@ def layout_parse(file):
                 lines.append(line)
 
             result_text = "\n".join(lines) + "\n"
-            result_json = "\n".join(lines) + "\n"  # todo 待确定文件解析结果结构
+            result_json = get_s3_links_for_simple_block_batch([SimpleBlock(type=TEXT, text=result_text)])
             return result_json, result_text
 
         except UnicodeDecodeError:

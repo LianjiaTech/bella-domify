@@ -8,9 +8,14 @@
 #    @Description   :
 #
 # ===============================================================
-import openpyxl
-from io import BytesIO
 import os
+from io import BytesIO
+
+import openpyxl
+
+from services.SimpleBlock import SimpleBlock
+from services.constants import TEXT
+from services.layout_parse_utils import get_s3_links_for_simple_block_batch
 
 
 def layout_parse(byte_data):
@@ -38,7 +43,7 @@ def layout_parse(byte_data):
         all_content += "\n"
 
     result_text = all_content
-    result_json = all_content
+    result_json = get_s3_links_for_simple_block_batch([SimpleBlock(type=TEXT, text=result_text)])
     return result_json, result_text
 
 
