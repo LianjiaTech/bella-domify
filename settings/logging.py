@@ -1,8 +1,11 @@
 from pydantic.v1 import BaseSettings
 import os
 
-# base_path = os.path.dirname(os.path.dirname((os.path.abspath(__file__))))
-base_path = "/data0/www/applogs"
+env = os.getenv("ENVTYPE", "test")
+if env == "test":
+    base_path = os.path.dirname(os.path.dirname((os.path.abspath(__file__))))
+else:
+    base_path = "/data0/www/applogs"
 
 
 class Settings(BaseSettings):

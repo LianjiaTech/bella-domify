@@ -116,9 +116,14 @@ def load_markdown(file_path):
 
     tag2type = {
         "h1": "Title",
+        "h2": "Title",
+        "h3": "Title",
         "p": "Text",
-        "ol": "List",
+        "ol": "List",  # 有序列表
         "li": "List",
+        "ul": "List",  # 无序列表
+        "code": "Code",  # 无序列表
+        "": "",
     }
 
     def compress_items(type_list):
@@ -154,56 +159,104 @@ def load_markdown(file_path):
 
         return cut_part, remaining_part
 
-    current_element = None
+    def html_to_table(html_content):
+        table_md_text = ""
+        soup = BeautifulSoup(html_content, 'html.parser')
+        table = soup.find('table')
+
+        rows = table.find_all('tr')
+        for row in rows:
+            cols = row.find_all('td')
+            col_texts = [col.get_text(strip=True) for col in cols]
+            table_md_text += '|'.join(col_texts)+"|"
+
+        return '|' + table_md_text
+
+    type_list = []
     contents = []
     index = 0
     for token in tokens:
-        item_type = tag2type.get(token.tag)
-        if token.type.endswith('_open'):
-            # 开始一个新的元素
-            if current_element:
-                current_element["type"].append(item_type)
-            else:
-                # if "|\n" in content:
-                #     chunk_type = "Table"
+        item_type = tag2type[token.tag]
+        item_text = token.content.strip().replace(" ", "")
 
-                current_element = {
-                    'type': [item_type],
-                    'text': '',
+        if token.type.endswith('_open'):
+            type_list.append(item_type)
+        elif token.type.endswith('_close'):
+            type_list = []
+        # 内容
+        else:
+            # 尝试抽取表格
+            table_text, item_text = cut_string(item_text)
+            if table_text:
+                current_element_new = {
+                    'page_num': -1,
+                    'order_num': str(index),
+                    'type': "Table",
+                    'layout_type': "Table",
+                    'text': table_text.replace("---|", ""),
                 }
-        elif token.type == 'inline':
-            # 添加内容到当前元素
-            if current_element:
-                ori_text = token.content.strip().replace(" ", "")
-                table_text, left_text = cut_string(ori_text)
-                if table_text:
+                index += 1
+                contents.append(current_element_new)
+
+            # Figure
+            if token.type == "html_block" and "<!-- image -->" in item_text:
+                current_element_new = {
+                    'page_num': -1,
+                    'order_num': str(index),
+                    'type': "Figure",
+                    'layout_type': "Figure",
+                    'text': "<image>",
+                }
+                index += 1
+                contents.append(current_element_new)
+            elif "![](images/" in item_text:
+                current_element_new = {
+                    'page_num': -1,
+                    'order_num': str(index),
+                    'type': "Figure",
+                    'layout_type': "Figure",
+                    'text': "<image>",
+                }
+                index += 1
+                contents.append(current_element_new)
+
+            # Table
+            elif token.type == "html_block" and "<table>" in item_text:
+                table_text = html_to_table(item_text)
+                current_element_new = {
+                    'page_num': -1,
+                    'order_num': str(index),
+                    'type': "Table",
+                    'layout_type': "Table",
+                    'text': table_text,
+                }
+                index += 1
+                contents.append(current_element_new)
+
+            # Code
+            elif token.type == "fence" and token.tag == "code":
+                current_element_new = {
+                    'page_num': -1,
+                    'order_num': str(index),
+                    'type': "Code",
+                    'layout_type': "Code",
+                    'text': item_text,
+                }
+                index += 1
+                contents.append(current_element_new)
+            # Text
+            elif item_text:
+                final_type = compress_items(type_list)
+                for slice in item_text.split('\n'):
                     current_element_new = {
                         'page_num': -1,
                         'order_num': str(index),
-                        'type': "Table",
-                        'layout_type': "Table",
-                        'text': table_text.replace("---|", ""),
+                        'type': final_type,
+                        'layout_type': final_type,
+                        'text': slice,
                     }
                     index += 1
                     contents.append(current_element_new)
-                    current_element['text'] = left_text
-                else:
-                    current_element['text'] = left_text
-
-        elif token.type.endswith('_close'):
-            # 结束当前元素并添加到列表
-            if current_element:
-                if not current_element['text']:
-                    current_element = None
-                    continue
-                current_element["page_num"] = -1
-                current_element["order_num"] = str(index)
-                current_element["type"] = compress_items(current_element["type"])
-                current_element["layout_type"] = current_element["type"]
-
-                index += 1
-                contents.append(current_element)
-                current_element = None
 
     return contents
 
@@ -1111,6 +1164,12 @@ def evaluation_single(logger_badcase, file_name, parser=""):
     elif parser == "llamaparse":
         parser_nodes = load_markdown(f"parse_json/{parser}/" + file_name + '.pdf.md')
         pc_edges_parser = get_pc_edges_llamaparse(parser_nodes)
+    elif parser == "docling":
+        parser_nodes = load_markdown(f"parse_json/{parser}/" + file_name + '.md')
+        pc_edges_parser = get_pc_edges_llamaparse(parser_nodes)
+    elif parser == "mineru":
+        parser_nodes = load_markdown(f"parse_json/{parser}/" + file_name + '.md')
+        pc_edges_parser = get_pc_edges_llamaparse(parser_nodes)
     else:
         raise "未实现的解析引擎"
 
@@ -1297,7 +1356,7 @@ def cal_accuracy(confusion_matrix):
     # 计算总的准确率
     overall_accuracy = total_correct / total_elements
 
-    logger.info(f"版面元素准确率：\t\t{overall_accuracy:.2f}  ({total_correct:.1f} / {total_elements:.0f})")
+    logger.info(f"\n版面元素准确率：\t\t{overall_accuracy:.2f}  ({total_correct:.1f} / {total_elements:.0f})")
 
 
 def generate_report():
@@ -1470,7 +1529,7 @@ def evaluation(parser_name):
 
     real_1v1_count = len([x for x in edit_dist_allfile if x > 0])  # 这里是指相似度大于0.8的节点；目标映射数为1并不是真正的相似度大于0.8
 
-    logger.info(f"block切分准确率：\t\t{mean(edit_dist_allfile):.2f}  ({real_1v1_count} / {len(edit_dist_allfile)})")
+    logger.info(f"\nblock切分准确率：\t\t{mean(edit_dist_allfile):.2f}  ({real_1v1_count} / {len(edit_dist_allfile)})")
     # 每种类型的准确率
     cal_accuracy(total_confusion_matrix)
 
@@ -1484,7 +1543,7 @@ def evaluation(parser_name):
     # print("全部文档1v1映射节点数：", count_1v1)
     # print("全部文档多映射节点数：", count_1vm)
     # print("全部文档无映射节点数：", count_nomap)
-    logger.info(f"层级结构准确率：\t\t{struct_right_cnt * 1.0 / struct_all_count:.2f}  ({struct_right_cnt} / {struct_all_count})\n\n")
+    logger.info(f"\n层级结构准确率：\t\t{struct_right_cnt * 1.0 / struct_all_count:.2f}  ({struct_right_cnt} / {struct_all_count})\n\n")
 
 
 if __name__ == "__main__":

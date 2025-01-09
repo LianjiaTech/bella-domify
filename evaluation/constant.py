@@ -39,4 +39,6 @@ parser_list = [
     # "paoding",
 
     # "llamaparse",
+    # "docling",
+    # "mineru",
 ]
