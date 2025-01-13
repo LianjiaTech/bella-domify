@@ -30,7 +30,10 @@ def get_file_type(file_path: str) -> str:
 
 def llm_image2text(image_url):
     PROMPT = """
-    请从图片中提取出文本信息，非文本信息必须直接忽略。没有文本信息则直接返回‘无’，否则直接输出文字结果。
+    请从图片中提取出表达的信息
+    如果图片中有表格，可以以markdown格式的表格表达；
+    如果只是段落，直接提取出文字即可；
+    如果没有文字，则直接返回‘无’；
     """
 
     max_retry = 2
