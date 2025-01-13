@@ -11,6 +11,8 @@ from pdf2docx.extend.text.LinesExtend import LinesExtend
 from pdf2docx.text.TextBlock import TextBlock
 from server.task_executor import s3
 
+from utils.general_util import llm_image2text
+
 
 class BaseBlockModel(BaseModel):
     class Config:
@@ -97,6 +99,11 @@ class TextBlockModel(BaseBlockModel):
     def image_s3_link(self) -> Union[str, None]:
         return self._block.image_s3_link
 
+    @computed_field
+    @property
+    def image_ocr_result(self) -> Union[str, None]:
+        return self._block.image_ocr_result
+
 
 class TextBlockExtend(RelationElement, BlockExtend):
     def __init__(self, text_block: TextBlock, metadata: Optional[dict] = None):
@@ -110,6 +117,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         self.prev_continuous_paragraph: Optional[TextBlockExtend] = None
         self.metadata = metadata
         self.image_s3_link = None
+        self.image_ocr_result = None
         self.page_num = 0  # -1:无页码
         self.is_table_name = 0
         self.is_figure_name = 0
@@ -139,12 +147,20 @@ class TextBlockExtend(RelationElement, BlockExtend):
     def get_is_catalog(self):
         return any([line.is_catalog for line in self.lines])
 
-    def get_image_s3_link(self):
+    def image_handler(self):
         if self.is_image_block:
-            image_span = self.lines.image_spans[0]
-            bytes = image_span.image_span.image
-            file_key = s3.upload_file(stream=bytes)
-            self.image_s3_link = s3.get_file_url(file_key)
+            self.get_image_s3_link()
+            self.get_image_ocr_result()
+
+    def get_image_s3_link(self):
+        image_span = self.lines.image_spans[0]
+        bytes = image_span.image_span.image
+        file_key = s3.upload_file(stream=bytes)
+        self.image_s3_link = s3.get_file_url(file_key)
+
+    def get_image_ocr_result(self):
+        if self.image_s3_link:
+            self.image_ocr_result = llm_image2text(self.image_s3_link)
 
     def add_ref_table(self, ref_table):
         self.ref_tables.append(ref_table)

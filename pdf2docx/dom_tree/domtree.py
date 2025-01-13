@@ -262,7 +262,7 @@ class DomTree:
             texts.extend(self._get_text_block(child))
         return texts
 
-    def add_image_s3_link(self):
+    def add_image_data(self):
         # 构建树结构件前，先把图片的s3链接附上
         tasks_to_process = []
         for (element, page, debug_page) in self.elements:
@@ -270,7 +270,7 @@ class DomTree:
                 tasks_to_process.append(element)
         # 多进程获取S3链接
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-            executor.map(lambda text_block_extend: text_block_extend.get_image_s3_link(), tasks_to_process)
+            executor.map(lambda text_block_extend: text_block_extend.image_handler(), tasks_to_process)
 
     def parse(self, **settings):
 
@@ -280,7 +280,7 @@ class DomTree:
         searched_block = set()
 
         # 添加图片s3链接
-        self.add_image_s3_link()
+        self.add_image_data()
 
         # 遍历解析
         for (element, page, debug_page) in self.elements:

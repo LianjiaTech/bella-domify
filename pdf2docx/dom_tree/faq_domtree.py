@@ -39,7 +39,7 @@ class FAQ_LLM_DomTree(DomTree):
             # 提交每个接口调用任务到线程池，并得到一个Future对象列表
             vote_res = list(executor.map(partial(self._is_faq, user=user_context.get()), sample_result))
             # 选择票数最多的结果
-            is_faq_doc = vote_res.count(False) <= 2
+            is_faq_doc = len(vote_res) >= 6 and vote_res.count(False) <= 2  # 判断非FAQ的段落如果小于等于2个，且占比小于30%则可以认定为FAQ文章
             print(f"\n【是否按FAQ文档解析】{is_faq_doc}\n")
             return is_faq_doc
 
@@ -174,7 +174,8 @@ class FAQ_LLM_DomTree(DomTree):
         for page_num in piece_list:
             page = self._fitz_doc.load_page(page_num)  # 加载页面
             text = page.get_text()  # 提取文字
-            sample_result.append(text)
+            if text.replace('\n', '').replace(' ', '').replace('\t', ''):
+                sample_result.append(text)
         return sample_result
 
     def extract_text_block(self) -> list[list[str]]:
