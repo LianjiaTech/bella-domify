@@ -14,6 +14,7 @@ from pdf2docx.extend.page.PagesExtend import PagesExtend
 from pdf2docx.extend.table.TableBlockExtend import TableBlockExtend, TableBlockModel
 from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend, TextBlockModel
 from pdf2docx.text.TextSpan import TextSpan
+from server.context import user_context
 
 
 def judge_title_by_child(parent_node):
@@ -269,8 +270,10 @@ class DomTree:
             if element.is_image_block:
                 tasks_to_process.append(element)
         # 多进程获取S3链接
+        user = user_context.get()
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-            executor.map(lambda text_block_extend: text_block_extend.image_handler(), tasks_to_process)
+            executor.map(lambda text_block_extend: text_block_extend.image_handler(user),
+                         tasks_to_process)
 
     def parse(self, **settings):
 

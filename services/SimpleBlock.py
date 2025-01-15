@@ -31,12 +31,12 @@ class SimpleBlock:
             "page_num": self.page_num,
         }
 
-    def generate_s3_url(self):
+    def generate_s3_url(self, user):
         if self.type == IMAGE and self.image_bytes:
             file_key = s3.upload_file(stream=self.image_bytes)
             image_s3_url = s3.get_file_url(file_key)
             self.text = image_s3_url
-            self.ocr_text = llm_image2text(self.text)
+            self.ocr_text = llm_image2text(self.text, user)
         return True
 
     def mark_holder(self, header: bool = True):

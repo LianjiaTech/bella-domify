@@ -147,10 +147,10 @@ class TextBlockExtend(RelationElement, BlockExtend):
     def get_is_catalog(self):
         return any([line.is_catalog for line in self.lines])
 
-    def image_handler(self):
+    def image_handler(self, user):
         if self.is_image_block:
             self.get_image_s3_link()
-            self.get_image_ocr_result()
+            self.get_image_ocr_result(user)
 
     def get_image_s3_link(self):
         image_span = self.lines.image_spans[0]
@@ -158,9 +158,9 @@ class TextBlockExtend(RelationElement, BlockExtend):
         file_key = s3.upload_file(stream=bytes)
         self.image_s3_link = s3.get_file_url(file_key)
 
-    def get_image_ocr_result(self):
+    def get_image_ocr_result(self, user):
         if self.image_s3_link:
-            self.image_ocr_result = llm_image2text(self.image_s3_link)
+            self.image_ocr_result = llm_image2text(self.image_s3_link, user)
 
     def add_ref_table(self, ref_table):
         self.ref_tables.append(ref_table)
