@@ -321,7 +321,8 @@ if __name__ == "__main__":
     file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
     stream = chubao.read_file(file_path)
 
-    parse_result_layout_and_domtree("file-2501151703350022000005-277459125", "demo.pptx", [])
+    print(parse_result_layout_and_domtree("file-2501151703350022000005-277459125", "demo.pptx", []))
+    print(parse_result_layout_and_domtree("file-2501151734460022000006-277459125", "《贝壳入职管理制度》5页.pdf", []))
     # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
 
     # file_type = get_file_type(file_path)
