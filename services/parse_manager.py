@@ -155,7 +155,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
     except Exception as e:
         logging.info(f"Exception layout_parse_and_callback: {e}")
         return ""
-    return layout_result_text
+    return layout_result_text, layout_result_json
 
 
 # domtree解析
@@ -209,7 +209,16 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     p2.start()
     p1.join()
     p2.join()
-    parse_result = dict(return_dict)
+
+    # todo 临时保留冗余字段
+    # parse_result = dict(return_dict)
+
+    parse_result_raw = dict(return_dict)
+    parse_result = {
+        "layout_parse": parse_result_raw["layout_parse"][0],
+        "layout_parse_json": parse_result_raw["layout_parse"][1],
+        "domtree_parse": parse_result_raw["domtree_parse"]
+    }
 
     # 解析结果存S3
     s3_service.upload_s3_parse_result(file_id, parse_result)
@@ -305,12 +314,14 @@ if __name__ == "__main__":
     os.environ["OPENAI_API_KEY"] = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
     os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
 
+    user_context.set("1000000023008327")
+
     # file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
     # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳离职管理制度V3.0》5页.pdf"
     file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
     stream = chubao.read_file(file_path)
 
-    parse_result_layout_and_domtree("评测文件8-交易知识15-rag-测试.pdf", stream, [])
+    parse_result_layout_and_domtree("file-2501151703350022000005-277459125", "demo.pptx", [])
     # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
 
     # file_type = get_file_type(file_path)
