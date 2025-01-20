@@ -13,7 +13,7 @@ import logging
 
 from server.task_executor import s3
 from services.SimpleBlock import SimpleBlock
-from services.constants import TEXT
+from services.constants import IMAGE
 from services.layout_parse_utils import get_s3_links_for_simple_block_batch
 from utils.general_util import llm_image2text
 from server.context import user_context
@@ -30,7 +30,7 @@ def layout_parse(file):
         ocr_text = ""
 
     result_text = ocr_text
-    result_json = get_s3_links_for_simple_block_batch([SimpleBlock(type=TEXT, text=result_text)])
+    result_json = get_s3_links_for_simple_block_batch([SimpleBlock(type=IMAGE, ocr_text=ocr_text)])
     return result_json, result_text
 
 
