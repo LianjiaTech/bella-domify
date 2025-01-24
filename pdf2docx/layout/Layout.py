@@ -135,20 +135,20 @@ class Layout:
 
 
     def parse(self, **settings):
-        '''Parse layout.
+        '''解析布局
 
-        Args:
-            settings (dict): Layout parsing parameters.
+        参数:
+            settings (dict): 布局解析参数
         '''
         if not self.blocks: return
 
-        # parse tables
+        # 解析表格
         self._parse_table(**settings)
 
-        # parse paragraphs
+        # 解析段落
         self._parse_paragraph(**settings)
 
-        # parse sub-layout, i.e. cell layouts under table block
+        # 解析子布局，即表格块下的单元格布局
         for block in filter(lambda e: e.is_table_block, self.blocks):
             block.parse(**settings)
 

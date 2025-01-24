@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from typing import Union, Optional
 from typing import List
+from typing import Union, Optional
 
 from pydantic import BaseModel, computed_field
 
@@ -9,9 +9,7 @@ from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.common.RelationConstruct import RelationElement
 from pdf2docx.extend.text.LinesExtend import LinesExtend
 from pdf2docx.text.TextBlock import TextBlock
-from server.task_executor import s3
-
-from utils.general_util import llm_image2text
+from utils.general_util import get_pic_url_and_ocr
 
 
 class BaseBlockModel(BaseModel):
@@ -21,40 +19,7 @@ class BaseBlockModel(BaseModel):
     @computed_field
     @property
     def layout_type(self) -> str:
-        block_type_mapping = {
-            # "Catalog": "text",
-            # "Title": "text",
-            # "List": "text",
-            "Formula": "text",
-            "Code": "text",
-            # "Text": "text",
-
-            # "Figure": "image",
-            "FigureName": "text",
-            "FigureNote": "text",
-
-            # "Table": "table",
-            "TableName": "text",
-            "TableNote": "text",
-        }
-        # 所属部分 优先级最高
-        if self._block.is_catalog:
-            return "Catalog"
-        # 元素类型
-        elif self.block_type == "image":
-            return "Figure"
-        elif self._block.is_table_block:
-            return "Table"
-        elif self._block.is_table_name:
-            return "TableName"
-        elif self._block.is_figure_name:
-            return "FigureName"
-        elif self._block.is_title:
-            return "Title"
-        # elif self._block.block.list_type():
-        #     return "List"
-        else:
-            return "Text"
+        return self._block.layout_type
 
     @computed_field
     @property
@@ -143,24 +108,39 @@ class TextBlockExtend(RelationElement, BlockExtend):
     @property
     def is_table_block(self):
         return False
+
+    @computed_field
+    @property
+    def layout_type(self) -> str:
+        # 所属部分 优先级最高
+        if self.is_catalog:
+            return "Catalog"
+        # 元素类型
+        elif self.is_image_block:
+            return "Figure"
+        elif self.is_table_block:
+            return "Table"
+        elif self.is_table_name:
+            return "TableName"
+        elif self.is_figure_name:
+            return "FigureName"
+        elif self.is_title:
+            return "Title"
+        # elif self.block.list_type():
+        #     return "List"
+        else:
+            return "Text"
     
     def get_is_catalog(self):
         return any([line.is_catalog for line in self.lines])
 
     def image_handler(self, user):
         if self.is_image_block:
-            self.get_image_s3_link()
-            self.get_image_ocr_result(user)
-
-    def get_image_s3_link(self):
-        image_span = self.lines.image_spans[0]
-        bytes = image_span.image_span.image
-        file_key = s3.upload_file(stream=bytes)
-        self.image_s3_link = s3.get_file_url(file_key)
-
-    def get_image_ocr_result(self, user):
-        if self.image_s3_link:
-            self.image_ocr_result = llm_image2text(self.image_s3_link, user)
+            image_span = self.lines.image_spans[0]
+            image_bytes = image_span.image_span.image
+            image_s3_url, ocr_text = get_pic_url_and_ocr(image_bytes, user)
+            self.image_s3_link = image_s3_url
+            self.image_ocr_result = ocr_text
 
     def add_ref_table(self, ref_table):
         self.ref_tables.append(ref_table)

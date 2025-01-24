@@ -11,20 +11,16 @@
 
 import logging
 
-from server.task_executor import s3
 from services.SimpleBlock import SimpleBlock
 from services.constants import IMAGE
 from services.layout_parse_utils import get_s3_links_for_simple_block_batch
-from utils.general_util import llm_image2text
+from utils.general_util import get_pic_url_and_ocr
 from server.context import user_context
 
 
 def layout_parse(file):
     try:
-        file_key = s3.upload_file(stream=file)
-        image_s3_url = s3.get_file_url(file_key)
-        ocr_text = llm_image2text(image_s3_url, user_context.get())
-
+        image_s3_url, ocr_text = get_pic_url_and_ocr(file, user_context.get())
     except Exception as e:
         logging.error(f"pic_parser Exception occurred: {e}")
         ocr_text = ""

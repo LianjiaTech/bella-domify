@@ -413,12 +413,13 @@ class TableStructure:
             merged_cells_cols.append(col_structure)
 
         # count merged cells in row and column directions
+        # 计算单元格横跨和列跨的格子个数
         for i in range(self.num_rows):
             for j in range(self.num_cols):
                 cell = self.cells[i][j]
                 n_col = TableStructure._count_merged_cells(merged_cells_rows[i][j:])
                 n_row = TableStructure._count_merged_cells(merged_cells_cols[j][i:])                
-                cell.merged_cells = (n_row, n_col)        
+                cell.merged_cells = (n_row, n_col)
 
         # check whether merged region is valid
         for i in range(self.num_rows):
@@ -556,7 +557,9 @@ class TableStructure:
 
     @staticmethod
     def _count_merged_cells(merging_status:list):
-        '''Count merged cells, 
+        '''
+        返回连续合并的单元格数量
+        Count merged cells,
         e.g. ``[1,0,0,1]`` -> the second and third cells are merged into the first one.
         
         Args:

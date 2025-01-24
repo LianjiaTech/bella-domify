@@ -71,6 +71,11 @@ class TableBlockExtend(RelationElement, BlockExtend):
     def is_table_block(self):
         return True
 
+    @computed_field
+    @property
+    def layout_type(self) -> str:
+        return "Table"
+
     def merge(self, table_extend: TableBlockExtend):
         '''Merge two table blocks.'''
         # 记录：发现这里只merge了rows，没有merge text，可能影响输出debug文件

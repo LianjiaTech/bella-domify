@@ -8,9 +8,8 @@
 #    @Description   : 
 #
 # ===============================================================
-from server.task_executor import s3
 from services.constants import IMAGE
-from utils.general_util import llm_image2text
+from utils.general_util import get_pic_url_and_ocr
 
 
 class SimpleBlock:
@@ -33,10 +32,9 @@ class SimpleBlock:
 
     def generate_s3_url(self, user):
         if self.type == IMAGE and self.image_bytes:
-            file_key = s3.upload_file(stream=self.image_bytes)
-            image_s3_url = s3.get_file_url(file_key)
+            image_s3_url, ocr_text = get_pic_url_and_ocr(self.image_bytes, user)
             self.text = image_s3_url
-            self.ocr_text = llm_image2text(self.text, user)
+            self.ocr_text = ocr_text
         return True
 
     def mark_holder(self, header: bool = True):

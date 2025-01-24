@@ -32,6 +32,9 @@ def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> s
 
     # gen uuid for file-key
     file_key = uuid.uuid4().hex + filename
+    # 保存图片至本地
+    # with open(f"/Users/lucio/code/others/工作内容/工作内容2025/0115图片信息提取评测/{file_key}.png", 'wb') as file:
+    #     file.write(stream)
 
     # 上传文件至s3
     s3.put_object(Bucket=bucket_name,

@@ -11,6 +11,7 @@ from pdf2docx.common.share import rgb_component_from_name
 from pdf2docx.extend.common.BlockExtend import BlockExtend
 from pdf2docx.extend.page.PageExtend import PageExtend
 from pdf2docx.extend.page.PagesExtend import PagesExtend
+from pdf2docx.extend.table import RowsExtend
 from pdf2docx.extend.table.TableBlockExtend import TableBlockExtend, TableBlockModel
 from pdf2docx.extend.text.TextBlockExtend import TextBlockExtend, TextBlockModel
 from pdf2docx.text.TextSpan import TextSpan
@@ -70,16 +71,13 @@ class Node:
         self.debug_page = debug_page
         self.order_num_str = None  # 当前元素的有序列表序号 1.1, 1.2.1
 
-
     def identify_catalog_by_mulu(self):
         if "目录" in self.element.text.replace(' ', ''):
             self.element.is_catalog = True
 
-
     def identify_catalog_by_father(self, father_node):
         if father_node.element and father_node.element.is_catalog:
             self.element.is_catalog = True
-
 
     def is_child_of(self, node):
         """Check if self is a child of node"""
@@ -221,6 +219,7 @@ class DomTree:
     def __init__(self, pages: PagesExtend, debug_file=None, fitz_doc=None, *, priority=0):
         self.root = Node(None, None, None, is_root=True)
         self.elements = []
+        self.markdown_res = ""
         self.node_dict = {}  # element->node
         self.debug_file = debug_file
         self._fitz_doc = fitz_doc
@@ -377,6 +376,7 @@ class DomTree:
                     break
                 else:
                     stack_path.pop()
+        self.generate_markdown()
 
         print("\n【文件结构树】\n")
         self.print_tree()
@@ -405,3 +405,95 @@ class DomTree:
 
         for i, child in enumerate(node.child, start=1):
             self._print_tree(child, level + 1, cur_order_str, i)
+
+    def generate_markdown(self):
+        self._generate_markdown(self.root, 0, "", 1)
+
+    def _generate_markdown(self, node, level, parent_order_str, order):
+        cur_order_str = parent_order_str
+        if node.element:
+            cur_order_str = f"{parent_order_str}.{order}" if parent_order_str else f"{order}"
+            node.order_num_str = cur_order_str
+
+            # 根据不同的layout_type生成Markdown
+            if node.element.layout_type == "Title":
+                if level <= 6:  # Title只能识别6级，大于6级的按普通文本处理
+                    self.markdown_res += f"{'#' * level} {node.element.text}\n\n"
+                else:
+                    self.markdown_res += f"{node.element.text}\n\n"
+
+            elif node.element.layout_type == "Text":
+                self.markdown_res += f"{node.element.text}\n\n"
+            elif node.element.layout_type == "List":
+                self.markdown_res += f"{order}. {node.element.text}\n"
+            elif node.element.layout_type == "Figure":
+                self.markdown_res += f"![Figure]({node.element.image_s3_link})\n\n"
+                md_ocr_res = convert_to_markdown_quote(node.element.image_ocr_result)
+                self.markdown_res += f"{md_ocr_res}\n\n"
+            elif node.element.layout_type == "Table":
+                table_md = list_to_html_table(node.element._rows)
+                if node.element.next_continuous_table:
+                    continuous_table_md = get_continuous_table_markdown(node.element.next_continuous_table)
+                    table_md += continuous_table_md
+                self.markdown_res += f"{table_md}\n\n"
+
+            # 其他layout_type类型可以继续添加
+
+        for i, child in enumerate(node.child, start=1):
+            self._generate_markdown(child, level + 1, cur_order_str, i)
+
+
+def convert_to_markdown_quote(text):
+    lines = text.split('\n')
+    quoted_lines = ['> ' + line for line in lines]
+    return '\n'.join(quoted_lines)
+
+
+def table_trans_list2markdown(nested_list, table_head=True):
+    """
+    将list类型的table表示，转为markdown格式。
+    """
+    # 表列数
+    col_count = len(nested_list[0])
+    # 假设第一个子列表是表头
+    if table_head:
+        header = nested_list[0]
+        rows = nested_list[1:]
+        # 创建表头行
+        markdown = '| ' + ' | '.join(header) + ' |\n'
+        # 创建分隔行
+        markdown += '| ' + ' | '.join(['---'] * col_count) + ' |\n'
+    else:
+        rows = nested_list
+        markdown = ''
+
+    # 创建数据行
+    for row in rows:
+        # 去除每个单元格中的换行符
+        sanitized_row = [str(item).replace('\n', ' ') if item is not None else '' for item in row]
+        markdown += '| ' + ' | '.join(sanitized_row) + ' |\n'
+
+    return markdown
+
+
+def list_to_html_table(rows: RowsExtend):
+    html = "<html><body><table>"
+
+    for row in rows:
+        html += "<tr>"
+        for cell in row._cells:
+            rowspan = cell.end_row - cell.start_row + 1
+            colspan = cell.end_col - cell.start_col + 1
+            html += f"<td rowspan='{rowspan}' colspan='{colspan}'>{cell.text}</td>"
+        html += "</tr>"
+    html += "</table></body></html>"
+    return html
+
+
+def get_continuous_table_markdown(element: TableBlockExtend):
+    markdown_content = list_to_html_table(element._rows)
+    if element.next_continuous_table:
+        continuous_table_md = get_continuous_table_markdown(element.next_continuous_table)
+        markdown_content += continuous_table_md
+
+    return markdown_content
