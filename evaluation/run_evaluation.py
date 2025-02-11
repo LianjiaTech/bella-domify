@@ -853,6 +853,7 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
     for label_node in label_nodes:
         if label_node["order_num"] in mapping:
             print(label_node["order_num"])
+            print("label有重复的order_num")
             raise
         mapping[label_node["order_num"]] = []
 
@@ -1522,6 +1523,7 @@ def evaluation(parser_name):
         struct_mapping.update(right_mapping)
 
     total_confusion_matrix = sum(confusion_matrix_list)
+    print("total_confusion_matrix.to_string()")
     print(total_confusion_matrix.to_string())
 
     # logger.info(f"总节点数：{len(edit_dist_allfile)}")
