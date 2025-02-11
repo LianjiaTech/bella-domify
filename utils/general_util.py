@@ -81,7 +81,7 @@ def llm_image2text(image_url, user, model=MODEL_NAME, confirm_result=True):
         return ""
 
     PROMPT = """
-    请从图片中提取出表达的信息，注意只提取信息不做二次加工，不做描述。
+    请从图片中提取出表达的信息，注意只提取信息，禁止修改已明确的表述，禁止二次加工，不做描述，以免曲解了表达原意
     
     如果图片中有表格，可以以markdown格式的表格表达；
     如果图片中有流程图，可以用mermaid方式表达；

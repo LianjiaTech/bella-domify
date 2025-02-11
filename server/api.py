@@ -35,7 +35,7 @@ async def health_readiness():
     return {"status": "UP"}
 
 
-# 上传文件接口
+# 上传pdf文件接口，结构解析
 @router.post("/pdf/parse/test")
 async def create_upload_file(file: UploadFile = File(...), user: str = Form(default=None)):
     user_context.set(user or DEFAULT_USER)
@@ -64,7 +64,7 @@ async def document_parse(file_name: str = Form(...), file_url_object: UploadFile
     return parse_manager.parse_result_layout_and_domtree_sync(file_name, contents)
 
 
-# 文件解析-获取结构信息和字符串信息 by file_id
+# 文件解析-通过file_id获取解析结果（结构信息和字符串信息）
 @router.get("/document/parse/{file_id}")
 async def document_parse(file_id: str = Path(...)):
     # 读取file字节流
@@ -84,6 +84,7 @@ async def async_parse_callback(taskNo: str = Path(..., title="The task number"),
     print(taskNo, task)
 
 
+# 文件解析 - 监听解析任务，异步解析
 @router.on_event("startup")
 async def startup_event():
     print("Starting background task...")
