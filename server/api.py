@@ -41,10 +41,10 @@ async def create_upload_file(file: UploadFile = File(...), user: str = Form(defa
     user_context.set(user or DEFAULT_USER)
     # 读取file字节流
     contents = await file.read()
-    return pdf_parser.pdf_parse(contents)
+    return pdf_parser.pdf_parse(contents)[0]
 
 
-# 文件解析-获取版面信息
+# 获取版面信息
 @router.post("/document/layout/parse")
 async def create_upload_file(file_name: str = Form(...), file_url_object: UploadFile = File(...), 
                              user: str = Form(default=None)):
@@ -54,7 +54,7 @@ async def create_upload_file(file_name: str = Form(...), file_url_object: Upload
     return parse_manager.layout_parse(file_name, contents)[0]   # todo luxu 临时保证老接口结构不变，后续修改
 
 
-# 文件解析-获取结构信息和字符串信息(直接串行解析)
+# 获取结构信息和字符串信息(直接串行解析)
 @router.post("/document/parse")
 async def document_parse(file_name: str = Form(...), file_url_object: UploadFile = File(...),
                          user: str = Form(default=None)):
@@ -64,11 +64,10 @@ async def document_parse(file_name: str = Form(...), file_url_object: UploadFile
     return parse_manager.parse_result_layout_and_domtree_sync(file_name, contents)
 
 
-# 文件解析-通过file_id获取解析结果（结构信息和字符串信息）
+# 获取S3缓存结果: 通过file_id获取解析结果（结构信息和字符串信息）
 @router.get("/document/parse/{file_id}")
-async def document_parse(file_id: str = Path(...)):
-    # 读取file字节流
-    return parse_manager.api_get_result_service(file_id)
+async def document_parse(file_id: str = Path(...), parse_type: str = Form(default="all")):
+    return parse_manager.api_get_result_service(file_id, parse_type)
 
 
 @router.post("/async/pdf/parse")

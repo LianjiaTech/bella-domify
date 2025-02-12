@@ -18,4 +18,7 @@ def pdf_parse(contents: bytes = None):
         remove_watermark=True,
         parse_stream_table=False
     )
-    return DomTreeModel(dom_tree=dom_tree)
+    # 转Markdown结果
+    markdown_res = dom_tree.markdown_res
+
+    return DomTreeModel(dom_tree=dom_tree), markdown_res
