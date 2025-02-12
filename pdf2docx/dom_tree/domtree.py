@@ -421,11 +421,6 @@ class DomTree:
                     self.markdown_res += f"{'#' * level} {node.element.text}\n\n"
                 else:
                     self.markdown_res += f"{node.element.text}\n\n"
-
-            elif node.element.layout_type == "Text":
-                self.markdown_res += f"{node.element.text}\n\n"
-            elif node.element.layout_type == "List":
-                self.markdown_res += f"{order}. {node.element.text}\n"
             elif node.element.layout_type == "Figure":
                 self.markdown_res += f"![Figure]({node.element.image_s3_link})\n\n"
                 md_ocr_res = convert_to_markdown_quote(node.element.image_ocr_result)
@@ -436,8 +431,12 @@ class DomTree:
                     continuous_table_md = get_continuous_table_markdown(node.element.next_continuous_table)
                     table_md += continuous_table_md
                 self.markdown_res += f"{table_md}\n\n"
+            elif node.element.layout_type in ["Text", "List"]:
+                # 这里将Text，List单独列出来增加可读性
+                self.markdown_res += f"{node.element.text}\n\n"
 
-            # 其他layout_type类型可以继续添加
+            else:  # Formula、Catalog、Code等元素的处理
+                self.markdown_res += f"{node.element.text}\n\n"
 
         for i, child in enumerate(node.child, start=1):
             self._generate_markdown(child, level + 1, cur_order_str, i)
@@ -449,45 +448,18 @@ def convert_to_markdown_quote(text):
     return '\n'.join(quoted_lines)
 
 
-def table_trans_list2markdown(nested_list, table_head=True):
-    """
-    将list类型的table表示，转为markdown格式。
-    """
-    # 表列数
-    col_count = len(nested_list[0])
-    # 假设第一个子列表是表头
-    if table_head:
-        header = nested_list[0]
-        rows = nested_list[1:]
-        # 创建表头行
-        markdown = '| ' + ' | '.join(header) + ' |\n'
-        # 创建分隔行
-        markdown += '| ' + ' | '.join(['---'] * col_count) + ' |\n'
-    else:
-        rows = nested_list
-        markdown = ''
-
-    # 创建数据行
-    for row in rows:
-        # 去除每个单元格中的换行符
-        sanitized_row = [str(item).replace('\n', ' ') if item is not None else '' for item in row]
-        markdown += '| ' + ' | '.join(sanitized_row) + ' |\n'
-
-    return markdown
-
-
 def list_to_html_table(rows: RowsExtend):
-    html = "<html><body><table>"
+    html_text = "<table>"
 
     for row in rows:
-        html += "<tr>"
+        html_text += "<tr>"
         for cell in row._cells:
             rowspan = cell.end_row - cell.start_row + 1
             colspan = cell.end_col - cell.start_col + 1
-            html += f"<td rowspan='{rowspan}' colspan='{colspan}'>{cell.text}</td>"
-        html += "</tr>"
-    html += "</table></body></html>"
-    return html
+            html_text += f"<td rowspan='{rowspan}' colspan='{colspan}'>{cell.text}</td>"
+        html_text += "</tr>"
+    html_text += "</table>"
+    return html_text
 
 
 def get_continuous_table_markdown(element: TableBlockExtend):
