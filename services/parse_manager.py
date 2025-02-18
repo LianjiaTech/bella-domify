@@ -109,6 +109,13 @@ def domtree_parse(file_name: str = None, file: bytes = None):
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'domtree_parse解析开始 文件名：{file_name}')
+
+    # 如果是doc、docx文件，转pdf处理
+    if file_extension in ['doc', 'docx']:
+        docx_stream = io.BytesIO(file)
+        file = convert_docx_to_pdf_in_memory(docx_stream)
+        file_extension = 'pdf'
+
     # 根据后缀判断文件类型
     if file_extension == 'pdf':
         try:
@@ -121,6 +128,15 @@ def domtree_parse(file_name: str = None, file: bytes = None):
             logging.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
             return False, {}, ""
             # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
+    elif file_extension == 'csv':
+        markdown_res = csv_parser.markdown_parse(file)
+        return True, {}, markdown_res
+    elif file_extension == 'xlsx':
+        markdown_res = xlsx_parser.markdown_parse(file)
+        return True, {}, markdown_res
+    elif file_extension == 'xls':
+        markdown_res = xls_parser.markdown_parse(file)
+        return True, {}, markdown_res
 
     else:
         return True, {}, ""
@@ -194,17 +210,27 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
 
 
 # 从FileAPI获取文件
-def retrieve_file(file_id):
+def file_api_retrieve_file(file_id):
     url = f"{FILE_API_URL}/v1/files/{file_id}/content"
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
     response = requests.get(url, headers=headers)
     return response.content
 
 
+# 从FileAPI获取文件名称
+def file_api_get_file_name(file_id):
+    url = f"{FILE_API_URL}/v1/files/{file_id}"
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+    response = requests.get(url, headers=headers)
+    response_data = json.loads(response.content)
+    file_name = response_data["filename"]
+    return file_name
+
+
 def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
 
     # 读取文件流内容
-    contents = retrieve_file(file_id)
+    contents = file_api_retrieve_file(file_id)
 
     # # 单进程
     # layout_parse_result = layout_parse(file_name, contents)
@@ -253,7 +279,7 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     return parse_result
 
 
-# 串行接口
+# 同步解析接口(file_name)
 def parse_result_layout_and_domtree_sync(file_name, contents):
     layout_result_json, layout_result_text = layout_parse(file_name, contents)
     parse_succeed, domtree_parse_result, markdown_res = domtree_parse(file_name, contents)
@@ -267,6 +293,39 @@ def parse_result_layout_and_domtree_sync(file_name, contents):
         "markdown_result": markdown_res,
     }
     return parse_result
+
+
+# 同步解析接口(file_id)
+def parse_layout_and_domtree_sync_by_file_id(file_id, parse_type=""):
+    parse_type_res = parse_type + "_result"
+    # 定义解析函数映射
+    parse_functions = {
+        "layout_result": lambda file_name, contents: layout_parse(file_name, contents)[0],  # 只返回layout_result_json
+        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents)[1],  # 只返回domtree_parse_result
+        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents)[2],  # 只返回markdown_res
+        "all_result": lambda file_name, contents: {
+            "layout_result": layout_parse(file_name, contents)[0],
+            "domtree_result": domtree_parse(file_name, contents)[1],
+            "markdown_result": domtree_parse(file_name, contents)[2],
+        }
+    }
+
+    # 检查parse_type是否有效
+    if parse_type_res not in parse_functions:
+        raise HTTPException(
+            status_code=404,
+            detail="parse_type传参异常，枚举值范围[domtree, layout, markdown, all]"
+        )
+
+    # 获取文件内容和文件名
+    contents = file_api_retrieve_file(file_id)
+    file_name = file_api_get_file_name(file_id)
+
+    # 根据parse_type_res选择解析函数并执行
+    parse_result = parse_functions[parse_type_res](file_name, contents)
+    print(parse_result)
+    # 返回结果
+    return parse_result if parse_type_res == "all_result" else {parse_type_res: parse_result}
 
 
 def callback_after_parse(file_id, status_code, callbacks):
@@ -360,3 +419,6 @@ if __name__ == "__main__":
     # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
 
     # file_type = get_file_type(file_path)
+
+    print(file_api_get_file_name("file-2502180943250024000009-277459125"))
+

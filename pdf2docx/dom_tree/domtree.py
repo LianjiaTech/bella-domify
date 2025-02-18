@@ -409,19 +409,15 @@ class DomTree:
     def generate_markdown(self):
         self._generate_markdown(self.root, 0, "", 1)
 
-    def _generate_markdown(self, node, level, parent_order_str, order):
+    def _generate_markdown(self, node, level, parent_order_str, order, low_than_text=0):
         cur_order_str = parent_order_str
+        child_low_than_text = 0
         if node.element:
             cur_order_str = f"{parent_order_str}.{order}" if parent_order_str else f"{order}"
             node.order_num_str = cur_order_str
 
             # 根据不同的layout_type生成Markdown
-            if node.element.layout_type == "Title":
-                if level <= 6:  # Title只能识别6级，大于6级的按普通文本处理
-                    self.markdown_res += f"{'#' * level} {node.element.text}\n\n"
-                else:
-                    self.markdown_res += f"{node.element.text}\n\n"
-            elif node.element.layout_type == "Figure":
+            if node.element.layout_type == "Figure":
                 self.markdown_res += f"![Figure]({node.element.image_s3_link})\n\n"
                 md_ocr_res = convert_to_markdown_quote(node.element.image_ocr_result)
                 self.markdown_res += f"{md_ocr_res}\n\n"
@@ -431,15 +427,25 @@ class DomTree:
                     continuous_table_md = get_continuous_table_markdown(node.element.next_continuous_table)
                     table_md += continuous_table_md
                 self.markdown_res += f"{table_md}\n\n"
-            elif node.element.layout_type in ["Text", "List"]:
-                # 这里将Text，List单独列出来增加可读性
-                self.markdown_res += f"{node.element.text}\n\n"
 
-            else:  # Formula、Catalog、Code等元素的处理
+            elif (level <= 6  # 标题必须小于等于6级
+                  and (node.element.layout_type in ["Title"]  # 认定为Title 或者 父节点非text的List
+                       or (node.element.layout_type in ["List"] and not low_than_text))):
+                # Title只能识别6级，大于6级的按普通文本处理
+                self.markdown_res += '#' * level + f" {node.element.text}\n\n"
+            elif node.element.layout_type in ["Title"]:
+                self.markdown_res += f"{node.element.text}\n\n"
+            elif node.element.layout_type in ["Text"]:
+                self.markdown_res += f"{node.element.text}\n\n"
+                child_low_than_text = low_than_text + 1  # Text节点的子节点标记
+            elif node.element.layout_type in ["List"]:
+                self.markdown_res += '\t' * (low_than_text - 1) + f"- {node.element.text}\n\n"
+            # Formula、Catalog、Code等元素的处理
+            else:
                 self.markdown_res += f"{node.element.text}\n\n"
 
         for i, child in enumerate(node.child, start=1):
-            self._generate_markdown(child, level + 1, cur_order_str, i)
+            self._generate_markdown(child, level + 1, cur_order_str, i, child_low_than_text)
 
 
 def convert_to_markdown_quote(text):

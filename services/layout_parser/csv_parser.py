@@ -41,6 +41,30 @@ def layout_parse(file):
     raise ValueError("异常：文件内容无法解码为支持的字符集")
 
 
+def markdown_parse(file):
+    # 尝试将二进制文件内容解码为文本
+    charsets = ['utf-8', 'gbk', 'utf-8-sig', 'latin1', 'iso-8859-1']
+    for charset in charsets:
+        try:
+            input_stream = BytesIO(file)
+            input_stream = StringIO(input_stream.read().decode(charset))
+            csv_reader = csv.reader(input_stream)
+
+            # 读取CSV内容并转换为Markdown表格
+            lines = []
+            for i, record in enumerate(csv_reader):
+                if i == 1:  # 在第二行添加分隔线
+                    lines.append("| " + " | ".join(["---"] * len(record)) + " |")
+                lines.append("| " + " | ".join(record) + " |")
+
+            # 将列表转换为字符串并返回
+            return "\n".join(lines)
+
+        except UnicodeDecodeError:
+            continue
+    raise ValueError("无法解码文件内容")
+
+
 if __name__ == "__main__":
 
     file_path = os.path.abspath(__file__).split("document_parse")[0] + "document_parse/test/samples/file_type_demo/"

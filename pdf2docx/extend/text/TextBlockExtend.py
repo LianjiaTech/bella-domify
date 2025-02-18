@@ -126,8 +126,8 @@ class TextBlockExtend(RelationElement, BlockExtend):
             return "FigureName"
         elif self.is_title:
             return "Title"
-        # elif self.block.list_type():
-        #     return "List"
+        elif self.block.list_type():
+            return "List"
         else:
             return "Text"
     

@@ -64,6 +64,14 @@ async def document_parse(file_name: str = Form(...), file_url_object: UploadFile
     return parse_manager.parse_result_layout_and_domtree_sync(file_name, contents)
 
 
+# 同步解析接口
+@router.post("/document/parse/sync")
+async def document_parse(file_id: str = Form(...), parse_type: str = Form(default="all"),
+                         user: str = Form(default=None)):
+    user_context.set(user or DEFAULT_USER)
+    return parse_manager.parse_layout_and_domtree_sync_by_file_id(file_id, parse_type)
+
+
 # 获取S3缓存结果: 通过file_id获取解析结果（结构信息和字符串信息）
 @router.get("/document/parse/{file_id}")
 async def document_parse(file_id: str = Path(...), parse_type: str = Form(default="all")):
