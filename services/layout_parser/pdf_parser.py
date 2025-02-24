@@ -27,7 +27,7 @@ def trans_block2text(block):
 
 def layout_parse(file):
     if not file:
-        return ""
+        return {}, ""
 
     page_list = []  # 所有页面list
     try:

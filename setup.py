@@ -8,7 +8,7 @@ from setuptools import find_packages, setup
 DESCRIPTION = 'Open source Python library converting pdf to docx.'
 EXCLUDE_FROM_PACKAGES = ["build", "dist", "test"]
 
-VERSION = "0.1.6.3"
+VERSION = "0.1.6.4"
 
 
 # 获取主版本号
@@ -114,5 +114,6 @@ if __name__ == "__main__":
     version = '0.1.6.1'  20241206   bug修复，获取字体等统计量时兼容image；
     version = '0.1.6.2'  20241209   依赖版本修改openpyxl==3.1.5；
     version = '0.1.6.3'  20250113   优化FAQ判断逻辑（添加空页情况兼容）；
+    version = '0.1.6.4'  20250220   添加图片信息提取功能，添加tomarkdown；
 
 """
