@@ -13,7 +13,7 @@ import json
 import logging
 
 from server.task_executor import s3
-from constants import ParseType
+from services.constants import ParseType
 
 PREFIX_PARSE_RESULT = "document_parse_result_"
 

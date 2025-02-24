@@ -28,7 +28,7 @@ from settings.ini_config import config
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
 
-from constants import ParseType
+from services.constants import ParseType
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -71,6 +71,12 @@ def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'layout_parse解析开始 文件名：{file_name}')
+
+    # # layout的缓存，待result_text下线后添加
+    # s3_result = s3_service.get_s3_parse_result(file_id, ParseType.LAYOUT.value)
+    # if s3_result:
+    #     return s3_result, result_text
+
     # 根据后缀判断文件类型
     if file_extension == 'pptx':
         result_json, result_text = pptx_parser.layout_parse(file)
@@ -104,6 +110,13 @@ def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
 
 
 def domtree_parse(file_name: str = None, file: bytes = None, file_id=""):
+
+    # 获取缓存
+    s3_result_domtree = s3_service.get_s3_parse_result(file_id, ParseType.DOMTREE.value)
+    s3_result_markdown = s3_service.get_s3_parse_result(file_id, ParseType.MARKDOWN.value)
+    if s3_result_domtree and s3_result_markdown:
+        logging.info(f'缓存获取成功 file_id：{file_id}')
+        return True, s3_result_domtree, s3_result_markdown
 
     # json转换
     def convert_to_json(obj):
