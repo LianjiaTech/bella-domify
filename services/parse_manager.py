@@ -28,6 +28,8 @@ from settings.ini_config import config
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
 
+from constants import ParseType
+
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
 # layout解析完毕
@@ -63,7 +65,7 @@ def validate_parameters(file_name, file):
         raise ValueError("异常：文件名没有包含后缀")
 
 
-def layout_parse(file_name: str = None, file: bytes = None):
+def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
     # 参数检验
     validate_parameters(file_name, file)
     # 获取文件后缀
@@ -93,10 +95,15 @@ def layout_parse(file_name: str = None, file: bytes = None):
     else:
         raise ValueError("异常：不支持的文件类型")
     logging.info(f'layout_parse解析完毕 文件名：{file_name}')
+
+    # 缓存结果
+    if file_id:
+        s3_service.upload_s3_parse_result(file_id, result_json, ParseType.LAYOUT.value)
+
     return result_json, result_text
 
 
-def domtree_parse(file_name: str = None, file: bytes = None):
+def domtree_parse(file_name: str = None, file: bytes = None, file_id=""):
 
     # json转换
     def convert_to_json(obj):
@@ -122,6 +129,11 @@ def domtree_parse(file_name: str = None, file: bytes = None):
             dom_tree_model, markdown_res = pdf_domtree_parser.pdf_parse(file)
             _, json_compatible_data = convert_to_json(dom_tree_model)
             logging.info(f'domtree_parse解析完毕 文件名：{file_name}')
+
+            if file_id:
+                s3_service.upload_s3_parse_result(file_id, json_compatible_data, ParseType.DOMTREE.value)
+                s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
+
             return True, json_compatible_data, markdown_res
             # return ParserResult(parser_data=json_compatible_data).to_json()
         except Exception as e:
@@ -130,12 +142,18 @@ def domtree_parse(file_name: str = None, file: bytes = None):
             # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
     elif file_extension == 'csv':
         markdown_res = csv_parser.markdown_parse(file)
+        if file_id:
+            s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
         return True, {}, markdown_res
     elif file_extension == 'xlsx':
         markdown_res = xlsx_parser.markdown_parse(file)
+        if file_id:
+            s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
         return True, {}, markdown_res
     elif file_extension == 'xls':
         markdown_res = xls_parser.markdown_parse(file)
+        if file_id:
+            s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
         return True, {}, markdown_res
 
     else:
@@ -153,7 +171,7 @@ def worker(func, args, return_dict, key, user):
 def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
     try:
         # 获取版面解析结果
-        layout_result_json, layout_result_text = layout_parse(file_name, contents)
+        layout_result_json, layout_result_text = layout_parse(file_name, contents, file_id)
         # 解析失败，直接回调
         if not layout_result_json:
             callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
@@ -183,7 +201,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
 def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
     try:
         # 获取domtree解析结果
-        parse_succeed, parse_result, markdown_res = domtree_parse(file_name, contents)
+        parse_succeed, parse_result, markdown_res = domtree_parse(file_name, contents, file_id)
         # 解析失败，直接回调
         if not parse_succeed:
             callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
@@ -300,13 +318,13 @@ def parse_layout_and_domtree_sync_by_file_id(file_id, parse_type=""):
     parse_type_res = parse_type + "_result"
     # 定义解析函数映射
     parse_functions = {
-        "layout_result": lambda file_name, contents: layout_parse(file_name, contents)[0],  # 只返回layout_result_json
-        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents)[1],  # 只返回domtree_parse_result
-        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents)[2],  # 只返回markdown_res
+        "layout_result": lambda file_name, contents: layout_parse(file_name, contents, file_id)[0],  # 只返回layout_result_json
+        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id)[1],  # 只返回domtree_parse_result
+        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id)[2],  # 只返回markdown_res
         "all_result": lambda file_name, contents: {
-            "layout_result": layout_parse(file_name, contents)[0],
-            "domtree_result": domtree_parse(file_name, contents)[1],
-            "markdown_result": domtree_parse(file_name, contents)[2],
+            "layout_result": layout_parse(file_name, contents, file_id)[0],
+            "domtree_result": domtree_parse(file_name, contents, file_id)[1],
+            "markdown_result": domtree_parse(file_name, contents, file_id)[2],
         }
     }
 
@@ -387,17 +405,17 @@ def api_get_result_service(file_id, parse_type=""):
     if not s3_result:  # 解析结果不存在
         raise HTTPException(status_code=404, detail="解析结果不存在")
 
-    if parse_type == "all":
+    if parse_type == ParseType.All.value:
         return s3_result
-    elif parse_type == "domtree_result":
-        parse_result = s3_result.get(parse_type, [])
-    elif parse_type == "layout_result":
-        parse_result = s3_result.get(parse_type, {})
-    elif parse_type == "markdown_result":
-        parse_result = s3_result.get(parse_type, "")
+    elif parse_type == ParseType.DOMTREE.value:
+        parse_result = s3_result.get(parse_type + "_result", [])
+    elif parse_type == ParseType.LAYOUT.value:
+        parse_result = s3_result.get(parse_type + "_result", {})
+    elif parse_type == ParseType.MARKDOWN.value:
+        parse_result = s3_result.get(parse_type + "_result", "")
     else:  # 异常逻辑
         raise HTTPException(status_code=404,
-                            detail="parse_type传参异常，枚举值范围[domtree_result, layout_result, markdown_result]")
+                            detail="parse_type传参异常，枚举值范围[domtree, layout, markdown, all]")
     return {parse_type: parse_result}
 
 

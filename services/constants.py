@@ -9,9 +9,18 @@
 #
 # ===============================================================
 
+from enum import Enum
+
 
 IMAGE = "image"
 TEXT = "text"
 TABLE = "table"
 
 OPENAI_API_KEY = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
+
+
+class ParseType(Enum):
+    All = "all"
+    LAYOUT = "layout"
+    DOMTREE = "domtree"
+    MARKDOWN = "markdown"
