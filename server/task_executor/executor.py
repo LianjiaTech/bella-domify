@@ -65,10 +65,10 @@ def listen_parse_task_layout_and_domtree():
 
             except json.JSONDecodeError:
                 logging.error("Failed to decode JSON message.")
+                consumer.commit(msg)
             except Exception as e:
                 logging.error(f"Exception occurred: {e}")
-                # # 提交偏移量，标记消息为已处理
-                # consumer.commit(msg)
+                consumer.commit(msg)
 
     except KeyboardInterrupt:
         pass
