@@ -125,12 +125,12 @@ class Pages(BaseCollection):
         metadata["catalog_title_list"].extend(catalog_title_list)
 
         # Title识别(根据文字内容)
-        parse_title(raw_pages, pages, metadata)
+        mark_title(raw_pages, pages, metadata)
 
         return metadata
 
 
-def parse_title(raw_pages, pages, metadata):
+def mark_title(raw_pages, pages, metadata):
     for i, page in enumerate(raw_pages):
         for line in page.blocks:
             text = line.text.strip().replace(' ', '')
