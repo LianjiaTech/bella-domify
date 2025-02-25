@@ -259,6 +259,7 @@ def file_api_get_file_name(file_id):
 
 
 def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
+    logging.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
 
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
@@ -306,6 +307,7 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
         status_code = DOCUMENT_PARSE_FINISH
 
     callback_after_parse(file_id, status_code, callbacks)
+    logging.info(f"parse_result_layout_and_domtree 完成解析 file_id:{file_id}")
 
     return parse_result
 
