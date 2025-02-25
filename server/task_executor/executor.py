@@ -58,10 +58,10 @@ def listen_parse_task_layout_and_domtree():
                 if "file_parse" in post_processors:
                     logging.info("Message consumed and offset committed.")
                     user_context.set(user)
+                    consumer.commit(msg)  # 先消费任务，不阻塞后续，再执行解析
                     parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
                 else:
                     logging.info("Message not consumed.")
-                consumer.commit(msg)
 
             except json.JSONDecodeError:
                 logging.error("Failed to decode JSON message.")
