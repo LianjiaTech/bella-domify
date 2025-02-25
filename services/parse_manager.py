@@ -109,7 +109,7 @@ def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
     return result_json, result_text
 
 
-def domtree_parse(file_name: str = None, file: bytes = None, file_id=""):
+def domtree_parse(file_name: str = None, file: bytes = None, file_id="", check_faq=True):
 
     # 获取缓存
     s3_result_domtree = s3_service.get_s3_parse_result(file_id, ParseType.DOMTREE.value)
@@ -139,7 +139,7 @@ def domtree_parse(file_name: str = None, file: bytes = None, file_id=""):
     # 根据后缀判断文件类型
     if file_extension == 'pdf':
         try:
-            dom_tree_model, markdown_res = pdf_domtree_parser.pdf_parse(file)
+            dom_tree_model, markdown_res = pdf_domtree_parser.pdf_parse(file, check_faq)
             _, json_compatible_data = convert_to_json(dom_tree_model)
             logging.info(f'domtree_parse解析完毕 文件名：{file_name}')
 
@@ -329,17 +329,17 @@ def parse_result_layout_and_domtree_sync(file_name, contents):
 
 
 # 同步解析接口(file_id)
-def parse_layout_and_domtree_sync_by_file_id(file_id, parse_type=""):
+def parse_layout_and_domtree_sync_by_file_id(file_id, parse_type="", check_faq=True):
     parse_type_res = parse_type + "_result"
     # 定义解析函数映射
     parse_functions = {
         "layout_result": lambda file_name, contents: layout_parse(file_name, contents, file_id)[0],  # 只返回layout_result_json
-        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id)[1],  # 只返回domtree_parse_result
-        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id)[2],  # 只返回markdown_res
+        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id, check_faq)[1],  # 只返回domtree_parse_result
+        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id, check_faq)[2],  # 只返回markdown_res
         "all_result": lambda file_name, contents: {
             "layout_result": layout_parse(file_name, contents, file_id)[0],
-            "domtree_result": domtree_parse(file_name, contents, file_id)[1],
-            "markdown_result": domtree_parse(file_name, contents, file_id)[2],
+            "domtree_result": domtree_parse(file_name, contents, file_id, check_faq)[1],
+            "markdown_result": domtree_parse(file_name, contents, file_id, check_faq)[2],
         }
     }
 

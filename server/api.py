@@ -67,9 +67,10 @@ async def document_parse(file_name: str = Form(...), file_url_object: UploadFile
 # 同步解析接口
 @router.post("/document/parse/sync")
 async def document_parse(file_id: str = Form(...), parse_type: str = Form(default="all"),
+                         check_faq: bool = Form(default=True),
                          user: str = Form(default=None)):
     user_context.set(user or DEFAULT_USER)
-    return parse_manager.parse_layout_and_domtree_sync_by_file_id(file_id, parse_type)
+    return parse_manager.parse_layout_and_domtree_sync_by_file_id(file_id, parse_type, check_faq)
 
 
 # 获取S3缓存结果: 通过file_id获取解析结果（结构信息和字符串信息）
