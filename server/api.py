@@ -4,7 +4,7 @@ from threading import Thread
 
 from fastapi import FastAPI, APIRouter
 from fastapi import File, UploadFile
-from fastapi import Form, Path, Body
+from fastapi import Form, Path, Body, Query
 
 from server.log.log_config import log_config
 from services import parse_manager
@@ -75,7 +75,7 @@ async def document_parse(file_id: str = Form(...), parse_type: str = Form(defaul
 
 # 获取S3缓存结果: 通过file_id获取解析结果（结构信息和字符串信息）
 @router.get("/document/parse/{file_id}")
-async def document_parse(file_id: str = Path(...), parse_type: str = Form(default="all")):
+async def document_parse(file_id: str = Path(...), parse_type: str = Query(default="all")):
     return parse_manager.api_get_result_service(file_id, parse_type)
 
 

@@ -12,6 +12,8 @@ import io
 import json
 import logging
 import multiprocessing
+import time
+from multiprocessing import Manager
 
 import requests
 from fastapi import HTTPException
@@ -21,14 +23,13 @@ import services.s3_service as s3_service
 from common.tool.chubaofs_tool import ChuBaoFSTool
 from server.context import user_context
 from services.constants import OPENAI_API_KEY
+from services.constants import ParseType
 from services.domtree_parser import pdf_parser as pdf_domtree_parser
 from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, \
     csv_parser, pic_parser
 from settings.ini_config import config
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
-
-from services.constants import ParseType
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -260,17 +261,13 @@ def file_api_get_file_name(file_id):
 
 def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     logging.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
+    start_time = time.time()
 
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
 
-    # # 单进程
-    # layout_parse_result = layout_parse(file_name, contents)
-    # domtree_parse_result = domtree_parse(file_name, contents)
-    # parse_result = {"layout_parse": layout_parse_result, "domtree_parse": domtree_parse_result}
-
     # 多进程并行解析
-    manager = multiprocessing.Manager()
+    manager = Manager()
     user = user_context.get()
     return_dict = manager.dict()
     p1 = multiprocessing.Process(target=worker, args=(
@@ -279,8 +276,24 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
         domtree_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'domtree_parse', user))
     p1.start()
     p2.start()
-    p1.join()
-    p2.join()
+
+    # 设置超时时间（例如 60 秒）
+    timeout = 60 * 15  # 15min
+
+    # 等待子进程完成，超时后终止子进程
+    p1.join(timeout)
+    if p1.is_alive():
+        p1.terminate()
+        p1.join()
+        logging.error(f"layout_parse 子进程超时并已终止 file_id:{file_id}")
+        return
+
+    p2.join(timeout)
+    if p2.is_alive():
+        p2.terminate()
+        p2.join()
+        logging.error(f"domtree_parse 子进程超时并已终止 file_id:{file_id}")
+        return
 
     # todo 临时保留冗余字段
     # parse_result = dict(return_dict)
@@ -307,8 +320,13 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
         status_code = DOCUMENT_PARSE_FINISH
 
     callback_after_parse(file_id, status_code, callbacks)
-    logging.info(f"parse_result_layout_and_domtree 完成解析 file_id:{file_id}")
 
+    # 记录结束时间并计算总耗时
+    end_time = time.time()
+    total_time = end_time - start_time
+    minutes = int(total_time // 60)
+    seconds = int(total_time % 60)
+    logging.info(f"parse_result_layout_and_domtree 完成解析 file_id:{file_id}, 总耗时: {minutes}分钟{seconds}秒")
     return parse_result
 
 
