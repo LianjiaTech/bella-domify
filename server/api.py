@@ -8,6 +8,7 @@ from fastapi import Form, Path, Body, Query
 
 from server.log.log_config import log_config
 from services import parse_manager
+from services.constants import GROUP_ID_LONG_TASK, GROUP_ID_IMAGE_TASK, GROUP_ID_SHORT_TASK
 from services.domtree_parser import pdf_parser
 from .context import user_context, DEFAULT_USER
 from .task_executor.executor import listen_parse_task_layout_and_domtree
@@ -96,8 +97,18 @@ async def async_parse_callback(taskNo: str = Path(..., title="The task number"),
 @router.on_event("startup")
 async def startup_event():
     print("Starting background task...")
-    thread = Thread(target=listen_parse_task_layout_and_domtree)
-    thread.start()
+
+    # 启动子进程，GROUP_ID_LONG_TASK 处理大文件
+    thread1 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_LONG_TASK,))
+    thread1.start()
+
+    # 启动子进程，GROUP_ID_SHORT_TASK 处理小文件
+    thread2 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_SHORT_TASK,))
+    thread2.start()
+
+    # 启动子进程，GROUP_ID_IMAGE_TASK 处理图片文件
+    thread3 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_IMAGE_TASK,))
+    thread3.start()
 
 
 ## 历史path兼容，下个版本删除

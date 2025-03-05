@@ -10,14 +10,17 @@ from confluent_kafka import Consumer, KafkaException
 from pdf2docx import Converter
 from pdf2docx.dom_tree.domtree import DomTreeModel
 from services import parse_manager
+from services.constants import GROUP_ID_LONG_TASK, GROUP_ID_IMAGE_TASK, GROUP_ID_SHORT_TASK
+from services.layout_parser import pptx_parser, docx_parser, pdf_parser
 from settings.ini_config import config
+from utils import general_util
 from .db.model import upload_task_parse_res
 from .s3 import get_file, upload_text_content
 from .task_manager import get_pdf_parse_task
 from ..context import user_context, DEFAULT_USER
 
 
-def listen_parse_task_layout_and_domtree():
+def listen_parse_task_layout_and_domtree(parser_group_id=""):
     # 配置消费者
     kafka_conf = {
         'bootstrap.servers': config.get('KAFKA', 'servers'),  # Kafka服务器地址
@@ -56,13 +59,19 @@ def listen_parse_task_layout_and_domtree():
                 post_processors = metadata.get("post_processors", [])
                 callbacks = metadata.get("callbacks", [])
                 if "file_parse" in post_processors:
-                    logging.info("Message consumed and offset committed.")
-                    user_context.set(user)
-                    consumer.commit(msg)  # 先消费任务，不阻塞后续，再执行解析
-                    parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
-                else:
-                    logging.info("Message not consumed.")
-                    consumer.commit(msg)  # 先消费任务，不阻塞后续，再执行解析
+                    contents = parse_manager.file_api_retrieve_file(file_id)
+                    file_info = parse_manager.file_api_get_file_info(file_id)
+                    # 检查文档准入标准
+                    group_id_analysis_info = check_file_size_and_pages(contents, file_info)
+                    # 计算groupId
+                    file_group_id = get_group_id(group_id_analysis_info)
+                    logging.info(f"计算groupId结果. file_id:{file_id} file_name:{file_name} file_group_id:{file_group_id}")
+
+                    if parser_group_id == file_group_id:
+                        logging.info(f"parser开始解析. file_id:{file_id} file_group_id:{file_group_id}")
+                        parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
+
+                consumer.commit(msg)
 
             except json.JSONDecodeError:
                 logging.error("Failed to decode JSON message.")
@@ -76,6 +85,59 @@ def listen_parse_task_layout_and_domtree():
     finally:
         # 关闭消费者
         consumer.close()
+
+
+def check_file_size_and_pages(contents, file_info):
+    file_id = file_info["id"]
+    file_size = file_info["bytes"]
+    file_name = file_info["filename"]
+    file_size_m = file_size / (1000 * 1000)  # 文件大小（单位M）
+    # 参数检验
+    parse_manager.validate_parameters(file_name, contents)
+    # 获取文件后缀
+    file_extension = general_util.get_file_type(file_name)
+
+    # 文件大小限制：小于20M
+    if file_size_m > 20:
+        logging.error(f"文件大小超出限制. file_id:{file_id} file_name:{file_name} file_size:{file_size_m}M")
+        raise ValueError("文件大小超出限制，解析中止")
+
+    # 文件页数限制：小于5000页
+    page_count = 0
+    if file_extension == 'pptx':
+        page_count = pptx_parser.get_page_count(contents)
+    elif file_extension == 'pdf':
+        page_count = pdf_parser.get_page_count(contents)
+    elif file_extension == 'docx':
+        paragraph_count = docx_parser.get_paragraph_count(contents)
+        page_count = paragraph_count / 10  # docx文件无法直接拿到页数，先用每页段落数较大值预估
+    if page_count > 5000:
+        logging.error(f"文件页数超出限制. file_id:{file_id} file_name:{file_name} page_count:{page_count}")
+        raise ValueError("文件页数超出限制，解析中止")
+
+    group_id_analysis_info = {
+        "file_size_m": file_size_m,
+        "file_extension": file_extension,
+        "page_count": page_count
+    }
+    return group_id_analysis_info
+
+
+def get_group_id(group_id_analysis_info):
+    file_size_m = group_id_analysis_info["file_size_m"]
+    file_extension = group_id_analysis_info["file_extension"]
+    page_count = group_id_analysis_info["page_count"]
+
+    if file_size_m > 8:
+        return GROUP_ID_LONG_TASK
+
+    if page_count > 30:
+        return GROUP_ID_LONG_TASK
+
+    if file_extension in ["png", "jpeg", "jpg", "bmp"]:
+        return GROUP_ID_IMAGE_TASK
+
+    return GROUP_ID_SHORT_TASK
 
 
 def worker(func, return_dict, key):

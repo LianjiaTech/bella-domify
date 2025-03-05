@@ -70,6 +70,13 @@ def layout_parse(file):
     return result_json, result_text
 
 
+def get_paragraph_count(file):
+    file_stream = io.BytesIO(file)
+    doc = Document(file_stream)
+    paragraph_count = len(doc.paragraphs)
+    return paragraph_count
+
+
 if __name__ == "__main__":
 
     file_name = 'demo_image.docx'

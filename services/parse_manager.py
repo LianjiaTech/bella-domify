@@ -67,8 +67,6 @@ def validate_parameters(file_name, file):
 
 
 def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
-    # 参数检验
-    validate_parameters(file_name, file)
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'layout_parse解析开始 文件名：{file_name}')
@@ -249,7 +247,7 @@ def file_api_retrieve_file(file_id):
     return response.content
 
 
-# 从FileAPI获取文件名称
+# 从FileAPI获取文件名称 todo 删除
 def file_api_get_file_name(file_id):
     url = f"{FILE_API_URL}/v1/files/{file_id}"
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
@@ -257,6 +255,15 @@ def file_api_get_file_name(file_id):
     response_data = json.loads(response.content)
     file_name = response_data["filename"]
     return file_name
+
+
+# 从FileAPI获取文件名称
+def file_api_get_file_info(file_id):
+    url = f"{FILE_API_URL}/v1/files/{file_id}"
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+    response = requests.get(url, headers=headers)
+    response_data = json.loads(response.content)
+    return response_data
 
 
 def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):

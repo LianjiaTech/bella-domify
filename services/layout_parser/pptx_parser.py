@@ -68,6 +68,13 @@ def layout_parse(file):
     return result_json, result_text
 
 
+def get_page_count(file):
+    pptx_stream = io.BytesIO(file)
+    pr = Presentation(pptx_stream)
+    slide_count = len(pr.slides)
+    return slide_count
+
+
 if __name__ == "__main__":
 
     file_name = 'demo.pptx'

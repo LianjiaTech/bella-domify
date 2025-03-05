@@ -17,16 +17,6 @@ import mammoth
 import docx2txt
 
 
-
-def layout_parse1(byte_data):
-    file_stream = io.BytesIO(byte_data)
-    doc = Document(file_stream)
-    full_text = []
-    for para in doc.paragraphs:
-        full_text.append(para.text)
-    return '\n'.join(full_text)
-
-
 def layout_parse(file_bytes):
     with io.BytesIO(file_bytes) as file_stream:
         with open('temp.doc', 'wb') as temp_file:

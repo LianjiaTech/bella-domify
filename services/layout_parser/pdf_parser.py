@@ -72,6 +72,11 @@ def layout_parse(file):
     return result_json, result_text
 
 
+def get_page_count(file):
+    pdf_document = fitz.Document(stream=file)
+    return len(pdf_document)
+
+
 if __name__ == "__main__":
 
     file_name = 'demo_table.pdf'

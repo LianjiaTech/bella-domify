@@ -32,7 +32,7 @@ def get_s3_parse_result(file_id, parse_type=""):
         s3_result = s3.get_file_text_content(file_key)
         s3_result_json = json.loads(s3_result)
     except Exception as e:
-        logging.error(e)
+        logging.warning(e)
         return
 
     return s3_result_json
