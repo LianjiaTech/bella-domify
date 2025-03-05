@@ -24,7 +24,7 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
     # 配置消费者
     kafka_conf = {
         'bootstrap.servers': config.get('KAFKA', 'servers'),  # Kafka服务器地址
-        'group.id': config.get('KAFKA', 'group_id'),  # 消费者组ID
+        'group.id': parser_group_id,  # 消费者组ID
         'auto.offset.reset': 'earliest',  # 从最早的消息开始消费
     }
     # 创建消费者实例
@@ -38,14 +38,14 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
 
             if msg is None:
                 time.sleep(2)
-                logging.info("msg is None")
+                logging.info(f"{parser_group_id} msg is None")
                 continue
             if msg.error():
                 raise KafkaException(msg.error())
 
             # 解析消息内容
             message_value = msg.value().decode('utf-8')
-            logging.info(f"Received message: {message_value}")
+            logging.info(f"{parser_group_id} Received message: {message_value}")
 
             # 判断是否需要文件解析处理
             try:
@@ -56,6 +56,7 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                 user = metadata.get("user", "")
                 if not user:
                     raise ValueError("user为空, 无法进行文件解析")
+                user_context.set(user)
                 post_processors = metadata.get("post_processors", [])
                 callbacks = metadata.get("callbacks", [])
                 if "file_parse" in post_processors:
