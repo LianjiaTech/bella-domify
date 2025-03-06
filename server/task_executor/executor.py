@@ -129,14 +129,14 @@ def get_group_id(group_id_analysis_info):
     file_extension = group_id_analysis_info["file_extension"]
     page_count = group_id_analysis_info["page_count"]
 
+    if file_extension in ["png", "jpeg", "jpg", "bmp"]:
+        return GROUP_ID_IMAGE_TASK
+
     if file_size_m > 8:
         return GROUP_ID_LONG_TASK
 
     if page_count > 30:
         return GROUP_ID_LONG_TASK
-
-    if file_extension in ["png", "jpeg", "jpg", "bmp"]:
-        return GROUP_ID_IMAGE_TASK
 
     return GROUP_ID_SHORT_TASK
 
