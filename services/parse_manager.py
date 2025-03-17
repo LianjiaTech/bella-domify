@@ -220,6 +220,10 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
             callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
             return {}
 
+        if not parse_result and not markdown_res:
+            # 无解析结果，不上报
+            return {}
+
         # 解析结果存S3
         all_parse_result = {
             # 冗余字段
