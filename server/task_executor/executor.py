@@ -55,22 +55,21 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                 metadata = json.loads(message_json.get("metadata", {}))
                 user = metadata.get("user", "")
                 if not user:
+                    parse_manager.callback_file_api(file_id, 'failed', "user为空, 无法进行文件解析")
                     raise ValueError("user为空, 无法进行文件解析")
                 user_context.set(user)
-                post_processors = metadata.get("post_processors", [])
                 callbacks = metadata.get("callbacks", [])
-                if "file_parse" in post_processors:
-                    contents = parse_manager.file_api_retrieve_file(file_id)
-                    file_info = parse_manager.file_api_get_file_info(file_id)
-                    # 检查文档准入标准
-                    group_id_analysis_info = check_file_size_and_pages(contents, file_info)
-                    # 计算groupId
-                    file_group_id = get_group_id(group_id_analysis_info)
-                    logging.info(f"计算groupId结果. file_id:{file_id} file_name:{file_name} file_group_id:{file_group_id}")
+                contents = parse_manager.file_api_retrieve_file(file_id)
+                file_info = parse_manager.file_api_get_file_info(file_id)
+                # 检查文档准入标准
+                group_id_analysis_info = check_file_size_and_pages(contents, file_info)
+                # 计算groupId
+                file_group_id = get_group_id(group_id_analysis_info)
+                logging.info(f"计算groupId结果. file_id:{file_id} file_name:{file_name} file_group_id:{file_group_id}")
 
-                    if parser_group_id == file_group_id:
-                        logging.info(f"parser开始解析. file_id:{file_id} file_group_id:{file_group_id}")
-                        parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
+                if parser_group_id == file_group_id:
+                    logging.info(f"parser开始解析. file_id:{file_id} file_group_id:{file_group_id}")
+                    parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
 
                 consumer.commit(msg)
 
@@ -101,6 +100,7 @@ def check_file_size_and_pages(contents, file_info):
     # 文件大小限制：小于20M
     if file_size_m > 20:
         logging.error(f"文件大小超出限制. file_id:{file_id} file_name:{file_name} file_size:{file_size_m}M")
+        parse_manager.callback_file_api(file_id, 'failed', '文件大小超出限制，解析中止')
         raise ValueError("文件大小超出限制，解析中止")
 
     # 文件页数限制：小于5000页
@@ -114,6 +114,7 @@ def check_file_size_and_pages(contents, file_info):
         page_count = paragraph_count / 10  # docx文件无法直接拿到页数，先用每页段落数较大值预估
     if page_count > 5000:
         logging.error(f"文件页数超出限制. file_id:{file_id} file_name:{file_name} page_count:{page_count}")
+        parse_manager.callback_file_api(file_id, 'failed', '文件页数超出限制，解析中止')
         raise ValueError("文件页数超出限制，解析中止")
 
     group_id_analysis_info = {

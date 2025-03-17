@@ -98,6 +98,7 @@ def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
     elif file_extension in ["png", "jpeg", "jpg", "bmp"]:
         result_json, result_text = pic_parser.layout_parse(file)
     else:
+        callback_file_api(file_id, 'failed', '异常：不支持的文件类型')
         raise ValueError("异常：不支持的文件类型")
     logging.info(f'layout_parse解析完毕 文件名：{file_name}')
 
@@ -186,7 +187,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         layout_result_json, layout_result_text = layout_parse(file_name, contents, file_id)
         # 解析失败，直接回调
         if not layout_result_json:
-            callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+            callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
             return layout_result_text
 
         # 解析结果存S3
@@ -202,7 +203,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         }
         s3_service.upload_s3_parse_result(file_id, parse_result)
         # 解析完毕回调
-        callback_after_parse(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
+        callback_parse_progress(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
         logging.info(f"Exception layout_parse_and_callback: {e}")
         return ""
@@ -216,7 +217,7 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
         parse_succeed, parse_result, markdown_res = domtree_parse(file_name, contents, file_id)
         # 解析失败，直接回调
         if not parse_succeed:
-            callback_after_parse(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+            callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
             return {}
 
         # 解析结果存S3
@@ -232,7 +233,7 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
         }
         s3_service.upload_s3_parse_result(file_id, all_parse_result)
         # 解析完毕回调
-        callback_after_parse(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
+        callback_parse_progress(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
         logging.info(f"Exception domtree_parse_and_callback: {e}")
         return {}
@@ -270,6 +271,7 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     logging.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
     start_time = time.time()
 
+    callback_parse_progress(file_id, DOCUMENT_PARSE_BEGIN, callbacks)
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
 
@@ -326,7 +328,7 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     else:
         status_code = DOCUMENT_PARSE_FINISH
 
-    callback_after_parse(file_id, status_code, callbacks)
+    callback_parse_progress(file_id, status_code, callbacks)
 
     # 记录结束时间并计算总耗时
     end_time = time.time()
@@ -386,7 +388,7 @@ def parse_layout_and_domtree_sync_by_file_id(file_id, parse_type="", check_faq=T
     return parse_result if parse_type_res == "all_result" else {parse_type_res: parse_result}
 
 
-def callback_after_parse(file_id, status_code, callbacks):
+def callback_parse_progress(file_id, status_code, callbacks):
     # 解析完毕回调fileAPI
     callback_file_api(file_id, status_code)
     # 业务方回调
@@ -394,7 +396,7 @@ def callback_after_parse(file_id, status_code, callbacks):
         callback_other_api(file_id, status_code, callback)
 
 
-def callback_file_api(file_id, status_code):
+def callback_file_api(file_id, status_code, message: str = ""):
     postprocessor_name = "document_parser"
     url = f"{FILE_API_URL}/v1/files/{file_id}/progress/{postprocessor_name}"
     headers = {
@@ -404,8 +406,8 @@ def callback_file_api(file_id, status_code):
     data = {
         "file_id": file_id,
         "status": status_code,
-        "message": "",
-        "percent": percent_map[status_code]
+        "message": message,
+        "percent": percent_map.get(status_code, 0)
     }
     try:
         response = requests.post(url, headers=headers, json=data)
@@ -420,12 +422,12 @@ def callback_file_api(file_id, status_code):
     return False
 
 
-def callback_other_api(file_id, status_code, callback_url):
+def callback_other_api(file_id, status_code, callback_url, message: str = ""):
     data = {
         "file_id": file_id,
         "status": status_code,
-        "message": "",
-        "percent": percent_map[status_code]
+        "message": message,
+        "percent": percent_map.get(status_code, 0)
     }
     try:
         response = requests.post(callback_url, json=data)
