@@ -52,11 +52,12 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                 message_json = json.loads(message_value)
                 file_id = message_json.get("data", {}).get("id", "")
                 file_name = message_json.get("data", {}).get("filename", "")
-                metadata = json.loads(message_json.get("metadata", {}))
-                user = metadata.get("user", "")
-                if not user:
-                    parse_manager.callback_file_api(file_id, 'failed', "user为空, 无法进行文件解析")
-                    raise ValueError("user为空, 无法进行文件解析")
+                metadata = json.loads(message_json.get("metadata", "{}"))
+                user = metadata.get("user", DEFAULT_USER)
+                # 暂不做user校验
+                # if not user:
+                #     parse_manager.callback_file_api(file_id, 'failed', "user为空, 无法进行文件解析")
+                #     raise ValueError("user为空, 无法进行文件解析")
                 user_context.set(user)
                 callbacks = metadata.get("callbacks", [])
                 contents = parse_manager.file_api_retrieve_file(file_id)
