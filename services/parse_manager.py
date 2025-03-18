@@ -314,13 +314,13 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     parse_result_raw = dict(return_dict)
     parse_result = {
         # 冗余字段
-        "layout_parse": parse_result_raw["layout_parse"][0],
-        "layout_parse_json": parse_result_raw["layout_parse"][1],
-        "domtree_parse": parse_result_raw["domtree_parse"][0],
+        "layout_parse": parse_result_raw["layout_parse"][0] if parse_result_raw["layout_parse"] else None,
+        "layout_parse_json": parse_result_raw["layout_parse"][1] if parse_result_raw["layout_parse"] else None,
+        "domtree_parse": parse_result_raw["domtree_parse"][0] if parse_result_raw["domtree_parse"] else None,
         # 最终字段
-        "layout_result": parse_result_raw["layout_parse"][1],
-        "domtree_result": parse_result_raw["domtree_parse"][0],
-        "markdown_result": parse_result_raw["domtree_parse"][1]
+        "layout_result": parse_result_raw["layout_parse"][1] if parse_result_raw["layout_parse"] else None,
+        "domtree_result": parse_result_raw["domtree_parse"][0] if parse_result_raw["domtree_parse"] else None,
+        "markdown_result": parse_result_raw["domtree_parse"][1] if parse_result_raw["domtree_parse"] else None
     }
 
     # 解析结果存S3
@@ -473,16 +473,17 @@ if __name__ == "__main__":
 
     user_context.set("1000000023008327")
 
+    parse_result_layout_and_domtree("file-2503181430240024000345-2075695711", "433.txt", [])
     # file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
     # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳离职管理制度V3.0》5页.pdf"
-    file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
-    stream = chubao.read_file(file_path)
-
-    print(parse_result_layout_and_domtree("file-2501151703350022000005-277459125", "demo.pptx", []))
-    print(parse_result_layout_and_domtree("file-2501151734460022000006-277459125", "《贝壳入职管理制度》5页.pdf", []))
-    # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
-
-    # file_type = get_file_type(file_path)
-
-    print(file_api_get_file_name("file-2502180943250024000009-277459125"))
+    # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
+    # stream = chubao.read_file(file_path)
+    #
+    # print(parse_result_layout_and_domtree("file-2501151703350022000005-277459125", "demo.pptx", []))
+    # print(parse_result_layout_and_domtree("file-2501151734460022000006-277459125", "《贝壳入职管理制度》5页.pdf", []))
+    # # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
+    #
+    # # file_type = get_file_type(file_path)
+    #
+    # print(file_api_get_file_name("file-2502180943250024000009-277459125"))
 
