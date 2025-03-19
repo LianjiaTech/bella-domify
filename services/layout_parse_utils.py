@@ -58,8 +58,8 @@ def mark_holder_by_text_similarity(page_holder_blocks, header: bool = True):
     # 计算频率：若有元素出现频率过半，则识别为页眉
     text_counter = Counter(text_list)
     #图片文件获取不来内容容易导致空指针异常，特加此判断
-    # if not text_counter.most_common(1):
-    #     return False
+    if not text_counter.most_common(1):
+        return False
     frequency, most_common_text = text_counter.most_common(1)[0][1], text_counter.most_common(1)[0][0]
     if most_common_text is None:
         return False
