@@ -20,8 +20,9 @@ import logging
 def trans_block2text(block):
     text = ""
     for line in block["lines"]:
-        for span in line["spans"]:
-            text += span["text"]
+        if(line["dir"][0] == 1.0 or line["dir"][1] == -1.0):
+            for span in line["spans"]:
+                text += span["text"]
     return text
 
 

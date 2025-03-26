@@ -1,5 +1,6 @@
 # fastapi定义接口
 import logging
+import time
 from threading import Thread
 
 from fastapi import FastAPI, APIRouter
@@ -92,10 +93,11 @@ async def async_parse_callback(taskNo: str = Path(..., title="The task number"),
     logging.info("接收回调")
     print(taskNo, task)
 
-
+background_threads = []
 # 文件解析 - 监听解析任务，异步解析
 @router.on_event("startup")
 async def startup_event():
+    global background_threads
     print("Starting background task...")
 
     # 启动子进程，GROUP_ID_LONG_TASK 处理大文件
@@ -109,6 +111,35 @@ async def startup_event():
     # 启动子进程，GROUP_ID_IMAGE_TASK 处理图片文件
     thread3 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_IMAGE_TASK,))
     thread3.start()
+
+    # 保存线程引用
+    background_threads.extend([thread1, thread2, thread3])
+    print(f"已启动 {len(background_threads)} 个后台线程")
+    monitor_thread = Thread(target=monitor_threads, daemon=True)
+    monitor_thread.start()
+
+
+
+def monitor_threads():
+    global background_threads
+    while True:
+        for i, thread in enumerate(background_threads):
+            if not thread.is_alive():
+                print(f"线程 {i} 已死亡，正在重启...")
+                # 重新创建并启动相应的线程
+                if i == 0:
+                    new_thread = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_LONG_TASK,),
+                                        daemon=True)
+                elif i == 1:
+                    new_thread = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_SHORT_TASK,),
+                                        daemon=True)
+                else :
+                    new_thread = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_IMAGE_TASK,),
+                                        daemon=True)
+                new_thread.start()
+                background_threads[i] = new_thread
+        time.sleep(60)
+
 
 
 ## 历史path兼容，下个版本删除
