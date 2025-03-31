@@ -16,7 +16,7 @@ IMAGE = "image"
 TEXT = "text"
 TABLE = "table"
 
-OPENAI_API_KEY = "qaekDD2hBoZE4ArZZlOQ9fYTQ74Qc8mq"
+OPENAI_API_KEY = "8d7b1d17-1478-408c-9180-795b148dc6b2"
 
 
 class ParseType(Enum):
