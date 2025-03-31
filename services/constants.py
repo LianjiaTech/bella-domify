@@ -10,13 +10,14 @@
 # ===============================================================
 
 from enum import Enum
+import os
 
 
 IMAGE = "image"
 TEXT = "text"
 TABLE = "table"
 
-OPENAI_API_KEY = "8d7b1d17-1478-408c-9180-795b148dc6b2"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 class ParseType(Enum):

@@ -23,7 +23,7 @@ user_context.set("1000000023008327")
 
 import os
 
-os.environ["OPENAI_API_KEY"] = "8d7b1d17-1478-408c-9180-795b148dc6b2"
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
 
 root_dir = os.getcwd().split("document_parse")[0] + "document_parse/"

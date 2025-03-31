@@ -145,7 +145,7 @@ def llm_image2text(image_url, user, model=MODEL_NAME, confirm_result=True):
 if __name__ == "__main__":
     import os
 
-    os.environ["OPENAI_API_KEY"] = "8d7b1d17-1478-408c-9180-795b148dc6b2"
+    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
     os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
     user = "1000000023008327"
     user_context.set(user)

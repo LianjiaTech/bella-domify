@@ -345,7 +345,10 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
 
 # 同步解析接口(file_name)
 def parse_result_layout_and_domtree_sync(file_name, contents):
+    start = time.time()
     layout_result_json, layout_result_text = layout_parse(file_name, contents)
+    end = time.time()
+    print(f"layout_parse 耗时: {end - start}")
     parse_succeed, domtree_parse_result, markdown_res = domtree_parse(file_name, contents)
     parse_result = {
         "layout_parse": layout_result_text,
@@ -468,7 +471,7 @@ def api_get_result_service(file_id, parse_type=""):
 if __name__ == "__main__":
     import os
 
-    os.environ["OPENAI_API_KEY"] = "8d7b1d17-1478-408c-9180-795b148dc6b2"
+    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
     os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
 
     user_context.set("1000000023008327")
