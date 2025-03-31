@@ -345,10 +345,7 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
 
 # 同步解析接口(file_name)
 def parse_result_layout_and_domtree_sync(file_name, contents):
-    start = time.time()
     layout_result_json, layout_result_text = layout_parse(file_name, contents)
-    end = time.time()
-    print(f"layout_parse 耗时: {end - start}")
     parse_succeed, domtree_parse_result, markdown_res = domtree_parse(file_name, contents)
     parse_result = {
         "layout_parse": layout_result_text,
