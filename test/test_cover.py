@@ -9,7 +9,7 @@ from pdf2docx import Converter
 from pdf2docx.dom_tree.domtree import DomTreeModel
 from server.context import user_context
 
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+
 os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
 
 user_context.set("1000000020353701")

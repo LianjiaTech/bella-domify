@@ -165,7 +165,7 @@ def evaluation(model_name):
 
 if __name__ == "__main__":
     import os
-    os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+
     os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
     user = "1000000023008327"
     user_context.set(user)
