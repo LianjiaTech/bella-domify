@@ -114,7 +114,7 @@ async def startup_event():
 
     # 保存线程引用
     background_threads.extend([thread1, thread2, thread3])
-    print(f"已启动 {len(background_threads)} 个后台线程")
+    logging.info(f"已启动 {len(background_threads)} 个后台线程")
     monitor_thread = Thread(target=monitor_threads, daemon=True)
     monitor_thread.start()
 
@@ -125,7 +125,7 @@ def monitor_threads():
     while True:
         for i, thread in enumerate(background_threads):
             if not thread.is_alive():
-                print(f"线程 {i} 已死亡，正在重启...")
+                logging.info(f"线程 {i} 已死亡，正在重启...")
                 # 重新创建并启动相应的线程
                 if i == 0:
                     new_thread = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_LONG_TASK,),
