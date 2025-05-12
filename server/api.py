@@ -3,8 +3,11 @@ import json
 import logging
 import time
 from threading import Thread
+from typing import Optional
 
-from fastapi import FastAPI, APIRouter
+from ait_openapi import validate_token
+from ait_openapi.exception import AuthorizationException
+from fastapi import FastAPI, APIRouter, Header
 from fastapi import File, UploadFile
 from fastapi import Form, Path, Query
 
@@ -39,7 +42,14 @@ async def health_readiness():
 @router.post("/document/parse")
 async def document_parse(file_object: UploadFile = File(...),
                          user: str = Form(default=None), parse_type: str = Form(default="all"),
-                         strategy: str = Form(default="")):
+                         strategy: str = Form(default=""),
+                         authorization: Optional[str] = Header("", alias="Authorization")):
+    try:
+        validate_token(authorization)
+    except AuthorizationException as e:
+        logging.error(f"Authorization failed: {e}")
+        return {"error": "Authorization failed", "message": str(e)}
+
     user_context.set(user or DEFAULT_USER)
     # 读取file字节流
     file_name = file_object.filename
@@ -50,7 +60,13 @@ async def document_parse(file_object: UploadFile = File(...),
 
 # 获取S3缓存结果: 通过file_id获取解析结果（结构信息和字符串信息）
 @router.get("/document/parse/{file_id}")
-async def document_parse(file_id: str = Path(...), parse_type: str = Query(default="all")):
+async def document_parse(file_id: str = Path(...), parse_type: str = Query(default="all"),
+                         authorization: Optional[str] = Header("", alias="Authorization")):
+    try:
+        validate_token(authorization)
+    except AuthorizationException as e:
+        logging.error(f"Authorization failed: {e}")
+        return {"error": "Authorization failed", "message": str(e)}
     return parse_manager.api_get_result_service(file_id, parse_type)
 
 
