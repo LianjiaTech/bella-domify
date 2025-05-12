@@ -182,18 +182,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
             callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
             return layout_result_text
 
-        # 解析结果存S3
-        parse_result = {
-            # 冗余字段
-            "layout_parse": layout_result_text,
-            "layout_parse_json": layout_result_json,
-            "domtree_parse": {},
-            # 最终字段
-            "layout_result": layout_result_json,
-            "domtree_result": {},
-            "markdown_result": "",
-        }
-        s3_service.upload_s3_parse_result(file_id, parse_result)
+        s3_service.upload_s3_parse_result(file_id, layout_result_json, ParseType.LAYOUT.value)
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
@@ -218,17 +207,8 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
             return {}
 
         # 解析结果存S3
-        all_parse_result = {
-            # 冗余字段
-            "layout_parse": "",
-            "layout_parse_json": [],
-            "domtree_parse": parse_result,
-            # 最终字段
-            "layout_result": [],
-            "domtree_result": parse_result,
-            "markdown_result": markdown_res
-        }
-        s3_service.upload_s3_parse_result(file_id, all_parse_result)
+        s3_service.upload_s3_parse_result(file_id, parse_result, ParseType.DOMTREE.value)
+        s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
@@ -302,25 +282,19 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
         logging.error(f"domtree_parse 子进程超时并已终止 file_id:{file_id}")
         return
 
-    # todo 临时保留冗余字段
-    # parse_result = dict(return_dict)
-
     parse_result_raw = dict(return_dict)
-    parse_result = {
-        # 冗余字段
-        "layout_parse": parse_result_raw["layout_parse"][0] if parse_result_raw["layout_parse"] else None,
-        "layout_parse_json": parse_result_raw["layout_parse"][1] if parse_result_raw["layout_parse"] else None,
-        "domtree_parse": parse_result_raw["domtree_parse"][0] if parse_result_raw["domtree_parse"] else None,
-        # 最终字段
-        "layout_result": parse_result_raw["layout_parse"][1] if parse_result_raw["layout_parse"] else None,
-        "domtree_result": parse_result_raw["domtree_parse"][0] if parse_result_raw["domtree_parse"] else None,
-        "markdown_result": parse_result_raw["domtree_parse"][1] if parse_result_raw["domtree_parse"] else None
-    }
+
+    layout_result = parse_result_raw["layout_parse"][1] if parse_result_raw["layout_parse"] else None
+    domtree_result = parse_result_raw["domtree_parse"][0] if parse_result_raw["domtree_parse"] else None
+    markdown_result = parse_result_raw["domtree_parse"][1] if parse_result_raw["domtree_parse"] else None
 
     # 解析结果存S3
-    s3_service.upload_s3_parse_result(file_id, parse_result)
+    s3_service.upload_s3_parse_result(file_id, layout_result, ParseType.LAYOUT.value)
+    s3_service.upload_s3_parse_result(file_id, domtree_result, ParseType.DOMTREE.value)
+    s3_service.upload_s3_parse_result(file_id, markdown_result, ParseType.MARKDOWN.value)
+
     # 解析完毕回调
-    if not parse_result.get("layout_parse") and not parse_result.get("domtree_parse"):
+    if not layout_result and not domtree_result:
         # 两个解析都没结果，返回失败
         status_code = DOCUMENT_PARSE_FAIL
     else:
@@ -334,7 +308,11 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
     minutes = int(total_time // 60)
     seconds = int(total_time % 60)
     logging.info(f"parse_result_layout_and_domtree 完成解析 file_id:{file_id}, 总耗时: {minutes}分钟{seconds}秒")
-    return parse_result
+    return {
+        "layout_result": layout_result,
+        "domtree_result": domtree_result,
+        "markdown_result": markdown_result,
+    }
 
 
 # 同步解析接口(file_name)
