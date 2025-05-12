@@ -8,7 +8,9 @@
 #    @Description   : 
 #
 # ===============================================================
+import hashlib
 import io
+import json
 import logging
 import time
 
@@ -16,7 +18,6 @@ import openai
 import requests
 from PIL import Image
 
-from server.context import user_context
 from server.task_executor import s3
 
 # MODEL_NAME = "ali-qwen2-72b-vl-v1-chat-20250117"
@@ -142,14 +143,33 @@ def llm_image2text(image_url, user, model=MODEL_NAME, confirm_result=True):
         return ocr_result
 
 
-if __name__ == "__main__":
-    import os
+def unified_md5(filename: str, contents: bytes, parst_type: str, strategy: dict) -> str:
+    """
+    将文件名和文件内容合并计算一个统一的MD5值
 
+    参数:
+        filename: 文件名(str)
+        content: 文件内容(bytes)
+        parst_type: 解析类型(str)
+        strategy: 解析策略(dict)
 
-    os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
-    user = "1000000023008327"
-    user_context.set(user)
+    返回:
+        统一的MD5哈希值(16进制字符串)
+    """
+    md5 = hashlib.md5()
 
-    print(llm_image2text(
-        "https://img.ljcdn.com/cv-aigc/d8530cfa14334458b6c5b43e232c483f?ak=Q265N5ELG32TT7UWO8YJ&exp=1733486661&ts=1733483061&sign=9113a47e7dababdd117cef161505ff81",
-        "1000000023008327"))
+    # 先更新文件名(转换为UTF-8编码的bytes)
+    md5.update(filename.encode('utf-8'))
+
+    # 再更新文件内容
+    md5.update(contents)
+
+    # 更新解析类型
+    md5.update(parst_type.encode('utf-8'))
+
+    # 更新解析策略
+    if strategy:
+        strategy_str = json.dumps(strategy, ensure_ascii=False).encode('utf-8')
+        md5.update(strategy_str)
+
+    return md5.hexdigest()

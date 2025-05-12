@@ -44,7 +44,6 @@ DOCUMENT_PARSE_FAIL = "document_parse_fail"
 
 FILE_API_URL = config.get('FILEAPI', 'URL')
 
-
 percent_map = {
     DOCUMENT_PARSE_BEGIN: 0,
     DOCUMENT_PARSE_LAYOUT_FINISH: 50,
@@ -66,15 +65,10 @@ def validate_parameters(file_name, file):
         raise ValueError("异常：文件名没有包含后缀")
 
 
-def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
+def layout_parse(file_name: str = None, file: bytes = None, task_id=""):
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'layout_parse解析开始 文件名：{file_name}')
-
-    # # layout的缓存，待result_text下线后添加
-    # s3_result = s3_service.get_s3_parse_result(file_id, ParseType.LAYOUT.value)
-    # if s3_result:
-    #     return s3_result, result_text
 
     # 根据后缀判断文件类型
     if file_extension == 'pptx':
@@ -98,24 +92,22 @@ def layout_parse(file_name: str = None, file: bytes = None, file_id=""):
     elif file_extension in ["png", "jpeg", "jpg", "bmp"]:
         result_json, result_text = pic_parser.layout_parse(file)
     else:
-        callback_file_api(file_id, 'failed', '异常：不支持的文件类型')
         raise ValueError("异常：不支持的文件类型")
     logging.info(f'layout_parse解析完毕 文件名：{file_name}')
 
     # 缓存结果
-    if file_id:
-        s3_service.upload_s3_parse_result(file_id, result_json, ParseType.LAYOUT.value)
+    if task_id:
+        s3_service.upload_s3_parse_result(task_id, result_json, ParseType.LAYOUT.value)
 
     return result_json, result_text
 
 
-def domtree_parse(file_name: str = None, file: bytes = None, file_id="", check_faq=True):
-
+def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_faq=True):
     # 获取缓存
-    s3_result_domtree = s3_service.get_s3_parse_result(file_id, ParseType.DOMTREE.value)
-    s3_result_markdown = s3_service.get_s3_parse_result(file_id, ParseType.MARKDOWN.value)
+    s3_result_domtree = s3_service.get_s3_parse_result(task_id, ParseType.DOMTREE.value)
+    s3_result_markdown = s3_service.get_s3_parse_result(task_id, ParseType.MARKDOWN.value)
     if s3_result_domtree and s3_result_markdown:
-        logging.info(f'缓存获取成功 file_id：{file_id}')
+        logging.info(f'缓存获取成功 file_id：{task_id}')
         return True, s3_result_domtree, s3_result_markdown
 
     # json转换
@@ -143,9 +135,9 @@ def domtree_parse(file_name: str = None, file: bytes = None, file_id="", check_f
             _, json_compatible_data = convert_to_json(dom_tree_model)
             logging.info(f'domtree_parse解析完毕 文件名：{file_name}')
 
-            if file_id:
-                s3_service.upload_s3_parse_result(file_id, json_compatible_data, ParseType.DOMTREE.value)
-                s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
+            if task_id:
+                s3_service.upload_s3_parse_result(task_id, json_compatible_data, ParseType.DOMTREE.value)
+                s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
 
             return True, json_compatible_data, markdown_res
             # return ParserResult(parser_data=json_compatible_data).to_json()
@@ -155,22 +147,22 @@ def domtree_parse(file_name: str = None, file: bytes = None, file_id="", check_f
             # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
     elif file_extension == 'csv':
         markdown_res = csv_parser.markdown_parse(file)
-        if file_id:
-            s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
+        if task_id:
+            s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
         return True, {}, markdown_res
     elif file_extension == 'xlsx':
         markdown_res = xlsx_parser.markdown_parse(file)
-        if file_id:
-            s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
+        if task_id:
+            s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
         return True, {}, markdown_res
     elif file_extension == 'xls':
         markdown_res = xls_parser.markdown_parse(file)
-        if file_id:
-            s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
+        if task_id:
+            s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
         return True, {}, markdown_res
 
     else:
-        return True, {}, ""
+        raise ValueError("异常：不支持的文件类型")
 
 
 def worker(func, args, return_dict, key, user):
@@ -205,6 +197,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
+        callback_file_api(file_id, 'failed', str(e))
         logging.info(f"Exception layout_parse_and_callback: {e}")
         return ""
     return layout_result_text, layout_result_json
@@ -239,6 +232,7 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
+        callback_file_api(file_id, 'failed', str(e))
         logging.info(f"Exception domtree_parse_and_callback: {e}")
         return {}
     return parse_result, markdown_res
@@ -344,33 +338,26 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
 
 
 # 同步解析接口(file_name)
-def parse_result_layout_and_domtree_sync(file_name, contents):
-    layout_result_json, layout_result_text = layout_parse(file_name, contents)
-    parse_succeed, domtree_parse_result, markdown_res = domtree_parse(file_name, contents)
-    parse_result = {
-        "layout_parse": layout_result_text,
-        "layout_parse_json": layout_result_json,
-        "domtree_parse": domtree_parse_result,
+def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
+    # 对文件名和文件内容进行md5加密，task_id主要是为了cache
+    task_id = general_util.unified_md5(file_name, contents, parse_type, strategy)
 
-        "layout_result": layout_result_json,
-        "domtree_result": domtree_parse_result,
-        "markdown_result": markdown_res,
-    }
-    return parse_result
+    # 底层处理方法暂不调整，先这么写
+    check_faq = strategy.get("check_faq", False)
 
-
-# 同步解析接口(file_id)
-def parse_layout_and_domtree_sync_by_file_id(file_id, parse_type="", check_faq=True):
     parse_type_res = parse_type + "_result"
     # 定义解析函数映射
     parse_functions = {
-        "layout_result": lambda file_name, contents: layout_parse(file_name, contents, file_id)[0],  # 只返回layout_result_json
-        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id, check_faq)[1],  # 只返回domtree_parse_result
-        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents, file_id, check_faq)[2],  # 只返回markdown_res
+        "layout_result": lambda file_name, contents: layout_parse(file_name, contents, task_id)[0],
+        # 只返回layout_result_json
+        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents, task_id, check_faq)[1],
+        # 只返回domtree_parse_result
+        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents, task_id, check_faq)[2],
+        # 只返回markdown_res
         "all_result": lambda file_name, contents: {
-            "layout_result": layout_parse(file_name, contents, file_id)[0],
-            "domtree_result": domtree_parse(file_name, contents, file_id, check_faq)[1],
-            "markdown_result": domtree_parse(file_name, contents, file_id, check_faq)[2],
+            "layout_result": layout_parse(file_name, contents, task_id)[0],
+            "domtree_result": domtree_parse(file_name, contents, task_id, check_faq)[1],
+            "markdown_result": domtree_parse(file_name, contents, task_id, check_faq)[2],
         }
     }
 
@@ -381,15 +368,13 @@ def parse_layout_and_domtree_sync_by_file_id(file_id, parse_type="", check_faq=T
             detail="parse_type传参异常，枚举值范围[domtree, layout, markdown, all]"
         )
 
-    # 获取文件内容和文件名
-    contents = file_api_retrieve_file(file_id)
-    file_name = file_api_get_file_name(file_id)
-
     # 根据parse_type_res选择解析函数并执行
     parse_result = parse_functions[parse_type_res](file_name, contents)
-    print(parse_result)
     # 返回结果
-    return parse_result if parse_type_res == "all_result" else {parse_type_res: parse_result}
+    ret = parse_result if parse_type_res == "all_result" else {parse_type_res: parse_result}
+    # 返回task_id
+    ret["task_id"] = task_id
+    return ret
 
 
 def callback_parse_progress(file_id, status_code, callbacks):
@@ -416,7 +401,8 @@ def callback_file_api(file_id, status_code, message: str = ""):
     try:
         response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-        logging.info(f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
+        logging.info(
+            f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
@@ -436,7 +422,8 @@ def callback_other_api(file_id, status_code, callback_url, message: str = ""):
     try:
         response = requests.post(callback_url, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-        logging.info(f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
+        logging.info(
+            f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
@@ -446,44 +433,21 @@ def callback_other_api(file_id, status_code, callback_url, message: str = ""):
     return False
 
 
-def api_get_result_service(file_id, parse_type=""):
-    s3_result = s3_service.get_s3_parse_result(file_id)
+def api_get_result_service(file_id, parse_type="all"):
+    if parse_type == ParseType.All.value:
+        layout_cache = s3_service.get_s3_parse_result(file_id, ParseType.LAYOUT.value)
+        domtree_cache = s3_service.get_s3_parse_result(file_id, ParseType.DOMTREE.value)
+        markdown_cache = s3_service.get_s3_parse_result(file_id, ParseType.MARKDOWN.value)
+        if not layout_cache and not domtree_cache and not markdown_cache:
+            raise HTTPException(status_code=404, detail="解析结果不存在")
+        return {
+            "layout_result": layout_cache,
+            "domtree_result": domtree_cache,
+            "markdown_result": markdown_cache
+        }
+
+    s3_result = s3_service.get_s3_parse_result(file_id, parse_type)
     if not s3_result:  # 解析结果不存在
         raise HTTPException(status_code=404, detail="解析结果不存在")
 
-    if parse_type == ParseType.All.value:
-        return s3_result
-    elif parse_type == ParseType.DOMTREE.value:
-        parse_result = s3_result.get(parse_type + "_result", [])
-    elif parse_type == ParseType.LAYOUT.value:
-        parse_result = s3_result.get(parse_type + "_result", {})
-    elif parse_type == ParseType.MARKDOWN.value:
-        parse_result = s3_result.get(parse_type + "_result", "")
-    else:  # 异常逻辑
-        raise HTTPException(status_code=404,
-                            detail="parse_type传参异常，枚举值范围[domtree, layout, markdown, all]")
-    return {parse_type: parse_result}
-
-
-if __name__ == "__main__":
-    import os
-
-
-    os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
-
-    user_context.set("1000000023008327")
-
-    parse_result_layout_and_domtree("file-2503181430240024000345-2075695711", "433.txt", [])
-    # file_path = "ait-raw-data/1000000030706450/app_data/belle/其他/评测文件8-交易知识15-rag-测试.pdf"
-    # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳离职管理制度V3.0》5页.pdf"
-    # file_path = "ait-raw-data/1000000023008327/app_data/belle/默认/《贝壳入职管理制度》5页.pdf"
-    # stream = chubao.read_file(file_path)
-    #
-    # print(parse_result_layout_and_domtree("file-2501151703350022000005-277459125", "demo.pptx", []))
-    # print(parse_result_layout_and_domtree("file-2501151734460022000006-277459125", "《贝壳入职管理制度》5页.pdf", []))
-    # # get_s3_parse_result("评测文件8-交易知识15-rag-测试.pdf", stream)
-    #
-    # # file_type = get_file_type(file_path)
-    #
-    # print(file_api_get_file_name("file-2502180943250024000009-277459125"))
-
+    return {parse_type + "_result": s3_result}

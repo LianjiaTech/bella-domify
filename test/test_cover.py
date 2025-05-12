@@ -9,12 +9,11 @@ from pdf2docx import Converter
 from pdf2docx.dom_tree.domtree import DomTreeModel
 from server.context import user_context
 
-
 os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
 
 user_context.set("1000000020353701")
 
-test_dir = "../test_document/"
+test_dir = "test_document/"
 
 
 def pdf_parser(file_name: str, debug: bool = False) -> dict:
