@@ -7,14 +7,14 @@ from typing import Optional
 
 from ait_openapi import validate_token
 from ait_openapi.exception import AuthorizationException
-from fastapi import FastAPI, APIRouter, Header
+from fastapi import FastAPI, APIRouter, Header, HTTPException
 from fastapi import File, UploadFile
 from fastapi import Form, Path, Query
 
 from server.log.log_config import log_config
 from services import parse_manager
 from services.constants import GROUP_ID_LONG_TASK, GROUP_ID_IMAGE_TASK, GROUP_ID_SHORT_TASK
-from .context import user_context, DEFAULT_USER
+from .context import user_context
 from .task_executor.executor import listen_parse_task_layout_and_domtree
 
 log_config()  # 初始化日志配置
@@ -50,7 +50,11 @@ async def document_parse(file_object: UploadFile = File(...),
         logging.error(f"Authorization failed: {e}")
         return {"error": "Authorization failed", "message": str(e)}
 
-    user_context.set(user or DEFAULT_USER)
+    if not user:
+        # 400错误，用户为空
+        raise HTTPException(status_code=400, detail="User is required")
+
+    user_context.set(user)
     # 读取file字节流
     file_name = file_object.filename
     contents = await file_object.read()
