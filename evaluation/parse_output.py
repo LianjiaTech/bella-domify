@@ -8,17 +8,16 @@
 #    @Description   : 
 #
 # ===============================================================
-import logging
-import time
 
-from pdf2docx import Converter, parse
-from pdf2docx.dom_tree.domtree import DomTreeModel
 import json
+
 from fastapi.encoders import jsonable_encoder
+
 from constant import file_list
-
-
+from pdf2docx import Converter
+from pdf2docx.dom_tree.domtree import DomTreeModel
 from server.context import user_context
+
 user_context.set("1000000023008327")
 
 import os

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from pydantic import BaseModel, PrivateAttr, computed_field
 
 from pdf2docx.common.Element import Element
@@ -13,9 +14,6 @@ class CellExtendModel(BaseModel):
         super().__init__()
         self._cell = cell
         self._talbe_order_num = table_order_num
-
-    class Config:
-        arbitrary_types_allowed = True
 
     @computed_field
     @property

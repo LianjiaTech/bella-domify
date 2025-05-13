@@ -34,9 +34,6 @@ class NodeModel(BaseModel):
         super().__init__()
         self._node = node
 
-    class Config:
-        arbitrary_types_allowed = True
-
     @computed_field
     @property
     def child(self) -> List[NodeModel]:
@@ -205,9 +202,6 @@ class DomTreeModel(BaseModel):
     def __init__(self, dom_tree, **data: Any):
         super().__init__(**data)
         self._dom_tree = dom_tree
-
-    class Config:
-        arbitrary_types_allowed = True
 
     @computed_field
     @property

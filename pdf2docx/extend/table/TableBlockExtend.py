@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import re
 from typing import Optional, List
 
@@ -32,9 +33,6 @@ class TableBlockModel(BaseBlockModel):
         self._block = block
         self._order_num = order_num
         self.page_num = block.page_num
-
-    class Config:
-        arbitrary_types_allowed = True
 
     @computed_field
     @property

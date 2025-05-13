@@ -3,8 +3,8 @@
 '''Base class for text/image/table blocks.
 '''
 
-from .share import BlockType, TextAlignment
 from .Element import Element
+from .share import BlockType, TextAlignment
 
 
 class Block(Element):
@@ -41,6 +41,7 @@ class Block(Element):
     def is_header(self):
         return self._header
 
+    # review-todo: 这里没有使用，是在哪里标记的页眉页脚？
     def mark_header(self):
         self._header = True
 
