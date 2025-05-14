@@ -52,6 +52,11 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                 message_json = json.loads(message_value)
                 file_id = message_json.get("data", {}).get("id", "")
                 file_name = message_json.get("data", {}).get("filename", "")
+                if not check_supported_file_type(file_name):
+                    logging.info(f"not supported file type: {file_name}")
+                    consumer.commit(msg)
+                    continue
+
                 metadata = json.loads(message_json.get("metadata", "{}"))
                 user = metadata.get("user", DEFAULT_USER)
                 # 暂不做user校验
@@ -87,6 +92,9 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
         # 关闭消费者
         consumer.close()
 
+def check_supported_file_type(file_name: str) -> bool:
+    # todo 校验文件类型，先过滤不包含文件类型的文件
+    return "." in file_name
 
 def check_file_size_and_pages(contents, file_info):
     file_id = file_info["id"]
