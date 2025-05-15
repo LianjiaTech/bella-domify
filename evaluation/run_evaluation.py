@@ -118,6 +118,7 @@ def load_markdown(file_path):
         "h1": "Title",
         "h2": "Title",
         "h3": "Title",
+        "h4": "Title",
         "p": "Text",
         "ol": "List",  # 有序列表
         "li": "List",
@@ -133,17 +134,6 @@ def load_markdown(file_path):
             return "Title"
         else:
             return "Text"
-
-    def extract_table(text):
-        if text[0] == "|" and text[-1] == "|":
-            return text, ""
-        # 使用正则表达式匹配从第一个到最后一个竖线之间的内容
-        match = re.search(r'\|.*?\|', text, re.DOTALL)
-        if match:
-            table_text = match.group(0)
-            left_text = text.replace(table_text, '', 1)
-            return table_text, left_text
-        return None, text
 
     def cut_string(s):
         first_index = s.find("|")
@@ -450,7 +440,6 @@ def tree2list_ali(parser_json):
     }
 
     elements = parser_json["layouts"]
-    cate_list = []
     for element in elements:
         type = element["type"]
         subType = element["subType"]
@@ -467,8 +456,6 @@ def tree2list_ali(parser_json):
             if type == "table":
                 text = text.replace("|\n", "").replace("---|", "").replace(" ", "")[1:]
                 layout_type = "Table"
-                # print(text)
-                # print()
             elif type == "text":
                 layout_type = "Text"
             elif type == "title":
@@ -1171,6 +1158,9 @@ def evaluation_single(logger_badcase, file_name, parser=""):
     elif parser == "mineru":
         parser_nodes = load_markdown(f"parse_json/{parser}/" + file_name + '.md')
         pc_edges_parser = get_pc_edges_llamaparse(parser_nodes)
+    elif parser == "microsoft":
+        parser_nodes = load_markdown(f"parse_json/{parser}/" + file_name + '.pdf.md')
+        pc_edges_parser = get_pc_edges_llamaparse(parser_nodes)
     else:
         raise "未实现的解析引擎"
 
@@ -1368,7 +1358,7 @@ def generate_report():
 
 
 def main():
-    # beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
+    beike_parse_output.parse()  # 如果不需要重新解析，可以注掉这行
     generate_report()
 
 
