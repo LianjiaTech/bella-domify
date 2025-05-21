@@ -10,16 +10,13 @@
 # ===============================================================
 
 import io
-import os
+import logging
 import multiprocessing
 import re
 import subprocess
 from io import IOBase
-import logging
 
 import fitz
-from services.layout_parser import pdf_parser
-
 
 lock = multiprocessing.Lock()
 
@@ -80,16 +77,4 @@ def is_mime_email(pdf_stream):
         return False
 
     return True
-
-
-if __name__ == "__main__":
-
-    file_path = os.path.abspath(__file__).split("document_parse")[0] + "document_parse/test/samples/file_type_demo/"
-    file_name = 'demo.doc'
-    # 示例使用
-    with open(file_path + file_name, 'rb') as docx_file:
-        docx_stream = io.BytesIO(docx_file.read())
-
-    pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
-    print(pdf_parser.layout_parse(docx_stream))
 

@@ -44,12 +44,6 @@ def log_setting(log_file=""):
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    # # 创建一个控制台处理器，将日志输出到控制台
-    # console_handler = logging.StreamHandler()
-    # console_handler.setLevel(logging.INFO)
-    # console_handler.setFormatter(formatter)
-    # logger.addHandler(console_handler)
-
     return logger
 
 
@@ -340,7 +334,6 @@ def tree2list_beike(tree):
             "text": text,
             "page_num": page_num,
             "bbox": bbox,
-            # "element": tree.get("element", {})
         }
         nodes.append(node_info)
     for child in tree.get("child", []):
@@ -399,7 +392,6 @@ def tree2list_adobe(parser_json):
         else:
             if block_type == "Figure":
                 text = "<image>"
-            # elif
             else:
                 text = element["Text"]
                 # pass
@@ -409,7 +401,6 @@ def tree2list_adobe(parser_json):
             "layout_type": layout_type,
             "order_num": element["Path"],
             "text": text.strip(),
-            # "element": tree.get("element", {})
         }
         nodes.append(node_info)
 
@@ -541,8 +532,6 @@ def tree2list_unstructured(parser_json):
         layout_type = layout_map[type]
         if type == "Image":
             text = "<image>"
-        # elif type == "Table":
-        #     text = text.replace("|\n", "").replace("---|", "").replace(" ", "")[1:]
 
 
         node_info = {
@@ -870,9 +859,7 @@ def find_mapping(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
                 continue
 
     print("1v1节点个数：", len(edit_dist_1v1_nodes))
-    # for i in see_1v1:
-    #     print(i)
-    # print("1v1节点编辑距离：", edit_dist_1v1_nodes)
+
     if edit_dist_1v1_nodes:
         print("1v1节点编辑距离：", round(mean(edit_dist_1v1_nodes), 4))
     else:
@@ -920,24 +907,8 @@ def calculate_box_relationship(label_node, parser_node):
         return "无重叠"
     elif inter_area / union_area > 0.60:
         return "基本吻合"
-    # elif inter_area / label_box.area > 0.60:
-    #     return "检测框覆盖"
     else:
         return "检测框太小"
-
-    # if inter_area > 0.6 * union_area:
-    #     return "基本吻合"
-    # elif inter_area > rect1_box.area * 0.90:
-    #     return "检测框太小"
-    # elif inter_area > rect2_box.area * 0.90:
-    #     return "检测框覆盖"
-    # elif inter_area:  # 有重叠，无关系
-    #     print(label_node["text"])
-    #     print(parser_node["order_num"])
-    #     print(inter_area/rect1_box.area)
-    #     print(inter_area/rect2_box.area)
-    # else:  # 无重叠
-    #     return "无重叠"
 
 
 def find_mapping_by_bbox(logger_badcase, file_name, parser_nodes_ori, label_nodes_ori):
@@ -1460,10 +1431,6 @@ def surya_view():
             page_num = parse_node["page_num"]
             bbox = parse_node["bbox"]
             layout_type = parse_node["layout_type"]
-            type = parse_node["type"]
-
-            # draw_text = type
-            # draw_text = layout_type
             draw_text = f"{order_num} {layout_type}"
             draw_box(debug_pages[page_num], draw_text, fitz.Rect(bbox))
         debug_file.save(f"documents/" + file_name + '_surya_ori.pdf')

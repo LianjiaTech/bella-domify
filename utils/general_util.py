@@ -20,7 +20,6 @@ from PIL import Image
 
 from server.task_executor import s3
 
-# MODEL_NAME = "ali-qwen2-72b-vl-v1-chat-20250117"
 MODEL_NAME = "gpt-4o"
 
 
