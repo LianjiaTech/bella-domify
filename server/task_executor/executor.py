@@ -43,6 +43,10 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
             try:
                 message_json = json.loads(message_value)
                 file_id = message_json.get("data", {}).get("id", "")
+                if "-14195186" in file_id:
+                    consumer.commit(msg)
+                    continue
+                    
                 file_name = message_json.get("data", {}).get("filename", "")
                 if not check_supported_file_type(file_name):
                     logging.info(f"not supported file type: {file_name}")
