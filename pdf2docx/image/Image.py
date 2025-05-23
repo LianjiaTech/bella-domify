@@ -19,8 +19,7 @@ Data structure defined in link https://pymupdf.readthedocs.io/en/latest/textpage
 '''
 
 import base64
-from io import BytesIO
-from ..common import docx
+
 from ..common.Element import Element
 
 
@@ -86,9 +85,3 @@ class Image(Element):
         page.draw_line((x0, y0), (x1, y1), color=color, width=0.5)
         page.draw_line((x0, y1), (x1, y0), color=color, width=0.5)
         super().plot(page, stroke=color)
-
-
-    def make_docx(self, paragraph):
-        '''Add image span to a docx paragraph.'''
-        # add image
-        docx.add_image(paragraph, BytesIO(self.image), self.bbox.x1-self.bbox.x0, self.bbox.y1-self.bbox.y0)

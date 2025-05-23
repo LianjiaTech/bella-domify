@@ -181,12 +181,3 @@ class Block(Element):
             'tab_stops'        : self.tab_stops
             })
         return res
-
-
-    def make_docx(self, *args, **kwargs):
-        """Create associated docx element.
-
-        Raises:
-            NotImplementedError
-        """
-        raise NotImplementedError

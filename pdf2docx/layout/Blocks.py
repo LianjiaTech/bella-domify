@@ -8,20 +8,17 @@ import logging
 import math
 import re
 
-from docx.shared import Pt
-
 from ..common import constants
-from ..common.Collection import ElementCollection
-from ..common.share import (BlockType, lower_round, rgb_value)
 from ..common.Block import Block
-from ..common.docx import (reset_paragraph_format, delete_paragraph)
-from ..text.TextBlock import TextBlock
-from ..text.TextSpan import TextSpan
+from ..common.Collection import ElementCollection
+from ..common.share import (BlockType, rgb_value)
+from ..image.ImageBlock import ImageBlock
+from ..table.Cell import Cell
+from ..table.TableBlock import TableBlock
 from ..text.Line import Line
 from ..text.Lines import Lines
-from ..table.Cell import Cell
-from ..image.ImageBlock import ImageBlock
-from ..table.TableBlock import TableBlock
+from ..text.TextBlock import TextBlock
+from ..text.TextSpan import TextSpan
 
 
 def is_center_aligned(block, left_x, right_x):
@@ -308,66 +305,6 @@ class Blocks(ElementCollection):
         self._parse_block_horizontal_spacing(*args)
         self._parse_block_vertical_spacing()
         self._parse_line_spacing()
-
-
-    def make_docx(self, doc):
-        '''Create page based on parsed block structure. 
-        
-        Args:
-            doc (Document, _Cell): The container to make docx content.
-        '''
-        def make_table(table_block, pre_table):
-            # create dummy paragraph if table before space is set
-            # - a minimum line height of paragraph is 0.7pt, so ignore before space if less than this value
-            # - but tow adjacent tables will be combined automatically, so adding a minimum dummy paragraph is required
-            if table_block.before_space>=constants.MIN_LINE_SPACING or pre_table:
-                h = lower_round(table_block.before_space, 1) # round(x,1), but to lower bound
-                p = doc.add_paragraph()
-                reset_paragraph_format(p, line_spacing=Pt(h))
-
-            # new table            
-            table = doc.add_table(rows=table_block.num_rows, cols=table_block.num_cols)
-            table.autofit = False
-            table.allow_autofit  = False
-            table_block.make_docx(table)
-
-        pre_table = False
-        cell_layout = isinstance(self.parent, Cell)
-        for block in self._instances:
-            # make paragraphs
-            if block.is_text_image_block:                
-                # new paragraph
-                p = doc.add_paragraph()
-                block.make_docx(p)
-
-                pre_table = False # mark block type
-            
-            # make table
-            elif block.is_table_block:
-                make_table(block, pre_table)
-                pre_table = True # mark block type
-
-                # NOTE: within a cell, there is always an empty paragraph after table,
-                # so, delete it right here.
-                # https://github.com/dothinking/pdf2docx/issues/76 
-                if cell_layout:
-                    delete_paragraph(doc.paragraphs[-1])
-       
-        # NOTE: If a table is at the end of a page, a new paragraph will be automatically 
-        # added by the rending engine, e.g. MS Word, which resulting in an unexpected
-        # page break. The solution is to never put a table at the end of a page, so add
-        # an empty paragraph and reset its format, particularly line spacing, when a table
-        # is created.
-        for block in self._instances[::-1]:
-            # ignore float image block
-            if block.is_float_image_block: continue
-
-            # nothing to do if not end with table block
-            if not block.is_table_block: break
-
-            # otherwise, add a small paragraph
-            p = doc.add_paragraph()
-            reset_paragraph_format(p, Pt(constants.MIN_LINE_SPACING)) # a small line height
 
   
     def plot(self, page):

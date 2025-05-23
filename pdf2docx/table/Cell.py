@@ -3,10 +3,9 @@
 '''Table Cell object.
 '''
 
-from docx.shared import Pt
+from ..common import docx
 from ..common.Element import Element
 from ..layout.Layout import Layout
-from ..common import docx
 
 
 class Cell(Element, Layout):
@@ -91,44 +90,6 @@ class Cell(Element, Layout):
         '''Plot cell and its sub-layout.'''        
         super().plot(page)
         self.blocks.plot(page)
-
-
-    def make_docx(self, table, indexes):
-        '''Set cell style and assign contents.
-        
-        Args:
-            table (Table): ``python-docx`` table instance.
-            indexes (tuple): Row and column indexes, ``(i, j)``.
-        '''        
-        # set cell style, e.g. border, shading, cell width
-        self._set_style(table, indexes)
-        
-        # ignore merged cells
-        if not bool(self):  return
-
-        # merge cells
-        n_row, n_col = self.merged_cells
-        i, j = indexes
-        docx_cell = table.cell(i, j)
-        if n_row*n_col!=1:
-            _cell = table.cell(i+n_row-1, j+n_col-1)
-            docx_cell.merge(_cell)
-        
-        # ---------------------
-        # cell width (cell height is set by row height)
-        # ---------------------
-        # experience: width of merged cells may change if not setting width for merged cells
-        x0, y0, x1, y1 = self.bbox
-        docx_cell.width = Pt(x1-x0)
-
-        # insert contents
-        # NOTE: there exists an empty paragraph already in each cell, which should be deleted first to
-        # avoid unexpected layout. `docx_cell._element.clear_content()` works here.
-        # But, docx requires at least one paragraph in each cell, otherwise resulting in a repair error. 
-        if self.blocks:
-            docx_cell._element.clear_content()
-            self.blocks.make_docx(docx_cell)
-
 
     def _set_style(self, table, indexes):
         '''Set ``python-docx`` cell style, e.g. border, shading, width, row height, 

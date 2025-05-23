@@ -3,8 +3,6 @@
 '''Row in a table.
 '''
 
-from docx.enum.table import WD_ROW_HEIGHT
-from docx.shared import Pt
 from .Cells import Cells
 from ..common.Element import Element
 
@@ -51,25 +49,3 @@ class Row(Element):
         })
 
         return res
-
-
-    def make_docx(self, table, idx_row:int):
-        '''Create row of docx table.
-        
-        Args:
-            table (Table): ``python-docx`` table instance.
-            idx_row (int): Current row index.
-        '''  
-        # set row height
-        docx_row = table.rows[idx_row]
-
-        # to control the layout precisely, set `exact` value, rather than `at least` value
-        # the associated steps in MS word: Table Properties -> Row -> Row height -> exactly
-        docx_row.height_rule = WD_ROW_HEIGHT.EXACTLY
-        
-        # NOTE: row height is counted from center-line of top border to center line of bottom border
-        docx_row.height = Pt(self.height)
-
-        # set cell style and contents
-        for idx_col in range(len(table.columns)):
-            self._cells[idx_col].make_docx(table, (idx_row, idx_col))

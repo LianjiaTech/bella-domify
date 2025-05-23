@@ -34,7 +34,6 @@ Data Structure::
 from .Row import Row
 from .Rows import Rows
 from ..common.Block import Block
-from ..common import docx
 from ..common.share import rgb_component_from_name
 from ..extend.table.CellExtend import CellExtend
 
@@ -173,16 +172,3 @@ class TableBlock(Block):
         # block border in blue
         green = rgb_component_from_name('green')
         super().extend_plot(page, stroke=green, dashes='[3.0 3.0] 0', width=5)
-
-    def make_docx(self, table):
-        '''Create docx table.
-        
-        Args:
-            table (Table): ``python-docx`` table instance.
-        '''
-        # set left indent
-        docx.indent_table(table, self.left_space)
-
-        # set format and contents row by row
-        for idx_row in range(len(table.rows)):
-            self._rows[idx_row].make_docx(table, idx_row)

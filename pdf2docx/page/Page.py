@@ -39,13 +39,11 @@ Page elements structure:
 
 '''
 
-from docx.shared import Pt
-from docx.enum.section import WD_SECTION
+from .BasePage import BasePage
 from ..common.Collection import BaseCollection
 from ..common.share import debug_plot
-from .BasePage import BasePage
-from ..layout.Sections import Sections
 from ..image.ImageBlock import ImageBlock
+from ..layout.Sections import Sections
 
 
 class Page(BasePage):
@@ -172,37 +170,6 @@ class Page(BasePage):
                 tables.append(table_block.text)
 
         return tables
-
-
-    def make_docx(self, doc):
-        '''Set page size, margin, and create page. 
-
-        .. note::
-            Before running this method, the page layout must be either parsed from source 
-            page or restored from parsed data.
-        
-        Args:
-            doc (Document): ``python-docx`` document object
-        '''
-        # new page
-        if doc.paragraphs:
-            section = doc.add_section(WD_SECTION.NEW_PAGE)
-        else:
-            section = doc.sections[0] # a default section is there when opening docx
-
-        # page size
-        section.page_width  = Pt(self.width)
-        section.page_height = Pt(self.height)
-
-        # page margin
-        left,right,top,bottom = self.margin
-        section.left_margin = Pt(left)
-        section.right_margin = Pt(right)
-        section.top_margin = Pt(top)
-        section.bottom_margin = Pt(bottom)
-
-        # create flow layout: sections
-        self.sections.make_docx(doc)
 
  
     def _restore_float_images(self, raws:list):

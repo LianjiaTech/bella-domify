@@ -5,13 +5,11 @@
 **The raw image block will be merged into TextBlock > Line > Span.**
 '''
 
-from io import BytesIO
-from ..text.Line import Line
-from ..text.TextBlock import TextBlock
 from .Image import Image
 from .ImageSpan import ImageSpan
 from ..common.Block import Block
-from ..common.docx import add_float_image
+from ..text.Line import Line
+from ..text.TextBlock import TextBlock
 
 
 class ImageBlock(Image, Block):
@@ -65,19 +63,3 @@ class ImageBlock(Image, Block):
 
     def extend_plot(self, page):
         self.plot(page)
-
-    def make_docx(self, p):
-        '''Create floating image behind text. 
-        
-        Args:
-            p (Paragraph): ``python-docx`` paragraph instance.
-        
-        .. note::
-            Inline image is created within TextBlock.
-        '''
-        if self.is_float_image_block:
-            x0, y0, x1, y1 = self.bbox
-            add_float_image(p, BytesIO(self.image), width=x1-x0, pos_x=x0, pos_y=y0)
-        else:
-            super().make_docx(p)
-        return p

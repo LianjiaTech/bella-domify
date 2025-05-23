@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
 import logging
-import os
-from multiprocessing import Pool, cpu_count
-from time import perf_counter
-from typing import AnyStr, IO, Union
 
 import fitz
-from docx import Document
 
 from .config import DEFAULT_SETTINGS
 from .dom_tree.domtree import DomTree
@@ -181,52 +176,6 @@ class Converter:
         self.pages_extend.relation_construct()
         return self
 
-    def make_docx(self, docx_filename=None, **kwargs):
-        '''Step 4 of converting process: create docx file with converted pages.
-        
-        Args:
-            docx_filename (str, file-like): docx file to write.
-            kwargs (dict, optional): Configuration parameters. 
-        '''
-        logging.info(self._color_output('[4/4] Creating pages...'))
-
-        # check parsed pages
-        parsed_pages = list(filter(
-            lambda page: page.finalized, self._pages
-        ))
-        if not parsed_pages:
-            raise ConversionException('No parsed pages. Please parse page first.')
-
-        if not docx_filename:
-            raise ConversionException(
-                "No docx file name. Please specify a docx file name or a file-like object to write."
-            )
-
-        # docx file to convert to
-        if hasattr(docx_filename, "write"):
-            filename = docx_filename
-
-        else:
-            filename = docx_filename or f'{self.filename_pdf[0:-len(".pdf")]}.docx' if self.filename_pdf else "output.docx"
-            if os.path.exists(filename): os.remove(filename)
-
-        # create page by page        
-        docx_file = Document()
-        num_pages = len(parsed_pages)
-        for i, page in enumerate(parsed_pages, start=1):
-            if not page.finalized: continue  # ignore unparsed pages
-            pid = page.id + 1
-            logging.info('(%d/%d) Page %d', i, num_pages, pid)
-            try:
-                page.make_docx(docx_file)
-            except Exception as e:
-                if not kwargs['debug'] and kwargs['ignore_page_error']:
-                    logging.error('Ignore page %d due to making page error: %s', pid, e)
-                else:
-                    raise MakedocxException(f'Error when make page {pid}: {e}')
-
-        # save docx
-        docx_file.save(filename)
 
     # -----------------------------------------------------------------------
     # Store / restore parsed results
@@ -418,33 +367,6 @@ class Converter:
                 continue
             page.sections.extend_plot(debug_page)
         debug_file.save(kwargs['debug_file_name'])
-
-    def _convert_with_multi_processing(self, docx_filename: str, start: int, end: int, **kwargs):
-        '''Parse and create pages based on page indexes with multi-processing.
-
-        Reference:
-
-            https://pymupdf.readthedocs.io/en/latest/faq.html#multiprocessing
-        '''
-        # make vectors of arguments for the processes
-        cpu = min(kwargs['cpu_count'], cpu_count()) if kwargs['cpu_count'] else cpu_count()
-        prefix = 'pages'  # json file writing parsed pages per process
-        vectors = [(i, cpu, start, end, self.filename_pdf, self.password,
-                    kwargs, f'{prefix}-{i}.json') for i in range(cpu)]
-
-        # start parsing processes
-        pool = Pool()
-        pool.map(self._parse_pages_per_cpu, vectors, 1)
-
-        # restore parsed page data
-        for i in range(cpu):
-            filename = f'{prefix}-{i}.json'
-            if not os.path.exists(filename): continue
-            self.deserialize(filename)
-            os.remove(filename)
-
-        # create docx file
-        self.make_docx(docx_filename, **kwargs)
 
     @staticmethod
     def _parse_pages_per_cpu(vector):

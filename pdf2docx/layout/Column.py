@@ -64,13 +64,4 @@ class Column(Element, Layout):
         return self
 
 
-    def make_docx(self, doc):
-        '''Create Section Column in docx. 
-
-        Args:
-            doc (Document): ``python-docx`` document object
-        '''
-        self.blocks.make_docx(doc)
-
-
 

@@ -30,14 +30,14 @@ this `link <https://pymupdf.readthedocs.io/en/latest/textpage.html>`_::
 '''
 
 import fitz
-import os
-from docx.shared import Pt, RGBColor
 from docx.oxml.ns import qn
+from docx.shared import Pt, RGBColor
+
 from .Char import Char
-from ..common.Element import Element
-from ..common.share import RectType
 from ..common import constants
 from ..common import share, docx
+from ..common.Element import Element
+from ..common.share import RectType
 from ..shape.Shape import Shape
 
 
@@ -361,30 +361,6 @@ class TextSpan(Element):
                 span.union_bbox(char)
 
         return span
-
-
-    def make_docx(self, paragraph):
-        '''Add text span to a docx paragraph, and set text style, e.g. font, color, underline, hyperlink, etc.
-
-        .. note::
-            Hyperlink and its style is parsed separately from pdf. For instance, regarding a general hyperlink with an
-            underline, the text and uri is parsed as hyperlink itself, while the underline is treated as a normal text
-            style.
-        '''
-        # Create hyperlink in particular, otherwise add a run directly
-        for style in self.style:
-            if style['type']==RectType.HYPERLINK.value and self.text.strip():
-                docx_run = docx.add_hyperlink(paragraph, style['uri'], self.text)
-                break
-        else:
-            docx_run = paragraph.add_run(self.text)
-        
-        # set text style, e.g. font, underline and highlight
-        self._set_text_format(docx_run)
-
-        # set charters spacing
-        if self.char_spacing: 
-            docx.set_char_spacing(docx_run, self.char_spacing)
 
 
     def _set_text_format(self, docx_run):
