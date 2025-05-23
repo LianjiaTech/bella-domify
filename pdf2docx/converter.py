@@ -170,7 +170,7 @@ class Converter:
         return self
 
     def relation_construct(self, **kwargs):
-        logging.info(self._color_output('[4/4] build elements relations...'))
+        logging.info(self._color_output('[4/4] Build elements relations...'))
         # 页面扩展对象
         self._pages_extend = PagesExtend(self._pages)
         self.pages_extend.relation_construct()
@@ -367,52 +367,6 @@ class Converter:
                 continue
             page.sections.extend_plot(debug_page)
         debug_file.save(kwargs['debug_file_name'])
-
-    @staticmethod
-    def _parse_pages_per_cpu(vector):
-        '''Render a page range of a document.
-        
-        Args:
-            vector (list): A list containing required parameters.
-                * 0  : segment number for current process                
-                * 1  : count of CPUs
-                * 2,3: whole pages range to process
-                * 4  : pdf filename
-                * 5  : password for encrypted pdf
-                * 6  : configuration parameters
-                * 7  : json filename storing parsed results
-        '''
-        # recreate the arguments
-        idx, cpu, s, e, pdf_filename, password, kwargs, json_filename = vector
-
-        # open pdf to get page count: all pages are marked to parse temporarily 
-        # since don't know which pages to parse for this moment
-        cv = Converter(pdf_filename, password)
-        cv.load_pages()
-
-        # the specified pages to process
-        e = e or len(cv.fitz_doc)
-        all_indexes = range(s, e)
-        num_pages = len(all_indexes)
-
-        # page segment processed by this cpu
-        m = int(num_pages / cpu)
-        n = num_pages % cpu
-        seg_size = m + int(idx < n)
-        seg_from = (m + 1) * idx + min(n - idx, 0)
-        seg_to = min(seg_from + seg_size, num_pages)
-        page_indexes = [all_indexes[i] for i in range(seg_from, seg_to)]
-
-        # now, mark the right pages
-        for page in cv.pages: page.skip_parsing = True
-        for i in page_indexes:
-            cv.pages[i].skip_parsing = False
-
-        # parse pages and serialize data for further processing
-        cv.parse_document(**kwargs) \
-            .parse_pages(**kwargs) \
-            .serialize(json_filename)
-        cv.close()
 
     @staticmethod
     def _page_indexes(start, end, pages, pdf_len):
