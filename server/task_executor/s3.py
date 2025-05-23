@@ -1,13 +1,13 @@
 import hashlib
 import io
+import json
+import logging
 import time
 import urllib.parse
 import uuid
 from urllib.parse import urlparse, urlunparse
 
 import boto3
-import json
-import logging
 from fastapi import UploadFile
 
 from settings.ini_config import config
@@ -18,11 +18,12 @@ bucket_name = config.get('S3', 'BUCKET_NAME')
 endpoint = config.get('S3', 'ENDPOINT')
 s3 = boto3.client("s3", aws_access_key_id=ak, aws_secret_access_key=sk, endpoint_url=endpoint)
 
-# 内网替换为外网
+# 内网替换为外网 review-todo：配置化
 inner_point = 'https://storage.lianjia.com'
 end_point = 'https://img.ljcdn.com'
 
 
+# review-todo：和s3_service的关系，以及应该放的位置
 def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> str:
     # s3 上传文件
     if file:

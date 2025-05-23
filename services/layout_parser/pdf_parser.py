@@ -9,18 +9,20 @@
 #
 # ===============================================================
 import json
+import logging
 
 import fitz
-from services.SimpleBlock import SimpleBlock
+
 from services.constants import TEXT, IMAGE
 from services.layout_parse_utils import _possible_holder_blocks, mark_holder_by_text_similarity, \
     get_s3_links_for_simple_block_batch, trans_simple_block_list2string
-import logging
+from services.simple_block import SimpleBlock
+
 
 def trans_block2text(block):
     text = ""
     for line in block["lines"]:
-        if(line["dir"][0] == 1.0 or line["dir"][1] == -1.0):
+        if (line["dir"][0] == 1.0 or line["dir"][1] == -1.0):
             for span in line["spans"]:
                 text += span["text"]
     return text
@@ -36,7 +38,6 @@ def layout_parse(file):
     except fitz.fitz.FileDataError as e:
         logging.error('layout_parse解析失败。[文件类型]pdf [原因]非pdf类型或损坏的pdf文件 [Exception]:%s', e)
         return ""
-        # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
 
     # 遍历每一页
     for page_num in range(len(pdf_document)):

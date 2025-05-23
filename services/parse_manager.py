@@ -140,11 +140,9 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
                 s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
 
             return True, json_compatible_data, markdown_res
-            # return ParserResult(parser_data=json_compatible_data).to_json()
         except Exception as e:
             logging.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
             return False, {}, ""
-            # return ParserResult(parser_code=ParserCode.ERROR, parser_msg="非pdf类型或损坏的pdf文件").to_json()
     elif file_extension == 'csv':
         markdown_res = csv_parser.markdown_parse(file)
         if task_id:

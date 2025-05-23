@@ -15,9 +15,9 @@ import logging
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER_TYPE
 
-from services.SimpleBlock import SimpleBlock
 from services.constants import TEXT, TABLE, IMAGE
 from services.layout_parse_utils import get_s3_links_for_simple_block_batch, trans_simple_block_list2string
+from services.simple_block import SimpleBlock
 
 
 def layout_parse(file):

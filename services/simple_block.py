@@ -11,7 +11,7 @@
 from services.constants import IMAGE
 from utils.general_util import get_pic_url_and_ocr
 
-
+# review-todo: 位置不对，放到parser module内
 class SimpleBlock:
     def __init__(self, text="", type="", page_num=0, is_header=False, is_footer=False, image_bytes=None, ocr_text=""):
         self.text = text

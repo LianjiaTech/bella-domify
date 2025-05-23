@@ -11,11 +11,11 @@
 
 import logging
 
-from services.SimpleBlock import SimpleBlock
+from server.context import user_context
 from services.constants import IMAGE
 from services.layout_parse_utils import get_s3_links_for_simple_block_batch
+from services.simple_block import SimpleBlock
 from utils.general_util import get_pic_url_and_ocr
-from server.context import user_context
 
 
 def layout_parse(file):

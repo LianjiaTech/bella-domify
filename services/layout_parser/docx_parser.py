@@ -16,9 +16,9 @@ from docx import Document, ImagePart
 from docx.oxml import CT_Picture
 from docx.text.paragraph import Paragraph
 
-from services.SimpleBlock import SimpleBlock
 from services.constants import TEXT, TABLE, IMAGE
 from services.layout_parse_utils import get_s3_links_for_simple_block_batch, trans_simple_block_list2string
+from services.simple_block import SimpleBlock
 
 
 def find_image(doc: Document, paragraph: Paragraph):

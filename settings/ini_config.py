@@ -1,7 +1,6 @@
 """Load configuration from .ini file."""
 import configparser
 import os
-import logging
 
 env = os.getenv("ENVTYPE", "test")
 # Read local file `settings.ini`.

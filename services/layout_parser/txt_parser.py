@@ -10,9 +10,9 @@
 # ===============================================================
 import os
 
-from services.SimpleBlock import SimpleBlock
 from services.constants import TEXT
 from services.layout_parse_utils import get_s3_links_for_simple_block_batch
+from services.simple_block import SimpleBlock
 
 
 def layout_parse(file):

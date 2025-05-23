@@ -5,8 +5,10 @@ import os
 
 from setuptools import find_packages, setup
 
-DESCRIPTION = 'Open source Python library converting pdf to docx.'
-EXCLUDE_FROM_PACKAGES = ["build", "dist", "test"]
+DESCRIPTION = 'An Open source Pdf Parser Python library'
+
+# review-todo：缺少setting、user_context
+INCLUDE_FROM_PACKAGES = ["pdf_parser", "pdf_parser.*"]
 
 VERSION = "0.1.6.4"
 

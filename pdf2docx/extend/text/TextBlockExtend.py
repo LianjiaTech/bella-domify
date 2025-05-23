@@ -138,6 +138,7 @@ class TextBlockExtend(RelationElement, BlockExtend):
         if self.is_image_block:
             image_span = self.lines.image_spans[0]
             image_bytes = image_span.image_span.image
+            # review-todo：这里要重构，最好module内自闭环
             image_s3_url, ocr_text = get_pic_url_and_ocr(image_bytes, user)
             self.image_s3_link = image_s3_url
             self.image_ocr_result = ocr_text
