@@ -56,3 +56,4 @@ xlrd==2.0.1
 confluent-kafka==2.5.0
 openpyxl==3.1.5
 ait_openapi==0.0.1.25
+docx2txt==0.8

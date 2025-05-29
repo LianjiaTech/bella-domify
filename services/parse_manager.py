@@ -224,16 +224,6 @@ def file_api_retrieve_file(file_id):
     return response.content
 
 
-# 从FileAPI获取文件名称 todo 删除
-def file_api_get_file_name(file_id):
-    url = f"{FILE_API_URL}/v1/files/{file_id}"
-    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
-    response = requests.get(url, headers=headers)
-    response_data = json.loads(response.content)
-    file_name = response_data["filename"]
-    return file_name
-
-
 # 从FileAPI获取文件名称
 def file_api_get_file_info(file_id):
     url = f"{FILE_API_URL}/v1/files/{file_id}"

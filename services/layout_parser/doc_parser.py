@@ -8,12 +8,9 @@
 #    @Description   :
 #
 # ===============================================================
-import xlrd
-from io import BytesIO
-import os
 import io
-from docx import Document
-import mammoth
+import os
+
 import docx2txt
 
 
