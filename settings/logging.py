@@ -3,8 +3,6 @@ import os
 
 from ait_openapi.bella_trace import TraceContext
 
-from doc_parser.context import logger_context
-
 _DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
 
@@ -38,9 +36,4 @@ def init_logger():
     logger.propagate = False
     return logger
 
-def _setup_logger():
-    document_parser_logger = init_logger()
-    # 注册日志记录器
-    logger_context.register_logger(document_parser_logger)
 
-_setup_logger()

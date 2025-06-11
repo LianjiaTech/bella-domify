@@ -1,15 +1,16 @@
-# 从新的日志初始化模块导入预配置的日志记录器，需要放在前面导入
+# web容器启动前的初始化操作，不要删除这个导入
+from . import server_bootstrap
 
 import json
 import time
 from threading import Thread
 
+from fastapi import FastAPI
+
 from doc_parser.context import parser_context, ParserConfig, logger_context
 from services.constants import GROUP_ID_LONG_TASK, GROUP_ID_IMAGE_TASK, GROUP_ID_SHORT_TASK
 from services.provider.s3_image_provider import S3ImageStorageProvider
 from settings.ini_config import config
-
-from fastapi import FastAPI
 
 from .api import router, health_router
 from .task_executor.executor import listen_parse_task_layout_and_domtree
