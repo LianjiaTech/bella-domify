@@ -336,7 +336,7 @@ def tree2list_beike(tree):
             "bbox": bbox,
         }
         nodes.append(node_info)
-    for child in tree.get("child", []):
+    for child in tree.get("children", []):
         nodes.extend(tree2list_beike(child))
     return nodes
 
@@ -797,7 +797,7 @@ def tree2list_label(order_num, tree):
             "bbox": bbox,
         }
         nodes.append(node_info)
-    for order_num, child in tree.get("child", {}).items():
+    for order_num, child in tree.get("children", {}).items():
         nodes.extend(tree2list_label(order_num, child))
     return nodes
 

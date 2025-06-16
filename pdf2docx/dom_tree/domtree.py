@@ -36,9 +36,9 @@ class NodeModel(BaseModel):
 
     @computed_field
     @property
-    def child(self) -> List[NodeModel]:
+    def children(self) -> List[NodeModel]:
         child_model = []
-        for child in self._node.child:
+        for child in self._node.children:
             child_model.append(NodeModel(node=child))
         return child_model
 
@@ -61,7 +61,7 @@ class NodeModel(BaseModel):
 class Node:
     def __init__(self, element: Optional[BlockExtend], page: Optional[PageExtend], debug_page, is_root=False):
         self.element = element
-        self.child = []
+        self.children = []
         self.parent = None
         self.is_root = is_root
         self.page = page
@@ -169,20 +169,20 @@ class Node:
     def same_list_type_node(self, node):
         return not node.is_root and self.element.block.list_type() == node.element.block.list_type()
 
-    def add_child(self, node: Node):
-        self.child.append(node)
+    def add_children(self, node: Node):
+        self.children.append(node)
         node.parent = self
 
     def add_brother(self, node: Node):
-        self.parent.child.append(node)
+        self.parent.children.append(node)
         node.parent = self.parent
 
     def union_bbox(self):
-        if not self.child:
+        if not self.children:
             return
-        for child in self.child:
+        for child in self.children:
             child.union_bbox()
-        [self.element.union_bbox(child.element) for child in self.child]
+        [self.element.union_bbox(child.element) for child in self.children]
 
     def plot(self):
         if self.element and self.debug_page:
@@ -252,7 +252,7 @@ class DomTree:
         texts = []
         if node.element and node.element.is_text_block:
             texts.append(node.element.text)
-        for child in node.child:
+        for child in node.children:
             texts.extend(self._get_text_block(child))
         return texts
 
@@ -296,13 +296,13 @@ class DomTree:
 
                 if element.refed_blocks and element.refed_blocks[0] in self.node_dict and element.caption_block not in searched_block:
                     # 如果是表格，且有引用, 则添加到首个引用块
-                    self.node_dict[element.refed_blocks[0]].add_child(node)
+                    self.node_dict[element.refed_blocks[0]].add_children(node)
                     caption_node = Node(element.caption_block, page, debug_page)
-                    self.node_dict[element.refed_blocks[0]].add_child(caption_node)
+                    self.node_dict[element.refed_blocks[0]].add_children(caption_node)
                     # 添加table caption为已搜索过的块，避免重复搜索
                     searched_block.add(element.caption_block)
                 elif prev_text_node:
-                    prev_text_node.add_child(node)
+                    prev_text_node.add_children(node)
                     judge_title_by_child(prev_text_node)
                     # todo 这部分依赖title识别要准确，之后加
                     # if prev_text_node.element.block.list_type() or prev_text_node.element.is_title:
@@ -310,26 +310,26 @@ class DomTree:
                     # else:
                     #     prev_text_node.add_brother(node)
                 else:
-                    self.root.add_child(node)
+                    self.root.add_children(node)
                 continue
             # 处理图片块
             if element.is_image_block:
                 image_span = element.lines.image_spans[0]
                 if image_span.refed_blocks and image_span.refed_blocks[0] in self.node_dict and image_span.caption_block not in searched_block:
                     # 如果是图片，且有引用, 则添加到首个引用块
-                    self.node_dict[image_span.refed_blocks[0]].add_child(node)
+                    self.node_dict[image_span.refed_blocks[0]].add_children(node)
                     caption_node = Node(image_span.caption_block, page, debug_page)
-                    self.node_dict[image_span.refed_blocks[0]].add_child(caption_node)
+                    self.node_dict[image_span.refed_blocks[0]].add_children(caption_node)
                     searched_block.add(image_span.caption_block)
                 elif prev_text_node:
-                    prev_text_node.add_child(node)
+                    prev_text_node.add_children(node)
                     judge_title_by_child(prev_text_node)
                     # if prev_text_node.element.block.list_type() or prev_text_node.element.is_title:
                     #     prev_text_node.add_child(node)
                     # else:
                     #     prev_text_node.add_brother(node)
                 else:
-                    self.root.add_child(node)
+                    self.root.add_children(node)
                 continue
             if not element.is_text_block:
                 # 先分析text block
@@ -357,7 +357,7 @@ class DomTree:
                             stack_path.append(parent_node)
 
                     # 增加子节点
-                    parent_node.add_child(node)
+                    parent_node.add_children(node)
                     # 非叶子节点、文字节点、且非目录 则判定为Title
                     judge_title_by_child(parent_node)
                     # 依赖层级，判定目录
@@ -376,7 +376,7 @@ class DomTree:
         self.print_tree()
 
     def union_bbox(self):
-        for child in self.root.child:
+        for child in self.root.children:
             child.union_bbox()
 
     def print_tree(self):
@@ -397,7 +397,7 @@ class DomTree:
                 print("\n【节点含特殊字符】" + cur_order_str)
                 print("    " * level + cur_order_str, "")
 
-        for i, child in enumerate(node.child, start=1):
+        for i, child in enumerate(node.children, start=1):
             self._print_tree(child, level + 1, cur_order_str, i)
 
     def generate_markdown(self):
@@ -438,7 +438,7 @@ class DomTree:
             else:
                 self.markdown_res += f"{node.element.text}\n\n"
 
-        for i, child in enumerate(node.child, start=1):
+        for i, child in enumerate(node.children, start=1):
             self._generate_markdown(child, level + 1, cur_order_str, i, child_low_than_text)
 
 
