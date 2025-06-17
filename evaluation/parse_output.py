@@ -36,7 +36,7 @@ def convert_to_json(obj):
 
 # 自定义排序函数
 def custom_sort(key):
-    order = ["order_num", "element", "children",
+    order = ["order_num", "element", "child",
              "root",
              "block_type", "text", "image_base64_str",
              "rows", "cells",

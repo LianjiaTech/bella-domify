@@ -34,12 +34,12 @@ def pdf_parser(file_name: str, debug: bool = False) -> dict:
 
 def test_cover():
     result1 = pdf_parser("demo")
-    assert result1["root"]["children"][0]["element"]["text"].strip() == "Automated Data Extraction from Scholarly Line"
+    assert result1["root"]["child"][0]["element"]["text"].strip() == "Automated Data Extraction from Scholarly Line"
     result2 = pdf_parser("demo-blank")
-    assert len(result2["root"]["children"]) == 0, "Expected no content in the blank PDF"
+    assert len(result2["root"]["child"]) == 0, "Expected no content in the blank PDF"
     result3 = pdf_parser("demo-image")
-    assert result3["root"]["children"][0]["element"]["text"].strip() == "A normal image:"
+    assert result3["root"]["child"][0]["element"]["text"].strip() == "A normal image:"
     result4 = pdf_parser("demo-table")
-    assert result4["root"]["children"][0]["element"]["text"].strip() == "Text format and Page Layout"
+    assert result4["root"]["child"][0]["element"]["text"].strip() == "Text format and Page Layout"
     result5 = pdf_parser("demo-table-nested")
-    assert result5["root"]["children"][0]["children"][0]["element"]['block_type'] == 'table'
+    assert result5["root"]["child"][0]["child"][0]["element"]['block_type'] == 'table'
