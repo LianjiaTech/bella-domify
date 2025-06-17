@@ -67,7 +67,7 @@ def output(dom_tree_model, file_name, json_dir, file_suffix=".json"):
     _, json_compatible_data = convert_to_json(dom_tree_model)
     sorted_data = sort_json(json_compatible_data)
 
-    with open(root_dir + json_dir + file_name + file_suffix, 'w') as json_file:
+    with open(root_dir + json_dir + file_name + file_suffix, 'w', encoding="utf8") as json_file:
         json.dump(sorted_data, json_file, indent=2, ensure_ascii=False)
 
 

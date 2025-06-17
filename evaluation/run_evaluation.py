@@ -39,7 +39,7 @@ def log_setting(log_file=""):
     logger.setLevel(logging.INFO)  # 设置日志级别
     formatter = logging.Formatter('%(message)s')
 
-    file_handler = logging.FileHandler(log_file, mode='w')
+    file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
     file_handler.setLevel(logging.INFO)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
@@ -92,7 +92,7 @@ parse_str = "p_"
 
 
 def load_json(file_path):
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding="utf8") as file:
         # 读取 JSON 数据
         data = json.load(file)
     return data
