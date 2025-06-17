@@ -55,5 +55,6 @@ shapely==2.0.5
 xlrd==2.0.1
 confluent-kafka==2.5.0
 openpyxl==3.1.5
-ait_openapi==0.0.1.25
-docx2txt==0.8
+ait_openapi==0.0.1.26
+pytest==4.6.2
+tiktoken==0.8.0
