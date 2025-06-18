@@ -162,7 +162,7 @@ class StandardDomTree(BaseModel):
         text = ""
         # 映射的类型
         element_type = block_type_mapping.get(element['layout_type'], "text")  # 默认类型为 text
-        positions = []
+        positions = [StandardPosition(bbox=element['bbox'], page=element['page_num'][0])]  # 位置列表，目前page_num元素个数只会是1个
 
         standard_node = None
         if element_type == "image":
@@ -199,7 +199,8 @@ class StandardDomTree(BaseModel):
                     for cell_data in row_data['cells']:
                         cell_text = cell_data.get('text', '')
                         cell_texts.append(cell_text)
-                        cell_path = path.copy().append([cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']])
+                        cell_path = path.copy()
+                        cell_path.append([cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']])
                         cell = Cell(
                             path=cell_path,
                             text=cell_text
