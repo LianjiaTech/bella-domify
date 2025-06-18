@@ -3,7 +3,7 @@ import uuid
 
 from fastapi.encoders import jsonable_encoder
 
-from server.domtree_protocol.standard_domtree import StandardDomTree
+from server.protocol.standard_domtree import StandardDomTree
 from services.parse_manager import file_api_retrieve_file, file_api_get_file_info, domtree_parse
 
 

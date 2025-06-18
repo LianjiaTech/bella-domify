@@ -13,11 +13,11 @@ block_type_mapping = {
 
     "Figure": "image",
     "FigureName": "text",
-    "FigureNote": "text",
+    "FigureNote": "text", # 目前实际解析出来没有
 
     "Table": "table",
     "TableName": "text",
-    "TableNote": "text",
+    "TableNote": "text",  # 目前实际解析出来没有
 }
 
 class SourceFile(BaseModel):
@@ -124,9 +124,11 @@ class StandardDomTree(BaseModel):
             children=[]
         )
 
-        # 递归处理子节点
-        for child in node.get('child', []):
-            standard_child = cls._from_standard_node(child)  # 移除 source_file 参数
+        # 递归处理子节点，并为每个子节点分配索引
+        for index, child in enumerate(node.get('child', []), start=1):
+            # 为子节点分配path，第一层级从1开始
+            child_path = [index]
+            standard_child = cls._from_standard_node(child, child_path)  # 传递path参数
             if standard_child:  # 确保子节点不为 None
                 standard_node.children.append(standard_child)
 
@@ -142,15 +144,16 @@ class StandardDomTree(BaseModel):
 
 
     @classmethod
-    def _from_standard_node(cls, node: dict) -> Optional[StandardNode]:
+    def _from_standard_node(cls, node: dict, path: List[int]) -> Optional[StandardNode]:
         """
-            将 Node 转换为 StandardNode
+        将 Node 转换为 StandardNode
 
-            Args:
-                node: 源 Node 对象（字典格式）
-            Returns:
-                StandardNode: 转换后的 StandardNode 对象
-            """
+        Args:
+            node: 源 Node 对象（字典格式）
+            path: 当前节点的路径
+        Returns:
+            StandardNode: 转换后的 StandardNode 对象
+        """
         if not node:
             return
 
@@ -160,8 +163,6 @@ class StandardDomTree(BaseModel):
         # 映射的类型
         element_type = block_type_mapping.get(element['layout_type'], "text")  # 默认类型为 text
         positions = []
-        # 解析 order_num 为 path
-        path = cls._parse_order_num(node['order_num'])
 
         standard_node = None
         if element_type == "image":
@@ -178,7 +179,7 @@ class StandardDomTree(BaseModel):
             standard_node = StandardNode(
                 summary="",
                 tokens=0,  # 先设置为 0，后面再计算
-                path=path,  # 设置解析后的 path
+                path=path,  # 使用传入的path
                 element=StandardImageElement(
                     type=element['layout_type'],
                     positions=positions,
@@ -196,13 +197,9 @@ class StandardDomTree(BaseModel):
                 cells = []
                 if 'cells' in row_data:
                     for cell_data in row_data['cells']:
-                        cell_path = []
-                        if 'order_num' in cell_data:
-                            cell_path = cls._parse_order_num(cell_data['order_num'])
-
                         cell_text = cell_data.get('text', '')
                         cell_texts.append(cell_text)
-
+                        cell_path = path.copy().append([cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']])
                         cell = Cell(
                             path=cell_path,
                             text=cell_text
@@ -218,7 +215,7 @@ class StandardDomTree(BaseModel):
             standard_node = StandardNode(
                 summary="",
                 tokens=0,  # 先设置为 0，后面再计算
-                path=path,  # 设置解析后的 path
+                path=path,  # 使用传入的path
                 element=StandardTableElement(
                     type=element['layout_type'],
                     positions=positions,
@@ -233,7 +230,7 @@ class StandardDomTree(BaseModel):
             standard_node = StandardNode(
                 summary="",
                 tokens=0,  # 先设置为 0，后面再计算
-                path=path,  # 设置解析后的 path
+                path=path,  # 使用传入的path
                 element=StandardElement(
                     type=element['layout_type'],
                     positions=positions,
@@ -242,10 +239,12 @@ class StandardDomTree(BaseModel):
                 children=[]
             )
 
-        # 递归处理子节点
+        # 递归处理子节点，并为每个子节点分配索引
         if 'child' in node:
-            for child in node['child']:
-                standard_child = cls._from_standard_node(child)
+            for index, child in enumerate(node['child'], start=1):
+                # 为子节点分配path，在当前path基础上添加子节点索引
+                child_path = path + [index]
+                standard_child = cls._from_standard_node(child, child_path)
                 if standard_child:  # 确保子节点不为 None
                     standard_node.children.append(standard_child)
 
@@ -260,43 +259,3 @@ class StandardDomTree(BaseModel):
         return standard_node
 
 
-    @staticmethod
-    def _parse_order_num(order_num: str):
-        """
-        解析 order_num 字符串，转换为 path 列表
-
-        Args:
-            order_num: 格式如 "1.1.1.1" 或 "1.2.3.1-1-1-1"
-
-        Returns:
-            list: 解析后的 path 列表，如 [1, 1, 1, 1] 或 [1, 2, 3, [1, 1, 1, 1]]
-        """
-        if not order_num:
-            return []
-
-        # 检查是否包含连字符
-        if '-' in order_num:
-            # 处理形如 "1.2.3.1-1-1-1" 的情况
-            parts = order_num.split('-')
-            # 将主路径部分（点号分隔的部分）解析为整数列表
-            main_parts = parts[0].split('.')
-            main_path = [int(p) for p in main_parts[:-1] if p]  # 除了最后一个部分
-
-            # 将最后一个主路径部分和所有子路径部分（连字符分隔的部分）合并为子列表
-            sub_path = []
-            if main_parts[-1]:  # 确保最后一个部分不为空
-                sub_path.append(int(main_parts[-1]))
-            for p in parts[1:]:
-                if p:  # 确保部分不为空
-                    sub_path.append(int(p))
-
-            # 将子列表添加到主路径
-            if main_path:
-                main_path.append(sub_path)
-                return main_path
-            else:
-                # 如果主路径为空，则直接返回子列表
-                return sub_path
-        else:
-            # 处理形如 "1.1.1.1" 的情况
-            return [int(p) for p in order_num.split('.') if p]
