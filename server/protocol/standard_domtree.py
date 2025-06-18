@@ -3,21 +3,21 @@ from pydantic import BaseModel, Field
 
 from utils.tokens_util import count_tokens
 
-block_type_mapping = {
-    "Catalog": "text",
-    "Title": "text",
-    "List": "text",
-    "Formula": "text",
-    "Code": "text",
-    "Text": "text",
+layout_type_mapping = {
+    "Catalog": "Catalog",
+    "Title": "Title",
+    "List": "ListItem",
+    "Formula": "Formula",
+    "Code": "Code",
+    "Text": "Text",
 
-    "Figure": "image",
-    "FigureName": "text",
-    "FigureNote": "text", # 目前实际解析出来没有
+    "Figure": "Figure",
+    "FigureName": "FigureName",
+    "FigureNote": "Text", # 目前实际解析出来没有
 
-    "Table": "table",
-    "TableName": "text",
-    "TableNote": "text",  # 目前实际解析出来没有
+    "Table": "Table",
+    "TableName": "TableName",
+    "TableNote": "Text",  # 目前实际解析出来没有
 }
 
 class SourceFile(BaseModel):
@@ -104,8 +104,14 @@ class StandardDomTree(BaseModel):
                 mime_type=file_info.get('mime_type')
             )
 
-        # 转换根节点
+        # 转换根节点，构建树结构（不计算path）
         standard_root = cls._from_standard_root_node(domtree.get('root'), source_file)
+
+        # 处理 FigureName 和 TableName 节点（合并节点）
+        cls._process_special_nodes(standard_root)
+
+        # 计算所有节点的path
+        cls._calculate_paths(standard_root)
 
         return cls(root=standard_root)
 
@@ -124,11 +130,9 @@ class StandardDomTree(BaseModel):
             children=[]
         )
 
-        # 递归处理子节点，并为每个子节点分配索引
-        for index, child in enumerate(node.get('child', []), start=1):
-            # 为子节点分配path，第一层级从1开始
-            child_path = [index]
-            standard_child = cls._from_standard_node(child, child_path)  # 传递path参数
+        # 递归处理子节点
+        for child in node.get('child', []):
+            standard_child = cls._from_standard_node(child)  # 不传递path参数
             if standard_child:  # 确保子节点不为 None
                 standard_node.children.append(standard_child)
 
@@ -142,15 +146,129 @@ class StandardDomTree(BaseModel):
 
         return standard_node
 
+    @classmethod
+    def _calculate_paths(cls, node: StandardNode, parent_path: List[int] = None):
+        """
+        计算所有节点的path
+
+        Args:
+            node: 当前处理的节点
+            parent_path: 父节点的path
+        """
+        if parent_path is None:
+            parent_path = []
+
+        # 为子节点计算path
+        for i, child in enumerate(node.children, start=1):
+            child_path = parent_path + [i]
+            child.path = child_path
+
+            # 如果是表格节点，还需要更新单元格的path
+            if isinstance(child.element, StandardTableElement) and child.element.rows:
+                for row in child.element.rows:
+                    for cell in row.cells:
+                        if cell.path and len(cell.path) > 0:
+                            # 保留单元格自身的位置信息
+                            cell_position = cell.path[0]
+                            cell.path = child_path + [cell_position]
+
+            # 递归计算子节点的path
+            cls._calculate_paths(child, child_path)
+
 
     @classmethod
-    def _from_standard_node(cls, node: dict, path: List[int]) -> Optional[StandardNode]:
+    def _process_special_nodes(cls, node: StandardNode):
+        """
+        处理特殊节点（FigureName 和 TableName）
+
+        Args:
+            node: 当前处理的节点
+        """
+        if not node or not node.children:
+            return
+
+        # 创建一个新的子节点列表，用于存储处理后的子节点
+        new_children = []
+        i = 0
+
+        while i < len(node.children):
+            current = node.children[i]
+
+            # 检查当前节点是否为 FigureName 或 TableName
+            if current.element and current.element.type in ['FigureName', 'TableName']:
+                target_type = 'Figure' if current.element.type == 'FigureName' else 'Table'
+                merged = False
+
+                # 检查前一个节点
+                if i > 0:
+                    prev_sibling = node.children[i-1]
+                    if prev_sibling.element and prev_sibling.element.type == target_type:
+                        # 找到对应类型的前一个兄弟节点，合并节点
+                        if cls._merge_nodes(prev_sibling, current, target_type):
+                            merged = True
+
+                # 如果没有与前一个节点合并，检查后一个节点
+                if not merged and i < len(node.children) - 1:
+                    next_sibling = node.children[i+1]
+                    if next_sibling.element and next_sibling.element.type == target_type:
+                        # 找到对应类型的后一个兄弟节点，合并节点
+                        if cls._merge_nodes(next_sibling, current, target_type):
+                            merged = True
+
+                # 如果没有找到对应类型的兄弟节点，将当前节点类型改为 Text
+                if not merged:
+                    current.element.type = 'text'
+                    new_children.append(current)
+            else:
+                new_children.append(current)
+
+            i += 1
+
+        # 更新子节点列表
+        node.children = new_children
+
+        # 递归处理子节点
+        for child in node.children:
+            cls._process_special_nodes(child)
+
+    @classmethod
+    def _merge_nodes(cls, target_node: StandardNode, source_node: StandardNode, node_type: str) -> bool:
+        """
+        合并两个节点，将source_node的信息合并到target_node中
+
+        Args:
+            target_node: 目标节点（Figure或Table节点）
+            source_node: 源节点（FigureName或TableName节点）
+            node_type: 节点类型（'Figure'或'Table'）
+
+        Returns:
+            bool: 是否成功合并
+        """
+        if node_type == 'Figure' and isinstance(target_node.element, StandardImageElement):
+            # 将 FigureName 的文本作为 Figure 的 name
+            target_node.element.name = source_node.element.text
+            # 更新 tokens 计数
+            target_node.tokens += source_node.tokens
+            # 将 FigureName 的位置添加到 Figure 中
+            target_node.element.positions += source_node.element.positions
+            return True
+        elif node_type == 'Table' and isinstance(target_node.element, StandardTableElement):
+            # 将 TableName 的文本作为 Table 的 name
+            target_node.element.name = source_node.element.text
+            # 更新 tokens 计数
+            target_node.tokens += source_node.tokens
+            # 将 Table 的位置添加到 Figure 中
+            target_node.element.positions += source_node.element.positions
+            return True
+        return False
+
+    @classmethod
+    def _from_standard_node(cls, node: dict) -> Optional[StandardNode]:
         """
         将 Node 转换为 StandardNode
 
         Args:
             node: 源 Node 对象（字典格式）
-            path: 当前节点的路径
         Returns:
             StandardNode: 转换后的 StandardNode 对象
         """
@@ -161,11 +279,14 @@ class StandardDomTree(BaseModel):
 
         text = ""
         # 映射的类型
-        element_type = block_type_mapping.get(element['layout_type'], "text")  # 默认类型为 text
+        element_type = layout_type_mapping.get(element['layout_type'], "Text")  # 默认类型为 text
+        print(f"Processing element type: {element['layout_type']}" )
+        print(f"Processing element type: {element_type}" )
+        print("===")
         positions = [StandardPosition(bbox=element['bbox'], page=element['page_num'][0])]  # 位置列表，目前page_num元素个数只会是1个
 
         standard_node = None
-        if element_type == "image":
+        if element_type == "Figure":
             # 处理图片信息
             image = None
             text = element.get('image_ocr_result', '')
@@ -179,9 +300,9 @@ class StandardDomTree(BaseModel):
             standard_node = StandardNode(
                 summary="",
                 tokens=0,  # 先设置为 0，后面再计算
-                path=path,  # 使用传入的path
+                path=[],  # 初始化为空列表，后续再计算
                 element=StandardImageElement(
-                    type=element['layout_type'],
+                    type=element_type,
                     positions=positions,
                     name="",
                     description="",
@@ -190,7 +311,7 @@ class StandardDomTree(BaseModel):
                 ),
                 children=[]
             )
-        elif element_type == "table":
+        elif element_type == "Table":
             rows = []
             cell_texts = []  # 收集所有单元格的文本，用于计算 token 数量
             for row_data in element['rows']:
@@ -199,10 +320,9 @@ class StandardDomTree(BaseModel):
                     for cell_data in row_data['cells']:
                         cell_text = cell_data.get('text', '')
                         cell_texts.append(cell_text)
-                        cell_path = path.copy()
-                        cell_path.append([cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']])
+                        # 不计算cell_path，后续再计算
                         cell = Cell(
-                            path=cell_path,
+                            path=[[cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']]],
                             text=cell_text
                         )
                         cells.append(cell)
@@ -216,9 +336,9 @@ class StandardDomTree(BaseModel):
             standard_node = StandardNode(
                 summary="",
                 tokens=0,  # 先设置为 0，后面再计算
-                path=path,  # 使用传入的path
+                path=[],  # 初始化为空列表，后续再计算
                 element=StandardTableElement(
-                    type=element['layout_type'],
+                    type=element_type,
                     positions=positions,
                     name="",
                     description="",
@@ -231,21 +351,19 @@ class StandardDomTree(BaseModel):
             standard_node = StandardNode(
                 summary="",
                 tokens=0,  # 先设置为 0，后面再计算
-                path=path,  # 使用传入的path
+                path=[],  # 初始化为空列表，后续再计算
                 element=StandardElement(
-                    type=element['layout_type'],
+                    type=element_type,
                     positions=positions,
                     text=text
                 ),
                 children=[]
             )
 
-        # 递归处理子节点，并为每个子节点分配索引
+        # 递归处理子节点
         if 'child' in node:
-            for index, child in enumerate(node['child'], start=1):
-                # 为子节点分配path，在当前path基础上添加子节点索引
-                child_path = path + [index]
-                standard_child = cls._from_standard_node(child, child_path)
+            for child in node['child']:
+                standard_child = cls._from_standard_node(child)
                 if standard_child:  # 确保子节点不为 None
                     standard_node.children.append(standard_child)
 
