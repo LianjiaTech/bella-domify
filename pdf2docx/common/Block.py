@@ -41,7 +41,7 @@ class Block(Element):
     def is_header(self):
         return self._header
 
-    # review-todo: 这里没有使用，是在哪里标记的页眉页脚？
+    # 这个方法实际没调用，页眉页脚设计上存在不优雅地方
     def mark_header(self):
         self._header = True
 
@@ -49,6 +49,7 @@ class Block(Element):
     def is_footer(self):
         return self._footer
 
+    # 这个方法实际没调用，页眉页脚设计上存在不优雅地方
     def mark_footer(self):
         self._footer = True
 

@@ -255,6 +255,7 @@ def _parser_header_and_footer(raw_pages: list):
 
     identify_header(raw_pages)
     identify_footer(raw_pages)
+    # 这里将页眉页脚的元素从blocks中去除，能实现功能，但是元素信息丢了，不太优雅
     for raw_page in raw_pages:
         raw_page.blocks = \
             Blocks(instances=[line for line in raw_page.blocks if (not line.is_header and not line.is_footer)],
@@ -296,6 +297,7 @@ def identify_header(raw_pages: list):
                         include_cnt += 1
                         break
             if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
+                # 识别页眉
                 candidate_line.is_header = 1
         # 文字
         elif candidate_line.text:
@@ -307,6 +309,7 @@ def identify_header(raw_pages: list):
                         include_cnt += 1
                         break
             if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
+                # 识别页眉
                 candidate_line.is_header = 1
 
     confirmed_header = [candidate_line for candidate_line in possible_header_list if candidate_line.is_header == 1]
@@ -322,9 +325,11 @@ def identify_header(raw_pages: list):
         for line in page.blocks:
             if "<image>" in line.text:  # 图片上边界在阈值以上
                 if line.bbox[3] != 0 and line.bbox[1] <= confirmed_header_height:
+                    # 识别页眉
                     line.is_header = 1
             else:  # 文字高度中点在阈值以上
                 if line.bbox[3] != 0 and (line.bbox[1] + line.bbox[3]) / 2 <= confirmed_header_height:
+                    # 识别页眉
                     line.is_header = 1
 
 
@@ -361,6 +366,7 @@ def identify_footer(raw_pages: list):
                         include_cnt += 1
                         break
             if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
+                # 识别页脚
                 candidate_line.is_footer = 1
         # 文字
         elif candidate_line.text:
@@ -372,6 +378,7 @@ def identify_footer(raw_pages: list):
                         include_cnt += 1
                         break
             if include_cnt / len(raw_pages) >= FREQUENCY_THRESHOLD_RATE and include_cnt >= FREQUENCY_THRESHOLD_TIMES:
+                # 识别页脚
                 candidate_line.is_footer = 1
 
     confirmed_footer = [candidate_line for candidate_line in possible_footer_list if candidate_line.is_footer == 1]
@@ -388,6 +395,7 @@ def identify_footer(raw_pages: list):
         for line in page.blocks:
             # 页脚部分图片和文字处理相同，必须整个bbox处于页脚区
             if confirmed_footer_height <= line.bbox[1]:
+                # 识别页脚
                 line.is_footer = 1
 
 
