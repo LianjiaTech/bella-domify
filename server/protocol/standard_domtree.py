@@ -126,7 +126,7 @@ class StandardDomTree(BaseModel):
 
         # 递归处理子节点
         for child in node.get('child', []):
-            standard_child = cls._from_domtree_node(child)  # 不传递path参数
+            standard_child = cls._from_domtree_node_to_base_info(child)  # 不传递path参数
             if standard_child:  # 确保子节点不为 None
                 standard_root_node.children.append(standard_child)
 
@@ -263,9 +263,9 @@ class StandardDomTree(BaseModel):
         return False
 
     @classmethod
-    def _from_domtree_node(cls, node: dict) -> Optional[StandardNode]:
+    def _from_domtree_node_to_base_info(cls, node: dict) -> Optional[StandardNode]:
         """
-        将 单个Node 转换为 StandardNode
+        将 单个Node 转换为 StandardNode，并未完成全部信息转换，path、tokens 等信息需要后续计算
 
         Args:
             node: 源 Node 对象（字典格式）
@@ -363,7 +363,7 @@ class StandardDomTree(BaseModel):
         # 递归处理子节点
         if 'child' in node:
             for child in node['child']:
-                standard_child = cls._from_domtree_node(child)
+                standard_child = cls._from_domtree_node_to_base_info(child)
                 if standard_child:  # 确保子节点不为 None
                     standard_node.children.append(standard_child)
 
