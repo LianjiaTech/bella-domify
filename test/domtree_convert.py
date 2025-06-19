@@ -8,9 +8,9 @@ from services.parse_manager import file_api_retrieve_file, file_api_get_file_inf
 
 
 def test_domtree_convert():
-    # file_id = "file-2506061426450028000313-273737144"  # 替换为实际的文件ID
+    file_id = "file-2506061426450028000313-273737144"  # 替换为实际的文件ID
     # file_id = "file-2506050858410019035509-1052769292"  # 有表格
-    file_id = "file-2506171354030028000360-273737144"  # 有表格
+    # file_id = "file-2506181733010028000364-273737144"
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
     file_info = file_api_get_file_info(file_id)
