@@ -105,23 +105,17 @@ class StandardDomTree(BaseModel):
             )
 
         # 转换根节点，构建树结构（不计算path）
-        standard_root = cls._from_standard_root_node(domtree.get('root'), source_file)
-
-        # 处理 FigureName 和 TableName 节点（合并节点）
-        cls._process_special_nodes(standard_root)
-
-        # 计算所有节点的path
-        cls._calculate_paths(standard_root)
+        standard_root = cls._from_domtree_nodes(domtree.get('root'), source_file)
 
         return cls(root=standard_root)
 
     @classmethod
-    def _from_standard_root_node(cls, node: dict, source_file: SourceFile) -> StandardNode:
+    def _from_domtree_nodes(cls, node: dict, source_file: SourceFile) -> StandardNode:
         """
-        处理根节点
+        处理所有节点
         """
-        # 如果是根节点，创建一个空的 StandardNode
-        standard_node = StandardNode(
+        # 根节点，创建一个空的 StandardNode
+        standard_root_node = StandardNode(
             source_file=source_file,
             summary="",
             tokens=0,  # 先设置为 0，后面再计算
@@ -132,19 +126,25 @@ class StandardDomTree(BaseModel):
 
         # 递归处理子节点
         for child in node.get('child', []):
-            standard_child = cls._from_standard_node(child)  # 不传递path参数
+            standard_child = cls._from_domtree_node(child)  # 不传递path参数
             if standard_child:  # 确保子节点不为 None
-                standard_node.children.append(standard_child)
+                standard_root_node.children.append(standard_child)
+
+        # 处理 FigureName 和 TableName 节点（合并节点）
+        cls._process_special_nodes(standard_root_node)
+
+        # 计算所有节点的path
+        cls._calculate_paths(standard_root_node)
 
         # 计算 token 数量：子节点 token 数量之和
         tokens = 0
-        for child in standard_node.children:
+        for child in standard_root_node.children:
             tokens += child.tokens
 
         # 设置 token 数量
-        standard_node.tokens = tokens
+        standard_root_node.tokens = tokens
 
-        return standard_node
+        return standard_root_node
 
     @classmethod
     def _calculate_paths(cls, node: StandardNode, parent_path: List[int] = None):
@@ -263,9 +263,9 @@ class StandardDomTree(BaseModel):
         return False
 
     @classmethod
-    def _from_standard_node(cls, node: dict) -> Optional[StandardNode]:
+    def _from_domtree_node(cls, node: dict) -> Optional[StandardNode]:
         """
-        将 Node 转换为 StandardNode
+        将 单个Node 转换为 StandardNode
 
         Args:
             node: 源 Node 对象（字典格式）
@@ -363,7 +363,7 @@ class StandardDomTree(BaseModel):
         # 递归处理子节点
         if 'child' in node:
             for child in node['child']:
-                standard_child = cls._from_standard_node(child)
+                standard_child = cls._from_domtree_node(child)
                 if standard_child:  # 确保子节点不为 None
                     standard_node.children.append(standard_child)
 
