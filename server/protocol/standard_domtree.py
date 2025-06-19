@@ -280,9 +280,6 @@ class StandardDomTree(BaseModel):
         text = ""
         # 映射的类型
         element_type = layout_type_mapping.get(element['layout_type'], "Text")  # 默认类型为 text
-        print(f"Processing element type: {element['layout_type']}" )
-        print(f"Processing element type: {element_type}" )
-        print("===")
         positions = [StandardPosition(bbox=element['bbox'], page=element['page_num'][0])]  # 位置列表，目前page_num元素个数只会是1个
 
         standard_node = None
