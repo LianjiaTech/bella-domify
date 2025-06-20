@@ -14,6 +14,7 @@ def test_domtree_convert():
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
     file_info = file_api_get_file_info(file_id)
+    file_info = file_api_get_file_info("file-2506191738240030000002-2075695711")
 
     domtree = domtree_parse(file_info['filename'], contents, file_id)[1]
     json_str = json.dumps(domtree, indent=2, ensure_ascii=False)

@@ -19,9 +19,10 @@ import requests
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 
-import services.s3_service as s3_service
-from common.tool.chubaofs_tool import ChuBaoFSTool
-from server.context import user_context
+from doc_parser.context import logger_context
+from doc_parser.layout_parser import pdf_parser, xlsx_parser, csv_parser, pic_parser
+from doc_parser.layout_parser import pptx_parser, txt_parser, xls_parser, docx_parser
+from server.protocol.standard_domtree import StandardDomTree
 from services.constants import OPENAI_API_KEY
 from services.constants import ParseType
 from services.domtree_parser import pdf_parser as pdf_domtree_parser
@@ -233,8 +234,42 @@ def file_api_get_file_info(file_id):
     return response_data
 
 
-def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
-    logging.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
+def file_api_upload_domtree(io, file_id):
+    """
+    向 file_api 上传文件的 dom-tree
+
+    Args:
+        io: 文件内容（二进制）
+        file_id: 文件ID
+
+    Returns:
+        响应数据
+    """
+    url = f"{FILE_API_URL}/v1/files/dom-tree"
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+
+    # 发送请求
+    response = requests.post(
+    url,
+    files={
+        "file": io
+    },
+    data={"file_id": file_id},
+    headers=headers,
+)
+
+    # 解析响应
+    try:
+        response_data = json.loads(response.content)
+        return response_data
+    except json.JSONDecodeError:
+        return {"error": {"message": response.content, "type": "Failed to decode response"}}
+
+
+def parse_result_layout_and_domtree(file_info, callbacks: list):
+    file_id = file_info["id"]
+    file_name = file_info["filename"]
+    logger.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
     start_time = time.time()
 
     callback_parse_progress(file_id, DOCUMENT_PARSE_BEGIN, callbacks)
@@ -287,6 +322,15 @@ def parse_result_layout_and_domtree(file_id, file_name, callbacks: list):
         status_code = DOCUMENT_PARSE_FAIL
     else:
         status_code = DOCUMENT_PARSE_FINISH
+
+    if domtree_result:
+        # 如果有domtree结果转换为协议标准化的StandardDomTree
+        standard_dom_tree = StandardDomTree.from_domtree_dict(domtree=domtree_result, file_info=file_info)
+        standard_dom_tree_json = jsonable_encoder(standard_dom_tree)
+        upload_result = file_api_upload_domtree(file_id=file_id, io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)))
+        if not upload_result or "error" in upload_result:
+            raise Exception(f"上传domtree到file_api失败 file_id:{file_id}, 错误信息: {upload_result.get('error', '未知错误')}")
+        logger.info(f"上传domtree到file_api成功 file_id:{file_id}")
 
     callback_parse_progress(file_id, status_code, callbacks)
 

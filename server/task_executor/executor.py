@@ -53,6 +53,11 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                     consumer.commit(msg)
                     continue
 
+                file_info = parse_manager.file_api_get_file_info(file_id)
+                if not file_info or file_info.get("purpose") == "dom_tree":
+                    logger.info(f"not supported purpose type: dom_tree")
+                    continue
+
                 metadata = json.loads(message_json.get("metadata", "{}"))
                 user = metadata.get("user", DEFAULT_USER)
                 # 暂不做user校验
@@ -62,7 +67,6 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                 user_context.set(user)
                 callbacks = metadata.get("callbacks", [])
                 contents = parse_manager.file_api_retrieve_file(file_id)
-                file_info = parse_manager.file_api_get_file_info(file_id)
                 # 检查文档准入标准
                 group_id_analysis_info = check_file_size_and_pages(contents, file_info)
                 # 计算groupId
@@ -70,8 +74,8 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                 logging.info(f"计算groupId结果. file_id:{file_id} file_name:{file_name} file_group_id:{file_group_id}")
 
                 if parser_group_id == file_group_id:
-                    logging.info(f"parser开始解析. file_id:{file_id} file_group_id:{file_group_id}")
-                    parse_manager.parse_result_layout_and_domtree(file_id, file_name, callbacks)
+                    logger.info(f"parser开始解析. file_id:{file_id} file_group_id:{file_group_id}")
+                    parse_manager.parse_result_layout_and_domtree(file_info, callbacks)
 
                 consumer.commit(msg)
 
