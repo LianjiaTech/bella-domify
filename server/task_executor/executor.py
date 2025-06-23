@@ -54,8 +54,14 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                     continue
 
                 file_info = parse_manager.file_api_get_file_info(file_id)
-                if not file_info or file_info.get("purpose") == "dom_tree":
+                if not file_info:
+                    logger.info(f"file_info not found for file_id: {file_id}")
+                    consumer.commit(msg)
+                    continue
+
+                if file_info.get("purpose") == "dom_tree":
                     logger.info(f"not supported purpose type: dom_tree")
+                    consumer.commit(msg)
                     continue
 
                 metadata = json.loads(message_json.get("metadata", "{}"))
