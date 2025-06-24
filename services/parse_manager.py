@@ -19,7 +19,7 @@ import requests
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 
-from doc_parser.context import logger_context
+from doc_parser.context import logger_context, ParserContext
 from doc_parser.layout_parser import pdf_parser, xlsx_parser, csv_parser, pic_parser
 from doc_parser.layout_parser import pptx_parser, txt_parser, xls_parser, docx_parser
 from server.protocol.standard_domtree import StandardDomTree
@@ -172,8 +172,9 @@ def worker(func, args, return_dict, key, user):
 
 
 # layout解析
-def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
+def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None):
     try:
+        ParserContext.register_user(user)
         # 获取版面解析结果
         layout_result_json, layout_result_text = layout_parse(file_name, contents, file_id)
         # 解析失败，直接回调
@@ -192,8 +193,9 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
 
 
 # domtree解析
-def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list):
+def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None):
     try:
+        ParserContext.register_user(user)
         # 获取domtree解析结果
         parse_succeed, parse_result, markdown_res = domtree_parse(file_name, contents, file_id)
         # 解析失败，直接回调
@@ -281,9 +283,9 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     user = user_context.get()
     return_dict = manager.dict()
     p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'layout_parse', user))
+        layout_parse_and_callback, (file_id, file_name, contents, callbacks, ParserContext.get_user()), return_dict, 'layout_parse'))
     p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, file_name, contents, callbacks), return_dict, 'domtree_parse', user))
+        domtree_parse_and_callback, (file_id, file_name, contents, callbacks, ParserContext.get_user()), return_dict, 'domtree_parse'))
     p1.start()
     p2.start()
 
