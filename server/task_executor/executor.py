@@ -59,8 +59,8 @@ def listen_parse_task_layout_and_domtree(parser_group_id=""):
                     consumer.commit(msg)
                     continue
 
-                if file_info.get("purpose") == "dom_tree":
-                    logger.info(f"not supported purpose type: dom_tree")
+                if file_info.get("purpose") != "assistants":
+                    logger.info(f"not supported purpose type: {file_info.get('purpose')}")
                     consumer.commit(msg)
                     continue
 
