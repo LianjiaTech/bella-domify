@@ -10,7 +10,7 @@ DESCRIPTION = 'An Open source Pdf Parser Python library'
 # review-todo：缺少setting、user_context
 INCLUDE_FROM_PACKAGES = ["pdf_parser", "pdf_parser.*"]
 
-VERSION = "0.1.6.4"
+VERSION = "0.1.6.8"
 
 
 # 获取主版本号
@@ -117,5 +117,7 @@ if __name__ == "__main__":
     version = '0.1.6.2'  20241209   依赖版本修改openpyxl==3.1.5；
     version = '0.1.6.3'  20250113   优化FAQ判断逻辑（添加空页情况兼容）；
     version = '0.1.6.4'  20250220   添加图片信息提取功能，添加tomarkdown；
+    version = '0.1.6.7'  20250604   代码clear基本完成，组织结构进行调整
+    version = '0.1.6.8'  20250626   取消FAQDomtree类型输出，不再用模型提取FAQ类文件
 
 """
