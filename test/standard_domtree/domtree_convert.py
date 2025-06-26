@@ -32,7 +32,7 @@ def test_domtree_convert():
     }
     dom_tree_json = jsonable_encoder(DomTreeModel(dom_tree=dom_tree))
     standard_dom_tree = StandardDomTree.from_domtree_dict(dom_tree_json, file_info = file_info)
-    json_compatible_data = jsonable_encoder(standard_dom_tree)
+    json_compatible_data = jsonable_encoder(standard_dom_tree.root)
     print(json.dumps(json_compatible_data, ensure_ascii=False))
 
     # 加载test/standard_domtree预期的JSON结果文件test/standard_domtree/result/英文论文Demo_前3页.json 比较 json.dumps(json_compatible_data, ensure_ascii=False)结果是否一致

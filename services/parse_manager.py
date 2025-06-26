@@ -328,7 +328,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     if domtree_result:
         # 如果有domtree结果转换为协议标准化的StandardDomTree
         standard_dom_tree = StandardDomTree.from_domtree_dict(domtree=domtree_result, file_info=file_info)
-        standard_dom_tree_json = jsonable_encoder(standard_dom_tree)
+        standard_dom_tree_json = jsonable_encoder(standard_dom_tree.root)
         upload_result = file_api_upload_domtree(file_id=file_id, io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)))
         if not upload_result or "error" in upload_result:
             raise Exception(f"上传domtree到file_api失败 file_id:{file_id}, 错误信息: {upload_result.get('error', '未知错误')}")
