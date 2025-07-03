@@ -164,15 +164,6 @@ class StandardDomTree(BaseModel):
             child_path = parent_path + [i]
             child.path = child_path
 
-            # 如果是表格节点，还需要更新单元格的path
-            if isinstance(child.element, StandardTableElement) and child.element.rows:
-                for row in child.element.rows:
-                    for cell in row.cells:
-                        if cell.path and len(cell.path) > 0:
-                            # 保留单元格自身的位置信息
-                            cell_position = cell.path[0]
-                            cell.path = child_path + [cell_position]
-
             # 递归计算子节点的path
             cls._calculate_paths(child, child_path)
 
@@ -320,7 +311,7 @@ class StandardDomTree(BaseModel):
                         cell_texts.append(cell_text)
                         # 不计算cell_path，后续再计算
                         cell = Cell(
-                            path=[[cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']]],
+                            path=[cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']],
                             text=cell_text,
                             # 目前只会有一个元素,且是Text类型，Path重新从头编号，相对cell是root
                             nodes=[StandardNode(summary="", tokens=count_tokens(cell_text), path=[1], children=[],
