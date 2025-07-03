@@ -43,6 +43,7 @@ class Cell(BaseModel):
     """表格单元格"""
     path: Optional[List[Union[int, List[int]]]] = Field(default_factory=list)  # 单元格路径
     text: Optional[str] = None  # 文本内容
+    nodes: Optional[List['StandardNode']] = Field(default_factory=list)
 
 
 class StandardRow(BaseModel):
@@ -320,7 +321,15 @@ class StandardDomTree(BaseModel):
                         # 不计算cell_path，后续再计算
                         cell = Cell(
                             path=[[cell_data['start_row'], cell_data['end_row'], cell_data['start_col'], cell_data['end_col']]],
-                            text=cell_text
+                            text=cell_text,
+                            # 目前只会有一个元素,且是Text类型，Path重新从头编号，相对cell是root
+                            nodes=[StandardNode(summary="", tokens=count_tokens(cell_text), path=[1], children=[],
+                                                element=StandardElement(
+                                                        type='Text',
+                                                        positions=[],
+                                                        text=cell_text
+                                                    )
+                                                )]
                         )
                         cells.append(cell)
                 # 使用 StandardRow 的构造函数创建行
