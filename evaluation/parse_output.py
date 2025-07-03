@@ -14,9 +14,12 @@ import json
 from fastapi.encoders import jsonable_encoder
 
 from constant import file_list
-from pdf2docx import Converter
-from pdf2docx.dom_tree.domtree import DomTreeModel
-from server.context import user_context
+from doc_parser.context import parser_context, ParserConfig
+from doc_parser.dom_parser.converter import Converter
+from doc_parser.dom_parser.domtree.domtree import DomTreeModel
+from doc_parser.dom_parser.provider.image_provider import ImageStorageProvider
+from services.provider.openai_vision_model_provider import OpenAIVisionModelProvider
+from settings.ini_config import config
 
 user_context.set("1000000023008327")
 
@@ -94,5 +97,22 @@ def parse():
         print(f"解析完毕：{file_name}")
 
 
+class EmptyImageStorageProvider(ImageStorageProvider):
+    """
+    一个空的图片存储提供者，用于测评时不需要实际存储图片。
+    """
+
+    def upload(self, image: bytes) -> str:
+        return ""
+
+    def download(self, file_key: str) -> bytes:
+        return b""
+
 if __name__ == "__main__":
+    parser_config = ParserConfig(image_provider=EmptyImageStorageProvider(),
+                                 ocr_model_name=config.get('OCR', 'model_name'),
+                                 ocr_enable=config.getboolean('OCR', 'enable'),
+                                 user="0000000000000001",
+                                 vision_model_provider=OpenAIVisionModelProvider())
+    parser_context.register_all_config(parser_config)
     parse()
