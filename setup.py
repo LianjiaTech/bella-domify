@@ -69,9 +69,10 @@ if __name__ == "__main__":
         long_description_content_type="text/markdown",
         license="GPL v3",
         author=["tangxiaolong", "luxu", "zhangxiaojia"],
-        author_email=["tangxiaolong@ke.com", "luxu002@ke.com", "zhangxiaojia002@ke.com"],
-        url="https://git.lianjia.com/ai-arch/document_parse",
-        packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
+        author_email="",
+        # 暂不写，后续换成github地址
+        url="",
+        packages=find_packages(include=INCLUDE_FROM_PACKAGES),
         include_package_data=True,
         zip_safe=False,
         install_requires=load_requirements("requirements.txt"),
