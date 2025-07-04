@@ -1,5 +1,6 @@
 # web容器启动前的初始化操作，不要删除这个导入
 from . import server_bootstrap
+from doc_parser.dom_parser.provider.image_provider import ImageStorageProvider
 
 import json
 import time
@@ -8,8 +9,6 @@ from threading import Thread
 from fastapi import FastAPI
 
 from doc_parser.context import parser_context, ParserConfig, logger_context
-from services.constants import GROUP_ID_LONG_TASK, GROUP_ID_IMAGE_TASK, GROUP_ID_SHORT_TASK
-from services.provider.s3_image_provider import S3ImageStorageProvider
 from settings.ini_config import config
 
 from .api import router, health_router
@@ -23,12 +22,30 @@ app.include_router(health_router)
 
 background_threads = []
 
+class EmptyImageStorageProvider(ImageStorageProvider):
+    """
+    一个空的图片存储提供者，可按需实现存储介质，本工程也提供了 S3ImageStorageProvider 实现，需要INI配置，并指定image_provider=S3ImageStorageProvider()
+    [S3]
+    AK =
+    SK =
+    BUCKET_NAME =
+    ENDPOINT =
+    OUT_ENDPOINT =
+    """
+
+    def upload(self, image: bytes) -> str:
+        return ""
+
+    def download(self, file_key: str) -> bytes:
+        return b""
 
 # 文件解析 - 监听解析任务，异步解析
 @app.on_event("startup")
 async def startup_event():
-    global background_threads
-    print("Starting background task...")
+    parser_config = ParserConfig(image_provider=EmptyImageStorageProvider(),
+                                 ocr_model_name=config.get('OCR', 'model_name'),
+                                 ocr_enable=config.getboolean('OCR', 'enable'),
+                                 vision_model_provider=OpenAIVisionModelProvider())
 
     # 启动子进程，GROUP_ID_LONG_TASK 处理大文件
     thread1 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_LONG_TASK,))

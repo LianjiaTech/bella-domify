@@ -5,3 +5,6 @@
 # Content : 
 # 
 # ======================
+import os
+
+settings_path = os.path.dirname(__file__)
