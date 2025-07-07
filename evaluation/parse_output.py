@@ -19,7 +19,6 @@ from doc_parser.dom_parser.converter import Converter
 from doc_parser.dom_parser.domtree.domtree import DomTreeModel
 from doc_parser.dom_parser.provider.image_provider import ImageStorageProvider
 from services.provider.openai_vision_model_provider import OpenAIVisionModelProvider
-from settings.ini_config import config
 
 user_context.set("1000000023008327")
 
