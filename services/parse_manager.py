@@ -172,9 +172,10 @@ def worker(func, args, return_dict, key, user):
 
 
 # layout解析
-def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None):
+def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None, parser_context_param=None):
     try:
-        ParserContext.register_user(user)
+        parser_context.register_all(parser_context_param)
+        parser_context.register_user(user)
         # 获取版面解析结果
         layout_result_json, layout_result_text = layout_parse(file_name, contents, file_id)
         # 解析失败，直接回调
@@ -193,9 +194,10 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
 
 
 # domtree解析
-def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None):
+def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None,  parser_context_param=None):
     try:
-        ParserContext.register_user(user)
+        parser_context.register_all(parser_context_param)
+        parser_context.register_user(user)
         # 获取domtree解析结果
         parse_succeed, parse_result, markdown_res = domtree_parse(file_name, contents, file_id)
         # 解析失败，直接回调
@@ -283,9 +285,9 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     user = user_context.get()
     return_dict = manager.dict()
     p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, file_name, contents, callbacks, ParserContext.get_user()), return_dict, 'layout_parse'))
+        layout_parse_and_callback, (file_id, file_name, contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
     p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, file_name, contents, callbacks, ParserContext.get_user()), return_dict, 'domtree_parse'))
+        domtree_parse_and_callback, (file_id, file_name, contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
     p1.start()
     p2.start()
 
