@@ -150,15 +150,25 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
             s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
         return True, {}, markdown_res
     elif file_extension == 'xlsx':
-        markdown_res = xlsx_parser.markdown_parse(file)
-        if task_id:
-            s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
-        return True, {}, markdown_res
+        converter = XlsxExcelConverter(stream=file)
+        xlsx_dom_tree = converter.dom_tree_parse()
+        _, json_compatible_data = convert_to_json(xlsx_dom_tree)
+        xlsx_markdown = xlsx_dom_tree.to_markdown()
+        if task_id and parser_context.parse_result_cache_provider:
+            parser_context.parse_result_cache_provider.upload_parse_result(task_id, json_compatible_data, ParseType.DOMTREE.value)
+            parser_context.parse_result_cache_provider.upload_parse_result(task_id, xlsx_markdown, ParseType.MARKDOWN.value)
+        return True, json_compatible_data, xlsx_markdown
     elif file_extension == 'xls':
-        markdown_res = xls_parser.markdown_parse(file)
-        if task_id:
-            s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
-        return True, {}, markdown_res
+        converter = XlsExcelConverter(stream=file)
+        xls_dom_tree = converter.dom_tree_parse()
+        _, json_compatible_data = convert_to_json(xls_dom_tree)
+        xls_markdown = xls_dom_tree.to_markdown()
+        if task_id and parser_context.parse_result_cache_provider:
+            parser_context.parse_result_cache_provider.upload_parse_result(task_id, json_compatible_data,
+                                                                           ParseType.DOMTREE.value)
+            parser_context.parse_result_cache_provider.upload_parse_result(task_id, xls_markdown,
+                                                                           ParseType.MARKDOWN.value)
+        return True, json_compatible_data, xls_markdown
 
     else:
         raise ValueError("异常：不支持的文件类型")
