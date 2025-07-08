@@ -1,6 +1,6 @@
 # web容器启动前的初始化操作，不要删除这个导入
-from services.provider.s3_parse_result_cache_provider import S3ParseResultCacheProvider
 from . import server_bootstrap
+from services.provider.s3_parse_result_cache_provider import S3ParseResultCacheProvider
 from fastapi import FastAPI
 
 from doc_parser.context import parser_context, ParserConfig, logger_context
