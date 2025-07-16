@@ -19,7 +19,10 @@ import requests
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 
-from doc_parser.context import logger_context, ParserContext
+from doc_parser.context import logger_context, parser_context
+from doc_parser.dom_parser.parsers.excel.converter import XlsxExcelConverter, XlsExcelConverter
+from doc_parser.dom_parser.parsers.pdf.converter import PDFConverter
+from doc_parser.dom_parser.parsers.txt.converter import TxtConverter
 from doc_parser.layout_parser import pdf_parser, xlsx_parser, csv_parser, pic_parser
 from doc_parser.layout_parser import pptx_parser, txt_parser, xls_parser, docx_parser
 from server.protocol.standard_domtree import StandardDomTree
@@ -144,11 +147,17 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
         except Exception as e:
             logging.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
             return False, {}, ""
-    elif file_extension == 'csv':
-        markdown_res = csv_parser.markdown_parse(file)
-        if task_id:
-            s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
-        return True, {}, markdown_res
+    elif file_extension == 'csv' or file_extension == 'txt':
+        converter = TxtConverter(stream=file)
+        txt_dom_tree = converter.dom_tree_parse()
+        _, json_compatible_data = convert_to_json(txt_dom_tree)
+        txt_markdown = txt_dom_tree.to_markdown()
+        if task_id and parser_context.parse_result_cache_provider:
+            parser_context.parse_result_cache_provider.upload_parse_result(task_id, json_compatible_data,
+                                                                           ParseType.DOMTREE.value)
+            parser_context.parse_result_cache_provider.upload_parse_result(task_id, txt_markdown,
+                                                                           ParseType.MARKDOWN.value)
+        return True, json_compatible_data, txt_markdown
     elif file_extension == 'xlsx':
         converter = XlsxExcelConverter(stream=file)
         xlsx_dom_tree = converter.dom_tree_parse()
