@@ -80,7 +80,8 @@ def layout_parse(file_name: str = None, file: bytes = None, task_id=""):
     elif file_extension == 'pdf':
         result_json, result_text = pdf_parser.layout_parse(file)
     elif file_extension == 'docx':
-        result_json, result_text = docx_parser.layout_parse(file)
+        # PDF转换已在主函数中完成，这里直接按PDF处理
+        result_json, result_text = pdf_parser.layout_parse(file)
     elif file_extension == 'csv':
         result_json, result_text = csv_parser.layout_parse(file)
     elif file_extension == 'doc':
