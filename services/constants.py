@@ -18,7 +18,7 @@ TEXT = "text"
 TABLE = "table"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
+BELLA_OPENAPI_KEY = os.getenv("BELLA_OPENAPI_KEY")
 
 class ParseType(Enum):
     All = "all"

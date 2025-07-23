@@ -26,7 +26,7 @@ from doc_parser.dom_parser.parsers.txt.converter import TxtConverter
 from doc_parser.layout_parser import pdf_parser, xlsx_parser, csv_parser, pic_parser
 from doc_parser.layout_parser import pptx_parser, txt_parser, xls_parser, docx_parser
 from server.protocol.standard_domtree import StandardDomTree
-from services.constants import OPENAI_API_KEY
+from services.constants import OPENAI_API_KEY, BELLA_OPENAPI_KEY
 from services.constants import ParseType
 from services.domtree_parser import pdf_parser as pdf_domtree_parser
 from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, \
@@ -84,8 +84,7 @@ def layout_parse(file_name: str = None, file: bytes = None, task_id=""):
     elif file_extension == 'csv':
         result_json, result_text = csv_parser.layout_parse(file)
     elif file_extension == 'doc':
-        docx_stream = io.BytesIO(file)
-        file = convert_docx_to_pdf_in_memory(docx_stream)
+        # PDF转换已在主函数中完成，这里直接按PDF处理
         result_json, result_text = pdf_parser.layout_parse(file)
     elif file_extension == 'xlsx':
         result_json, result_text = xlsx_parser.layout_parse(file)
@@ -126,10 +125,9 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'domtree_parse解析开始 文件名：{file_name}')
 
-    # 如果是doc、docx文件，转pdf处理
+    # 如果是doc、docx文件，直接按PDF处理（转换已在主函数中完成）
     if file_extension in ['doc', 'docx']:
-        docx_stream = io.BytesIO(file)
-        file = convert_docx_to_pdf_in_memory(docx_stream)
+        # 注意：PDF转换已在主函数中完成，这里直接按PDF处理
         file_extension = 'pdf'
 
     # 根据后缀判断文件类型
@@ -298,15 +296,43 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     callback_parse_progress(file_id, DOCUMENT_PARSE_BEGIN, callbacks)
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
+    
+    # 获取文件扩展名
+    file_extension = general_util.get_file_type(file_name)
+    
+    # 如果是doc/docx文件，预先转换PDF
+    pdf_contents = None
+    if file_extension in ['doc', 'docx']:
+        docx_stream = io.BytesIO(contents)
+        pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
+        if pdf_stream:
+            pdf_stream.seek(0)
+            pdf_contents = pdf_stream.read()
+            logger.info(f"PDF转换成功，准备回流 file_id:{file_id}")
+            
+            # 回流PDF到API
+            pdf_stream.seek(0)
+            pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id)
+            if not pdf_upload_result or "error" in pdf_upload_result:
+                logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
+            else:
+                logger.info(f"PDF回流成功 file_id:{file_id}")
+        else:
+            logger.error(f"PDF转换失败 file_id:{file_id}")
 
     # 多进程并行解析
     manager = Manager()
     user = user_context.get()
     return_dict = manager.dict()
+    
+    # 根据文件类型决定传递的内容
+    layout_contents = pdf_contents if pdf_contents else contents
+    domtree_contents = pdf_contents if pdf_contents else contents
+
     p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, file_name, contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
+        layout_parse_and_callback, (file_id, file_name, layout_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
     p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, file_name, contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
+        domtree_parse_and_callback, (file_id, file_name, domtree_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
     p1.start()
     p2.start()
 
@@ -483,4 +509,58 @@ def api_get_result_service(file_id, parse_type="all"):
     if not s3_result:  # 解析结果不存在
         raise HTTPException(status_code=404, detail="解析结果不存在")
 
-    return {parse_type + "_result": s3_result}
+def pdf_parse(contents: bytes = None):
+    converter = PDFConverter(stream=contents)
+    dom_tree = converter.dom_tree_parse(
+        remove_watermark=True,
+        parse_stream_table=False
+    )
+    return dom_tree, dom_tree.to_markdown()
+
+
+def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
+    """
+    向 file_api 上传PDF文件
+
+    Args:
+        pdf_stream: PDF文件流
+        file_id: 文件ID
+        
+    Returns:
+        响应数据
+    """
+    url = f"{FILE_API_URL}/v1/files/pdf"
+    headers = {"Authorization": f"Bearer {BELLA_OPENAPI_KEY}"}
+    
+    # 准备文件数据
+    pdf_stream.seek(0)
+    files = {
+        'file': ('converted.pdf', pdf_stream, 'application/pdf')
+    }
+    
+    data = {
+        'file_id': file_id
+    }
+    
+    logger.info(f"开始回流PDF到API: {url}, file_id: {file_id}")
+    
+    # 发送请求
+    response = requests.post(
+        url,
+        files=files,
+        data=data,
+        headers=headers,
+        timeout=60
+    )
+    
+    # 解析响应
+    try:
+        response_data = response.json()
+        if response.status_code == 200:
+            logger.info(f"PDF回流成功: {file_id}")
+        else:
+            logger.error(f"PDF回流失败: {response.status_code}, {response.text}")
+        return response_data
+    except Exception as e:
+        logger.error(f"PDF回流异常: {str(e)}")
+        return {"error": {"message": str(e), "type": "PDF回流异常"}}
