@@ -26,7 +26,7 @@ from doc_parser.dom_parser.parsers.txt.converter import TxtConverter
 from doc_parser.layout_parser import pdf_parser, xlsx_parser, csv_parser, pic_parser
 from doc_parser.layout_parser import pptx_parser, txt_parser, xls_parser, docx_parser
 from server.protocol.standard_domtree import StandardDomTree
-from services.constants import OPENAI_API_KEY, BELLA_OPENAPI_KEY
+from services.constants import OPENAI_API_KEY
 from services.constants import ParseType
 from services.domtree_parser import pdf_parser as pdf_domtree_parser
 from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, \
