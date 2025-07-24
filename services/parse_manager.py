@@ -294,27 +294,26 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     file_extension = general_util.get_file_type(file_name)
     
     # 如果是doc/docx文件，预先转换PDF
-    pdf_contents = None
-    modified_file_name = file_name  # 用于传递给解析函数的文件名
+    pdf_stream = None
     if file_extension in ['doc', 'docx']:
         docx_stream = io.BytesIO(contents)
         pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
         if pdf_stream:
-            pdf_stream.seek(0)
-            pdf_contents = pdf_stream.read()
             logger.info(f"PDF转换成功，准备回流 file_id:{file_id}")
             
             # 回流PDF到API
-            pdf_stream.seek(0)
             pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id)
             if not pdf_upload_result or "error" in pdf_upload_result:
                 logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
             else:
                 logger.info(f"PDF回流成功 file_id:{file_id}")
-            
-            # 修改文件名后缀为.pdf
-            modified_file_name = file_name.rsplit('.', 1)[0] + '.pdf'
-            logger.info(f"文件名已修改: {file_name} -> {modified_file_name}")
+
+            # 重置pdf_stream位置
+            pdf_stream.seek(0)
+
+            # 直接修改文件名后缀为.pdf
+            file_name = file_name.rsplit('.', 1)[0] + '.pdf'
+            logger.info(f"文件名已修改: {file_name}")
         else:
             logger.error(f"PDF转换失败 file_id:{file_id}")
 
@@ -324,13 +323,12 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     return_dict = manager.dict()
     
     # 根据文件类型决定传递的内容
-    layout_contents = pdf_contents if pdf_contents else contents
-    domtree_contents = pdf_contents if pdf_contents else contents
+    parse_contents = pdf_stream if pdf_stream else contents
 
     p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, modified_file_name, layout_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
+        layout_parse_and_callback, (file_id, file_name, parse_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
     p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, modified_file_name, domtree_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
+        domtree_parse_and_callback, (file_id, file_name, parse_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
     p1.start()
     p2.start()
 
@@ -403,24 +401,22 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
     file_extension = general_util.get_file_type(file_name)
     
     # 如果是doc/docx文件，预先转换PDF
-    pdf_contents = None
-    modified_file_name = file_name  # 用于传递给解析函数的文件名
+    pdf_stream = None
     if file_extension in ['doc', 'docx']:
         docx_stream = io.BytesIO(contents)
         pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
         if pdf_stream:
-            pdf_stream.seek(0)
-            pdf_contents = pdf_stream.read()
             logger.info(f"PDF转换成功，准备解析 file_name:{file_name}")
-            
-            # 修改文件名后缀为.pdf
-            modified_file_name = file_name.rsplit('.', 1)[0] + '.pdf'
-            logger.info(f"文件名已修改: {file_name} -> {modified_file_name}")
+            pdf_stream.seek(0)
+
+            # 直接修改文件名后缀为.pdf
+            file_name = file_name.rsplit('.', 1)[0] + '.pdf'
+            logger.info(f"文件名已修改: {file_name}")
         else:
             logger.error(f"PDF转换失败 file_name:{file_name}")
 
     # 根据文件类型决定传递的内容
-    parse_contents = pdf_contents if pdf_contents else contents
+    parse_contents = pdf_stream if pdf_stream else contents
 
     parse_type_res = parse_type + "_result"
     # 定义解析函数映射
@@ -446,7 +442,7 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
         )
 
     # 根据parse_type_res选择解析函数并执行
-    parse_result = parse_functions[parse_type_res](modified_file_name, parse_contents)
+    parse_result = parse_functions[parse_type_res](file_name, parse_contents)
     # 返回结果
     ret = parse_result if parse_type_res == "all_result" else {parse_type_res: parse_result}
     # 返回task_id
