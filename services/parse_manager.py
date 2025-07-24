@@ -33,7 +33,7 @@ from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_par
     csv_parser, pic_parser
 from settings.ini_config import config
 from utils import general_util
-from utils.docx2pdf_util import convert_docx_to_pdf_in_memory
+from utils.docx2pdf_util import convert_docx_to_pdf_in_memory, convert_docx_to_pdf
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -59,32 +59,6 @@ percent_map = {
 chubao = ChuBaoFSTool()
 
 
-def convert_docx_to_pdf_stream(file_name: str, contents: bytes):
-    """
-    将 DOCX 文件转换为 PDF 流
-    
-    Args:
-        file_name: 文件名
-        contents: 文件内容
-        
-    Returns:
-        tuple: (pdf_stream, modified_file_name)
-    """
-    # 转换 DOCX 到 PDF
-    docx_stream = io.BytesIO(contents)
-    pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
-    
-    if not pdf_stream:
-        logger.error(f"PDF转换失败 file_name:{file_name}")
-        return None, file_name
-    
-    logger.info(f"PDF转换成功，准备解析 file_name:{file_name}")
-    
-    # 修改文件名后缀为.pdf
-    modified_file_name = file_name.rsplit('.', 1)[0] + '.pdf'
-    logger.info(f"文件名已修改 {file_name}-> {modified_file_name}")
-    
-    return pdf_stream, modified_file_name
 
 
 def validate_parameters(file_name, file):
@@ -358,7 +332,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     pdf_stream = None
 
     if file_extension in ['doc', 'docx']:
-        pdf_stream, file_name = convert_docx_to_pdf_stream(file_name, contents)
+        pdf_stream, file_name = convert_docx_to_pdf(file_name, contents)
         
         # 如果是 DOCX 转换的 PDF，回流到 API
         if pdf_stream:
@@ -453,7 +427,7 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
     file_extension = general_util.get_file_type(file_name)
     pdf_stream = None
     if file_extension in ['doc', 'docx']:
-        pdf_stream, file_name = convert_docx_to_pdf_stream(file_name, contents)
+        pdf_stream, file_name = convert_docx_to_pdf(file_name, contents)
 
     parse_contents = pdf_stream if pdf_stream else contents
 

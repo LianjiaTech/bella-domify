@@ -21,6 +21,33 @@ import fitz
 lock = multiprocessing.Lock()
 
 
+def convert_docx_to_pdf(file_name: str, contents: bytes):
+    """
+    将 DOCX 文件转换为 PDF 流
+
+    Args:
+        file_name: 文件名
+        contents: 文件内容
+
+    Returns:
+        tuple: (pdf_stream, modified_file_name)
+    """
+    # 转换 DOCX 到 PDF
+    docx_stream = io.BytesIO(contents)
+    pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
+
+    if not pdf_stream:
+        logger.error(f"PDF转换失败 file_name:{file_name}")
+        return None, file_name
+
+    logger.info(f"PDF转换成功，准备解析 file_name:{file_name}")
+
+    # 修改文件名后缀为.pdf
+    pdf_file_name = file_name.rsplit('.', 1)[0] + '.pdf'
+    logger.info(f"文件名已修改 {file_name}-> {pdf_file_name}")
+
+    return pdf_stream, pdf_file_name
+
 def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
     logging.info('Starting DOCX to PDF conversion')
 

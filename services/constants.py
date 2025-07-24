@@ -19,6 +19,7 @@ TABLE = "table"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+
 class ParseType(Enum):
     All = "all"
     LAYOUT = "layout"
