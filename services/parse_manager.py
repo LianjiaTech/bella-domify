@@ -59,6 +59,34 @@ percent_map = {
 chubao = ChuBaoFSTool()
 
 
+def convert_docx_to_pdf_stream(file_name: str, contents: bytes):
+    """
+    将 DOCX 文件转换为 PDF 流
+    
+    Args:
+        file_name: 文件名
+        contents: 文件内容
+        
+    Returns:
+        tuple: (pdf_stream, modified_file_name)
+    """
+    # 转换 DOCX 到 PDF
+    docx_stream = io.BytesIO(contents)
+    pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
+    
+    if not pdf_stream:
+        logger.error(f"PDF转换失败 file_name:{file_name}")
+        return None, file_name
+    
+    logger.info(f"PDF转换成功，准备解析 file_name:{file_name}")
+    
+    # 修改文件名后缀为.pdf
+    modified_file_name = file_name.rsplit('.', 1)[0] + '.pdf'
+    logger.info(f"文件名已修改 {file_name}-> {modified_file_name}")
+    
+    return pdf_stream, modified_file_name
+
+
 def validate_parameters(file_name, file):
     # 参数检验
     if not file_name:
@@ -280,6 +308,41 @@ def file_api_upload_domtree(io, file_id):
         return {"error": {"message": response.content, "type": "Failed to decode response"}}
 
 
+def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
+    """
+    向 file_api 上传 PDF 文件
+    
+    Args:
+        pdf_stream: PDF 文件流
+        file_id: 文件ID
+        
+    Returns:
+        响应数据
+    """
+    url = f"{FILE_API_URL}/v1/files/pdf"
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+    
+    # 重置流位置到开始
+    pdf_stream.seek(0)
+    
+    # 发送请求
+    response = requests.post(
+        url,
+        files={
+            "file": ("document.pdf", pdf_stream, "application/pdf")
+        },
+        data={"file_id": file_id},
+        headers=headers,
+    )
+    
+    # 解析响应
+    try:
+        response_data = json.loads(response.content)
+        return response_data
+    except json.JSONDecodeError:
+        return {"error": {"message": response.content, "type": "Failed to decode response"}}
+
+
 def parse_result_layout_and_domtree(file_info, callbacks: list):
     file_id = file_info["id"]
     file_name = file_info["filename"]
@@ -290,39 +353,28 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
     
-    # 获取文件扩展名
+    # 检查是否需要转换
     file_extension = general_util.get_file_type(file_name)
-    
-    # 如果是doc/docx文件，预先转换PDF
     pdf_stream = None
+
     if file_extension in ['doc', 'docx']:
-        docx_stream = io.BytesIO(contents)
-        pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
+        pdf_stream, file_name = convert_docx_to_pdf_stream(file_name, contents)
+        
+        # 如果是 DOCX 转换的 PDF，回流到 API
         if pdf_stream:
-            logger.info(f"PDF转换成功，准备回流 file_id:{file_id}")
-            
-            # 回流PDF到API
             pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id)
             if not pdf_upload_result or "error" in pdf_upload_result:
                 logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
             else:
                 logger.info(f"PDF回流成功 file_id:{file_id}")
-
-            # 重置pdf_stream位置
+            
             pdf_stream.seek(0)
-
-            # 直接修改文件名后缀为.pdf
-            file_name = file_name.rsplit('.', 1)[0] + '.pdf'
-            logger.info(f"文件名已修改: {file_name}")
-        else:
-            logger.error(f"PDF转换失败 file_id:{file_id}")
 
     # 多进程并行解析
     manager = Manager()
     user = user_context.get()
     return_dict = manager.dict()
-    
-    # 根据文件类型决定传递的内容
+
     parse_contents = pdf_stream if pdf_stream else contents
 
     p1 = multiprocessing.Process(target=worker, args=(
@@ -397,25 +449,12 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
     # 对文件名和文件内容进行md5加密，task_id主要是为了cache
     task_id = general_util.unified_md5(file_name, contents, parse_type, strategy)
 
-    # 获取文件扩展名
+    # 检查是否需要转换
     file_extension = general_util.get_file_type(file_name)
-    
-    # 如果是doc/docx文件，预先转换PDF
     pdf_stream = None
     if file_extension in ['doc', 'docx']:
-        docx_stream = io.BytesIO(contents)
-        pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
-        if pdf_stream:
-            logger.info(f"PDF转换成功，准备解析 file_name:{file_name}")
-            pdf_stream.seek(0)
+        pdf_stream, file_name = convert_docx_to_pdf_stream(file_name, contents)
 
-            # 直接修改文件名后缀为.pdf
-            file_name = file_name.rsplit('.', 1)[0] + '.pdf'
-            logger.info(f"文件名已修改: {file_name}")
-        else:
-            logger.error(f"PDF转换失败 file_name:{file_name}")
-
-    # 根据文件类型决定传递的内容
     parse_contents = pdf_stream if pdf_stream else contents
 
     parse_type_res = parse_type + "_result"
@@ -531,50 +570,3 @@ def pdf_parse(contents: bytes = None):
     )
     return dom_tree, dom_tree.to_markdown()
 
-
-def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
-    """
-    向 file_api 上传PDF文件
-
-    Args:
-        pdf_stream: PDF文件流
-        file_id: 文件ID
-        
-    Returns:
-        响应数据
-    """
-    url = f"{FILE_API_URL}/v1/files/pdf"
-    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
-
-    # 准备文件数据
-    pdf_stream.seek(0)
-    files = {
-        'file': ('converted.pdf', pdf_stream, 'application/pdf')
-    }
-    
-    data = {
-        'file_id': file_id
-    }
-    
-    logger.info(f"开始回流PDF到API: {url}, file_id: {file_id}")
-    
-    # 发送请求
-    response = requests.post(
-        url,
-        files=files,
-        data=data,
-        headers=headers,
-        timeout=60
-    )
-    
-    # 解析响应
-    try:
-        response_data = response.json()
-        if response.status_code == 200:
-            logger.info(f"PDF回流成功: {file_id}")
-        else:
-            logger.error(f"PDF回流失败: {response.status_code}, {response.text}")
-        return response_data
-    except Exception as e:
-        logger.error(f"PDF回流异常: {str(e)}")
-        return {"error": {"message": str(e), "type": "PDF回流异常"}}
