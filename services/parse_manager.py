@@ -531,8 +531,8 @@ def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
         响应数据
     """
     url = f"{FILE_API_URL}/v1/files/pdf"
-    headers = {"Authorization": f"Bearer {BELLA_OPENAPI_KEY}"}
-    
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+
     # 准备文件数据
     pdf_stream.seek(0)
     files = {
