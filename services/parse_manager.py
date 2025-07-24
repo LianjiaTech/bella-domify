@@ -74,6 +74,10 @@ def layout_parse(file_name: str = None, file: bytes = None, task_id=""):
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'layout_parse解析开始 文件名：{file_name}')
 
+    # 如果是doc、docx文件，直接按PDF处理（转换已在主函数中完成）
+    if file_extension in ['doc', 'docx']:
+        file_extension = 'pdf'
+
     # 根据后缀判断文件类型
     if file_extension == 'pptx':
         result_json, result_text = pptx_parser.layout_parse(file)
@@ -402,8 +406,23 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
     # 对文件名和文件内容进行md5加密，task_id主要是为了cache
     task_id = general_util.unified_md5(file_name, contents, parse_type, strategy)
 
-    # 底层处理方法暂不调整，先这么写
-    check_faq = strategy.get("check_faq", False)
+    # 获取文件扩展名
+    file_extension = general_util.get_file_type(file_name)
+    
+    # 如果是doc/docx文件，预先转换PDF
+    pdf_contents = None
+    if file_extension in ['doc', 'docx']:
+        docx_stream = io.BytesIO(contents)
+        pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
+        if pdf_stream:
+            pdf_stream.seek(0)
+            pdf_contents = pdf_stream.read()
+            logger.info(f"PDF转换成功，准备解析 file_name:{file_name}")
+        else:
+            logger.error(f"PDF转换失败 file_name:{file_name}")
+
+    # 根据文件类型决定传递的内容
+    parse_contents = pdf_contents if pdf_contents else contents
 
     parse_type_res = parse_type + "_result"
     # 定义解析函数映射
@@ -429,7 +448,7 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
         )
 
     # 根据parse_type_res选择解析函数并执行
-    parse_result = parse_functions[parse_type_res](file_name, contents)
+    parse_result = parse_functions[parse_type_res](file_name, parse_contents)
     # 返回结果
     ret = parse_result if parse_type_res == "all_result" else {parse_type_res: parse_result}
     # 返回task_id
