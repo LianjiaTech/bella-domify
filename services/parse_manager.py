@@ -74,23 +74,15 @@ def layout_parse(file_name: str = None, file: bytes = None, task_id=""):
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'layout_parse解析开始 文件名：{file_name}')
 
-    # 如果是doc、docx文件，直接按PDF处理（转换已在主函数中完成）
-    if file_extension in ['doc', 'docx']:
-        file_extension = 'pdf'
-
     # 根据后缀判断文件类型
     if file_extension == 'pptx':
         result_json, result_text = pptx_parser.layout_parse(file)
     elif file_extension == 'pdf':
         result_json, result_text = pdf_parser.layout_parse(file)
     elif file_extension == 'docx':
-        # PDF转换已在主函数中完成，这里直接按PDF处理
-        result_json, result_text = pdf_parser.layout_parse(file)
+        result_json, result_text = docx_parser.layout_parse(file)
     elif file_extension == 'csv':
         result_json, result_text = csv_parser.layout_parse(file)
-    elif file_extension == 'doc':
-        # PDF转换已在主函数中完成，这里直接按PDF处理
-        result_json, result_text = pdf_parser.layout_parse(file)
     elif file_extension == 'xlsx':
         result_json, result_text = xlsx_parser.layout_parse(file)
     elif file_extension == 'xls':
@@ -130,10 +122,6 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
     file_extension = general_util.get_file_type(file_name)
     logging.info(f'domtree_parse解析开始 文件名：{file_name}')
 
-    # 如果是doc、docx文件，直接按PDF处理（转换已在主函数中完成）
-    if file_extension in ['doc', 'docx']:
-        # 注意：PDF转换已在主函数中完成，这里直接按PDF处理
-        file_extension = 'pdf'
 
     # 根据后缀判断文件类型
     if file_extension == 'pdf':
@@ -307,6 +295,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     
     # 如果是doc/docx文件，预先转换PDF
     pdf_contents = None
+    modified_file_name = file_name  # 用于传递给解析函数的文件名
     if file_extension in ['doc', 'docx']:
         docx_stream = io.BytesIO(contents)
         pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
@@ -322,6 +311,10 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
                 logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
             else:
                 logger.info(f"PDF回流成功 file_id:{file_id}")
+            
+            # 修改文件名后缀为.pdf
+            modified_file_name = file_name.rsplit('.', 1)[0] + '.pdf'
+            logger.info(f"文件名已修改: {file_name} -> {modified_file_name}")
         else:
             logger.error(f"PDF转换失败 file_id:{file_id}")
 
@@ -335,9 +328,9 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     domtree_contents = pdf_contents if pdf_contents else contents
 
     p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, file_name, layout_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
+        layout_parse_and_callback, (file_id, modified_file_name, layout_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
     p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, file_name, domtree_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
+        domtree_parse_and_callback, (file_id, modified_file_name, domtree_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
     p1.start()
     p2.start()
 
@@ -411,6 +404,7 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
     
     # 如果是doc/docx文件，预先转换PDF
     pdf_contents = None
+    modified_file_name = file_name  # 用于传递给解析函数的文件名
     if file_extension in ['doc', 'docx']:
         docx_stream = io.BytesIO(contents)
         pdf_stream = convert_docx_to_pdf_in_memory(docx_stream)
@@ -418,6 +412,10 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
             pdf_stream.seek(0)
             pdf_contents = pdf_stream.read()
             logger.info(f"PDF转换成功，准备解析 file_name:{file_name}")
+            
+            # 修改文件名后缀为.pdf
+            modified_file_name = file_name.rsplit('.', 1)[0] + '.pdf'
+            logger.info(f"文件名已修改: {file_name} -> {modified_file_name}")
         else:
             logger.error(f"PDF转换失败 file_name:{file_name}")
 
@@ -448,7 +446,7 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
         )
 
     # 根据parse_type_res选择解析函数并执行
-    parse_result = parse_functions[parse_type_res](file_name, parse_contents)
+    parse_result = parse_functions[parse_type_res](modified_file_name, parse_contents)
     # 返回结果
     ret = parse_result if parse_type_res == "all_result" else {parse_type_res: parse_result}
     # 返回task_id
