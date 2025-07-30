@@ -90,9 +90,7 @@ def parse():
             ignore_faq=True,
         )
 
-        dom_tree_model = DomTreeModel(dom_tree=dom_tree)
-
-        output(dom_tree_model, file_name, "evaluation/parse_json/beike/")
+        output(dom_tree, file_name, "evaluation/parse_json/beike/")
         print(f"解析完毕：{file_name}")
 
 
