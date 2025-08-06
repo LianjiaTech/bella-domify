@@ -22,6 +22,8 @@ background_threads = []
 # 文件解析 - 监听解析任务，异步解析
 @app.on_event("startup")
 async def startup_event():
+    import os
+    
     parser_config = ParserConfig(image_provider=S3ImageStorageProvider(),
                                  parse_result_cache_provider=S3ParseResultCacheProvider(),
                                  ocr_model_name=config.get('OCR', 'model_name'),
@@ -32,47 +34,25 @@ async def startup_event():
     thread1 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_LONG_TASK,))
     thread1.start()
 
-    # 启动子进程，GROUP_ID_SHORT_TASK 处理小文件
-    thread2 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_SHORT_TASK,))
-    thread2.start()
-
-    # 启动子进程，GROUP_ID_IMAGE_TASK 处理图片文件
-    thread3 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_IMAGE_TASK,))
-    thread3.start()
-
-    # 保存线程引用
-    background_threads.extend([thread1, thread2, thread3])
-    logging.info(f"已启动 {len(background_threads)} 个后台线程")
-    monitor_thread = Thread(target=monitor_threads, daemon=True)
-    monitor_thread.start()
-
-
-def monitor_threads():
-    global background_threads
-    while True:
-        for i, thread in enumerate(background_threads):
-            if not thread.is_alive():
-                logging.info(f"线程 {i} 已死亡，正在重启...")
-                # 重新创建并启动相应的线程
-                if i == 0:
-                    new_thread = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_LONG_TASK,),
-                                        daemon=True)
-                elif i == 1:
-                    new_thread = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_SHORT_TASK,),
-                                        daemon=True)
-                else:
-                    new_thread = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_IMAGE_TASK,),
-                                        daemon=True)
-                new_thread.start()
-                background_threads[i] = new_thread
-        time.sleep(60)
-
-
-@app.on_event("startup")
-async def startup_event():
-    print("Application startup")
+    # 只有主worker进程启动Kafka消费者，避免重复消费
+    worker_id = os.getenv('UVICORN_WORKER_ID', '0')
+    if worker_id == '0':
+        logger.info('Starting Kafka consumer thread...')
+        start_workers()
+        logger.info('Starting Kafka consumer thread ok...')
+    else:
+        logger.info(f'Worker {worker_id} skipping Kafka consumer startup')
 
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    print("Application shutdown")
+    import os
+    
+    # 只有启动了Kafka消费者的worker才需要停止
+    worker_id = os.getenv('UVICORN_WORKER_ID', '0')
+    if worker_id == '0':
+        # 使用导入的logger，不需要重新获取
+        logger.info('Stopping Kafka consumer thread...')
+        stop_workers()
+        logger.info('Stopping Kafka consumer thread ok...')
+    logger.info("Application shutdown")

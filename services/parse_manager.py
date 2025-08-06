@@ -33,7 +33,7 @@ from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_par
     csv_parser, pic_parser
 from settings.ini_config import config
 from utils import general_util
-from utils.docx2pdf_util import convert_docx_to_pdf_in_memory, convert_docx_to_pdf
+from utils.docx2pdf_util import convert_docx_to_pdf
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
