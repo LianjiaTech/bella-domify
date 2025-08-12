@@ -140,7 +140,7 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
         except Exception as e:
             logging.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
             return False, {}, ""
-    elif file_extension == 'csv' or file_extension == 'txt':
+    elif file_extension == 'csv' or file_extension == 'txt' or file_extension == 'md' or file_extension == 'html':
         converter = TxtConverter(stream=file)
         txt_dom_tree = converter.dom_tree_parse()
         _, json_compatible_data = convert_to_json(txt_dom_tree)
@@ -264,6 +264,14 @@ def file_api_upload_domtree(io, file_id):
     url = f"{FILE_API_URL}/v1/files/dom-tree"
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
 
+    if file_meta:
+        user_headers = {
+            'X-BELLA-SPACE-CODE': str(file_meta.get('space_code', '')),
+            'X-BELLA-OPERATOR-ID': str(file_meta.get('cuid', '')),
+            'X-BELLA-OPERATOR-NAME': urllib.parse.quote(str(file_meta.get('cu_name', '')))
+        }
+        headers.update({k: v for k, v in user_headers.items() if v})
+
     # 发送请求
     response = requests.post(
     url,
@@ -295,10 +303,18 @@ def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
     """
     url = f"{FILE_API_URL}/v1/files/pdf"
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
-    
+
+    if file_meta:
+        user_headers = {
+            'X-BELLA-SPACE-CODE': str(file_meta.get('space_code', '')),
+            'X-BELLA-OPERATOR-ID': str(file_meta.get('cuid', '')),
+            'X-BELLA-OPERATOR-NAME': urllib.parse.quote(str(file_meta.get('cu_name', '')))
+        }
+        headers.update({k: v for k, v in user_headers.items() if v})
+
     # 重置流位置到开始
     pdf_stream.seek(0)
-    
+
     # 发送请求
     response = requests.post(
         url,
@@ -308,7 +324,7 @@ def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
         data={"file_id": file_id},
         headers=headers,
     )
-    
+
     # 解析响应
     try:
         response_data = json.loads(response.content)
@@ -326,14 +342,14 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     callback_parse_progress(file_id, DOCUMENT_PARSE_BEGIN, callbacks)
     # 读取文件流内容
     contents = file_api_retrieve_file(file_id)
-    
+
     # 检查是否需要转换
     file_extension = general_util.get_file_type(file_name)
     pdf_stream = None
 
     if file_extension in ['doc', 'docx']:
         pdf_stream, file_name = convert_docx_to_pdf(file_name, contents)
-        
+
         # 如果是 DOCX 转换的 PDF，回流到 API
         if pdf_stream:
             pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id)
@@ -341,7 +357,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
                 logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
             else:
                 logger.info(f"PDF回流成功 file_id:{file_id}")
-            
+
             pdf_stream.seek(0)
 
     # 多进程并行解析
