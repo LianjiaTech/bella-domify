@@ -2,9 +2,11 @@
 import json
 import logging
 from typing import Optional
+from xmlrpc.client import boolean
 
-from ait_openapi import validate_token
-from ait_openapi.exception import AuthorizationException
+from bella_openapi.authorize import validate_token_by_whoami
+from bella_openapi.bella_trace import TraceContext
+from bella_openapi.exception import AuthorizationException
 from fastapi import APIRouter, Header, HTTPException
 from fastapi import File, UploadFile
 from fastapi import Form, Path, Query
@@ -39,12 +41,13 @@ async def health_readiness():
 async def document_parse(file_object: UploadFile = File(...),
                          user: str = Form(default=None), parse_type: str = Form(default="all"),
                          strategy: str = Form(default=""),
-                         authorization: Optional[str] = Header("", alias="Authorization")):
-    try:
-        validate_token(authorization)
-    except AuthorizationException as e:
-        logging.error(f"Authorization failed: {e}")
-        return {"error": "Authorization failed", "message": str(e)}
+                         authorization: Optional[str] = Header("", alias="Authorization"),
+                         bella_trace_id: Optional[str] = Header("", alias="X-BELLA-TRACE-ID")):
+    TraceContext.trace_id = bella_trace_id
+    can_pass:bool = validate_token_by_whoami(authorization)
+    if not can_pass:
+        logger.error(f"Authorization failed")
+        return {"error": "Authorization failed", "message": "Invalid token"}
 
     if not user:
         # 400错误，用户为空
@@ -61,10 +64,10 @@ async def document_parse(file_object: UploadFile = File(...),
 # 获取S3缓存结果: 通过file_id获取解析结果（结构信息和字符串信息）
 @router.get("/document/parse/{file_id}")
 async def document_parse(file_id: str = Path(...), parse_type: str = Query(default="all"),
-                         authorization: Optional[str] = Header("", alias="Authorization")):
-    try:
-        validate_token(authorization)
-    except AuthorizationException as e:
-        logging.error(f"Authorization failed: {e}")
-        return {"error": "Authorization failed", "message": str(e)}
+                         authorization: Optional[str] = Header("", alias="Authorization"),
+                         bella_trace_id: Optional[str] = Header("", alias="X-BELLA-TRACE-ID")):
+    can_pass:bool = validate_token_by_whoami(authorization)
+    if not can_pass:
+        logger.error(f"Authorization failed")
+        return {"error": "Authorization failed", "message": "Invalid token"}
     return parse_manager.api_get_result_service(file_id, parse_type)

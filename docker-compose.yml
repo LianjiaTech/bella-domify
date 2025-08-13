@@ -1,0 +1,93 @@
+services:
+  # LocalStack - S3 模拟服务
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./scripts/init-localstack.sh:/etc/localstack/init/ready.d/init-localstack.sh"
+    networks:
+      - document-parser-network
+
+  # Zookeeper - Kafka依赖
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - document-parser-network
+
+  # Kafka
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - document-parser-network
+
+  # Kafka Topic 初始化服务
+  kafka-init:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka-init
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - "./scripts/init-kafka.sh:/init-kafka.sh"
+    command: bash /init-kafka.sh
+    networks:
+      - document-parser-network
+
+  # Document Parser 主应用
+  document-parser:
+    image: document_parser:1.0
+    container_name: document-parser
+    ports:
+      - "80:8080"
+    depends_on:
+      localstack:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
+    environment:
+      - OPENAI_API_KEY=75d63cd2-dab3-4ca9-9c27-78c6b41cf225
+      - OPENAI_BASE_URL=https://api.bella.top/v1/
+      - OPENAPI_CONSOLE_KEY=75d63cd2-dab3-4ca9-9c27-78c6b41cf225
+      - OPENAPI_HOST=https://api.bella.top
+    networks:
+      - document-parser-network
+
+networks:
+  document-parser-network:
+    driver: bridge
