@@ -64,7 +64,7 @@ def upload_dict_content(data: dict, file_key: str) -> str:
 def get_file_url_inner(file_key):
     # s3, 获取文件加签url
     return s3.generate_presigned_url('get_object', Params={'Bucket': bucket_name, 'Key': file_key},
-                                     ExpiresIn=3600)
+                                     ExpiresIn=10 * 365 * 24 * 60* 60)  # 10年有效期
 
 
 def get_file(file_key) -> bytes:
@@ -113,9 +113,5 @@ def get_sign_url_with_given_end_time(uri, start_time: int, expire_seconds: int) 
 
 def get_file_url(file_key):
     url_inner = get_file_url_inner(file_key)
-    url_outer = get_signed_img_url_with_given_time(url_inner, int(time.time()), 3600)
+    url_outer = get_sign_url_with_given_end_time(url_inner, int(time.time()), 10 * 365 * 24 * 60* 60)  # 10年有效期
     return url_outer
-
-
-if __name__ == "__main__":
-    print(get_file_text_content('4d646f6a6b134f8eaf3f800edbc24f2a.txt'))
