@@ -64,14 +64,17 @@ services:
       kafka:
         condition: service_healthy
     volumes:
-      - "./scripts/init-kafka.sh:/init-kafka.sh"
+      - type: bind
+        source: ./scripts/init-kafka.sh
+        target: /init-kafka.sh
+        read_only: true
     command: bash /init-kafka.sh
     networks:
       - document-parser-network
 
   # Document Parser 主应用
   document-parser:
-    image: document_parser:1.0
+    image: bellatop/document_parse:latest
     container_name: document-parser
     ports:
       - "80:8080"
