@@ -3,6 +3,8 @@ import os
 
 from ait_openapi.bella_trace import TraceContext
 
+from settings.ini_config import config
+
 _DATE_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
 
@@ -28,9 +30,11 @@ def init_logger():
     # 添加trace_id过滤器
     logger.addFilter(TraceContextFilter())
     #配置日志文件滚动
-    if not os.path.exists("/data0/www/applogs"):
-        os.makedirs("/data0/www/applogs", exist_ok=True)
-    file_handler = TimedRotatingFileHandler(filename="/data0/www/applogs/app.log", when="D", interval=1, backupCount=14)
+    log_dir = str(config.get("LOG", "dir"))
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir, exist_ok=True)
+    log_file_path = os.path.join(log_dir, str(config.get("LOG", "log_file")))
+    file_handler = TimedRotatingFileHandler(filename=log_file_path, when="D", interval=1, backupCount=14)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     logger.propagate = False
