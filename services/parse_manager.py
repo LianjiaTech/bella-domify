@@ -13,6 +13,7 @@ import json
 import logging
 import multiprocessing
 import time
+import uuid
 from multiprocessing import Manager
 
 import requests
@@ -272,11 +273,15 @@ def file_api_upload_domtree(io, file_id):
         }
         headers.update({k: v for k, v in user_headers.items() if v})
 
+    # 生成基于UUID的domtree文件名
+    domtree_uuid = str(uuid.uuid4())
+    domtree_filename = f"dom_tree_{domtree_uuid}.json"
+
     # 发送请求
     response = requests.post(
     url,
     files={
-        "file": io
+        "file": (domtree_filename, io, "application/json")
     },
     data={"file_id": file_id},
     headers=headers,
@@ -314,12 +319,16 @@ def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
 
     # 重置流位置到开始
     pdf_stream.seek(0)
+    
+    # 生成基于UUID的PDF文件名
+    pdf_uuid = str(uuid.uuid4())
+    pdf_filename = f"pdf_{pdf_uuid}.pdf"
 
     # 发送请求
     response = requests.post(
         url,
         files={
-            "file": ("document.pdf", pdf_stream, "application/pdf")
+            "file": (pdf_filename, pdf_stream, "application/pdf")
         },
         data={"file_id": file_id},
         headers=headers,
