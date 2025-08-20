@@ -3,14 +3,13 @@
 #
 #    Copyright (C) 2024 Beike, Inc. All Rights Reserved.
 #
-#    @Create Author : luxu(luxu002@ke.com)
+#    @Create Author : luxu
 #    @Create Time   : 2024/7/22
 #    @Description   : 
 #
 # ===============================================================
 
 import io
-import logging
 import multiprocessing
 import re
 import subprocess
@@ -18,6 +17,9 @@ from io import IOBase
 
 import fitz
 
+from doc_parser.context import logger_context
+
+logger = logger_context.get_logger()
 lock = multiprocessing.Lock()
 
 
@@ -49,7 +51,7 @@ def convert_docx_to_pdf(file_name: str, contents: bytes):
     return pdf_stream, pdf_file_name
 
 def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
-    logging.info('Starting DOCX to PDF conversion')
+    logger.info('Starting DOCX to PDF conversion')
 
     try:
 
@@ -65,24 +67,24 @@ def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
                 pdf_data, error = process.communicate(input=docx_stream.read(), timeout=60)
             except subprocess.TimeoutExpired:
                 process.kill()
-                logging.error("Conversion failed: Process timed out after 60 seconds")
+                logger.error("Conversion failed: Process timed out after 60 seconds")
                 return
 
             if process.returncode != 0:
-                logging.error(f"Conversion failed: {error.decode('utf-8')}")
+                logger.error(f"Conversion failed: {error.decode('utf-8')}")
                 return
 
             pdf_stream = io.BytesIO(pdf_data)
 
             if is_mime_email(pdf_stream):
-                logging.error("Conversion failed: 不支持非原生的doc格式")
+                logger.error("Conversion failed: 不支持非原生的doc格式")
                 return
 
-            logging.info('Conversion successful')
+            logger.info('Conversion successful')
             return pdf_stream
 
     except Exception as e:
-        logging.error(f"Conversion failed: {str(e)}")
+        logger.error(f"Conversion failed: {str(e)}")
         return
 
 

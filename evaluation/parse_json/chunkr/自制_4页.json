@@ -1,0 +1,495 @@
+[
+  {
+    "segments": [
+      {
+        "segment_id": "d172cc88-13d1-4c63-9d53-562e175b8446",
+        "bbox": {
+          "left": 384.5833,
+          "top": 182.5,
+          "width": 489.16666,
+          "height": 62.083332
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "这是一个自制的文件",
+        "segment_type": "Title",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/d172cc88-13d1-4c63-9d53-562e175b8446.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=67cf7ca09c8709d9377a916a1ed609172e68ed56ecfcd4fb7b5436fe0e04d818",
+        "html": "<h1>这是一个自制的文件</h1>",
+        "markdown": "# 这是一个自制的文件\n\n"
+      }
+    ],
+    "chunk_length": 1
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "94196cec-483f-4fc7-aa47-934672bd7c17",
+        "bbox": {
+          "left": 453.3333,
+          "top": 284.5833,
+          "width": 349.5833,
+          "height": 49.583332
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "第一部分 文字图片",
+        "segment_type": "Title",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/94196cec-483f-4fc7-aa47-934672bd7c17.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=845d0f490e516f938c10ca16ba93118895a78c88094d3a4199eb51da236a3473",
+        "html": "<h1>第一部分 文字图片</h1>",
+        "markdown": "# 第一部分 文字图片\n\n"
+      }
+    ],
+    "chunk_length": 2
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "3a20c1d3-aa2a-495d-a85d-c333426357ab",
+        "bbox": {
+          "left": 180.41666,
+          "top": 365.8333,
+          "width": 876.6666,
+          "height": 312.0833
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文 字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/3a20c1d3-aa2a-495d-a85d-c333426357ab.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=aa1411084420a200557d00d01b18f3ae1ad4427f346ee5b414d594236e4e2f42",
+        "html": "<p>这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文 字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。</p>",
+        "markdown": "这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文 字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。\n\n"
+      },
+      {
+        "segment_id": "3d4630b1-5548-47d8-8c8b-57e4703f04d4",
+        "bbox": {
+          "left": 182.5,
+          "top": 711.6666,
+          "width": 874.5833,
+          "height": 570.4166
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "",
+        "segment_type": "Picture",
+        "ocr": [],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/3d4630b1-5548-47d8-8c8b-57e4703f04d4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=cf5abf4ae9de724a531cc5afd884fc1a331cfb2ab5daf5819f833d9edb8f49ed",
+        "html": "<img src=\"https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/3d4630b1-5548-47d8-8c8b-57e4703f04d4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=cf5abf4ae9de724a531cc5afd884fc1a331cfb2ab5daf5819f833d9edb8f49ed\" />",
+        "markdown": "![Image](https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/3d4630b1-5548-47d8-8c8b-57e4703f04d4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=cf5abf4ae9de724a531cc5afd884fc1a331cfb2ab5daf5819f833d9edb8f49ed)"
+      },
+      {
+        "segment_id": "4582f8e9-3c63-4f35-a5b8-34acbda93ac0",
+        "bbox": {
+          "left": 565.8333,
+          "top": 1299.1666,
+          "width": 114.166664,
+          "height": 39.166664
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "图 1-1",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/4582f8e9-3c63-4f35-a5b8-34acbda93ac0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4dc7b0995f6698e6e2f58a7f54a237ae8e70e0e822d7243a21483c3b069c244e",
+        "html": "<span class=\"caption\">图 1-1</span>",
+        "markdown": "图 1-1\n\n"
+      },
+      {
+        "segment_id": "08224155-0b9a-4757-86c4-e4ac4a82def0",
+        "bbox": {
+          "left": 180.41666,
+          "top": 1376.25,
+          "width": 876.6666,
+          "height": 174.58333
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/08224155-0b9a-4757-86c4-e4ac4a82def0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3c0250ab0fe98df1dc7ab2ba523d37c8e92162441c3abb2c1e129042d603b39a",
+        "html": "<p>这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文</p>",
+        "markdown": "这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文\n\n"
+      },
+      {
+        "segment_id": "a964caf9-732c-41a2-8b9f-7b9f6ef32a75",
+        "bbox": {
+          "left": 180.41666,
+          "top": 157.5,
+          "width": 876.6666,
+          "height": 110.0
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/a964caf9-732c-41a2-8b9f-7b9f6ef32a75.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=2485f8e57e16322ec7c4ea94f3ad01aa8f6ef43cd82fa3648ec0cd1dbc03b59f",
+        "html": "<p>字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。</p>",
+        "markdown": "字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。\n\n"
+      },
+      {
+        "segment_id": "373557dc-d779-4dc5-8c6c-4d12db197bcc",
+        "bbox": {
+          "left": 453.3333,
+          "top": 301.25,
+          "width": 349.5833,
+          "height": 49.583332
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "第二部分 无序列表",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/373557dc-d779-4dc5-8c6c-4d12db197bcc.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=644a40f45169dd98016a6d425cf4b9e7aa76690dfb1ea8f3ab54dfa559704374",
+        "html": "<span class=\"caption\">第二部分 无序列表</span>",
+        "markdown": "第二部分 无序列表\n\n"
+      },
+      {
+        "segment_id": "12173e40-1ebb-4b35-bb97-be90fb673f20",
+        "bbox": {
+          "left": 180.41666,
+          "top": 382.5,
+          "width": 874.5833,
+          "height": 112.08333
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "第一种无序列表 demo 如下，第一种无序列表 demo 如 下，第一种无序列表 demo 如下：",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/12173e40-1ebb-4b35-bb97-be90fb673f20.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b3c1734ca68fc1af65b9b2888efb236408b2a33e05674fc9609292e3c27868ff",
+        "html": "<p>第一种无序列表 demo 如下，第一种无序列表 demo 如 下，第一种无序列表 demo 如下：</p>",
+        "markdown": "第一种无序列表 demo 如下，第一种无序列表 demo 如 下，第一种无序列表 demo 如下：\n\n"
+      },
+      {
+        "segment_id": "edfb5fe9-e42e-4e36-9e7a-a80972edbefb",
+        "bbox": {
+          "left": 265.8333,
+          "top": 530.4166,
+          "width": 299.5833,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表第一项",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/edfb5fe9-e42e-4e36-9e7a-a80972edbefb.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c7f3363da4dc749a64f381d56aaaed242954dc7fcaea770020811c982e2bf88a",
+        "html": "<p> 无序列表第一项</p>",
+        "markdown": " 无序列表第一项\n\n"
+      },
+      {
+        "segment_id": "6ffffaa4-524c-4181-8113-51620d6038b4",
+        "bbox": {
+          "left": 265.8333,
+          "top": 597.0833,
+          "width": 301.66666,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表第二项",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/6ffffaa4-524c-4181-8113-51620d6038b4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bee4a8cf2de5b6f155834ffbc4742d65eb4d8a8aae4ca4504351fb3e97a92479",
+        "html": "<p> 无序列表第二项</p>",
+        "markdown": " 无序列表第二项\n\n"
+      },
+      {
+        "segment_id": "cb52a20a-0dee-46fb-a32a-0253f8f3ccc5",
+        "bbox": {
+          "left": 263.75,
+          "top": 661.6666,
+          "width": 299.5833,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表第三项",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/cb52a20a-0dee-46fb-a32a-0253f8f3ccc5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4ec84f48c99bc8141b6a98789e2e0fbf679c1b41fbef8989a368a1c797d59d07",
+        "html": "<p> 无序列表第三项</p>",
+        "markdown": " 无序列表第三项\n\n"
+      },
+      {
+        "segment_id": "948f25c1-096f-41d4-aa73-3061e3cd7cd3",
+        "bbox": {
+          "left": 180.41666,
+          "top": 742.9166,
+          "width": 878.74994,
+          "height": 110.0
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "第二种无序列表 demo 如下，demo 如下，demo 如下，demo 如下，demo 如下：",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/948f25c1-096f-41d4-aa73-3061e3cd7cd3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=96ff6f8b6fc8863363e1d4b7d13f20a62b3466ab9a4ffdece88f861bfed4b913",
+        "html": "<p>第二种无序列表 demo 如下，demo 如下，demo 如下，demo 如下，demo 如下：</p>",
+        "markdown": "第二种无序列表 demo 如下，demo 如下，demo 如下，demo 如下，demo 如下：\n\n"
+      },
+      {
+        "segment_id": "5d36aa35-5c3c-4a41-91de-f4882a10b969",
+        "bbox": {
+          "left": 263.75,
+          "top": 888.74994,
+          "width": 303.75,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表第 1 项",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/5d36aa35-5c3c-4a41-91de-f4882a10b969.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d591ec228ae780393d0f2f281279f813f1cfa009d46ce8d682ad2b67156bd55e",
+        "html": "<p> 无序列表第 1 项</p>",
+        "markdown": " 无序列表第 1 项\n\n"
+      },
+      {
+        "segment_id": "e51bfbfd-b42a-4542-95b3-8f35fc29a445",
+        "bbox": {
+          "left": 263.75,
+          "top": 953.3333,
+          "width": 303.75,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表第 2 项",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/e51bfbfd-b42a-4542-95b3-8f35fc29a445.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=969e86340b20943b748099f47d30f091c6cc407cf8f137b4c6bfab5bd74a9fd0",
+        "html": "<p> 无序列表第 2 项</p>",
+        "markdown": " 无序列表第 2 项\n\n"
+      },
+      {
+        "segment_id": "8df86056-6929-4623-aa0e-fccc558457ec",
+        "bbox": {
+          "left": 263.75,
+          "top": 1017.9166,
+          "width": 305.8333,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表第 3 项",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/8df86056-6929-4623-aa0e-fccc558457ec.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=56e91a703450b40412296b32c6aaed33590736a49975d598a7f1d2b25c09196d",
+        "html": "<p> 无序列表第 3 项</p>",
+        "markdown": " 无序列表第 3 项\n\n"
+      },
+      {
+        "segment_id": "d84eddd1-3694-4fda-82df-8561a98eaf7d",
+        "bbox": {
+          "left": 182.5,
+          "top": 1099.1666,
+          "width": 866.24994,
+          "height": 174.58333
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "第三种无序列表 demo 如下，如下如下如下如下如下如 下如下如下如下如下如下如下如下如下如下如下如下如下 如下如下：",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/d84eddd1-3694-4fda-82df-8561a98eaf7d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=a0f561574945b64df9be2a4d378a882df47f537fe49f6391ed4c627390b92a1e",
+        "html": "<p>第三种无序列表 demo 如下，如下如下如下如下如下如 下如下如下如下如下如下如下如下如下如下如下如下如下 如下如下：</p>",
+        "markdown": "第三种无序列表 demo 如下，如下如下如下如下如下如 下如下如下如下如下如下如下如下如下如下如下如下如下 如下如下：\n\n"
+      },
+      {
+        "segment_id": "96e10f15-1385-411d-9968-f273f7c69479",
+        "bbox": {
+          "left": 251.25,
+          "top": 1311.6666,
+          "width": 430.8333,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表项无序列表项 1",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/96e10f15-1385-411d-9968-f273f7c69479.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=33e8fa1b1e8784d996398d0951aca314034cb5bc3273b5f15a5ca11567737be3",
+        "html": "<p> 无序列表项无序列表项 1</p>",
+        "markdown": " 无序列表项无序列表项 1\n\n"
+      },
+      {
+        "segment_id": "6c3908ec-7525-4d20-bb32-da1491345560",
+        "bbox": {
+          "left": 251.25,
+          "top": 1376.25,
+          "width": 428.74997,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表项无序列表项 2",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/6c3908ec-7525-4d20-bb32-da1491345560.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0fdc5a928393d5ac657cde15b2049d1012390e914df9953664acd21edb3c4366",
+        "html": "<p> 无序列表项无序列表项 2</p>",
+        "markdown": " 无序列表项无序列表项 2\n\n"
+      },
+      {
+        "segment_id": "ee29f717-4f3b-4ecd-aa37-48faa6b0c320",
+        "bbox": {
+          "left": 251.25,
+          "top": 1440.8333,
+          "width": 430.8333,
+          "height": 43.333332
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表项无序列表项 3",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/ee29f717-4f3b-4ecd-aa37-48faa6b0c320.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1655fcf7ed22db581cf7b7865e007636d7649af958d584fc72a2ea115132f68c",
+        "html": "<p> 无序列表项无序列表项 3</p>",
+        "markdown": " 无序列表项无序列表项 3\n\n"
+      },
+      {
+        "segment_id": "fb51318d-8ade-46b5-9bd8-7d5fe9cc9b90",
+        "bbox": {
+          "left": 251.25,
+          "top": 1505.4166,
+          "width": 430.8333,
+          "height": 45.416664
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": " 无序列表项无序列表项 4",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/fb51318d-8ade-46b5-9bd8-7d5fe9cc9b90.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b0f2315c53a70fc808010bfddf72b3c0015c06e8431cfd7af67dd656c4f87faf",
+        "html": "<p> 无序列表项无序列表项 4</p>",
+        "markdown": " 无序列表项无序列表项 4\n\n"
+      },
+      {
+        "segment_id": "bb7a703e-3cda-4f2a-88fe-bff2fe6c62d1",
+        "bbox": {
+          "left": 182.5,
+          "top": 157.5,
+          "width": 878.74994,
+          "height": 110.0
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "代码块 demo 如下，代码块 demo 如下，，代码块 demo 如下，代码块 demo 如下，代码块 demo 如下：",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/bb7a703e-3cda-4f2a-88fe-bff2fe6c62d1.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0c33def9e37a4424ff199c96db0727985bf2d0d5b123c77609615c3c935fca22",
+        "html": "<p>代码块 demo 如下，代码块 demo 如下，，代码块 demo 如下，代码块 demo 如下，代码块 demo 如下：</p>",
+        "markdown": "代码块 demo 如下，代码块 demo 如下，，代码块 demo 如下，代码块 demo 如下，代码块 demo 如下：\n\n"
+      },
+      {
+        "segment_id": "271c0974-9c10-44b4-9f96-160e52616c24",
+        "bbox": {
+          "left": 307.5,
+          "top": 184.58333,
+          "width": 509.99997,
+          "height": 1449.5833
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "{ \"root\": { \"child\": [ { \"child\": [ { \"child\": [], \"order_num\": \"1.1\", \"element\": { \"block_type\": \"table\", \"rows\": [] } }, {} ], \"order_num\": \"1\", \"element\": { \"text\": \" 贝壳 无形资产核算指引 \", \"block_type\": \"text\", \"image_base64_str\": null } } ], \"order_num\": null, \"element\": null } }",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/271c0974-9c10-44b4-9f96-160e52616c24.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1c7daf442143ef2b81f5afeb8f2a9e77843f21c01aa46059e601aa08f6f9b6b9",
+        "html": "<p>{ \"root\": { \"child\": [ { \"child\": [ { \"child\": [], \"order_num\": \"1.1\", \"element\": { \"block_type\": \"table\", \"rows\": [] } }, {} ], \"order_num\": \"1\", \"element\": { \"text\": \" 贝壳 无形资产核算指引 \", \"block_type\": \"text\", \"image_base64_str\": null } } ], \"order_num\": null, \"element\": null } }</p>",
+        "markdown": "{ \"root\": { \"child\": [ { \"child\": [ { \"child\": [], \"order_num\": \"1.1\", \"element\": { \"block_type\": \"table\", \"rows\": [] } }, {} ], \"order_num\": \"1\", \"element\": { \"text\": \" 贝壳 无形资产核算指引 \", \"block_type\": \"text\", \"image_base64_str\": null } } ], \"order_num\": null, \"element\": null } }\n\n"
+      }
+    ],
+    "chunk_length": 120
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "79dd5d4c-7b43-4b46-ba38-d21c5489b406",
+        "bbox": {
+          "left": 180.41666,
+          "top": 157.5,
+          "width": 747.5,
+          "height": 118.33333
+        },
+        "page_number": 5,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "以上是代码块，以上是代码块全部内容，代码块。 附录",
+        "segment_type": "Title",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/79dd5d4c-7b43-4b46-ba38-d21c5489b406.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8561d2ed2f29096ef43a27cac8a65728b744076bd777e4cb395f0a1b0eaefae3",
+        "html": "<h1>以上是代码块，以上是代码块全部内容，代码块。 附录</h1>",
+        "markdown": "# 以上是代码块，以上是代码块全部内容，代码块。 附录\n\n"
+      }
+    ],
+    "chunk_length": 2
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "18f1e7ad-8db0-4cf1-ac38-501d98b7ca95",
+        "bbox": {
+          "left": 180.41666,
+          "top": 355.41666,
+          "width": 874.5833,
+          "height": 168.33333
+        },
+        "page_number": 5,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/18f1e7ad-8db0-4cf1-ac38-501d98b7ca95.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=59df523f2af334aff6194b4b300f4cddceb186fc1cda7532164401ed63e408ab",
+        "html": "<p>这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容。</p>",
+        "markdown": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容。\n\n"
+      },
+      {
+        "segment_id": "017a0237-9f4f-4134-99a0-9b7fe227ef83",
+        "bbox": {
+          "left": 180.41666,
+          "top": 551.25,
+          "width": 874.5833,
+          "height": 428.74997
+        },
+        "page_number": 5,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附 录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录， 附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附 录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一 个附录，附录内容附录内容。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/291883a3-a6b0-4ef8-aa4f-4b074ee9a1a0/images/017a0237-9f4f-4134-99a0-9b7fe227ef83.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T031521Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=860315a360669cc4500e6ce723fbd482e6b0ec826e357bea533a93ae109f7340",
+        "html": "<p>这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附 录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录， 附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附 录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一 个附录，附录内容附录内容。</p>",
+        "markdown": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附 录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录， 附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附 录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一 个附录，附录内容附录内容。\n\n"
+      }
+    ],
+    "chunk_length": 10
+  }
+]

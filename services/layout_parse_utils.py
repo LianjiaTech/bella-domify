@@ -3,7 +3,7 @@
 #
 #    Copyright (C) 2024 Beike, Inc. All Rights Reserved.
 #
-#    @Create Author : luxu(luxu002@ke.com)
+#    @Create Author : luxu
 #    @Create Time   : 2024/7/31
 #    @Description   : 
 #
@@ -12,10 +12,9 @@ import concurrent.futures
 import re
 from collections import Counter
 
+from doc_parser.context import run_with_context_in_thread
 from services.constants import TABLE
 from services.constants import TEXT, IMAGE
-
-from server.context import user_context
 
 
 def remove_number(text):
@@ -86,10 +85,10 @@ def get_s3_links_for_simple_block_batch(simple_block_list):
     SimpleBlock的list批量获取S3链接，并返回目标结构
     """
     result = []
-    user = user_context.get()
     # 多进程获取S3链接
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-        futures = [executor.submit(simple_block.generate_s3_url, user) for simple_block in simple_block_list]
+        # 修改这一行，不再调用返回的包装函数，而是直接传递给executor.submit
+        futures = [executor.submit(run_with_context_in_thread(simple_block.generate_s3_url)) for simple_block in simple_block_list]
         for future in concurrent.futures.as_completed(futures):
             future.result()  # 等待每个任务完成
 
@@ -106,7 +105,3 @@ def trans_simple_block_list2string(simple_block_list):
         else:  # IMAGE
             doc_text = doc_text + "；" + simple_block["ocr_result"]
     return doc_text
-
-
-if __name__ == "__main__":
-    pass

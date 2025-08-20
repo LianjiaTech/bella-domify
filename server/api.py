@@ -1,6 +1,5 @@
 # fastapi定义接口
 import json
-import logging
 from typing import Optional
 from xmlrpc.client import boolean
 
@@ -11,11 +10,10 @@ from fastapi import APIRouter, Header, HTTPException
 from fastapi import File, UploadFile
 from fastapi import Form, Path, Query
 
-from server.log.log_config import log_config
+from doc_parser.context import logger_context, parser_context
 from services import parse_manager
-from .context import user_context
 
-log_config()  # 初始化日志配置
+logger = logger_context.get_logger()
 
 router = APIRouter(prefix="/v1/parser")
 health_router = APIRouter(prefix="/actuator/health")
@@ -23,6 +21,7 @@ health_router = APIRouter(prefix="/actuator/health")
 
 @router.get("/")
 async def root():
+
     return {"message": "Welcome to the Document Parser API"}
 
 
@@ -53,7 +52,7 @@ async def document_parse(file_object: UploadFile = File(...),
         # 400错误，用户为空
         raise HTTPException(status_code=400, detail="User is required")
 
-    user_context.set(user)
+    parser_context.register_user(user)
     # 读取file字节流
     file_name = file_object.filename
     contents = await file_object.read()

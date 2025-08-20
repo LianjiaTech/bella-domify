@@ -1,0 +1,384 @@
+{
+    "document": [
+        {
+            "id": 122589,
+            "uuid": "36fc011c-9511-11ef-a83a-00163e028884",
+            "parsed": 2,
+            "filename": "自制_4页.pdf",
+            "created_utc": 1730108664,
+            "updated_utc": 1730108671,
+            "exceptions": null
+        }
+    ],
+    "pdf_page": [
+        {
+            "id": 822244,
+            "did": 122589,
+            "page": 4,
+            "meta": {
+                "width": 595,
+                "height": 842,
+                "page_type": null,
+                "page_prob": null,
+                "is_image": false
+            },
+            "created_utc": 1730108671,
+            "updated_utc": 1730108671
+        },
+        {
+            "id": 822243,
+            "did": 122589,
+            "page": 3,
+            "meta": {
+                "width": 595,
+                "height": 842,
+                "page_type": null,
+                "page_prob": null,
+                "is_image": false
+            },
+            "created_utc": 1730108671,
+            "updated_utc": 1730108671
+        },
+        {
+            "id": 822242,
+            "did": 122589,
+            "page": 2,
+            "meta": {
+                "width": 595,
+                "height": 842,
+                "page_type": null,
+                "page_prob": null,
+                "is_image": false
+            },
+            "created_utc": 1730108671,
+            "updated_utc": 1730108671
+        },
+        {
+            "id": 822241,
+            "did": 122589,
+            "page": 1,
+            "meta": {
+                "width": 595,
+                "height": 842,
+                "page_type": null,
+                "page_prob": null,
+                "is_image": false
+            },
+            "created_utc": 1730108671,
+            "updated_utc": 1730108671
+        },
+        {
+            "id": 822240,
+            "did": 122589,
+            "page": 0,
+            "meta": {
+                "width": 595,
+                "height": 842,
+                "page_type": null,
+                "page_prob": null,
+                "is_image": false
+            },
+            "created_utc": 1730108671,
+            "updated_utc": 1730108671
+        }
+    ],
+    "pdf_elements": [
+        {
+            "page": 0,
+            "elements": [
+                {
+                    "page": 0,
+                    "text": "这是一个自制的文件",
+                    "index": 0,
+                    "syllabus": 0,
+                    "element_type": "paragraphs",
+                    "origin_index": 0
+                },
+                {
+                    "page": 0,
+                    "text": "第一部分 文字图片",
+                    "index": 1,
+                    "syllabus": 1,
+                    "element_type": "paragraphs",
+                    "origin_index": 1
+                },
+                {
+                    "page": 0,
+                    "text": "这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。",
+                    "index": 2,
+                    "syllabus": 1,
+                    "element_type": "paragraphs",
+                    "origin_index": 2
+                },
+                {
+                    "data": "imagebase64值",
+                    "page": 0,
+                    "index": 3,
+                    "title": "图 1-1",
+                    "syllabus": 1,
+                    "element_type": "images",
+                    "origin_index": 3
+                },
+                {
+                    "page": 0,
+                    "text": "图 1-1",
+                    "index": 4,
+                    "syllabus": 1,
+                    "element_type": "paragraphs",
+                    "origin_index": 4
+                },
+                {
+                    "page": 0,
+                    "text": "这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。 ",
+                    "index": 5,
+                    "syllabus": 1,
+                    "continued": true,
+                    "element_type": "paragraphs",
+                    "origin_index": 5
+                }
+            ]
+        },
+        {
+            "page": 1,
+            "elements": [
+                {
+                    "page": 1,
+                    "text": "第二部分 无序列表",
+                    "index": 0,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 7
+                },
+                {
+                    "page": 1,
+                    "text": "第一种无序列表 demo 如下，第一种无序列表 demo 如下，第一种无序列表 demo 如下：",
+                    "index": 1,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 8
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表第一项",
+                    "index": 2,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 9
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表第二项",
+                    "index": 3,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 10
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表第三项",
+                    "index": 4,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 11
+                },
+                {
+                    "page": 1,
+                    "text": "第二种无序列表 demo 如下，demo 如下，demo 如下，demo如下，demo 如下：",
+                    "index": 5,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 12
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表第 1 项",
+                    "index": 6,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 13
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表第 2 项",
+                    "index": 7,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 14
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表第 3 项",
+                    "index": 8,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 15
+                },
+                {
+                    "page": 1,
+                    "text": "第三种无序列表 demo 如下，如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下：",
+                    "index": 9,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 16
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表项无序列表项 1",
+                    "index": 10,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 17
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表项无序列表项 2",
+                    "index": 11,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 18
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表项无序列表项 3",
+                    "index": 12,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 19
+                },
+                {
+                    "page": 1,
+                    "text": " 无序列表项无序列表项 4",
+                    "index": 13,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 20
+                }
+            ]
+        },
+        {
+            "page": 2,
+            "elements": [
+                {
+                    "page": 2,
+                    "text": "代码块 demo 如下，代码块 demo 如下，，代码块 demo如下，代码块 demo 如下，代码块 demo 如下：",
+                    "index": 0,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 21
+                }
+            ]
+        },
+        {
+            "page": 3,
+            "elements": [
+                {
+                    "page": 3,
+                    "text": "{\"root\": {\"child\": [{\"child\": [{\"child\": [],\"order_num\": \"1.1\", \"element\": {\"block_type\": \"table\", \"rows\": []}},{}],\"order_num\": \"1\", \"element\": {\"text\": \"贝壳 无形资产核算指引 \",\"block_type\": \"text\", \"image_base64_str\": null}}],\"order_num\": null, \"element\": null}}",
+                    "index": 0,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 22
+                }
+            ]
+        },
+        {
+            "page": 4,
+            "elements": [
+                {
+                    "page": 4,
+                    "text": "以上是代码块，以上是代码块全部内容，代码块。",
+                    "index": 0,
+                    "syllabus": 7,
+                    "element_type": "paragraphs",
+                    "origin_index": 23
+                },
+                {
+                    "page": 4,
+                    "text": "附录",
+                    "index": 1,
+                    "syllabus": 24,
+                    "element_type": "paragraphs",
+                    "origin_index": 24
+                },
+                {
+                    "page": 4,
+                    "text": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容。",
+                    "index": 2,
+                    "syllabus": 24,
+                    "element_type": "paragraphs",
+                    "origin_index": 25
+                },
+                {
+                    "page": 4,
+                    "text": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容。",
+                    "index": 3,
+                    "syllabus": 24,
+                    "element_type": "paragraphs",
+                    "origin_index": 26
+                }
+            ]
+        }
+    ],
+    "pdf_stamps": [],
+    "syllabus": {
+        "index": -1,
+        "children": [
+            {
+                "page": 0,
+                "etype": "paragraphs",
+                "index": 0,
+                "level": 1,
+                "range": [
+                    0,
+                    1
+                ],
+                "title": "这是一个自制的文件",
+                "parent": -1,
+                "element": 0,
+                "children": []
+            },
+            {
+                "page": 0,
+                "etype": "paragraphs",
+                "index": 1,
+                "level": 1,
+                "range": [
+                    1,
+                    7
+                ],
+                "title": "第一部分 文字图片",
+                "parent": -1,
+                "element": 1,
+                "children": []
+            },
+            {
+                "page": 1,
+                "etype": "paragraphs",
+                "index": 7,
+                "level": 1,
+                "range": [
+                    7,
+                    24
+                ],
+                "title": "第二部分 无序列表",
+                "parent": -1,
+                "element": 7,
+                "children": []
+            },
+            {
+                "page": 4,
+                "etype": "paragraphs",
+                "index": 24,
+                "level": 1,
+                "range": [
+                    24,
+                    27
+                ],
+                "title": "附录",
+                "parent": -1,
+                "element": 24,
+                "children": []
+            }
+        ]
+    }
+}

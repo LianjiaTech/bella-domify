@@ -7,8 +7,7 @@ from setuptools import find_packages, setup
 
 DESCRIPTION = 'An Open source Pdf Parser Python library'
 
-# review-todo：缺少setting、user_context
-INCLUDE_FROM_PACKAGES = ["pdf_parser", "pdf_parser.*"]
+INCLUDE_FROM_PACKAGES = ["doc_parser", "doc_parser.*"]
 
 VERSION = "0.1.6.8"
 
@@ -63,7 +62,7 @@ if __name__ == "__main__":
     setup(
         name="document_parser",
         version=get_version("version.txt"),
-        keywords=["document-parser"],
+        keywords=["document-doc_parser"],
         description=DESCRIPTION,
         long_description=load_long_description("README.md"),
         long_description_content_type="text/markdown",
@@ -76,12 +75,7 @@ if __name__ == "__main__":
         include_package_data=True,
         zip_safe=False,
         install_requires=load_requirements("requirements.txt"),
-        python_requires=">=3.6",
-        entry_points={
-            "console_scripts": [
-                "pdf2docx=pdf2docx.main:main"
-            ]
-        },
+        python_requires=">=3.6"
     )
 
 """
@@ -102,7 +96,7 @@ if __name__ == "__main__":
     version = '0.1.3.6'  20240830   不常见字体兼容；
     version = '0.1.3.7'  20240912   FAQ文件QA切分输出；
     version = '0.1.3.10'  20240919   大文件oom问题优化；
-    version = '0.1.3.11'  20240919   image_s3_link属性丢失问题修复；
+    version = '0.1.3.11'  20240919   image_link属性丢失问题修复；
     version = '0.1.3.12'  20240920   特殊字体的默认读入设置改为Helvetica；
     version = '0.1.3.13'  20240923   block切分准确率：0.96；
     

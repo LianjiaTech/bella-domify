@@ -1,15 +1,22 @@
-from pdf2docx import Converter
-from server.context import user_context, DEFAULT_USER
+import os
 
-test_dir = '/Users/beike/Documents/工作记录/智能架构/2024/知识库/结构化提取/'
-file_name = '评测文件9-博学_13页.pdf'
-converter = Converter(test_dir + file_name)
-user_context.set(DEFAULT_USER)
+from doc_parser.dom_parser.parsers.pdf.converter import PDFConverter
+from test import TEST_PATH
 
-dom_tree = converter.dom_tree_parse(
-    start=3, end=4,
-    remove_watermark=True,
-    debug=True,
-    debug_file_name=test_dir + "结果/" + file_name,
-    parse_stream_table=False
-)
+
+def test_dom_tree():
+    # # 使用项目内的test/document目录
+    test_dir = os.path.join(TEST_PATH, "document")
+    file_name = '英文论文Demo_前3页.pdf'
+    converter = PDFConverter(os.path.join(test_dir, file_name))
+    # 将结果保存在test/results目录下
+    results_dir = os.path.join(TEST_PATH, 'results')
+    # 确保结果目录存在,不存在则创建
+    os.makedirs(results_dir, exist_ok=True)
+
+    dom_tree = converter.dom_tree_parse(
+        remove_watermark=True,
+        debug=True,
+        debug_file_name=os.path.join(results_dir, file_name),
+        parse_stream_table=False
+    )

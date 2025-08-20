@@ -1,0 +1,1093 @@
+[
+  {
+    "type": "Title",
+    "element_id": "ab907eea459ddca06d5ab95833fd174b",
+    "text": "这是一个自制的文件 第一部分 文字图片",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            522.21826171875,
+            248.6339569091797
+          ],
+          [
+            522.21826171875,
+            444.2156066894531
+          ],
+          [
+            1129.3037109375,
+            444.2156066894531
+          ],
+          [
+            1129.3037109375,
+            248.6339569091797
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8892440bfaba4cf79549edad15ae4c08",
+    "text": "是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文 字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            200.91038513183594,
+            523.3421630859375
+          ],
+          [
+            200.91038513183594,
+            900.4959106445312
+          ],
+          [
+            1421.0941162109375,
+            900.4959106445312
+          ],
+          [
+            1421.0941162109375,
+            523.3421630859375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "ab907eea459ddca06d5ab95833fd174b",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "5ec63d911de58daba0d4265e666a6a3d",
+    "text": "= T o",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            249.01612854003906,
+            950.6898803710938
+          ],
+          [
+            249.01612854003906,
+            1697.9999999999998
+          ],
+          [
+            1404.3863525390625,
+            1697.9999999999998
+          ],
+          [
+            1404.3863525390625,
+            950.6898803710938
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "583790ed813d14f3202545fbf55a8e54",
+    "text": "图 1-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            764.0,
+            1740.228271484375
+          ],
+          [
+            764.0,
+            1781.1515277777778
+          ],
+          [
+            888.7287499999999,
+            1781.1515277777778
+          ],
+          [
+            888.7287499999999,
+            1740.228271484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "84b7437ff13f9d63b89c5ebc4b30a959",
+    "text": "这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            246.91586303710938,
+            1838.436767578125
+          ],
+          [
+            246.91586303710938,
+            2072.053466796875
+          ],
+          [
+            1416.2291259765625,
+            2072.053466796875
+          ],
+          [
+            1416.2291259765625,
+            1838.436767578125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "583790ed813d14f3202545fbf55a8e54",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "db540aaf6ff331e85386c47f5f5d426c",
+    "text": "字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            245.15711975097656,
+            211.81024169921875
+          ],
+          [
+            245.15711975097656,
+            355.4476013183594
+          ],
+          [
+            1426.81103515625,
+            355.4476013183594
+          ],
+          [
+            1426.81103515625,
+            211.81024169921875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "583790ed813d14f3202545fbf55a8e54",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+    "text": "第二部分 无序列表",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            608.9684448242188,
+            406.3175964355469
+          ],
+          [
+            608.9684448242188,
+            469.20953369140625
+          ],
+          [
+            1044.50439453125,
+            469.20953369140625
+          ],
+          [
+            1044.50439453125,
+            406.3175964355469
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "41dd190afbdabd41ed2380cbe4a8f33e",
+    "text": "第一种无序列表 demo 如下，第一种无序列表 demo 如 下，第一种无序列表 demo 如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            518.0214233398438
+          ],
+          [
+            250.0,
+            660.6983642578125
+          ],
+          [
+            1415.8624267578125,
+            660.6983642578125
+          ],
+          [
+            1415.8624267578125,
+            518.0214233398438
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c28863ea4b1db4215e82d91d0bc48476",
+    "text": "无序列表第一项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            360.9972222222222,
+            715.0997924804688
+          ],
+          [
+            360.9972222222222,
+            768.033447265625
+          ],
+          [
+            733.7871704101562,
+            768.033447265625
+          ],
+          [
+            733.7871704101562,
+            715.0997924804688
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8ee7c38edee1a6e1ce05000b29671872",
+    "text": "无序列表第二项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            360.9972222222222,
+            802.914794921875
+          ],
+          [
+            360.9972222222222,
+            853.7383422851562
+          ],
+          [
+            734.214111328125,
+            853.7383422851562
+          ],
+          [
+            734.214111328125,
+            802.914794921875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7cd424b537d786ca2d7bd44c0c15e72c",
+    "text": "无序列表第三项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            360.9972222222222,
+            886.6646728515625
+          ],
+          [
+            360.9972222222222,
+            940.9166259765625
+          ],
+          [
+            734.4074096679688,
+            940.9166259765625
+          ],
+          [
+            734.4074096679688,
+            886.6646728515625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "ca5503bb85271f5ecb5e35660744354d",
+    "text": "第二种无序列表 demo 如下，demo 如下，demo 如下，demo 如下，demo 如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            995.7361450195312
+          ],
+          [
+            250.0,
+            1136.1590576171875
+          ],
+          [
+            1408.888671875,
+            1136.1590576171875
+          ],
+          [
+            1408.888671875,
+            995.7361450195312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "1145ddc3fa3a86ecebc03b3e453c84ba",
+    "text": "无序列表第 1 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            360.9972222222222,
+            1191.40478515625
+          ],
+          [
+            360.9972222222222,
+            1244.72607421875
+          ],
+          [
+            736.557373046875,
+            1244.72607421875
+          ],
+          [
+            736.557373046875,
+            1191.40478515625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "720ea55afc5a9c50567aa13babe7ea79",
+    "text": "无序列表第 2 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            360.9972222222222,
+            1277.82080078125
+          ],
+          [
+            360.9972222222222,
+            1330.898681640625
+          ],
+          [
+            735.5972900390625,
+            1330.898681640625
+          ],
+          [
+            735.5972900390625,
+            1277.82080078125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "1b89e9f52d9e7021f0885142daa0d909",
+    "text": "无序列表第 3 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            360.9972222222222,
+            1365.5206298828125
+          ],
+          [
+            360.9972222222222,
+            1417.3651123046875
+          ],
+          [
+            733.7460327148438,
+            1417.3651123046875
+          ],
+          [
+            733.7460327148438,
+            1365.5206298828125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "49fa3c2e4242e07a4ad762de4aa993d9",
+    "text": "第三种无序列表 demo 如下，如下如下如下如下如下如 下如下如下如下如下如下如下如下如下如下如下如下如下 如下如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            237.73387145996094,
+            1471.25927734375
+          ],
+          [
+            237.73387145996094,
+            1699.4962158203125
+          ],
+          [
+            1396.765869140625,
+            1699.4962158203125
+          ],
+          [
+            1396.765869140625,
+            1471.25927734375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "0722a5c79d4c493e4744b48e55c114b8",
+    "text": "无序列表项无序列表项 1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            339.0,
+            1752.0631103515625
+          ],
+          [
+            339.0,
+            1809.25390625
+          ],
+          [
+            874.8166666666667,
+            1809.25390625
+          ],
+          [
+            874.8166666666667,
+            1752.0631103515625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "d69d24e6627e6cbf95fb456caef1190f",
+    "text": "无序列表项无序列表项 2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            339.0,
+            1839.255126953125
+          ],
+          [
+            339.0,
+            1896.0377197265625
+          ],
+          [
+            882.2335205078125,
+            1896.0377197265625
+          ],
+          [
+            882.2335205078125,
+            1839.255126953125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2f5931b1040c45613f55a84a730174c9",
+    "text": "无序列表项无序列表项 3",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            339.0,
+            1928.403564453125
+          ],
+          [
+            339.0,
+            1980.376708984375
+          ],
+          [
+            876.4205322265625,
+            1980.376708984375
+          ],
+          [
+            876.4205322265625,
+            1928.403564453125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a0c6ac5f6ce89eb244f47b5e2291a725",
+    "text": "无序列表项无序列表项 4",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            339.0,
+            2015.27392578125
+          ],
+          [
+            339.0,
+            2068.0224609375
+          ],
+          [
+            879.0554809570312,
+            2068.0224609375
+          ],
+          [
+            879.0554809570312,
+            2015.27392578125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "e51e30916b6ecd6d2f9635dc25deeb63",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "ab672f73ccdbd7513d00737b7a7cb3be",
+    "text": "代码块 demo 如下，代码块 demo 如下，，代码块 demo 如下，代码块 demo 如下，代码块 demo 如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            216.13877868652344
+          ],
+          [
+            250.0,
+            360.76348876953125
+          ],
+          [
+            1451.69189453125,
+            360.76348876953125
+          ],
+          [
+            1451.69189453125,
+            216.13877868652344
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "61f9a71416a1693a47e0250bc620f0c1",
+    "text": "{",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            425.0,
+            264.30000000000007
+          ],
+          [
+            425.0,
+            293.32777777777795
+          ],
+          [
+            442.4166666666667,
+            293.32777777777795
+          ],
+          [
+            442.4166666666667,
+            264.30000000000007
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "73d116836248820b0a29a1aff81107a1",
+    "text": "}",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            425.0,
+            2133.969444444444
+          ],
+          [
+            425.0,
+            2162.9972222222223
+          ],
+          [
+            442.4166666666667,
+            2162.9972222222223
+          ],
+          [
+            442.4166666666667,
+            2133.969444444444
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "274e63b3320137a7ca87d293f833643f",
+    "text": "\"root\": {",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            454.0,
+            336.30277777777764
+          ],
+          [
+            454.0,
+            365.3305555555556
+          ],
+          [
+            611.4166666666666,
+            365.3305555555556
+          ],
+          [
+            611.4166666666666,
+            336.30277777777764
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "CodeSnippet",
+    "element_id": "20bb2e17e7a4a543a967ebfca341e377",
+    "text": "\"child\": [ { \"child\": [ { \"child\": [], \"order_num\": \"1.1\", \"element\": { \"block_type\": \"table\", \"rows\": [] } }, {} ], \"order_num\": \"1\", \"element\": { \"text\": \"贝壳 无形资产核算指引 \", \"block_type\": \"text\", \"image_base64_str\": null } } ], \"order_num\": null, \"element\": null",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            477.8530578613281,
+            379.8467712402344
+          ],
+          [
+            477.8530578613281,
+            2149.685546875
+          ],
+          [
+            1091.0377197265625,
+            2149.685546875
+          ],
+          [
+            1091.0377197265625,
+            379.8467712402344
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "79c7a49fb1d58115b67880e5a7ce1abb",
+    "text": "}",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            454.0,
+            2061.9666666666667
+          ],
+          [
+            454.0,
+            2090.9944444444445
+          ],
+          [
+            471.4166666666667,
+            2090.9944444444445
+          ],
+          [
+            471.4166666666667,
+            2061.9666666666667
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "732d1c39f0ec77d9260a06fc8bed045e",
+    "text": "以上是代码块，以上是代码块全部内容，代码块。 附录",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            217.45111083984375
+          ],
+          [
+            250.0,
+            366.36328125
+          ],
+          [
+            1227.6097222222224,
+            366.36328125
+          ],
+          [
+            1227.6097222222224,
+            217.45111083984375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7ce39763ada2d724cb7d61aa19770ef1",
+    "text": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            476.0081481933594
+          ],
+          [
+            250.0,
+            697.8209722222222
+          ],
+          [
+            1413.47119140625,
+            697.8209722222222
+          ],
+          [
+            1413.47119140625,
+            476.0081481933594
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "parent_id": "732d1c39f0ec77d9260a06fc8bed045e",
+      "filename": "自制_4页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "32eb7645e548da21fd06dcef5b84e051",
+    "text": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附 录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录， 附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附 录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一 个附录，附录内容附录内容。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            247.49566650390625,
+            736.9226684570312
+          ],
+          [
+            247.49566650390625,
+            1307.1990966796875
+          ],
+          [
+            1422.3611111111109,
+            1307.1990966796875
+          ],
+          [
+            1422.3611111111109,
+            736.9226684570312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "parent_id": "732d1c39f0ec77d9260a06fc8bed045e",
+      "filename": "自制_4页.pdf"
+    }
+  }
+]

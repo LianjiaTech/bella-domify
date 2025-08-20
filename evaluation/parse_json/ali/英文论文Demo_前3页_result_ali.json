@@ -1,0 +1,5069 @@
+{
+    "logics": {
+        "docTree": [
+            {
+                "backlink": {
+                    "上级": [
+                        "ROOT"
+                    ]
+                },
+                "level": 0,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "1c80607ab208ccba02cb0af99b7ce580"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "1c80607ab208ccba02cb0af99b7ce580"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "608d3f36c013cca31eb8fe7d7a8585e3"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "608d3f36c013cca31eb8fe7d7a8585e3"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "b797d2d11c64771ac716374f715336a2"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "608d3f36c013cca31eb8fe7d7a8585e3"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "7ed2da9ee5fc57c2f23224f295bf6e6e"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "608d3f36c013cca31eb8fe7d7a8585e3"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "16c42d71ab93cdf6fd3e2bdbfabcfc69"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "1c80607ab208ccba02cb0af99b7ce580"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "7d8ea392e74c6ca7d1d4e70fc25eaf31"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "1c80607ab208ccba02cb0af99b7ce580"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "eff9599c7d133f349593441a974d18b6"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "eff9599c7d133f349593441a974d18b6"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "ad2a117374a45d14ec380a06d68499c3"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "1c80607ab208ccba02cb0af99b7ce580"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "16e38e31f34bd8ea8860ab681a68f289"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "16e38e31f34bd8ea8860ab681a68f289"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "21982e81c1c7c369e0fbbc08c52bc822"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "16e38e31f34bd8ea8860ab681a68f289"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "cdbe2a3754da3ecf23454c6d16ee87b7"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "cdbe2a3754da3ecf23454c6d16ee87b7"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "73e992224b4a478627b4d43e3cb7bda5"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "73e992224b4a478627b4d43e3cb7bda5"
+                    ]
+                },
+                "level": 4,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "0d851f98093824d22079950dcc1a6a0a"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "73e992224b4a478627b4d43e3cb7bda5"
+                    ]
+                },
+                "level": 4,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "62dfb7acacf97c6467e931f5ee9b31f2"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "16e38e31f34bd8ea8860ab681a68f289"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "cc031d2aa3938ad22f35dec3b568258b"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "16e38e31f34bd8ea8860ab681a68f289"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "ddb32aeb4618ef1a342bac35f1925650"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "16e38e31f34bd8ea8860ab681a68f289"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "f02e444c25571fd80b0d9dd28fb1c204"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "f02e444c25571fd80b0d9dd28fb1c204"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "2a3e5a68f3c2d042ad81aebc4d576079"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "f02e444c25571fd80b0d9dd28fb1c204"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "c2a71b708e628d1767af967723193518"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "f02e444c25571fd80b0d9dd28fb1c204"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "efa7a6813d7e4ef297d99b4d74653950"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "16e38e31f34bd8ea8860ab681a68f289"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "f764027d3da3efab639300d3f87e4852"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "f764027d3da3efab639300d3f87e4852"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "04849251ce4a4a77f57d646437d8c1f4"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "1c80607ab208ccba02cb0af99b7ce580"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "4eb5d3bf955c3957c6e6f92fb53c36d6"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "4eb5d3bf955c3957c6e6f92fb53c36d6"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "3b15ead725c11dd71d9d5901b28485d1"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "3b15ead725c11dd71d9d5901b28485d1"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "af0fe00b7fc4d5314ebbe9cb7e9ac601"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "1c80607ab208ccba02cb0af99b7ce580"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "b72b01599fcb5317faac0bfaadfbaa3e"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "b72b01599fcb5317faac0bfaadfbaa3e"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "e3d475d1d737a04c67140848587cca2d"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "b72b01599fcb5317faac0bfaadfbaa3e"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "5198c662d791a651f3b0f813d7426e7a"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "5198c662d791a651f3b0f813d7426e7a"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "9ee59f2f6df8f796a14ff33ef7c08bab"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "b72b01599fcb5317faac0bfaadfbaa3e"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "990e71a173e6362fd303443d16c0981b"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "990e71a173e6362fd303443d16c0981b"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "f1b2788cf761ee5ec823203b0d9e7189"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "f1b2788cf761ee5ec823203b0d9e7189"
+                    ]
+                },
+                "level": 4,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "ec8101795716df103e61285506ba21ad"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "f1b2788cf761ee5ec823203b0d9e7189"
+                    ]
+                },
+                "level": 4,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "c7c0c24b388158291a0b08960e4cc993"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "990e71a173e6362fd303443d16c0981b"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "f50666e948826e20262c57cdde7bce97"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "f50666e948826e20262c57cdde7bce97"
+                    ]
+                },
+                "level": 4,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "f0111b232d3b72edd19dfe8d5d0f988e"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "990e71a173e6362fd303443d16c0981b"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "5b6f6f79e9f87361fdf6c05cb4e489e6"
+            }
+        ],
+        "paragraphKVs": []
+    },
+    "docInfo": {
+        "pages": [
+            {
+                "imageWidth": 1355,
+                "fileName": null,
+                "sheetName": "",
+                "fileIndex": 0,
+                "pageIdCurDoc": 0,
+                "source": null,
+                "pdfParseResult": null,
+                "imageHeight": 1917,
+                "isBlankPage": null,
+                "sourceFileType": "normal",
+                "imageUrl": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/publicDocStructure/docmind-20240829-c2303110d48e458c8bb06cc0ae8582dd/0.png?Expires=1724975938&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=sTlhdZRf0TXDwKT7%2B%2BmJuHopqs8%3D",
+                "angle": 0.0,
+                "sourceImagePath": null,
+                "excelParseResult": null,
+                "fileUrl": null,
+                "wordParseResult": null,
+                "imageType": "JPEG",
+                "imageStorageKey": "docmind-20240829-c2303110d48e458c8bb06cc0ae8582dd/0.png",
+                "pageIdAllDocs": 0,
+                "imageParseResult": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/parse?Expires=1724975938&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=kqJEYLoaRZ6hKob%2F4AXj9qxfFSg%3D"
+            },
+            {
+                "imageWidth": 1355,
+                "fileName": null,
+                "sheetName": "",
+                "fileIndex": 0,
+                "pageIdCurDoc": 1,
+                "source": null,
+                "pdfParseResult": null,
+                "imageHeight": 1917,
+                "isBlankPage": null,
+                "sourceFileType": "normal",
+                "imageUrl": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/publicDocStructure/docmind-20240829-c2303110d48e458c8bb06cc0ae8582dd/1.png?Expires=1724975938&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=0AwtrXYUCdp6mi3syUUJMk59kh0%3D",
+                "angle": 0.0,
+                "sourceImagePath": null,
+                "excelParseResult": null,
+                "fileUrl": null,
+                "wordParseResult": null,
+                "imageType": "JPEG",
+                "imageStorageKey": "docmind-20240829-c2303110d48e458c8bb06cc0ae8582dd/1.png",
+                "pageIdAllDocs": 1,
+                "imageParseResult": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/parse?Expires=1724975938&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=kqJEYLoaRZ6hKob%2F4AXj9qxfFSg%3D"
+            },
+            {
+                "imageWidth": 1355,
+                "fileName": null,
+                "sheetName": "",
+                "fileIndex": 0,
+                "pageIdCurDoc": 2,
+                "source": null,
+                "pdfParseResult": null,
+                "imageHeight": 1917,
+                "isBlankPage": null,
+                "sourceFileType": "normal",
+                "imageUrl": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/publicDocStructure/docmind-20240829-c2303110d48e458c8bb06cc0ae8582dd/2.png?Expires=1724975938&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=d5UhhRVhxcpfiRH77ylmUBl7N3k%3D",
+                "angle": 0.0,
+                "sourceImagePath": null,
+                "excelParseResult": null,
+                "fileUrl": null,
+                "wordParseResult": null,
+                "imageType": "JPEG",
+                "imageStorageKey": "docmind-20240829-c2303110d48e458c8bb06cc0ae8582dd/2.png",
+                "pageIdAllDocs": 2,
+                "imageParseResult": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/parse?Expires=1724975938&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=kqJEYLoaRZ6hKob%2F4AXj9qxfFSg%3D"
+            }
+        ],
+        "docType": "pdf",
+        "pageCountEstimate": 3
+    },
+    "styles": [
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 0,
+            "deleteLine": false,
+            "fontSize": 7,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 1,
+            "deleteLine": false,
+            "fontSize": 10,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 2,
+            "deleteLine": false,
+            "fontSize": 6,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Medi",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 3,
+            "deleteLine": false,
+            "fontSize": 18,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Medi",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 4,
+            "deleteLine": false,
+            "fontSize": 15,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMR8",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 5,
+            "deleteLine": false,
+            "fontSize": 15,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 6,
+            "deleteLine": false,
+            "fontSize": 14,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusMonL-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 7,
+            "deleteLine": false,
+            "fontSize": 15,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 8,
+            "deleteLine": false,
+            "fontSize": 13,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Medi",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 9,
+            "deleteLine": false,
+            "fontSize": 13,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 10,
+            "deleteLine": false,
+            "fontSize": 15,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusMonL-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 11,
+            "deleteLine": false,
+            "fontSize": 13,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 12,
+            "deleteLine": false,
+            "fontSize": 12,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusRomNo9L-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 13,
+            "deleteLine": false,
+            "fontSize": 11,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "NimbusMonL-Regu",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 14,
+            "deleteLine": false,
+            "fontSize": 10,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMR10",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 15,
+            "deleteLine": false,
+            "fontSize": 14,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMSY10",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 16,
+            "deleteLine": false,
+            "fontSize": 13,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMR6",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 17,
+            "deleteLine": false,
+            "fontSize": 15,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMR8",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 18,
+            "deleteLine": false,
+            "fontSize": 8,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMMI6",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 19,
+            "deleteLine": false,
+            "fontSize": 15,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMMI8",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 20,
+            "deleteLine": false,
+            "fontSize": 8,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "CMSY10",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 21,
+            "deleteLine": false,
+            "fontSize": 14,
+            "bold": false,
+            "italic": false
+        }
+    ],
+    "layouts": [
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 660,
+                    "y": 1770
+                },
+                {
+                    "x": 696,
+                    "y": 1770
+                },
+                {
+                    "x": 696,
+                    "y": 1789
+                },
+                {
+                    "x": 660,
+                    "y": 1789
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 661,
+                            "y": 1775
+                        },
+                        {
+                            "x": 699,
+                            "y": 1775
+                        },
+                        {
+                            "x": 699,
+                            "y": 1792
+                        },
+                        {
+                            "x": 661,
+                            "y": 1792
+                        }
+                    ],
+                    "styleId": 0,
+                    "text": "949"
+                }
+            ],
+            "index": 0,
+            "subType": "page",
+            "lineHeight": 0,
+            "text": "949",
+            "alignment": "center",
+            "type": "foot_pagenum",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "0280aff8aae8523802948cf17163aaa0"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 283,
+                    "y": 1810
+                },
+                {
+                    "x": 1071,
+                    "y": 1810
+                },
+                {
+                    "x": 1071,
+                    "y": 1855
+                },
+                {
+                    "x": 283,
+                    "y": 1855
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 284,
+                            "y": 1804
+                        },
+                        {
+                            "x": 1071,
+                            "y": 1804
+                        },
+                        {
+                            "x": 1071,
+                            "y": 1830
+                        },
+                        {
+                            "x": 284,
+                            "y": 1830
+                        }
+                    ],
+                    "styleId": 1,
+                    "text": "Proceedings of the 28th International Conference on Computational Linguistics, pages 949–960"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 477,
+                            "y": 1840
+                        },
+                        {
+                            "x": 878,
+                            "y": 1840
+                        },
+                        {
+                            "x": 878,
+                            "y": 1853
+                        },
+                        {
+                            "x": 477,
+                            "y": 1853
+                        }
+                    ],
+                    "styleId": 2,
+                    "text": "Barcelona, Spain(Online), December 8-13, 2020"
+                }
+            ],
+            "index": 1,
+            "subType": "page_footer",
+            "lineHeight": 10,
+            "text": "Proceedings of the 28th International Conference on Computational Linguistics, pages 949–960Barcelona, Spain(Online), December 8-13, 2020",
+            "alignment": "center",
+            "type": "foot",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "d952c28f9ea39081a1c8fdac0f2fd5a2"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 234,
+                    "y": 160
+                },
+                {
+                    "x": 1125,
+                    "y": 160
+                },
+                {
+                    "x": 1125,
+                    "y": 192
+                },
+                {
+                    "x": 234,
+                    "y": 192
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 234,
+                            "y": 149
+                        },
+                        {
+                            "x": 1126,
+                            "y": 149
+                        },
+                        {
+                            "x": 1126,
+                            "y": 193
+                        },
+                        {
+                            "x": 234,
+                            "y": 193
+                        }
+                    ],
+                    "styleId": 3,
+                    "text": "DocBank: A Benchmark Dataset for Document Layout Analysis"
+                }
+            ],
+            "index": 2,
+            "subType": "doc_title",
+            "lineHeight": 0,
+            "text": "DocBank: A Benchmark Dataset for Document Layout Analysis",
+            "alignment": "center",
+            "type": "title",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "1c80607ab208ccba02cb0af99b7ce580"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 357,
+                    "y": 224
+                },
+                {
+                    "x": 1005,
+                    "y": 224
+                },
+                {
+                    "x": 1005,
+                    "y": 287
+                },
+                {
+                    "x": 357,
+                    "y": 287
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 366,
+                            "y": 218
+                        },
+                        {
+                            "x": 1001,
+                            "y": 218
+                        },
+                        {
+                            "x": 1001,
+                            "y": 255
+                        },
+                        {
+                            "x": 366,
+                            "y": 255
+                        }
+                    ],
+                    "styleId": 4,
+                    "text": "Minghao Li1*, Yiheng Xu2;, Lei Cui2, Shaohan Huang2,"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 466,
+                            "y": 250
+                        },
+                        {
+                            "x": 900,
+                            "y": 250
+                        },
+                        {
+                            "x": 900,
+                            "y": 287
+                        },
+                        {
+                            "x": 466,
+                            "y": 287
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": " Furu Wei2, Zhoujun Li1, Ming Zhou2"
+                }
+            ],
+            "index": 3,
+            "subType": "none",
+            "lineHeight": -5,
+            "text": "Minghao Li1*, Yiheng Xu2;, Lei Cui2, Shaohan Huang2, Furu Wei2, Zhoujun Li1, Ming Zhou2",
+            "alignment": "center",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "608d3f36c013cca31eb8fe7d7a8585e3"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 572,
+                    "y": 291
+                },
+                {
+                    "x": 794,
+                    "y": 291
+                },
+                {
+                    "x": 794,
+                    "y": 317
+                },
+                {
+                    "x": 572,
+                    "y": 317
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 572,
+                            "y": 284
+                        },
+                        {
+                            "x": 795,
+                            "y": 284
+                        },
+                        {
+                            "x": 795,
+                            "y": 318
+                        },
+                        {
+                            "x": 572,
+                            "y": 318
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "1Beihang University"
+                }
+            ],
+            "index": 4,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "1Beihang University",
+            "alignment": "center",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "b797d2d11c64771ac716374f715336a2"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 535,
+                    "y": 322
+                },
+                {
+                    "x": 829,
+                    "y": 322
+                },
+                {
+                    "x": 829,
+                    "y": 349
+                },
+                {
+                    "x": 535,
+                    "y": 349
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 543,
+                            "y": 315
+                        },
+                        {
+                            "x": 824,
+                            "y": 315
+                        },
+                        {
+                            "x": 824,
+                            "y": 350
+                        },
+                        {
+                            "x": 543,
+                            "y": 350
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "2Microsoft Research Asia"
+                }
+            ],
+            "index": 5,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "2Microsoft Research Asia",
+            "alignment": "center",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "7ed2da9ee5fc57c2f23224f295bf6e6e"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 419,
+                    "y": 355
+                },
+                {
+                    "x": 946,
+                    "y": 355
+                },
+                {
+                    "x": 946,
+                    "y": 382
+                },
+                {
+                    "x": 419,
+                    "y": 382
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 425,
+                            "y": 345
+                        },
+                        {
+                            "x": 942,
+                            "y": 345
+                        },
+                        {
+                            "x": 942,
+                            "y": 382
+                        },
+                        {
+                            "x": 425,
+                            "y": 382
+                        }
+                    ],
+                    "styleId": 7,
+                    "text": "{liminghao1630,lizj}@buaa.edu.cn"
+                }
+            ],
+            "index": 6,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "{liminghao1630,lizj}@buaa.edu.cn",
+            "alignment": "center",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "16c42d71ab93cdf6fd3e2bdbfabcfc69"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 270,
+                    "y": 389
+                },
+                {
+                    "x": 1097,
+                    "y": 389
+                },
+                {
+                    "x": 1097,
+                    "y": 415
+                },
+                {
+                    "x": 270,
+                    "y": 415
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 270,
+                            "y": 376
+                        },
+                        {
+                            "x": 1097,
+                            "y": 376
+                        },
+                        {
+                            "x": 1097,
+                            "y": 414
+                        },
+                        {
+                            "x": 270,
+                            "y": 414
+                        }
+                    ],
+                    "styleId": 7,
+                    "text": "{v-yixu,lecu,shaohanh,fuwei,mingzhou}@microsoft.com"
+                }
+            ],
+            "index": 7,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "{v-yixu,lecu,shaohanh,fuwei,mingzhou}@microsoft.com",
+            "alignment": "center",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "7d8ea392e74c6ca7d1d4e70fc25eaf31"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 628,
+                    "y": 476
+                },
+                {
+                    "x": 732,
+                    "y": 476
+                },
+                {
+                    "x": 732,
+                    "y": 499
+                },
+                {
+                    "x": 628,
+                    "y": 499
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 629,
+                            "y": 466
+                        },
+                        {
+                            "x": 731,
+                            "y": 466
+                        },
+                        {
+                            "x": 731,
+                            "y": 503
+                        },
+                        {
+                            "x": 629,
+                            "y": 503
+                        }
+                    ],
+                    "styleId": 4,
+                    "text": "Abstract"
+                }
+            ],
+            "index": 8,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "Abstract",
+            "alignment": "center",
+            "type": "title",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "eff9599c7d133f349593441a974d18b6"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 200,
+                    "y": 537
+                },
+                {
+                    "x": 1156,
+                    "y": 537
+                },
+                {
+                    "x": 1156,
+                    "y": 898
+                },
+                {
+                    "x": 200,
+                    "y": 898
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 530
+                        },
+                        {
+                            "x": 1158,
+                            "y": 530
+                        },
+                        {
+                            "x": 1158,
+                            "y": 561
+                        },
+                        {
+                            "x": 202,
+                            "y": 561
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "Document layout analysis usually relies on computer vision models to understand documents"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 560
+                        },
+                        {
+                            "x": 1158,
+                            "y": 560
+                        },
+                        {
+                            "x": 1158,
+                            "y": 592
+                        },
+                        {
+                            "x": 202,
+                            "y": 592
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " while ignoring textual information that is vital to capture. Meanwhile, high quality labeled"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 591
+                        },
+                        {
+                            "x": 1158,
+                            "y": 591
+                        },
+                        {
+                            "x": 1158,
+                            "y": 623
+                        },
+                        {
+                            "x": 202,
+                            "y": 623
+                        }
+                    ],
+                    "styleId": 9,
+                    "text": " datasets with both visual and textual information are still insufficient. In this paper, we present"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 620
+                        },
+                        {
+                            "x": 1158,
+                            "y": 620
+                        },
+                        {
+                            "x": 1158,
+                            "y": 654
+                        },
+                        {
+                            "x": 202,
+                            "y": 654
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " DocBank, a benchmark dataset that contains 500K document pages with fine-grained token-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 653
+                        },
+                        {
+                            "x": 1158,
+                            "y": 653
+                        },
+                        {
+                            "x": 1158,
+                            "y": 685
+                        },
+                        {
+                            "x": 202,
+                            "y": 685
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "level annotations for document layout analysis. DocBank is constructed using a simple yet"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 684
+                        },
+                        {
+                            "x": 1158,
+                            "y": 684
+                        },
+                        {
+                            "x": 1158,
+                            "y": 721
+                        },
+                        {
+                            "x": 202,
+                            "y": 721
+                        }
+                    ],
+                    "styleId": 10,
+                    "text": " effective way with weak supervision from the LATEX documents available on the arXiv.com."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 715
+                        },
+                        {
+                            "x": 1158,
+                            "y": 715
+                        },
+                        {
+                            "x": 1158,
+                            "y": 746
+                        },
+                        {
+                            "x": 202,
+                            "y": 746
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " With DocBank, models from different modalities can be compared fairly and multi-modal ap-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 746
+                        },
+                        {
+                            "x": 1158,
+                            "y": 746
+                        },
+                        {
+                            "x": 1158,
+                            "y": 777
+                        },
+                        {
+                            "x": 202,
+                            "y": 777
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "proaches will be further investigated and boost the performance of document layout analysis."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 777
+                        },
+                        {
+                            "x": 1158,
+                            "y": 777
+                        },
+                        {
+                            "x": 1158,
+                            "y": 808
+                        },
+                        {
+                            "x": 202,
+                            "y": 808
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " We build several strong baselines and manually split train/dev/test sets for evaluation. Ex-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 807
+                        },
+                        {
+                            "x": 1158,
+                            "y": 807
+                        },
+                        {
+                            "x": 1158,
+                            "y": 839
+                        },
+                        {
+                            "x": 202,
+                            "y": 839
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "periment results show that models trained on DocBank accurately recognize the layout infor-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 838
+                        },
+                        {
+                            "x": 1158,
+                            "y": 838
+                        },
+                        {
+                            "x": 1158,
+                            "y": 870
+                        },
+                        {
+                            "x": 202,
+                            "y": 870
+                        }
+                    ],
+                    "styleId": 11,
+                    "text": "mation for a variety of documents. The DocBank dataset is publicly available at https:"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 869
+                        },
+                        {
+                            "x": 702,
+                            "y": 869
+                        },
+                        {
+                            "x": 702,
+                            "y": 901
+                        },
+                        {
+                            "x": 202,
+                            "y": 901
+                        }
+                    ],
+                    "styleId": 1,
+                    "text": "//github.com/doc-analysis/DocBank."
+                }
+            ],
+            "index": 9,
+            "subType": "para",
+            "lineHeight": -1,
+            "text": "Document layout analysis usually relies on computer vision models to understand documents while ignoring textual information that is vital to capture. Meanwhile, high quality labeled datasets with both visual and textual information are still insufficient. In this paper, we present DocBank, a benchmark dataset that contains 500K document pages with fine-grained token-level annotations for document layout analysis. DocBank is constructed using a simple yet effective way with weak supervision from the LATEX documents available on the arXiv.com. With DocBank, models from different modalities can be compared fairly and multi-modal ap-proaches will be further investigated and boost the performance of document layout analysis. We build several strong baselines and manually split train/dev/test sets for evaluation. Ex-periment results show that models trained on DocBank accurately recognize the layout infor-mation for a variety of documents. The DocBank dataset is publicly available at https://github.com/doc-analysis/DocBank.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "ad2a117374a45d14ec380a06d68499c3"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 164,
+                    "y": 934
+                },
+                {
+                    "x": 351,
+                    "y": 934
+                },
+                {
+                    "x": 351,
+                    "y": 958
+                },
+                {
+                    "x": 164,
+                    "y": 958
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 925
+                        },
+                        {
+                            "x": 352,
+                            "y": 925
+                        },
+                        {
+                            "x": 352,
+                            "y": 962
+                        },
+                        {
+                            "x": 164,
+                            "y": 962
+                        }
+                    ],
+                    "styleId": 4,
+                    "text": "1 Introduction"
+                }
+            ],
+            "index": 10,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "1 Introduction",
+            "alignment": "left",
+            "type": "title",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "16e38e31f34bd8ea8860ab681a68f289"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 979
+                },
+                {
+                    "x": 1194,
+                    "y": 979
+                },
+                {
+                    "x": 1194,
+                    "y": 1301
+                },
+                {
+                    "x": 162,
+                    "y": 1301
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 980
+                        },
+                        {
+                            "x": 1197,
+                            "y": 980
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1011
+                        },
+                        {
+                            "x": 164,
+                            "y": 1011
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "Document layout analysis is an important task in many document understanding applications as it can"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1011
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1011
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1042
+                        },
+                        {
+                            "x": 164,
+                            "y": 1042
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " transform semi-structured information into a structured representation, meanwhile extracting key infor-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1042
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1042
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1073
+                        },
+                        {
+                            "x": 164,
+                            "y": 1073
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "mation from the documents. It is a challenging problem due to the varying layouts and formats of the"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1072
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1072
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1104
+                        },
+                        {
+                            "x": 164,
+                            "y": 1104
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " documents. Existing techniques have been proposed based on conventional rule-based or machine learn-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1103
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1103
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1135
+                        },
+                        {
+                            "x": 164,
+                            "y": 1135
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "ing methods, where most of them fail to generalize well because they rely on hand crafted features that"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1134
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1134
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1166
+                        },
+                        {
+                            "x": 164,
+                            "y": 1166
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " may be not robust to layout variations. Recently, the rapid development of deep learning in computer"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1165
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1165
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1197
+                        },
+                        {
+                            "x": 164,
+                            "y": 1197
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " vision has significantly boosted the data-driven image-based approaches for document layout analysis."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1196
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1196
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1227
+                        },
+                        {
+                            "x": 164,
+                            "y": 1227
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " Although these approaches have been widely adopted and made significant progress, they usually lever-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1227
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1227
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1258
+                        },
+                        {
+                            "x": 164,
+                            "y": 1258
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "age visual features while neglecting textual features from the documents. Therefore, it is inevitable to"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1258
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1258
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1289
+                        },
+                        {
+                            "x": 164,
+                            "y": 1289
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": " explore how to leverage the visual and textual information in a unified way for document layout analysis."
+                }
+            ],
+            "index": 11,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "Document layout analysis is an important task in many document understanding applications as it can transform semi-structured information into a structured representation, meanwhile extracting key infor-mation from the documents. It is a challenging problem due to the varying layouts and formats of the documents. Existing techniques have been proposed based on conventional rule-based or machine learn-ing methods, where most of them fail to generalize well because they rely on hand crafted features that may be not robust to layout variations. Recently, the rapid development of deep learning in computer vision has significantly boosted the data-driven image-based approaches for document layout analysis. Although these approaches have been widely adopted and made significant progress, they usually lever-age visual features while neglecting textual features from the documents. Therefore, it is inevitable to explore how to leverage the visual and textual information in a unified way for document layout analysis.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "21982e81c1c7c369e0fbbc08c52bc822"
+        },
+        {
+            "firstLinesChars": 24,
+            "pos": [
+                {
+                    "x": 158,
+                    "y": 1294
+                },
+                {
+                    "x": 1198,
+                    "y": 1294
+                },
+                {
+                    "x": 1198,
+                    "y": 1689
+                },
+                {
+                    "x": 158,
+                    "y": 1689
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 188,
+                            "y": 1290
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1290
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1321
+                        },
+                        {
+                            "x": 188,
+                            "y": 1321
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "Nowadays, the state-of-the-art computer vision and NLP models are often built upon the pre-trained"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1321
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1321
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1352
+                        },
+                        {
+                            "x": 164,
+                            "y": 1352
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " models(Peters et al., 2018; Radford et al., 2018; Devlin et al., 2018; Lample and Conneau, 2019;"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1351
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1351
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1383
+                        },
+                        {
+                            "x": 164,
+                            "y": 1383
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " Yang et al., 2019; Dong et al., 2019; Raffel et al., 2019; Xu et al., 2019) followed by fine-tuning on"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1382
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1382
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1414
+                        },
+                        {
+                            "x": 164,
+                            "y": 1414
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " specific downstream tasks, which achieves very promising results. However, pre-trained models not only"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1413
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1413
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1445
+                        },
+                        {
+                            "x": 164,
+                            "y": 1445
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " require large-scale unlabeled data for self-supervised learning, but also need high quality labeled data"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1444
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1444
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1476
+                        },
+                        {
+                            "x": 164,
+                            "y": 1476
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " for task-specific fine-tuning to achieve good performance. For document layout analysis tasks, there"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1475
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1475
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1506
+                        },
+                        {
+                            "x": 164,
+                            "y": 1506
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " have been some image-based document layout datasets, while most of them are built for computer vision"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1506
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1506
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1537
+                        },
+                        {
+                            "x": 164,
+                            "y": 1537
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " approaches and they are difficult to apply to NLP methods. In addition, image-based datasets mainly"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1537
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1537
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1568
+                        },
+                        {
+                            "x": 164,
+                            "y": 1568
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " include the page images and the bounding boxes of large semantic structures, which are not fine-grained"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1568
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1568
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1599
+                        },
+                        {
+                            "x": 164,
+                            "y": 1599
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " token-level annotations. Moreover, it is also time-consuming and labor-intensive to produce human-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1598
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1598
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1630
+                        },
+                        {
+                            "x": 164,
+                            "y": 1630
+                        }
+                    ],
+                    "styleId": 13,
+                    "text": "labeled and fine-grained token-level text block arrangement. Therefore, it is vital to leverage weak"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 692
+                        },
+                        {
+                            "x": 1197,
+                            "y": 692
+                        },
+                        {
+                            "x": 1197,
+                            "y": 723
+                        },
+                        {
+                            "x": 164,
+                            "y": 723
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "supervision to obtain fine-grained labeled documents with minimum efforts, meanwhile making the data"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 723
+                        },
+                        {
+                            "x": 784,
+                            "y": 723
+                        },
+                        {
+                            "x": 784,
+                            "y": 754
+                        },
+                        {
+                            "x": 164,
+                            "y": 754
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": " be easily applied to any NLP and computer vision approaches."
+                }
+            ],
+            "index": 12,
+            "subType": "none",
+            "lineHeight": 0,
+            "text": "Nowadays, the state-of-the-art computer vision and NLP models are often built upon the pre-trained models(Peters et al., 2018; Radford et al., 2018; Devlin et al., 2018; Lample and Conneau, 2019; Yang et al., 2019; Dong et al., 2019; Raffel et al., 2019; Xu et al., 2019) followed by fine-tuning on specific downstream tasks, which achieves very promising results. However, pre-trained models not only require large-scale unlabeled data for self-supervised learning, but also need high quality labeled data for task-specific fine-tuning to achieve good performance. For document layout analysis tasks, there have been some image-based document layout datasets, while most of them are built for computer vision approaches and they are difficult to apply to NLP methods. In addition, image-based datasets mainly include the page images and the bounding boxes of large semantic structures, which are not fine-grained token-level annotations. Moreover, it is also time-consuming and labor-intensive to produce human-labeled and fine-grained token-level text block arrangement. Therefore, it is vital to leverage weaksupervision to obtain fine-grained labeled documents with minimum efforts, meanwhile making the data be easily applied to any NLP and computer vision approaches.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                0,
+                1
+            ],
+            "uniqueId": "cdbe2a3754da3ecf23454c6d16ee87b7"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 194,
+                    "y": 1653
+                },
+                {
+                    "x": 737,
+                    "y": 1653
+                },
+                {
+                    "x": 737,
+                    "y": 1676
+                },
+                {
+                    "x": 194,
+                    "y": 1676
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 1646
+                        },
+                        {
+                            "x": 739,
+                            "y": 1646
+                        },
+                        {
+                            "x": 739,
+                            "y": 1675
+                        },
+                        {
+                            "x": 200,
+                            "y": 1675
+                        }
+                    ],
+                    "styleId": 13,
+                    "text": "EEqual contributions during internship at Microsoft Research Asia."
+                }
+            ],
+            "index": 13,
+            "subType": "footer_note",
+            "lineHeight": 0,
+            "text": "EEqual contributions during internship at Microsoft Research Asia.",
+            "alignment": "left",
+            "type": "corner_note",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "4b28439f30cb6e7e18fb68c3f2e7337a"
+        },
+        {
+            "firstLinesChars": 20,
+            "pos": [
+                {
+                    "x": 166,
+                    "y": 1697
+                },
+                {
+                    "x": 1196,
+                    "y": 1697
+                },
+                {
+                    "x": 1196,
+                    "y": 1744
+                },
+                {
+                    "x": 166,
+                    "y": 1744
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 184,
+                            "y": 1693
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1693
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1719
+                        },
+                        {
+                            "x": 184,
+                            "y": 1719
+                        }
+                    ],
+                    "styleId": 14,
+                    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License. License details: http://"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1716
+                        },
+                        {
+                            "x": 610,
+                            "y": 1716
+                        },
+                        {
+                            "x": 610,
+                            "y": 1742
+                        },
+                        {
+                            "x": 164,
+                            "y": 1742
+                        }
+                    ],
+                    "styleId": 1,
+                    "text": "creativecommons.org/licenses/by/4.0/."
+                }
+            ],
+            "index": 14,
+            "subType": "footer_note",
+            "lineHeight": -3,
+            "text": "This work is licensed under a Creative Commons Attribution 4.0 International License. License details: http://creativecommons.org/licenses/by/4.0/.",
+            "alignment": "left",
+            "type": "corner_note",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "1bb57c66ef630b6be71a5a95b21ae34f"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 658,
+                    "y": 1770
+                },
+                {
+                    "x": 698,
+                    "y": 1770
+                },
+                {
+                    "x": 698,
+                    "y": 1791
+                },
+                {
+                    "x": 658,
+                    "y": 1791
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 661,
+                            "y": 1775
+                        },
+                        {
+                            "x": 699,
+                            "y": 1775
+                        },
+                        {
+                            "x": 699,
+                            "y": 1792
+                        },
+                        {
+                            "x": 661,
+                            "y": 1792
+                        }
+                    ],
+                    "styleId": 0,
+                    "text": "950"
+                }
+            ],
+            "index": 0,
+            "subType": "page",
+            "lineHeight": 0,
+            "text": "950",
+            "alignment": "center",
+            "type": "foot_pagenum",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "47bf84cd09bc4e5ee30e876b47b5b940"
+        },
+        {
+            "pos": [
+                {
+                    "x": 176,
+                    "y": 149
+                },
+                {
+                    "x": 1188,
+                    "y": 149
+                },
+                {
+                    "x": 1188,
+                    "y": 538
+                },
+                {
+                    "x": 176,
+                    "y": 538
+                }
+            ],
+            "index": 1,
+            "subType": "picture",
+            "text": "=Cosmlc String Detectlon with Tree-Based Machine a中三品                    号菲菲-()                               L(a)                   (b)                   (c)                   (d)",
+            "alignment": "center",
+            "type": "figure",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "73e992224b4a478627b4d43e3cb7bda5"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 548
+                },
+                {
+                    "x": 1193,
+                    "y": 548
+                },
+                {
+                    "x": 1193,
+                    "y": 618
+                },
+                {
+                    "x": 162,
+                    "y": 618
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 543
+                        },
+                        {
+                            "x": 1197,
+                            "y": 543
+                        },
+                        {
+                            "x": 1197,
+                            "y": 574
+                        },
+                        {
+                            "x": 164,
+                            "y": 574
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "Figure 1: Example annotations of the DocBank. The colors of semantic structure labels are: Abstract,"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 170,
+                            "y": 574
+                        },
+                        {
+                            "x": 1197,
+                            "y": 574
+                        },
+                        {
+                            "x": 1197,
+                            "y": 605
+                        },
+                        {
+                            "x": 170,
+                            "y": 605
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": " Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, Section, Table,"
+                }
+            ],
+            "index": 2,
+            "subType": "pic_title",
+            "lineHeight": 0,
+            "text": "Figure 1: Example annotations of the DocBank. The colors of semantic structure labels are: Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, Section, Table,",
+            "alignment": "left",
+            "type": "figure_name",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "0d851f98093824d22079950dcc1a6a0a"
+        },
+        {
+            "pos": [
+                {
+                    "x": 492,
+                    "y": 576
+                },
+                {
+                    "x": 575,
+                    "y": 576
+                },
+                {
+                    "x": 575,
+                    "y": 610
+                },
+                {
+                    "x": 492,
+                    "y": 610
+                }
+            ],
+            "index": 3,
+            "subType": "none",
+            "text": "",
+            "alignment": "left",
+            "type": "stamp",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "62dfb7acacf97c6467e931f5ee9b31f2"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 170,
+                    "y": 612
+                },
+                {
+                    "x": 216,
+                    "y": 612
+                },
+                {
+                    "x": 216,
+                    "y": 643
+                },
+                {
+                    "x": 170,
+                    "y": 643
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 170,
+                            "y": 612
+                        },
+                        {
+                            "x": 216,
+                            "y": 612
+                        },
+                        {
+                            "x": 216,
+                            "y": 643
+                        },
+                        {
+                            "x": 170,
+                            "y": 643
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "Title"
+                }
+            ],
+            "index": 4,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "Title",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "cc031d2aa3938ad22f35dec3b568258b"
+        },
+        {
+            "firstLinesChars": 24,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 768
+                },
+                {
+                    "x": 1197,
+                    "y": 768
+                },
+                {
+                    "x": 1197,
+                    "y": 1517
+                },
+                {
+                    "x": 162,
+                    "y": 1517
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 188,
+                            "y": 754
+                        },
+                        {
+                            "x": 1197,
+                            "y": 754
+                        },
+                        {
+                            "x": 1197,
+                            "y": 785
+                        },
+                        {
+                            "x": 188,
+                            "y": 785
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "To this end, we build the DocBank dataset, a document-level benchmark that contains 500K docu-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 784
+                        },
+                        {
+                            "x": 1197,
+                            "y": 784
+                        },
+                        {
+                            "x": 1197,
+                            "y": 816
+                        },
+                        {
+                            "x": 164,
+                            "y": 816
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "ment pages with fine-grained token-level annotations for layout analysis. Distinct from the conventional"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 815
+                        },
+                        {
+                            "x": 1197,
+                            "y": 815
+                        },
+                        {
+                            "x": 1197,
+                            "y": 847
+                        },
+                        {
+                            "x": 164,
+                            "y": 847
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " human-labeled datasets, our approach obtains high quality annotations in a simple yet effective way with"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 846
+                        },
+                        {
+                            "x": 1197,
+                            "y": 846
+                        },
+                        {
+                            "x": 1197,
+                            "y": 878
+                        },
+                        {
+                            "x": 164,
+                            "y": 878
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " weak supervision. Inspired by existing document layout annotations(Siegel et al., 2018; Li et al., 2019;"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 877
+                        },
+                        {
+                            "x": 1197,
+                            "y": 877
+                        },
+                        {
+                            "x": 1197,
+                            "y": 909
+                        },
+                        {
+                            "x": 164,
+                            "y": 909
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " Zhong et al., 2019), there are a great number of digital-born documents such as the PDFs of research pa-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 908
+                        },
+                        {
+                            "x": 1197,
+                            "y": 908
+                        },
+                        {
+                            "x": 1197,
+                            "y": 945
+                        },
+                        {
+                            "x": 164,
+                            "y": 945
+                        }
+                    ],
+                    "styleId": 10,
+                    "text": "pers that are compiled by LATEX using their source code. The LATEX system contains the explicit semantic"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 939
+                        },
+                        {
+                            "x": 1197,
+                            "y": 939
+                        },
+                        {
+                            "x": 1197,
+                            "y": 970
+                        },
+                        {
+                            "x": 164,
+                            "y": 970
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " structure information using mark-up tags as the building blocks, such as abstract, author, caption, equa-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 970
+                        },
+                        {
+                            "x": 1197,
+                            "y": 970
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1001
+                        },
+                        {
+                            "x": 164,
+                            "y": 1001
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "tion, figure, footer, list, paragraph, reference, section, table and title. To distinguish individual semantic"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1000
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1000
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1032
+                        },
+                        {
+                            "x": 164,
+                            "y": 1032
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " structures, we manipulate the source code to specify different colors to the text of different semantic"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1031
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1031
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1063
+                        },
+                        {
+                            "x": 164,
+                            "y": 1063
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " units. In this way, different text zones can be clearly segmented and identified as separate logical roles,"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1062
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1062
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1094
+                        },
+                        {
+                            "x": 164,
+                            "y": 1094
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " which is shown in Figure 1. The advantage of DocBank is that, it can be used in any sequence labeling"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1093
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1093
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1125
+                        },
+                        {
+                            "x": 164,
+                            "y": 1125
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " models from the NLP perspective. Meanwhile, DocBank can also be easily converted into image-based"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1124
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1124
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1155
+                        },
+                        {
+                            "x": 164,
+                            "y": 1155
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " annotations to support object detection models in computer vision. In this way, models from different"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1155
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1155
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1186
+                        },
+                        {
+                            "x": 164,
+                            "y": 1186
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " modalities can be compared fairly using DocBank, and multi-modal approaches will be further investi-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1186
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1186
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1217
+                        },
+                        {
+                            "x": 164,
+                            "y": 1217
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "gated and boost the performance of document layout analysis. To verify the effectiveness of DocBank,"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1217
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1217
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1248
+                        },
+                        {
+                            "x": 164,
+                            "y": 1248
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " we conduct experiments using four baseline models: 1) BERT(Devlin et al., 2018), a pre-trained model"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1247
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1247
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1279
+                        },
+                        {
+                            "x": 164,
+                            "y": 1279
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " using only textual information based on the Transformer architecture. 2) RoBERTa(Liu et al., 2019), a"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1278
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1278
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1310
+                        },
+                        {
+                            "x": 164,
+                            "y": 1310
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " robustly optimized method for pre-training the Transformer architecture. 3) LayoutLM(Xu et al., 2019),"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1309
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1309
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1341
+                        },
+                        {
+                            "x": 164,
+                            "y": 1341
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " a multi-modal architecture that integrates both the text information and layout information. 4) Faster"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1340
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1340
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1371
+                        },
+                        {
+                            "x": 164,
+                            "y": 1371
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " R-CNN(Ren et al., 2015), a high performance object detection networks depending on region proposal"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1371
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1371
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1402
+                        },
+                        {
+                            "x": 164,
+                            "y": 1402
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " algorithms to hypothesize object locations. The experiment results show that the LayoutLM model sig-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1402
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1402
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1433
+                        },
+                        {
+                            "x": 164,
+                            "y": 1433
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "nificantly outperforms the BERT and RoBERTa models and the object detection model on DocBank for"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1433
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1433
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1464
+                        },
+                        {
+                            "x": 164,
+                            "y": 1464
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " document layout analysis. We hope DocBank will empower more document layout analysis models,"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1463
+                        },
+                        {
+                            "x": 1165,
+                            "y": 1463
+                        },
+                        {
+                            "x": 1165,
+                            "y": 1495
+                        },
+                        {
+                            "x": 164,
+                            "y": 1495
+                        }
+                    ],
+                    "styleId": 1,
+                    "text": " meanwhile promoting more customized network structures to make substantial advances in this area."
+                }
+            ],
+            "index": 6,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "To this end, we build the DocBank dataset, a document-level benchmark that contains 500K docu-ment pages with fine-grained token-level annotations for layout analysis. Distinct from the conventional human-labeled datasets, our approach obtains high quality annotations in a simple yet effective way with weak supervision. Inspired by existing document layout annotations(Siegel et al., 2018; Li et al., 2019; Zhong et al., 2019), there are a great number of digital-born documents such as the PDFs of research pa-pers that are compiled by LATEX using their source code. The LATEX system contains the explicit semantic structure information using mark-up tags as the building blocks, such as abstract, author, caption, equa-tion, figure, footer, list, paragraph, reference, section, table and title. To distinguish individual semantic structures, we manipulate the source code to specify different colors to the text of different semantic units. In this way, different text zones can be clearly segmented and identified as separate logical roles, which is shown in Figure 1. The advantage of DocBank is that, it can be used in any sequence labeling models from the NLP perspective. Meanwhile, DocBank can also be easily converted into image-based annotations to support object detection models in computer vision. In this way, models from different modalities can be compared fairly using DocBank, and multi-modal approaches will be further investi-gated and boost the performance of document layout analysis. To verify the effectiveness of DocBank, we conduct experiments using four baseline models: 1) BERT(Devlin et al., 2018), a pre-trained model using only textual information based on the Transformer architecture. 2) RoBERTa(Liu et al., 2019), a robustly optimized method for pre-training the Transformer architecture. 3) LayoutLM(Xu et al., 2019), a multi-modal architecture that integrates both the text information and layout information. 4) Faster R-CNN(Ren et al., 2015), a high performance object detection networks depending on region proposal algorithms to hypothesize object locations. The experiment results show that the LayoutLM model sig-nificantly outperforms the BERT and RoBERTa models and the object detection model on DocBank for document layout analysis. We hope DocBank will empower more document layout analysis models, meanwhile promoting more customized network structures to make substantial advances in this area.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "ddb32aeb4618ef1a342bac35f1925650"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 190,
+                    "y": 1501
+                },
+                {
+                    "x": 771,
+                    "y": 1501
+                },
+                {
+                    "x": 771,
+                    "y": 1527
+                },
+                {
+                    "x": 190,
+                    "y": 1527
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 188,
+                            "y": 1494
+                        },
+                        {
+                            "x": 772,
+                            "y": 1494
+                        },
+                        {
+                            "x": 772,
+                            "y": 1526
+                        },
+                        {
+                            "x": 188,
+                            "y": 1526
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "The contributions of this paper are summarized as follows:"
+                }
+            ],
+            "index": 7,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "The contributions of this paper are summarized as follows:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "f02e444c25571fd80b0d9dd28fb1c204"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 193,
+                    "y": 1552
+                },
+                {
+                    "x": 1193,
+                    "y": 1552
+                },
+                {
+                    "x": 1193,
+                    "y": 1610
+                },
+                {
+                    "x": 193,
+                    "y": 1610
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 193,
+                            "y": 1546
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1546
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1578
+                        },
+                        {
+                            "x": 193,
+                            "y": 1578
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "• We present DocBank, a large-scale dataset that is constructed using a weak supervision approach."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 213,
+                            "y": 1577
+                        },
+                        {
+                            "x": 1124,
+                            "y": 1577
+                        },
+                        {
+                            "x": 1124,
+                            "y": 1609
+                        },
+                        {
+                            "x": 213,
+                            "y": 1609
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": " It enables models to integrate both the textual and layout information for downstream tasks."
+                }
+            ],
+            "index": 8,
+            "subType": "para",
+            "lineHeight": -1,
+            "text": "• We present DocBank, a large-scale dataset that is constructed using a weak supervision approach. It enables models to integrate both the textual and layout information for downstream tasks.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "2a3e5a68f3c2d042ad81aebc4d576079"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 194,
+                    "y": 1635
+                },
+                {
+                    "x": 1194,
+                    "y": 1635
+                },
+                {
+                    "x": 1194,
+                    "y": 1692
+                },
+                {
+                    "x": 194,
+                    "y": 1692
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 193,
+                            "y": 1629
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1629
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1660
+                        },
+                        {
+                            "x": 193,
+                            "y": 1660
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "• We conduct a set of experiments with different baseline models and parameter settings, which con-"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 213,
+                            "y": 1660
+                        },
+                        {
+                            "x": 862,
+                            "y": 1660
+                        },
+                        {
+                            "x": 862,
+                            "y": 1691
+                        },
+                        {
+                            "x": 213,
+                            "y": 1691
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "firms the effectiveness of DocBank for document layout analysis."
+                }
+            ],
+            "index": 9,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "• We conduct a set of experiments with different baseline models and parameter settings, which con-firms the effectiveness of DocBank for document layout analysis.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "c2a71b708e628d1767af967723193518"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 195,
+                    "y": 1718
+                },
+                {
+                    "x": 1159,
+                    "y": 1718
+                },
+                {
+                    "x": 1159,
+                    "y": 1743
+                },
+                {
+                    "x": 195,
+                    "y": 1743
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 193,
+                            "y": 1712
+                        },
+                        {
+                            "x": 1164,
+                            "y": 1712
+                        },
+                        {
+                            "x": 1164,
+                            "y": 1743
+                        },
+                        {
+                            "x": 193,
+                            "y": 1743
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "• The DocBank dataset is available at https://github.com/doc-analysis/DocBank."
+                }
+            ],
+            "index": 10,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "• The DocBank dataset is available at https://github.com/doc-analysis/DocBank.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "efa7a6813d7e4ef297d99b4d74653950"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 659,
+                    "y": 1769
+                },
+                {
+                    "x": 696,
+                    "y": 1769
+                },
+                {
+                    "x": 696,
+                    "y": 1791
+                },
+                {
+                    "x": 659,
+                    "y": 1791
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 661,
+                            "y": 1775
+                        },
+                        {
+                            "x": 699,
+                            "y": 1775
+                        },
+                        {
+                            "x": 699,
+                            "y": 1792
+                        },
+                        {
+                            "x": 661,
+                            "y": 1792
+                        }
+                    ],
+                    "styleId": 0,
+                    "text": "951"
+                }
+            ],
+            "index": 0,
+            "subType": "page",
+            "lineHeight": 0,
+            "text": "951",
+            "alignment": "center",
+            "type": "foot_pagenum",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "1fc6812e41da2d62b1604c9fb03434f3"
+        },
+        {
+            "pos": [
+                {
+                    "x": 235,
+                    "y": 157
+                },
+                {
+                    "x": 1112,
+                    "y": 157
+                },
+                {
+                    "x": 1112,
+                    "y": 277
+                },
+                {
+                    "x": 235,
+                    "y": 277
+                }
+            ],
+            "index": 1,
+            "subType": "picture",
+            "text": "Documents Semantic structures with colored fonts Token annotations by the(.tex)(structure-specific colors) color to structure mapping",
+            "alignment": "center",
+            "type": "figure",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "f764027d3da3efab639300d3f87e4852"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 508,
+                    "y": 329
+                },
+                {
+                    "x": 851,
+                    "y": 329
+                },
+                {
+                    "x": 851,
+                    "y": 354
+                },
+                {
+                    "x": 508,
+                    "y": 354
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 508,
+                            "y": 321
+                        },
+                        {
+                            "x": 852,
+                            "y": 321
+                        },
+                        {
+                            "x": 852,
+                            "y": 353
+                        },
+                        {
+                            "x": 508,
+                            "y": 353
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "Figure 2: Data processing pipeline"
+                }
+            ],
+            "index": 2,
+            "subType": "pic_title",
+            "lineHeight": 0,
+            "text": "Figure 2: Data processing pipeline",
+            "alignment": "center",
+            "type": "figure_name",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "04849251ce4a4a77f57d646437d8c1f4"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 401
+                },
+                {
+                    "x": 381,
+                    "y": 401
+                },
+                {
+                    "x": 381,
+                    "y": 425
+                },
+                {
+                    "x": 162,
+                    "y": 425
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 391
+                        },
+                        {
+                            "x": 381,
+                            "y": 391
+                        },
+                        {
+                            "x": 381,
+                            "y": 428
+                        },
+                        {
+                            "x": 164,
+                            "y": 428
+                        }
+                    ],
+                    "styleId": 4,
+                    "text": "2 Task Definition"
+                }
+            ],
+            "index": 3,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "2 Task Definition",
+            "alignment": "left",
+            "type": "title",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "4eb5d3bf955c3957c6e6f92fb53c36d6"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 163,
+                    "y": 448
+                },
+                {
+                    "x": 1192,
+                    "y": 448
+                },
+                {
+                    "x": 1192,
+                    "y": 599
+                },
+                {
+                    "x": 163,
+                    "y": 599
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 442
+                        },
+                        {
+                            "x": 1197,
+                            "y": 442
+                        },
+                        {
+                            "x": 1197,
+                            "y": 474
+                        },
+                        {
+                            "x": 164,
+                            "y": 474
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "The document layout analysis task is to extract the pre-defined semantic units in visually rich documents."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 471
+                        },
+                        {
+                            "x": 1197,
+                            "y": 471
+                        },
+                        {
+                            "x": 1197,
+                            "y": 506
+                        },
+                        {
+                            "x": 164,
+                            "y": 506
+                        }
+                    ],
+                    "styleId": 15,
+                    "text": " Specifically, given a document D composed of discrete token set t={t0, t1,..., tn}, each token ti="
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 502
+                        },
+                        {
+                            "x": 1197,
+                            "y": 502
+                        },
+                        {
+                            "x": 1197,
+                            "y": 537
+                        },
+                        {
+                            "x": 164,
+                            "y": 537
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "(w,(x0, y0, x1, y1)) consists of word w and its bounding box(x0, y0, x1, y1). And C={c0, c1,.., cm}"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 535
+                        },
+                        {
+                            "x": 1197,
+                            "y": 535
+                        },
+                        {
+                            "x": 1197,
+                            "y": 566
+                        },
+                        {
+                            "x": 164,
+                            "y": 566
+                        }
+                    ],
+                    "styleId": 16,
+                    "text": " defines the semantic categories that the tokens are classified into. We intend to find a function F:"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 563
+                        },
+                        {
+                            "x": 587,
+                            "y": 563
+                        },
+                        {
+                            "x": 587,
+                            "y": 598
+                        },
+                        {
+                            "x": 164,
+                            "y": 598
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "(C,D)→S, where S is the prediction set:"
+                }
+            ],
+            "index": 4,
+            "subType": "para",
+            "lineHeight": -3,
+            "text": "The document layout analysis task is to extract the pre-defined semantic units in visually rich documents. Specifically, given a document D composed of discrete token set t={t0, t1,..., tn}, each token ti=(w,(x0, y0, x1, y1)) consists of word w and its bounding box(x0, y0, x1, y1). And C={c0, c1,.., cm} defines the semantic categories that the tokens are classified into. We intend to find a function F:(C,D)→S, where S is the prediction set:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "3b15ead725c11dd71d9d5901b28485d1"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 444,
+                    "y": 614
+                },
+                {
+                    "x": 1197,
+                    "y": 614
+                },
+                {
+                    "x": 1197,
+                    "y": 650
+                },
+                {
+                    "x": 444,
+                    "y": 650
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 449,
+                            "y": 612
+                        },
+                        {
+                            "x": 625,
+                            "y": 612
+                        },
+                        {
+                            "x": 625,
+                            "y": 649
+                        },
+                        {
+                            "x": 449,
+                            "y": 649
+                        }
+                    ],
+                    "styleId": 17,
+                    "text": "S={({t00,..., tn0"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 605,
+                            "y": 631
+                        },
+                        {
+                            "x": 615,
+                            "y": 631
+                        },
+                        {
+                            "x": 615,
+                            "y": 650
+                        },
+                        {
+                            "x": 605,
+                            "y": 650
+                        }
+                    ],
+                    "styleId": 18,
+                    "text": "0"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 628,
+                            "y": 612
+                        },
+                        {
+                            "x": 840,
+                            "y": 612
+                        },
+                        {
+                            "x": 840,
+                            "y": 650
+                        },
+                        {
+                            "x": 628,
+                            "y": 650
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "}, c0),...,({t0k,..., tnk"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 820,
+                            "y": 632
+                        },
+                        {
+                            "x": 830,
+                            "y": 632
+                        },
+                        {
+                            "x": 830,
+                            "y": 651
+                        },
+                        {
+                            "x": 820,
+                            "y": 651
+                        }
+                    ],
+                    "styleId": 20,
+                    "text": "k"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 843,
+                            "y": 612
+                        },
+                        {
+                            "x": 911,
+                            "y": 612
+                        },
+                        {
+                            "x": 911,
+                            "y": 647
+                        },
+                        {
+                            "x": 843,
+                            "y": 647
+                        }
+                    ],
+                    "styleId": 21,
+                    "text": "}, ck)}"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 1168,
+                            "y": 614
+                        },
+                        {
+                            "x": 1197,
+                            "y": 614
+                        },
+                        {
+                            "x": 1197,
+                            "y": 645
+                        },
+                        {
+                            "x": 1168,
+                            "y": 645
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "(1)"
+                }
+            ],
+            "index": 5,
+            "subType": "formula",
+            "lineHeight": -37,
+            "text": "S={({t00,..., tn00}, c0),...,({t0k,..., tnk k}, ck)}               (1)",
+            "alignment": "center",
+            "type": "formula",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "af0fe00b7fc4d5314ebbe9cb7e9ac601"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 668
+                },
+                {
+                    "x": 312,
+                    "y": 668
+                },
+                {
+                    "x": 312,
+                    "y": 692
+                },
+                {
+                    "x": 162,
+                    "y": 692
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 658
+                        },
+                        {
+                            "x": 312,
+                            "y": 658
+                        },
+                        {
+                            "x": 312,
+                            "y": 696
+                        },
+                        {
+                            "x": 164,
+                            "y": 696
+                        }
+                    ],
+                    "styleId": 4,
+                    "text": "3 DocBank"
+                }
+            ],
+            "index": 6,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "3 DocBank",
+            "alignment": "left",
+            "type": "title",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "b72b01599fcb5317faac0bfaadfbaa3e"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 160,
+                    "y": 714
+                },
+                {
+                    "x": 1196,
+                    "y": 714
+                },
+                {
+                    "x": 1196,
+                    "y": 897
+                },
+                {
+                    "x": 160,
+                    "y": 897
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 709
+                        },
+                        {
+                            "x": 1197,
+                            "y": 709
+                        },
+                        {
+                            "x": 1197,
+                            "y": 741
+                        },
+                        {
+                            "x": 164,
+                            "y": 741
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "We build DocBank with token-level annotations that supports both NLP and computer vision models."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 740
+                        },
+                        {
+                            "x": 1197,
+                            "y": 740
+                        },
+                        {
+                            "x": 1197,
+                            "y": 772
+                        },
+                        {
+                            "x": 164,
+                            "y": 772
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " As shown in Figure 2, the construction of DocBank has three steps: Document Acquisition, Semantic"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 771
+                        },
+                        {
+                            "x": 1197,
+                            "y": 771
+                        },
+                        {
+                            "x": 1197,
+                            "y": 803
+                        },
+                        {
+                            "x": 164,
+                            "y": 803
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " Structures Detection, Token Annotation. Meanwhile, DocBank can be converted to the format that is"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 802
+                        },
+                        {
+                            "x": 1197,
+                            "y": 802
+                        },
+                        {
+                            "x": 1197,
+                            "y": 833
+                        },
+                        {
+                            "x": 164,
+                            "y": 833
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " used by computer vision models in a few steps. The current DocBank dataset totally includes 500K"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 833
+                        },
+                        {
+                            "x": 1197,
+                            "y": 833
+                        },
+                        {
+                            "x": 1197,
+                            "y": 864
+                        },
+                        {
+                            "x": 164,
+                            "y": 864
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " document pages, where the training set includes 400K document pages and both the validation set and"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 864
+                        },
+                        {
+                            "x": 570,
+                            "y": 864
+                        },
+                        {
+                            "x": 570,
+                            "y": 895
+                        },
+                        {
+                            "x": 164,
+                            "y": 895
+                        }
+                    ],
+                    "styleId": 13,
+                    "text": " the test set include 50K document pages."
+                }
+            ],
+            "index": 7,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "We build DocBank with token-level annotations that supports both NLP and computer vision models. As shown in Figure 2, the construction of DocBank has three steps: Document Acquisition, Semantic Structures Detection, Token Annotation. Meanwhile, DocBank can be converted to the format that is used by computer vision models in a few steps. The current DocBank dataset totally includes 500K document pages, where the training set includes 400K document pages and both the validation set and the test set include 50K document pages.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "e3d475d1d737a04c67140848587cca2d"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 920
+                },
+                {
+                    "x": 456,
+                    "y": 920
+                },
+                {
+                    "x": 456,
+                    "y": 945
+                },
+                {
+                    "x": 162,
+                    "y": 945
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 912
+                        },
+                        {
+                            "x": 456,
+                            "y": 912
+                        },
+                        {
+                            "x": 456,
+                            "y": 945
+                        },
+                        {
+                            "x": 164,
+                            "y": 945
+                        }
+                    ],
+                    "styleId": 9,
+                    "text": "3.1 Document Acquisition"
+                }
+            ],
+            "index": 8,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "3.1 Document Acquisition",
+            "alignment": "left",
+            "type": "title",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "5198c662d791a651f3b0f813d7426e7a"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 161,
+                    "y": 960
+                },
+                {
+                    "x": 1195,
+                    "y": 960
+                },
+                {
+                    "x": 1195,
+                    "y": 1079
+                },
+                {
+                    "x": 161,
+                    "y": 1079
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 953
+                        },
+                        {
+                            "x": 1197,
+                            "y": 953
+                        },
+                        {
+                            "x": 1197,
+                            "y": 990
+                        },
+                        {
+                            "x": 164,
+                            "y": 990
+                        }
+                    ],
+                    "styleId": 10,
+                    "text": "We download the PDF files on arXiv.com as well as the LATEX source files since we need to modify"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 984
+                        },
+                        {
+                            "x": 1197,
+                            "y": 984
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1016
+                        },
+                        {
+                            "x": 164,
+                            "y": 1016
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " the source code to detect the semantic structures. The papers contain Physics, Mathematics, Computer"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1015
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1015
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1046
+                        },
+                        {
+                            "x": 164,
+                            "y": 1046
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " Science and many other areas, which is beneficial for the diversity of DocBank to produce robust models."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1046
+                        },
+                        {
+                            "x": 1095,
+                            "y": 1046
+                        },
+                        {
+                            "x": 1095,
+                            "y": 1077
+                        },
+                        {
+                            "x": 164,
+                            "y": 1077
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": " We focus on English documents in this work and will expand to other languages in the future."
+                }
+            ],
+            "index": 9,
+            "subType": "para",
+            "lineHeight": -2,
+            "text": "We download the PDF files on arXiv.com as well as the LATEX source files since we need to modify the source code to detect the semantic structures. The papers contain Physics, Mathematics, Computer Science and many other areas, which is beneficial for the diversity of DocBank to produce robust models. We focus on English documents in this work and will expand to other languages in the future.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "9ee59f2f6df8f796a14ff33ef7c08bab"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 1102
+                },
+                {
+                    "x": 542,
+                    "y": 1102
+                },
+                {
+                    "x": 542,
+                    "y": 1126
+                },
+                {
+                    "x": 162,
+                    "y": 1126
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1094
+                        },
+                        {
+                            "x": 542,
+                            "y": 1094
+                        },
+                        {
+                            "x": 542,
+                            "y": 1128
+                        },
+                        {
+                            "x": 164,
+                            "y": 1128
+                        }
+                    ],
+                    "styleId": 9,
+                    "text": "3.2 Semantic Structures Detection"
+                }
+            ],
+            "index": 10,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "3.2 Semantic Structures Detection",
+            "alignment": "left",
+            "type": "title",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "990e71a173e6362fd303443d16c0981b"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 160,
+                    "y": 1141
+                },
+                {
+                    "x": 1196,
+                    "y": 1141
+                },
+                {
+                    "x": 1196,
+                    "y": 1413
+                },
+                {
+                    "x": 160,
+                    "y": 1413
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1135
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1135
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1167
+                        },
+                        {
+                            "x": 164,
+                            "y": 1167
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "DocBank is a natural extension of the TableBank dataset(Li et al., 2019), where other semantic units"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1166
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1166
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1198
+                        },
+                        {
+                            "x": 164,
+                            "y": 1198
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " are also included for document layout analysis. In this work, the following semantic structures are"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1195
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1195
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1229
+                        },
+                        {
+                            "x": 164,
+                            "y": 1229
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": " annotated in DocBank:{Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference,"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1226
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1226
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1260
+                        },
+                        {
+                            "x": 164,
+                            "y": 1260
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": " Section, Table and Title}. In TableBank, the tables are labeled with the help of the ‘fcolorbox’ command."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1259
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1259
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1290
+                        },
+                        {
+                            "x": 164,
+                            "y": 1290
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " However, for DocBank, the target structures are mainly composed of text, where the ‘fcolorbox’ cannot"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1290
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1290
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1321
+                        },
+                        {
+                            "x": 164,
+                            "y": 1321
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " be well applied. Therefore, we use the ‘color’ command to distinguish these semantic structures by"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1321
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1321
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1352
+                        },
+                        {
+                            "x": 164,
+                            "y": 1352
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " changing their font colors into structure-specific colors. Basically, there are two types of commands to"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1351
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1351
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1389
+                        },
+                        {
+                            "x": 164,
+                            "y": 1389
+                        }
+                    ],
+                    "styleId": 10,
+                    "text": " represent semantic structures. Some of the LATEX commands are simple words preceded by a backslash."
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1382
+                        },
+                        {
+                            "x": 1025,
+                            "y": 1382
+                        },
+                        {
+                            "x": 1025,
+                            "y": 1419
+                        },
+                        {
+                            "x": 164,
+                            "y": 1419
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": " For instance, the section titles in LATEX documents are usually in the format as follows:"
+                }
+            ],
+            "index": 11,
+            "subType": "para",
+            "lineHeight": -2,
+            "text": "DocBank is a natural extension of the TableBank dataset(Li et al., 2019), where other semantic units are also included for document layout analysis. In this work, the following semantic structures are annotated in DocBank:{Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, Section, Table and Title}. In TableBank, the tables are labeled with the help of the ‘fcolorbox’ command. However, for DocBank, the target structures are mainly composed of text, where the ‘fcolorbox’ cannot be well applied. Therefore, we use the ‘color’ command to distinguish these semantic structures by changing their font colors into structure-specific colors. Basically, there are two types of commands to represent semantic structures. Some of the LATEX commands are simple words preceded by a backslash. For instance, the section titles in LATEX documents are usually in the format as follows:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "f1b2788cf761ee5ec823203b0d9e7189"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 407,
+                    "y": 1424
+                },
+                {
+                    "x": 955,
+                    "y": 1424
+                },
+                {
+                    "x": 955,
+                    "y": 1454
+                },
+                {
+                    "x": 407,
+                    "y": 1454
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 420,
+                            "y": 1417
+                        },
+                        {
+                            "x": 802,
+                            "y": 1417
+                        },
+                        {
+                            "x": 802,
+                            "y": 1452
+                        },
+                        {
+                            "x": 420,
+                            "y": 1452
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "\\ s e c t i o n{The t i t l e of th i s"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 826,
+                            "y": 1417
+                        },
+                        {
+                            "x": 940,
+                            "y": 1417
+                        },
+                        {
+                            "x": 940,
+                            "y": 1452
+                        },
+                        {
+                            "x": 826,
+                            "y": 1452
+                        }
+                    ],
+                    "styleId": 21,
+                    "text": "s e c t i o n}"
+                }
+            ],
+            "index": 12,
+            "subType": "formula",
+            "lineHeight": 0,
+            "text": "\\ s e c t i o n{The t i t l e of th i s s e c t i o n}",
+            "alignment": "center",
+            "type": "formula",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "ec8101795716df103e61285506ba21ad"
+        },
+        {
+            "pos": [
+                {
+                    "x": 411,
+                    "y": 1452
+                },
+                {
+                    "x": 941,
+                    "y": 1452
+                },
+                {
+                    "x": 941,
+                    "y": 1458
+                },
+                {
+                    "x": 411,
+                    "y": 1458
+                }
+            ],
+            "index": 13,
+            "subType": "none",
+            "text": "",
+            "alignment": "left",
+            "type": "split_line",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "c7c0c24b388158291a0b08960e4cc993"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 168,
+                    "y": 1462
+                },
+                {
+                    "x": 1193,
+                    "y": 1462
+                },
+                {
+                    "x": 1193,
+                    "y": 1509
+                },
+                {
+                    "x": 168,
+                    "y": 1509
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1457
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1457
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1494
+                        },
+                        {
+                            "x": 164,
+                            "y": 1494
+                        }
+                    ],
+                    "styleId": 10,
+                    "text": "Other commands often start an environment. For instance, the list declaration in LATEX documents is"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1488
+                        },
+                        {
+                            "x": 342,
+                            "y": 1488
+                        },
+                        {
+                            "x": 342,
+                            "y": 1519
+                        },
+                        {
+                            "x": 164,
+                            "y": 1519
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": " shown as follows:"
+                }
+            ],
+            "index": 14,
+            "subType": "para",
+            "lineHeight": -6,
+            "text": "Other commands often start an environment. For instance, the list declaration in LATEX documents is shown as follows:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "f50666e948826e20262c57cdde7bce97"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 517,
+                    "y": 1531
+                },
+                {
+                    "x": 844,
+                    "y": 1531
+                },
+                {
+                    "x": 844,
+                    "y": 1655
+                },
+                {
+                    "x": 517,
+                    "y": 1655
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 525,
+                            "y": 1517
+                        },
+                        {
+                            "x": 746,
+                            "y": 1517
+                        },
+                        {
+                            "x": 746,
+                            "y": 1552
+                        },
+                        {
+                            "x": 525,
+                            "y": 1552
+                        }
+                    ],
+                    "styleId": 21,
+                    "text": "\\ b e g i n{ i t e m i z e}"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 584,
+                            "y": 1548
+                        },
+                        {
+                            "x": 742,
+                            "y": 1548
+                        },
+                        {
+                            "x": 742,
+                            "y": 1582
+                        },
+                        {
+                            "x": 584,
+                            "y": 1582
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "\\ item Fi r s t"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 765,
+                            "y": 1550
+                        },
+                        {
+                            "x": 819,
+                            "y": 1550
+                        },
+                        {
+                            "x": 819,
+                            "y": 1582
+                        },
+                        {
+                            "x": 765,
+                            "y": 1582
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "item"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 584,
+                            "y": 1579
+                        },
+                        {
+                            "x": 833,
+                            "y": 1579
+                        },
+                        {
+                            "x": 833,
+                            "y": 1613
+                        },
+                        {
+                            "x": 584,
+                            "y": 1613
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "\\ item Second item"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 525,
+                            "y": 1610
+                        },
+                        {
+                            "x": 716,
+                            "y": 1610
+                        },
+                        {
+                            "x": 716,
+                            "y": 1644
+                        },
+                        {
+                            "x": 525,
+                            "y": 1644
+                        }
+                    ],
+                    "styleId": 21,
+                    "text": "\\ end{ i t e m i z e}"
+                }
+            ],
+            "index": 15,
+            "subType": "formula",
+            "lineHeight": -3,
+            "text": "\\ b e g i n{ i t e m i z e}\\ item Fi r s t item\\ item Second item\\ end{ i t e m i z e}",
+            "alignment": "center",
+            "type": "formula",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "f0111b232d3b72edd19dfe8d5d0f988e"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 162,
+                    "y": 1656
+                },
+                {
+                    "x": 1193,
+                    "y": 1656
+                },
+                {
+                    "x": 1193,
+                    "y": 1742
+                },
+                {
+                    "x": 162,
+                    "y": 1742
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1648
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1648
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1682
+                        },
+                        {
+                            "x": 164,
+                            "y": 1682
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "The command\\begin{itemize} starts an environment while the command\\end{itemize} ends that"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1681
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1681
+                        },
+                        {
+                            "x": 1197,
+                            "y": 1712
+                        },
+                        {
+                            "x": 164,
+                            "y": 1712
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": " environment. The real command name is declared as the parameters of the ‘begin’ command and the"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 164,
+                            "y": 1712
+                        },
+                        {
+                            "x": 326,
+                            "y": 1712
+                        },
+                        {
+                            "x": 326,
+                            "y": 1743
+                        },
+                        {
+                            "x": 164,
+                            "y": 1743
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": "‘end’ command."
+                }
+            ],
+            "index": 16,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "The command\\begin{itemize} starts an environment while the command\\end{itemize} ends that environment. The real command name is declared as the parameters of the ‘begin’ command and the‘end’ command.",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "5b6f6f79e9f87361fdf6c05cb4e489e6"
+        }
+    ],
+    "version": "1.0.0"
+}

@@ -1,0 +1,2966 @@
+[
+  {
+    "segments": [
+      {
+        "segment_id": "83fe5c46-c413-4656-bf15-4f15c84f465e",
+        "bbox": {
+          "left": 111.666664,
+          "top": 155.41666,
+          "width": 380.8333,
+          "height": 35.0
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "文章编号 :1003-0077(2022)09-0001-18",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/83fe5c46-c413-4656-bf15-4f15c84f465e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d212e7b8f52126d4fa3897c36e56e189134abf467cad7c4d6fe9b5bdaeecf72e",
+        "html": "<ul><li>文章编号 :1003-0077(2022)09-0001-18</li></ul>",
+        "markdown": "- 文章编号 :1003-0077(2022)09-0001-18\n\n"
+      }
+    ],
+    "chunk_length": 2
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "a5e93bb0-42aa-4200-957b-b82e400b6eca",
+        "bbox": {
+          "left": 451.24997,
+          "top": 253.33331,
+          "width": 347.5,
+          "height": 43.333332
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "中文文本自动校对综述",
+        "segment_type": "Title",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a5e93bb0-42aa-4200-957b-b82e400b6eca.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=a352549602d1fb866eacf03f98e8c4049865a0ebe61d071537c00b4db8884fcc",
+        "html": "<h1>中文文本自动校对综述</h1>",
+        "markdown": "# 中文文本自动校对综述\n\n"
+      }
+    ],
+    "chunk_length": 1
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "eab2120c-f49a-4e38-b09a-3154741662ca",
+        "bbox": {
+          "left": 403.3333,
+          "top": 320.0,
+          "width": 439.16666,
+          "height": 37.083332
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "李云汉 1,2 , 施运梅 1,2 , 李 宁 1,2 , 田英爱 1,2",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/eab2120c-f49a-4e38-b09a-3154741662ca.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8d422ffa72cecb03a48669977d326bb1c2f089a107f964f59276c72984e499b7",
+        "html": "<p>李云汉 1,2 , 施运梅 1,2 , 李 宁 1,2 , 田英爱 1,2</p>",
+        "markdown": "李云汉 1,2 , 施运梅 1,2 , 李 宁 1,2 , 田英爱 1,2\n\n"
+      },
+      {
+        "segment_id": "92b3d1ff-7b0a-484e-b898-89fe632fb935",
+        "bbox": {
+          "left": 301.25,
+          "top": 372.0833,
+          "width": 645.4166,
+          "height": 60.0
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "(1. 北京信息科技大学 网络文化与数字传播北京市重点实验室 , 北京 100101; 2. 北京信息科技大学 计算机学院 , 北京 100101)",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/92b3d1ff-7b0a-484e-b898-89fe632fb935.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f2c13b3424f2ec409c850a3d14453c9828654f836040e091fbbcf6a33b7f7307",
+        "html": "<p>(1. 北京信息科技大学 网络文化与数字传播北京市重点实验室 , 北京 100101; 2. 北京信息科技大学 计算机学院 , 北京 100101)</p>",
+        "markdown": "(1. 北京信息科技大学 网络文化与数字传播北京市重点实验室 , 北京 100101; 2. 北京信息科技大学 计算机学院 , 北京 100101)\n\n"
+      },
+      {
+        "segment_id": "a012612a-4ed5-47b8-8e40-323d8b8ab7d1",
+        "bbox": {
+          "left": 153.33333,
+          "top": 442.91666,
+          "width": 930.8333,
+          "height": 116.24999
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "摘 要 : 文本校对在新闻发布 、 书刊出版 、 语音输入 、 汉字识别等领域有着极其重要的应用价值 , 是自然语言处理领 域中的一个重要研究方向 。 该文对中文文本自动校对技术进行了系统性的梳理 , 将 中 文 文 本 的 错 误 类 型 分 为 拼 写 错误 、 语法错误和语义错误 , 并对这三类错误的校对方法进行了梳理 , 对中文文本 自 动 校 对 的 数 据 集 和 评 价 方 法 进 行了总结 , 最后展望了中文文本自动校对技术的未来发展 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a012612a-4ed5-47b8-8e40-323d8b8ab7d1.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=113754633de55f39cc6af1f84e4c91d49cdc651189e52b475642b1207f96b8e6",
+        "html": "<p>摘 要 : 文本校对在新闻发布 、 书刊出版 、 语音输入 、 汉字识别等领域有着极其重要的应用价值 , 是自然语言处理领 域中的一个重要研究方向 。 该文对中文文本自动校对技术进行了系统性的梳理 , 将 中 文 文 本 的 错 误 类 型 分 为 拼 写 错误 、 语法错误和语义错误 , 并对这三类错误的校对方法进行了梳理 , 对中文文本 自 动 校 对 的 数 据 集 和 评 价 方 法 进 行了总结 , 最后展望了中文文本自动校对技术的未来发展 。</p>",
+        "markdown": "摘 要 : 文本校对在新闻发布 、 书刊出版 、 语音输入 、 汉字识别等领域有着极其重要的应用价值 , 是自然语言处理领 域中的一个重要研究方向 。 该文对中文文本自动校对技术进行了系统性的梳理 , 将 中 文 文 本 的 错 误 类 型 分 为 拼 写 错误 、 语法错误和语义错误 , 并对这三类错误的校对方法进行了梳理 , 对中文文本 自 动 校 对 的 数 据 集 和 评 价 方 法 进 行了总结 , 最后展望了中文文本自动校对技术的未来发展 。\n\n"
+      },
+      {
+        "segment_id": "a18bcd46-ce77-40a3-a7b7-4ba9ddf4ce86",
+        "bbox": {
+          "left": 153.33333,
+          "top": 561.6666,
+          "width": 570.4166,
+          "height": 28.75
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "关键词 : 自动校对 ; 拼写错误 ; 语法错误 ; 语义错误 ; 数据集 ; 评估指标",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a18bcd46-ce77-40a3-a7b7-4ba9ddf4ce86.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=505343d5ca5bf9b81bae32b9c68d0de448cd3da863512c1f32acfc5979092175",
+        "html": "<p>关键词 : 自动校对 ; 拼写错误 ; 语法错误 ; 语义错误 ; 数据集 ; 评估指标</p>",
+        "markdown": "关键词 : 自动校对 ; 拼写错误 ; 语法错误 ; 语义错误 ; 数据集 ; 评估指标\n\n"
+      },
+      {
+        "segment_id": "fcfcaedd-2f4a-4167-9a30-60e13727d072",
+        "bbox": {
+          "left": 153.33333,
+          "top": 590.8333,
+          "width": 393.3333,
+          "height": 28.75
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "中图分类号 :TP391 文献标识码 :A",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/fcfcaedd-2f4a-4167-9a30-60e13727d072.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=e39b008e83d936a1bf9346394cfb6adfa73fa91f0056c8b43b4847b674e0131d",
+        "html": "<p>中图分类号 :TP391 文献标识码 :A</p>",
+        "markdown": "中图分类号 :TP391 文献标识码 :A\n\n"
+      }
+    ],
+    "chunk_length": 96
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "f423051a-c8da-4b62-b3bf-5a4f9637185b",
+        "bbox": {
+          "left": 315.8333,
+          "top": 670.0,
+          "width": 610.0,
+          "height": 37.083332
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "ASurveyofAutomaticErrorCorrectionofChineseText",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/f423051a-c8da-4b62-b3bf-5a4f9637185b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9c215fea97c7b37ce655c127177f682eac6e64e587362761362896625a3fb02f",
+        "html": "<h2>ASurveyofAutomaticErrorCorrectionofChineseText</h2>",
+        "markdown": "## ASurveyofAutomaticErrorCorrectionofChineseText\n\n"
+      },
+      {
+        "segment_id": "76bbf175-d473-4532-993b-ceaa5e0ddaf1",
+        "bbox": {
+          "left": 278.3333,
+          "top": 717.9166,
+          "width": 695.4166,
+          "height": 97.5
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "LiYunhan 1,2 ,ShiYunmei 1,2 ,LiNing 1,2 ,TianYing􀆳ai 1,2 (1.BeijingInformationScienceandTechnologyUniversity,BeijingKeyLaboratory ofInternetCultureDigitalDissemination,Beijing100101,China;",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/76bbf175-d473-4532-993b-ceaa5e0ddaf1.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b33419e5b78185d859018880329656d786c7a476fb9df6201e6723a307542517",
+        "html": "<p>LiYunhan 1,2 ,ShiYunmei 1,2 ,LiNing 1,2 ,TianYing􀆳ai 1,2 (1.BeijingInformationScienceandTechnologyUniversity,BeijingKeyLaboratory ofInternetCultureDigitalDissemination,Beijing100101,China;</p>",
+        "markdown": "LiYunhan 1,2 ,ShiYunmei 1,2 ,LiNing 1,2 ,TianYing􀆳ai 1,2 (1.BeijingInformationScienceandTechnologyUniversity,BeijingKeyLaboratory ofInternetCultureDigitalDissemination,Beijing100101,China;\n\n"
+      },
+      {
+        "segment_id": "bf96132f-211b-4b8e-b4ad-1cf9bbc389c1",
+        "bbox": {
+          "left": 230.41666,
+          "top": 809.5833,
+          "width": 776.6666,
+          "height": 32.916664
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "2.SchoolofComputer,BeijingUniversityofInformationTechnology,Beijing100101,China)",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/bf96132f-211b-4b8e-b4ad-1cf9bbc389c1.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d6ed07c0c1d6a08375407a16e6defac7c53a9430a6c65ed9bdbda689b841e213",
+        "html": "<p>2.SchoolofComputer,BeijingUniversityofInformationTechnology,Beijing100101,China)</p>",
+        "markdown": "2.SchoolofComputer,BeijingUniversityofInformationTechnology,Beijing100101,China)\n\n"
+      },
+      {
+        "segment_id": "ffa18573-9bb1-49f1-948c-075174657795",
+        "bbox": {
+          "left": 153.33333,
+          "top": 851.24994,
+          "width": 934.99994,
+          "height": 178.75
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "Abstract :Textcorrection,animportantresearchfieldin NaturalLanguage Processing (NLP),isofgreat applicationvalueinfieldssuchasnews,publication,andtextinput.Thispaperprovidesasystematicoverviewof automaticerrorcorrectiontechnologyforChinesetexts.ErrorsinChinesetextsaredividedintospellingerrors, grammaticerrorsandsemanticerrors,andthemethodsoferrorcorrectionforthesethreetypesarereviewed.More- over,datasetsandevaluationmethodsofautomaticerrorcorrectionforChinesetextsaresummarized.Intheend, prospectsfortheautomaticerrorcorrectionforChinesetextsareraised.",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/ffa18573-9bb1-49f1-948c-075174657795.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=7e13caedd6f7dc1652f440a50893eeb4ac9e6212b4a906e4cd113db41f308d6c",
+        "html": "<p>Abstract :Textcorrection,animportantresearchfieldin NaturalLanguage Processing (NLP),isofgreat applicationvalueinfieldssuchasnews,publication,andtextinput.Thispaperprovidesasystematicoverviewof automaticerrorcorrectiontechnologyforChinesetexts.ErrorsinChinesetextsaredividedintospellingerrors, grammaticerrorsandsemanticerrors,andthemethodsoferrorcorrectionforthesethreetypesarereviewed.More- over,datasetsandevaluationmethodsofautomaticerrorcorrectionforChinesetextsaresummarized.Intheend, prospectsfortheautomaticerrorcorrectionforChinesetextsareraised.</p>",
+        "markdown": "Abstract :Textcorrection,animportantresearchfieldin NaturalLanguage Processing (NLP),isofgreat applicationvalueinfieldssuchasnews,publication,andtextinput.Thispaperprovidesasystematicoverviewof automaticerrorcorrectiontechnologyforChinesetexts.ErrorsinChinesetextsaredividedintospellingerrors, grammaticerrorsandsemanticerrors,andthemethodsoferrorcorrectionforthesethreetypesarereviewed.More- over,datasetsandevaluationmethodsofautomaticerrorcorrectionforChinesetextsaresummarized.Intheend, prospectsfortheautomaticerrorcorrectionforChinesetextsareraised.\n\n"
+      },
+      {
+        "segment_id": "83ace7f6-dd3f-4f45-a6bc-e51c7ee5d49f",
+        "bbox": {
+          "left": 153.33333,
+          "top": 1030.4166,
+          "width": 932.9166,
+          "height": 60.0
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "Keywords :automaticcorrection;spellingerrors;grammaticalerrors;semanticerrors;datasets;evaluationindica- tors",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/83ace7f6-dd3f-4f45-a6bc-e51c7ee5d49f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=510010e918a31215014f3055f805d9231cfd58d84c2540335d269412dce87e00",
+        "html": "<p>Keywords :automaticcorrection;spellingerrors;grammaticalerrors;semanticerrors;datasets;evaluationindica- tors</p>",
+        "markdown": "Keywords :automaticcorrection;spellingerrors;grammaticalerrors;semanticerrors;datasets;evaluationindica- tors\n\n"
+      },
+      {
+        "segment_id": "95bf4086-971c-496c-a897-2224142594df",
+        "bbox": {
+          "left": 149.16666,
+          "top": 1528.3333,
+          "width": 424.5833,
+          "height": 30.833332
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "收稿日期 :2021-10-07 定稿日期 :2021-11-25",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/95bf4086-971c-496c-a897-2224142594df.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=e3d37da16ae01e474d484439cd6c37107e95428f3e86310fdf4734bcff6ed33a",
+        "html": "<p>收稿日期 :2021-10-07 定稿日期 :2021-11-25</p>",
+        "markdown": "收稿日期 :2021-10-07 定稿日期 :2021-11-25\n\n"
+      },
+      {
+        "segment_id": "1583c4b4-c534-4ce3-b036-05201301ea93",
+        "bbox": {
+          "left": 149.16666,
+          "top": 1559.5833,
+          "width": 457.91666,
+          "height": 30.833332
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "基金项目 : 国家重点研发计划项目 (2018YFB1004100)",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/1583c4b4-c534-4ce3-b036-05201301ea93.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9368d43813e8bbf37a0a613c341c60192ffbf4f2e1ec5beb174a90d4d9c30d7c",
+        "html": "<p>基金项目 : 国家重点研发计划项目 (2018YFB1004100)</p>",
+        "markdown": "基金项目 : 国家重点研发计划项目 (2018YFB1004100)\n\n"
+      }
+    ],
+    "chunk_length": 33
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "f0686388-9d94-4054-b59d-1a340aa70d60",
+        "bbox": {
+          "left": 109.58333,
+          "top": 1153.3333,
+          "width": 99.58333,
+          "height": 35.0
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "0 引言",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/f0686388-9d94-4054-b59d-1a340aa70d60.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8027b1bce041e93d21cba6fca73d7680e80f610ff5e85dc1cb2c3b115730efc5",
+        "html": "<h2>0 引言</h2>",
+        "markdown": "## 0 引言\n\n"
+      },
+      {
+        "segment_id": "39aa0d4b-d749-44d5-b3b4-8031c0bdd21d",
+        "bbox": {
+          "left": 111.666664,
+          "top": 1220.0,
+          "width": 491.24997,
+          "height": 285.0
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "中文文本自动校对是自然语言处理技术的一个 重要应用 方 面 。 随 着 互 联 网 与 信 息 技 术 的 高 速 发 展 , 中文文本数量呈爆炸式增长 , 这对传统的手工校 对方式提 出 了 严 峻 挑 战 。 为 了 降 低 手 工 校 对 工 作 量 , 中文文本自动校 对 相 关 的 研 究 工 作 得 到 了 人 们 的重点关注 。 中文 文 本 自 动 校 对 研 究 始 于 20 世 纪 90 年代 , 相对 于 英 文 文 本 自 动 校 对 研 究 开 始 较 晚 , 但其发展速度快且 取 得 了 丰 硕 的 研 究 成 果 , 目 前 也 出现了已经商业化的产品 , 如黑马校对软件 、 哈工大",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/39aa0d4b-d749-44d5-b3b4-8031c0bdd21d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=a1447774723ebd3d2033648b30399246710b79b2a41edfe3085e7a62f20237af",
+        "html": "<p>中文文本自动校对是自然语言处理技术的一个 重要应用 方 面 。 随 着 互 联 网 与 信 息 技 术 的 高 速 发 展 , 中文文本数量呈爆炸式增长 , 这对传统的手工校 对方式提 出 了 严 峻 挑 战 。 为 了 降 低 手 工 校 对 工 作 量 , 中文文本自动校 对 相 关 的 研 究 工 作 得 到 了 人 们 的重点关注 。 中文 文 本 自 动 校 对 研 究 始 于 20 世 纪 90 年代 , 相对 于 英 文 文 本 自 动 校 对 研 究 开 始 较 晚 , 但其发展速度快且 取 得 了 丰 硕 的 研 究 成 果 , 目 前 也 出现了已经商业化的产品 , 如黑马校对软件 、 哈工大</p>",
+        "markdown": "中文文本自动校对是自然语言处理技术的一个 重要应用 方 面 。 随 着 互 联 网 与 信 息 技 术 的 高 速 发 展 , 中文文本数量呈爆炸式增长 , 这对传统的手工校 对方式提 出 了 严 峻 挑 战 。 为 了 降 低 手 工 校 对 工 作 量 , 中文文本自动校 对 相 关 的 研 究 工 作 得 到 了 人 们 的重点关注 。 中文 文 本 自 动 校 对 研 究 始 于 20 世 纪 90 年代 , 相对 于 英 文 文 本 自 动 校 对 研 究 开 始 较 晚 , 但其发展速度快且 取 得 了 丰 硕 的 研 究 成 果 , 目 前 也 出现了已经商业化的产品 , 如黑马校对软件 、 哈工大\n\n"
+      },
+      {
+        "segment_id": "14615e71-f11a-498c-bb93-03c707764de5",
+        "bbox": {
+          "left": 632.5,
+          "top": 1124.1666,
+          "width": 497.49997,
+          "height": 382.91666
+        },
+        "page_number": 1,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "讯飞实验室发布的飞鹰智能文本校对系统等 。 早期中文自动校对方法主要基于统计和规则相 结合的方法 [1-2] , 采用了分词 、 统计语言模型 、 统计机 器翻译 (StatisticalMachineTranslation,SMT) 和混淆字 符集等技术 。 随着深度学习的发展 , 一系列端到端的 方法在 自 然 语 言 处 理 (NaturalLanguageProcessing, NLP) 领域逐渐得到应用 , 如循环神经网络 (Recurrent NeuralNetwork,RNN)、 序 列 到 序 列 模 型 (Sequence- to-sequence,Seq2seq) [3-4] 、 注 意 力 机 制 [5-6] 、 卷 积 序 列 到 序 列 模 型 (ConvolutionalSequencetoSequence, ConvS2S) [7] 和 基 于 自 注 意 力 的 Transformer 模 型 [8] , 中文文本自 动 校 对 研 究 逐 渐 从 基 于 规 则 和 统",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/14615e71-f11a-498c-bb93-03c707764de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c60ebaa5e4f50a3f5135bf73092b7861ff47ad1c3eadf83d2670bd6392ab69db",
+        "html": "<p>讯飞实验室发布的飞鹰智能文本校对系统等 。 早期中文自动校对方法主要基于统计和规则相 结合的方法 [1-2] , 采用了分词 、 统计语言模型 、 统计机 器翻译 (StatisticalMachineTranslation,SMT) 和混淆字 符集等技术 。 随着深度学习的发展 , 一系列端到端的 方法在 自 然 语 言 处 理 (NaturalLanguageProcessing, NLP) 领域逐渐得到应用 , 如循环神经网络 (Recurrent NeuralNetwork,RNN)、 序 列 到 序 列 模 型 (Sequence- to-sequence,Seq2seq) [3-4] 、 注 意 力 机 制 [5-6] 、 卷 积 序 列 到 序 列 模 型 (ConvolutionalSequencetoSequence, ConvS2S) [7] 和 基 于 自 注 意 力 的 Transformer 模 型 [8] , 中文文本自 动 校 对 研 究 逐 渐 从 基 于 规 则 和 统</p>",
+        "markdown": "讯飞实验室发布的飞鹰智能文本校对系统等 。 早期中文自动校对方法主要基于统计和规则相 结合的方法 [1-2] , 采用了分词 、 统计语言模型 、 统计机 器翻译 (StatisticalMachineTranslation,SMT) 和混淆字 符集等技术 。 随着深度学习的发展 , 一系列端到端的 方法在 自 然 语 言 处 理 (NaturalLanguageProcessing, NLP) 领域逐渐得到应用 , 如循环神经网络 (Recurrent NeuralNetwork,RNN)、 序 列 到 序 列 模 型 (Sequence- to-sequence,Seq2seq) [3-4] 、 注 意 力 机 制 [5-6] 、 卷 积 序 列 到 序 列 模 型 (ConvolutionalSequencetoSequence, ConvS2S) [7] 和 基 于 自 注 意 力 的 Transformer 模 型 [8] , 中文文本自 动 校 对 研 究 逐 渐 从 基 于 规 则 和 统\n\n"
+      },
+      {
+        "segment_id": "9b240075-01b9-433a-bab5-65e672e237d0",
+        "bbox": {
+          "left": 113.74999,
+          "top": 157.5,
+          "width": 489.16666,
+          "height": 128.75
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "计语言模 型 相 结 合 的 方 法 转 向 基 于 深 度 模 型 的 方 法 , 并 且 使 用 序 列 标 注 模 型 、 神 经 机 器 翻 译 模 型 (NeuralMachineTranslation,NMT) 和预训练语言 模型进行端到端的校对 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/9b240075-01b9-433a-bab5-65e672e237d0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=a5b03edd4f6ba8c9393d0df0268e646e722fefde847d4d1d01e78c4360308b02",
+        "html": "<p>计语言模 型 相 结 合 的 方 法 转 向 基 于 深 度 模 型 的 方 法 , 并 且 使 用 序 列 标 注 模 型 、 神 经 机 器 翻 译 模 型 (NeuralMachineTranslation,NMT) 和预训练语言 模型进行端到端的校对 。</p>",
+        "markdown": "计语言模 型 相 结 合 的 方 法 转 向 基 于 深 度 模 型 的 方 法 , 并 且 使 用 序 列 标 注 模 型 、 神 经 机 器 翻 译 模 型 (NeuralMachineTranslation,NMT) 和预训练语言 模型进行端到端的校对 。\n\n"
+      },
+      {
+        "segment_id": "088bc374-9f4e-40ac-8b1b-2b04cdd29661",
+        "bbox": {
+          "left": 113.74999,
+          "top": 288.75,
+          "width": 487.0833,
+          "height": 166.25
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "本文概述了中文文本中的常见错误类型 , 分析 了中文文本校对技 术 的 研 究 发 展 现 状 , 对 中 文 文 本 校对共享任务数据集以及校对系统的评估指标进行 了归纳总结 , 最后探 讨 了 中 文 文 本 自 动 校 对 技 术 未 来发展的方向 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/088bc374-9f4e-40ac-8b1b-2b04cdd29661.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=61c04a770928ae97d048d7758ef74f0cdeb9b01091156fd78979f91f426f3fb0",
+        "html": "<p>本文概述了中文文本中的常见错误类型 , 分析 了中文文本校对技 术 的 研 究 发 展 现 状 , 对 中 文 文 本 校对共享任务数据集以及校对系统的评估指标进行 了归纳总结 , 最后探 讨 了 中 文 文 本 自 动 校 对 技 术 未 来发展的方向 。</p>",
+        "markdown": "本文概述了中文文本中的常见错误类型 , 分析 了中文文本校对技 术 的 研 究 发 展 现 状 , 对 中 文 文 本 校对共享任务数据集以及校对系统的评估指标进行 了归纳总结 , 最后探 讨 了 中 文 文 本 自 动 校 对 技 术 未 来发展的方向 。\n\n"
+      }
+    ],
+    "chunk_length": 287
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "ebe91975-cb4d-48fc-ab12-4b1f25663c19",
+        "bbox": {
+          "left": 107.49999,
+          "top": 488.74997,
+          "width": 287.0833,
+          "height": 35.0
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "1 中文文本的错误类型",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/ebe91975-cb4d-48fc-ab12-4b1f25663c19.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=22007963ed288566f2d3c9642e85a016fef2a8f0f61141e7c306530ce9fcf727",
+        "html": "<h2>1 中文文本的错误类型</h2>",
+        "markdown": "## 1 中文文本的错误类型\n\n"
+      },
+      {
+        "segment_id": "af1c3ce4-b7aa-49ce-8fe2-6b126e4cfaef",
+        "bbox": {
+          "left": 111.666664,
+          "top": 555.4166,
+          "width": 489.16666,
+          "height": 66.25
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "中文文本产生的错误可大体分为拼写错误 、 语 法错误和语义错误三类 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/af1c3ce4-b7aa-49ce-8fe2-6b126e4cfaef.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=da2195f2ac1f2cc506b45b38ac922a6685abcfa20febc1c901d5d6f35a219dba",
+        "html": "<p>中文文本产生的错误可大体分为拼写错误 、 语 法错误和语义错误三类 。</p>",
+        "markdown": "中文文本产生的错误可大体分为拼写错误 、 语 法错误和语义错误三类 。\n\n"
+      },
+      {
+        "segment_id": "51d269b0-93bf-479a-b218-f1f7b29d4983",
+        "bbox": {
+          "left": 111.666664,
+          "top": 622.0833,
+          "width": 489.16666,
+          "height": 335.0
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "拼写错误 张仰森等人 [9-10] 和 Liu 等人 [11] 指出 音似 、 形 似 字 错 误 是 中 文 文 本 中 常 见 的 拼 写 错 误 。 形似字错误主要发生在五笔输入和字符识别 (Optical CharacterRecognition,OCR) 过程中 , 音似错误则主要 发生在拼音输入和语音识别 (AutomatedSpeechRec- ognition,ASR) 过 程 中 。 其 中 , 音 似 错 误 又 可 以 进 一 步细分为同音同调 、 同音异调和相似音错误 [12-13] 。 虽 然大部分拼写错误是由音似 、 形似字误用导致 , 但也 有些错误是由于缺少常识性知识或语言学知识所导 致的 , 如表 1 所示 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/51d269b0-93bf-479a-b218-f1f7b29d4983.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8ca1cea1fd1cdd57d9b486da4bf6052d22c13889002c2ac35211efb811caaa89",
+        "html": "<p>拼写错误 张仰森等人 [9-10] 和 Liu 等人 [11] 指出 音似 、 形 似 字 错 误 是 中 文 文 本 中 常 见 的 拼 写 错 误 。 形似字错误主要发生在五笔输入和字符识别 (Optical CharacterRecognition,OCR) 过程中 , 音似错误则主要 发生在拼音输入和语音识别 (AutomatedSpeechRec- ognition,ASR) 过 程 中 。 其 中 , 音 似 错 误 又 可 以 进 一 步细分为同音同调 、 同音异调和相似音错误 [12-13] 。 虽 然大部分拼写错误是由音似 、 形似字误用导致 , 但也 有些错误是由于缺少常识性知识或语言学知识所导 致的 , 如表 1 所示 。</p>",
+        "markdown": "拼写错误 张仰森等人 [9-10] 和 Liu 等人 [11] 指出 音似 、 形 似 字 错 误 是 中 文 文 本 中 常 见 的 拼 写 错 误 。 形似字错误主要发生在五笔输入和字符识别 (Optical CharacterRecognition,OCR) 过程中 , 音似错误则主要 发生在拼音输入和语音识别 (AutomatedSpeechRec- ognition,ASR) 过 程 中 。 其 中 , 音 似 错 误 又 可 以 进 一 步细分为同音同调 、 同音异调和相似音错误 [12-13] 。 虽 然大部分拼写错误是由音似 、 形似字误用导致 , 但也 有些错误是由于缺少常识性知识或语言学知识所导 致的 , 如表 1 所示 。\n\n"
+      },
+      {
+        "segment_id": "6492d178-bb55-443c-a83d-588b2cf4d579",
+        "bbox": {
+          "left": 251.25,
+          "top": 974.1666,
+          "width": 222.49998,
+          "height": 28.75
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "表 1 常见拼写错误举例",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/6492d178-bb55-443c-a83d-588b2cf4d579.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=61d3c2176da526845259df7ece5db6b074effa804ca6684f0e8db8ed854a6455",
+        "html": "<span class=\"caption\">表 1 常见拼写错误举例</span>",
+        "markdown": "表 1 常见拼写错误举例\n\n"
+      },
+      {
+        "segment_id": "d71b7ea8-091e-41e1-9ee5-52c1b7d4e877",
+        "bbox": {
+          "left": 111.666664,
+          "top": 1001.24994,
+          "width": 491.24997,
+          "height": 372.5
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "错误类型 错误 正确 形似字错误 诞续 延续 音似 字错 误 同音 同调 火势向四周漫 (man4) 延 火 势 向 四 周 蔓 (man4) 延 同音 异调 但 是 不 行 (xing2) 还 是 发生了 但 是 不 幸 (xing4) 还是发生了 相似 音 词青 (qing1) 标注 词性 (xing2) 标注 知识型错误 埃及有金子塔 埃及有金字塔 推断型错误 他 的 求 胜 欲 很 强 , 为 了 越狱在挖洞 他的求生欲 很强 , 为了越狱在挖洞",
+        "segment_type": "Table",
+        "ocr": [
+          {
+            "bbox": {
+              "left": 6.6045628,
+              "top": 14.474343,
+              "width": 117.27873,
+              "height": 33.649635
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 120.076584,
+              "top": 14.474343,
+              "width": 211.22032,
+              "height": 33.649635
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 333.1693,
+              "top": 14.474343,
+              "width": 153.07806,
+              "height": 33.649635
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.6045628,
+              "top": 48.26818,
+              "width": 117.27873,
+              "height": 40.415413
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 120.076584,
+              "top": 48.26818,
+              "width": 211.22032,
+              "height": 40.415413
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 333.1693,
+              "top": 48.26818,
+              "width": 153.07806,
+              "height": 40.415413
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.6045628,
+              "top": 87.97432,
+              "width": 117.27873,
+              "height": 59.641098
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 120.076584,
+              "top": 87.97432,
+              "width": 211.22032,
+              "height": 59.641098
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 333.1693,
+              "top": 87.97432,
+              "width": 153.07806,
+              "height": 59.641098
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.6045628,
+              "top": 147.42693,
+              "width": 117.27873,
+              "height": 62.732468
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 120.076584,
+              "top": 147.42693,
+              "width": 211.22032,
+              "height": 62.732468
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 333.1693,
+              "top": 147.42693,
+              "width": 153.07806,
+              "height": 62.732468
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.6045628,
+              "top": 210.27057,
+              "width": 117.27873,
+              "height": 55.29889
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 120.076584,
+              "top": 210.27057,
+              "width": 211.22032,
+              "height": 55.29889
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 333.1693,
+              "top": 210.27057,
+              "width": 153.07806,
+              "height": 55.29889
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.6045628,
+              "top": 266.64716,
+              "width": 117.27873,
+              "height": 41.624084
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 120.076584,
+              "top": 266.64716,
+              "width": 211.22032,
+              "height": 41.624084
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 333.1693,
+              "top": 266.64716,
+              "width": 153.07806,
+              "height": 41.624084
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.6045628,
+              "top": 307.8449,
+              "width": 117.27873,
+              "height": 54.675262
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 120.076584,
+              "top": 307.8449,
+              "width": 211.22032,
+              "height": 54.675262
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 333.1693,
+              "top": 307.8449,
+              "width": 153.07806,
+              "height": 54.675262
+            },
+            "text": "",
+            "confidence": null
+          }
+        ],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/d71b7ea8-091e-41e1-9ee5-52c1b7d4e877.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9e962778f0aa5d9d3cb3d7cd7a98f86d8f4cde5f8d3024bd78dcfbb4c0d4ffcb",
+        "html": "<table><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr></table>",
+        "markdown": "|| | | || | | || | | || | | || | | || | | || | | |\n"
+      },
+      {
+        "segment_id": "6a496caa-004f-45ca-bfe1-834cda6228dc",
+        "bbox": {
+          "left": 113.74999,
+          "top": 1395.0,
+          "width": 489.16666,
+          "height": 201.66666
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "语法错 误 NLPTEA 等 [14-20] 语 法 错 误 校 对 竞 赛将中文 文 本 常 见 语 法 错 误 归 纳 为 字 词 冗 余 错 误 (Redundant words,R)、 字 词 缺 失 错 误 (Missing words,M)、 搭配不当错误 (Selectionerrors,S) 和字 词 乱 序 错 误 (Wordorderingerrors,W), 如 表 2 所示 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/6a496caa-004f-45ca-bfe1-834cda6228dc.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=a585c657c3722c4f17820c631f334fb94b6d4cda2869a0e9df42665aeac68b4b",
+        "html": "<p>语法错 误 NLPTEA 等 [14-20] 语 法 错 误 校 对 竞 赛将中文 文 本 常 见 语 法 错 误 归 纳 为 字 词 冗 余 错 误 (Redundant words,R)、 字 词 缺 失 错 误 (Missing words,M)、 搭配不当错误 (Selectionerrors,S) 和字 词 乱 序 错 误 (Wordorderingerrors,W), 如 表 2 所示 。</p>",
+        "markdown": "语法错 误 NLPTEA 等 [14-20] 语 法 错 误 校 对 竞 赛将中文 文 本 常 见 语 法 错 误 归 纳 为 字 词 冗 余 错 误 (Redundant words,R)、 字 词 缺 失 错 误 (Missing words,M)、 搭配不当错误 (Selectionerrors,S) 和字 词 乱 序 错 误 (Wordorderingerrors,W), 如 表 2 所示 。\n\n"
+      },
+      {
+        "segment_id": "6b41ccbd-982c-4ba8-9a06-f73abc53a1da",
+        "bbox": {
+          "left": 774.1666,
+          "top": 157.5,
+          "width": 222.49998,
+          "height": 26.666666
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "表 2 常见语法错误举例",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/6b41ccbd-982c-4ba8-9a06-f73abc53a1da.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=e114f2a17fe44e6b2d34e95f8b97f68ea2059a482fbb7e1a097626a636d500fa",
+        "html": "<span class=\"caption\">表 2 常见语法错误举例</span>",
+        "markdown": "表 2 常见语法错误举例\n\n"
+      },
+      {
+        "segment_id": "7802de5c-8d1b-4a6c-866a-47eb6537d7b9",
+        "bbox": {
+          "left": 634.5833,
+          "top": 184.58333,
+          "width": 497.49997,
+          "height": 291.25
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "错误 类型 错误 正确 字词 冗余 我根本不能理解这妇 女 辞职回家的现象 。 我根本不能理解妇 女 辞 职 回家的现象 。 字词 缺失 我河边散步的时候 。 我在河边散步的时候 。 搭配 不当 还 有 其 他 的 人 也 受 被害 。 还有其他的人也受伤害 。 字词 乱序 世界上每天由于饥饿 很 多人死亡 。 世界上每天很多人 由 于 饥 饿死亡 。",
+        "segment_type": "Table",
+        "ocr": [
+          {
+            "bbox": {
+              "left": 6.0958405,
+              "top": 7.106268,
+              "width": 53.579624,
+              "height": 55.677963
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 58.466015,
+              "top": 7.106268,
+              "width": 205.90923,
+              "height": 55.677963
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 262.05875,
+              "top": 7.106268,
+              "width": 214.16272,
+              "height": 55.677963
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.0958405,
+              "top": 61.948708,
+              "width": 53.579624,
+              "height": 62.011185
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 58.466015,
+              "top": 61.948708,
+              "width": 205.90923,
+              "height": 62.011185
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 262.05875,
+              "top": 61.948708,
+              "width": 214.16272,
+              "height": 62.011185
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.0958405,
+              "top": 122.44774,
+              "width": 53.579624,
+              "height": 54.164383
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 58.466015,
+              "top": 122.44774,
+              "width": 205.90923,
+              "height": 54.164383
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 262.05875,
+              "top": 122.44774,
+              "width": 214.16272,
+              "height": 54.164383
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.0958405,
+              "top": 176.83185,
+              "width": 53.579624,
+              "height": 53.659393
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 58.466015,
+              "top": 176.83185,
+              "width": 205.90923,
+              "height": 53.659393
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 262.05875,
+              "top": 176.83185,
+              "width": 214.16272,
+              "height": 53.659393
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 6.0958405,
+              "top": 230.60944,
+              "width": 53.579624,
+              "height": 53.918976
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 58.466015,
+              "top": 230.60944,
+              "width": 205.90923,
+              "height": 53.918976
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 262.05875,
+              "top": 230.60944,
+              "width": 214.16272,
+              "height": 53.918976
+            },
+            "text": "",
+            "confidence": null
+          }
+        ],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/7802de5c-8d1b-4a6c-866a-47eb6537d7b9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=ba6ee865be0714518f7cee85dc680a728918bcc12b004d60216e0efd2d5e835e",
+        "html": "<table><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'></td></tr></table>",
+        "markdown": "|| | | || | | || | | || | | || | | |\n"
+      },
+      {
+        "segment_id": "e395dc0b-cf80-4480-a0de-15e961789067",
+        "bbox": {
+          "left": 634.5833,
+          "top": 497.0833,
+          "width": 493.3333,
+          "height": 197.5
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "语义错误 语义错误是指一些语言错误在字词 层面和语法搭配上 不 存 在 问 题 , 而 是 在 语 义 层 面 上 的搭配有误 [21] , 如表 3 所示 。 由于语义错误的处理 需要模型理解上下 文 的 语 义 信 息 , 因 而 对 模 型 提 出 了较高的要求 , 其校 对 难 度 要 高 于 拼 写 错 误 校 对 和 语法错误校对 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/e395dc0b-cf80-4480-a0de-15e961789067.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=e45ad47435a8ff0b6ec420fcfb20c8ec9147d3ab12fec72e5e1494b305b1ce5e",
+        "html": "<p>语义错误 语义错误是指一些语言错误在字词 层面和语法搭配上 不 存 在 问 题 , 而 是 在 语 义 层 面 上 的搭配有误 [21] , 如表 3 所示 。 由于语义错误的处理 需要模型理解上下 文 的 语 义 信 息 , 因 而 对 模 型 提 出 了较高的要求 , 其校 对 难 度 要 高 于 拼 写 错 误 校 对 和 语法错误校对 。</p>",
+        "markdown": "语义错误 语义错误是指一些语言错误在字词 层面和语法搭配上 不 存 在 问 题 , 而 是 在 语 义 层 面 上 的搭配有误 [21] , 如表 3 所示 。 由于语义错误的处理 需要模型理解上下 文 的 语 义 信 息 , 因 而 对 模 型 提 出 了较高的要求 , 其校 对 难 度 要 高 于 拼 写 错 误 校 对 和 语法错误校对 。\n\n"
+      },
+      {
+        "segment_id": "a4c2488c-a2e2-4e6a-ad9a-ca2200282961",
+        "bbox": {
+          "left": 776.25,
+          "top": 703.3333,
+          "width": 218.33333,
+          "height": 28.75
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "表 3 常见语义错误举例",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a4c2488c-a2e2-4e6a-ad9a-ca2200282961.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c7afb1053af84d11533d53d04221ba228b1a644dd97de613b7803b9c972c1120",
+        "html": "<span class=\"caption\">表 3 常见语义错误举例</span>",
+        "markdown": "表 3 常见语义错误举例\n\n"
+      },
+      {
+        "segment_id": "35cc8d47-a89d-4cd9-b77d-a20bc1b3f398",
+        "bbox": {
+          "left": 632.5,
+          "top": 728.3333,
+          "width": 497.49997,
+          "height": 149.58333
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "错误类型 错误 正确 知识错误 中国的首都是南京 中国的首都是北京 搭配错误 他戴着帽子和皮靴 就 出门了 他戴着帽子穿着 皮 靴 就 出门了",
+        "segment_type": "Table",
+        "ocr": [
+          {
+            "bbox": {
+              "left": 8.787769,
+              "top": 13.954242,
+              "width": 91.4686,
+              "height": 33.553196
+            },
+            "text": "错误类型",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 100.01922,
+              "top": 13.954242,
+              "width": 182.14807,
+              "height": 33.553196
+            },
+            "text": "错误",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 117.93121,
+              "top": 13.954242,
+              "width": 382.47916,
+              "height": 33.553196
+            },
+            "text": "正确",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 8.787769,
+              "top": 48.144947,
+              "width": 91.4686,
+              "height": 38.291256
+            },
+            "text": "知识错误",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 100.01922,
+              "top": 48.144947,
+              "width": 182.14807,
+              "height": 38.291256
+            },
+            "text": "中国的首都是南京",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 117.93121,
+              "top": 48.144947,
+              "width": 382.47916,
+              "height": 38.291256
+            },
+            "text": "中国的首都是北京",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 8.787769,
+              "top": 88.21983,
+              "width": 91.4686,
+              "height": 49.306885
+            },
+            "text": "搭配错误",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 100.01922,
+              "top": 88.21983,
+              "width": 182.14807,
+              "height": 49.306885
+            },
+            "text": "他戴着帽子和皮靴就 出门了",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 117.93121,
+              "top": 88.21983,
+              "width": 382.47916,
+              "height": 49.306885
+            },
+            "text": "他戴着帽子穿着皮靴就 出门了",
+            "confidence": null
+          }
+        ],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/35cc8d47-a89d-4cd9-b77d-a20bc1b3f398.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=e7271e74304e8173950dfdad6347d886c3896afd27d423682975d1221972083d",
+        "html": "<table><tr><td colspan='1' rowspan='1'>错误类型</td><td colspan='1' rowspan='1'>错误</td><td colspan='1' rowspan='1'>正确</td></tr><tr><td colspan='1' rowspan='1'>知识错误</td><td colspan='1' rowspan='1'>中国的首都是南京</td><td colspan='1' rowspan='1'>中国的首都是北京</td></tr><tr><td colspan='1' rowspan='1'>搭配错误</td><td colspan='1' rowspan='1'>他戴着帽子和皮靴就 出门了</td><td colspan='1' rowspan='1'>他戴着帽子穿着皮靴就 出门了</td></tr></table>",
+        "markdown": "||错误类型 |错误 |正确 ||知识错误 |中国的首都是南京 |中国的首都是北京 ||搭配错误 |他戴着帽子和皮靴就 出门了 |他戴着帽子穿着皮靴就 出门了 |\n"
+      },
+      {
+        "segment_id": "7b26aa4f-5c6a-4a04-92de-2ce6b71ec600",
+        "bbox": {
+          "left": 634.5833,
+          "top": 892.9166,
+          "width": 497.49997,
+          "height": 66.25
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "下文中将分别 对 拼 写 错 误 、 语 法 错 误 和 语 义 错 误的自动校对方法进行总结与分析 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/7b26aa4f-5c6a-4a04-92de-2ce6b71ec600.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b6a9e155ae81d114557548daf4dcfc3789ff76527f183b3bdc86e255e03f9d42",
+        "html": "<p>下文中将分别 对 拼 写 错 误 、 语 法 错 误 和 语 义 错 误的自动校对方法进行总结与分析 。</p>",
+        "markdown": "下文中将分别 对 拼 写 错 误 、 语 法 错 误 和 语 义 错 误的自动校对方法进行总结与分析 。\n\n"
+      }
+    ],
+    "chunk_length": 345
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "f09f6a25-82b9-4e2c-a12b-7fa7dfd23508",
+        "bbox": {
+          "left": 634.5833,
+          "top": 990.8333,
+          "width": 312.0833,
+          "height": 35.0
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "2 中文文本自动校对方法",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/f09f6a25-82b9-4e2c-a12b-7fa7dfd23508.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=10fe330dc7ce8a576b446aa57ee389dcb15c17d34c5ca9975052746b4107756c",
+        "html": "<h2>2 中文文本自动校对方法</h2>",
+        "markdown": "## 2 中文文本自动校对方法\n\n"
+      },
+      {
+        "segment_id": "3eefc79e-3a9a-49b7-bd36-f8f66f7759f8",
+        "bbox": {
+          "left": 632.5,
+          "top": 1057.5,
+          "width": 245.41666,
+          "height": 30.833332
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "2. 1 拼写错误校对方法",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/3eefc79e-3a9a-49b7-bd36-f8f66f7759f8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=ffa8b8ab0b9391955a5791ba48107a1367f32b892a9865aaf9ab77aeec559c84",
+        "html": "<h2>2. 1 拼写错误校对方法</h2>",
+        "markdown": "## 2. 1 拼写错误校对方法\n\n"
+      },
+      {
+        "segment_id": "44515e8a-1595-4961-81a0-79a372545954",
+        "bbox": {
+          "left": 630.4166,
+          "top": 1103.3333,
+          "width": 497.49997,
+          "height": 364.16666
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "中文 文 本 拼 写 校 对 流 程 大 致 可 以 分 为 以 下 三 步 :① 错 误 识 别 : 判 断 文 本 是 否 存 在 拼 写 错 误 , 并 标记出错误位置 ;② 生成纠正候选 : 利用混淆字符 或通过模型生成字符等方法构建错误字符的纠正候 选 ;③ 评估纠正候选 : 利用某种评分函数或分类器 等 , 结合局部乃至全局特征对纠正候选排序 , 排序最 高的纠正候选作 为 最 终 校 对 结 果 。 事 实 上 , 大 部 分 校对方法的流程都 可 以 划 分 为 上 述 三 步 , 不 过 也 有 部分方法 , 如基于深度模型端到端的校对方法 , 将错 误识别阶段省略 , 但本质上也属于此流程 。 2. 1. 1 基于规则和统计语言模型结合的校对方法",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/44515e8a-1595-4961-81a0-79a372545954.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=05b692802b130c1f51ce4f7cd0d028d9315b8d290338140cd098aaea953a2282",
+        "html": "<p>中文 文 本 拼 写 校 对 流 程 大 致 可 以 分 为 以 下 三 步 :① 错 误 识 别 : 判 断 文 本 是 否 存 在 拼 写 错 误 , 并 标记出错误位置 ;② 生成纠正候选 : 利用混淆字符 或通过模型生成字符等方法构建错误字符的纠正候 选 ;③ 评估纠正候选 : 利用某种评分函数或分类器 等 , 结合局部乃至全局特征对纠正候选排序 , 排序最 高的纠正候选作 为 最 终 校 对 结 果 。 事 实 上 , 大 部 分 校对方法的流程都 可 以 划 分 为 上 述 三 步 , 不 过 也 有 部分方法 , 如基于深度模型端到端的校对方法 , 将错 误识别阶段省略 , 但本质上也属于此流程 。 2. 1. 1 基于规则和统计语言模型结合的校对方法</p>",
+        "markdown": "中文 文 本 拼 写 校 对 流 程 大 致 可 以 分 为 以 下 三 步 :① 错 误 识 别 : 判 断 文 本 是 否 存 在 拼 写 错 误 , 并 标记出错误位置 ;② 生成纠正候选 : 利用混淆字符 或通过模型生成字符等方法构建错误字符的纠正候 选 ;③ 评估纠正候选 : 利用某种评分函数或分类器 等 , 结合局部乃至全局特征对纠正候选排序 , 排序最 高的纠正候选作 为 最 终 校 对 结 果 。 事 实 上 , 大 部 分 校对方法的流程都 可 以 划 分 为 上 述 三 步 , 不 过 也 有 部分方法 , 如基于深度模型端到端的校对方法 , 将错 误识别阶段省略 , 但本质上也属于此流程 。 2. 1. 1 基于规则和统计语言模型结合的校对方法\n\n"
+      },
+      {
+        "segment_id": "00cba359-956a-4667-8a57-bbcc49765ffa",
+        "bbox": {
+          "left": 634.5833,
+          "top": 1465.8333,
+          "width": 495.41666,
+          "height": 130.83333
+        },
+        "page_number": 2,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "中文拼写错误校对早期采用的主要是规则和统 计语言 模 型 (StatisticalLanguage Model,SLM) 相 结合的校对方法 , 该 类 方 法 使 用 规 则 和 统 计 语 言 模 型进行检错 , 在生成 候 选 阶 段 利 用 混 淆 字 符 或 通 过",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/00cba359-956a-4667-8a57-bbcc49765ffa.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=a66f78f6463696a75d6727f26574f145f0bbed01eb07f69fff67d5badb50364d",
+        "html": "<p>中文拼写错误校对早期采用的主要是规则和统 计语言 模 型 (StatisticalLanguage Model,SLM) 相 结合的校对方法 , 该 类 方 法 使 用 规 则 和 统 计 语 言 模 型进行检错 , 在生成 候 选 阶 段 利 用 混 淆 字 符 或 通 过</p>",
+        "markdown": "中文拼写错误校对早期采用的主要是规则和统 计语言 模 型 (StatisticalLanguage Model,SLM) 相 结合的校对方法 , 该 类 方 法 使 用 规 则 和 统 计 语 言 模 型进行检错 , 在生成 候 选 阶 段 利 用 混 淆 字 符 或 通 过\n\n"
+      },
+      {
+        "segment_id": "84617dac-274d-46e2-9ceb-ce1e8b1bbfbf",
+        "bbox": {
+          "left": 111.666664,
+          "top": 155.41666,
+          "width": 489.16666,
+          "height": 95.416664
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "模型生成字符的方 式 得 到 纠 正 候 选 字 符 , 最 后 通 过 统计语言模型进行纠正候选的评估 , 其中 , 校对规则 主要使用 了 混 淆 字 符 集 、 基 于 分 词 的 查 错 规 则 和",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/84617dac-274d-46e2-9ceb-ce1e8b1bbfbf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3cd554525a8ef063bd079d04d77ca04807ea8b4f7c18e32c6b0d4611e8a0b589",
+        "html": "<p>模型生成字符的方 式 得 到 纠 正 候 选 字 符 , 最 后 通 过 统计语言模型进行纠正候选的评估 , 其中 , 校对规则 主要使用 了 混 淆 字 符 集 、 基 于 分 词 的 查 错 规 则 和</p>",
+        "markdown": "模型生成字符的方 式 得 到 纠 正 候 选 字 符 , 最 后 通 过 统计语言模型进行纠正候选的评估 , 其中 , 校对规则 主要使用 了 混 淆 字 符 集 、 基 于 分 词 的 查 错 规 则 和\n\n"
+      },
+      {
+        "segment_id": "df0dc0d9-5af7-4b3b-a6c4-d5758accc214",
+        "bbox": {
+          "left": 634.5833,
+          "top": 155.41666,
+          "width": 497.49997,
+          "height": 99.58333
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "校对词典等 , 统 计 语 言 模 型 主 要 使 用 了 N 元 语 法 ( N -gram)、 条 件 随 机 场 (Conditional Random Fields,CRF) 等 , 如表 4 所示 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/df0dc0d9-5af7-4b3b-a6c4-d5758accc214.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=7b7047ca82502fefa464da4df77916808e99cf0b32ddf04fce76c2641cbef519",
+        "html": "<p>校对词典等 , 统 计 语 言 模 型 主 要 使 用 了 N 元 语 法 ( N -gram)、 条 件 随 机 场 (Conditional Random Fields,CRF) 等 , 如表 4 所示 。</p>",
+        "markdown": "校对词典等 , 统 计 语 言 模 型 主 要 使 用 了 N 元 语 法 ( N -gram)、 条 件 随 机 场 (Conditional Random Fields,CRF) 等 , 如表 4 所示 。\n\n"
+      },
+      {
+        "segment_id": "921ed7f2-9d68-4eab-bc53-4a6a8a3305d9",
+        "bbox": {
+          "left": 453.3333,
+          "top": 272.0833,
+          "width": 335.0,
+          "height": 28.75
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "表 4 基于规则和统计的拼写校对方法",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/921ed7f2-9d68-4eab-bc53-4a6a8a3305d9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8b3bd2d3e8bdb62aaff85e53c82fcdbc372e9ca5aca0fc4ce66774607b432ff1",
+        "html": "<span class=\"caption\">表 4 基于规则和统计的拼写校对方法</span>",
+        "markdown": "表 4 基于规则和统计的拼写校对方法\n\n"
+      },
+      {
+        "segment_id": "1951c0aa-b331-4648-b154-712c5aedc66c",
+        "bbox": {
+          "left": 111.666664,
+          "top": 299.16666,
+          "width": 1018.3333,
+          "height": 826.6666
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "引用 语言 规则 统计模型 [22],1995 繁体 混淆字符集 Bi-gram [23],1998 简体 最长匹配分词 Tri-gram [24],2001 简体 — 互信息 [25],2002 混淆字符集 , 最小编辑距离 Tri-gram, 贝叶斯分类器 [26],2006 简体 非多字词错误查错规则 互信息 [27],2012 繁体 形似字符集 Bi-gram, 线性回归 [28],2013 繁体 混淆字符集 Bi-gram, 线性回归 [29],2013 繁体 混淆字符集 ,E-HowNet N -gram [30],2013 繁体 混淆字符集 , 混淆字符替换规则 N -gram [31],2013 繁体 混淆字符集 , 校对词典 Tri-gram,CRF [32],2013 繁体 混淆字符集 N -gram [33],2013 繁体 — 最大熵 [34],2013 繁体 混淆字符集 , 词典 SMT, N -gram,SVM [35],2013 繁体 校对词典 , 检错规则 SMT, N -gram [36],2014 繁体 混淆字符集 Tri-gram [37],2014 繁体 混淆字符集 噪声信道模型 , N -gram [38],2014 繁体 校对规则 图模型 ,CRF [39],2014 繁体 校对词典 , 编辑距离 , 最长匹配分词 HMM, N -gram,SVM [40],2015 繁体 混淆字符集 CRF, N -gram [41],2015 繁体 — N -gram [42],2016 简体 模式匹配 , 中文串相似度计算 N -gram [43],2017 繁体 模式匹配 ,E-HowNet, 混淆字符集 N -gram",
+        "segment_type": "Table",
+        "ocr": [
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 9.436704,
+              "width": 31.860687,
+              "height": 30.915138
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 9.436704,
+              "width": 166.174,
+              "height": 30.915138
+            },
+            "text": "引用",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 9.436704,
+              "width": 121.91986,
+              "height": 30.915138
+            },
+            "text": "语言",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 9.436704,
+              "width": 364.88235,
+              "height": 30.915138
+            },
+            "text": "规则",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 9.436704,
+              "width": 292.84064,
+              "height": 30.915138
+            },
+            "text": "统计模型",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 9.436704,
+              "width": 37.618713,
+              "height": 30.915138
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 40.688896,
+              "width": 31.860687,
+              "height": 35.12113
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 40.688896,
+              "width": 166.174,
+              "height": 35.12113
+            },
+            "text": "[22],1995",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 40.688896,
+              "width": 121.91986,
+              "height": 35.12113
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 40.688896,
+              "width": 364.88235,
+              "height": 35.12113
+            },
+            "text": "混淆字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 40.688896,
+              "width": 292.84064,
+              "height": 35.12113
+            },
+            "text": "Bi-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 40.688896,
+              "width": 37.618713,
+              "height": 35.12113
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 75.70959,
+              "width": 31.860687,
+              "height": 35.364517
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 75.70959,
+              "width": 166.174,
+              "height": 35.364517
+            },
+            "text": "[23],1998",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 75.70959,
+              "width": 121.91986,
+              "height": 35.364517
+            },
+            "text": "简体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 75.70959,
+              "width": 364.88235,
+              "height": 35.364517
+            },
+            "text": "最长匹配分词",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 75.70959,
+              "width": 292.84064,
+              "height": 35.364517
+            },
+            "text": "Tri-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 75.70959,
+              "width": 37.618713,
+              "height": 35.364517
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 110.97315,
+              "width": 31.860687,
+              "height": 35.1426
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 110.97315,
+              "width": 166.174,
+              "height": 35.1426
+            },
+            "text": "[24],2001",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 110.97315,
+              "width": 121.91986,
+              "height": 35.1426
+            },
+            "text": "简体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 110.97315,
+              "width": 364.88235,
+              "height": 35.1426
+            },
+            "text": "1",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 110.97315,
+              "width": 292.84064,
+              "height": 35.1426
+            },
+            "text": "互信息",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 110.97315,
+              "width": 37.618713,
+              "height": 35.1426
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 146.07425,
+              "width": 31.860687,
+              "height": 35.27841
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 146.07425,
+              "width": 166.174,
+              "height": 35.27841
+            },
+            "text": "[25],2002",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 146.07425,
+              "width": 121.91986,
+              "height": 35.27841
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 146.07425,
+              "width": 364.88235,
+              "height": 35.27841
+            },
+            "text": "混淆字符集，最小编辑距离",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 146.07425,
+              "width": 292.84064,
+              "height": 35.27841
+            },
+            "text": "Tri-gram，贝叶斯分类器",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 146.07425,
+              "width": 37.618713,
+              "height": 35.27841
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 181.2894,
+              "width": 31.860687,
+              "height": 35.30484
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 181.2894,
+              "width": 166.174,
+              "height": 35.30484
+            },
+            "text": "[26],2006",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 181.2894,
+              "width": 121.91986,
+              "height": 35.30484
+            },
+            "text": "简体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 181.2894,
+              "width": 364.88235,
+              "height": 35.30484
+            },
+            "text": "非多字词错误查错规则",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 181.2894,
+              "width": 292.84064,
+              "height": 35.30484
+            },
+            "text": "互信息",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 181.2894,
+              "width": 37.618713,
+              "height": 35.30484
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 216.58508,
+              "width": 31.860687,
+              "height": 34.70598
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 216.58508,
+              "width": 166.174,
+              "height": 34.70598
+            },
+            "text": "[27],2012",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 216.58508,
+              "width": 121.91986,
+              "height": 34.70598
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 216.58508,
+              "width": 364.88235,
+              "height": 34.70598
+            },
+            "text": "形似字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 216.58508,
+              "width": 292.84064,
+              "height": 34.70598
+            },
+            "text": "Bi-gram，线性回归",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 216.58508,
+              "width": 37.618713,
+              "height": 34.70598
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.493935,
+              "top": 283.90143,
+              "width": 28.60086,
+              "height": 69.98047
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 251.47191,
+              "width": 166.174,
+              "height": 35.524887
+            },
+            "text": "[28],2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 251.47191,
+              "width": 121.91986,
+              "height": 35.524887
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 251.47191,
+              "width": 364.88235,
+              "height": 35.524887
+            },
+            "text": "混淆字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 251.47191,
+              "width": 292.84064,
+              "height": 35.524887
+            },
+            "text": "Bi-gram，线性回归",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 251.47191,
+              "width": 37.618713,
+              "height": 35.524887
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.493935,
+              "top": 283.90143,
+              "width": 28.60086,
+              "height": 69.98047
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 287.30984,
+              "width": 166.174,
+              "height": 35.531708
+            },
+            "text": "[29],2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 287.30984,
+              "width": 121.91986,
+              "height": 35.531708
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 287.30984,
+              "width": 364.88235,
+              "height": 35.531708
+            },
+            "text": "混淆字符集，E-HowNet",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 287.30984,
+              "width": 292.84064,
+              "height": 35.531708
+            },
+            "text": "N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 287.30984,
+              "width": 37.618713,
+              "height": 35.531708
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.493935,
+              "top": 283.90143,
+              "width": 28.60086,
+              "height": 69.98047
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 323.24466,
+              "width": 166.174,
+              "height": 34.526367
+            },
+            "text": "[30],2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 323.24466,
+              "width": 121.91986,
+              "height": 34.526367
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 323.24466,
+              "width": 364.88235,
+              "height": 34.526367
+            },
+            "text": "混淆字符集，混淆字符替换规则",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 323.24466,
+              "width": 292.84064,
+              "height": 34.526367
+            },
+            "text": "N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 323.24466,
+              "width": 37.618713,
+              "height": 34.526367
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.5429444,
+              "top": 349.25534,
+              "width": 28.924963,
+              "height": 78.531586
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 357.66357,
+              "width": 166.174,
+              "height": 35.04901
+            },
+            "text": "[31].2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 357.66357,
+              "width": 121.91986,
+              "height": 35.04901
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 357.66357,
+              "width": 364.88235,
+              "height": 35.04901
+            },
+            "text": "混淆字符集，校对词典",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 357.66357,
+              "width": 292.84064,
+              "height": 35.04901
+            },
+            "text": "Tri-gram,CRF",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 357.66357,
+              "width": 37.618713,
+              "height": 35.04901
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.5429444,
+              "top": 349.25534,
+              "width": 28.924963,
+              "height": 78.531586
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 394.54044,
+              "width": 166.174,
+              "height": 34.250885
+            },
+            "text": "[32],2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 394.54044,
+              "width": 121.91986,
+              "height": 34.250885
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 394.54044,
+              "width": 364.88235,
+              "height": 34.250885
+            },
+            "text": "混淆字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 394.54044,
+              "width": 292.84064,
+              "height": 34.250885
+            },
+            "text": "N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 394.54044,
+              "width": 37.618713,
+              "height": 34.250885
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 428.5201,
+              "width": 31.860687,
+              "height": 35.017273
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 428.5201,
+              "width": 166.174,
+              "height": 35.017273
+            },
+            "text": "[33],2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 428.5201,
+              "width": 121.91986,
+              "height": 35.017273
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 428.5201,
+              "width": 364.88235,
+              "height": 35.017273
+            },
+            "text": "-",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 428.5201,
+              "width": 292.84064,
+              "height": 35.017273
+            },
+            "text": "最大熵",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 428.5201,
+              "width": 37.618713,
+              "height": 35.017273
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 465.30457,
+              "width": 31.860687,
+              "height": 35.700745
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 465.30457,
+              "width": 166.174,
+              "height": 35.700745
+            },
+            "text": "[34],2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 465.30457,
+              "width": 121.91986,
+              "height": 35.700745
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 465.30457,
+              "width": 364.88235,
+              "height": 35.700745
+            },
+            "text": "混淆字符集，词典",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 465.30457,
+              "width": 292.84064,
+              "height": 35.700745
+            },
+            "text": "SMT,N-gram.SVM",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 465.30457,
+              "width": 37.618713,
+              "height": 35.700745
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 501.16754,
+              "width": 31.860687,
+              "height": 35.098206
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 501.16754,
+              "width": 166.174,
+              "height": 35.098206
+            },
+            "text": "[35],2013",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 501.16754,
+              "width": 121.91986,
+              "height": 35.098206
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 501.16754,
+              "width": 364.88235,
+              "height": 35.098206
+            },
+            "text": "校对词典·检错规则",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 501.16754,
+              "width": 292.84064,
+              "height": 35.098206
+            },
+            "text": "SMT,N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 501.16754,
+              "width": 37.618713,
+              "height": 35.098206
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 536.1758,
+              "width": 31.860687,
+              "height": 35.45685
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 536.1758,
+              "width": 166.174,
+              "height": 35.45685
+            },
+            "text": "[36],2014",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 536.1758,
+              "width": 121.91986,
+              "height": 35.45685
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 536.1758,
+              "width": 364.88235,
+              "height": 35.45685
+            },
+            "text": "混淆字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 536.1758,
+              "width": 292.84064,
+              "height": 35.45685
+            },
+            "text": "Tri-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 536.1758,
+              "width": 37.618713,
+              "height": 35.45685
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 571.54706,
+              "width": 31.860687,
+              "height": 34.680054
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 571.54706,
+              "width": 166.174,
+              "height": 34.680054
+            },
+            "text": "[37],2014",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 571.54706,
+              "width": 121.91986,
+              "height": 34.680054
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 571.54706,
+              "width": 364.88235,
+              "height": 34.680054
+            },
+            "text": "混淆字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 571.54706,
+              "width": 292.84064,
+              "height": 34.680054
+            },
+            "text": "噪声信道模型，N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 571.54706,
+              "width": 37.618713,
+              "height": 34.680054
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 606.35223,
+              "width": 31.860687,
+              "height": 34.89331
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 606.35223,
+              "width": 166.174,
+              "height": 34.89331
+            },
+            "text": "[38],2014",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 606.35223,
+              "width": 121.91986,
+              "height": 34.89331
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 606.35223,
+              "width": 364.88235,
+              "height": 34.89331
+            },
+            "text": "校对规则",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 606.35223,
+              "width": 292.84064,
+              "height": 34.89331
+            },
+            "text": "图模型，CRF",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 606.35223,
+              "width": 37.618713,
+              "height": 34.89331
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 641.087,
+              "width": 31.860687,
+              "height": 34.875
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 641.087,
+              "width": 166.174,
+              "height": 34.875
+            },
+            "text": "[39],2014",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 641.087,
+              "width": 121.91986,
+              "height": 34.875
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 641.087,
+              "width": 364.88235,
+              "height": 34.875
+            },
+            "text": "校对词典，编辑距离，最长匹配分词",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 641.087,
+              "width": 292.84064,
+              "height": 34.875
+            },
+            "text": "HMM,N-gram,SVM",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 641.087,
+              "width": 37.618713,
+              "height": 34.875
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.569211,
+              "top": 675.84436,
+              "width": 31.860687,
+              "height": 34.979492
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 33.704742,
+              "top": 675.84436,
+              "width": 166.174,
+              "height": 34.979492
+            },
+            "text": "[40],2015",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 675.84436,
+              "width": 121.91986,
+              "height": 34.979492
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 675.84436,
+              "width": 364.88235,
+              "height": 34.979492
+            },
+            "text": "混淆字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 675.84436,
+              "width": 292.84064,
+              "height": 34.979492
+            },
+            "text": "CRF,N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 675.84436,
+              "width": 37.618713,
+              "height": 34.979492
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.193636,
+              "top": 728.8169,
+              "width": 30.955442,
+              "height": 82.75714
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.193636,
+              "top": 728.8169,
+              "width": 30.955442,
+              "height": 82.75714
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 711.05237,
+              "width": 121.91986,
+              "height": 35.846313
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 711.05237,
+              "width": 364.88235,
+              "height": 35.846313
+            },
+            "text": "-",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 711.05237,
+              "width": 292.84064,
+              "height": 35.846313
+            },
+            "text": "N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 711.05237,
+              "width": 37.618713,
+              "height": 35.846313
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.193636,
+              "top": 728.8169,
+              "width": 30.955442,
+              "height": 82.75714
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.193636,
+              "top": 728.8169,
+              "width": 30.955442,
+              "height": 82.75714
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 747.2096,
+              "width": 121.91986,
+              "height": 34.936096
+            },
+            "text": "简体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 747.2096,
+              "width": 364.88235,
+              "height": 34.936096
+            },
+            "text": "模式匹配，中文串相似度计算",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 747.2096,
+              "width": 292.84064,
+              "height": 34.936096
+            },
+            "text": "N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 747.2096,
+              "width": 37.618713,
+              "height": 34.936096
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.193636,
+              "top": 728.8169,
+              "width": 30.955442,
+              "height": 82.75714
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 5.193636,
+              "top": 728.8169,
+              "width": 30.955442,
+              "height": 82.75714
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 200.17905,
+              "top": 782.2832,
+              "width": 121.91986,
+              "height": 28.51239
+            },
+            "text": "繁体",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 321.6212,
+              "top": 782.2832,
+              "width": 364.88235,
+              "height": 28.51239
+            },
+            "text": "模式匹配，E-HowNet，混淆字符集",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 687.23303,
+              "top": 782.2832,
+              "width": 292.84064,
+              "height": 28.51239
+            },
+            "text": "N-gram",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 979.1915,
+              "top": 782.2832,
+              "width": 37.618713,
+              "height": 28.51239
+            },
+            "text": "",
+            "confidence": null
+          }
+        ],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/1951c0aa-b331-4648-b154-712c5aedc66c.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1de4c9f1e1a55230885c93aa6ebdd920329722b5273847ad491c79d6348de945",
+        "html": "<table><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>引用</td><td colspan='1' rowspan='1'>语言</td><td colspan='1' rowspan='1'>规则</td><td colspan='1' rowspan='1'>统计模型</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[22],1995</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集</td><td colspan='1' rowspan='1'>Bi-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[23],1998</td><td colspan='1' rowspan='1'>简体</td><td colspan='1' rowspan='1'>最长匹配分词</td><td colspan='1' rowspan='1'>Tri-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[24],2001</td><td colspan='1' rowspan='1'>简体</td><td colspan='1' rowspan='1'>1</td><td colspan='1' rowspan='1'>互信息</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[25],2002</td><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>混淆字符集，最小编辑距离</td><td colspan='1' rowspan='1'>Tri-gram，贝叶斯分类器</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[26],2006</td><td colspan='1' rowspan='1'>简体</td><td colspan='1' rowspan='1'>非多字词错误查错规则</td><td colspan='1' rowspan='1'>互信息</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[27],2012</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>形似字符集</td><td colspan='1' rowspan='1'>Bi-gram，线性回归</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>[28],2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集</td><td colspan='1' rowspan='1'>Bi-gram，线性回归</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>[29],2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集，E-HowNet</td><td colspan='1' rowspan='1'>N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>[30],2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集，混淆字符替换规则</td><td colspan='1' rowspan='1'>N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>[31].2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集，校对词典</td><td colspan='1' rowspan='1'>Tri-gram,CRF</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>[32],2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集</td><td colspan='1' rowspan='1'>N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[33],2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>-</td><td colspan='1' rowspan='1'>最大熵</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[34],2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集，词典</td><td colspan='1' rowspan='1'>SMT,N-gram.SVM</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[35],2013</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>校对词典·检错规则</td><td colspan='1' rowspan='1'>SMT,N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[36],2014</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集</td><td colspan='1' rowspan='1'>Tri-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[37],2014</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集</td><td colspan='1' rowspan='1'>噪声信道模型，N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[38],2014</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>校对规则</td><td colspan='1' rowspan='1'>图模型，CRF</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[39],2014</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>校对词典，编辑距离，最长匹配分词</td><td colspan='1' rowspan='1'>HMM,N-gram,SVM</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='1' rowspan='1'></td><td colspan='1' rowspan='1'>[40],2015</td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>混淆字符集</td><td colspan='1' rowspan='1'>CRF,N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>-</td><td colspan='1' rowspan='1'>N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>简体</td><td colspan='1' rowspan='1'>模式匹配，中文串相似度计算</td><td colspan='1' rowspan='1'>N-gram</td><td colspan='1' rowspan='1'></td></tr><tr><td colspan='0' rowspan='0'></td><td colspan='0' rowspan='0'></td><td colspan='1' rowspan='1'>繁体</td><td colspan='1' rowspan='1'>模式匹配，E-HowNet，混淆字符集</td><td colspan='1' rowspan='1'>N-gram</td><td colspan='1' rowspan='1'></td></tr></table>",
+        "markdown": "|| |引用 |语言 |规则 |统计模型 | || |[22],1995 |繁体 |混淆字符集 |Bi-gram | || |[23],1998 |简体 |最长匹配分词 |Tri-gram | || |[24],2001 |简体 |1 |互信息 | || |[25],2002 | |混淆字符集，最小编辑距离 |Tri-gram，贝叶斯分类器 | || |[26],2006 |简体 |非多字词错误查错规则 |互信息 | || |[27],2012 |繁体 |形似字符集 |Bi-gram，线性回归 | || |[28],2013 |繁体 |混淆字符集 |Bi-gram，线性回归 | || |[29],2013 |繁体 |混淆字符集，E-HowNet |N-gram | || |[30],2013 |繁体 |混淆字符集，混淆字符替换规则 |N-gram | || |[31].2013 |繁体 |混淆字符集，校对词典 |Tri-gram,CRF | || |[32],2013 |繁体 |混淆字符集 |N-gram | || |[33],2013 |繁体 |- |最大熵 | || |[34],2013 |繁体 |混淆字符集，词典 |SMT,N-gram.SVM | || |[35],2013 |繁体 |校对词典·检错规则 |SMT,N-gram | || |[36],2014 |繁体 |混淆字符集 |Tri-gram | || |[37],2014 |繁体 |混淆字符集 |噪声信道模型，N-gram | || |[38],2014 |繁体 |校对规则 |图模型，CRF | || |[39],2014 |繁体 |校对词典，编辑距离，最长匹配分词 |HMM,N-gram,SVM | || |[40],2015 |繁体 |混淆字符集 |CRF,N-gram | || | |繁体 |- |N-gram | || | |简体 |模式匹配，中文串相似度计算 |N-gram | || | |繁体 |模式匹配，E-HowNet，混淆字符集 |N-gram | |\n"
+      },
+      {
+        "segment_id": "6109eb35-2c3a-485a-98e9-571c391e51e4",
+        "bbox": {
+          "left": 111.666664,
+          "top": 1138.75,
+          "width": 495.41666,
+          "height": 66.25
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "对于规则和统计相结合的校对方法的研究 , 通常 是改进校对流程的不同阶段的方法 , 可大致分为三类 :",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/6109eb35-2c3a-485a-98e9-571c391e51e4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=af331b3fa33c899cc834c63f4403d71d619d8f70572e8ddd82fb2464e3ed435e",
+        "html": "<p>对于规则和统计相结合的校对方法的研究 , 通常 是改进校对流程的不同阶段的方法 , 可大致分为三类 :</p>",
+        "markdown": "对于规则和统计相结合的校对方法的研究 , 通常 是改进校对流程的不同阶段的方法 , 可大致分为三类 :\n\n"
+      },
+      {
+        "segment_id": "a4fa6f2a-189e-4de1-991e-67500056921e",
+        "bbox": {
+          "left": 113.74999,
+          "top": 1203.3333,
+          "width": 489.16666,
+          "height": 393.3333
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "错误识别阶段 基于统计语言模型的检错 。 基 于统计语言模型的检错方法通常都需要先对原句进 行分词 , 然后通过统 计 语 言 模 型 与 词 性 标 注 序 列 等 相结合的方式进行 检 错 , 其 中 统 计 语 言 模 型 主 要 用 到 N -gram 等 , 如于勐等人 [23] 提出一种混合校对系 统 HMCTC(HybridMethodforChineseTextCol- lation), 采用最长 匹 配 分 词 结 合 词 典 的 方 式 将 原 句 分词 , 然后以 Tri-gram 为基础结合语法属性标注进 行检错 , 将相邻词共 现 频 率 低 于 阈 值 和 语 法 序 列 标 注不合理的地方标记为错误 ; 张仰森等人 [24] 提出了 一种基于互信息的 字 词 接 续 判 断 模 型 , 通 过 判 断 相 邻字和相邻词的接续性进行检错 。 早期基于统计语",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a4fa6f2a-189e-4de1-991e-67500056921e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bc617a6ddd984367cb5f9ca5009d769fb4af935d1286512b9968beaa85a25c00",
+        "html": "<p>错误识别阶段 基于统计语言模型的检错 。 基 于统计语言模型的检错方法通常都需要先对原句进 行分词 , 然后通过统 计 语 言 模 型 与 词 性 标 注 序 列 等 相结合的方式进行 检 错 , 其 中 统 计 语 言 模 型 主 要 用 到 N -gram 等 , 如于勐等人 [23] 提出一种混合校对系 统 HMCTC(HybridMethodforChineseTextCol- lation), 采用最长 匹 配 分 词 结 合 词 典 的 方 式 将 原 句 分词 , 然后以 Tri-gram 为基础结合语法属性标注进 行检错 , 将相邻词共 现 频 率 低 于 阈 值 和 语 法 序 列 标 注不合理的地方标记为错误 ; 张仰森等人 [24] 提出了 一种基于互信息的 字 词 接 续 判 断 模 型 , 通 过 判 断 相 邻字和相邻词的接续性进行检错 。 早期基于统计语</p>",
+        "markdown": "错误识别阶段 基于统计语言模型的检错 。 基 于统计语言模型的检错方法通常都需要先对原句进 行分词 , 然后通过统 计 语 言 模 型 与 词 性 标 注 序 列 等 相结合的方式进行 检 错 , 其 中 统 计 语 言 模 型 主 要 用 到 N -gram 等 , 如于勐等人 [23] 提出一种混合校对系 统 HMCTC(HybridMethodforChineseTextCol- lation), 采用最长 匹 配 分 词 结 合 词 典 的 方 式 将 原 句 分词 , 然后以 Tri-gram 为基础结合语法属性标注进 行检错 , 将相邻词共 现 频 率 低 于 阈 值 和 语 法 序 列 标 注不合理的地方标记为错误 ; 张仰森等人 [24] 提出了 一种基于互信息的 字 词 接 续 判 断 模 型 , 通 过 判 断 相 邻字和相邻词的接续性进行检错 。 早期基于统计语\n\n"
+      }
+    ],
+    "chunk_length": 462
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "9c41a283-468e-436b-8193-f5cf46f4abb5",
+        "bbox": {
+          "left": 636.6666,
+          "top": 1138.75,
+          "width": 491.24997,
+          "height": 457.91666
+        },
+        "page_number": 3,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "言模型的检错方法 通 常 都 需 要 构 建 庞 大 的 字 字 、 词 词同现频率库 , 这带来了严重的数据稀疏问题 , 造成 这个问题的原因除 了 统 计 模 型 本 身 的 缺 陷 外 , 还 因 为早期的 检 错 方 法 没 有 深 度 地 分 析 中 文 分 词 的 特 点 。 张仰森等人 [26] 通过分析中文文本的特点指出 , 中文文本大多由二 字 以 上 的 词 构 成 , 分 词 后 出 现 的 连续单字词一般不 超 过 5 个 , 且 出 现 的 单 字 词 多 是 助词 、 介词等 , 而含有拼写错误的文本分词后会出现 连续的不合理的单字散串 , 并由此提出了 “ 非多字词 错误 ”, 在检错时主要针对分词后出现的连续单字词 进行判断 , 字字同现 库 通 过 正 确 文 本 中 的 连 续 单 字 词同现频率进行构建 , 减小了同现频率库的规模 , 缓 解了数据稀疏问 题 ;Xie 等 人 [41] 对 文 本 中 长 度 等 于 2 和 大 于 2 的 连 续 单 字 词 分 别 使 用 Bi-gram 和",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/9c41a283-468e-436b-8193-f5cf46f4abb5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=05fd95901c73e04bc3b1ce21f4ec0c4849f5f1374df3198fb3aa53f6341d8443",
+        "html": "<p>言模型的检错方法 通 常 都 需 要 构 建 庞 大 的 字 字 、 词 词同现频率库 , 这带来了严重的数据稀疏问题 , 造成 这个问题的原因除 了 统 计 模 型 本 身 的 缺 陷 外 , 还 因 为早期的 检 错 方 法 没 有 深 度 地 分 析 中 文 分 词 的 特 点 。 张仰森等人 [26] 通过分析中文文本的特点指出 , 中文文本大多由二 字 以 上 的 词 构 成 , 分 词 后 出 现 的 连续单字词一般不 超 过 5 个 , 且 出 现 的 单 字 词 多 是 助词 、 介词等 , 而含有拼写错误的文本分词后会出现 连续的不合理的单字散串 , 并由此提出了 “ 非多字词 错误 ”, 在检错时主要针对分词后出现的连续单字词 进行判断 , 字字同现 库 通 过 正 确 文 本 中 的 连 续 单 字 词同现频率进行构建 , 减小了同现频率库的规模 , 缓 解了数据稀疏问 题 ;Xie 等 人 [41] 对 文 本 中 长 度 等 于 2 和 大 于 2 的 连 续 单 字 词 分 别 使 用 Bi-gram 和</p>",
+        "markdown": "言模型的检错方法 通 常 都 需 要 构 建 庞 大 的 字 字 、 词 词同现频率库 , 这带来了严重的数据稀疏问题 , 造成 这个问题的原因除 了 统 计 模 型 本 身 的 缺 陷 外 , 还 因 为早期的 检 错 方 法 没 有 深 度 地 分 析 中 文 分 词 的 特 点 。 张仰森等人 [26] 通过分析中文文本的特点指出 , 中文文本大多由二 字 以 上 的 词 构 成 , 分 词 后 出 现 的 连续单字词一般不 超 过 5 个 , 且 出 现 的 单 字 词 多 是 助词 、 介词等 , 而含有拼写错误的文本分词后会出现 连续的不合理的单字散串 , 并由此提出了 “ 非多字词 错误 ”, 在检错时主要针对分词后出现的连续单字词 进行判断 , 字字同现 库 通 过 正 确 文 本 中 的 连 续 单 字 词同现频率进行构建 , 减小了同现频率库的规模 , 缓 解了数据稀疏问 题 ;Xie 等 人 [41] 对 文 本 中 长 度 等 于 2 和 大 于 2 的 连 续 单 字 词 分 别 使 用 Bi-gram 和\n\n"
+      },
+      {
+        "segment_id": "a5736b1a-70ff-4ee6-bf05-29f62b449c67",
+        "bbox": {
+          "left": 111.666664,
+          "top": 155.41666,
+          "width": 491.24997,
+          "height": 237.08333
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "索 , 这些模型参数多 、 规模大 、 计算速度慢 , 难以满足 搜索引擎搜索和语音交互等实时场景 。 如何在效果 损失较小的情况下缩小模型规模 、 缩短迭代周期 、 加 快预 测 速 度 是 一 个 重 要 的 研 究 方 向 , 如 Sanh 等 人 [105] 提 出 了 LTD-BERT 模 型 (LearningtoDistill BERT) 对 BERT 进行了模型压缩 , 在效果损失很小 的基础上 , 降低了存储和运算开销 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a5736b1a-70ff-4ee6-bf05-29f62b449c67.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0984fa22f4fa64dd130af8f31caf4056249b142ffb11259d44e326c461c65b00",
+        "html": "<p>索 , 这些模型参数多 、 规模大 、 计算速度慢 , 难以满足 搜索引擎搜索和语音交互等实时场景 。 如何在效果 损失较小的情况下缩小模型规模 、 缩短迭代周期 、 加 快预 测 速 度 是 一 个 重 要 的 研 究 方 向 , 如 Sanh 等 人 [105] 提 出 了 LTD-BERT 模 型 (LearningtoDistill BERT) 对 BERT 进行了模型压缩 , 在效果损失很小 的基础上 , 降低了存储和运算开销 。</p>",
+        "markdown": "索 , 这些模型参数多 、 规模大 、 计算速度慢 , 难以满足 搜索引擎搜索和语音交互等实时场景 。 如何在效果 损失较小的情况下缩小模型规模 、 缩短迭代周期 、 加 快预 测 速 度 是 一 个 重 要 的 研 究 方 向 , 如 Sanh 等 人 [105] 提 出 了 LTD-BERT 模 型 (LearningtoDistill BERT) 对 BERT 进行了模型压缩 , 在效果损失很小 的基础上 , 降低了存储和运算开销 。\n\n"
+      },
+      {
+        "segment_id": "f5153492-71c3-4ce6-ae35-518d55f86e00",
+        "bbox": {
+          "left": 111.666664,
+          "top": 395.0,
+          "width": 489.16666,
+          "height": 339.16666
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "(3) 现有的文本自动校对研究主要面向通用领 域 , 随着无纸化办公的普及 , 针对不同领域具体场景 下的文本校对需求 迫 在 眉 睫 , 将 受 到 越 来 越 多 研 究 人员的关注 。 具体应用场景下的文本校对通常需要 在传统校对的基础 上 进 行 更 加 有 针 对 性 的 建 模 , 以 公文领域为 例 , 张 仰 森 等 人 [106] 指 出 政 治 新 闻 领 域 存在的文本错误除常见的拼写 、 语法错误以外 , 还有 领导人顺序错误和领导人姓名 - 职务对应错误等 , 针 对政治新闻等领域 的 文 本 校 对 , 需 要 分 析 领 域 错 误 特点 , 单独构建领域词典 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/f5153492-71c3-4ce6-ae35-518d55f86e00.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=080f296eac63fc575412c3a4d7a519de77909861d7a46b1bd48b3876b49ee701",
+        "html": "<p>(3) 现有的文本自动校对研究主要面向通用领 域 , 随着无纸化办公的普及 , 针对不同领域具体场景 下的文本校对需求 迫 在 眉 睫 , 将 受 到 越 来 越 多 研 究 人员的关注 。 具体应用场景下的文本校对通常需要 在传统校对的基础 上 进 行 更 加 有 针 对 性 的 建 模 , 以 公文领域为 例 , 张 仰 森 等 人 [106] 指 出 政 治 新 闻 领 域 存在的文本错误除常见的拼写 、 语法错误以外 , 还有 领导人顺序错误和领导人姓名 - 职务对应错误等 , 针 对政治新闻等领域 的 文 本 校 对 , 需 要 分 析 领 域 错 误 特点 , 单独构建领域词典 。</p>",
+        "markdown": "(3) 现有的文本自动校对研究主要面向通用领 域 , 随着无纸化办公的普及 , 针对不同领域具体场景 下的文本校对需求 迫 在 眉 睫 , 将 受 到 越 来 越 多 研 究 人员的关注 。 具体应用场景下的文本校对通常需要 在传统校对的基础 上 进 行 更 加 有 针 对 性 的 建 模 , 以 公文领域为 例 , 张 仰 森 等 人 [106] 指 出 政 治 新 闻 领 域 存在的文本错误除常见的拼写 、 语法错误以外 , 还有 领导人顺序错误和领导人姓名 - 职务对应错误等 , 针 对政治新闻等领域 的 文 本 校 对 , 需 要 分 析 领 域 错 误 特点 , 单独构建领域词典 。\n\n"
+      },
+      {
+        "segment_id": "76f5864f-c0eb-47f2-a9e8-d80b341f7744",
+        "bbox": {
+          "left": 111.666664,
+          "top": 738.75,
+          "width": 489.16666,
+          "height": 478.74997
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "(4) 现阶段中文文本语法错误校对方法主要还 是基于 Seq2Seq 的 NMT 方 法 , 通 常 生 成 模 型 需 要 大规模的平行语料 进 行 训 练 , 而 语 法 纠 错 相 关 的 语 料则比较匮乏 , 因此 如 何 自 动 构 建 大 量 中 文 语 法 校 对训练语料将受到更多学者的关注 。 目前针对语法 校对训练数据不足 的 问 题 , 部 分 英 文 语 法 校 对 的 研 究者提出通过构造 伪 数 据 的 方 法 来 增 加 训 练 数 据 , 如 Ge 等人 [107] 将 正 确 语 句 输 入 Seq2Seq, 将 错 误 语 句作为 输 出 , 训 练 得 到 一 个 错 误 语 句 生 成 模 型 ; Lichtarge 等人 [108] 使用翻译系统将英文翻译成一种 中间语言 , 如日语 、 法 语 等 , 再 将 中 间 语 言 翻 译 回 英 文 , 生成的英语语义和原始英语语句基本保持不变 , 但是往往会存在一些语法错误 。 中文语法校对也可 以参考上述办法构造大规模平行语料 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/76f5864f-c0eb-47f2-a9e8-d80b341f7744.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=905a08f87574971bea6ee0f2985ee46dc77096ee6bb2ef627e361960c6be22a0",
+        "html": "<p>(4) 现阶段中文文本语法错误校对方法主要还 是基于 Seq2Seq 的 NMT 方 法 , 通 常 生 成 模 型 需 要 大规模的平行语料 进 行 训 练 , 而 语 法 纠 错 相 关 的 语 料则比较匮乏 , 因此 如 何 自 动 构 建 大 量 中 文 语 法 校 对训练语料将受到更多学者的关注 。 目前针对语法 校对训练数据不足 的 问 题 , 部 分 英 文 语 法 校 对 的 研 究者提出通过构造 伪 数 据 的 方 法 来 增 加 训 练 数 据 , 如 Ge 等人 [107] 将 正 确 语 句 输 入 Seq2Seq, 将 错 误 语 句作为 输 出 , 训 练 得 到 一 个 错 误 语 句 生 成 模 型 ; Lichtarge 等人 [108] 使用翻译系统将英文翻译成一种 中间语言 , 如日语 、 法 语 等 , 再 将 中 间 语 言 翻 译 回 英 文 , 生成的英语语义和原始英语语句基本保持不变 , 但是往往会存在一些语法错误 。 中文语法校对也可 以参考上述办法构造大规模平行语料 。</p>",
+        "markdown": "(4) 现阶段中文文本语法错误校对方法主要还 是基于 Seq2Seq 的 NMT 方 法 , 通 常 生 成 模 型 需 要 大规模的平行语料 进 行 训 练 , 而 语 法 纠 错 相 关 的 语 料则比较匮乏 , 因此 如 何 自 动 构 建 大 量 中 文 语 法 校 对训练语料将受到更多学者的关注 。 目前针对语法 校对训练数据不足 的 问 题 , 部 分 英 文 语 法 校 对 的 研 究者提出通过构造 伪 数 据 的 方 法 来 增 加 训 练 数 据 , 如 Ge 等人 [107] 将 正 确 语 句 输 入 Seq2Seq, 将 错 误 语 句作为 输 出 , 训 练 得 到 一 个 错 误 语 句 生 成 模 型 ; Lichtarge 等人 [108] 使用翻译系统将英文翻译成一种 中间语言 , 如日语 、 法 语 等 , 再 将 中 间 语 言 翻 译 回 英 文 , 生成的英语语义和原始英语语句基本保持不变 , 但是往往会存在一些语法错误 。 中文语法校对也可 以参考上述办法构造大规模平行语料 。\n\n"
+      }
+    ],
+    "chunk_length": 441
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "64e0b8a2-9709-4a1c-9c64-3b72bedae259",
+        "bbox": {
+          "left": 113.74999,
+          "top": 1220.0,
+          "width": 487.0833,
+          "height": 272.5
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "(5) 语义问题的研究一直是 NLP 研究中的薄弱 环节 , 也是中 文 文 本 校 对 的 难 点 [95] , 已 有 的 语 义 错 误校对方法主要是 基 于 规 则 、 知 识 库 和 语 义 推 理 的 方法 [21,96,98] 。 基于规则 、 知 识 库 等 的 校 对 方 法 需 要 人工建立规则 , 整理领域词典 , 不适用于大规模的语 义错误校对 , 随着深度学习的不断发展 , 如何通过深 度学习的 方 法 解 决 语 义 错 误 会 持 续 受 到 学 者 们 的 关注 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/64e0b8a2-9709-4a1c-9c64-3b72bedae259.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=98f0587fbfa00f903764bafd5d196afa407d5c7f14c84c4ca12a4eebffb1ed83",
+        "html": "<p>(5) 语义问题的研究一直是 NLP 研究中的薄弱 环节 , 也是中 文 文 本 校 对 的 难 点 [95] , 已 有 的 语 义 错 误校对方法主要是 基 于 规 则 、 知 识 库 和 语 义 推 理 的 方法 [21,96,98] 。 基于规则 、 知 识 库 等 的 校 对 方 法 需 要 人工建立规则 , 整理领域词典 , 不适用于大规模的语 义错误校对 , 随着深度学习的不断发展 , 如何通过深 度学习的 方 法 解 决 语 义 错 误 会 持 续 受 到 学 者 们 的 关注 。</p>",
+        "markdown": "(5) 语义问题的研究一直是 NLP 研究中的薄弱 环节 , 也是中 文 文 本 校 对 的 难 点 [95] , 已 有 的 语 义 错 误校对方法主要是 基 于 规 则 、 知 识 库 和 语 义 推 理 的 方法 [21,96,98] 。 基于规则 、 知 识 库 等 的 校 对 方 法 需 要 人工建立规则 , 整理领域词典 , 不适用于大规模的语 义错误校对 , 随着深度学习的不断发展 , 如何通过深 度学习的 方 法 解 决 语 义 错 误 会 持 续 受 到 学 者 们 的 关注 。\n\n"
+      },
+      {
+        "segment_id": "a7f1fe5c-23da-4d8d-a868-cfb19fe6459c",
+        "bbox": {
+          "left": 113.74999,
+          "top": 1497.0833,
+          "width": 489.16666,
+          "height": 99.58333
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "中文文本自动校对作为自然语言处理领域一个 重要研究方向 , 一 直 以 来 受 到 相 当 广 泛 的 关 注 。 本 文主要阐述了中文文本拼写错误和语法错误的校对",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a7f1fe5c-23da-4d8d-a868-cfb19fe6459c.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=ae74462021b959b1349cb773b90fb53afdf420af48bdd65becb046bec51adce4",
+        "html": "<p>中文文本自动校对作为自然语言处理领域一个 重要研究方向 , 一 直 以 来 受 到 相 当 广 泛 的 关 注 。 本 文主要阐述了中文文本拼写错误和语法错误的校对</p>",
+        "markdown": "中文文本自动校对作为自然语言处理领域一个 重要研究方向 , 一 直 以 来 受 到 相 当 广 泛 的 关 注 。 本 文主要阐述了中文文本拼写错误和语法错误的校对\n\n"
+      },
+      {
+        "segment_id": "ec10d8d7-91d1-46c2-8ea9-79922b5824f1",
+        "bbox": {
+          "left": 636.6666,
+          "top": 155.41666,
+          "width": 497.49997,
+          "height": 66.25
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "方法 , 整理了相关共享任务数据集 , 并对未来的研究 方向进行了分析和展望 。",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/ec10d8d7-91d1-46c2-8ea9-79922b5824f1.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=ec2ca26d2d7d8a773ae4ee4f578878c43cbfcf4884753a0bf8b4af973303c25c",
+        "html": "<p>方法 , 整理了相关共享任务数据集 , 并对未来的研究 方向进行了分析和展望 。</p>",
+        "markdown": "方法 , 整理了相关共享任务数据集 , 并对未来的研究 方向进行了分析和展望 。\n\n"
+      }
+    ],
+    "chunk_length": 110
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "89c67c55-9b95-4cdd-9a85-c0e70aeeff05",
+        "bbox": {
+          "left": 632.5,
+          "top": 255.41666,
+          "width": 118.33333,
+          "height": 32.916664
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "参考文献",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/89c67c55-9b95-4cdd-9a85-c0e70aeeff05.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3a93bca1127a5f3489ce92dd0262d132f26b1f3d8619863d0f7e751adef28d3e",
+        "html": "<h2>参考文献</h2>",
+        "markdown": "## 参考文献\n\n"
+      },
+      {
+        "segment_id": "fdcc71a2-e3b1-4ff3-913a-01e782d04d09",
+        "bbox": {
+          "left": 634.5833,
+          "top": 322.0833,
+          "width": 495.41666,
+          "height": 57.916664
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[1] 徐连诚 , 石磊 . 自 动 文 字 校 对 动 态 规 划 算 法 的 设 计 与 实现 [J]. 计算机科学 ,2002,29(9):149-150.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/fdcc71a2-e3b1-4ff3-913a-01e782d04d09.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c31ef16442ad6abf78af9915d403256728d30c9d3bbb62aef565a7e19c02ca97",
+        "html": "<ul><li>[1] 徐连诚 , 石磊 . 自 动 文 字 校 对 动 态 规 划 算 法 的 设 计 与 实现 [J]. 计算机科学 ,2002,29(9):149-150.</li></ul>",
+        "markdown": "- [1] 徐连诚 , 石磊 . 自 动 文 字 校 对 动 态 规 划 算 法 的 设 计 与 实现 [J]. 计算机科学 ,2002,29(9):149-150.\n\n"
+      },
+      {
+        "segment_id": "d882dcfd-55a8-4746-b25e-3d34521c0ac5",
+        "bbox": {
+          "left": 634.5833,
+          "top": 376.25,
+          "width": 495.41666,
+          "height": 89.166664
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[2] 龚小谨 , 罗 振 声 , 骆 卫 华 . 中 文 文 本 自 动 校 对 中 的 语 法错误 检 查 [J]. 计 算 机 工 程 与 应 用 ,2003,39(8): 98-100.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/d882dcfd-55a8-4746-b25e-3d34521c0ac5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=fe87e7b9cefc74940a973cd2a7b1c5920185bf04eec8c8f45808e626ba1c93a8",
+        "html": "<ul><li>[2] 龚小谨 , 罗 振 声 , 骆 卫 华 . 中 文 文 本 自 动 校 对 中 的 语 法错误 检 查 [J]. 计 算 机 工 程 与 应 用 ,2003,39(8): 98-100.</li></ul>",
+        "markdown": "- [2] 龚小谨 , 罗 振 声 , 骆 卫 华 . 中 文 文 本 自 动 校 对 中 的 语 法错误 检 查 [J]. 计 算 机 工 程 与 应 用 ,2003,39(8): 98-100.\n\n"
+      },
+      {
+        "segment_id": "d3063a03-8799-42b7-84c3-80026736027b",
+        "bbox": {
+          "left": 634.5833,
+          "top": 463.74997,
+          "width": 495.41666,
+          "height": 170.41666
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[3] ChoK,VanMerrienboerB,GulcehreC,etal.Learn- ingphraserepresentationsusingRNNencoder-decoder forstatisticalmachinetranslation[C]//Proceedingsof theConferenceonEmpiricalMethodsinNaturalLan- guageProcessing.Stroudsburg,PA,USA:Associa- tionforComputationalLinguistics,2014:1724-1734.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/d3063a03-8799-42b7-84c3-80026736027b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=92a47c882aad332bda4acb3d70072afa54f4d27b4f1537e68c496c02c200701f",
+        "html": "<ul><li>[3] ChoK,VanMerrienboerB,GulcehreC,etal.Learn- ingphraserepresentationsusingRNNencoder-decoder forstatisticalmachinetranslation[C]//Proceedingsof theConferenceonEmpiricalMethodsinNaturalLan- guageProcessing.Stroudsburg,PA,USA:Associa- tionforComputationalLinguistics,2014:1724-1734.</li></ul>",
+        "markdown": "- [3] ChoK,VanMerrienboerB,GulcehreC,etal.Learn- ingphraserepresentationsusingRNNencoder-decoder forstatisticalmachinetranslation[C]//Proceedingsof theConferenceonEmpiricalMethodsinNaturalLan- guageProcessing.Stroudsburg,PA,USA:Associa- tionforComputationalLinguistics,2014:1724-1734.\n\n"
+      },
+      {
+        "segment_id": "4281d19f-8a20-45a3-955c-64a9571f2495",
+        "bbox": {
+          "left": 634.5833,
+          "top": 632.5,
+          "width": 497.49997,
+          "height": 143.33333
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[4] SutskeverI,VinyalsO,LeQV.Sequencetosequence learningwithneuralnetworks[C]//Proceddingsofthe 27thInternationalConferenceon NeuralInformation ProcessingSystems.Cambridge,USA:MIT Press, 2014:3104-3112.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/4281d19f-8a20-45a3-955c-64a9571f2495.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b231774c46cec18c0fe94883aa3f3b19dfd766e53fa7b00ced29da06aa6bbf9d",
+        "html": "<ul><li>[4] SutskeverI,VinyalsO,LeQV.Sequencetosequence learningwithneuralnetworks[C]//Proceddingsofthe 27thInternationalConferenceon NeuralInformation ProcessingSystems.Cambridge,USA:MIT Press, 2014:3104-3112.</li></ul>",
+        "markdown": "- [4] SutskeverI,VinyalsO,LeQV.Sequencetosequence learningwithneuralnetworks[C]//Proceddingsofthe 27thInternationalConferenceon NeuralInformation ProcessingSystems.Cambridge,USA:MIT Press, 2014:3104-3112.\n\n"
+      },
+      {
+        "segment_id": "9783194d-f1e2-44f8-8824-590485bd78b3",
+        "bbox": {
+          "left": 636.6666,
+          "top": 774.1666,
+          "width": 495.41666,
+          "height": 172.5
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[5] BahdanauD,ChoK,BengioY.Neuralmachinetrans- lationbyjointlylearningtoalignandtranslate[C]// Proceedingsof3rdInternationalConferenceonLearn- ingRepresentations.SanDiego,UnitedStates:Inter- national Conference on Learning Representations, 2015:940-1000.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/9783194d-f1e2-44f8-8824-590485bd78b3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=dbccc96118a2df58c758748df7c05d02b32e28f1322615a16aaccda0e9b476b2",
+        "html": "<ul><li>[5] BahdanauD,ChoK,BengioY.Neuralmachinetrans- lationbyjointlylearningtoalignandtranslate[C]// Proceedingsof3rdInternationalConferenceonLearn- ingRepresentations.SanDiego,UnitedStates:Inter- national Conference on Learning Representations, 2015:940-1000.</li></ul>",
+        "markdown": "- [5] BahdanauD,ChoK,BengioY.Neuralmachinetrans- lationbyjointlylearningtoalignandtranslate[C]// Proceedingsof3rdInternationalConferenceonLearn- ingRepresentations.SanDiego,UnitedStates:Inter- national Conference on Learning Representations, 2015:940-1000.\n\n"
+      },
+      {
+        "segment_id": "a0717335-61e6-4b0d-8b5e-179051a7e525",
+        "bbox": {
+          "left": 636.6666,
+          "top": 942.9166,
+          "width": 495.41666,
+          "height": 172.5
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[6] LuongT,Pham H,ManningCD.Effectiveapproa- ches to attention-based neural machine translation [C]//Proceedings ofthe Conference on Empirical Methodsin Natural Language Processing.Strouds- burg,PA,USA:AssociationforComputationalLin- guistics,2015:1412-1421.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/a0717335-61e6-4b0d-8b5e-179051a7e525.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8308b51300dc8d49add4b63315778bf019da56647ce00315243d8a227e017e5d",
+        "html": "<ul><li>[6] LuongT,Pham H,ManningCD.Effectiveapproa- ches to attention-based neural machine translation [C]//Proceedings ofthe Conference on Empirical Methodsin Natural Language Processing.Strouds- burg,PA,USA:AssociationforComputationalLin- guistics,2015:1412-1421.</li></ul>",
+        "markdown": "- [6] LuongT,Pham H,ManningCD.Effectiveapproa- ches to attention-based neural machine translation [C]//Proceedings ofthe Conference on Empirical Methodsin Natural Language Processing.Strouds- burg,PA,USA:AssociationforComputationalLin- guistics,2015:1412-1421.\n\n"
+      },
+      {
+        "segment_id": "641c4053-400d-4db4-bad6-8ed171fa9e91",
+        "bbox": {
+          "left": 636.6666,
+          "top": 1113.75,
+          "width": 495.41666,
+          "height": 116.24999
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[7] GehringJ,AuliM,GrangierD,etal.Convolutional sequencetosequencelearning[C]//Proceedingsofthe 34thInternationalConferenceon Machine Learning. UnitedStates:JMLR,2017:2029-2042.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/641c4053-400d-4db4-bad6-8ed171fa9e91.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=09f00ec1e50b2f8c3a60e36a2fe59ab4815bf680a68803d4d7f3adab9290e2af",
+        "html": "<ul><li>[7] GehringJ,AuliM,GrangierD,etal.Convolutional sequencetosequencelearning[C]//Proceedingsofthe 34thInternationalConferenceon Machine Learning. UnitedStates:JMLR,2017:2029-2042.</li></ul>",
+        "markdown": "- [7] GehringJ,AuliM,GrangierD,etal.Convolutional sequencetosequencelearning[C]//Proceedingsofthe 34thInternationalConferenceon Machine Learning. UnitedStates:JMLR,2017:2029-2042.\n\n"
+      },
+      {
+        "segment_id": "faeeab01-94fc-46cd-ae48-b50615a8fc15",
+        "bbox": {
+          "left": 636.6666,
+          "top": 1226.25,
+          "width": 497.49997,
+          "height": 141.25
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[8] VaswaniA,ShazeerN,ParmarN,etal.Attentionis allyouneed[C]//Proceedingsofthe31stInternational ConferenceonNeuralInformationProcessingSystems. RedHook,NY,USA:CurranAssociatesInc,2017: 6000-6010.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/faeeab01-94fc-46cd-ae48-b50615a8fc15.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=224b575696720b07c028f232d962463cbe41f14e85816ad99b6a49013b936980",
+        "html": "<ul><li>[8] VaswaniA,ShazeerN,ParmarN,etal.Attentionis allyouneed[C]//Proceedingsofthe31stInternational ConferenceonNeuralInformationProcessingSystems. RedHook,NY,USA:CurranAssociatesInc,2017: 6000-6010.</li></ul>",
+        "markdown": "- [8] VaswaniA,ShazeerN,ParmarN,etal.Attentionis allyouneed[C]//Proceedingsofthe31stInternational ConferenceonNeuralInformationProcessingSystems. RedHook,NY,USA:CurranAssociatesInc,2017: 6000-6010.\n\n"
+      },
+      {
+        "segment_id": "d42fe483-ef39-437a-86ce-850cd98be7dc",
+        "bbox": {
+          "left": 634.5833,
+          "top": 1365.8333,
+          "width": 495.41666,
+          "height": 60.0
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[9] 张仰森 、 丁 冰 青 . 中 文 文 本 自 动 校 对 技 术 现 状 及 展 望 [J]. 中文信息学报 ,1998(301):51-57.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/d42fe483-ef39-437a-86ce-850cd98be7dc.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d19a32804d32fbb3be4178554a65e86cae2ba804d1bb9bd55697eba339321665",
+        "html": "<ul><li>[9] 张仰森 、 丁 冰 青 . 中 文 文 本 自 动 校 对 技 术 现 状 及 展 望 [J]. 中文信息学报 ,1998(301):51-57.</li></ul>",
+        "markdown": "- [9] 张仰森 、 丁 冰 青 . 中 文 文 本 自 动 校 对 技 术 现 状 及 展 望 [J]. 中文信息学报 ,1998(301):51-57.\n\n"
+      },
+      {
+        "segment_id": "13b4c0d7-9a34-4ccf-8bd1-a3e0615a81c7",
+        "bbox": {
+          "left": 636.6666,
+          "top": 1424.1666,
+          "width": 493.3333,
+          "height": 60.0
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[10] 张仰森 , 俞士汶 . 文本自动校对技术研究综述 [J]. 计 算机应用研究 ,2006,23(6):8-12.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/13b4c0d7-9a34-4ccf-8bd1-a3e0615a81c7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=7b7432f843f87d4e6c3af458c49d1855081e144447cac0bd2aeabcc14ca81353",
+        "html": "<ul><li>[10] 张仰森 , 俞士汶 . 文本自动校对技术研究综述 [J]. 计 算机应用研究 ,2006,23(6):8-12.</li></ul>",
+        "markdown": "- [10] 张仰森 , 俞士汶 . 文本自动校对技术研究综述 [J]. 计 算机应用研究 ,2006,23(6):8-12.\n\n"
+      },
+      {
+        "segment_id": "779784ce-4b82-4bf6-8a9a-0e8dae138d51",
+        "bbox": {
+          "left": 634.5833,
+          "top": 1480.4166,
+          "width": 495.41666,
+          "height": 118.33333
+        },
+        "page_number": 4,
+        "page_width": 1240.0,
+        "page_height": 1754.0,
+        "content": "[11] LiuCL,LaiM H,TienK W,etal.Visuallyand phonologicallysimilarcharactersinincorrectChinese words[J].ACM TransactionsonAsianLanguageIn- formationProcessing,2011,10(2):1-39.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/701c200d-1b55-4655-8631-1f6ca9e863a4/images/779784ce-4b82-4bf6-8a9a-0e8dae138d51.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241023%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241023T033429Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=735965abf1d6208e2f4374cf5a23e2a3aa5329a8b3cb8c1c945a344626291e53",
+        "html": "<ul><li>[11] LiuCL,LaiM H,TienK W,etal.Visuallyand phonologicallysimilarcharactersinincorrectChinese words[J].ACM TransactionsonAsianLanguageIn- formationProcessing,2011,10(2):1-39.</li></ul>",
+        "markdown": "- [11] LiuCL,LaiM H,TienK W,etal.Visuallyand phonologicallysimilarcharactersinincorrectChinese words[J].ACM TransactionsonAsianLanguageIn- formationProcessing,2011,10(2):1-39.\n\n"
+      }
+    ],
+    "chunk_length": 164
+  }
+]

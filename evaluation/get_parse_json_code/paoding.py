@@ -1,36 +1,24 @@
 import hashlib
+import os
 import urllib.parse
 from datetime import datetime
 import requests
 import json
-import time
 
-test_dir = '/Users/lucio/code/document_parse/evaluation/documents/'
+from evaluation import EVALUATION_WORK_DIR
+from evaluation.context import EvaluationConfig
 
-output_dir = '/Users/lucio/code/document_parse/evaluation/parse_json/paoding/'
+test_dir = os.path.join(EVALUATION_WORK_DIR,'documents')
+
+output_dir =  os.path.join(EVALUATION_WORK_DIR,'parse_json', 'paoding')
 
 # 评测集文件名
 file_list = [
-    # "评测文件1-喵回QA_3页",
-    "《贝壳入职管理制度》5页",
-    "《贝壳离职管理制度V3.0》5页",
     "中文论文Demo中文文本自动校对综述_4页",
     "自制_4页",
-    "花桥学院业务核算指引_6页",
     "英文论文Demo_前3页",
     "评测文件9-博学_13页",
 ]
-
-# file_name = "《贝壳入职管理制度》5页"
-# file_name = "《贝壳离职管理制度V3.0》5页"
-# file_name = "花桥学院业务核算指引_6页"
-file_name = "英文论文Demo_前3页"
-# file_name = "中文论文Demo中文文本自动校对综述_4页"
-# file_name = "自制_4页"
-# file_name = "评测文件9-博学_13页"
-
-user = "beike"
-# token = "e1fdb2b9c57c5e03bee792493c62d6ce"
 
 
 def revise_url(url, extra_params=None, excludes=None):
@@ -85,18 +73,17 @@ def encode_url(url, app_id, secret_key, params=None, timestamp=None):
 
 
 
-def get_single_file_parse(file_name):
+def get_single_file_parse(file_name, app_id, user, token):
 
-    file_all_name = f"{test_dir}{file_name}.pdf"
+    file_all_name = f"{test_dir}/{file_name}.pdf"
 
-    uuid = upload_task(file_all_name)
+    uuid = upload_task(file_all_name, app_id, user, token)
     print(file_name)
     print(uuid)
 
     URL = f"https://saas.pdflux.com/api/v1/saas/document/{uuid}/pdftables?user={user}"  # 获取解析结果
-    # URL = f"https://saas.pdflux.com/api/v1/saas/document/{uuid}/pdftables?_timestamp=1590562575&_token=bc62219c497be230697368b87930eb33&user=beike"  # 获取解析结果
 
-    url = encode_url(URL, 'pdflux', 'hFEOLeA4jwcD')  # pdflux是appid，请勿改动
+    url = encode_url(URL, app_id, token)
     print(url)
     # 这里打好断点，用网页能访问之后，再让程序继续
 
@@ -105,12 +92,12 @@ def get_single_file_parse(file_name):
 
     data = response.json()
     # 将结果写入到一个JSON文件中
-    with open(f"{output_dir}{file_name}.json", 'w') as json_file:
+    with open(f"{output_dir}/{file_name}.json", 'w') as json_file:
         json.dump(data, json_file, indent=4, ensure_ascii=False)
 
 
-def upload_task(file_all_name):
-    url = get_token()
+def upload_task(file_all_name, app_id, user, token):
+    url = get_token(app_id, user, token)
     print("upload_task url:" + url)
         # 打开文件并发送POST请求
     with open(file_all_name, 'rb') as file:
@@ -123,16 +110,22 @@ def upload_task(file_all_name):
     return uuid
 
 
-def get_token():
+def get_token(app_id, user, token):
     URL = f"https://saas.pdflux.com/api/v1/saas/upload?user={user}&force_update=true"  # 获取Token
-    url = encode_url(URL, 'pdflux', 'hFEOLeA4jwcD')  # pdflux是appid，请勿改动
+    url = encode_url(URL, app_id, token)
     return url
 
 
 if __name__ == '__main__':
+    config = EvaluationConfig.from_ini()
+
+    # 从配置中获取Paoding的配置
+    if not config.paodingConfig:
+        print("未找到Paoding配置，请检查配置文件")
+        exit(1)
 
     for file_name in file_list:
         print(file_name)
-        get_single_file_parse(file_name)
+        get_single_file_parse(file_name, config.paodingConfig.app_id, config.paodingConfig.user, config.paodingConfig.secret_key)
 
 

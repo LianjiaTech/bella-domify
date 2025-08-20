@@ -3,25 +3,27 @@
 #
 #    Copyright (C) 2024 Beike, Inc. All Rights Reserved.
 #
-#    @Create Author : luxu(luxu002@ke.com)
+#    @Create Author : luxu
 #    @Create Time   : 2024/12/20
 #    @Description   : 
 #
 # ===============================================================
+import os
+
 import requests
 import mimetypes
 import time
 
+from evaluation import EVALUATION_WORK_DIR
+from evaluation.context import EvaluationConfig
 
-api_key = "llx-P6vGKGpYE7Y38rQzkeWDJghY3JMLKboVZ1eDvHIrI3lhCG0X"
+test_dir = os.path.join(EVALUATION_WORK_DIR,'documents')
+output_dir =  os.path.join(EVALUATION_WORK_DIR,'parse_json', 'llamaparse')
 
-test_dir = '/Users/lucio/code/document_parse/evaluation/documents/'
-
-
-def get_result(file_name, need_save=True):
+def get_result(file_name, api_key, need_save=True):
 
     headers = {"Authorization": f"Bearer {api_key}"}
-    file_path = f"{test_dir}{file_name}.pdf"
+    file_path = f"{test_dir}/{file_name}.pdf"
     base_url = "https://api.cloud.llamaindex.ai/api/parsing"
 
     with open(file_path, "rb") as f:
@@ -86,28 +88,31 @@ def get_result(file_name, need_save=True):
 
     print(output)
     if need_save:
-        with open(f"/Users/lucio/code/document_parse/evaluation/parse_json/llamaparse/{file_name}.pdf.md", "w", encoding="utf-8") as file:
+        with open(f"{output_dir}/{file_name}.pdf.md", "w", encoding="utf-8") as file:
             file.write(output)
     return output
 
 
-def get_result_list():
+def get_result_list(api_key):
     file_list = [
-        "《贝壳入职管理制度》5页",
-        "《贝壳离职管理制度V3.0》5页",
         "中文论文Demo中文文本自动校对综述_4页",
         "自制_4页",
-        "花桥学院业务核算指引_6页",
         "英文论文Demo_前3页",
         "评测文件9-博学_13页",
     ]
 
     for file_name in file_list:
         print(file_name)
-        get_result(file_name)
+        get_result(file_name, api_key)
         time.sleep(5)
 
 
 if __name__ == "__main__":
-    # output = get_result(file_name, need_save=False)
-    get_result_list()
+    config = EvaluationConfig.from_ini()
+
+    # 从配置中获取Paoding的配置
+    if not config.llamaparseConfig:
+        print("未找到Llamaparse配置，请检查配置文件")
+        exit(1)
+
+    get_result_list(config.llamaparseConfig.api_key)

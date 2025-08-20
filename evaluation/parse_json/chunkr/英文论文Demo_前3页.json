@@ -1,0 +1,1212 @@
+[
+  {
+    "segments": [
+      {
+        "segment_id": "2b6a1379-ce46-4cb9-9331-0fb5353462b5",
+        "bbox": {
+          "left": 411.66666,
+          "top": 286.66666,
+          "width": 1664.1666,
+          "height": 484.99997
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "DocBank: A Benchmark Dataset for Document Layout Analysis Minghao Li 1 ⇤ , Yiheng Xu 2 ⇤ , Lei Cui 2 , Shaohan Huang 2 , Furu Wei 2 , Zhoujun Li 1 , Ming Zhou 2 1 Beihang University 2 Microsoft Research Asia { liminghao1630,lizj } @buaa.edu.cn { v-yixu,lecu,shaohanh,fuwei,mingzhou } @microsoft.com",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/2b6a1379-ce46-4cb9-9331-0fb5353462b5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d0e385e4b0e7ded1e68fdda1b81635b796aeda92edcbdf96f6b99d58e90343e2",
+        "html": "<p>DocBank: A Benchmark Dataset for Document Layout Analysis Minghao Li 1 ⇤ , Yiheng Xu 2 ⇤ , Lei Cui 2 , Shaohan Huang 2 , Furu Wei 2 , Zhoujun Li 1 , Ming Zhou 2 1 Beihang University 2 Microsoft Research Asia { liminghao1630,lizj } @buaa.edu.cn { v-yixu,lecu,shaohanh,fuwei,mingzhou } @microsoft.com</p>",
+        "markdown": "DocBank: A Benchmark Dataset for Document Layout Analysis Minghao Li 1 ⇤ , Yiheng Xu 2 ⇤ , Lei Cui 2 , Shaohan Huang 2 , Furu Wei 2 , Zhoujun Li 1 , Ming Zhou 2 1 Beihang University 2 Microsoft Research Asia { liminghao1630,lizj } @buaa.edu.cn { v-yixu,lecu,shaohanh,fuwei,mingzhou } @microsoft.com\n\n"
+      }
+    ],
+    "chunk_length": 52
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "d41625e4-d353-4aa5-8b9c-c5375aea7c05",
+        "bbox": {
+          "left": 1145.0,
+          "top": 861.6666,
+          "width": 197.5,
+          "height": 60.0
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Abstract",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/d41625e4-d353-4aa5-8b9c-c5375aea7c05.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8e738a1171788a9322385c57fd99cd6cef2c4c92c7324991c67c50ef243a7351",
+        "html": "<h2>Abstract</h2>",
+        "markdown": "## Abstract\n\n"
+      },
+      {
+        "segment_id": "3cf27c33-c861-4386-aea9-247ced645337",
+        "bbox": {
+          "left": 361.66666,
+          "top": 978.3333,
+          "width": 1764.1666,
+          "height": 668.3333
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Document layout analysis usually relies on computer vision models to understand documents while ignoring textual information that is vital to capture. Meanwhile, high quality labeled datasets with both visual and textual information are still insufficient. In this paper, we present DocBank , a benchmark dataset that contains 500K document pages with fine-grained token- level annotations for document layout analysis. DocBank is constructed using a simple yet effective way with weak supervision from the L A TEX documents available on the arXiv.com. With DocBank, models from different modalities can be compared fairly and multi-modal ap- proaches will be further investigated and boost the performance of document layout analysis. We build several strong baselines and manually split train/dev/test sets for evaluation. Ex- periment results show that models trained on DocBank accurately recognize the layout infor- mation for a variety of documents. The DocBank dataset is publicly available at https: //github.com/doc-analysis/DocBank .",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/3cf27c33-c861-4386-aea9-247ced645337.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8a47cca48833adbf2c1e2a4cf691a988127d369964f0348c7474fc7dfc926db4",
+        "html": "<p>Document layout analysis usually relies on computer vision models to understand documents while ignoring textual information that is vital to capture. Meanwhile, high quality labeled datasets with both visual and textual information are still insufficient. In this paper, we present DocBank , a benchmark dataset that contains 500K document pages with fine-grained token- level annotations for document layout analysis. DocBank is constructed using a simple yet effective way with weak supervision from the L A TEX documents available on the arXiv.com. With DocBank, models from different modalities can be compared fairly and multi-modal ap- proaches will be further investigated and boost the performance of document layout analysis. We build several strong baselines and manually split train/dev/test sets for evaluation. Ex- periment results show that models trained on DocBank accurately recognize the layout infor- mation for a variety of documents. The DocBank dataset is publicly available at https: //github.com/doc-analysis/DocBank .</p>",
+        "markdown": "Document layout analysis usually relies on computer vision models to understand documents while ignoring textual information that is vital to capture. Meanwhile, high quality labeled datasets with both visual and textual information are still insufficient. In this paper, we present DocBank , a benchmark dataset that contains 500K document pages with fine-grained token- level annotations for document layout analysis. DocBank is constructed using a simple yet effective way with weak supervision from the L A TEX documents available on the arXiv.com. With DocBank, models from different modalities can be compared fairly and multi-modal ap- proaches will be further investigated and boost the performance of document layout analysis. We build several strong baselines and manually split train/dev/test sets for evaluation. Ex- periment results show that models trained on DocBank accurately recognize the layout infor- mation for a variety of documents. The DocBank dataset is publicly available at https: //github.com/doc-analysis/DocBank .\n\n"
+      }
+    ],
+    "chunk_length": 150
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "f58b0c8d-cc55-4655-a6c2-464c50a914e4",
+        "bbox": {
+          "left": 295.0,
+          "top": 1703.3333,
+          "width": 355.8333,
+          "height": 60.0
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "1 Introduction",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/f58b0c8d-cc55-4655-a6c2-464c50a914e4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c56068cf424df55a108b19acb225ce0a0ea60a0f5004c3d4c173371e1fcfd861",
+        "html": "<h2>1 Introduction</h2>",
+        "markdown": "## 1 Introduction\n\n"
+      },
+      {
+        "segment_id": "fa932aec-5c2e-4045-92f2-c47145d7cb18",
+        "bbox": {
+          "left": 290.8333,
+          "top": 1799.1666,
+          "width": 1905.8333,
+          "height": 555.8333
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Document layout analysis is an important task in many document understanding applications as it can transform semi-structured information into a structured representation, meanwhile extracting key infor- mation from the documents. It is a challenging problem due to the varying layouts and formats of the documents. Existing techniques have been proposed based on conventional rule-based or machine learn- ing methods, where most of them fail to generalize well because they rely on hand crafted features that may be not robust to layout variations. Recently, the rapid development of deep learning in computer vision has significantly boosted the data-driven image-based approaches for document layout analysis. Although these approaches have been widely adopted and made significant progress, they usually lever- age visual features while neglecting textual features from the documents. Therefore, it is inevitable to explore how to leverage the visual and textual information in a unified way for document layout analysis.",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/fa932aec-5c2e-4045-92f2-c47145d7cb18.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1e1b66b76d8c7899030356553ce030650e1fb25f7621fd38b579987cc08d73f5",
+        "html": "<p>Document layout analysis is an important task in many document understanding applications as it can transform semi-structured information into a structured representation, meanwhile extracting key infor- mation from the documents. It is a challenging problem due to the varying layouts and formats of the documents. Existing techniques have been proposed based on conventional rule-based or machine learn- ing methods, where most of them fail to generalize well because they rely on hand crafted features that may be not robust to layout variations. Recently, the rapid development of deep learning in computer vision has significantly boosted the data-driven image-based approaches for document layout analysis. Although these approaches have been widely adopted and made significant progress, they usually lever- age visual features while neglecting textual features from the documents. Therefore, it is inevitable to explore how to leverage the visual and textual information in a unified way for document layout analysis.</p>",
+        "markdown": "Document layout analysis is an important task in many document understanding applications as it can transform semi-structured information into a structured representation, meanwhile extracting key infor- mation from the documents. It is a challenging problem due to the varying layouts and formats of the documents. Existing techniques have been proposed based on conventional rule-based or machine learn- ing methods, where most of them fail to generalize well because they rely on hand crafted features that may be not robust to layout variations. Recently, the rapid development of deep learning in computer vision has significantly boosted the data-driven image-based approaches for document layout analysis. Although these approaches have been widely adopted and made significant progress, they usually lever- age visual features while neglecting textual features from the documents. Therefore, it is inevitable to explore how to leverage the visual and textual information in a unified way for document layout analysis.\n\n"
+      },
+      {
+        "segment_id": "fb3a029f-7b8e-4bac-be23-9a518b1e9e14",
+        "bbox": {
+          "left": 295.0,
+          "top": 2365.8333,
+          "width": 1901.6666,
+          "height": 614.1666
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Nowadays, the state-of-the-art computer vision and NLP models are often built upon the pre-trained models (Peters et al., 2018; Radford et al., 2018; Devlin et al., 2018; Lample and Conneau, 2019; Yang et al., 2019; Dong et al., 2019; Raffel et al., 2019; Xu et al., 2019) followed by fine-tuning on specific downstream tasks, which achieves very promising results. However, pre-trained models not only require large-scale unlabeled data for self-supervised learning, but also need high quality labeled data for task-specific fine-tuning to achieve good performance. For document layout analysis tasks, there have been some image-based document layout datasets, while most of them are built for computer vision approaches and they are difficult to apply to NLP methods. In addition, image-based datasets mainly include the page images and the bounding boxes of large semantic structures, which are not fine-grained token-level annotations. Moreover, it is also time-consuming and labor-intensive to produce human- labeled and fine-grained token-level text block arrangement. Therefore, it is vital to leverage weak",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/fb3a029f-7b8e-4bac-be23-9a518b1e9e14.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=81875086a6b40bdd1738a32b7261df9b3091031f4db12108a40623997eaa92b8",
+        "html": "<p>Nowadays, the state-of-the-art computer vision and NLP models are often built upon the pre-trained models (Peters et al., 2018; Radford et al., 2018; Devlin et al., 2018; Lample and Conneau, 2019; Yang et al., 2019; Dong et al., 2019; Raffel et al., 2019; Xu et al., 2019) followed by fine-tuning on specific downstream tasks, which achieves very promising results. However, pre-trained models not only require large-scale unlabeled data for self-supervised learning, but also need high quality labeled data for task-specific fine-tuning to achieve good performance. For document layout analysis tasks, there have been some image-based document layout datasets, while most of them are built for computer vision approaches and they are difficult to apply to NLP methods. In addition, image-based datasets mainly include the page images and the bounding boxes of large semantic structures, which are not fine-grained token-level annotations. Moreover, it is also time-consuming and labor-intensive to produce human- labeled and fine-grained token-level text block arrangement. Therefore, it is vital to leverage weak</p>",
+        "markdown": "Nowadays, the state-of-the-art computer vision and NLP models are often built upon the pre-trained models (Peters et al., 2018; Radford et al., 2018; Devlin et al., 2018; Lample and Conneau, 2019; Yang et al., 2019; Dong et al., 2019; Raffel et al., 2019; Xu et al., 2019) followed by fine-tuning on specific downstream tasks, which achieves very promising results. However, pre-trained models not only require large-scale unlabeled data for self-supervised learning, but also need high quality labeled data for task-specific fine-tuning to achieve good performance. For document layout analysis tasks, there have been some image-based document layout datasets, while most of them are built for computer vision approaches and they are difficult to apply to NLP methods. In addition, image-based datasets mainly include the page images and the bounding boxes of large semantic structures, which are not fine-grained token-level annotations. Moreover, it is also time-consuming and labor-intensive to produce human- labeled and fine-grained token-level text block arrangement. Therefore, it is vital to leverage weak\n\n"
+      },
+      {
+        "segment_id": "8ddd0835-bff5-4613-a184-67ce2179b507",
+        "bbox": {
+          "left": 357.5,
+          "top": 3020.0,
+          "width": 997.49994,
+          "height": 43.333332
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "⇤ Equal contributions during internship at Microsoft Research Asia.",
+        "segment_type": "Footnote",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/8ddd0835-bff5-4613-a184-67ce2179b507.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3cb28b95b6e988ef2500af2d859df0d791aa1e47ac10c35f7ff6405dc2cdfede",
+        "html": "<span class=\"footnote\">⇤ Equal contributions during internship at Microsoft Research Asia.</span>",
+        "markdown": "⇤ Equal contributions during internship at Microsoft Research Asia.\n\n"
+      },
+      {
+        "segment_id": "12c795e3-02e7-4601-9690-b70548d88b0b",
+        "bbox": {
+          "left": 295.0,
+          "top": 3103.3333,
+          "width": 1901.6666,
+          "height": 80.83333
+        },
+        "page_number": 1,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "This work is licensed under a Creative Commons Attribution 4.0 International License. License details: http:// creativecommons.org/licenses/by/4.0/ .",
+        "segment_type": "Footnote",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/12c795e3-02e7-4601-9690-b70548d88b0b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=761cb76e3fea42425b0096bb926d5193ada41ddd71fb23417d00381cec36466e",
+        "html": "<span class=\"footnote\">This work is licensed under a Creative Commons Attribution 4.0 International License. License details: http:// creativecommons.org/licenses/by/4.0/ .</span>",
+        "markdown": "This work is licensed under a Creative Commons Attribution 4.0 International License. License details: http:// creativecommons.org/licenses/by/4.0/ .\n\n"
+      },
+      {
+        "segment_id": "b23e83d2-4467-42ed-a342-a0a44b2cc7c3",
+        "bbox": {
+          "left": 299.16666,
+          "top": 236.66666,
+          "width": 1897.4999,
+          "height": 718.3333
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "(a) (b) (c) (d)",
+        "segment_type": "Picture",
+        "ocr": [
+          {
+            "bbox": {
+              "left": 1120.0,
+              "top": 78.0,
+              "width": 235.0,
+              "height": 16.0
+            },
+            "text": "Cosmic String Detection ith Tree-Based Mechin Leng",
+            "confidence": 0.76484334
+          },
+          {
+            "bbox": {
+              "left": 1330.0,
+              "top": 102.0,
+              "width": 46.0,
+              "height": 13.0
+            },
+            "text": "noise-free",
+            "confidence": 0.8002986
+          },
+          {
+            "bbox": {
+              "left": 34.0,
+              "top": 114.0,
+              "width": 329.0,
+              "height": 20.0
+            },
+            "text": "Cosmic StringDetection with Tree-Based Machine",
+            "confidence": 0.9532072
+          },
+          {
+            "bbox": {
+              "left": 1329.0,
+              "top": 122.0,
+              "width": 49.0,
+              "height": 13.0
+            },
+            "text": "Planck-ike",
+            "confidence": 0.858628
+          },
+          {
+            "bbox": {
+              "left": 1331.0,
+              "top": 113.0,
+              "width": 41.0,
+              "height": 12.0
+            },
+            "text": "ACT-ke",
+            "confidence": 0.93619555
+          },
+          {
+            "bbox": {
+              "left": 33.0,
+              "top": 129.0,
+              "width": 65.0,
+              "height": 21.0
+            },
+            "text": "Learning",
+            "confidence": 0.9912522
+          },
+          {
+            "bbox": {
+              "left": 36.0,
+              "top": 156.0,
+              "width": 338.0,
+              "height": 24.0
+            },
+            "text": "AVafSaMFaMS.BBa",
+            "confidence": 0.6548004
+          },
+          {
+            "bbox": {
+              "left": 365.0,
+              "top": 162.0,
+              "width": 55.0,
+              "height": 13.0
+            },
+            "text": "M.Kunz",
+            "confidence": 0.9087763
+          },
+          {
+            "bbox": {
+              "left": 61.0,
+              "top": 178.0,
+              "width": 211.0,
+              "height": 14.0
+            },
+            "text": " PhmdCjA P",
+            "confidence": 0.6462442
+          },
+          {
+            "bbox": {
+              "left": 275.0,
+              "top": 180.0,
+              "width": 70.0,
+              "height": 10.0
+            },
+            "text": " G,Q",
+            "confidence": 0.6676918
+          },
+          {
+            "bbox": {
+              "left": 41.0,
+              "top": 192.0,
+              "width": 267.0,
+              "height": 16.0
+            },
+            "text": "A",
+            "confidence": 0.64901257
+          },
+          {
+            "bbox": {
+              "left": 289.0,
+              "top": 203.0,
+              "width": 44.0,
+              "height": 10.0
+            },
+            "text": "3395-5537. 7ab",
+            "confidence": 0.7429848
+          },
+          {
+            "bbox": {
+              "left": 36.0,
+              "top": 249.0,
+              "width": 53.0,
+              "height": 12.0
+            },
+            "text": "23 No 9",
+            "confidence": 0.6700874
+          },
+          {
+            "bbox": {
+              "left": 137.0,
+              "top": 272.0,
+              "width": 46.0,
+              "height": 10.0
+            },
+            "text": "ABSTRACT",
+            "confidence": 0.9554662
+          },
+          {
+            "bbox": {
+              "left": 1063.0,
+              "top": 342.0,
+              "width": 18.0,
+              "height": 7.0
+            },
+            "text": "RF",
+            "confidence": 0.6050186
+          },
+          {
+            "bbox": {
+              "left": 165.0,
+              "top": 364.0,
+              "width": 21.0,
+              "height": 7.0
+            },
+            "text": "CAIB",
+            "confidence": 0.6397642
+          },
+          {
+            "bbox": {
+              "left": 1191.0,
+              "top": 369.0,
+              "width": 35.0,
+              "height": 7.0
+            },
+            "text": "Tebok 2.S",
+            "confidence": 0.572129
+          },
+          {
+            "bbox": {
+              "left": 136.0,
+              "top": 383.0,
+              "width": 20.0,
+              "height": 10.0
+            },
+            "text": "Key",
+            "confidence": 0.9874103
+          },
+          {
+            "bbox": {
+              "left": 1090.0,
+              "top": 396.0,
+              "width": 17.0,
+              "height": 7.0
+            },
+            "text": "(GI8)",
+            "confidence": 0.57920194
+          },
+          {
+            "bbox": {
+              "left": 1122.0,
+              "top": 395.0,
+              "width": 33.0,
+              "height": 10.0
+            },
+            "text": "Gp(U)",
+            "confidence": 0.56387866
+          },
+          {
+            "bbox": {
+              "left": 1495.0,
+              "top": 392.0,
+              "width": 143.0,
+              "height": 59.0
+            },
+            "text": "私号",
+            "confidence": 0.6612686
+          },
+          {
+            "bbox": {
+              "left": 1690.0,
+              "top": 387.0,
+              "width": 143.0,
+              "height": 55.0
+            },
+            "text": "建业号",
+            "confidence": 0.5750954
+          },
+          {
+            "bbox": {
+              "left": 1079.0,
+              "top": 407.0,
+              "width": 32.0,
+              "height": 10.0
+            },
+            "text": "1310-",
+            "confidence": 0.80194914
+          },
+          {
+            "bbox": {
+              "left": 1121.0,
+              "top": 407.0,
+              "width": 34.0,
+              "height": 10.0
+            },
+            "text": "mmTE",
+            "confidence": 0.500408
+          },
+          {
+            "bbox": {
+              "left": 1215.0,
+              "top": 405.0,
+              "width": 50.0,
+              "height": 13.0
+            },
+            "text": "CMB-S+ ()",
+            "confidence": 0.7679498
+          },
+          {
+            "bbox": {
+              "left": 1276.0,
+              "top": 399.0,
+              "width": 30.0,
+              "height": 10.0
+            },
+            "text": "14×10-",
+            "confidence": 0.785937
+          },
+          {
+            "bbox": {
+              "left": 1080.0,
+              "top": 415.0,
+              "width": 28.0,
+              "height": 9.0
+            },
+            "text": "1.2×00",
+            "confidence": 0.8360598
+          },
+          {
+            "bbox": {
+              "left": 1123.0,
+              "top": 415.0,
+              "width": 28.0,
+              "height": 9.0
+            },
+            "text": "30×",
+            "confidence": 0.6603647
+          },
+          {
+            "bbox": {
+              "left": 1216.0,
+              "top": 415.0,
+              "width": 48.0,
+              "height": 9.0
+            },
+            "text": "CMB-S+-1 (T)",
+            "confidence": 0.73828274
+          },
+          {
+            "bbox": {
+              "left": 1276.0,
+              "top": 407.0,
+              "width": 31.0,
+              "height": 10.0
+            },
+            "text": "(2×107",
+            "confidence": 0.63748246
+          },
+          {
+            "bbox": {
+              "left": 1276.0,
+              "top": 415.0,
+              "width": 29.0,
+              "height": 9.0
+            },
+            "text": "1.2 ×10-7",
+            "confidence": 0.8512694
+          },
+          {
+            "bbox": {
+              "left": 1320.0,
+              "top": 407.0,
+              "width": 30.0,
+              "height": 10.0
+            },
+            "text": "1.2×107",
+            "confidence": 0.8245366
+          },
+          {
+            "bbox": {
+              "left": 42.0,
+              "top": 419.0,
+              "width": 74.0,
+              "height": 9.0
+            },
+            "text": "INTRODUCTION",
+            "confidence": 0.9874187
+          },
+          {
+            "bbox": {
+              "left": 1020.0,
+              "top": 422.0,
+              "width": 48.0,
+              "height": 10.0
+            },
+            "text": "CMB-S+-IBe ()",
+            "confidence": 0.7806682
+          },
+          {
+            "bbox": {
+              "left": 1124.0,
+              "top": 422.0,
+              "width": 26.0,
+              "height": 10.0
+            },
+            "text": "2×10-",
+            "confidence": 0.8146248
+          },
+          {
+            "bbox": {
+              "left": 1225.0,
+              "top": 421.0,
+              "width": 29.0,
+              "height": 11.0
+            },
+            "text": "ACT-1o",
+            "confidence": 0.63918525
+          },
+          {
+            "bbox": {
+              "left": 1276.0,
+              "top": 421.0,
+              "width": 25.0,
+              "height": 11.0
+            },
+            "text": "2.5×10",
+            "confidence": 0.8812222
+          },
+          {
+            "bbox": {
+              "left": 1320.0,
+              "top": 422.0,
+              "width": 28.0,
+              "height": 10.0
+            },
+            "text": "25×10",
+            "confidence": 0.7194289
+          },
+          {
+            "bbox": {
+              "left": 1321.0,
+              "top": 415.0,
+              "width": 27.0,
+              "height": 9.0
+            },
+            "text": "23×3D",
+            "confidence": 0.6057233
+          },
+          {
+            "bbox": {
+              "left": 302.0,
+              "top": 428.0,
+              "width": 24.0,
+              "height": 7.0
+            },
+            "text": "rkdetet",
+            "confidence": 0.7319008
+          },
+          {
+            "bbox": {
+              "left": 1032.0,
+              "top": 431.0,
+              "width": 22.0,
+              "height": 7.0
+            },
+            "text": "MCT-18",
+            "confidence": 0.68378454
+          },
+          {
+            "bbox": {
+              "left": 1081.0,
+              "top": 430.0,
+              "width": 25.0,
+              "height": 10.0
+            },
+            "text": ".2×10",
+            "confidence": 0.57977724
+          },
+          {
+            "bbox": {
+              "left": 1223.0,
+              "top": 427.0,
+              "width": 33.0,
+              "height": 14.0
+            },
+            "text": "Plack-he",
+            "confidence": 0.603582
+          },
+          {
+            "bbox": {
+              "left": 233.0,
+              "top": 442.0,
+              "width": 31.0,
+              "height": 13.0
+            },
+            "text": "d μe",
+            "confidence": 0.51408446
+          },
+          {
+            "bbox": {
+              "left": 1260.0,
+              "top": 462.0,
+              "width": 41.0,
+              "height": 10.0
+            },
+            "text": "Gn",
+            "confidence": 0.56289184
+          },
+          {
+            "bbox": {
+              "left": 1303.0,
+              "top": 454.0,
+              "width": 33.0,
+              "height": 9.0
+            },
+            "text": "fiers, The",
+            "confidence": 0.9013246
+          },
+          {
+            "bbox": {
+              "left": 1225.0,
+              "top": 470.0,
+              "width": 21.0,
+              "height": 10.0
+            },
+            "text": "with",
+            "confidence": 0.76583236
+          },
+          {
+            "bbox": {
+              "left": 191.0,
+              "top": 578.0,
+              "width": 26.0,
+              "height": 10.0
+            },
+            "text": "nlot",
+            "confidence": 0.70332927
+          },
+          {
+            "bbox": {
+              "left": 234.0,
+              "top": 577.0,
+              "width": 64.0,
+              "height": 9.0
+            },
+            "text": "G II Sbt",
+            "confidence": 0.5032133
+          },
+          {
+            "bbox": {
+              "left": 355.0,
+              "top": 578.0,
+              "width": 39.0,
+              "height": 9.0
+            },
+            "text": "198",
+            "confidence": 0.8441047
+          },
+          {
+            "bbox": {
+              "left": 235.0,
+              "top": 595.0,
+              "width": 23.0,
+              "height": 7.0
+            },
+            "text": "mitrespc",
+            "confidence": 0.5836924
+          },
+          {
+            "bbox": {
+              "left": 291.0,
+              "top": 591.0,
+              "width": 123.0,
+              "height": 14.0
+            },
+            "text": "iadegaed SocsWilfe affectcand by",
+            "confidence": 0.5746399
+          },
+          {
+            "bbox": {
+              "left": 994.0,
+              "top": 594.0,
+              "width": 11.0,
+              "height": 8.0
+            },
+            "text": "Our",
+            "confidence": 0.6737981
+          },
+          {
+            "bbox": {
+              "left": 1019.0,
+              "top": 618.0,
+              "width": 41.0,
+              "height": 10.0
+            },
+            "text": "00001-1000",
+            "confidence": 0.8687
+          },
+          {
+            "bbox": {
+              "left": 696.0,
+              "top": 688.0,
+              "width": 24.0,
+              "height": 20.0
+            },
+            "text": "b",
+            "confidence": 0.9712605
+          },
+          {
+            "bbox": {
+              "left": 1649.0,
+              "top": 685.0,
+              "width": 26.0,
+              "height": 24.0
+            },
+            "text": "p",
+            "confidence": 0.919547
+          }
+        ],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/b23e83d2-4467-42ed-a342-a0a44b2cc7c3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=66025a5c30b61333ea3aaca96de439aadb743bdfbeb0478f23cffa10baeb433c",
+        "html": "<img src=\"https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/b23e83d2-4467-42ed-a342-a0a44b2cc7c3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=66025a5c30b61333ea3aaca96de439aadb743bdfbeb0478f23cffa10baeb433c\" />",
+        "markdown": "![Image](https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/b23e83d2-4467-42ed-a342-a0a44b2cc7c3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=66025a5c30b61333ea3aaca96de439aadb743bdfbeb0478f23cffa10baeb433c)"
+      },
+      {
+        "segment_id": "6dd86e0c-df8d-42f0-aeae-e631c2dc1dac",
+        "bbox": {
+          "left": 290.8333,
+          "top": 999.1666,
+          "width": 1901.6666,
+          "height": 189.16666
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Figure 1: Example annotations of the DocBank. The colors of semantic structure labels are: Abstract , Author , Caption , Equation , Figure , Footer , List , Paragraph , Reference , Section , Table , Title",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/6dd86e0c-df8d-42f0-aeae-e631c2dc1dac.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=90acb371e9005a3ed1d8564e74fd7fc82abef761b715008700534d7a496ede45",
+        "html": "<span class=\"caption\">Figure 1: Example annotations of the DocBank. The colors of semantic structure labels are: Abstract , Author , Caption , Equation , Figure , Footer , List , Paragraph , Reference , Section , Table , Title</span>",
+        "markdown": "Figure 1: Example annotations of the DocBank. The colors of semantic structure labels are: Abstract , Author , Caption , Equation , Figure , Footer , List , Paragraph , Reference , Section , Table , Title\n\n"
+      },
+      {
+        "segment_id": "5ab6faaa-b063-450e-aab3-59e88ebc1bea",
+        "bbox": {
+          "left": 295.0,
+          "top": 1274.1666,
+          "width": 1897.4999,
+          "height": 110.0
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "supervision to obtain fine-grained labeled documents with minimum efforts, meanwhile making the data be easily applied to any NLP and computer vision approaches.",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/5ab6faaa-b063-450e-aab3-59e88ebc1bea.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f841c7a6e7db4b72d2cf40778a330f3973a778d101951470f75da6ffc7fb9ca4",
+        "html": "<p>supervision to obtain fine-grained labeled documents with minimum efforts, meanwhile making the data be easily applied to any NLP and computer vision approaches.</p>",
+        "markdown": "supervision to obtain fine-grained labeled documents with minimum efforts, meanwhile making the data be easily applied to any NLP and computer vision approaches.\n\n"
+      }
+    ],
+    "chunk_length": 405
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "55092ef3-2a93-43d4-b4ab-1ae5a8f6acd5",
+        "bbox": {
+          "left": 295.0,
+          "top": 1386.6666,
+          "width": 1901.6666,
+          "height": 1347.5
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "To this end, we build the DocBank dataset, a document-level benchmark that contains 500K docu- ment pages with fine-grained token-level annotations for layout analysis. Distinct from the conventional human-labeled datasets, our approach obtains high quality annotations in a simple yet effective way with weak supervision. Inspired by existing document layout annotations (Siegel et al., 2018; Li et al., 2019; Zhong et al., 2019), there are a great number of digital-born documents such as the PDFs of research pa- pers that are compiled by L A TEX using their source code. The L A TEX system contains the explicit semantic structure information using mark-up tags as the building blocks, such as abstract, author, caption, equa- tion, figure, footer, list, paragraph, reference, section, table and title. To distinguish individual semantic structures, we manipulate the source code to specify different colors to the text of different semantic units. In this way, different text zones can be clearly segmented and identified as separate logical roles, which is shown in Figure 1. The advantage of DocBank is that, it can be used in any sequence labeling models from the NLP perspective. Meanwhile, DocBank can also be easily converted into image-based annotations to support object detection models in computer vision. In this way, models from different modalities can be compared fairly using DocBank, and multi-modal approaches will be further investi- gated and boost the performance of document layout analysis. To verify the effectiveness of DocBank, we conduct experiments using four baseline models: 1) BERT (Devlin et al., 2018), a pre-trained model using only textual information based on the Transformer architecture. 2) RoBERTa (Liu et al., 2019), a robustly optimized method for pre-training the Transformer architecture. 3) LayoutLM (Xu et al., 2019), a multi-modal architecture that integrates both the text information and layout information. 4) Faster R-CNN (Ren et al., 2015), a high performance object detection networks depending on region proposal algorithms to hypothesize object locations. The experiment results show that the LayoutLM model sig- nificantly outperforms the BERT and RoBERTa models and the object detection model on DocBank for document layout analysis. We hope DocBank will empower more document layout analysis models, meanwhile promoting more customized network structures to make substantial advances in this area.",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/55092ef3-2a93-43d4-b4ab-1ae5a8f6acd5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f72839164e256b29d75df9b902e19f5679a0602de42ef25da8088ed40eee5f88",
+        "html": "<p>To this end, we build the DocBank dataset, a document-level benchmark that contains 500K docu- ment pages with fine-grained token-level annotations for layout analysis. Distinct from the conventional human-labeled datasets, our approach obtains high quality annotations in a simple yet effective way with weak supervision. Inspired by existing document layout annotations (Siegel et al., 2018; Li et al., 2019; Zhong et al., 2019), there are a great number of digital-born documents such as the PDFs of research pa- pers that are compiled by L A TEX using their source code. The L A TEX system contains the explicit semantic structure information using mark-up tags as the building blocks, such as abstract, author, caption, equa- tion, figure, footer, list, paragraph, reference, section, table and title. To distinguish individual semantic structures, we manipulate the source code to specify different colors to the text of different semantic units. In this way, different text zones can be clearly segmented and identified as separate logical roles, which is shown in Figure 1. The advantage of DocBank is that, it can be used in any sequence labeling models from the NLP perspective. Meanwhile, DocBank can also be easily converted into image-based annotations to support object detection models in computer vision. In this way, models from different modalities can be compared fairly using DocBank, and multi-modal approaches will be further investi- gated and boost the performance of document layout analysis. To verify the effectiveness of DocBank, we conduct experiments using four baseline models: 1) BERT (Devlin et al., 2018), a pre-trained model using only textual information based on the Transformer architecture. 2) RoBERTa (Liu et al., 2019), a robustly optimized method for pre-training the Transformer architecture. 3) LayoutLM (Xu et al., 2019), a multi-modal architecture that integrates both the text information and layout information. 4) Faster R-CNN (Ren et al., 2015), a high performance object detection networks depending on region proposal algorithms to hypothesize object locations. The experiment results show that the LayoutLM model sig- nificantly outperforms the BERT and RoBERTa models and the object detection model on DocBank for document layout analysis. We hope DocBank will empower more document layout analysis models, meanwhile promoting more customized network structures to make substantial advances in this area.</p>",
+        "markdown": "To this end, we build the DocBank dataset, a document-level benchmark that contains 500K docu- ment pages with fine-grained token-level annotations for layout analysis. Distinct from the conventional human-labeled datasets, our approach obtains high quality annotations in a simple yet effective way with weak supervision. Inspired by existing document layout annotations (Siegel et al., 2018; Li et al., 2019; Zhong et al., 2019), there are a great number of digital-born documents such as the PDFs of research pa- pers that are compiled by L A TEX using their source code. The L A TEX system contains the explicit semantic structure information using mark-up tags as the building blocks, such as abstract, author, caption, equa- tion, figure, footer, list, paragraph, reference, section, table and title. To distinguish individual semantic structures, we manipulate the source code to specify different colors to the text of different semantic units. In this way, different text zones can be clearly segmented and identified as separate logical roles, which is shown in Figure 1. The advantage of DocBank is that, it can be used in any sequence labeling models from the NLP perspective. Meanwhile, DocBank can also be easily converted into image-based annotations to support object detection models in computer vision. In this way, models from different modalities can be compared fairly using DocBank, and multi-modal approaches will be further investi- gated and boost the performance of document layout analysis. To verify the effectiveness of DocBank, we conduct experiments using four baseline models: 1) BERT (Devlin et al., 2018), a pre-trained model using only textual information based on the Transformer architecture. 2) RoBERTa (Liu et al., 2019), a robustly optimized method for pre-training the Transformer architecture. 3) LayoutLM (Xu et al., 2019), a multi-modal architecture that integrates both the text information and layout information. 4) Faster R-CNN (Ren et al., 2015), a high performance object detection networks depending on region proposal algorithms to hypothesize object locations. The experiment results show that the LayoutLM model sig- nificantly outperforms the BERT and RoBERTa models and the object detection model on DocBank for document layout analysis. We hope DocBank will empower more document layout analysis models, meanwhile promoting more customized network structures to make substantial advances in this area.\n\n"
+      },
+      {
+        "segment_id": "1d149c5b-1cec-4b94-bcb7-9cc8211d4e88",
+        "bbox": {
+          "left": 336.66666,
+          "top": 2740.8333,
+          "width": 1080.8333,
+          "height": 51.666664
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "The contributions of this paper are summarized as follows:",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/1d149c5b-1cec-4b94-bcb7-9cc8211d4e88.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c18cbd8cebd1fa4727e8ee9afbcbddd9c6eff842383dc3c7addd6cb2a8f9b132",
+        "html": "<p>The contributions of this paper are summarized as follows:</p>",
+        "markdown": "The contributions of this paper are summarized as follows:\n\n"
+      },
+      {
+        "segment_id": "3ea9b579-c02a-4988-8320-56bc7f0fe892",
+        "bbox": {
+          "left": 349.16666,
+          "top": 2836.6665,
+          "width": 1847.4999,
+          "height": 105.83333
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "• We present DocBank, a large-scale dataset that is constructed using a weak supervision approach. It enables models to integrate both the textual and layout information for downstream tasks.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/3ea9b579-c02a-4988-8320-56bc7f0fe892.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=423a3093e1c7286e38cf2eaeba78db3b94b699eddc6e0b37fd11f0adf51d7e72",
+        "html": "<ul><li>We present DocBank, a large-scale dataset that is constructed using a weak supervision approach. It enables models to integrate both the textual and layout information for downstream tasks.</li></ul>",
+        "markdown": "- We present DocBank, a large-scale dataset that is constructed using a weak supervision approach. It enables models to integrate both the textual and layout information for downstream tasks.\n\n"
+      },
+      {
+        "segment_id": "4d4471bd-b8e6-42cd-924c-7db89205dbd7",
+        "bbox": {
+          "left": 345.0,
+          "top": 2982.5,
+          "width": 1851.6666,
+          "height": 110.0
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "• We conduct a set of experiments with different baseline models and parameter settings, which con- firms the effectiveness of DocBank for document layout analysis.",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/4d4471bd-b8e6-42cd-924c-7db89205dbd7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3599e4f2f1f37c99095cb4a663b2db222cce3022fb48d922184b1b5228a8cdfd",
+        "html": "<ul><li>We conduct a set of experiments with different baseline models and parameter settings, which con- firms the effectiveness of DocBank for document layout analysis.</li></ul>",
+        "markdown": "- We conduct a set of experiments with different baseline models and parameter settings, which con- firms the effectiveness of DocBank for document layout analysis.\n\n"
+      },
+      {
+        "segment_id": "a4cfc2d0-b765-499a-add8-51d638d8b3f7",
+        "bbox": {
+          "left": 345.0,
+          "top": 3136.6665,
+          "width": 1784.9999,
+          "height": 55.833332
+        },
+        "page_number": 2,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "• The DocBank dataset is available at https://github.com/doc-analysis/DocBank .",
+        "segment_type": "List item",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/a4cfc2d0-b765-499a-add8-51d638d8b3f7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c1b5a455ba217b66cced045dd6955a96215c09398c44758499f3b1b2dc048822",
+        "html": "<ul><li>The DocBank dataset is available at https://github.com/doc-analysis/DocBank .</li></ul>",
+        "markdown": "- The DocBank dataset is available at https://github.com/doc-analysis/DocBank .\n\n"
+      },
+      {
+        "segment_id": "24ce83dd-4d8a-4f0d-a00c-33d757de1920",
+        "bbox": {
+          "left": 424.16666,
+          "top": 290.8333,
+          "width": 1639.1666,
+          "height": 222.49998
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Documents (.tex) Semantic structures with colored fonts (structure-specific colors) Token annotations by the color to structure mapping",
+        "segment_type": "Table",
+        "ocr": [],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/24ce83dd-4d8a-4f0d-a00c-33d757de1920.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=62a52443d6f77d94015f56cdb881a8c2b661b3313544be85a80d9efda688c9d7",
+        "html": "<table></table>",
+        "markdown": "Documents (.tex) Semantic structures with colored fonts (structure-specific colors) Token annotations by the color to structure mapping\n\n"
+      },
+      {
+        "segment_id": "b38d9918-3356-4aed-87a7-3920079116a4",
+        "bbox": {
+          "left": 919.99994,
+          "top": 595.0,
+          "width": 639.1666,
+          "height": 55.833332
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Figure 2: Data processing pipeline",
+        "segment_type": "Caption",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/b38d9918-3356-4aed-87a7-3920079116a4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=ee42649dfe87e045c65aadbff0cf2c136fcbb89d3b43595f3030157a797ee086",
+        "html": "<span class=\"caption\">Figure 2: Data processing pipeline</span>",
+        "markdown": "Figure 2: Data processing pipeline\n\n"
+      }
+    ],
+    "chunk_length": 463
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "ced18aa5-5cb6-4e84-8bbf-a9e8c2ed9b0e",
+        "bbox": {
+          "left": 295.0,
+          "top": 724.1666,
+          "width": 405.8333,
+          "height": 60.0
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "2 Task Definition",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/ced18aa5-5cb6-4e84-8bbf-a9e8c2ed9b0e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=5b3bbb0efddba8e5c0abc980add47136573a3399128b1331bbe40049702f62b1",
+        "html": "<h2>2 Task Definition</h2>",
+        "markdown": "## 2 Task Definition\n\n"
+      },
+      {
+        "segment_id": "7e5842fe-9d36-498e-8d66-3761b12bf84a",
+        "bbox": {
+          "left": 295.0,
+          "top": 815.8333,
+          "width": 1901.6666,
+          "height": 276.66666
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "The document layout analysis task is to extract the pre-defined semantic units in visually rich documents. Specifically, given a document D composed of discrete token set t = { t 0 , t 1 , ..., t n } , each token t i = ( w, ( x 0 , y 0 , x 1 , y 1 )) consists of word w and its bounding box ( x 0 , y 0 , x 1 , y 1 ) . And C = { c 0 , c 1 , .., c m } defines the semantic categories that the tokens are classified into. We intend to find a function F : ( C , D ) ! S , where S is the prediction set:",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/7e5842fe-9d36-498e-8d66-3761b12bf84a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=7e6158adcdfd9c2ee75001c62478c02a3e5eb9e1cd5023d60ccd7f19fc6b807e",
+        "html": "<p>The document layout analysis task is to extract the pre-defined semantic units in visually rich documents. Specifically, given a document D composed of discrete token set t = { t 0 , t 1 , ..., t n } , each token t i = ( w, ( x 0 , y 0 , x 1 , y 1 )) consists of word w and its bounding box ( x 0 , y 0 , x 1 , y 1 ) . And C = { c 0 , c 1 , .., c m } defines the semantic categories that the tokens are classified into. We intend to find a function F : ( C , D ) ! S , where S is the prediction set:</p>",
+        "markdown": "The document layout analysis task is to extract the pre-defined semantic units in visually rich documents. Specifically, given a document D composed of discrete token set t = { t 0 , t 1 , ..., t n } , each token t i = ( w, ( x 0 , y 0 , x 1 , y 1 )) consists of word w and its bounding box ( x 0 , y 0 , x 1 , y 1 ) . And C = { c 0 , c 1 , .., c m } defines the semantic categories that the tokens are classified into. We intend to find a function F : ( C , D ) ! S , where S is the prediction set:\n\n"
+      },
+      {
+        "segment_id": "fc4e9c4b-e023-4a49-a2a7-d508ccfff9bf",
+        "bbox": {
+          "left": 811.6666,
+          "top": 1124.1666,
+          "width": 1380.8333,
+          "height": 64.166664
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "S = { ( { t 0 0 , ..., t n 0 0 } , c 0 ) , ..., ( { t 0 k , ..., t n k k } , c k ) } (1)",
+        "segment_type": "Formula",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/fc4e9c4b-e023-4a49-a2a7-d508ccfff9bf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=64804581abc54b906ee6c27ca0cc1c7fc60386ed441e8ccdb43a296f24714df9",
+        "html": "<span class=\"formula\">S = { ( { t 0 0 , ..., t n 0 0 } , c 0 ) , ..., ( { t 0 k , ..., t n k k } , c k ) } (1)</span>",
+        "markdown": "S = { ( { t 0 0 , ..., t n 0 0 } , c 0 ) , ..., ( { t 0 k , ..., t n k k } , c k ) } (1)\n\n"
+      }
+    ],
+    "chunk_length": 170
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "573fa125-24a0-4971-96ca-d29281b51ce9",
+        "bbox": {
+          "left": 295.0,
+          "top": 1215.8333,
+          "width": 276.66666,
+          "height": 60.0
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "3 DocBank",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/573fa125-24a0-4971-96ca-d29281b51ce9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=00e0e4437b179cf976539ed86b48eee288115fdf68caf175dbce2a33a141e84d",
+        "html": "<h2>3 DocBank</h2>",
+        "markdown": "## 3 DocBank\n\n"
+      },
+      {
+        "segment_id": "88c12b1b-f474-4d63-8023-6cfd47c7cac6",
+        "bbox": {
+          "left": 295.0,
+          "top": 1303.3333,
+          "width": 1901.6666,
+          "height": 335.0
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "We build DocBank with token-level annotations that supports both NLP and computer vision models. As shown in Figure 2, the construction of DocBank has three steps: Document Acquisition, Semantic Structures Detection, Token Annotation. Meanwhile, DocBank can be converted to the format that is used by computer vision models in a few steps. The current DocBank dataset totally includes 500K document pages, where the training set includes 400K document pages and both the validation set and the test set include 50K document pages.",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/88c12b1b-f474-4d63-8023-6cfd47c7cac6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=a7f0333e584960270b9016599a1e9dd9cdc48a4be1ba5eee1f3e7be1e03637da",
+        "html": "<p>We build DocBank with token-level annotations that supports both NLP and computer vision models. As shown in Figure 2, the construction of DocBank has three steps: Document Acquisition, Semantic Structures Detection, Token Annotation. Meanwhile, DocBank can be converted to the format that is used by computer vision models in a few steps. The current DocBank dataset totally includes 500K document pages, where the training set includes 400K document pages and both the validation set and the test set include 50K document pages.</p>",
+        "markdown": "We build DocBank with token-level annotations that supports both NLP and computer vision models. As shown in Figure 2, the construction of DocBank has three steps: Document Acquisition, Semantic Structures Detection, Token Annotation. Meanwhile, DocBank can be converted to the format that is used by computer vision models in a few steps. The current DocBank dataset totally includes 500K document pages, where the training set includes 400K document pages and both the validation set and the test set include 50K document pages.\n\n"
+      }
+    ],
+    "chunk_length": 84
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "f14d5835-e846-4de3-9a64-efd9f9ccfc3b",
+        "bbox": {
+          "left": 295.0,
+          "top": 1678.3333,
+          "width": 543.3333,
+          "height": 55.833332
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "3.1 Document Acquisition",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/f14d5835-e846-4de3-9a64-efd9f9ccfc3b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b423bc1be7b3799e22b55ceb610b4aff1c97d895d3b635e59f75d04173212a93",
+        "html": "<h2>3.1 Document Acquisition</h2>",
+        "markdown": "## 3.1 Document Acquisition\n\n"
+      },
+      {
+        "segment_id": "58aed0ca-ce8e-4154-a7d3-a6ef3f26a643",
+        "bbox": {
+          "left": 295.0,
+          "top": 1749.1666,
+          "width": 1901.6666,
+          "height": 222.49998
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "We download the PDF files on arXiv.com as well as the L A TEX source files since we need to modify the source code to detect the semantic structures. The papers contain Physics, Mathematics, Computer Science and many other areas, which is beneficial for the diversity of DocBank to produce robust models. We focus on English documents in this work and will expand to other languages in the future.",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/58aed0ca-ce8e-4154-a7d3-a6ef3f26a643.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3aa2c4e793f89b94b6bd538ed3a8d1f5f4f85ec39781c120a28ea1e05c1f99c9",
+        "html": "<p>We download the PDF files on arXiv.com as well as the L A TEX source files since we need to modify the source code to detect the semantic structures. The papers contain Physics, Mathematics, Computer Science and many other areas, which is beneficial for the diversity of DocBank to produce robust models. We focus on English documents in this work and will expand to other languages in the future.</p>",
+        "markdown": "We download the PDF files on arXiv.com as well as the L A TEX source files since we need to modify the source code to detect the semantic structures. The papers contain Physics, Mathematics, Computer Science and many other areas, which is beneficial for the diversity of DocBank to produce robust models. We focus on English documents in this work and will expand to other languages in the future.\n\n"
+      }
+    ],
+    "chunk_length": 72
+  },
+  {
+    "segments": [
+      {
+        "segment_id": "f97211a2-ce21-49ef-9244-f964186618be",
+        "bbox": {
+          "left": 295.0,
+          "top": 2007.4999,
+          "width": 701.6666,
+          "height": 55.833332
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "3.2 Semantic Structures Detection",
+        "segment_type": "Section header",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/f97211a2-ce21-49ef-9244-f964186618be.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=55cbb86c95b1329890e5a3d286eaf4bc5279a9545cdc9988efb77df14d291fc8",
+        "html": "<h2>3.2 Semantic Structures Detection</h2>",
+        "markdown": "## 3.2 Semantic Structures Detection\n\n"
+      },
+      {
+        "segment_id": "3823e0ae-4d30-4ff8-a81d-b66098b67f25",
+        "bbox": {
+          "left": 295.0,
+          "top": 2086.6665,
+          "width": 1901.6666,
+          "height": 505.8333
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "DocBank is a natural extension of the TableBank dataset (Li et al., 2019), where other semantic units are also included for document layout analysis. In this work, the following semantic structures are annotated in DocBank: { Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, Section, Table and Title } . In TableBank, the tables are labeled with the help of the ‘fcolorbox’ command. However, for DocBank, the target structures are mainly composed of text, where the ‘fcolorbox’ cannot be well applied. Therefore, we use the ‘color’ command to distinguish these semantic structures by changing their font colors into structure-specific colors. Basically, there are two types of commands to represent semantic structures. Some of the L A TEX commands are simple words preceded by a backslash. For instance, the section titles in L A TEX documents are usually in the format as follows:",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/3823e0ae-4d30-4ff8-a81d-b66098b67f25.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=6f83ba5ef9f10f183b93b8f8f252fced8754a0c9af57167634bbbb81e45389c7",
+        "html": "<p>DocBank is a natural extension of the TableBank dataset (Li et al., 2019), where other semantic units are also included for document layout analysis. In this work, the following semantic structures are annotated in DocBank: { Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, Section, Table and Title } . In TableBank, the tables are labeled with the help of the ‘fcolorbox’ command. However, for DocBank, the target structures are mainly composed of text, where the ‘fcolorbox’ cannot be well applied. Therefore, we use the ‘color’ command to distinguish these semantic structures by changing their font colors into structure-specific colors. Basically, there are two types of commands to represent semantic structures. Some of the L A TEX commands are simple words preceded by a backslash. For instance, the section titles in L A TEX documents are usually in the format as follows:</p>",
+        "markdown": "DocBank is a natural extension of the TableBank dataset (Li et al., 2019), where other semantic units are also included for document layout analysis. In this work, the following semantic structures are annotated in DocBank: { Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, Section, Table and Title } . In TableBank, the tables are labeled with the help of the ‘fcolorbox’ command. However, for DocBank, the target structures are mainly composed of text, where the ‘fcolorbox’ cannot be well applied. Therefore, we use the ‘color’ command to distinguish these semantic structures by changing their font colors into structure-specific colors. Basically, there are two types of commands to represent semantic structures. Some of the L A TEX commands are simple words preceded by a backslash. For instance, the section titles in L A TEX documents are usually in the format as follows:\n\n"
+      },
+      {
+        "segment_id": "027f5f01-2b7c-4c0a-ac5b-7384f469d6f6",
+        "bbox": {
+          "left": 749.1666,
+          "top": 2599.1665,
+          "width": 993.3333,
+          "height": 60.0
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "\\ s e c t i o n { The t i t l e o f t h i s s e c t i o n }",
+        "segment_type": "Formula",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/027f5f01-2b7c-4c0a-ac5b-7384f469d6f6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=04ad8842c5ace599ff1731e170ebd7b5d06cc756243529ef7c9b8c82682db23e",
+        "html": "<span class=\"formula\">\\ s e c t i o n { The t i t l e o f t h i s s e c t i o n }</span>",
+        "markdown": "\\ s e c t i o n { The t i t l e o f t h i s s e c t i o n }\n\n"
+      },
+      {
+        "segment_id": "52ae9d3b-600a-46f2-828a-5beeebdd28b7",
+        "bbox": {
+          "left": 295.0,
+          "top": 2670.0,
+          "width": 1901.6666,
+          "height": 105.83333
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "Other commands often start an environment. For instance, the list declaration in L A TEX documents is shown as follows:",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/52ae9d3b-600a-46f2-828a-5beeebdd28b7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=2f984198e97b27c9fb471549a53a79ce4f4983f046a8c3297a2935d513441200",
+        "html": "<p>Other commands often start an environment. For instance, the list declaration in L A TEX documents is shown as follows:</p>",
+        "markdown": "Other commands often start an environment. For instance, the list declaration in L A TEX documents is shown as follows:\n\n"
+      },
+      {
+        "segment_id": "8df67d1b-54c1-40ae-953d-99cf15ca7b72",
+        "bbox": {
+          "left": 924.1666,
+          "top": 2778.3333,
+          "width": 643.3333,
+          "height": 239.16666
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "\\ b e g i n { i t e m i z e } \\ i t e m F i r s t i t e m \\ i t e m Second i t e m \\ end { i t e m i z e }",
+        "segment_type": "Table",
+        "ocr": [
+          {
+            "bbox": {
+              "left": 14.636584,
+              "top": 9.685925,
+              "width": 84.362045,
+              "height": 49.155643
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 14.636584,
+              "top": 48.733616,
+              "width": 84.362045,
+              "height": 70.02893
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 14.636584,
+              "top": 129.13857,
+              "width": 84.362045,
+              "height": 55.12375
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 14.636584,
+              "top": 155.84209,
+              "width": 84.362045,
+              "height": 42.686615
+            },
+            "text": "",
+            "confidence": null
+          },
+          {
+            "bbox": {
+              "left": 14.636584,
+              "top": 181.96796,
+              "width": 84.362045,
+              "height": 44.339264
+            },
+            "text": "",
+            "confidence": null
+          }
+        ],
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/8df67d1b-54c1-40ae-953d-99cf15ca7b72.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f882c3983f038e83f69b2eee7cbcd760f79ad4c0c4664d654cb68e16b56d57ab",
+        "html": "<table><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr></table>",
+        "markdown": "|  |\n| --- |\n|  |\n|  |\n|  |\n|  |\n"
+      },
+      {
+        "segment_id": "91106417-2325-4f21-af74-556a7f169012",
+        "bbox": {
+          "left": 295.0,
+          "top": 3020.0,
+          "width": 1901.6666,
+          "height": 168.33333
+        },
+        "page_number": 3,
+        "page_width": 2479.0,
+        "page_height": 3504.0,
+        "content": "The command \\ begin { itemize } starts an environment while the command \\ end { itemize } ends that environment. The real command name is declared as the parameters of the ‘begin’ command and the ‘end’ command.",
+        "segment_type": "Text",
+        "ocr": null,
+        "image": "https://chunkmydocs-bucket-prod.storage.googleapis.com/1a6a7a7d-7ab4-4402-8ede-71076b412317/2cc02a1f-6376-4f1e-92a9-9fc744ca51ad/images/91106417-2325-4f21-af74-556a7f169012.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=GOOG1E67ULNM7PPHKQDVSRZD64OWC4CJTKOHXCOIDKI5QCMJK4U6ROEJQSOJM%2F20241025%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20241025T035630Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=efdd83c32692ab873d472fc5fb31f07e46877e5e9debf020aaf6fb064b3311ea",
+        "html": "<p>The command \\ begin { itemize } starts an environment while the command \\ end { itemize } ends that environment. The real command name is declared as the parameters of the ‘begin’ command and the ‘end’ command.</p>",
+        "markdown": "The command \\ begin { itemize } starts an environment while the command \\ end { itemize } ends that environment. The real command name is declared as the parameters of the ‘begin’ command and the ‘end’ command.\n\n"
+      }
+    ],
+    "chunk_length": 284
+  }
+]

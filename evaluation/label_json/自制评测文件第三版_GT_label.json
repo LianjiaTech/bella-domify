@@ -1,0 +1,1776 @@
+{
+  "root": {
+    "element": null,
+    "child": {
+      "1": {
+        "element": {
+          "block_type": "Title",
+          "text": "这是一个自制的文件 ",
+          "image_base64_str": null,
+          "page_num": [
+            0
+          ],
+          "bbox": [
+            189.4,
+            90.7,
+            411.9,
+            115.7
+          ]
+        },
+        "child": {
+          "1.1": {
+            "element": {
+              "block_type": "Title",
+              "text": "第一部分 文字图片 ",
+              "image_base64_str": null,
+              "page_num": [
+                0
+              ],
+              "bbox": [
+                221.0,
+                140.5,
+                378.9,
+                159.2
+              ]
+            },
+            "child": {
+              "1.1.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "这是第一个段落。在那遥远的山谷中，晨曦轻轻唤醒沉 睡的大地，薄雾如纱般笼罩着翠绿的山峦。鸟鸣婉转，仿佛 在诉说着古老的传说。此刻，心灵仿佛也被洗净，宁静而安 详，仿佛置身于世外桃源，忘却了尘世的喧嚣与烦忧。 ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    0
+                  ],
+                  "bbox": [
+                    90.0,
+                    180.4,
+                    505.2,
+                    290.8
+                  ]
+                },
+                "child": {
+                  "1.1.1.1": {
+                    "element": {
+                      "block_type": "Figure",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        0
+                      ],
+                      "bbox": [
+                        116.5,
+                        312.1,
+                        478.4,
+                        487.1
+                      ]
+                    },
+                    "child": {
+                      "1.1.1.1.1": {
+                        "element": {
+                          "block_type": "FigureName",
+                          "text": "图 1-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            0
+                          ],
+                          "bbox": [
+                            276.0,
+                            501.6,
+                            322.5,
+                            516.1
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  },
+                  "1.1.1.2": {
+                    "element": {
+                      "block_type": "Figure",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        0
+                      ],
+                      "bbox": [
+                        122.9,
+                        526.3,
+                        472.0,
+                        647.0
+                      ]
+                    },
+                    "child": {
+                      "1.1.1.2.1": {
+                        "element": {
+                          "block_type": "FigureName",
+                          "text": "图 1-2 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            0
+                          ],
+                          "bbox": [
+                            276.0,
+                            657.6,
+                            322.5,
+                            672.1
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.1.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "在这个快节奏的时代，人们常常忙于工作和生活，忽略 了内心的宁静与平和。偶尔停下脚步，享受片刻的安宁，可以让我们重新审视自己的目标与方向。无论是阅读一本好书，还是在自然中漫步，这些简单的活动都能帮助我们放松心情，恢复活力。珍惜每一个当下，感受生活的美好，是我们追求 幸福的重要途径。 ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    0
+                  ],
+                  "bbox": [
+                    90.0,
+                    695.2,
+                    505.2,
+                    743.2
+                  ]
+                },
+                "child": {}
+              }
+            }
+          },
+          "1.2": {
+            "element": {
+              "block_type": "Title",
+              "text": "第二部分 无序列表 ",
+              "image_base64_str": null,
+              "page_num": [
+                1
+              ],
+              "bbox": [
+                221.0,
+                249.7,
+                378.9,
+                268.4
+              ]
+            },
+            "child": {
+              "1.2.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "冰心的《小桔灯》是一篇感人至深的散文，讲述了一个 小女孩在艰难环境中，用一盏小桔灯照亮黑暗的故事。文章 通过细腻的描写，展现了小女孩的坚强与乐观。第一种无序 列表 demo 如下： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    1
+                  ],
+                  "bbox": [
+                    90.0,
+                    289.6,
+                    505.2,
+                    400.0
+                  ]
+                },
+                "child": {
+                  "1.2.1.1": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "Ø无序列表第一项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        1
+                      ],
+                      "bbox": [
+                        130.1,
+                        420.9,
+                        267.4,
+                        439.1
+                      ]
+                    },
+                    "child": {}
+                  },
+                  "1.2.1.2": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "Ø无序列表第二项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        1
+                      ],
+                      "bbox": [
+                        130.1,
+                        452.1,
+                        267.4,
+                        470.3
+                      ]
+                    },
+                    "child": {}
+                  },
+                  "1.2.1.3": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "Ø无序列表第三项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        1
+                      ],
+                      "bbox": [
+                        130.1,
+                        483.3,
+                        267.4,
+                        501.5
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.2.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "她用简单的桔子皮和蜡烛，制作了一盏温暖的小灯，象 征着希望与勇气。冰心通过这个故事，传达了在困境中保持 积极心态的重要性，以及人性中温暖和善良的力量。第二种 无序列表 demo 如下： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    1
+                  ],
+                  "bbox": [
+                    90.0,
+                    523.6,
+                    505.2,
+                    634.0
+                  ]
+                },
+                "child": {
+                  "1.2.2.1": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "l无序列表第 1 项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        1
+                      ],
+                      "bbox": [
+                        130.1,
+                        654.9,
+                        267.7,
+                        673.1
+                      ]
+                    },
+                    "child": {}
+                  },
+                  "1.2.2.2": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "l无序列表第 2 项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        1
+                      ],
+                      "bbox": [
+                        130.1,
+                        686.1,
+                        267.7,
+                        704.3
+                      ]
+                    },
+                    "child": {}
+                  },
+                  "1.2.2.3": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "l无序列表第 3 项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        1
+                      ],
+                      "bbox": [
+                        130.1,
+                        717.3,
+                        267.7,
+                        735.5
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.2.3": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "通过小女孩的形象，表达了对生活的热爱和对未来的希望。小桔灯不仅仅是一盏灯，更是象征着在黑暗中寻找光明的勇气。第三种无序列表 demo 如下： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    2
+                  ],
+                  "bbox": [
+                    122.2,
+                    78.9,
+                    505.2,
+                    95.6
+                  ]
+                },
+                "child": {
+                  "1.2.3.1": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "ü无序列表项无序列表项 1",
+                      "image_base64_str": null,
+                      "page_num": [
+                        2
+                      ],
+                      "bbox": [
+                        121.9,
+                        179.0,
+                        319.8,
+                        290.8
+                      ]
+                    },
+                    "child": {}
+                  },
+                  "1.2.3.2": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "ü无序列表项无序列表项 2",
+                      "image_base64_str": null,
+                      "page_num": [
+                        2
+                      ],
+                      "bbox": [
+                        121.9,
+                        179.0,
+                        319.8,
+                        290.8
+                      ]
+                    },
+                    "child": {}
+                  },
+                  "1.2.3.3": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "ü无序列表项无序列表项 3 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        2
+                      ],
+                      "bbox": [
+                        121.9,
+                        179.0,
+                        319.8,
+                        290.8
+                      ]
+                    },
+                    "child": {}
+                  },
+                  "1.2.3.4": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "ü无序列表项无序列表项 4 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        2
+                      ],
+                      "bbox": [
+                        121.9,
+                        179.0,
+                        319.8,
+                        290.8
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              }
+            }
+          },
+          "1.3": {
+            "element": {
+              "block_type": "Title",
+              "text": "第三部分 无序列表嵌套 ",
+              "image_base64_str": null,
+              "page_num": [
+                2
+              ],
+              "bbox": [
+                203.0,
+                312.1,
+                396.9,
+                330.8
+              ]
+            },
+            "child": {
+              "1.3.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "文章结尾，小桔灯的光芒照亮了整个房间，也照亮了读 者的心灵。无序列表嵌套无序列表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    2
+                  ],
+                  "bbox": [
+                    90.0,
+                    352.0,
+                    505.2,
+                    400.0
+                  ]
+                },
+                "child": {
+                  "1.3.1.1": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "Ø无序列表第一项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        2
+                      ],
+                      "bbox": [
+                        130.1,
+                        420.9,
+                        267.4,
+                        439.1
+                      ]
+                    },
+                    "child": {
+                      "1.3.1.1.1": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "n无序列表第一项的第一子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            2
+                          ],
+                          "bbox": [
+                            151.0,
+                            452.1,
+                            368.5,
+                            470.3
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.1.1.2": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "n无序列表第一项的第二子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            2
+                          ],
+                          "bbox": [
+                            151.0,
+                            483.3,
+                            368.5,
+                            501.5
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.1.1.3": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "n无序列表第一项的第三子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            2
+                          ],
+                          "bbox": [
+                            151.0,
+                            514.5,
+                            368.5,
+                            532.7
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  },
+                  "1.3.1.2": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "Ø无序列表第二项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        2
+                      ],
+                      "bbox": [
+                        130.1,
+                        545.7,
+                        267.4,
+                        563.9
+                      ]
+                    },
+                    "child": {
+                      "1.3.1.2.1": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "n无序列表第二项的第一子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            2
+                          ],
+                          "bbox": [
+                            151.0,
+                            576.9,
+                            368.5,
+                            595.1
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.1.2.2": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "n无序列表第二项的第二子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            2
+                          ],
+                          "bbox": [
+                            151.0,
+                            608.1,
+                            368.5,
+                            626.3
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  },
+                  "1.3.1.3": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "Ø无序列表第三项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        2
+                      ],
+                      "bbox": [
+                        130.1,
+                        639.3,
+                        267.4,
+                        657.5
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.3.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "冰心用简洁而富有诗意的语言，唤起了人们对美好生活 的向往和对人性光辉的信任。这篇散文以其深刻的内涵和感 人的故事，成为了文学史上的经典之作。第二种无序列表嵌套无序列表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    2,
+                    3
+                  ],
+                  "bbox": [
+                    90.0,
+                    679.6,
+                    505.2,
+                    758.8
+                  ]
+                },
+                "child": {
+                  "1.3.2.1": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "l无序列表第 1 项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        3
+                      ],
+                      "bbox": [
+                        130.1,
+                        116.6,
+                        267.7,
+                        134.8
+                      ]
+                    },
+                    "child": {
+                      "1.3.2.1.1": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "²无序列表第 1 项的第 1 子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            151.0,
+                            147.8,
+                            369.2,
+                            166.0
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.2.1.2": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "²无序列表第 1 项的第 2 子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            151.0,
+                            179.0,
+                            369.2,
+                            197.2
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  },
+                  "1.3.2.2": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "l无序列表第 2 项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        3
+                      ],
+                      "bbox": [
+                        130.1,
+                        210.2,
+                        267.7,
+                        228.4
+                      ]
+                    },
+                    "child": {
+                      "1.3.2.2.1": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "²无序列表第 2 项的第 1 子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            151.0,
+                            241.4,
+                            369.2,
+                            259.6
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.2.2.2": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "²无序列表第 2 项的第 2 子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            151.0,
+                            272.6,
+                            369.2,
+                            290.8
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.2.2.3": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "²无序列表第 2 项的第 3 子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            151.0,
+                            303.8,
+                            369.2,
+                            322.0
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  },
+                  "1.3.2.3": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "l无序列表第 3 项 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        3
+                      ],
+                      "bbox": [
+                        130.1,
+                        335.0,
+                        267.7,
+                        353.2
+                      ]
+                    },
+                    "child": {
+                      "1.3.2.3.1": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "²无序列表第 3 项的第 1 子项 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            151.0,
+                            366.2,
+                            369.2,
+                            384.4
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.3.3": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "鲁迅通过与童年伙伴闰土的重逢，揭示了时间流逝带来的变化和人情的冷暖。无序列表嵌套有序列表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    3
+                  ],
+                  "bbox": [
+                    122.2,
+                    406.5,
+                    505.2,
+                    423.2
+                  ]
+                },
+                "child": {
+                  "1.3.3.1": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "ü无序列表项无序列表项 1 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        3
+                      ],
+                      "bbox": [
+                        121.9,
+                        475.4,
+                        319.8,
+                        493.6
+                      ]
+                    },
+                    "child": {
+                      "1.3.3.1.1": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "1）无序列表项有序列表项 1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            143.0,
+                            508.0,
+                            355.8,
+                            524.8
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.3.1.2": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "2）无序列表项有序列表项 2 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            143.0,
+                            508.0,
+                            355.8,
+                            524.8
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  },
+                  "1.3.3.2": {
+                    "element": {
+                      "block_type": "List",
+                      "text": "ü无序列表项无序列表项 2 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        3
+                      ],
+                      "bbox": [
+                        121.9,
+                        539.2,
+                        355.8,
+                        587.2
+                      ]
+                    },
+                    "child": {
+                      "1.3.3.2.1": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "a)无序列表项有序列表项 1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            143.0,
+                            601.6,
+                            340.6,
+                            618.4
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.3.2.2": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "b)无序列表项有序列表项 2 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            143.0,
+                            632.8,
+                            340.6,
+                            649.6
+                          ]
+                        },
+                        "child": {}
+                      },
+                      "1.3.3.2.3": {
+                        "element": {
+                          "block_type": "List",
+                          "text": "c)无序列表项有序列表项 3 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            3
+                          ],
+                          "bbox": [
+                            143.0,
+                            664.0,
+                            340.6,
+                            680.8
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "1.4": {
+            "element": {
+              "block_type": "Title",
+              "text": "第四部分 表格 ",
+              "image_base64_str": null,
+              "page_num": [
+                4
+              ],
+              "bbox": [
+                239.0,
+                78.1,
+                360.9,
+                96.8
+              ]
+            },
+            "child": {
+              "1.4.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第一个示例，三线表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    4
+                  ],
+                  "bbox": [
+                    130.1,
+                    157.1,
+                    342.6,
+                    173.9
+                  ]
+                },
+                "child": {
+                  "1.4.1.1": {
+                    "element": {
+                      "block_type": "Table",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        4
+                      ],
+                      "bbox": [
+                        89.3,
+                        504.4,
+                        493.9,
+                        694.5
+                      ]
+                    },
+                    "child": {
+                      "1.4.1.1.1": {
+                        "element": {
+                          "block_type": "TableName",
+                          "text": "表 1-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            4
+                          ],
+                          "bbox": [
+                            293.0,
+                            394.5,
+                            346.4,
+                            411.2
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.4.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第二个示例，内部框线表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    4
+                  ],
+                  "bbox": [
+                    130.1,
+                    472.5,
+                    374.5,
+                    489.2
+                  ]
+                },
+                "child": {
+                  "1.4.2.1": {
+                    "element": {
+                      "block_type": "Table",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        4
+                      ],
+                      "bbox": [
+                        89.3,
+                        504.4,
+                        493.9,
+                        694.5
+                      ]
+                    },
+                    "child": {
+                      "1.4.2.1.1": {
+                        "element": {
+                          "block_type": "TableName",
+                          "text": "表 2-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            4
+                          ],
+                          "bbox": [
+                            293.0,
+                            394.5,
+                            346.4,
+                            411.2
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.4.3": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第三个示例，外部框线表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    5
+                  ],
+                  "bbox": [
+                    130.1,
+                    472.5,
+                    374.5,
+                    489.2
+                  ]
+                },
+                "child": {
+                  "1.4.3.1": {
+                    "element": {
+                      "block_type": "Table",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        5
+                      ],
+                      "bbox": [
+                        89.3,
+                        504.4,
+                        493.9,
+                        694.5
+                      ]
+                    },
+                    "child": {
+                      "1.4.3.1.1": {
+                        "element": {
+                          "block_type": "TableName",
+                          "text": "表 3-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            5
+                          ],
+                          "bbox": [
+                            293.0,
+                            394.5,
+                            346.4,
+                            411.2
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.4.4": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第四个示例，无线表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    5
+                  ],
+                  "bbox": [
+                    130.1,
+                    472.5,
+                    374.5,
+                    489.2
+                  ]
+                },
+                "child": {
+                  "1.4.4.1": {
+                    "element": {
+                      "block_type": "Table",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        5
+                      ],
+                      "bbox": [
+                        89.3,
+                        504.4,
+                        493.9,
+                        694.5
+                      ]
+                    },
+                    "child": {
+                      "1.4.4.1.1": {
+                        "element": {
+                          "block_type": "TableName",
+                          "text": "表 4-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            5
+                          ],
+                          "bbox": [
+                            293.0,
+                            394.5,
+                            346.4,
+                            411.2
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.4.5": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第五个示例，无线表： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    6
+                  ],
+                  "bbox": [
+                    130.1,
+                    472.5,
+                    374.5,
+                    489.2
+                  ]
+                },
+                "child": {
+                  "1.4.5.1": {
+                    "element": {
+                      "block_type": "Table",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        6
+                      ],
+                      "bbox": [
+                        89.3,
+                        504.4,
+                        493.9,
+                        694.5
+                      ]
+                    },
+                    "child": {
+                      "1.4.5.1.1": {
+                        "element": {
+                          "block_type": "TableName",
+                          "text": "表 5-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            6
+                          ],
+                          "bbox": [
+                            293.0,
+                            394.5,
+                            346.4,
+                            411.2
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "1.5": {
+            "element": {
+              "block_type": "Title",
+              "text": "第五部分 代码块 ",
+              "image_base64_str": null,
+              "page_num": [
+                7
+              ],
+              "bbox": [
+                229.9,
+                78.1,
+                369.7,
+                96.8
+              ]
+            },
+            "child": {
+              "1.5.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第一个代码块，这是一个 JSON 代码表达了一 个文档解析后的结构，代码块 demo 如下： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    7
+                  ],
+                  "bbox": [
+                    90.0,
+                    118.0,
+                    505.2,
+                    166.0
+                  ]
+                },
+                "child": {
+                  "1.5.1.1": {
+                    "element": {
+                      "block_type": "Code",
+                      "text": "{ \n \"root\": { \n \"child\": [ \n { \n \"child\": [ \n { \n \"child\": [], \n \"order_num\": \"1.1\", \n \"element\": { \n \"block_type\": \"table\", \n \"rows\": [] \n } \n }, \n {} \n ], \n \"order_num\": \"1\", \n \"element\": { \n \"text\": \"贝壳无形资产核算指引 \", \n \"block_type\": \"text\", \n \"image_base64_str\": null \n } \n } \n ], \n \"order_num\": null, \n \"element\": null \n } \n} ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        7
+                      ],
+                      "bbox": [
+                        121.5,
+                        176.3,
+                        536.5,
+                        761.8
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.5.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "下面是第二个代码块，这是一个普通的 SQL 代码，用 于查询学生和课程的相关信息，具体如下： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    8
+                  ],
+                  "bbox": [
+                    111.1,
+                    79.1,
+                    505.2,
+                    127.1
+                  ]
+                },
+                "child": {
+                  "1.5.2.1": {
+                    "element": {
+                      "block_type": "Code",
+                      "text": "SELECT \n s.name,  \n s.age,  \n s.score,  \n c.course_name  \nFROM \n students s  \nJOIN \n enrollments e ON s.student_id = e.student_id  JOIN \n courses c ON e.course_id = c.course_id  \nWHERE \n s.age > 18  \n AND s.score > 75  \n AND c.course_name LIKE 'Math%' ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        8
+                      ],
+                      "bbox": [
+                        121.5,
+                        140.2,
+                        536.5,
+                        392.2
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.5.3": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "下面是第三个代码块，这是一个普通的 HTML 代码，这是一个简单的静态页面的表达，可以在浏览器中直接打 开浏览，非常方便，具体如下： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    8
+                  ],
+                  "bbox": [
+                    111.1,
+                    406.7,
+                    505.4,
+                    485.9
+                  ]
+                },
+                "child": {
+                  "1.5.3.1": {
+                    "element": {
+                      "block_type": "Code",
+                      "text": "<!DOCTYPE html> \n<html lang=\"en\"> \n<head> \n <meta charset=\"UTF-8\"> \n <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> \n <title>Simple HTML Page</title> \n</head> \n<body> \n <h1>Welcome to My Website</h1> \n <p>This is a simple HTML page.</p> \n <a href=\"https://www.example.com\">Visit Example</a> \n</body> \n</html> ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        8
+                      ],
+                      "bbox": [
+                        121.5,
+                        499.3,
+                        536.5,
+                        720.1
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.5.4": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "下面是第四个代码块，这是一个 python 代码，这里是一个实现快速排序（Quick Sort）算法的 Python 示例，具体如下： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    8,
+                    9
+                  ],
+                  "bbox": [
+                    132.0,
+                    734.3,
+                    505.2,
+                    751.1
+                  ]
+                },
+                "child": {
+                  "1.5.4.1": {
+                    "element": {
+                      "block_type": "Code",
+                      "text": "def quicksort(arr): \n if len(arr) <= 1: \n return arr \n else: \n pivot = arr[len(arr) // 2] \n left = [x for x in arr if x < pivot] \n middle = [x for x in arr if x == pivot] \n right = [x for x in arr if x > pivot] \n return quicksort(left) + middle + quicksort(right) \n# 示例用法 \narray = [3, 6, 8, 10, 1, 2, 1] \nsorted_array = quicksort(array) \nprint(\"Sorted array:\", sorted_array) ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        9
+                      ],
+                      "bbox": [
+                        121.5,
+                        140.5,
+                        536.5,
+                        376.9
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              }
+            }
+          },
+          "1.6": {
+            "element": {
+              "block_type": "Title",
+              "text": "第六部分 线框图 ",
+              "image_base64_str": null,
+              "page_num": [
+                9
+              ],
+              "bbox": [
+                229.9,
+                429.2,
+                369.7,
+                447.9
+              ]
+            },
+            "child": {
+              "1.6.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第一个线框图，以下是第一个线框图： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    9
+                  ],
+                  "bbox": [
+                    111.1,
+                    469.1,
+                    435.4,
+                    485.9
+                  ]
+                },
+                "child": {
+                  "1.6.1.1": {
+                    "element": {
+                      "block_type": "Figure",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        9
+                      ],
+                      "bbox": [
+                        111.0,
+                        496.5,
+                        526.0,
+                        738.6
+                      ]
+                    },
+                    "child": {
+                      "1.6.1.1.1": {
+                        "element": {
+                          "block_type": "FigureName",
+                          "text": "图表 6-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            9
+                          ],
+                          "bbox": [
+                            275.5,
+                            749.9,
+                            344.7,
+                            766.7
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.6.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是第二个线框图，以下是第二个线框图： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    10
+                  ],
+                  "bbox": [
+                    111.1,
+                    79.1,
+                    435.4,
+                    95.9
+                  ]
+                },
+                "child": {
+                  "1.6.2.1": {
+                    "element": {
+                      "block_type": "Figure",
+                      "text": null,
+                      "image_base64_str": null,
+                      "page_num": [
+                        10
+                      ],
+                      "bbox": [
+                        296.9,
+                        116.3,
+                        340.1,
+                        131.3
+                      ]
+                    },
+                    "child": {
+                      "1.6.2.1.1": {
+                        "element": {
+                          "block_type": "FigureName",
+                          "text": "图标 7-1 ",
+                          "image_base64_str": null,
+                          "page_num": [
+                            10
+                          ],
+                          "bbox": [
+                            277.4,
+                            359.9,
+                            342.8,
+                            376.7
+                          ]
+                        },
+                        "child": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "1.6.3": {
+                "element": {
+                  "block_type": "Figure",
+                  "text": null,
+                  "image_base64_str": null,
+                  "page_num": [
+                    10
+                  ],
+                  "bbox": [
+                    125.9,
+                    443.0,
+                    205.8,
+                    463.7
+                  ]
+                },
+                "child": {
+                  "1.6.3.1": {
+                    "element": {
+                      "block_type": "FigureName",
+                      "text": "图表 8-1 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        10
+                      ],
+                      "bbox": [
+                        275.5,
+                        640.7,
+                        344.7,
+                        657.5
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.6.4": {
+                "element": {
+                  "block_type": "Figure",
+                  "text": null,
+                  "image_base64_str": null,
+                  "page_num": [
+                    10
+                  ],
+                  "bbox": [
+                    308.5,
+                    564.2,
+                    481.0,
+                    584.9
+                  ]
+                },
+                "child": {
+                  "1.6.4.1": {
+                    "element": {
+                      "block_type": "FigureName",
+                      "text": "图片 2-1 有 ocr 需求的图片 1 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        11
+                      ],
+                      "bbox": [
+                        202.3,
+                        203.9,
+                        417.9,
+                        220.7
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.6.5": {
+                "element": {
+                  "block_type": "Figure",
+                  "text": null,
+                  "image_base64_str": null,
+                  "page_num": [
+                    11
+                  ],
+                  "bbox": [
+                    157.5,
+                    229.1,
+                    458.5,
+                    414.1
+                  ]
+                },
+                "child": {
+                  "1.6.5.1": {
+                    "element": {
+                      "block_type": "FigureName",
+                      "text": "图片 3-1 有 ocr 需求的图片 2 ",
+                      "image_base64_str": null,
+                      "page_num": [
+                        11
+                      ],
+                      "bbox": [
+                        202.3,
+                        422.3,
+                        417.9,
+                        439.1
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              }
+            }
+          },
+          "1.7": {
+            "element": {
+              "block_type": "Title",
+              "text": "第七部分 公式 ",
+              "image_base64_str": null,
+              "page_num": [
+                12
+              ],
+              "bbox": [
+                239.0,
+                78.1,
+                360.9,
+                96.8
+              ]
+            },
+            "child": {
+              "1.7.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "以下是公式的示例，以下是公式的示例，以下是公式的示 例，以下是公式的示例，以下是公式的示例，以下是公式的 示例，以下是公式的示例。 ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    12
+                  ],
+                  "bbox": [
+                    90.0,
+                    118.0,
+                    505.2,
+                    197.2
+                  ]
+                },
+                "child": {}
+              },
+              "1.7.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "第一个示例： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    12
+                  ],
+                  "bbox": [
+                    111.1,
+                    211.6,
+                    211.5,
+                    228.4
+                  ]
+                },
+                "child": {
+                  "1.7.2.1": {
+                    "element": {
+                      "block_type": "Formula",
+                      "text": "a^2 + b^2 = c^2",
+                      "image_base64_str": null,
+                      "page_num": [
+                        12
+                      ],
+                      "bbox": [
+                        253.2,
+                        240.3,
+                        341.0,
+                        260.9
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.7.3": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "第二个示例： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    12
+                  ],
+                  "bbox": [
+                    111.1,
+                    274.0,
+                    211.5,
+                    290.8
+                  ]
+                },
+                "child": {
+                  "1.7.3.1": {
+                    "element": {
+                      "block_type": "Formula",
+                      "text": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}",
+                      "image_base64_str": null,
+                      "page_num": [
+                        12
+                      ],
+                      "bbox": [
+                        226.8,
+                        298.9,
+                        367.9,
+                        334.8
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.7.4": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "第三个示例： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    12
+                  ],
+                  "bbox": [
+                    111.1,
+                    352.0,
+                    211.5,
+                    368.8
+                  ]
+                },
+                "child": {
+                  "1.7.4.1": {
+                    "element": {
+                      "block_type": "Formula",
+                      "text": "e^x = 1 + \\frac{x}{1!} + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots,\\;-\\infty<x<\\infty",
+                      "image_base64_str": null,
+                      "page_num": [
+                        12
+                      ],
+                      "bbox": [
+                        111.1,
+                        430.0,
+                        211.5,
+                        446.8
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              },
+              "1.7.5": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "第四个示例： ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    12
+                  ],
+                  "bbox": [
+                    111.1,
+                    430.0,
+                    211.5,
+                    446.8
+                  ]
+                },
+                "child": {
+                  "1.7.5.1": {
+                    "element": {
+                      "block_type": "Formula",
+                      "text": "\\sin \\alpha \\pm \\sin \\beta = 2 \\sin \\frac12 (\\alpha \\pm \\beta) \\cos \\frac12 (\\alpha \\mp \\beta)",
+                      "image_base64_str": null,
+                      "page_num": [
+                        12
+                      ],
+                      "bbox": [
+                        111.1,
+                        430.0,
+                        211.5,
+                        446.8
+                      ]
+                    },
+                    "child": {}
+                  }
+                }
+              }
+            }
+          },
+          "1.8": {
+            "element": {
+              "block_type": "Title",
+              "text": "附录 ",
+              "image_base64_str": null,
+              "page_num": [
+                13
+              ],
+              "bbox": [
+                275.5,
+                76.2,
+                325.5,
+                99.2
+              ]
+            },
+            "child": {
+              "1.8.1": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "这是一个附录，以下填充了附录的内容：《小马过河》讲述了一 匹小马在过河过程中学会独立思考的故事。小马的妈妈让它把麦子送 到河对岸的磨坊。小马来到河边，看到湍急的河水，心里有些害怕。它问老牛河水深不深，老牛说水很浅，只到小腿。小马稍微放松，但 又遇到小松鼠，小松鼠说河水很深，曾经有朋友被冲走。小马听后更 加犹豫。 ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    13
+                  ],
+                  "bbox": [
+                    90.0,
+                    142.8,
+                    511.7,
+                    313.3
+                  ]
+                },
+                "child": {}
+              },
+              "1.8.2": {
+                "element": {
+                  "block_type": "Text",
+                  "text": "小马回去找妈妈，妈妈告诉它要自己试一试。于是，小马鼓起勇 气走进河水，发现水既不浅也不深，刚好到肚子。小马顺利过河，把 麦子送到磨坊。通过这次经历，小马明白了不能只依赖别人的经验，要勇敢尝试，自己判断。这故事教会我们独立思考和勇敢面对挑战的 重要性。 ",
+                  "image_base64_str": null,
+                  "page_num": [
+                    13
+                  ],
+                  "bbox": [
+                    90.0,
+                    330.0,
+                    511.7,
+                    469.3
+                  ]
+                },
+                "child": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

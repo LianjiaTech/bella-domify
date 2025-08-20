@@ -1,0 +1,4245 @@
+[
+  {
+    "type": "Title",
+    "element_id": "fef6cbf9687065646044a718e8929e3a",
+    "text": "这是一个自制的文件 第一部分 文字图片",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            519.70068359375,
+            244.3195037841797
+          ],
+          [
+            519.70068359375,
+            450.1775817871094
+          ],
+          [
+            1144.2666666666667,
+            450.1775817871094
+          ],
+          [
+            1144.2666666666667,
+            244.3195037841797
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "579c8719a04749b4b8bac664d4138b66",
+    "text": "这是第一个段落。在那遥远的山谷中，晨曦轻轻唤醒沉 睡的大地，薄雾如纱般笼罩着翠绿的山峦。鸟鸣婉转，仿佛 在诉说着古老的传说。此刻，心灵仿佛也被洗净，宁静而安 详，仿佛置身于世外桃源，忘却了尘世的喧嚣与烦忧。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            495.4284362792969
+          ],
+          [
+            250.0,
+            812.9441528320312
+          ],
+          [
+            1409.0694580078125,
+            812.9441528320312
+          ],
+          [
+            1409.0694580078125,
+            495.4284362792969
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "fef6cbf9687065646044a718e8929e3a",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "f6a4e117eac5bc39ba01d772b5c23dab",
+    "text": "以 下 是 一 个 简 单 的 表 格 示 例 , 包 含 一 些 基 本 信 息 ; 姓 名 年 龄 职 业 城 市 张 伟 28 工 程 师 北 京 李 娜 32 设 计 师 上 海 25 王 强 教 师 广 州 陈 静 30 医 生 深 圳",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            323.6111111111111,
+            866.9372222222222
+          ],
+          [
+            323.6111111111111,
+            1353.0483333333332
+          ],
+          [
+            1328.9769444444444,
+            1353.0483333333332
+          ],
+          [
+            1328.9769444444444,
+            866.9372222222222
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "text_as_html": "<table><thead><tr><th>以 下 是 一</th><th>个 简 单 的 表 格</th><th>基 本 信 息 :</th></tr><tr><th>姓 名</th><th>年 龄</th><th>城 市</th></tr></thead><tbody><tr><td>张 伟</td><td>28</td><td>北 京</td></tr><tr><td>李 娜</td><td>32</td><td>上 海</td></tr><tr><td>王 强</td><td>25</td><td>广 州</td></tr><tr><td>陈 静</td><td>30</td><td>深 圳</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "fef6cbf9687065646044a718e8929e3a",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "98d4b107248e4bf1c0b8e88878c9770b",
+    "text": "以 下 是 一 个 简 单 的 表 格 示 例 , 包 含 一 些 基 本 信 息 ;",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            335.41802978515625,
+            881.9751586914062
+          ],
+          [
+            335.41802978515625,
+            935.2388916015625
+          ],
+          [
+            1174.012451171875,
+            935.2388916015625
+          ],
+          [
+            1174.012451171875,
+            881.9751586914062
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "fef6cbf9687065646044a718e8929e3a",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c35bd9793ba2464b7a621719d3124561",
+    "text": "图 1-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            766.6666666666666,
+            1393.3857421875
+          ],
+          [
+            766.6666666666666,
+            1433.6373333333333
+          ],
+          [
+            895.9279999999999,
+            1433.6373333333333
+          ],
+          [
+            895.9279999999999,
+            1393.3857421875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "02711a209a62d11ea99af0c69fc008f2",
+    "text": "在 一 个 宁 静 的 午 后 , 阳 光 透 过 窗 帘 酒 在 书 桌 上 , 微 风 轻 轻 拂 动 , 带 来 阵 阵 花 香 。 窗 外 , 树 影 婆 娇 , 消 着 古 老 的 智 意 与 哲 思 。 此 刻 , 时 间 仿 佛 凝 固 , 心 灵 在 文 字 的 海 洋 中 避 游 , 感 受 着 前 人 留 下 的 深 遥 鸟 儿 在 枝 头 欢 快 地 歌 唱 , 仿 佛 在 为 这 美 好 的 时 光 伴 奏 。 手 中 的 书 籍 散 发 着 淡 淡 的 墨 香 , 字 里 行 间 流 思 考 与 情 感 。 远 处 , 钟 声 您 扬 , 提 醒 着 人 们 珍 惜 这 短 暂 而 美 好 的 宁 静 时 光 。 生 活 的 烦 恼 与 压 力 在 这 一 刻 似 乎 都 被 抛 诸 脑 后 , 只 剩 下 内 心 的 平 和 与 满 足 。 这 样 的 时 光 , 虽 短 暂 , 却 如 同 一 剂 良 药 , 治 愈 着 疲 惫 的 心 灵 , 让 人 重 新 焕 发 出 对 生 活 的 热 爱 与 向 往 。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            366.2295837402344,
+            1518.3431396484375
+          ],
+          [
+            366.2295837402344,
+            1705.1434326171875
+          ],
+          [
+            1273.728515625,
+            1705.1434326171875
+          ],
+          [
+            1273.728515625,
+            1518.3431396484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "c35bd9793ba2464b7a621719d3124561",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "2b799af2cad22e932bce0cd5dcf6ca20",
+    "text": "山",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1110.8189697265625,
+            1745.421875
+          ],
+          [
+            1110.8189697265625,
+            1770.654296875
+          ],
+          [
+            1135.87646484375,
+            1770.654296875
+          ],
+          [
+            1135.87646484375,
+            1745.421875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "a778b8a0413626bd8ded705a5c558904",
+    "text": "VW",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1159.3902587890625,
+            1744.9869384765625
+          ],
+          [
+            1159.3902587890625,
+            1769.4222412109375
+          ],
+          [
+            1183.8345947265625,
+            1769.4222412109375
+          ],
+          [
+            1183.8345947265625,
+            1744.9869384765625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "e0e11fc751b3c08a4b9b5026d04cc575",
+    "text": "口",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1208.177978515625,
+            1745.4857177734375
+          ],
+          [
+            1208.177978515625,
+            1769.1318359375
+          ],
+          [
+            1230.8243408203125,
+            1769.1318359375
+          ],
+          [
+            1230.8243408203125,
+            1745.4857177734375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f55edbecbb773393d98597ea791b1b73",
+    "text": "尔",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1253.652587890625,
+            1748.2344970703125
+          ],
+          [
+            1253.652587890625,
+            1769.685546875
+          ],
+          [
+            1280.982666015625,
+            1769.685546875
+          ],
+          [
+            1280.982666015625,
+            1748.2344970703125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "e0e11fc751b3c08a4b9b5026d04cc575",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c4e85984f2cdafd259bf106ff503d892",
+    "text": "图 1-2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            766.6666666666666,
+            1827.423583984375
+          ],
+          [
+            766.6666666666666,
+            1866.9706666666664
+          ],
+          [
+            895.9279999999999,
+            1866.9706666666664
+          ],
+          [
+            895.9279999999999,
+            1827.423583984375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "87c4dc77b730c403e52f7d770c991bb1",
+    "text": "在这个快节奏的时代，人们常常忙于工作和生活，忽略 了内心的宁静与平和。偶尔停下脚步，享受片刻的安宁，可",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            1928.7813720703125
+          ],
+          [
+            250.0,
+            2069.970947265625
+          ],
+          [
+            1405.313720703125,
+            2069.970947265625
+          ],
+          [
+            1405.313720703125,
+            1928.7813720703125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "c4e85984f2cdafd259bf106ff503d892",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "346aca63274f21461c3784ebb87c83e9",
+    "text": "以让我们重新审视自己的目标与方向。无论是阅读一本好书， 还是在自然中漫步，这些简单的活动都能帮助我们放松心情， 恢复活力。珍惜每一个当下，感受生活的美好，是我们追求 幸福的重要途径。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            245.94403076171875,
+            211.76974487304688
+          ],
+          [
+            245.94403076171875,
+            528.6343383789062
+          ],
+          [
+            1448.0091333333332,
+            528.6343383789062
+          ],
+          [
+            1448.0091333333332,
+            211.76974487304688
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "c4e85984f2cdafd259bf106ff503d892",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "78f51036aac841c1b7e4602e75d43ad7",
+    "text": "第二部分 无序列表",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            612.32275390625,
+            688.0931396484375
+          ],
+          [
+            612.32275390625,
+            748.9974975585938
+          ],
+          [
+            1052.4166666666665,
+            748.9974975585938
+          ],
+          [
+            1052.4166666666665,
+            688.0931396484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7f5850ffc62fbb4f5bb04af7a17dfdc8",
+    "text": "冰心的《小桔灯》是一篇感人至深的散文，讲述了一个 小女孩在艰难环境中，用一盏小桔灯照亮黑暗的故事。文章 通过细腻的描写，展现了小女孩的坚强与乐观。第一种无序 列表 demo 如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            798.620849609375
+          ],
+          [
+            250.0,
+            1112.58740234375
+          ],
+          [
+            1422.1461181640625,
+            1112.58740234375
+          ],
+          [
+            1422.1461181640625,
+            798.620849609375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "78f51036aac841c1b7e4602e75d43ad7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "b1a375fa4ea395e431638e6c617bff53",
+    "text": "Ø 无序列表第一项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1167.8687744140625
+          ],
+          [
+            361.33333333333326,
+            1224.90234375
+          ],
+          [
+            742.9053333333331,
+            1224.90234375
+          ],
+          [
+            742.9053333333331,
+            1167.8687744140625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "78f51036aac841c1b7e4602e75d43ad7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "661b18fa7c8814ae4c32f8860b1f3c6a",
+    "text": "Ø 无序列表第二项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1255.1846923828125
+          ],
+          [
+            361.33333333333326,
+            1310.641845703125
+          ],
+          [
+            742.9053333333331,
+            1310.641845703125
+          ],
+          [
+            742.9053333333331,
+            1255.1846923828125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "78f51036aac841c1b7e4602e75d43ad7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "4437bbccdd2fcd27f7c92cfa3310189f",
+    "text": "Ø 无序列表第三项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1347.4246666666668
+          ],
+          [
+            361.33333333333326,
+            1393.0293333333334
+          ],
+          [
+            742.9053333333331,
+            1393.0293333333334
+          ],
+          [
+            742.9053333333331,
+            1347.4246666666668
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7a26d5805b98f1d2dd82a02db6a8142f",
+    "text": "她用简单的桔子皮和蜡烛，制作了一盏温暖的小灯，象 征着希望与勇气。冰心通过这个故事，传达了在困境中保持 积极心态的重要性，以及人性中温暖和善良的力量。第二种 无序列表 demo 如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            1448.9976806640625
+          ],
+          [
+            250.0,
+            1762.3853759765625
+          ],
+          [
+            1421.2130126953125,
+            1762.3853759765625
+          ],
+          [
+            1421.2130126953125,
+            1448.9976806640625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "4437bbccdd2fcd27f7c92cfa3310189f",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "9a16a9e7746d664f95e1008e9edf1f59",
+    "text": "l 无序列表第 1 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1818.19384765625
+          ],
+          [
+            361.33333333333326,
+            1872.508056640625
+          ],
+          [
+            743.5719999999999,
+            1872.508056640625
+          ],
+          [
+            743.5719999999999,
+            1818.19384765625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "4437bbccdd2fcd27f7c92cfa3310189f",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "065d30b62c277bfab48827e416bb8bc8",
+    "text": "l 无序列表第 2 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1910.758
+          ],
+          [
+            361.33333333333326,
+            1956.3626666666667
+          ],
+          [
+            743.5719999999999,
+            1956.3626666666667
+          ],
+          [
+            743.5719999999999,
+            1910.758
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "4437bbccdd2fcd27f7c92cfa3310189f",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "d234d96834c13477a1540d90d570af33",
+    "text": "l 无序列表第 3 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1997.4246666666663
+          ],
+          [
+            361.33333333333326,
+            2043.0293333333332
+          ],
+          [
+            743.5719999999999,
+            2043.0293333333332
+          ],
+          [
+            743.5719999999999,
+            1997.4246666666663
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "4437bbccdd2fcd27f7c92cfa3310189f",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "72915365c175203c2e4adefbb3d3f491",
+    "text": "通过小女孩的形象，表达了对生活的热爱和对未来的希 望。小桔灯不仅仅是一盏灯，更是象征着在黑暗中寻找光明 的勇气。第三种无序列表 demo 如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            212.74822998046875
+          ],
+          [
+            250.0,
+            444.5107727050781
+          ],
+          [
+            1410.842529296875,
+            444.5107727050781
+          ],
+          [
+            1410.842529296875,
+            212.74822998046875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "682d0d55c359ee0d5065b5cb9a84653b",
+    "text": "ü 无序列表项无序列表项 1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            338.6666666666667,
+            496.4934997558594
+          ],
+          [
+            338.6666666666667,
+            552.5159301757812
+          ],
+          [
+            888.2386666666666,
+            552.5159301757812
+          ],
+          [
+            888.2386666666666,
+            496.4934997558594
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "4dd1f7d13a9e114138822fe11d8d663d",
+    "text": "ü 无序列表项无序列表项 2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            338.6666666666667,
+            583.1560668945312
+          ],
+          [
+            338.6666666666667,
+            637.0054931640625
+          ],
+          [
+            888.2386666666666,
+            637.0054931640625
+          ],
+          [
+            888.2386666666666,
+            583.1560668945312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6be6b90fa951086b67981f05a6750598",
+    "text": "ü 无序列表项无序列表项 3",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            338.6666666666667,
+            670.9461059570312
+          ],
+          [
+            338.6666666666667,
+            724.172607421875
+          ],
+          [
+            888.2386666666666,
+            724.172607421875
+          ],
+          [
+            888.2386666666666,
+            670.9461059570312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "10f5b334f570985c30052bd10ffff501",
+    "text": "ü 无序列表项无序列表项 4",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            338.6666666666667,
+            757.847900390625
+          ],
+          [
+            338.6666666666667,
+            811.551513671875
+          ],
+          [
+            888.2386666666666,
+            811.551513671875
+          ],
+          [
+            888.2386666666666,
+            757.847900390625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "39b0c1188bf092ffe7f837e164adf4e5",
+    "text": "第三部分 无序列表嵌套",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            564.0,
+            861.9747314453125
+          ],
+          [
+            564.0,
+            921.6277465820312
+          ],
+          [
+            1102.4166666666665,
+            921.6277465820312
+          ],
+          [
+            1102.4166666666665,
+            861.9747314453125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a21ebecac62686d38e98f39811ef6838",
+    "text": "文章结尾，小桔灯的光芒照亮了整个房间，也照亮了读 者的心灵。无序列表嵌套无序列表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            973.6555786132812
+          ],
+          [
+            250.0,
+            1114.553955078125
+          ],
+          [
+            1406.7845458984375,
+            1114.553955078125
+          ],
+          [
+            1406.7845458984375,
+            973.6555786132812
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "39b0c1188bf092ffe7f837e164adf4e5",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "56e764efc62e421882597ae2e2f74de6",
+    "text": "Ø 无序列表第一项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1174.0913333333333
+          ],
+          [
+            361.33333333333326,
+            1219.6960000000001
+          ],
+          [
+            742.9053333333331,
+            1219.6960000000001
+          ],
+          [
+            742.9053333333331,
+            1174.0913333333333
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7d416d811771b0f1cd770729c647033e",
+    "text": "n 无序列表第一项的第一子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            1255.683349609375
+          ],
+          [
+            419.3333333333333,
+            1310.2335205078125
+          ],
+          [
+            1023.5719999999999,
+            1310.2335205078125
+          ],
+          [
+            1023.5719999999999,
+            1255.683349609375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "56e764efc62e421882597ae2e2f74de6",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "0eb2fa7588133b7ceaf253ec1a4c6f6b",
+    "text": "n 无序列表第一项的第二子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            1342.2098388671875
+          ],
+          [
+            419.3333333333333,
+            1396.158447265625
+          ],
+          [
+            1023.5719999999999,
+            1396.158447265625
+          ],
+          [
+            1023.5719999999999,
+            1342.2098388671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "56e764efc62e421882597ae2e2f74de6",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "30ad0f387aaca25801712c1000b4d819",
+    "text": "n 无序列表第一项的第三子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            1428.5760498046875
+          ],
+          [
+            419.3333333333333,
+            1483.0584716796875
+          ],
+          [
+            1023.5719999999999,
+            1483.0584716796875
+          ],
+          [
+            1023.5719999999999,
+            1428.5760498046875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "56e764efc62e421882597ae2e2f74de6",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "3c2348a07ac90a19b84d47a0e27c6b63",
+    "text": "Ø 无序列表第二项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1520.758
+          ],
+          [
+            361.33333333333326,
+            1566.3626666666667
+          ],
+          [
+            742.9053333333331,
+            1566.3626666666667
+          ],
+          [
+            742.9053333333331,
+            1520.758
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "fb48ecdb92f6b478df72e084c041395e",
+    "text": "n 无序列表第二项的第一子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            1603.1944580078125
+          ],
+          [
+            419.3333333333333,
+            1655.30224609375
+          ],
+          [
+            1023.5719999999999,
+            1655.30224609375
+          ],
+          [
+            1023.5719999999999,
+            1603.1944580078125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "3c2348a07ac90a19b84d47a0e27c6b63",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "4b7cf5f0f20f299272d8838ded674305",
+    "text": "n 无序列表第二项的第二子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            1689.8995361328125
+          ],
+          [
+            419.3333333333333,
+            1742.2259521484375
+          ],
+          [
+            1023.5719999999999,
+            1742.2259521484375
+          ],
+          [
+            1023.5719999999999,
+            1689.8995361328125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "3c2348a07ac90a19b84d47a0e27c6b63",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7597a80ad5f6e78d396afaec45cf129d",
+    "text": "Ø 无序列表第三项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1777.7060546875
+          ],
+          [
+            361.33333333333326,
+            1828.4393310546875
+          ],
+          [
+            742.9053333333331,
+            1828.4393310546875
+          ],
+          [
+            742.9053333333331,
+            1777.7060546875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "3c2348a07ac90a19b84d47a0e27c6b63",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "900237eaa87873da365ae91f68d3885d",
+    "text": "冰心用简洁而富有诗意的语言，唤起了人们对美好生活 的向往和对人性光辉的信任。这篇散文以其深刻的内涵和感 人的故事，成为了文学史上的经典之作。第二种无序列表嵌",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            1884.456298828125
+          ],
+          [
+            250.0,
+            2111.994873046875
+          ],
+          [
+            1416.7332763671875,
+            2111.994873046875
+          ],
+          [
+            1416.7332763671875,
+            1884.456298828125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "3c2348a07ac90a19b84d47a0e27c6b63",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Header",
+    "element_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+    "text": "套无序列表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            246.91148376464844,
+            214.00262451171875
+          ],
+          [
+            246.91148376464844,
+            267.0999450683594
+          ],
+          [
+            528.9053333333334,
+            267.0999450683594
+          ],
+          [
+            528.9053333333334,
+            214.00262451171875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "43fa4a843cf04350dce9c134fd5f750b",
+    "text": "l 无序列表第 1 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            325.21923828125
+          ],
+          [
+            361.33333333333326,
+            374.6612854003906
+          ],
+          [
+            743.5719999999999,
+            374.6612854003906
+          ],
+          [
+            743.5719999999999,
+            325.21923828125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "4c4515a3ad266228478399c060125614",
+    "text": "² 无序列表第 1 项的第 1 子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            411.12811279296875
+          ],
+          [
+            419.3333333333333,
+            463.3383483886719
+          ],
+          [
+            1025.572,
+            463.3383483886719
+          ],
+          [
+            1025.572,
+            411.12811279296875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7c8f3b8f913eb1be12398e8ca317a45e",
+    "text": "² 无序列表第 1 项的第 2 子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            497.0846862792969
+          ],
+          [
+            419.3333333333333,
+            550.8770141601562
+          ],
+          [
+            1025.572,
+            550.8770141601562
+          ],
+          [
+            1025.572,
+            497.0846862792969
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "78b7849fa1d142a3fc36cc63efd09ed0",
+    "text": "l 无序列表第 2 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            584.3291625976562
+          ],
+          [
+            361.33333333333326,
+            634.9085083007812
+          ],
+          [
+            743.5719999999999,
+            634.9085083007812
+          ],
+          [
+            743.5719999999999,
+            584.3291625976562
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "69154dc6d4911988de6299b183c2aa3c",
+    "text": "² 无序列表第 2 项的第 1 子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            670.2832641601562
+          ],
+          [
+            419.3333333333333,
+            724.31103515625
+          ],
+          [
+            1025.572,
+            724.31103515625
+          ],
+          [
+            1025.572,
+            670.2832641601562
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8033079cc2198e1840199b871b62bcf6",
+    "text": "² 无序列表第 2 项的第 2 子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            756.1802368164062
+          ],
+          [
+            419.3333333333333,
+            811.7491455078125
+          ],
+          [
+            1025.572,
+            811.7491455078125
+          ],
+          [
+            1025.572,
+            756.1802368164062
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c309abd7d9c5fafc685ce647994b2c83",
+    "text": "² 无序列表第 2 项的第 3 子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            842.3353881835938
+          ],
+          [
+            419.3333333333333,
+            898.6708374023438
+          ],
+          [
+            1025.572,
+            898.6708374023438
+          ],
+          [
+            1025.572,
+            842.3353881835938
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "e98916b1505ca405436bab6ad1f934be",
+    "text": "l 无序列表第 3 项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            931.1751098632812
+          ],
+          [
+            361.33333333333326,
+            982.0582885742188
+          ],
+          [
+            743.5719999999999,
+            982.0582885742188
+          ],
+          [
+            743.5719999999999,
+            931.1751098632812
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f0d2e83fce6bacc1f289727733ccf225",
+    "text": "² 无序列表第 3 项的第 1 子项",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            419.3333333333333,
+            1017.7027587890625
+          ],
+          [
+            419.3333333333333,
+            1070.5147705078125
+          ],
+          [
+            1025.572,
+            1070.5147705078125
+          ],
+          [
+            1025.572,
+            1017.7027587890625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "205b23f9738887b48bfb7efce3dbbced",
+    "text": "鲁迅通过与童年伙伴闰土的重逢，揭示了时间流逝带来 的变化和人情的冷暖。无序列表嵌套有序列表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            1122.2618408203125
+          ],
+          [
+            250.0,
+            1268.609130859375
+          ],
+          [
+            1407.4947509765625,
+            1268.609130859375
+          ],
+          [
+            1407.4947509765625,
+            1122.2618408203125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "991ab09075c89068005514ece635d997",
+    "text": "ü 无序列表项无序列表项 1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            338.6666666666667,
+            1318.9814453125
+          ],
+          [
+            338.6666666666667,
+            1373.9688720703125
+          ],
+          [
+            888.2603759765625,
+            1373.9688720703125
+          ],
+          [
+            888.2603759765625,
+            1318.9814453125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7f003e5e5a4914f46346b9d23dd87993",
+    "text": "1） 无序列表项有序列表项 1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            397.3333333333333,
+            1405.3353271484375
+          ],
+          [
+            397.3333333333333,
+            1463.323974609375
+          ],
+          [
+            988.2386666666666,
+            1463.323974609375
+          ],
+          [
+            988.2386666666666,
+            1405.3353271484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "e05db0f52a08ab5b907efa53f9917061",
+    "text": "2） 无序列表项有序列表项 2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            397.3333333333333,
+            1491.447998046875
+          ],
+          [
+            397.3333333333333,
+            1550.6256103515625
+          ],
+          [
+            988.2386666666666,
+            1550.6256103515625
+          ],
+          [
+            988.2386666666666,
+            1491.447998046875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7d050c7a205e180a283c48f3bff947c1",
+    "text": "ü 无序列表项无序列表项 2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            338.6666666666667,
+            1579.9586181640625
+          ],
+          [
+            338.6666666666667,
+            1635.5306396484375
+          ],
+          [
+            888.2386666666666,
+            1635.5306396484375
+          ],
+          [
+            888.2386666666666,
+            1579.9586181640625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "bccf383b4763e7e7a8e5a5b9c34284d5",
+    "text": "a) 无序列表项有序列表项 1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            391.0229187011719,
+            1664.7689208984375
+          ],
+          [
+            391.0229187011719,
+            1723.952392578125
+          ],
+          [
+            946.2386666666666,
+            1723.952392578125
+          ],
+          [
+            946.2386666666666,
+            1664.7689208984375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "5bef33a62072b3f26ce383919c9ac211",
+    "text": "b) 无序列表项有序列表项 2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            388.7781066894531,
+            1751.7735595703125
+          ],
+          [
+            388.7781066894531,
+            1810.434326171875
+          ],
+          [
+            946.3690795898438,
+            1810.434326171875
+          ],
+          [
+            946.3690795898438,
+            1751.7735595703125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "1b364d51343eccbbd12b5c2185592d7f",
+    "text": "c) 无序列表项有序列表项 3",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            387.12103271484375,
+            1840.1502685546875
+          ],
+          [
+            387.12103271484375,
+            1894.52587890625
+          ],
+          [
+            946.703369140625,
+            1894.52587890625
+          ],
+          [
+            946.703369140625,
+            1840.1502685546875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 4,
+      "parent_id": "6997b0b6b7bbedffa6514e34a86e43b7",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c9e5306e3853cb45ca98bbb039055065",
+    "text": "第四部分 表格",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            657.3287963867188,
+            212.81968688964844
+          ],
+          [
+            657.3287963867188,
+            270.6954345703125
+          ],
+          [
+            1002.4166666666665,
+            270.6954345703125
+          ],
+          [
+            1002.4166666666665,
+            212.81968688964844
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "03a16cec690ed0c5daa9c53ba259bb4d",
+    "text": "以下是第一个示例，三线表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            358.4002380371094,
+            432.5877990722656
+          ],
+          [
+            358.4002380371094,
+            484.7717590332031
+          ],
+          [
+            951.5719999999998,
+            484.7717590332031
+          ],
+          [
+            951.5719999999998,
+            432.5877990722656
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "ef8e5ea6c8d69cd4bce87a73830970d1",
+    "text": "姓名 性别 张三 男 张四 男 张五 男 表 1-1 年龄 25 26 27",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            296.7245788574219,
+            552.0772094726562
+          ],
+          [
+            296.7245788574219,
+            1147.1512451171875
+          ],
+          [
+            1380.8297119140625,
+            1147.1512451171875
+          ],
+          [
+            1380.8297119140625,
+            552.0772094726562
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "text_as_html": "<table><tbody><tr><td>姓 名</td><td>年 龄</td></tr><tr><td>张 三</td><td>25</td></tr><tr><td>张 四</td><td>26</td></tr><tr><td colspan=\"2\">张 五 27</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "parent_id": "03a16cec690ed0c5daa9c53ba259bb4d",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c860792e0baf57767a3d4ef2b19c94b6",
+    "text": "以下是第二个示例，内部框线表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1306.708251953125
+          ],
+          [
+            361.33333333333326,
+            1363.0035400390625
+          ],
+          [
+            1040.2386666666666,
+            1363.0035400390625
+          ],
+          [
+            1040.2386666666666,
+            1306.708251953125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "d9397650fe130c03f92add07cbbd19e6",
+    "text": "姓名 性别 李四 女 李五 女 李六 女 年龄 37 38 39",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            236.8070831298828,
+            1393.442138671875
+          ],
+          [
+            236.8070831298828,
+            1936.1324462890625
+          ],
+          [
+            1380.02294921875,
+            1936.1324462890625
+          ],
+          [
+            1380.02294921875,
+            1393.442138671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "text_as_html": "<table><thead><tr><th>姓 名</th><th>年 龄</th></tr></thead><tbody><tr><td>李 四</td><td>37</td></tr><tr><td>李 五</td><td>38</td></tr><tr><td>李 六</td><td>39</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "parent_id": "c860792e0baf57767a3d4ef2b19c94b6",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a3f1bc2ae64976cc193b7de21a20a23d",
+    "text": "表 2-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            810.8345336914062,
+            1969.9945068359375
+          ],
+          [
+            810.8345336914062,
+            2018.3626666666664
+          ],
+          [
+            962.2386666666666,
+            2018.3626666666664
+          ],
+          [
+            962.2386666666666,
+            1969.9945068359375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 5,
+      "parent_id": "c860792e0baf57767a3d4ef2b19c94b6",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "cfa6222a694fe750a78e835de3ab2cab",
+    "text": "以下是第三个示例，外部框线表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            359.38031005859375,
+            213.36410522460938
+          ],
+          [
+            359.38031005859375,
+            270.1145324707031
+          ],
+          [
+            1040.2386666666666,
+            270.1145324707031
+          ],
+          [
+            1040.2386666666666,
+            213.36410522460938
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 6,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "3aa0b792184e4c19d89ab962a5f409a2",
+    "text": "姓名 性别 王五 男 王六 男 王七 男 年龄 41 42 43",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            243.4453125,
+            306.94598388671875
+          ],
+          [
+            243.4453125,
+            840.000732421875
+          ],
+          [
+            1382.97216796875,
+            840.000732421875
+          ],
+          [
+            1382.97216796875,
+            306.94598388671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "text_as_html": "<table><tbody><tr><td>姓 名</td><td>年 龄</td></tr><tr><td>王 五</td><td>41</td></tr><tr><td>王 六</td><td>42</td></tr><tr><td>王 七</td><td>43</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 6,
+      "parent_id": "cfa6222a694fe750a78e835de3ab2cab",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "0628f31aa8a5ef6c681d33562f403d95",
+    "text": "表 3-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            810.3658447265625,
+            871.36083984375
+          ],
+          [
+            810.3658447265625,
+            920.3626666666668
+          ],
+          [
+            962.2386666666666,
+            920.3626666666668
+          ],
+          [
+            962.2386666666666,
+            871.36083984375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 6,
+      "parent_id": "cfa6222a694fe750a78e835de3ab2cab",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "da0a8b8d1d49452cf7359d4298e55d4a",
+    "text": "以下是第四个示例，无线表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            361.33333333333326,
+            1085.309814453125
+          ],
+          [
+            361.33333333333326,
+            1140.512451171875
+          ],
+          [
+            951.5719999999998,
+            1140.512451171875
+          ],
+          [
+            951.5719999999998,
+            1085.309814453125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 6,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "ed5e406807cc5888fc75736281ef6a62",
+    "text": "序号 项目名称 负责人 1 数据分析报告 张伟 2 市场调研报告 李娜 3 产品设计 王强 完成日期 2024-11-13 2024-11-12 2024-11-11",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            247.96331787109375,
+            1203.232177734375
+          ],
+          [
+            247.96331787109375,
+            1704.107421875
+          ],
+          [
+            1406.774169921875,
+            1704.107421875
+          ],
+          [
+            1406.774169921875,
+            1203.232177734375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "text_as_html": "<table><thead><tr><th>序 号</th><th>项 目 名 称</th><th>负 责 人 完 成 日 期</th></tr></thead><tbody><tr><td></td><td>数 据 分 析 报 告</td><td>张 伟 2024-11-13</td></tr><tr><td colspan=\"3\">市 场 调 研 报 告 李 娜 2024-11-12</td></tr><tr><td></td><td>产 品 设 计</td><td>王 强 2024-11-11</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 6,
+      "parent_id": "da0a8b8d1d49452cf7359d4298e55d4a",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6af9971f63269b5d96160a0d1bce3dac",
+    "text": "表 4-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            811.2003173828125,
+            1740.928955078125
+          ],
+          [
+            811.2003173828125,
+            1788.3626666666667
+          ],
+          [
+            962.2386666666666,
+            1788.3626666666667
+          ],
+          [
+            962.2386666666666,
+            1740.928955078125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 6,
+      "parent_id": "da0a8b8d1d49452cf7359d4298e55d4a",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "6ccc59972fb81463b0be3223e59be022",
+    "text": "以下是第五个示例，无线表：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            359.1258850097656,
+            212.52301025390625
+          ],
+          [
+            359.1258850097656,
+            270.4920349121094
+          ],
+          [
+            951.5719999999998,
+            270.4920349121094
+          ],
+          [
+            951.5719999999998,
+            212.52301025390625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 7,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "da0c6461bb439fd37d84413a73e734f4",
+    "text": "序号 项目名称 负责人 1 用户测试 陈敏 2 系统集成 赵磊 3 项目总结 孙丽 完成日期 2024-11-13 2024-11-12 2024-11-11",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            249.45997619628906,
+            330.86932373046875
+          ],
+          [
+            249.45997619628906,
+            805.7929077148438
+          ],
+          [
+            1377.4266357421875,
+            805.7929077148438
+          ],
+          [
+            1377.4266357421875,
+            330.86932373046875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "text_as_html": "<table><tbody><tr><td>序 号</td><td>项 目 名 称</td><td>负 责 人 完 成 日 期</td></tr><tr><td></td><td>用 户 测 试</td><td>陈 敏 2024-11-13</td></tr><tr><td></td><td>系 统 集 成</td><td>赵 磊 2024-11-12</td></tr><tr><td></td><td>项 目 总 结</td><td>孙 丽 2024-11-11</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 7,
+      "parent_id": "6ccc59972fb81463b0be3223e59be022",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "65ac504fa0ecaf52aa516a1dfc99aefe",
+    "text": "表 5-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            809.929443359375,
+            868.5648193359375
+          ],
+          [
+            809.929443359375,
+            919.2761840820312
+          ],
+          [
+            962.2386666666666,
+            919.2761840820312
+          ],
+          [
+            962.2386666666666,
+            868.5648193359375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 7,
+      "parent_id": "6ccc59972fb81463b0be3223e59be022",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "a4d45e80e46d28376e51e3eebb02ce28",
+    "text": "第五部分 代码块",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            638.6666666666666,
+            212.69940185546875
+          ],
+          [
+            638.6666666666666,
+            272.99359130859375
+          ],
+          [
+            1027.0833333333333,
+            272.99359130859375
+          ],
+          [
+            1027.0833333333333,
+            212.69940185546875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 8,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "5138188b103d26fbbddfb88c81940ab4",
+    "text": "以下是第一个代码块，这是一个 JSON 代码表达了一",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            383.3333333333333,
+            329.6960000000003
+          ],
+          [
+            383.3333333333333,
+            374.36266666666677
+          ],
+          [
+            1403.3333333333333,
+            374.36266666666677
+          ],
+          [
+            1403.3333333333333,
+            329.6960000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 8,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "64594233cb24f146810331ae89aea6a3",
+    "text": "个文档解析后的结构，代码块 demo 如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            245.04409790039062,
+            408.9765319824219
+          ],
+          [
+            245.04409790039062,
+            465.9046325683594
+          ],
+          [
+            1106.9053333333331,
+            465.9046325683594
+          ],
+          [
+            1106.9053333333331,
+            408.9765319824219
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 8,
+      "parent_id": "5138188b103d26fbbddfb88c81940ab4",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "CodeSnippet",
+    "element_id": "7c978ff348676ac212db3557a1a62afe",
+    "text": "{ \"root\": { \"child\": [ { \"child\": [ { \"child\": [], \"order_num\": \"1.1\", \"element\": { \"block_type\": \"table\", \"rows\": [] } }, {} ], \"order_num\": \"1\", \"element\": { \"text\": \"贝壳 无形资产核算指引 \", \"block_type\": \"text\", \"image_base64_str\": null } } ], \"order_num\": null, \"element\": null } }",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            425.3333333333333,
+            519.7047729492188
+          ],
+          [
+            425.3333333333333,
+            2078.07080078125
+          ],
+          [
+            1136.9333333333332,
+            2078.07080078125
+          ],
+          [
+            1136.9333333333332,
+            519.7047729492188
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 8,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "fec6fb0a0cdf0afc79e880fe255ed9ad",
+    "text": "下面是第二个代码块，这是一个普通的 SQL 代码，用",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            366.66666666666663,
+            213.88348388671875
+          ],
+          [
+            366.66666666666663,
+            269.34014892578125
+          ],
+          [
+            1403.3333333333333,
+            269.34014892578125
+          ],
+          [
+            1403.3333333333333,
+            213.88348388671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 9,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "88967468287a605f7870b397d0eb66ee",
+    "text": "于查询学生和课程的相关信息，具体如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.66666666666663,
+            300.8739318847656
+          ],
+          [
+            308.66666666666663,
+            356.9762878417969
+          ],
+          [
+            1165.572,
+            356.9762878417969
+          ],
+          [
+            1165.572,
+            300.8739318847656
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 9,
+      "parent_id": "fec6fb0a0cdf0afc79e880fe255ed9ad",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "CodeSnippet",
+    "element_id": "75d4621c7bb2c1fb2687f1a60f127450",
+    "text": "SELECT s.name, s.age, s.score, c.course_name FROM students s JOIN enrollments e ON s.student_id = e.student_id JOIN courses c ON e.course_id = c.course_id WHERE s.age > 18 AND s.score > 75 AND c.course_name LIKE 'Math%'",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            412.7491455078125,
+            411.07958984375
+          ],
+          [
+            412.7491455078125,
+            1060.34326171875
+          ],
+          [
+            1070.0373333333332,
+            1060.34326171875
+          ],
+          [
+            1070.0373333333332,
+            411.07958984375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 9,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "1362b9130c42b38f82a7e8665ba09177",
+    "text": "下面是第三个代码块，这是一个普通的 HTML 代码， 这是一个简单的静态页面的表达，可以在浏览器中直接打 开浏览，非常方便，具体如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            304.447021484375,
+            1125.326171875
+          ],
+          [
+            304.447021484375,
+            1355.3275146484375
+          ],
+          [
+            1412.5712890625,
+            1355.3275146484375
+          ],
+          [
+            1412.5712890625,
+            1125.326171875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 9,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "CodeSnippet",
+    "element_id": "25cda00e27799bc500ea0fe9c5bf791b",
+    "text": "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Simple HTML Page</title> </head> <body> <h1>Welcome to My Website</h1> <p>This is a simple HTML page.</p> <a href=\"https://www.example.com\">Visit Example</a> </body> </html>",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            420.331787109375,
+            1403.462158203125
+          ],
+          [
+            420.331787109375,
+            1970.118408203125
+          ],
+          [
+            1477.84521484375,
+            1970.118408203125
+          ],
+          [
+            1477.84521484375,
+            1403.462158203125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 9,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c8c6e7e90c766c4d29bffd8d1b59bb98",
+    "text": "下面是第四个代码块，这是一个 python 代码，这里是",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            366.66666666666663,
+            2035.6168212890625
+          ],
+          [
+            366.66666666666663,
+            2090.54638671875
+          ],
+          [
+            1414.0321044921875,
+            2090.54638671875
+          ],
+          [
+            1414.0321044921875,
+            2035.6168212890625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 9,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "5e60b0cfc816440d547e677328f8ad8d",
+    "text": "一个实现快速排序（Quick Sort）算法的 Python 示例，",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.66666666666663,
+            221.69600000000034
+          ],
+          [
+            308.66666666666663,
+            266.3626666666668
+          ],
+          [
+            1403.3333333333333,
+            266.3626666666668
+          ],
+          [
+            1403.3333333333333,
+            221.69600000000034
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 10,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "ecbe788258557978e6d6fb80b2243d48",
+    "text": "具体如下：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            304.0928955078125,
+            301.3240661621094
+          ],
+          [
+            304.0928955078125,
+            353.5021667480469
+          ],
+          [
+            542.9053333333333,
+            353.5021667480469
+          ],
+          [
+            542.9053333333333,
+            301.3240661621094
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 10,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "CodeSnippet",
+    "element_id": "a3bd5291c417be84bf1af033acd22bbe",
+    "text": "def quicksort(arr): if len(arr) <= 1: return arr else: pivot = arr[len(arr) // 2] left = [x for x in arr if x < pivot] middle = [x for x in arr if x == pivot] right = [x for x in arr if x > pivot] return quicksort(left) + middle + quicksort(right) # 示例用法 array = [3, 6, 8, 10, 1, 2, 1] sorted_array = quicksort(array) print(\"Sorted array:\", sorted_array)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            422.03466796875,
+            411.684814453125
+          ],
+          [
+            422.03466796875,
+            1025.4920654296875
+          ],
+          [
+            1154.818133333333,
+            1025.4920654296875
+          ],
+          [
+            1154.818133333333,
+            411.684814453125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 10,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "9641ed5a2c5c35d92e922a848e3a15ad",
+    "text": "第六部分 线框图",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            631.5133666992188,
+            1188.3753662109375
+          ],
+          [
+            631.5133666992188,
+            1244.6453857421875
+          ],
+          [
+            1037.3748779296875,
+            1244.6453857421875
+          ],
+          [
+            1037.3748779296875,
+            1188.3753662109375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 10,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "79988d599bcb5a8b6d6d87969dc98ba8",
+    "text": "以下是第一个线框图，以下是第一个线框图：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.66666666666663,
+            1298.4501953125
+          ],
+          [
+            308.66666666666663,
+            1352.197509765625
+          ],
+          [
+            1209.572,
+            1352.197509765625
+          ],
+          [
+            1209.572,
+            1298.4501953125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 10,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "91e8e89fd038a42e7d3b4a4d4ae9c84a",
+    "text": "图表标题  6  5  4  3  2  1  0  类别 1  类别 2  类别 3  类别 4  系列 1 系列 2 系列 3 ",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            310.4969177246094,
+            1383.756591796875
+          ],
+          [
+            310.4969177246094,
+            2047.997314453125
+          ],
+          [
+            1457.4697265625,
+            2047.997314453125
+          ],
+          [
+            1457.4697265625,
+            1383.756591796875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 10,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2bcf2e7e8f114aeb9bb5241a18eec551",
+    "text": "图表 6-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            763.1197509765625,
+            2082.92578125
+          ],
+          [
+            763.1197509765625,
+            2129.696
+          ],
+          [
+            957.5719999999999,
+            2129.696
+          ],
+          [
+            957.5719999999999,
+            2082.92578125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 10,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "e80af861ebef5c32b73fa77ec02f02b1",
+    "text": "以下是第二个线框图，以下是第二个线框图：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            301.09783935546875,
+            213.5391845703125
+          ],
+          [
+            301.09783935546875,
+            268.95367431640625
+          ],
+          [
+            1209.572,
+            268.95367431640625
+          ],
+          [
+            1209.572,
+            213.5391845703125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 11,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "eaaf4a5dcc8f8ec7ad821a52e8029514",
+    "text": "第一季度 第二季度 第三季度 第四季度 ",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            499.8529052734375,
+            332.6108703613281
+          ],
+          [
+            499.8529052734375,
+            955.2943725585938
+          ],
+          [
+            1273.2135009765625,
+            955.2943725585938
+          ],
+          [
+            1273.2135009765625,
+            332.6108703613281
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 11,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7ade55da024227198fbbbc3e0ab5b651",
+    "text": "图标 7-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            770.5560913085938,
+            999.2015991210938
+          ],
+          [
+            770.5560913085938,
+            1046.3626666666669
+          ],
+          [
+            952.2386666666665,
+            1046.3626666666669
+          ],
+          [
+            952.2386666666665,
+            999.2015991210938
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 11,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "4d6ffc2dd1fce0a4cc0684bb161cfbcf",
+    "text": "需求分析  方案设计  交付与维  护  开发实施  测试与优  化 ",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.34930419921875,
+            1169.9166259765625
+          ],
+          [
+            308.34930419921875,
+            1660.19873046875
+          ],
+          [
+            1457.550537109375,
+            1660.19873046875
+          ],
+          [
+            1457.550537109375,
+            1169.9166259765625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 11,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "5a6a98f3a5eee3641e299c8d43491323",
+    "text": "图表 8-1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            765.3333333333333,
+            1779.83447265625
+          ],
+          [
+            765.3333333333333,
+            1826.3626666666669
+          ],
+          [
+            957.5719999999999,
+            1826.3626666666669
+          ],
+          [
+            957.5719999999999,
+            1779.83447265625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 11,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c81b5f96788563a04cb33681504a5cdc",
+    "text": "朱 自 清 的 《 春 》 是 一 篇 揣 绘 春 天 景 色 的 散 文 , 充 满 了 对 春 天 的 热 爱 和 赞 美 。 文 章 通 过 细 腻 的 笔 触 , 揣 绘 了 春 天 的 各 种 景 象 , 如 春 风 、 春 雨 、 春 花 等 , 表 达 了 作 者 对 春 天 的 喜 悦 和 对 生 命 的 热 爱 。 以 下 是 文 章 的 开 头 部 分 :",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            318.5799255371094,
+            220.54051208496094
+          ],
+          [
+            318.5799255371094,
+            285.9578552246094
+          ],
+          [
+            1452.5345458984375,
+            285.9578552246094
+          ],
+          [
+            1452.5345458984375,
+            220.54051208496094
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 12,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8dd20bbe0cc9236bc8e83ce9f6513c8d",
+    "text": "易 望 着 , 防 望 着 , 东 风 来 了 , 春 天 的 脚 步 近 了 。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            319.1286315917969,
+            369.1333923339844
+          ],
+          [
+            319.1286315917969,
+            400.743896484375
+          ],
+          [
+            777.8005981445312,
+            400.743896484375
+          ],
+          [
+            777.8005981445312,
+            369.1333923339844
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 12,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f5df2449a41f8d06fa44fffdae158b61",
+    "text": "一 切 都 像 刚 睡 醒 的 样 子 , 欣 欣 然 张 开 了 眯 。 山 朗 润 起 来 了 , 水 涨 起 来 了 , 太 阳 的 脸 红 起 来 了 。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            313.0174255371094,
+            409.7981872558594
+          ],
+          [
+            313.0174255371094,
+            442.0446472167969
+          ],
+          [
+            1214.4820556640625,
+            442.0446472167969
+          ],
+          [
+            1214.4820556640625,
+            409.7981872558594
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 12,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "11a4df95ad095a10c5f3f7c41a378526",
+    "text": "小 草 偷 偷 地 从 土 里 钻 出 来 , 嫩 嫩 的 , 绿 绿 的 。 园 子 里 , 田 野 里 , 瞌 去 , 一 大 片 一 大 片 满 是 的 。 坐 着 , 躺 着 , 打 两 个 滚 , 蹋 几 脚 球 , 赛 几 超跑 , 捉 几 回 迷 藏 。 风 轻 悄 悄 的 , 草 软 绵 绵 的 。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            294.60748291015625,
+            450.5440368652344
+          ],
+          [
+            294.60748291015625,
+            515.465576171875
+          ],
+          [
+            1455.211669921875,
+            515.465576171875
+          ],
+          [
+            1455.211669921875,
+            450.5440368652344
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 12,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "aa6532496605938ade4b2f95f498538d",
+    "text": "图片 2-1 有 ocr 需求的图片 1",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            558.3944702148438,
+            562.1294555664062
+          ],
+          [
+            558.3944702148438,
+            614.2100830078125
+          ],
+          [
+            1160.9053333333331,
+            614.2100830078125
+          ],
+          [
+            1160.9053333333331,
+            562.1294555664062
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 12,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "7def8d36bcc876398d966c3f2e85ed70",
+    "text": "论 文 标 题 及 作 者 6 。 无 框 图 ( 博 学 作 者 ) | 1 “ 对 错 边 缘 3 。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            437.5,
+            636.3822222222224
+          ],
+          [
+            437.5,
+            1150.2711111111112
+          ],
+          [
+            1273.611111111111,
+            1150.2711111111112
+          ],
+          [
+            1273.611111111111,
+            636.3822222222224
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "text_as_html": "<table><tbody><tr><td>无 框 图 ( 博 学 作</td><td>者 ) | 1 |</td></tr><tr><td>对 错 边 缘</td><td></td></tr><tr><td></td><td>3 。</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 12,
+      "parent_id": "aa6532496605938ade4b2f95f498538d",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "087717deda93c47b8eaebaf6d0e81d8e",
+    "text": "图片 3-1 有 ocr 需求的图片 2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            562.0,
+            1167.8238525390625
+          ],
+          [
+            562.0,
+            1222.6484375
+          ],
+          [
+            1160.9053333333331,
+            1222.6484375
+          ],
+          [
+            1160.9053333333331,
+            1167.8238525390625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 12,
+      "parent_id": "aa6532496605938ade4b2f95f498538d",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "835e2d6ac44e89ccff3b503c3fd0f6a3",
+    "text": "第七部分 公式",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            658.9173583984375,
+            211.97328186035156
+          ],
+          [
+            658.9173583984375,
+            272.93670654296875
+          ],
+          [
+            1002.4166666666665,
+            272.93670654296875
+          ],
+          [
+            1002.4166666666665,
+            211.97328186035156
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "4193072ca21d3283c2f78a21a18cca03",
+    "text": "以下是公式的示例，以下是公式的示例，以下是公式的示 例，以下是公式的示例，以下是公式的示例，以下是公式的 示例，以下是公式的示例。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            319.46466064453125
+          ],
+          [
+            250.0,
+            550.9208374023438
+          ],
+          [
+            1409.56640625,
+            550.9208374023438
+          ],
+          [
+            1409.56640625,
+            319.46466064453125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "parent_id": "835e2d6ac44e89ccff3b503c3fd0f6a3",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "0642e0bae2d2659affc65863b06935fc",
+    "text": "第一个示例：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.66666666666663,
+            589.696
+          ],
+          [
+            308.66666666666663,
+            634.3626666666665
+          ],
+          [
+            587.572,
+            634.3626666666665
+          ],
+          [
+            587.572,
+            589.696
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Formula",
+    "element_id": "9321e60aa16e75377bf5e2500d9f2d77",
+    "text": "𝑎\" + 𝑏\" = 𝑐\"",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            697.3079833984375,
+            670.0272216796875
+          ],
+          [
+            697.3079833984375,
+            725.0293333333335
+          ],
+          [
+            960.9053333333331,
+            725.0293333333335
+          ],
+          [
+            960.9053333333331,
+            670.0272216796875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "3e92d0841562658fcccee412aa4995e1",
+    "text": "第二个示例：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.66666666666663,
+            763.0293333333336
+          ],
+          [
+            308.66666666666663,
+            807.6960000000001
+          ],
+          [
+            587.572,
+            807.6960000000001
+          ],
+          [
+            587.572,
+            763.0293333333336
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Formula",
+    "element_id": "a6f51ed475374b2e6f6d4d0105e1e19c",
+    "text": "𝑥 = −𝑏 ± √𝑏\" − 4𝑎𝑐 2𝑎",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            625.348876953125,
+            842.8804931640625
+          ],
+          [
+            625.348876953125,
+            959.9159999999999
+          ],
+          [
+            1024.305419921875,
+            959.9159999999999
+          ],
+          [
+            1024.305419921875,
+            842.8804931640625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c8b99349d1aab5097a1cbb5713071ae5",
+    "text": "第三个示例：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.66666666666663,
+            979.6960000000001
+          ],
+          [
+            308.66666666666663,
+            1024.3626666666669
+          ],
+          [
+            587.572,
+            1024.3626666666669
+          ],
+          [
+            587.572,
+            979.6960000000001
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Formula",
+    "element_id": "7a77e2599cd83923765abb8e37ca1482",
+    "text": "𝑒. = 1 + 𝑥 1! + 𝑥\" 2! + 𝑥1 3! + ⋯ , −∞ < 𝑥 < ∞",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            367.4475402832031,
+            1053.6004638671875
+          ],
+          [
+            367.4475402832031,
+            1184.155517578125
+          ],
+          [
+            1274.2386666666666,
+            1184.155517578125
+          ],
+          [
+            1274.2386666666666,
+            1053.6004638671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "e120db6ac51f4ab3d3ad4da0c7209a18",
+    "text": "第四个示例：",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            308.66666666666663,
+            1196.3626666666667
+          ],
+          [
+            308.66666666666663,
+            1241.0293333333334
+          ],
+          [
+            587.572,
+            1241.0293333333334
+          ],
+          [
+            587.572,
+            1196.3626666666667
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Formula",
+    "element_id": "1de54a99f5ce3d8dd28e72f3e5d61fe9",
+    "text": "sin 𝛼 ± sin 𝛽 = 2 sin 1 2 (𝛼 ± 𝛽) cos 1 2 (𝛼 ∓ 𝛽)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            413.0846862792969,
+            1271.46484375
+          ],
+          [
+            413.0846862792969,
+            1386.5826666666667
+          ],
+          [
+            1250.2386666666666,
+            1386.5826666666667
+          ],
+          [
+            1250.2386666666666,
+            1271.46484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 13,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "08304b429e18fe8f97629a62516c2408",
+    "text": "附录",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            765.3333333333333,
+            206.70187377929688
+          ],
+          [
+            765.3333333333333,
+            277.1726989746094
+          ],
+          [
+            904.1386666666666,
+            277.1726989746094
+          ],
+          [
+            904.1386666666666,
+            206.70187377929688
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 14,
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "ebe347c726f601c0d272601f3bb22651",
+    "text": "这是一个附录，以下填充了附录的内容：《小马过河》讲述了一 匹小马在过河过程中学会独立思考的故事。小马的妈妈让它把麦子送 到河对岸的磨坊。小马来到河边，看到湍急的河水，心里有些害怕。 它问老牛河水深不深，老牛说水很浅，只到小腿。小马稍微放松，但 又遇到小松鼠，小松鼠说河水很深，曾经有朋友被冲走。小马听后更 加犹豫。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            391.0316467285156
+          ],
+          [
+            250.0,
+            877.0514526367188
+          ],
+          [
+            1421.322133333333,
+            877.0514526367188
+          ],
+          [
+            1421.322133333333,
+            391.0316467285156
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 14,
+      "parent_id": "08304b429e18fe8f97629a62516c2408",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "18728e7fb54501025546e081c85bb6b9",
+    "text": "小马回去找妈妈，妈妈告诉它要自己试一试。于是，小马鼓起勇 气走进河水，发现水既不浅也不深，刚好到肚子。小马顺利过河，把 麦子送到磨坊。通过这次经历，小马明白了不能只依赖别人的经验， 要勇敢尝试，自己判断。这故事教会我们独立思考和勇敢面对挑战的 重要性。",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            250.0,
+            910.4353637695312
+          ],
+          [
+            250.0,
+            1305.416259765625
+          ],
+          [
+            1421.306133333333,
+            1305.416259765625
+          ],
+          [
+            1421.306133333333,
+            910.4353637695312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1653,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 14,
+      "parent_id": "08304b429e18fe8f97629a62516c2408",
+      "filename": "自制评测文件第三版.pdf"
+    }
+  }
+]

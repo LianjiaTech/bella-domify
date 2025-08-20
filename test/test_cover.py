@@ -5,31 +5,25 @@
 import json
 import os
 
-from pdf2docx import Converter
-from pdf2docx.dom_tree.domtree import DomTreeModel
-from server.context import user_context
-
-os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
-
-user_context.set("1000000020353701")
-
-test_dir = "test_document/"
+from doc_parser.dom_parser.domtree.domtree import DomTreeModel
+from doc_parser.dom_parser.parsers.pdf.converter import PDFConverter
+from test import TEST_PATH
 
 
 def pdf_parser(file_name: str, debug: bool = False) -> dict:
-    converter = Converter(test_dir + f"{file_name}.pdf")
+    converter = PDFConverter(os.path.join(TEST_PATH, "samples", f"{file_name}.pdf"))
     dom_tree = converter.dom_tree_parse(
         start=0, end=4,
         remove_watermark=True,
         debug=debug,
-        debug_file_name=test_dir + f"{file_name}-debug.pdf",
+        debug_file_name=os.path.join(TEST_PATH, "samples", f"{file_name}-debug.pdf"),
         parse_stream_table=False,
         filter_cover=True,
     )
     if debug:
-        with open(test_dir + f"{file_name}-debug.json", "w") as fw:
-            json.dump(DomTreeModel(dom_tree=dom_tree).model_dump(), fw, ensure_ascii=False, indent=2)
-    return DomTreeModel(dom_tree=dom_tree).model_dump()
+        with open(os.path.join(TEST_PATH, "samples", f"{file_name}-debug.json", "w")) as fw:
+            json.dump(dom_tree.model_dump(), fw, ensure_ascii=False, indent=2)
+    return dom_tree.model_dump()
 
 
 def test_cover():

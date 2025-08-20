@@ -1,0 +1,109 @@
+# -*- coding: utf-8 -*-
+
+'''Table Cell object.
+'''
+
+from doc_parser.dom_parser.parsers.pdf.common import docx
+from doc_parser.dom_parser.parsers.pdf.common.Element import Element
+from doc_parser.dom_parser.parsers.pdf.layout.Layout import Layout
+
+
+class Cell(Element, Layout):
+    '''Cell object.'''
+
+    def __init__(self, raw: dict = None):
+        raw = raw or {}
+        Element.__init__(self, raw=raw)
+        self.bg_color = raw.get('bg_color', None)  # type: int
+        self.border_color = raw.get('border_color', (0, 0, 0, 0))  # type: tuple [int]
+        self.border_width = raw.get('border_width', (0, 0, 0, 0))  # type: tuple [float]
+        self.merged_cells = raw.get('merged_cells', (1, 1))  # type: tuple [int]
+
+        # restore layout
+        Layout.__init__(self, blocks=None, shapes=None)  # init empty layout
+        self.restore(raw)
+
+    @property
+    def text(self):
+        '''Text contained in this cell.'''
+        if not self: return None
+        # NOTE: sub-table may exists in 
+        return '\n'.join([block.text if block.is_text_block else '<NEST TABLE>'
+                          for block in self.blocks])
+
+    @property
+    def working_bbox(self):
+        '''Inner bbox with border excluded.'''
+        x0, y0, x1, y1 = self.bbox
+        w_top, w_right, w_bottom, w_left = self.border_width
+        bbox = (x0 + w_left / 2.0, y0 + w_top / 2.0, x1 - w_right / 2.0, y1 - w_bottom / 2.0)
+        return Element().update_bbox(bbox).bbox  # convert to fitz.Rect
+
+    def store(self):
+        if bool(self):
+            res = super().store()  # Element
+            res.update({
+                'bg_color': self.bg_color,
+                'border_color': self.border_color,
+                'border_width': self.border_width,
+                'merged_cells': self.merged_cells
+            })
+            res.update(Layout.store(self))
+            return res
+        else:
+            return None
+
+    def plot(self, page):
+        '''Plot cell and its sub-layout.'''
+        super().plot(page)
+        self.blocks.plot(page)
+
+    def _set_style(self, table, indexes):
+        '''Set ``python-docx`` cell style, e.g. border, shading, width, row height, 
+        based on cell block parsed from PDF.
+        
+        Args:
+            table (Table): ``python-docx`` table object.
+            indexes (tuple): ``(i, j)`` index of current cell in table.
+        '''
+        i, j = indexes
+        docx_cell = table.cell(i, j)
+        n_row, n_col = self.merged_cells
+
+        # ---------------------
+        # border style
+        # ---------------------
+        # NOTE: border width is specified in eighths of a point, with a minimum value of 
+        # two (1/4 of a point) and a maximum value of 96 (twelve points)
+        keys = ('top', 'end', 'bottom', 'start')
+        kwargs = {}
+        for k, w, c in zip(keys, self.border_width, self.border_color):
+            # skip if width=0 -> will not show in docx
+            if not w: continue
+
+            hex_c = f'#{hex(c)[2:].zfill(6)}'
+            kwargs[k] = {
+                'sz': 8 * w, 'val': 'single', 'color': hex_c.upper()
+            }
+
+        # merged cells are assumed to have same borders with the main cell        
+        for m in range(i, i + n_row):
+            for n in range(j, j + n_col):
+                docx.set_cell_border(table.cell(m, n), **kwargs)
+
+                # ---------------------
+        # cell bg-color
+        # ---------------------
+        if self.bg_color != None:
+            docx.set_cell_shading(docx_cell, self.bg_color)
+
+        # ---------------------
+        # clear cell margin
+        # ---------------------
+        # NOTE: the start position of a table is based on text in cell, rather than left border of table. 
+        # They're almost aligned if left-margin of cell is zero.
+        docx.set_cell_margins(docx_cell, start=0, end=0)
+
+        # set vertical direction if contained text blocks are in vertical direction
+        if self.blocks.is_vertical_text:
+            docx.set_vertical_cell_direction(docx_cell)

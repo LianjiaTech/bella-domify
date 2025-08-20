@@ -1,0 +1,990 @@
+{
+  "root": {
+    "order_num": null,
+    "element": null,
+    "child": [
+      {
+        "order_num": "1",
+        "element": {
+          "block_type": "text",
+          "text": "DocBank: A Benchmark Dataset for Document Layout Analysis",
+          "layout_type": "Title",
+          "bbox": [
+            102.8,
+            67.7,
+            494.7,
+            86.3
+          ],
+          "metadata": null,
+          "page_num": [
+            0
+          ],
+          "image_link": null,
+          "image_ocr_result": null
+        },
+        "child": [
+          {
+            "order_num": "1.1",
+            "element": {
+              "block_type": "text",
+              "text": "Minghao Li1⇤, Yiheng Xu2⇤, Lei Cui2, Shaohan Huang2,",
+              "layout_type": "Title",
+              "bbox": [
+                160.9,
+                97.7,
+                439.7,
+                113.3
+              ],
+              "metadata": null,
+              "page_num": [
+                0
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": []
+          },
+          {
+            "order_num": "1.2",
+            "element": {
+              "block_type": "text",
+              "text": "Furu Wei2, Zhoujun Li1, Ming Zhou2",
+              "layout_type": "Title",
+              "bbox": [
+                204.7,
+                111.7,
+                395.3,
+                127.2
+              ],
+              "metadata": null,
+              "page_num": [
+                0
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": [
+              {
+                "order_num": "1.2.1",
+                "element": {
+                  "block_type": "text",
+                  "text": "1Beihang University",
+                  "layout_type": "Text",
+                  "bbox": [
+                    251.5,
+                    126.1,
+                    349.0,
+                    140.5
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.2.2",
+                "element": {
+                  "block_type": "text",
+                  "text": "2Microsoft Research Asia",
+                  "layout_type": "Title",
+                  "bbox": [
+                    238.5,
+                    140.0,
+                    362.1,
+                    154.4
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              }
+            ]
+          },
+          {
+            "order_num": "1.3",
+            "element": {
+              "block_type": "text",
+              "text": "{liminghao1630,lizj}@buaa.edu.cn",
+              "layout_type": "Text",
+              "bbox": [
+                186.7,
+                155.3,
+                413.8,
+                176.5
+              ],
+              "metadata": null,
+              "page_num": [
+                0
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": []
+          },
+          {
+            "order_num": "1.4",
+            "element": {
+              "block_type": "text",
+              "text": "{v-yixu,lecu,shaohanh,fuwei,mingzhou}@microsoft.com",
+              "layout_type": "Title",
+              "bbox": [
+                118.5,
+                169.3,
+                482.0,
+                190.4
+              ],
+              "metadata": null,
+              "page_num": [
+                0
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": []
+          },
+          {
+            "order_num": "1.5",
+            "element": {
+              "block_type": "text",
+              "text": "Abstract",
+              "layout_type": "Title",
+              "bbox": [
+                276.5,
+                206.6,
+                321.0,
+                222.2
+              ],
+              "metadata": null,
+              "page_num": [
+                0
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": [
+              {
+                "order_num": "1.5.1",
+                "element": {
+                  "block_type": "text",
+                  "text": "Document layout analysis usually relies on computer vision models to understand documents while ignoring textual information that is vital to capture. Meanwhile, high quality labeled datasets with both visual and textual information are still insufficient. In this paper, we present DocBank, a benchmark dataset that contains 500K document pages with fine-grained token-level annotations for document layout analysis. DocBank is constructed using a simple yet effective way with weak supervision from the LATEX documents available on the arXiv.com. With DocBank, models from different modalities can be compared fairly and multi-modal ap-proaches will be further investigated and boost the performance of document layout analysis. We build several strong baselines and manually split train/dev/test sets for evaluation. Ex-periment results show that models trained on DocBank accurately recognize the layout infor-mation for a variety of documents. The DocBank dataset is publicly available at https: //github.com/doc-analysis/DocBank.",
+                  "layout_type": "Text",
+                  "bbox": [
+                    89.0,
+                    234.0,
+                    508.5,
+                    396.2
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              }
+            ]
+          },
+          {
+            "order_num": "1.6",
+            "element": {
+              "block_type": "text",
+              "text": "1 Introduction",
+              "layout_type": "Title",
+              "bbox": [
+                72.0,
+                408.0,
+                154.8,
+                423.6
+              ],
+              "metadata": null,
+              "page_num": [
+                0
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": [
+              {
+                "order_num": "1.6.1",
+                "element": {
+                  "block_type": "text",
+                  "text": "Document layout analysis is an important task in many document understanding applications as it can transform semi-structured information into a structured representation, meanwhile extracting key infor-mation from the documents. It is a challenging problem due to the varying layouts and formats of the documents. Existing techniques have been proposed based on conventional rule-based or machine learn-ing methods, where most of them fail to generalize well because they rely on hand crafted features that may be not robust to layout variations. Recently, the rapid development of deep learning in computer vision has significantly boosted the data-driven image-based approaches for document layout analysis. Although these approaches have been widely adopted and made significant progress, they usually lever-age visual features while neglecting textual features from the documents. Therefore, it is inevitable to explore how to leverage the visual and textual information in a unified way for document layout analysis.",
+                  "layout_type": "Text",
+                  "bbox": [
+                    72.0,
+                    431.7,
+                    525.5,
+                    566.8
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.6.2",
+                "element": {
+                  "block_type": "text",
+                  "text": "Nowadays, the state-of-the-art computer vision and NLP models are often built upon the pre-trained models (Peters et al., 2018; Radford et al., 2018; Devlin et al., 2018; Lample and Conneau, 2019; Yang et al., 2019; Dong et al., 2019; Raffel et al., 2019; Xu et al., 2019) followed by fine-tuning on specific downstream tasks, which achieves very promising results. However, pre-trained models not only require large-scale unlabeled data for self-supervised learning, but also need high quality labeled data for task-specific fine-tuning to achieve good performance. For document layout analysis tasks, there have been some image-based document layout datasets, while most of them are built for computer vision approaches and they are difficult to apply to NLP methods. In addition, image-based datasets mainly include the page images and the bounding boxes of large semantic structures, which are not fine-grained token-level annotations. Moreover, it is also time-consuming and labor-intensive to produce human-labeled and fine-grained token-level text block arrangement. Therefore, it is vital to leverage weak",
+                  "layout_type": "Text",
+                  "bbox": [
+                    72.0,
+                    567.7,
+                    525.5,
+                    716.3
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": [
+                  {
+                    "order_num": "1.6.2.1",
+                    "element": {
+                      "block_type": "text",
+                      "text": "⇤Equal contributions during internship at Microsoft Research Asia.",
+                      "layout_type": "List",
+                      "bbox": [
+                        88.1,
+                        724.9,
+                        324.5,
+                        735.9
+                      ],
+                      "metadata": null,
+                      "page_num": [
+                        0
+                      ],
+                      "image_link": null,
+                      "image_ocr_result": null
+                    },
+                    "child": [
+                      {
+                        "order_num": "1.6.2.1.1",
+                        "element": {
+                          "block_type": "text",
+                          "text": "This work is licensed under a Creative Commons Attribution 4.0 International License. License details: http:// creativecommons.org/licenses/by/4.0/.",
+                          "layout_type": "Text",
+                          "bbox": [
+                            72.0,
+                            744.7,
+                            525.5,
+                            765.5
+                          ],
+                          "metadata": null,
+                          "page_num": [
+                            0
+                          ],
+                          "image_link": null,
+                          "image_ocr_result": null
+                        },
+                        "child": [
+                          {
+                            "order_num": "1.6.2.1.1.1",
+                            "element": {
+                              "block_type": "image",
+                              "text": null,
+                              "layout_type": "Figure",
+                              "bbox": [
+                                73.3,
+                                62.8,
+                                524.2,
+                                213.5
+                              ],
+                              "metadata": null,
+                              "page_num": [
+                                1
+                              ],
+                              "image_link": null,
+                              "image_ocr_result": null
+                            },
+                            "child": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "order_num": "1.6.3",
+                "element": {
+                  "block_type": "text",
+                  "text": "(a) (b) (c) (d)",
+                  "layout_type": "Title",
+                  "bbox": [
+                    121.6,
+                    218.2,
+                    476.1,
+                    229.0
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    1
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.6.4",
+                "element": {
+                  "block_type": "text",
+                  "text": "Figure 1: Example annotations of the DocBank. The colors of semantic structure labels are: Abstract , Author , Caption , Equation , Figure , Footer , List , Paragraph , Reference , Section , Table , Title",
+                  "layout_type": "FigureName",
+                  "bbox": [
+                    72.0,
+                    239.8,
+                    525.5,
+                    283.2
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    1
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.6.5",
+                "element": {
+                  "block_type": "text",
+                  "text": "supervision to obtain fine-grained labeled documents with minimum efforts, meanwhile making the data be easily applied to any NLP and computer vision approaches.",
+                  "layout_type": "Text",
+                  "bbox": [
+                    72.0,
+                    305.2,
+                    525.5,
+                    331.9
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    1
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.6.6",
+                "element": {
+                  "block_type": "text",
+                  "text": "To this end, we build the DocBank dataset, a document-level benchmark that contains 500K docu-ment pages with fine-grained token-level annotations for layout analysis. Distinct from the conventional human-labeled datasets, our approach obtains high quality annotations in a simple yet effective way with weak supervision. Inspired by existing document layout annotations (Siegel et al., 2018; Li et al., 2019; Zhong et al., 2019), there are a great number of digital-born documents such as the PDFs of research pa-pers that are compiled by LATEX using their source code. The LATEX system contains the explicit semantic structure information using mark-up tags as the building blocks, such as abstract, author, caption, equa-tion, figure, footer, list, paragraph, reference, section, table and title. To distinguish individual semantic structures, we manipulate the source code to specify different colors to the text of different semantic units. In this way, different text zones can be clearly segmented and identified as separate logical roles, which is shown in Figure 1. The advantage of DocBank is that, it can be used in any sequence labeling models from the NLP perspective. Meanwhile, DocBank can also be easily converted into image-based annotations to support object detection models in computer vision. In this way, models from different modalities can be compared fairly using DocBank, and multi-modal approaches will be further investi-gated and boost the performance of document layout analysis. To verify the effectiveness of DocBank, we conduct experiments using four baseline models: 1) BERT (Devlin et al., 2018), a pre-trained model using only textual information based on the Transformer architecture. 2) RoBERTa (Liu et al., 2019), a robustly optimized method for pre-training the Transformer architecture. 3) LayoutLM (Xu et al., 2019), a multi-modal architecture that integrates both the text information and layout information. 4) Faster R-CNN (Ren et al., 2015), a high performance object detection networks depending on region proposal algorithms to hypothesize object locations. The experiment results show that the LayoutLM model sig-nificantly outperforms the BERT and RoBERTa models and the object detection model on DocBank for document layout analysis. We hope DocBank will empower more document layout analysis models, meanwhile promoting more customized network structures to make substantial advances in this area.",
+                  "layout_type": "Text",
+                  "bbox": [
+                    72.0,
+                    332.3,
+                    525.5,
+                    657.1
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    1
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.6.7",
+                "element": {
+                  "block_type": "text",
+                  "text": "The contributions of this paper are summarized as follows:",
+                  "layout_type": "Text",
+                  "bbox": [
+                    82.9,
+                    657.6,
+                    339.3,
+                    670.7
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    1
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": [
+                  {
+                    "order_num": "1.6.7.1",
+                    "element": {
+                      "block_type": "text",
+                      "text": "• We present DocBank, a large-scale dataset that is constructed using a weak supervision approach. It enables models to integrate both the textual and layout information for downstream tasks.",
+                      "layout_type": "List",
+                      "bbox": [
+                        85.0,
+                        680.3,
+                        525.5,
+                        707.0
+                      ],
+                      "metadata": null,
+                      "page_num": [
+                        1
+                      ],
+                      "image_link": null,
+                      "image_ocr_result": null
+                    },
+                    "child": []
+                  },
+                  {
+                    "order_num": "1.6.7.2",
+                    "element": {
+                      "block_type": "text",
+                      "text": "• We conduct a set of experiments with different baseline models and parameter settings, which con-firms the effectiveness of DocBank for document layout analysis.",
+                      "layout_type": "List",
+                      "bbox": [
+                        85.0,
+                        716.6,
+                        525.5,
+                        743.3
+                      ],
+                      "metadata": null,
+                      "page_num": [
+                        1
+                      ],
+                      "image_link": null,
+                      "image_ocr_result": null
+                    },
+                    "child": []
+                  },
+                  {
+                    "order_num": "1.6.7.3",
+                    "element": {
+                      "block_type": "text",
+                      "text": "• The DocBank dataset is available at https://github.com/doc-analysis/DocBank.",
+                      "layout_type": "List",
+                      "bbox": [
+                        85.0,
+                        752.9,
+                        511.2,
+                        766.0
+                      ],
+                      "metadata": null,
+                      "page_num": [
+                        1
+                      ],
+                      "image_link": null,
+                      "image_ocr_result": null
+                    },
+                    "child": [
+                      {
+                        "order_num": "1.6.7.3.1",
+                        "element": {
+                          "block_type": "text",
+                          "text": "Documents",
+                          "layout_type": "Text",
+                          "bbox": [
+                            115.1,
+                            87.1,
+                            165.1,
+                            98.5
+                          ],
+                          "metadata": null,
+                          "page_num": [
+                            2
+                          ],
+                          "image_link": null,
+                          "image_ocr_result": null
+                        },
+                        "child": []
+                      },
+                      {
+                        "order_num": "1.6.7.3.2",
+                        "element": {
+                          "block_type": "text",
+                          "text": "(.tex)",
+                          "layout_type": "Text",
+                          "bbox": [
+                            129.8,
+                            97.7,
+                            151.3,
+                            109.2
+                          ],
+                          "metadata": null,
+                          "page_num": [
+                            2
+                          ],
+                          "image_link": null,
+                          "image_ocr_result": null
+                        },
+                        "child": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "order_num": "1.6.8",
+                "element": {
+                  "block_type": "text",
+                  "text": "Semantic structures with ",
+                  "layout_type": "Title",
+                  "bbox": [
+                    213.8,
+                    81.7,
+                    324.9,
+                    93.2
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    2
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.6.9",
+                "element": {
+                  "block_type": "text",
+                  "text": "(structure-specific colors) colored fonts color to structure mapping Token annotations by the ",
+                  "layout_type": "Text",
+                  "bbox": [
+                    214.1,
+                    87.1,
+                    486.5,
+                    114.5
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    2
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.6.10",
+                "element": {
+                  "block_type": "text",
+                  "text": "Figure 2: Data processing pipeline",
+                  "layout_type": "Title",
+                  "bbox": [
+                    223.3,
+                    142.6,
+                    374.2,
+                    155.7
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    2
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              }
+            ]
+          },
+          {
+            "order_num": "1.7",
+            "element": {
+              "block_type": "text",
+              "text": "2 Task Definition",
+              "layout_type": "Title",
+              "bbox": [
+                72.0,
+                173.9,
+                167.6,
+                189.4
+              ],
+              "metadata": null,
+              "page_num": [
+                2
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": [
+              {
+                "order_num": "1.7.1",
+                "element": {
+                  "block_type": "text",
+                  "text": "The document layout analysis task is to extract the pre-defined semantic units in visually rich documents. Specifically, given a document D composed of discrete token set t = {t0, t1, ..., tn}, each token ti = (w, (x0, y0, x1, y1)) consists of word w and its bounding box (x0, y0, x1, y1). And C = {c0, c1, .., cm} defines the semantic categories that the tokens are classified into. We intend to find a function F :",
+                  "layout_type": "Text",
+                  "bbox": [
+                    72.0,
+                    195.6,
+                    525.5,
+                    249.4
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    2
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.7.2",
+                "element": {
+                  "block_type": "text",
+                  "text": "(C, D) ! S, where S is the prediction set:",
+                  "layout_type": "Text",
+                  "bbox": [
+                    72.0,
+                    249.8,
+                    258.0,
+                    270.4
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    2
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.7.3",
+                "element": {
+                  "block_type": "text",
+                  "text": "S = {({t0 0, ..., tn0 0}, c0), ..., ({t0 k, ..., tnk k}, ck)}",
+                  "layout_type": "Text",
+                  "bbox": [
+                    197.5,
+                    269.9,
+                    400.1,
+                    295.1
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    2
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": []
+              }
+            ]
+          },
+          {
+            "order_num": "1.8",
+            "element": {
+              "block_type": "text",
+              "text": "3 DocBank",
+              "layout_type": "Title",
+              "bbox": [
+                72.0,
+                291.2,
+                137.1,
+                306.7
+              ],
+              "metadata": null,
+              "page_num": [
+                2
+              ],
+              "image_link": null,
+              "image_ocr_result": null
+            },
+            "child": [
+              {
+                "order_num": "1.8.1",
+                "element": {
+                  "block_type": "text",
+                  "text": "(1)",
+                  "layout_type": "Title",
+                  "bbox": [
+                    512.8,
+                    271.0,
+                    525.5,
+                    284.1
+                  ],
+                  "metadata": null,
+                  "page_num": [
+                    2
+                  ],
+                  "image_link": null,
+                  "image_ocr_result": null
+                },
+                "child": [
+                  {
+                    "order_num": "1.8.1.1",
+                    "element": {
+                      "block_type": "text",
+                      "text": "We build DocBank with token-level annotations that supports both NLP and computer vision models. As shown in Figure 2, the construction of DocBank has three steps: Document Acquisition, Semantic Structures Detection, Token Annotation. Meanwhile, DocBank can be converted to the format that is used by computer vision models in a few steps. The current DocBank dataset totally includes 500K document pages, where the training set includes 400K document pages and both the validation set and the test set include 50K document pages.",
+                      "layout_type": "Text",
+                      "bbox": [
+                        72.0,
+                        312.9,
+                        525.5,
+                        393.8
+                      ],
+                      "metadata": null,
+                      "page_num": [
+                        2
+                      ],
+                      "image_link": null,
+                      "image_ocr_result": null
+                    },
+                    "child": [
+                      {
+                        "order_num": "1.8.1.1.1",
+                        "element": {
+                          "block_type": "text",
+                          "text": "3.1 Document Acquisition",
+                          "layout_type": "Title",
+                          "bbox": [
+                            72.0,
+                            402.1,
+                            200.5,
+                            416.3
+                          ],
+                          "metadata": null,
+                          "page_num": [
+                            2
+                          ],
+                          "image_link": null,
+                          "image_ocr_result": null
+                        },
+                        "child": [
+                          {
+                            "order_num": "1.8.1.1.1.1",
+                            "element": {
+                              "block_type": "text",
+                              "text": "We download the PDF files on arXiv.com as well as the LATEX source files since we need to modify the source code to detect the semantic structures. The papers contain Physics, Mathematics, Computer Science and many other areas, which is beneficial for the diversity of DocBank to produce robust models. We focus on English documents in this work and will expand to other languages in the future.",
+                              "layout_type": "Text",
+                              "bbox": [
+                                72.0,
+                                420.0,
+                                525.5,
+                                473.8
+                              ],
+                              "metadata": null,
+                              "page_num": [
+                                2
+                              ],
+                              "image_link": null,
+                              "image_ocr_result": null
+                            },
+                            "child": []
+                          },
+                          {
+                            "order_num": "1.8.1.1.1.2",
+                            "element": {
+                              "block_type": "text",
+                              "text": "\\ s e c t i o n {The s e c t i o n }",
+                              "layout_type": "Title",
+                              "bbox": [
+                                184.8,
+                                624.7,
+                                412.8,
+                                645.3
+                              ],
+                              "metadata": null,
+                              "page_num": [
+                                2
+                              ],
+                              "image_link": null,
+                              "image_ocr_result": null
+                            },
+                            "child": []
+                          },
+                          {
+                            "order_num": "1.8.1.1.1.3",
+                            "element": {
+                              "block_type": "text",
+                              "text": "Other commands often start an environment. For instance, the list declaration in LATEX documents is shown as follows:",
+                              "layout_type": "Text",
+                              "bbox": [
+                                72.0,
+                                641.2,
+                                525.5,
+                                667.9
+                              ],
+                              "metadata": null,
+                              "page_num": [
+                                2
+                              ],
+                              "image_link": null,
+                              "image_ocr_result": null
+                            },
+                            "child": [
+                              {
+                                "order_num": "1.8.1.1.1.3.1",
+                                "element": {
+                                  "block_type": "table",
+                                  "rows": [
+                                    {
+                                      "cells": [
+                                        {
+                                          "order_num": "1.8.1.1.1.3.1.1-1-1-1",
+                                          "text": "\\ begin { i t e m i z e } \\ item \\ item Second F i r s t item item",
+                                          "start_row": 1,
+                                          "end_row": 1,
+                                          "start_col": 1,
+                                          "end_col": 1
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "page_num": [
+                                    2
+                                  ],
+                                  "layout_type": "Table",
+                                  "bbox": [
+                                    223.9,
+                                    669.0,
+                                    373.7,
+                                    723.6
+                                  ]
+                                },
+                                "child": []
+                              }
+                            ]
+                          },
+                          {
+                            "order_num": "1.8.1.1.1.4",
+                            "element": {
+                              "block_type": "text",
+                              "text": "\\end{ i t e m i z e }",
+                              "layout_type": "Title",
+                              "bbox": [
+                                230.6,
+                                709.3,
+                                314.6,
+                                729.8
+                              ],
+                              "metadata": null,
+                              "page_num": [
+                                2
+                              ],
+                              "image_link": null,
+                              "image_ocr_result": null
+                            },
+                            "child": []
+                          },
+                          {
+                            "order_num": "1.8.1.1.1.5",
+                            "element": {
+                              "block_type": "text",
+                              "text": "The command \\begin{itemize} starts an environment while the command \\end{itemize} ends that environment. The real command name is declared as the parameters of the ‘begin’ command and the‘end’ command.",
+                              "layout_type": "Text",
+                              "bbox": [
+                                72.0,
+                                725.8,
+                                525.5,
+                                766.0
+                              ],
+                              "metadata": null,
+                              "page_num": [
+                                2
+                              ],
+                              "image_link": null,
+                              "image_ocr_result": null
+                            },
+                            "child": []
+                          }
+                        ]
+                      },
+                      {
+                        "order_num": "1.8.1.1.2",
+                        "element": {
+                          "block_type": "text",
+                          "text": "3.2 Semantic Structures Detection",
+                          "layout_type": "List",
+                          "bbox": [
+                            72.0,
+                            482.1,
+                            238.1,
+                            496.3
+                          ],
+                          "metadata": null,
+                          "page_num": [
+                            2
+                          ],
+                          "image_link": null,
+                          "image_ocr_result": null
+                        },
+                        "child": [
+                          {
+                            "order_num": "1.8.1.1.2.1",
+                            "element": {
+                              "block_type": "text",
+                              "text": "DocBank is a natural extension of the TableBank dataset (Li et al., 2019), where other semantic units are also included for document layout analysis. In this work, the following semantic structures are annotated in DocBank: {Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, Section, Table and Title}. In TableBank, the tables are labeled with the help of the ‘fcolorbox’ command. However, for DocBank, the target structures are mainly composed of text, where the ‘fcolorbox’ cannot be well applied. Therefore, we use the ‘color’ command to distinguish these semantic structures by changing their font colors into structure-specific colors. Basically, there are two types of commands to represent semantic structures. Some of the LATEX commands are simple words preceded by a backslash. For instance, the section titles in LATEX documents are usually in the format as follows:",
+                              "layout_type": "Text",
+                              "bbox": [
+                                72.0,
+                                499.9,
+                                525.5,
+                                623.9
+                              ],
+                              "metadata": null,
+                              "page_num": [
+                                2
+                              ],
+                              "image_link": null,
+                              "image_ocr_result": null
+                            },
+                            "child": [
+                              {
+                                "order_num": "1.8.1.1.2.1.1",
+                                "element": {
+                                  "block_type": "table",
+                                  "rows": [
+                                    {
+                                      "cells": [
+                                        {
+                                          "order_num": "1.8.1.1.2.1.1.1-1-1-1",
+                                          "text": "t i t l e of t h i s",
+                                          "start_row": 1,
+                                          "end_row": 1,
+                                          "start_col": 1,
+                                          "end_col": 1
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "page_num": [
+                                    2
+                                  ],
+                                  "layout_type": "Table",
+                                  "bbox": [
+                                    178.0,
+                                    625.1,
+                                    419.5,
+                                    639.1
+                                  ]
+                                },
+                                "child": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

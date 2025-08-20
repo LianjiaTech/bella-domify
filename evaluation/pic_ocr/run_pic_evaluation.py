@@ -3,38 +3,19 @@
 #
 #    Copyright (C) 2024 Beike, Inc. All Rights Reserved.
 #
-#    @Create Author : luxu(luxu002@ke.com)
+#    @Create Author : luxu
 #    @Create Time   : 2024/9/11
 #    @Description   :
 #
 # ===============================================================
-import copy
-import datetime
 import json
-import logging
-import os
 import re
-from collections import defaultdict
-from difflib import SequenceMatcher
-from statistics import mean
 
-import fitz
-import markdown
 import pandas as pd
-from bs4 import BeautifulSoup
-from markdown_it import MarkdownIt
-from shapely.geometry import box
-import logging
-import time
 
-import openai
-import json
-import requests
-
-from server.context import user_context
-from server.task_executor import s3
-
-from utils.general_util import llm_image2text
+from doc_parser.context import parser_context
+from doc_parser.dom_parser.parsers.pdf.common.ocr import llm_image2text
+from utils import s3
 
 
 def clean_string(input_string):
@@ -87,9 +68,9 @@ def get_ocr_result(model_name):
                 file_key = s3.upload_file(stream=file_stream)
 
                 # 获取文件的 S3 URL
-                image_s3_url = s3.get_file_url(file_key)
+                image_url = s3.get_file_url(file_key)
 
-                ocr_res = llm_image2text(image_s3_url, user, model_name, False)
+                ocr_res = llm_image2text(image_url, parser_context.get_user(), model_name)
 
                 result_json[pic_name] = ocr_res
 
@@ -161,38 +142,4 @@ def evaluation(model_name):
     df = pd.concat([df, total_row_df], ignore_index=True)
     print(df)
     return df
-
-
-if __name__ == "__main__":
-    import os
-
-    os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
-    user = "1000000023008327"
-    user_context.set(user)
-
-    # from server.task_executor import s3
-    #
-    # with open('/Users/lucio/Downloads/瓷砖踢脚线4.png', 'rb') as file:
-    #     image_bytes = file.read()
-    #
-    # file_key = s3.upload_file(stream=image_bytes)
-    # image_s3_url = s3.get_file_url(file_key)
-    #
-    # print(image_s3_url)
-
-    # print(llm_image2text(
-    #     "https://img.ljcdn.com/cv-aigc/d8530cfa14334458b6c5b43e232c483f?ak=Q265N5ELG32TT7UWO8YJ&exp=1733486661&ts=1733483061&sign=9113a47e7dababdd117cef161505ff81",
-    #     "1000000023008327", confirm_result=False))
-
-    model_name = "gpt-4o"
-    # model_name = "ali-qwen2-72b-vl-v1-chat-20250117"  # 稳定的线上版本
-
-    # model_name = "doubao-vision-pro-32k"
-    # model_name = "ali-qwen2-72b-qwen2vl-v1-chat-20241104"  # 不稳定的
-
-    # model_name = "qwen-vl-max"
-    # model_name = "qwen-vl-plus"  # 无法查看您提到的图片
-
-    get_ocr_result(model_name)
-    result_df = evaluation(model_name)
 

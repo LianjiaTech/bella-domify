@@ -3,14 +3,13 @@
 #
 #    Copyright (C) 2024 Beike, Inc. All Rights Reserved.
 #
-#    @Create Author : luxu(luxu002@ke.com)
+#    @Create Author : luxu
 #    @Create Time   : 2024/11/05
 #    @Description   :
 #
 # ===============================================================
 import io
 import json
-import logging
 import multiprocessing
 import time
 import uuid
@@ -29,12 +28,12 @@ from doc_parser.layout_parser import pptx_parser, txt_parser, xls_parser, docx_p
 from server.protocol.standard_domtree import StandardDomTree
 from services.constants import OPENAI_API_KEY
 from services.constants import ParseType
-from services.domtree_parser import pdf_parser as pdf_domtree_parser
-from services.layout_parser import pptx_parser, docx_parser, pdf_parser, txt_parser, xlsx_parser, xls_parser, \
-    csv_parser, pic_parser
 from settings.ini_config import config
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf
+import urllib.parse
+
+logger = logger_context.get_logger()
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
@@ -57,8 +56,6 @@ percent_map = {
     DOCUMENT_PARSE_FAIL: 100,
 }
 
-chubao = ChuBaoFSTool()
-
 
 
 
@@ -75,7 +72,7 @@ def validate_parameters(file_name, file):
 def layout_parse(file_name: str = None, file: bytes = None, task_id=""):
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
-    logging.info(f'layout_parse解析开始 文件名：{file_name}')
+    logger.info(f'layout_parse解析开始 文件名：{file_name}')
 
     # 根据后缀判断文件类型
     if file_extension == 'pptx':
@@ -96,22 +93,24 @@ def layout_parse(file_name: str = None, file: bytes = None, task_id=""):
         result_json, result_text = pic_parser.layout_parse(file)
     else:
         raise ValueError("异常：不支持的文件类型")
-    logging.info(f'layout_parse解析完毕 文件名：{file_name}')
+    logger.info(f'layout_parse解析完毕 文件名：{file_name}')
 
     # 缓存结果
-    if task_id:
-        s3_service.upload_s3_parse_result(task_id, result_json, ParseType.LAYOUT.value)
+    if task_id and parser_context.parse_result_cache_provider:
+        parser_context.parse_result_cache_provider.upload_parse_result(task_id, result_json, ParseType.LAYOUT.value)
 
     return result_json, result_text
 
 
-def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_faq=True):
+def domtree_parse(file_name: str = None, file: bytes = None, task_id=""):
     # 获取缓存
-    s3_result_domtree = s3_service.get_s3_parse_result(task_id, ParseType.DOMTREE.value)
-    s3_result_markdown = s3_service.get_s3_parse_result(task_id, ParseType.MARKDOWN.value)
-    if s3_result_domtree and s3_result_markdown:
-        logging.info(f'缓存获取成功 file_id：{task_id}')
-        return True, s3_result_domtree, s3_result_markdown
+    if parser_context.parse_result_cache_provider:
+        cache_result_domtree = parser_context.parse_result_cache_provider.get_parse_result(task_id, ParseType.DOMTREE.value)
+        cache_result_markdown = parser_context.parse_result_cache_provider.get_parse_result(task_id, ParseType.MARKDOWN.value)
+        if cache_result_domtree and cache_result_markdown:
+            logger.info(f'缓存获取成功 file_id：{task_id}')
+            return True, cache_result_domtree, cache_result_markdown
+
 
     # json转换
     def convert_to_json(obj):
@@ -123,23 +122,23 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
     validate_parameters(file_name, file)
     # 获取文件后缀
     file_extension = general_util.get_file_type(file_name)
-    logging.info(f'domtree_parse解析开始 文件名：{file_name}')
+    logger.info(f'domtree_parse解析开始 文件名：{file_name}')
 
 
     # 根据后缀判断文件类型
     if file_extension == 'pdf':
         try:
-            dom_tree_model, markdown_res = pdf_domtree_parser.pdf_parse(file, check_faq)
+            dom_tree_model, markdown_res = pdf_parse(file)
             _, json_compatible_data = convert_to_json(dom_tree_model)
-            logging.info(f'domtree_parse解析完毕 文件名：{file_name}')
+            logger.info(f'domtree_parse解析完毕 文件名：{file_name}')
 
-            if task_id:
-                s3_service.upload_s3_parse_result(task_id, json_compatible_data, ParseType.DOMTREE.value)
-                s3_service.upload_s3_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
+            if task_id and parser_context.parse_result_cache_provider:
+                parser_context.parse_result_cache_provider.upload_parse_result(task_id, json_compatible_data, ParseType.DOMTREE.value)
+                parser_context.parse_result_cache_provider.upload_parse_result(task_id, markdown_res, ParseType.MARKDOWN.value)
 
             return True, json_compatible_data, markdown_res
         except Exception as e:
-            logging.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
+            logger.error('domtree_parse解析失败。[文件类型]pdf [原因]未知 [Exception]:%s', e)
             return False, {}, ""
     elif file_extension == 'csv' or file_extension == 'txt' or file_extension == 'md' or file_extension == 'html':
         converter = TxtConverter(stream=file)
@@ -177,9 +176,8 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id="", check_f
         raise ValueError("异常：不支持的文件类型")
 
 
-def worker(func, args, return_dict, key, user):
+def worker(func, args, return_dict, key):
     # 在子进程中设置上下文变量的值
-    user_context.set(user)
     result = func(*args)
     return_dict[key] = result
 
@@ -196,12 +194,13 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
             callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
             return layout_result_text
 
-        s3_service.upload_s3_parse_result(file_id, layout_result_json, ParseType.LAYOUT.value)
+        if parser_context.parse_result_cache_provider:
+            parser_context.parse_result_cache_provider.upload_parse_result(file_id, layout_result_json, ParseType.LAYOUT.value)
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
         callback_file_api(file_id, 'failed', str(e))
-        logging.info(f"Exception layout_parse_and_callback: {e}")
+        logger.info(f"Exception layout_parse_and_callback: {e}")
         return ""
     return layout_result_text, layout_result_json
 
@@ -222,14 +221,16 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
             # 无解析结果，不上报
             return {}
 
-        # 解析结果存S3
-        s3_service.upload_s3_parse_result(file_id, parse_result, ParseType.DOMTREE.value)
-        s3_service.upload_s3_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
+        # 解析结果
+        if parser_context.parse_result_cache_provider:
+            parser_context.parse_result_cache_provider.upload_parse_result(file_id, parse_result, ParseType.DOMTREE.value)
+            parser_context.parse_result_cache_provider.upload_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
+
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
         callback_file_api(file_id, 'failed', str(e))
-        logging.info(f"Exception domtree_parse_and_callback: {e}")
+        logger.info(f"Exception domtree_parse_and_callback: {e}")
         return {}
     return parse_result, markdown_res
 
@@ -251,13 +252,14 @@ def file_api_get_file_info(file_id):
     return response_data
 
 
-def file_api_upload_domtree(io, file_id):
+def file_api_upload_domtree(io, file_id, file_meta: dict = None):
     """
     向 file_api 上传文件的 dom-tree
 
     Args:
         io: 文件内容（二进制）
         file_id: 文件ID
+        file_meta: 包含space_code、cuid、cu_name的文件元数据信息
 
     Returns:
         响应数据
@@ -295,13 +297,14 @@ def file_api_upload_domtree(io, file_id):
         return {"error": {"message": response.content, "type": "Failed to decode response"}}
 
 
-def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
+def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str, file_meta: dict = None) -> dict:
     """
     向 file_api 上传 PDF 文件
     
     Args:
         pdf_stream: PDF 文件流
         file_id: 文件ID
+        file_meta: 包含space_code、cuid、cu_name的文件元数据信息
         
     Returns:
         响应数据
@@ -345,6 +348,7 @@ def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str) -> dict:
 def parse_result_layout_and_domtree(file_info, callbacks: list):
     file_id = file_info["id"]
     file_name = file_info["filename"]
+    file_meta = file_info.get("file_meta", {})
     logger.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
     start_time = time.time()
 
@@ -361,7 +365,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
 
         # 如果是 DOCX 转换的 PDF，回流到 API
         if pdf_stream:
-            pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id)
+            pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id, file_meta)
             if not pdf_upload_result or "error" in pdf_upload_result:
                 logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
             else:
@@ -371,7 +375,6 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
 
     # 多进程并行解析
     manager = Manager()
-    user = user_context.get()
     return_dict = manager.dict()
 
     parse_contents = pdf_stream if pdf_stream else contents
@@ -391,14 +394,14 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     if p1.is_alive():
         p1.terminate()
         p1.join()
-        logging.error(f"layout_parse 子进程超时并已终止 file_id:{file_id}")
+        logger.error(f"layout_parse 子进程超时并已终止 file_id:{file_id}")
         return
 
     p2.join(timeout)
     if p2.is_alive():
         p2.terminate()
         p2.join()
-        logging.error(f"domtree_parse 子进程超时并已终止 file_id:{file_id}")
+        logger.error(f"domtree_parse 子进程超时并已终止 file_id:{file_id}")
         return
 
     parse_result_raw = dict(return_dict)
@@ -407,10 +410,11 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     domtree_result = parse_result_raw["domtree_parse"][0] if parse_result_raw["domtree_parse"] else None
     markdown_result = parse_result_raw["domtree_parse"][1] if parse_result_raw["domtree_parse"] else None
 
-    # 解析结果存S3
-    s3_service.upload_s3_parse_result(file_id, layout_result, ParseType.LAYOUT.value)
-    s3_service.upload_s3_parse_result(file_id, domtree_result, ParseType.DOMTREE.value)
-    s3_service.upload_s3_parse_result(file_id, markdown_result, ParseType.MARKDOWN.value)
+    # 解析结果缓存
+    if parser_context.parse_result_cache_provider:
+        parser_context.parse_result_cache_provider.upload_parse_result(file_id, layout_result, ParseType.LAYOUT.value)
+        parser_context.parse_result_cache_provider.upload_parse_result(file_id, domtree_result, ParseType.DOMTREE.value)
+        parser_context.parse_result_cache_provider.upload_parse_result(file_id, markdown_result, ParseType.MARKDOWN.value)
 
     # 解析完毕回调
     if not layout_result and not domtree_result:
@@ -423,7 +427,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
         # 如果有domtree结果转换为协议标准化的StandardDomTree
         standard_dom_tree = StandardDomTree.from_domtree_dict(domtree=domtree_result, file_info=file_info)
         standard_dom_tree_json = jsonable_encoder(standard_dom_tree.root)
-        upload_result = file_api_upload_domtree(file_id=file_id, io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)))
+        upload_result = file_api_upload_domtree(file_id=file_id, io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)), file_meta=file_meta)
         if not upload_result or "error" in upload_result:
             raise Exception(f"上传domtree到file_api失败 file_id:{file_id}, 错误信息: {upload_result.get('error', '未知错误')}")
         logger.info(f"上传domtree到file_api成功 file_id:{file_id}")
@@ -435,7 +439,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     total_time = end_time - start_time
     minutes = int(total_time // 60)
     seconds = int(total_time % 60)
-    logging.info(f"parse_result_layout_and_domtree 完成解析 file_id:{file_id}, 总耗时: {minutes}分钟{seconds}秒")
+    logger.info(f"parse_result_layout_and_domtree 完成解析 file_id:{file_id}, 总耗时: {minutes}分钟{seconds}秒")
     return {
         "layout_result": layout_result,
         "domtree_result": domtree_result,
@@ -461,14 +465,14 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
     parse_functions = {
         "layout_result": lambda file_name, contents: layout_parse(file_name, contents, task_id)[0],
         # 只返回layout_result_json
-        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents, task_id, check_faq)[1],
+        "domtree_result": lambda file_name, contents: domtree_parse(file_name, contents, task_id)[1],
         # 只返回domtree_parse_result
-        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents, task_id, check_faq)[2],
+        "markdown_result": lambda file_name, contents: domtree_parse(file_name, contents, task_id)[2],
         # 只返回markdown_res
         "all_result": lambda file_name, contents: {
             "layout_result": layout_parse(file_name, contents, task_id)[0],
-            "domtree_result": domtree_parse(file_name, contents, task_id, check_faq)[1],
-            "markdown_result": domtree_parse(file_name, contents, task_id, check_faq)[2],
+            "domtree_result": domtree_parse(file_name, contents, task_id)[1],
+            "markdown_result": domtree_parse(file_name, contents, task_id)[2],
         }
     }
 
@@ -512,14 +516,14 @@ def callback_file_api(file_id, status_code, message: str = ""):
     try:
         response = requests.post(url, headers=headers, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-        logging.info(
+        logger.info(
             f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
-        logging.info(f"HTTP 错误: {http_err}")
+        logger.info(f"HTTP 错误: {http_err}")
     except requests.exceptions.RequestException as req_err:
-        logging.info(f"请求异常: {req_err}")
+        logger.info(f"请求异常: {req_err}")
     return False
 
 
@@ -533,22 +537,22 @@ def callback_other_api(file_id, status_code, callback_url, message: str = ""):
     try:
         response = requests.post(callback_url, json=data)
         response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
-        logging.info(
+        logger.info(
             f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
-        logging.info(f"HTTP 错误: {http_err}")
+        logger.info(f"HTTP 错误: {http_err}")
     except requests.exceptions.RequestException as req_err:
-        logging.info(f"请求异常: {req_err}")
+        logger.info(f"请求异常: {req_err}")
     return False
 
 
 def api_get_result_service(file_id, parse_type="all"):
-    if parse_type == ParseType.All.value:
-        layout_cache = s3_service.get_s3_parse_result(file_id, ParseType.LAYOUT.value)
-        domtree_cache = s3_service.get_s3_parse_result(file_id, ParseType.DOMTREE.value)
-        markdown_cache = s3_service.get_s3_parse_result(file_id, ParseType.MARKDOWN.value)
+    if parse_type == ParseType.All.value and parser_context.parse_result_cache_provider:
+        layout_cache = parser_context.parse_result_cache_provider.get_parse_result(file_id, ParseType.LAYOUT.value)
+        domtree_cache = parser_context.parse_result_cache_provider.get_parse_result(file_id, ParseType.DOMTREE.value)
+        markdown_cache = parser_context.parse_result_cache_provider.get_parse_result(file_id, ParseType.MARKDOWN.value)
         if not layout_cache and not domtree_cache and not markdown_cache:
             raise HTTPException(status_code=404, detail="解析结果不存在")
         return {
@@ -557,9 +561,13 @@ def api_get_result_service(file_id, parse_type="all"):
             "markdown_result": markdown_cache
         }
 
-    s3_result = s3_service.get_s3_parse_result(file_id, parse_type)
-    if not s3_result:  # 解析结果不存在
-        raise HTTPException(status_code=404, detail="解析结果不存在")
+    if parser_context.parse_result_cache_provider:
+        cache_result = parser_context.parse_result_cache_provider.get_parse_result(file_id, parse_type)
+        if not cache_result:  # 解析结果不存在
+            raise HTTPException(status_code=404, detail="解析结果不存在")
+        return {parse_type + "_result": cache_result}
+    else:
+        raise HTTPException(status_code=404, detail="解析结果存储未实现")
 
 def pdf_parse(contents: bytes = None):
     converter = PDFConverter(stream=contents)

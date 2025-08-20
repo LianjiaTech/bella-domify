@@ -1,0 +1,748 @@
+{
+  "root": {
+    "order_num": null,
+    "element": null,
+    "child": [
+      {
+        "order_num": "1",
+        "element": {
+          "block_type": "text",
+          "text": "这是一个自制的文件",
+          "layout_type": "Title",
+          "metadata": null,
+          "page_num": [
+            0
+          ],
+          "image_link": null
+        },
+        "child": [
+          {
+            "order_num": "1.1",
+            "element": {
+              "block_type": "text",
+              "text": "第一部分 文字图片",
+              "layout_type": "Title",
+              "metadata": null,
+              "page_num": [
+                0
+              ],
+              "image_link": null
+            },
+            "child": [
+              {
+                "order_num": "1.1.1",
+                "element": {
+                  "block_type": "text",
+                  "text": "这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文 字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。",
+                  "layout_type": "Text",
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null
+                },
+                "child": [
+                  {
+                    "order_num": "1.1.1.1",
+                    "element": {
+                      "block_type": "image",
+                      "text": null,
+                      "layout_type": "Figure",
+                      "metadata": null,
+                      "page_num": [
+                        0
+                      ],
+                      "image_link": null
+                    },
+                    "child": []
+                  }
+                ]
+              },
+              {
+                "order_num": "1.1.2",
+                "element": {
+                  "block_type": "text",
+                  "text": "图 1-1",
+                  "layout_type": "FigureName",
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null
+                },
+                "child": []
+              },
+              {
+                "order_num": "1.1.3",
+                "element": {
+                  "block_type": "text",
+                  "text": "这是文字这是文字，这是文字这是文字。这是文字这 是文字，这是文字这是文字。这是文字这是文字，这是文字 这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是文字这是文字。这是文字这是文字，这是 文字这是文字。",
+                  "layout_type": "Text",
+                  "metadata": null,
+                  "page_num": [
+                    0
+                  ],
+                  "image_link": null
+                },
+                "child": []
+              }
+            ]
+          },
+          {
+            "order_num": "1.2",
+            "element": {
+              "block_type": "text",
+              "text": "第二部分 无序列表",
+              "layout_type": "Title",
+              "metadata": null,
+              "page_num": [
+                1
+              ],
+              "image_link": null
+            },
+            "child": [
+              {
+                "order_num": "1.2.1",
+                "element": {
+                  "block_type": "text",
+                  "text": "第一种无序列表 demo 如下，第一种无序列表 demo 如 下，第一种无序列表 demo 如下：",
+                  "layout_type": "Text",
+                  "metadata": null,
+                  "page_num": [
+                    1
+                  ],
+                  "image_link": null
+                },
+                "child": [
+                  {
+                    "order_num": "1.2.1.1",
+                    "element": {
+                      "block_type": "text",
+                      "text": " 无序列表第一项",
+                      "layout_type": "Text",
+                      "metadata": null,
+                      "page_num": [
+                        1
+                      ],
+                      "image_link": null
+                    },
+                    "child": []
+                  },
+                  {
+                    "order_num": "1.2.1.2",
+                    "element": {
+                      "block_type": "text",
+                      "text": " 无序列表第二项",
+                      "layout_type": "Text",
+                      "metadata": null,
+                      "page_num": [
+                        1
+                      ],
+                      "image_link": null
+                    },
+                    "child": []
+                  },
+                  {
+                    "order_num": "1.2.1.3",
+                    "element": {
+                      "block_type": "text",
+                      "text": " 无序列表第三项",
+                      "layout_type": "Title",
+                      "metadata": null,
+                      "page_num": [
+                        1
+                      ],
+                      "image_link": null
+                    },
+                    "child": [
+                      {
+                        "order_num": "1.2.1.3.1",
+                        "element": {
+                          "block_type": "text",
+                          "text": "第二种无序列表 demo 如下，demo 如下，demo 如下，demo 如下，demo 如下：",
+                          "layout_type": "Text",
+                          "metadata": null,
+                          "page_num": [
+                            1
+                          ],
+                          "image_link": null
+                        },
+                        "child": [
+                          {
+                            "order_num": "1.2.1.3.1.1",
+                            "element": {
+                              "block_type": "text",
+                              "text": " 无序列表第 1 项",
+                              "layout_type": "Text",
+                              "metadata": null,
+                              "page_num": [
+                                1
+                              ],
+                              "image_link": null
+                            },
+                            "child": []
+                          },
+                          {
+                            "order_num": "1.2.1.3.1.2",
+                            "element": {
+                              "block_type": "text",
+                              "text": " 无序列表第 2 项",
+                              "layout_type": "Text",
+                              "metadata": null,
+                              "page_num": [
+                                1
+                              ],
+                              "image_link": null
+                            },
+                            "child": []
+                          },
+                          {
+                            "order_num": "1.2.1.3.1.3",
+                            "element": {
+                              "block_type": "text",
+                              "text": " 无序列表第 3 项",
+                              "layout_type": "Title",
+                              "metadata": null,
+                              "page_num": [
+                                1
+                              ],
+                              "image_link": null
+                            },
+                            "child": [
+                              {
+                                "order_num": "1.2.1.3.1.3.1",
+                                "element": {
+                                  "block_type": "text",
+                                  "text": "第三种无序列表 demo 如下，如下如下如下如下如下如 下如下如下如下如下如下如下如下如下如下如下如下如下 如下如下：",
+                                  "layout_type": "Text",
+                                  "metadata": null,
+                                  "page_num": [
+                                    1
+                                  ],
+                                  "image_link": null
+                                },
+                                "child": [
+                                  {
+                                    "order_num": "1.2.1.3.1.3.1.1",
+                                    "element": {
+                                      "block_type": "text",
+                                      "text": " 无序列表项无序列表项 1",
+                                      "layout_type": "Text",
+                                      "metadata": null,
+                                      "page_num": [
+                                        1
+                                      ],
+                                      "image_link": null
+                                    },
+                                    "child": []
+                                  },
+                                  {
+                                    "order_num": "1.2.1.3.1.3.1.2",
+                                    "element": {
+                                      "block_type": "text",
+                                      "text": " 无序列表项无序列表项 2",
+                                      "layout_type": "Text",
+                                      "metadata": null,
+                                      "page_num": [
+                                        1
+                                      ],
+                                      "image_link": null
+                                    },
+                                    "child": []
+                                  },
+                                  {
+                                    "order_num": "1.2.1.3.1.3.1.3",
+                                    "element": {
+                                      "block_type": "text",
+                                      "text": " 无序列表项无序列表项 3",
+                                      "layout_type": "Text",
+                                      "metadata": null,
+                                      "page_num": [
+                                        1
+                                      ],
+                                      "image_link": null
+                                    },
+                                    "child": []
+                                  },
+                                  {
+                                    "order_num": "1.2.1.3.1.3.1.4",
+                                    "element": {
+                                      "block_type": "text",
+                                      "text": " 无序列表项无序列表项 4",
+                                      "layout_type": "Title",
+                                      "metadata": null,
+                                      "page_num": [
+                                        1
+                                      ],
+                                      "image_link": null
+                                    },
+                                    "child": [
+                                      {
+                                        "order_num": "1.2.1.3.1.3.1.4.1",
+                                        "element": {
+                                          "block_type": "text",
+                                          "text": "代码块 demo 如下，代码块 demo 如下，，代码块 demo 如下，代码块 demo 如下，代码块 demo 如下：",
+                                          "layout_type": "Text",
+                                          "metadata": null,
+                                          "page_num": [
+                                            2
+                                          ],
+                                          "image_link": null
+                                        },
+                                        "child": [
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.1",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "{",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.2",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"root\": {",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.3",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"child\": [",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.4",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "{",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.5",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"child\": [",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.6",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "{",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.7",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"child\": [],",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.8",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"order_num\": \"1.1\",",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.9",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"element\": {",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.10",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"block_type\": \"table\",",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.11",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"rows\": []",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.12",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "}",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.13",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "},",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.14",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "{}",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.15",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "],",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.16",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"order_num\": \"1\",",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.17",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"element\": {",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.18",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"text\": \"贝壳 无形资产核算指引 \",",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.19",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"block_type\": \"text\",",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.20",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"image_base64_str\": null",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.21",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "}",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.22",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "}",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.23",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "],",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.24",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"order_num\": null,",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.25",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "\"element\": null",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.26",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "}",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.1.27",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "}",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                3
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "order_num": "1.2.1.3.1.3.1.4.2",
+                                        "element": {
+                                          "block_type": "text",
+                                          "text": "以上是代码块，以上是代码块全部内容，代码块。",
+                                          "layout_type": "Text",
+                                          "metadata": null,
+                                          "page_num": [
+                                            4
+                                          ],
+                                          "image_link": null
+                                        },
+                                        "child": []
+                                      },
+                                      {
+                                        "order_num": "1.2.1.3.1.3.1.4.3",
+                                        "element": {
+                                          "block_type": "text",
+                                          "text": "附录",
+                                          "layout_type": "Title",
+                                          "metadata": null,
+                                          "page_num": [
+                                            4
+                                          ],
+                                          "image_link": null
+                                        },
+                                        "child": [
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.3.1",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容。",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                4
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          },
+                                          {
+                                            "order_num": "1.2.1.3.1.3.1.4.3.2",
+                                            "element": {
+                                              "block_type": "text",
+                                              "text": "这是一个附录，附录内容附录内容，这是一个附录，附录内容附 录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内 容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附 录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一个附 录，附录内容附录内容，这是一个附录，附录内容附录内容，这是一 个附录，附录内容附录内容。",
+                                              "layout_type": "Text",
+                                              "metadata": null,
+                                              "page_num": [
+                                                4
+                                              ],
+                                              "image_link": null
+                                            },
+                                            "child": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,2869 @@
+{
+    "logics": {
+        "docTree": [
+            {
+                "backlink": {
+                    "上级": [
+                        "ROOT"
+                    ]
+                },
+                "level": 0,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "3805d39f01757a746b25d398f6f4366d"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "3805d39f01757a746b25d398f6f4366d"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "8e174bd95b69d779ee0068b389fda56a"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8e174bd95b69d779ee0068b389fda56a"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "4d9f8b0b5e3ad4877fe1ecd195d2e0e4"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8e174bd95b69d779ee0068b389fda56a"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "4e8510174e57e76f0682adbeaf38318a"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "4e8510174e57e76f0682adbeaf38318a"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "c2116fca0e8ec80942e3d55fd86d8988"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8e174bd95b69d779ee0068b389fda56a"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "f36d7ccdcd0aa0be919f0bc2088263b5"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "3805d39f01757a746b25d398f6f4366d"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "8c46f47b02b83d4da2a223954c770a35"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8c46f47b02b83d4da2a223954c770a35"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "5b3490bebb4b8521654abe8a6cc9c9e6"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "5b3490bebb4b8521654abe8a6cc9c9e6"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "bbe3f9ca42e934eb76877bf212f02251"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "5b3490bebb4b8521654abe8a6cc9c9e6"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "4fe2046b529644bd0aec45764a795444"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "5b3490bebb4b8521654abe8a6cc9c9e6"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "fd94cecca923bb86537e1e545ee6bc53"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8c46f47b02b83d4da2a223954c770a35"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "6de8b1f6e703c7a68b52815b8ca6fd65"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "6de8b1f6e703c7a68b52815b8ca6fd65"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "a03cd3ee4aa0cbde1baafaff92514273"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "6de8b1f6e703c7a68b52815b8ca6fd65"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "26ba9f904c23c4a7966e809d8e8a7b3a"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "6de8b1f6e703c7a68b52815b8ca6fd65"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "e55867f01a1abcb5d8aa6251b009ba42"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8c46f47b02b83d4da2a223954c770a35"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "d5e6a6d13333927eed9106577fec8cd6"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "d5e6a6d13333927eed9106577fec8cd6"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "9551ab660bfd89ed2a420bb3ef5fc0ae"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "d5e6a6d13333927eed9106577fec8cd6"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "d5f782dc082c17f9a83c7e81531c5044"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "d5e6a6d13333927eed9106577fec8cd6"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "4b55680e77459c1842370023d27dce5a"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "d5e6a6d13333927eed9106577fec8cd6"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "8e04682492f01eae98c9d619dc03ec13"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8c46f47b02b83d4da2a223954c770a35"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "7d87a690d2f160d161262886a790e7a1"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "7d87a690d2f160d161262886a790e7a1"
+                    ]
+                },
+                "level": 3,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "289e522e54ec6395979ebd8d8ed5394a"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "8c46f47b02b83d4da2a223954c770a35"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "beddf855180807a6eb26d7dd306cae54"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "3805d39f01757a746b25d398f6f4366d"
+                    ]
+                },
+                "level": 1,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "b30143b9e9da0cfde1c791123f8e8ecc"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "b30143b9e9da0cfde1c791123f8e8ecc"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "4de23274b7351510abf4c4afff3c750d"
+            },
+            {
+                "backlink": {
+                    "上级": [
+                        "b30143b9e9da0cfde1c791123f8e8ecc"
+                    ]
+                },
+                "level": 2,
+                "link": {
+                    "下级": [],
+                    "包含": []
+                },
+                "uniqueId": "dbb6ba533bb5fbe1ffc06b72c5a9ea01"
+            }
+        ],
+        "paragraphKVs": [
+            {
+                "value": [
+                    "文字图片"
+                ],
+                "key": [
+                    "第一部分"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "8e174bd95b69d779ee0068b389fda56a",
+                    "valueConfidence": 0.950845,
+                    "keyLayoutId": "8e174bd95b69d779ee0068b389fda56a",
+                    "keyConfidence": 0.9839205
+                }
+            },
+            {
+                "value": [
+                    "无序列表"
+                ],
+                "key": [
+                    "第二部分"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "8c46f47b02b83d4da2a223954c770a35",
+                    "valueConfidence": 0.95751184,
+                    "keyLayoutId": "8c46f47b02b83d4da2a223954c770a35",
+                    "keyConfidence": 0.91853875
+                }
+            },
+            {
+                "value": [
+                    "第一项"
+                ],
+                "key": [
+                    "无序列表"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "bbe3f9ca42e934eb76877bf212f02251",
+                    "valueConfidence": 0.7762623,
+                    "keyLayoutId": "bbe3f9ca42e934eb76877bf212f02251",
+                    "keyConfidence": 0.8781714
+                }
+            },
+            {
+                "value": [
+                    "第三项"
+                ],
+                "key": [
+                    "无序列表"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "fd94cecca923bb86537e1e545ee6bc53",
+                    "valueConfidence": 0.8434987,
+                    "keyLayoutId": "fd94cecca923bb86537e1e545ee6bc53",
+                    "keyConfidence": 0.91136837
+                }
+            },
+            {
+                "value": [
+                    "第1项"
+                ],
+                "key": [
+                    "无序列表"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "a03cd3ee4aa0cbde1baafaff92514273",
+                    "valueConfidence": 0.74246496,
+                    "keyLayoutId": "a03cd3ee4aa0cbde1baafaff92514273",
+                    "keyConfidence": 0.7693828
+                }
+            },
+            {
+                "value": [
+                    "第2项"
+                ],
+                "key": [
+                    "无序列表"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "26ba9f904c23c4a7966e809d8e8a7b3a",
+                    "valueConfidence": 0.7717791,
+                    "keyLayoutId": "26ba9f904c23c4a7966e809d8e8a7b3a",
+                    "keyConfidence": 0.8192009
+                }
+            },
+            {
+                "value": [
+                    "第3项"
+                ],
+                "key": [
+                    "无序列表"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "e55867f01a1abcb5d8aa6251b009ba42",
+                    "valueConfidence": 0.9852055,
+                    "keyLayoutId": "e55867f01a1abcb5d8aa6251b009ba42",
+                    "keyConfidence": 0.9724542
+                }
+            },
+            {
+                "value": [
+                    "1"
+                ],
+                "key": [
+                    "无序列表项"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "9551ab660bfd89ed2a420bb3ef5fc0ae",
+                    "valueConfidence": 0.8274042,
+                    "keyLayoutId": "9551ab660bfd89ed2a420bb3ef5fc0ae",
+                    "keyConfidence": 0.69013333
+                }
+            },
+            {
+                "value": [
+                    "2"
+                ],
+                "key": [
+                    "无序列表项"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "d5f782dc082c17f9a83c7e81531c5044",
+                    "valueConfidence": 0.60309076,
+                    "keyLayoutId": "d5f782dc082c17f9a83c7e81531c5044",
+                    "keyConfidence": 0.537306
+                }
+            },
+            {
+                "value": [
+                    "3"
+                ],
+                "key": [
+                    "无序列表项"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "4b55680e77459c1842370023d27dce5a",
+                    "valueConfidence": 0.5806774,
+                    "keyLayoutId": "4b55680e77459c1842370023d27dce5a",
+                    "keyConfidence": 0.53865415
+                }
+            },
+            {
+                "value": [
+                    "4"
+                ],
+                "key": [
+                    "无序列表项"
+                ],
+                "extInfo": {
+                    "valueLayoutId": "8e04682492f01eae98c9d619dc03ec13",
+                    "valueConfidence": 0.71216315,
+                    "keyLayoutId": "8e04682492f01eae98c9d619dc03ec13",
+                    "keyConfidence": 0.58656883
+                }
+            }
+        ]
+    },
+    "docInfo": {
+        "pages": [
+            {
+                "imageWidth": 1355,
+                "fileName": null,
+                "sheetName": "",
+                "fileIndex": 0,
+                "pageIdCurDoc": 0,
+                "source": null,
+                "pdfParseResult": null,
+                "imageHeight": 1917,
+                "isBlankPage": null,
+                "sourceFileType": "normal",
+                "imageUrl": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/publicDocStructure/docmind-20240829-97ca19bd54724b7a98e946a96c6561da/0.png?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=vPy2Uh%2FyQwW%2BUP%2F07RYF200SJhA%3D",
+                "angle": 0.0,
+                "sourceImagePath": null,
+                "excelParseResult": null,
+                "fileUrl": null,
+                "wordParseResult": null,
+                "imageType": "JPEG",
+                "imageStorageKey": "docmind-20240829-97ca19bd54724b7a98e946a96c6561da/0.png",
+                "pageIdAllDocs": 0,
+                "imageParseResult": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/parse?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=bp1dgH30otQCCG6SKDS9xfVRx1g%3D"
+            },
+            {
+                "imageWidth": 1355,
+                "fileName": null,
+                "sheetName": "",
+                "fileIndex": 0,
+                "pageIdCurDoc": 1,
+                "source": null,
+                "pdfParseResult": null,
+                "imageHeight": 1917,
+                "isBlankPage": null,
+                "sourceFileType": "normal",
+                "imageUrl": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/publicDocStructure/docmind-20240829-97ca19bd54724b7a98e946a96c6561da/1.png?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=WCbJk%2BllwkJ0ntHDwYZ2dQdD%2B%2Fo%3D",
+                "angle": 0.0,
+                "sourceImagePath": null,
+                "excelParseResult": null,
+                "fileUrl": null,
+                "wordParseResult": null,
+                "imageType": "JPEG",
+                "imageStorageKey": "docmind-20240829-97ca19bd54724b7a98e946a96c6561da/1.png",
+                "pageIdAllDocs": 1,
+                "imageParseResult": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/parse?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=bp1dgH30otQCCG6SKDS9xfVRx1g%3D"
+            },
+            {
+                "imageWidth": 1355,
+                "fileName": null,
+                "sheetName": "",
+                "fileIndex": 0,
+                "pageIdCurDoc": 2,
+                "source": null,
+                "pdfParseResult": null,
+                "imageHeight": 1917,
+                "isBlankPage": null,
+                "sourceFileType": "normal",
+                "imageUrl": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/publicDocStructure/docmind-20240829-97ca19bd54724b7a98e946a96c6561da/2.png?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=8CvswBJ7bKk%2F7OCwoApLdt8mzqg%3D",
+                "angle": 0.0,
+                "sourceImagePath": null,
+                "excelParseResult": null,
+                "fileUrl": null,
+                "wordParseResult": null,
+                "imageType": "JPEG",
+                "imageStorageKey": "docmind-20240829-97ca19bd54724b7a98e946a96c6561da/2.png",
+                "pageIdAllDocs": 2,
+                "imageParseResult": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/parse?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=bp1dgH30otQCCG6SKDS9xfVRx1g%3D"
+            },
+            {
+                "imageWidth": 1355,
+                "fileName": null,
+                "sheetName": "",
+                "fileIndex": 0,
+                "pageIdCurDoc": 3,
+                "source": null,
+                "pdfParseResult": null,
+                "imageHeight": 1917,
+                "isBlankPage": null,
+                "sourceFileType": "normal",
+                "imageUrl": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/publicDocStructure/docmind-20240829-97ca19bd54724b7a98e946a96c6561da/3.png?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=C9CnAAgpTVWraRJLbMxALgcAgAI%3D",
+                "angle": 0.0,
+                "sourceImagePath": null,
+                "excelParseResult": null,
+                "fileUrl": null,
+                "wordParseResult": null,
+                "imageType": "JPEG",
+                "imageStorageKey": "docmind-20240829-97ca19bd54724b7a98e946a96c6561da/3.png",
+                "pageIdAllDocs": 3,
+                "imageParseResult": "http://docmind-api-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/parse?Expires=1724975962&OSSAccessKeyId=LTAI5tQL9bqLHC5HYKV68DA9&Signature=bp1dgH30otQCCG6SKDS9xfVRx1g%3D"
+            }
+        ],
+        "docType": "pdf",
+        "pageCountEstimate": 4
+    },
+    "styles": [
+        {
+            "fontName": "微软雅黑",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 0,
+            "deleteLine": false,
+            "fontSize": 28,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "黑体",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 1,
+            "deleteLine": false,
+            "fontSize": 19,
+            "bold": true,
+            "italic": false
+        },
+        {
+            "fontName": "黑体",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 2,
+            "deleteLine": false,
+            "fontSize": 17,
+            "bold": true,
+            "italic": false
+        },
+        {
+            "fontName": "微软雅黑",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 3,
+            "deleteLine": false,
+            "fontSize": 16,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "等线",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 4,
+            "deleteLine": false,
+            "fontSize": 17,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "微软雅黑",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 5,
+            "deleteLine": false,
+            "fontSize": 17,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "Verdana",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 6,
+            "deleteLine": false,
+            "fontSize": 13,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "等线",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 7,
+            "deleteLine": false,
+            "fontSize": 16,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "黑体",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 8,
+            "deleteLine": false,
+            "fontSize": 17,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "Garamond",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 9,
+            "deleteLine": false,
+            "fontSize": 16,
+            "bold": true,
+            "italic": true
+        },
+        {
+            "fontName": "Times_New_Roman",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 10,
+            "deleteLine": false,
+            "fontSize": 16,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "Verdana",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 11,
+            "deleteLine": false,
+            "fontSize": 18,
+            "bold": true,
+            "italic": false
+        },
+        {
+            "fontName": "Verdana",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 12,
+            "deleteLine": false,
+            "fontSize": 18,
+            "bold": true,
+            "italic": true
+        },
+        {
+            "fontName": "微软雅黑",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 13,
+            "deleteLine": false,
+            "fontSize": 18,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "黑体",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 14,
+            "deleteLine": false,
+            "fontSize": 16,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "Verdana",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 15,
+            "deleteLine": false,
+            "fontSize": 17,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "Verdana",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 16,
+            "deleteLine": false,
+            "fontSize": 16,
+            "bold": true,
+            "italic": false
+        },
+        {
+            "fontName": "Verdana",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 17,
+            "deleteLine": false,
+            "fontSize": 17,
+            "bold": true,
+            "italic": true
+        },
+        {
+            "fontName": "黑体",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 18,
+            "deleteLine": false,
+            "fontSize": 23,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "黑体",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 19,
+            "deleteLine": false,
+            "fontSize": 15,
+            "bold": false,
+            "italic": false
+        },
+        {
+            "fontName": "黑体",
+            "charScale": 1.0,
+            "color": "000000",
+            "underline": false,
+            "styleId": 20,
+            "deleteLine": false,
+            "fontSize": 14,
+            "bold": false,
+            "italic": false
+        }
+    ],
+    "layouts": [
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 430,
+                    "y": 206
+                },
+                {
+                    "x": 921,
+                    "y": 206
+                },
+                {
+                    "x": 921,
+                    "y": 262
+                },
+                {
+                    "x": 430,
+                    "y": 262
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 424,
+                            "y": 201
+                        },
+                        {
+                            "x": 927,
+                            "y": 201
+                        },
+                        {
+                            "x": 927,
+                            "y": 266
+                        },
+                        {
+                            "x": 424,
+                            "y": 266
+                        }
+                    ],
+                    "styleId": 0,
+                    "text": "这是一个自制的文件"
+                }
+            ],
+            "index": 0,
+            "subType": "doc_title",
+            "lineHeight": 0,
+            "text": "这是一个自制的文件",
+            "alignment": "center",
+            "type": "title",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "3805d39f01757a746b25d398f6f4366d"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 504,
+                    "y": 319
+                },
+                {
+                    "x": 847,
+                    "y": 319
+                },
+                {
+                    "x": 847,
+                    "y": 361
+                },
+                {
+                    "x": 504,
+                    "y": 361
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 499,
+                            "y": 317
+                        },
+                        {
+                            "x": 700,
+                            "y": 317
+                        },
+                        {
+                            "x": 700,
+                            "y": 362
+                        },
+                        {
+                            "x": 499,
+                            "y": 362
+                        }
+                    ],
+                    "styleId": 1,
+                    "text": "第一部分"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 680,
+                            "y": 319
+                        },
+                        {
+                            "x": 849,
+                            "y": 319
+                        },
+                        {
+                            "x": 849,
+                            "y": 360
+                        },
+                        {
+                            "x": 680,
+                            "y": 360
+                        }
+                    ],
+                    "styleId": 2,
+                    "text": "文字图片"
+                }
+            ],
+            "index": 1,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "第一部分文字图片",
+            "alignment": "center",
+            "type": "title",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "8e174bd95b69d779ee0068b389fda56a"
+        },
+        {
+            "firstLinesChars": 90,
+            "pos": [
+                {
+                    "x": 204,
+                    "y": 407
+                },
+                {
+                    "x": 1126,
+                    "y": 407
+                },
+                {
+                    "x": 1126,
+                    "y": 734
+                },
+                {
+                    "x": 204,
+                    "y": 734
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 290,
+                            "y": 407
+                        },
+                        {
+                            "x": 1135,
+                            "y": 407
+                        },
+                        {
+                            "x": 1135,
+                            "y": 450
+                        },
+                        {
+                            "x": 290,
+                            "y": 450
+                        }
+                    ],
+                    "styleId": 3,
+                    "text": "这是文字这是文字,这是文字这是文字。这是文字这"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 477
+                        },
+                        {
+                            "x": 1118,
+                            "y": 477
+                        },
+                        {
+                            "x": 1118,
+                            "y": 521
+                        },
+                        {
+                            "x": 200,
+                            "y": 521
+                        }
+                    ],
+                    "styleId": 3,
+                    "text": "是文字,这是文字这是文字。这是文字这是文字,这是文"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 549
+                        },
+                        {
+                            "x": 1117,
+                            "y": 549
+                        },
+                        {
+                            "x": 1117,
+                            "y": 591
+                        },
+                        {
+                            "x": 200,
+                            "y": 591
+                        }
+                    ],
+                    "styleId": 4,
+                    "text": "字这是文字。这是文字这是文字,这是文字这是文字。这"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 620
+                        },
+                        {
+                            "x": 1081,
+                            "y": 620
+                        },
+                        {
+                            "x": 1081,
+                            "y": 663
+                        },
+                        {
+                            "x": 200,
+                            "y": 663
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "是文字这是文字,这是文字这是文字。这是文字这是文"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 693
+                        },
+                        {
+                            "x": 591,
+                            "y": 693
+                        },
+                        {
+                            "x": 591,
+                            "y": 732
+                        },
+                        {
+                            "x": 200,
+                            "y": 732
+                        }
+                    ],
+                    "styleId": 3,
+                    "text": "字,这是文字这是文字。"
+                }
+            ],
+            "index": 2,
+            "subType": "para",
+            "lineHeight": 33,
+            "text": "这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "4d9f8b0b5e3ad4877fe1ecd195d2e0e4"
+        },
+        {
+            "pos": [
+                {
+                    "x": 198,
+                    "y": 789
+                },
+                {
+                    "x": 1152,
+                    "y": 789
+                },
+                {
+                    "x": 1152,
+                    "y": 1401
+                },
+                {
+                    "x": 198,
+                    "y": 1401
+                }
+            ],
+            "index": 3,
+            "subType": "picture",
+            "text": "",
+            "alignment": "center",
+            "type": "figure",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "4e8510174e57e76f0682adbeaf38318a"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 629,
+                    "y": 1427
+                },
+                {
+                    "x": 721,
+                    "y": 1427
+                },
+                {
+                    "x": 721,
+                    "y": 1458
+                },
+                {
+                    "x": 629,
+                    "y": 1458
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 623,
+                            "y": 1426
+                        },
+                        {
+                            "x": 727,
+                            "y": 1426
+                        },
+                        {
+                            "x": 727,
+                            "y": 1458
+                        },
+                        {
+                            "x": 623,
+                            "y": 1458
+                        }
+                    ],
+                    "styleId": 6,
+                    "text": "图1-1"
+                }
+            ],
+            "index": 4,
+            "subType": "pic_title",
+            "lineHeight": 0,
+            "text": "图1-1",
+            "alignment": "center",
+            "type": "figure_name",
+            "pageNum": [
+                0
+            ],
+            "uniqueId": "c2116fca0e8ec80942e3d55fd86d8988"
+        },
+        {
+            "firstLinesChars": 91,
+            "pos": [
+                {
+                    "x": 207,
+                    "y": 1509
+                },
+                {
+                    "x": 1135,
+                    "y": 1509
+                },
+                {
+                    "x": 1135,
+                    "y": 1805
+                },
+                {
+                    "x": 207,
+                    "y": 1805
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 291,
+                            "y": 1509
+                        },
+                        {
+                            "x": 1135,
+                            "y": 1509
+                        },
+                        {
+                            "x": 1135,
+                            "y": 1551
+                        },
+                        {
+                            "x": 291,
+                            "y": 1551
+                        }
+                    ],
+                    "styleId": 7,
+                    "text": "这是文字这是文字,这是文字这是文字。这是文字这"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 1579
+                        },
+                        {
+                            "x": 1118,
+                            "y": 1579
+                        },
+                        {
+                            "x": 1118,
+                            "y": 1622
+                        },
+                        {
+                            "x": 200,
+                            "y": 1622
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "是文字,这是文字这是文字。这是文字这是文字,这是文"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 1651
+                        },
+                        {
+                            "x": 1118,
+                            "y": 1651
+                        },
+                        {
+                            "x": 1118,
+                            "y": 1693
+                        },
+                        {
+                            "x": 200,
+                            "y": 1693
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "字这是文字。这是文字这是文字,这是文字这是文字。这"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 177
+                        },
+                        {
+                            "x": 1081,
+                            "y": 177
+                        },
+                        {
+                            "x": 1081,
+                            "y": 219
+                        },
+                        {
+                            "x": 200,
+                            "y": 219
+                        }
+                    ],
+                    "styleId": 3,
+                    "text": "是文字这是文字,这是文字这是文字。这是文字这是文"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 199,
+                            "y": 248
+                        },
+                        {
+                            "x": 591,
+                            "y": 248
+                        },
+                        {
+                            "x": 591,
+                            "y": 289
+                        },
+                        {
+                            "x": 199,
+                            "y": 289
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "字,这是文字这是文字。"
+                }
+            ],
+            "index": 5,
+            "subType": "none",
+            "lineHeight": 33,
+            "text": "这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。这是文字这是文字,这是文字这是文字。",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                0,
+                1
+            ],
+            "uniqueId": "f36d7ccdcd0aa0be919f0bc2088263b5"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 502,
+                    "y": 336
+                },
+                {
+                    "x": 850,
+                    "y": 336
+                },
+                {
+                    "x": 850,
+                    "y": 379
+                },
+                {
+                    "x": 502,
+                    "y": 379
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 499,
+                            "y": 336
+                        },
+                        {
+                            "x": 854,
+                            "y": 336
+                        },
+                        {
+                            "x": 854,
+                            "y": 378
+                        },
+                        {
+                            "x": 499,
+                            "y": 378
+                        }
+                    ],
+                    "styleId": 2,
+                    "text": "第二部分无序列表"
+                }
+            ],
+            "index": 1,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "第二部分无序列表",
+            "alignment": "center",
+            "type": "title",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "8c46f47b02b83d4da2a223954c770a35"
+        },
+        {
+            "firstLinesChars": 91,
+            "pos": [
+                {
+                    "x": 202,
+                    "y": 428
+                },
+                {
+                    "x": 1124,
+                    "y": 428
+                },
+                {
+                    "x": 1124,
+                    "y": 536
+                },
+                {
+                    "x": 202,
+                    "y": 536
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 291,
+                            "y": 425
+                        },
+                        {
+                            "x": 1128,
+                            "y": 425
+                        },
+                        {
+                            "x": 1128,
+                            "y": 468
+                        },
+                        {
+                            "x": 291,
+                            "y": 468
+                        }
+                    ],
+                    "styleId": 3,
+                    "text": "第一种无序列表demo如下,第一种无序列表 demo"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 496
+                        },
+                        {
+                            "x": 780,
+                            "y": 496
+                        },
+                        {
+                            "x": 780,
+                            "y": 538
+                        },
+                        {
+                            "x": 200,
+                            "y": 538
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "如下,第一种无序列表demo如下:"
+                }
+            ],
+            "index": 2,
+            "subType": "para",
+            "lineHeight": 33,
+            "text": "第一种无序列表demo如下,第一种无序列表 demo如下,第一种无序列表demo如下:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "5b3490bebb4b8521654abe8a6cc9c9e6"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 294,
+                    "y": 587
+                },
+                {
+                    "x": 598,
+                    "y": 587
+                },
+                {
+                    "x": 598,
+                    "y": 625
+                },
+                {
+                    "x": 294,
+                    "y": 625
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 329,
+                            "y": 586
+                        },
+                        {
+                            "x": 603,
+                            "y": 586
+                        },
+                        {
+                            "x": 603,
+                            "y": 625
+                        },
+                        {
+                            "x": 329,
+                            "y": 625
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表第一项"
+                }
+            ],
+            "index": 3,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "无序列表第一项",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "bbe3f9ca42e934eb76877bf212f02251"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 295,
+                    "y": 658
+                },
+                {
+                    "x": 599,
+                    "y": 658
+                },
+                {
+                    "x": 599,
+                    "y": 696
+                },
+                {
+                    "x": 295,
+                    "y": 696
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 290,
+                            "y": 656
+                        },
+                        {
+                            "x": 337,
+                            "y": 656
+                        },
+                        {
+                            "x": 337,
+                            "y": 695
+                        },
+                        {
+                            "x": 290,
+                            "y": 695
+                        }
+                    ],
+                    "styleId": 9,
+                    "text": ">"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 330,
+                            "y": 657
+                        },
+                        {
+                            "x": 603,
+                            "y": 657
+                        },
+                        {
+                            "x": 603,
+                            "y": 696
+                        },
+                        {
+                            "x": 330,
+                            "y": 696
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表第二项"
+                }
+            ],
+            "index": 4,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": ">无序列表第二项",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "4fe2046b529644bd0aec45764a795444"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 296,
+                    "y": 729
+                },
+                {
+                    "x": 597,
+                    "y": 729
+                },
+                {
+                    "x": 597,
+                    "y": 767
+                },
+                {
+                    "x": 296,
+                    "y": 767
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 331,
+                            "y": 728
+                        },
+                        {
+                            "x": 603,
+                            "y": 728
+                        },
+                        {
+                            "x": 603,
+                            "y": 767
+                        },
+                        {
+                            "x": 331,
+                            "y": 767
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表第三项"
+                }
+            ],
+            "index": 5,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "无序列表第三项",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "fd94cecca923bb86537e1e545ee6bc53"
+        },
+        {
+            "firstLinesChars": 71,
+            "pos": [
+                {
+                    "x": 201,
+                    "y": 819
+                },
+                {
+                    "x": 1094,
+                    "y": 819
+                },
+                {
+                    "x": 1094,
+                    "y": 926
+                },
+                {
+                    "x": 201,
+                    "y": 926
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 272,
+                            "y": 815
+                        },
+                        {
+                            "x": 1100,
+                            "y": 815
+                        },
+                        {
+                            "x": 1100,
+                            "y": 859
+                        },
+                        {
+                            "x": 272,
+                            "y": 859
+                        }
+                    ],
+                    "styleId": 3,
+                    "text": "第二种无序列表demo如下,demo如下,demo如"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 889
+                        },
+                        {
+                            "x": 689,
+                            "y": 889
+                        },
+                        {
+                            "x": 689,
+                            "y": 929
+                        },
+                        {
+                            "x": 201,
+                            "y": 929
+                        }
+                    ],
+                    "styleId": 10,
+                    "text": "下,demo如下,demo如下:"
+                }
+            ],
+            "index": 6,
+            "subType": "para",
+            "lineHeight": 36,
+            "text": "第二种无序列表demo如下,demo如下,demo如下,demo如下,demo如下:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "6de8b1f6e703c7a68b52815b8ca6fd65"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 295,
+                    "y": 977
+                },
+                {
+                    "x": 599,
+                    "y": 977
+                },
+                {
+                    "x": 599,
+                    "y": 1016
+                },
+                {
+                    "x": 295,
+                    "y": 1016
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 296,
+                            "y": 978
+                        },
+                        {
+                            "x": 340,
+                            "y": 978
+                        },
+                        {
+                            "x": 340,
+                            "y": 1021
+                        },
+                        {
+                            "x": 296,
+                            "y": 1021
+                        }
+                    ],
+                    "styleId": 11,
+                    "text": "●"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 337,
+                            "y": 977
+                        },
+                        {
+                            "x": 603,
+                            "y": 977
+                        },
+                        {
+                            "x": 603,
+                            "y": 1016
+                        },
+                        {
+                            "x": 337,
+                            "y": 1016
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表第1项"
+                }
+            ],
+            "index": 7,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "●无序列表第1项",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "a03cd3ee4aa0cbde1baafaff92514273"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 296,
+                    "y": 1048
+                },
+                {
+                    "x": 599,
+                    "y": 1048
+                },
+                {
+                    "x": 599,
+                    "y": 1087
+                },
+                {
+                    "x": 296,
+                    "y": 1087
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 297,
+                            "y": 1049
+                        },
+                        {
+                            "x": 340,
+                            "y": 1049
+                        },
+                        {
+                            "x": 340,
+                            "y": 1093
+                        },
+                        {
+                            "x": 297,
+                            "y": 1093
+                        }
+                    ],
+                    "styleId": 12,
+                    "text": "●"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 337,
+                            "y": 1047
+                        },
+                        {
+                            "x": 604,
+                            "y": 1047
+                        },
+                        {
+                            "x": 604,
+                            "y": 1087
+                        },
+                        {
+                            "x": 337,
+                            "y": 1087
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表第2项"
+                }
+            ],
+            "index": 8,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "●无序列表第2项",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "26ba9f904c23c4a7966e809d8e8a7b3a"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 296,
+                    "y": 1121
+                },
+                {
+                    "x": 598,
+                    "y": 1121
+                },
+                {
+                    "x": 598,
+                    "y": 1158
+                },
+                {
+                    "x": 296,
+                    "y": 1158
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 339,
+                            "y": 1119
+                        },
+                        {
+                            "x": 603,
+                            "y": 1119
+                        },
+                        {
+                            "x": 603,
+                            "y": 1158
+                        },
+                        {
+                            "x": 339,
+                            "y": 1158
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表第3项"
+                }
+            ],
+            "index": 9,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "无序列表第3项",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "e55867f01a1abcb5d8aa6251b009ba42"
+        },
+        {
+            "firstLinesChars": 80,
+            "pos": [
+                {
+                    "x": 202,
+                    "y": 1206
+                },
+                {
+                    "x": 1114,
+                    "y": 1206
+                },
+                {
+                    "x": 1114,
+                    "y": 1392
+                },
+                {
+                    "x": 202,
+                    "y": 1392
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 279,
+                            "y": 1210
+                        },
+                        {
+                            "x": 1118,
+                            "y": 1210
+                        },
+                        {
+                            "x": 1118,
+                            "y": 1252
+                        },
+                        {
+                            "x": 279,
+                            "y": 1252
+                        }
+                    ],
+                    "styleId": 13,
+                    "text": "第三种无序列表demo如下,如下如下如下如下如下"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 199,
+                            "y": 1278
+                        },
+                        {
+                            "x": 1117,
+                            "y": 1278
+                        },
+                        {
+                            "x": 1117,
+                            "y": 1320
+                        },
+                        {
+                            "x": 199,
+                            "y": 1320
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "如下如下如下如下如下如下如下如下如下如下如下如下如"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 1350
+                        },
+                        {
+                            "x": 416,
+                            "y": 1350
+                        },
+                        {
+                            "x": 416,
+                            "y": 1390
+                        },
+                        {
+                            "x": 202,
+                            "y": 1390
+                        }
+                    ],
+                    "styleId": 14,
+                    "text": "下如下如下:"
+                }
+            ],
+            "index": 10,
+            "subType": "para",
+            "lineHeight": 30,
+            "text": "第三种无序列表demo如下,如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下如下:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "d5e6a6d13333927eed9106577fec8cd6"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 279,
+                    "y": 1440
+                },
+                {
+                    "x": 717,
+                    "y": 1440
+                },
+                {
+                    "x": 717,
+                    "y": 1479
+                },
+                {
+                    "x": 279,
+                    "y": 1479
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 289,
+                            "y": 1438
+                        },
+                        {
+                            "x": 339,
+                            "y": 1438
+                        },
+                        {
+                            "x": 339,
+                            "y": 1477
+                        },
+                        {
+                            "x": 289,
+                            "y": 1477
+                        }
+                    ],
+                    "styleId": 15,
+                    "text": "/"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 321,
+                            "y": 1438
+                        },
+                        {
+                            "x": 721,
+                            "y": 1438
+                        },
+                        {
+                            "x": 721,
+                            "y": 1479
+                        },
+                        {
+                            "x": 321,
+                            "y": 1479
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表项无序列表项1"
+                }
+            ],
+            "index": 11,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "/无序列表项无序列表项1",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "9551ab660bfd89ed2a420bb3ef5fc0ae"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 278,
+                    "y": 1511
+                },
+                {
+                    "x": 719,
+                    "y": 1511
+                },
+                {
+                    "x": 719,
+                    "y": 1549
+                },
+                {
+                    "x": 278,
+                    "y": 1549
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 278,
+                            "y": 1507
+                        },
+                        {
+                            "x": 321,
+                            "y": 1507
+                        },
+                        {
+                            "x": 321,
+                            "y": 1545
+                        },
+                        {
+                            "x": 278,
+                            "y": 1545
+                        }
+                    ],
+                    "styleId": 16,
+                    "text": "√"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 321,
+                            "y": 1509
+                        },
+                        {
+                            "x": 722,
+                            "y": 1509
+                        },
+                        {
+                            "x": 722,
+                            "y": 1550
+                        },
+                        {
+                            "x": 321,
+                            "y": 1550
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表项无序列表项2"
+                }
+            ],
+            "index": 12,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "√无序列表项无序列表项2",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "d5f782dc082c17f9a83c7e81531c5044"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 278,
+                    "y": 1582
+                },
+                {
+                    "x": 718,
+                    "y": 1582
+                },
+                {
+                    "x": 718,
+                    "y": 1620
+                },
+                {
+                    "x": 278,
+                    "y": 1620
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 274,
+                            "y": 1579
+                        },
+                        {
+                            "x": 310,
+                            "y": 1579
+                        },
+                        {
+                            "x": 310,
+                            "y": 1616
+                        },
+                        {
+                            "x": 274,
+                            "y": 1616
+                        }
+                    ],
+                    "styleId": 16,
+                    "text": "√"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 322,
+                            "y": 1580
+                        },
+                        {
+                            "x": 722,
+                            "y": 1580
+                        },
+                        {
+                            "x": 722,
+                            "y": 1620
+                        },
+                        {
+                            "x": 322,
+                            "y": 1620
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表项无序列表项3"
+                }
+            ],
+            "index": 13,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "√无序列表项无序列表项3",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "4b55680e77459c1842370023d27dce5a"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 278,
+                    "y": 1653
+                },
+                {
+                    "x": 718,
+                    "y": 1653
+                },
+                {
+                    "x": 718,
+                    "y": 1690
+                },
+                {
+                    "x": 278,
+                    "y": 1690
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 289,
+                            "y": 1650
+                        },
+                        {
+                            "x": 339,
+                            "y": 1650
+                        },
+                        {
+                            "x": 339,
+                            "y": 1690
+                        },
+                        {
+                            "x": 289,
+                            "y": 1690
+                        }
+                    ],
+                    "styleId": 17,
+                    "text": "/"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 322,
+                            "y": 1651
+                        },
+                        {
+                            "x": 722,
+                            "y": 1651
+                        },
+                        {
+                            "x": 722,
+                            "y": 1692
+                        },
+                        {
+                            "x": 322,
+                            "y": 1692
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "无序列表项无序列表项4"
+                }
+            ],
+            "index": 14,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "/无序列表项无序列表项4",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                1
+            ],
+            "uniqueId": "8e04682492f01eae98c9d619dc03ec13"
+        },
+        {
+            "firstLinesChars": 108,
+            "pos": [
+                {
+                    "x": 205,
+                    "y": 179
+                },
+                {
+                    "x": 1099,
+                    "y": 179
+                },
+                {
+                    "x": 1099,
+                    "y": 289
+                },
+                {
+                    "x": 205,
+                    "y": 289
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 308,
+                            "y": 176
+                        },
+                        {
+                            "x": 1101,
+                            "y": 176
+                        },
+                        {
+                            "x": 1101,
+                            "y": 220
+                        },
+                        {
+                            "x": 308,
+                            "y": 220
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "代码块demo如下,代码块demo如下,,代码块"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 247
+                        },
+                        {
+                            "x": 1063,
+                            "y": 247
+                        },
+                        {
+                            "x": 1063,
+                            "y": 291
+                        },
+                        {
+                            "x": 200,
+                            "y": 291
+                        }
+                    ],
+                    "styleId": 5,
+                    "text": "demo如下,代码块demo如下,代码块demo如下:"
+                }
+            ],
+            "index": 0,
+            "subType": "para",
+            "lineHeight": 33,
+            "text": "代码块demo如下,代码块demo如下,,代码块demo如下,代码块demo如下,代码块demo如下:",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "7d87a690d2f160d161262886a790e7a1"
+        },
+        {
+            "pos": [
+                {
+                    "x": 192,
+                    "y": 308
+                },
+                {
+                    "x": 1236,
+                    "y": 308
+                },
+                {
+                    "x": 1236,
+                    "y": 1640
+                },
+                {
+                    "x": 192,
+                    "y": 1640
+                }
+            ],
+            "index": 1,
+            "subType": "none",
+            "text": "{\"root\":{\"child\":[{\"child\":[{\"child\":[],\"order_num\":\"1.1\",\"element\":{\"block_type\":\"table\",\"rows\":[]}},{}],\"order_num\":\"1\",\"element\":{\"text\":\"贝壳无形资产核算指引\"block_type\":\"text\",\"image_base64_str\": null}}],\"order_num\": null,\"element\": null}}",
+            "alignment": "center",
+            "type": "figure",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "289e522e54ec6395979ebd8d8ed5394a"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 206,
+                    "y": 1672
+                },
+                {
+                    "x": 982,
+                    "y": 1672
+                },
+                {
+                    "x": 982,
+                    "y": 1709
+                },
+                {
+                    "x": 206,
+                    "y": 1709
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 202,
+                            "y": 1670
+                        },
+                        {
+                            "x": 451,
+                            "y": 1670
+                        },
+                        {
+                            "x": 451,
+                            "y": 1710
+                        },
+                        {
+                            "x": 202,
+                            "y": 1710
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "以上是代码块,"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 449,
+                            "y": 1669
+                        },
+                        {
+                            "x": 989,
+                            "y": 1669
+                        },
+                        {
+                            "x": 989,
+                            "y": 1711
+                        },
+                        {
+                            "x": 449,
+                            "y": 1711
+                        }
+                    ],
+                    "styleId": 8,
+                    "text": "以上是代码块全部内容,代码块。"
+                }
+            ],
+            "index": 2,
+            "subType": "para",
+            "lineHeight": 0,
+            "text": "以上是代码块,以上是代码块全部内容,代码块。",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                2
+            ],
+            "uniqueId": "beddf855180807a6eb26d7dd306cae54"
+        },
+        {
+            "firstLinesChars": 0,
+            "pos": [
+                {
+                    "x": 627,
+                    "y": 173
+                },
+                {
+                    "x": 725,
+                    "y": 173
+                },
+                {
+                    "x": 725,
+                    "y": 224
+                },
+                {
+                    "x": 627,
+                    "y": 224
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 623,
+                            "y": 171
+                        },
+                        {
+                            "x": 734,
+                            "y": 171
+                        },
+                        {
+                            "x": 734,
+                            "y": 225
+                        },
+                        {
+                            "x": 623,
+                            "y": 225
+                        }
+                    ],
+                    "styleId": 18,
+                    "text": "附录"
+                }
+            ],
+            "index": 0,
+            "subType": "para_title",
+            "lineHeight": 0,
+            "text": "附录",
+            "alignment": "center",
+            "type": "title",
+            "pageNum": [
+                3
+            ],
+            "uniqueId": "b30143b9e9da0cfde1c791123f8e8ecc"
+        },
+        {
+            "firstLinesChars": 61,
+            "pos": [
+                {
+                    "x": 204,
+                    "y": 324
+                },
+                {
+                    "x": 1127,
+                    "y": 324
+                },
+                {
+                    "x": 1127,
+                    "y": 499
+                },
+                {
+                    "x": 204,
+                    "y": 499
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 262,
+                            "y": 320
+                        },
+                        {
+                            "x": 1130,
+                            "y": 320
+                        },
+                        {
+                            "x": 1130,
+                            "y": 360
+                        },
+                        {
+                            "x": 262,
+                            "y": 360
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "这是一个附录,附录内容附录内容,这是一个附录,附录内容"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 391
+                        },
+                        {
+                            "x": 1130,
+                            "y": 391
+                        },
+                        {
+                            "x": 1130,
+                            "y": 430
+                        },
+                        {
+                            "x": 201,
+                            "y": 430
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "附录内容,这是一个附录,附录内容附录内容,这是一个附录,附"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 464
+                        },
+                        {
+                            "x": 447,
+                            "y": 464
+                        },
+                        {
+                            "x": 447,
+                            "y": 500
+                        },
+                        {
+                            "x": 201,
+                            "y": 500
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "录内容附录内容。"
+                }
+            ],
+            "index": 1,
+            "subType": "para",
+            "lineHeight": 37,
+            "text": "这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容。",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                3
+            ],
+            "uniqueId": "4de23274b7351510abf4c4afff3c750d"
+        },
+        {
+            "firstLinesChars": 62,
+            "pos": [
+                {
+                    "x": 202,
+                    "y": 537
+                },
+                {
+                    "x": 1128,
+                    "y": 537
+                },
+                {
+                    "x": 1128,
+                    "y": 997
+                },
+                {
+                    "x": 202,
+                    "y": 997
+                }
+            ],
+            "blocks": [
+                {
+                    "pos": [
+                        {
+                            "x": 263,
+                            "y": 533
+                        },
+                        {
+                            "x": 1130,
+                            "y": 533
+                        },
+                        {
+                            "x": 1130,
+                            "y": 573
+                        },
+                        {
+                            "x": 263,
+                            "y": 573
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "这是一个附录,附录内容附录内容,这是一个附录,附录内容"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 604
+                        },
+                        {
+                            "x": 1130,
+                            "y": 604
+                        },
+                        {
+                            "x": 1130,
+                            "y": 644
+                        },
+                        {
+                            "x": 201,
+                            "y": 644
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "附录内容,这是一个附录,附录内容附录内容,这是一个附录,附"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 676
+                        },
+                        {
+                            "x": 1130,
+                            "y": 676
+                        },
+                        {
+                            "x": 1130,
+                            "y": 715
+                        },
+                        {
+                            "x": 201,
+                            "y": 715
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "录内容附录内容,这是一个附录,附录内容附录内容,这是一个附"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 746
+                        },
+                        {
+                            "x": 1131,
+                            "y": 746
+                        },
+                        {
+                            "x": 1131,
+                            "y": 787
+                        },
+                        {
+                            "x": 201,
+                            "y": 787
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "录,附录内容附录内容,这是一个附录,附录内容附录内容,这是"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 817
+                        },
+                        {
+                            "x": 1098,
+                            "y": 817
+                        },
+                        {
+                            "x": 1098,
+                            "y": 857
+                        },
+                        {
+                            "x": 201,
+                            "y": 857
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "一个附录,附录内容附录内容,这是一个附录,附录内容附录内"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 200,
+                            "y": 888
+                        },
+                        {
+                            "x": 1131,
+                            "y": 888
+                        },
+                        {
+                            "x": 1131,
+                            "y": 929
+                        },
+                        {
+                            "x": 200,
+                            "y": 929
+                        }
+                    ],
+                    "styleId": 19,
+                    "text": "容,这是一个附录,附录内容附录内容,这是一个附录,附录内容"
+                },
+                {
+                    "pos": [
+                        {
+                            "x": 201,
+                            "y": 960
+                        },
+                        {
+                            "x": 860,
+                            "y": 960
+                        },
+                        {
+                            "x": 860,
+                            "y": 998
+                        },
+                        {
+                            "x": 201,
+                            "y": 998
+                        }
+                    ],
+                    "styleId": 20,
+                    "text": "附录内容,这是一个附录,附录内容附录内容。"
+                }
+            ],
+            "index": 2,
+            "subType": "para",
+            "lineHeight": 36,
+            "text": "这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容,这是一个附录,附录内容附录内容。",
+            "alignment": "left",
+            "type": "text",
+            "pageNum": [
+                3
+            ],
+            "uniqueId": "dbb6ba533bb5fbe1ffc06b72c5a9ea01"
+        }
+    ],
+    "version": "1.0.0"
+}

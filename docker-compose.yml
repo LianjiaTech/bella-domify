@@ -15,13 +15,8 @@ services:
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_DEFAULT_REGION=us-east-1
     volumes:
-      - type: bind
-        source: ./scripts/init-localstack.sh
-        target: /etc/localstack/init/ready.d/init-localstack.sh
-        read_only: true
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./scripts/init-localstack.sh:/etc/localstack/init/ready.d/init-localstack.sh"
     networks:
       - document-parser-network
 
@@ -82,7 +77,7 @@ services:
     image: bellatop/document_parse:latest
     container_name: document-parser
     ports:
-      - "8080:8080"
+      - "80:8080"
     depends_on:
       localstack:
         condition: service_started

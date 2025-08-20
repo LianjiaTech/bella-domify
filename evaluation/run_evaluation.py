@@ -3,7 +3,7 @@
 #
 #    Copyright (C) 2024 Beike, Inc. All Rights Reserved.
 #
-#    @Create Author : luxu(luxu002@ke.com)
+#    @Create Author : luxu
 #    @Create Time   : 2024/9/11
 #    @Description   : 
 #
@@ -262,7 +262,7 @@ def load_markdown2(file_path):
     html = markdown.markdown(markdown_content)
 
     # 使用BeautifulSoup解析HTML
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, 'html.doc_parser')
 
     # 提取元素及其内容
     nodes = []
@@ -1105,7 +1105,7 @@ def evaluation_single(logger_badcase, file_name, parser=""):
         parser_json = load_json(f"parse_json/{parser}/" + file_name + '_result_ali.json')
         parser_nodes = tree2list_ali(parser_json)
         pc_edges_parser = get_pc_edges_ali(parser_json)
-    # elif parser == "adobe":
+    # elif doc_parser == "adobe":
     #     parser_json = load_json("adobe/structuredData" + file_name + '_chi.json')
     #     parser_nodes = tree2list_adobe(parser_json)
     elif parser == "unstructured":

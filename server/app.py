@@ -8,7 +8,7 @@ from services.provider.openai_vision_model_provider import OpenAIVisionModelProv
 from services.provider.s3_image_provider import S3ImageStorageProvider
 from settings.ini_config import config
 from .api import router, health_router
-from .task_executor.executor import listen_parse_task_layout_and_domtree
+from .workers import start_workers, stop_workers
 
 logger = logger_context.get_logger()
 app = FastAPI()
@@ -30,9 +30,7 @@ async def startup_event():
                                  ocr_enable=config.getboolean('OCR', 'enable'),
                                  vision_model_provider=OpenAIVisionModelProvider())
 
-    # 启动子进程，GROUP_ID_LONG_TASK 处理大文件
-    thread1 = Thread(target=listen_parse_task_layout_and_domtree, args=(GROUP_ID_LONG_TASK,))
-    thread1.start()
+    parser_context.register_all_config(parser_config)
 
     # 只有主worker进程启动Kafka消费者，避免重复消费
     worker_id = os.getenv('UVICORN_WORKER_ID', '0')

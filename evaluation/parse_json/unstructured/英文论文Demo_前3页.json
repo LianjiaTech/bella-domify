@@ -1,0 +1,2094 @@
+[
+  {
+    "type": "Title",
+    "element_id": "b36d83e06e73284d5397a55bf80ef87d",
+    "text": "DocBank: A Benchmark Dataset for Document Layout Analysis",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            285.6861111111111,
+            192.2032012939453
+          ],
+          [
+            285.6861111111111,
+            239.8473727777776
+          ],
+          [
+            1381.5272216796875,
+            239.8473727777776
+          ],
+          [
+            1381.5272216796875,
+            192.2032012939453
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6e3bd42af222b2d88885a45eb1e3a053",
+    "text": "Minghao Li1 ⇤, Yiheng Xu2 ⇤, Lei Cui2, Shaohan Huang2, Furu Wei2, Zhoujun Li1, Ming Zhou2",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            403.9439697265625,
+            271.1289978027344
+          ],
+          [
+            403.9439697265625,
+            353.42700888888885
+          ],
+          [
+            1269.9019775390625,
+            353.42700888888885
+          ],
+          [
+            1269.9019775390625,
+            271.1289978027344
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "b36d83e06e73284d5397a55bf80ef87d",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "694d085172fb59a8ed7b1eb7b92b5668",
+    "text": "1Beihang University 2Microsoft Research Asia",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            662.4194444444445,
+            349.91937255859375
+          ],
+          [
+            662.4194444444445,
+            428.9233644444443
+          ],
+          [
+            1024.444580078125,
+            428.9233644444443
+          ],
+          [
+            1024.444580078125,
+            349.91937255859375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "b36d83e06e73284d5397a55bf80ef87d",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "4ef927c34793c8ca2c9d84f24089fe1a",
+    "text": "{",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            329.3,
+            495.74942222222217
+          ],
+          [
+            329.3,
+            528.958311111111
+          ],
+          [
+            345.90444444444444,
+            528.958311111111
+          ],
+          [
+            345.90444444444444,
+            495.74942222222217
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "b36d83e06e73284d5397a55bf80ef87d",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "221cccedf9f9c4d43a9979578ea81bb6",
+    "text": "liminghao1630,lizj @buaa.edu.cn } { v-yixu,lecu,shaohanh,fuwei,mingzhou @microsoft.com",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            345.90277777777777,
+            428.4640808105469
+          ],
+          [
+            345.90277777777777,
+            510.44488525390625
+          ],
+          [
+            1351.3099365234375,
+            510.44488525390625
+          ],
+          [
+            1351.3099365234375,
+            428.4640808105469
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "b36d83e06e73284d5397a55bf80ef87d",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "aceb77744e3167acd5e70dcf82015bcf",
+    "text": "Abstract",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            764.9932861328125,
+            576.039306640625
+          ],
+          [
+            764.9932861328125,
+            617.1297866666666
+          ],
+          [
+            896.5671997070312,
+            617.1297866666666
+          ],
+          [
+            896.5671997070312,
+            576.039306640625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "dbd383bf1bca884fa37ff78549c9ce73",
+    "text": "Document layout analysis usually relies on computer vision models to understand documents while ignoring textual information that is vital to capture. Meanwhile, high quality labeled datasets with both visual and textual information are still insufﬁcient. In this paper, we present DocBank, a benchmark dataset that contains 500K document pages with ﬁne-grained token- level annotations for document layout analysis. DocBank is constructed using a simple yet effective way with weak supervision from the LATEX documents available on the arXiv.com. With DocBank, models from different modalities can be compared fairly and multi-modal ap- proaches will be further investigated and boost the performance of document layout analysis. We build several strong baselines and manually split train/dev/test sets for evaluation. Ex- periment results show that models trained on DocBank accurately recognize the layout infor- mation for a variety of documents. The DocBank dataset is publicly available at https: //github.com/doc-analysis/DocBank.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            244.46835327148438,
+            649.4876098632812
+          ],
+          [
+            244.46835327148438,
+            1100.4790475
+          ],
+          [
+            1423.19873046875,
+            1100.4790475
+          ],
+          [
+            1423.19873046875,
+            649.4876098632812
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "aceb77744e3167acd5e70dcf82015bcf",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "19c8a48047ed8f04068d372285452e17",
+    "text": "1 Introduction",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            196.17567443847656,
+            1137.806884765625
+          ],
+          [
+            196.17567443847656,
+            1176.5520088888888
+          ],
+          [
+            435.59869384765625,
+            1176.5520088888888
+          ],
+          [
+            435.59869384765625,
+            1137.806884765625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "1f660dbb9c8d8757a7211a8c66d54bd4",
+    "text": "Document layout analysis is an important task in many document understanding applications as it can transform semi-structured information into a structured representation, meanwhile extracting key infor- mation from the documents. It is a challenging problem due to the varying layouts and formats of the documents. Existing techniques have been proposed based on conventional rule-based or machine learn- ing methods, where most of them fail to generalize well because they rely on hand crafted features that may be not robust to layout variations. Recently, the rapid development of deep learning in computer vision has signiﬁcantly boosted the data-driven image-based approaches for document layout analysis. Although these approaches have been widely adopted and made signiﬁcant progress, they usually lever- age visual features while neglecting textual features from the documents. Therefore, it is inevitable to explore how to leverage the visual and textual information in a uniﬁed way for document layout analysis.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            196.65415954589844,
+            1201.677978515625
+          ],
+          [
+            196.65415954589844,
+            1574.9901123046875
+          ],
+          [
+            1466.441650390625,
+            1574.9901123046875
+          ],
+          [
+            1466.441650390625,
+            1201.677978515625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "19c8a48047ed8f04068d372285452e17",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "28249d912dec0bf9d8a77288dfd6c4b4",
+    "text": "Nowadays, the state-of-the-art computer vision and NLP models are often built upon the pre-trained models (Peters et al., 2018; Radford et al., 2018; Devlin et al., 2018; Lample and Conneau, 2019; Yang et al., 2019; Dong et al., 2019; Raffel et al., 2019; Xu et al., 2019) followed by ﬁne-tuning on speciﬁc downstream tasks, which achieves very promising results. However, pre-trained models not only require large-scale unlabeled data for self-supervised learning, but also need high quality labeled data for task-speciﬁc ﬁne-tuning to achieve good performance. For document layout analysis tasks, there have been some image-based document layout datasets, while most of them are built for computer vision approaches and they are difﬁcult to apply to NLP methods. In addition, image-based datasets mainly include the page images and the bounding boxes of large semantic structures, which are not ﬁne-grained token-level annotations. Moreover, it is also time-consuming and labor-intensive to produce human- labeled and ﬁne-grained token-level text block arrangement. Therefore, it is vital to leverage weak",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            196.2061767578125,
+            1576.9066162109375
+          ],
+          [
+            196.2061767578125,
+            1989.8568252777777
+          ],
+          [
+            1463.92431640625,
+            1989.8568252777777
+          ],
+          [
+            1463.92431640625,
+            1576.9066162109375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "19c8a48047ed8f04068d372285452e17",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "7d0006b0b0cfb978f4a32fb9bdc2b730",
+    "text": "⇤Equal contributions during internship at Microsoft Research Asia.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            243.24620056152344,
+            2014.6058349609375
+          ],
+          [
+            243.24620056152344,
+            2046.3662109375
+          ],
+          [
+            903.3146362304688,
+            2046.3662109375
+          ],
+          [
+            903.3146362304688,
+            2014.6058349609375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "19c8a48047ed8f04068d372285452e17",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2caf1f6c78ffa69cb43bdcd87dd7f366",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License. License details: http:// creativecommons.org/licenses/by/4.0/.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            184.73727416992188,
+            2067.215087890625
+          ],
+          [
+            184.73727416992188,
+            2127.644775390625
+          ],
+          [
+            1470.025390625,
+            2127.644775390625
+          ],
+          [
+            1470.025390625,
+            2067.215087890625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "19c8a48047ed8f04068d372285452e17",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "5908fbfedffdf51ecafda2b88a010555",
+    "text": "949",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            807.1944444444443,
+            2160.553769722222
+          ],
+          [
+            807.1944444444443,
+            2190.8568252777777
+          ],
+          [
+            852.6490277777777,
+            2190.8568252777777
+          ],
+          [
+            852.6490277777777,
+            2160.553769722222
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "parent_id": "19c8a48047ed8f04068d372285452e17",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Footer",
+    "element_id": "565b9e6beab7940d7ce4b9fe03eee516",
+    "text": "Proceedings of the 28th International Conference on Computational Linguistics, pages 949–960 Barcelona, Spain (Online), December 8-13, 2020",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            345.9085693359375,
+            2203.0703125
+          ],
+          [
+            345.9085693359375,
+            2266.50537109375
+          ],
+          [
+            1314.640625,
+            2266.50537109375
+          ],
+          [
+            1314.640625,
+            2203.0703125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 1,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "6e8358d0396d8ddb0d96711156c1ecf1",
+    "text": "Mt",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            222.0109100341797,
+            234.08770751953125
+          ],
+          [
+            222.0109100341797,
+            257.1080627441406
+          ],
+          [
+            438.14739990234375,
+            257.1080627441406
+          ],
+          [
+            438.14739990234375,
+            234.08770751953125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "a925d91245b94ed6f94ff49083f9dee0",
+    "text": "一 一 心 心 - 一",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            522.4944444444444,
+            170.2158966064453
+          ],
+          [
+            522.4944444444444,
+            593.1333333333333
+          ],
+          [
+            818.5605555555555,
+            593.1333333333333
+          ],
+          [
+            818.5605555555555,
+            170.2158966064453
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "14385585b4b0af87cae168dd16def895",
+    "text": "",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            841.286111111111,
+            174.45222222222236
+          ],
+          [
+            841.286111111111,
+            593.1333333333333
+          ],
+          [
+            1137.3522222222223,
+            593.1333333333333
+          ],
+          [
+            1137.3522222222223,
+            174.45222222222236
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "5fff2f722a6f27af20c84a63fb95aeb6",
+    "text": "心 心 一 心 0 E",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1160.075,
+            174.45222222222236
+          ],
+          [
+            1160.075,
+            593.1333333333333
+          ],
+          [
+            1458.0068359375,
+            593.1333333333333
+          ],
+          [
+            1458.0068359375,
+            174.45222222222236
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "e964ec8ec2eb8068c340f5354c07d96d",
+    "text": "(a)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            337.9111111111111,
+            611.2032177777779
+          ],
+          [
+            337.9111111111111,
+            636.1098844444446
+          ],
+          [
+            365.5575111111111,
+            636.1098844444446
+          ],
+          [
+            365.5575111111111,
+            611.2032177777779
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c799c5ede83f40d6faaed36f3fe45a3f",
+    "text": "(b)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            655.40966796875,
+            609.9763793945312
+          ],
+          [
+            655.40966796875,
+            636.1098844444446
+          ],
+          [
+            686.6022338867188,
+            636.1098844444446
+          ],
+          [
+            686.6022338867188,
+            609.9763793945312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "e438e8f433546cbce9b6b9e03e174f47",
+    "text": "(c)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            975.4944444444444,
+            611.2032177777779
+          ],
+          [
+            975.4944444444444,
+            636.1098844444446
+          ],
+          [
+            1003.1408444444444,
+            636.1098844444446
+          ],
+          [
+            1003.1408444444444,
+            611.2032177777779
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "b8547129fb5b562b688ff0825f687940",
+    "text": "(d)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1293.586111111111,
+            611.2032177777779
+          ],
+          [
+            1293.586111111111,
+            636.1098844444446
+          ],
+          [
+            1322.6272844444443,
+            636.1098844444446
+          ],
+          [
+            1322.6272844444443,
+            611.2032177777779
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a784ef64645d1951035fe502fa24d605",
+    "text": "Figure 1: Example annotations of the DocBank. The colors of semantic structure labels are: Abstract , BT 各 马 - Paragraph, REHSHEG, E Table .",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            201.0,
+            673.0
+          ],
+          [
+            201.0,
+            751.0
+          ],
+          [
+            1462.0,
+            751.0
+          ],
+          [
+            1462.0,
+            673.0
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "d0a3d59fd2c9ca7226530482c0a04cb6",
+    "text": "I",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            832.32958984375,
+            701.925048828125
+          ],
+          [
+            832.32958984375,
+            742.3720092773438
+          ],
+          [
+            910.623291015625,
+            742.3720092773438
+          ],
+          [
+            910.623291015625,
+            701.925048828125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Image",
+    "element_id": "67ce833aefaeb65e0cd9abfc691799c7",
+    "text": "",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            199.73788452148438,
+            703.6824340820312
+          ],
+          [
+            199.73788452148438,
+            741.3345947265625
+          ],
+          [
+            301.4820861816406,
+            741.3345947265625
+          ],
+          [
+            301.4820861816406,
+            703.6824340820312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "d8ca3396a390d083c9f0415c49ee4844",
+    "text": "Tide:",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            200.0,
+            749.0
+          ],
+          [
+            200.0,
+            787.0
+          ],
+          [
+            273.0,
+            787.0
+          ],
+          [
+            273.0,
+            749.0
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "9fb3626618d1f0fae01f2fcf7b80774e",
+    "text": "supervision to obtain ﬁne-grained labeled documents with minimum efforts, meanwhile making the data be easily applied to any NLP and computer vision approaches.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            200.0,
+            849.9484252929688
+          ],
+          [
+            200.0,
+            922.660400390625
+          ],
+          [
+            1463.1650390625,
+            922.660400390625
+          ],
+          [
+            1463.1650390625,
+            849.9484252929688
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "d8ca3396a390d083c9f0415c49ee4844",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "abf31c9f18834b5004516c3d75f94a44",
+    "text": "To this end, we build the DocBank dataset, a document-level benchmark that contains 500K docu- ment pages with ﬁne-grained token-level annotations for layout analysis. Distinct from the conventional human-labeled datasets, our approach obtains high quality annotations in a simple yet effective way with weak supervision. Inspired by existing document layout annotations (Siegel et al., 2018; Li et al., 2019; Zhong et al., 2019), there are a great number of digital-born documents such as the PDFs of research pa- pers that are compiled by LATEX using their source code. The LATEX system contains the explicit semantic structure information using mark-up tags as the building blocks, such as abstract, author, caption, equa- tion, ﬁgure, footer, list, paragraph, reference, section, table and title. To distinguish individual semantic structures, we manipulate the source code to specify different colors to the text of different semantic units. In this way, different text zones can be clearly segmented and identiﬁed as separate logical roles, which is shown in Figure 1. The advantage of DocBank is that, it can be used in any sequence labeling models from the NLP perspective. Meanwhile, DocBank can also be easily converted into image-based annotations to support object detection models in computer vision. In this way, models from different modalities can be compared fairly using DocBank, and multi-modal approaches will be further investi- gated and boost the performance of document layout analysis. To verify the effectiveness of DocBank, we conduct experiments using four baseline models: 1) BERT (Devlin et al., 2018), a pre-trained model using only textual information based on the Transformer architecture. 2) RoBERTa (Liu et al., 2019), a robustly optimized method for pre-training the Transformer architecture. 3) LayoutLM (Xu et al., 2019), a multi-modal architecture that integrates both the text information and layout information. 4) Faster R-CNN (Ren et al., 2015), a high performance object detection networks depending on region proposal algorithms to hypothesize object locations. The experiment results show that the LayoutLM model sig- niﬁcantly outperforms the BERT and RoBERTa models and the object detection model on DocBank for document layout analysis. We hope DocBank will empower more document layout analysis models, meanwhile promoting more customized network structures to make substantial advances in this area.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            192.67535400390625,
+            929.3287697222221
+          ],
+          [
+            192.67535400390625,
+            1825.2734919444445
+          ],
+          [
+            1469.7796630859375,
+            1825.2734919444445
+          ],
+          [
+            1469.7796630859375,
+            929.3287697222221
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "d8ca3396a390d083c9f0415c49ee4844",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "1026829f29082ec5d5764e5770703d2e",
+    "text": "The contributions of this paper are summarized as follows:",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            226.96966552734375,
+            1829.7796630859375
+          ],
+          [
+            226.96966552734375,
+            1863.067936388889
+          ],
+          [
+            952.21630859375,
+            1863.067936388889
+          ],
+          [
+            952.21630859375,
+            1829.7796630859375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "d8ca3396a390d083c9f0415c49ee4844",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "9b028a1c0c5752acad2abf41ed468307",
+    "text": "• We present DocBank, a large-scale dataset that is constructed using a weak supervision approach. It enables models to integrate both the textual and layout information for downstream tasks.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            236.1638888888889,
+            1891.0103759765625
+          ],
+          [
+            236.1638888888889,
+            1965.1119384765625
+          ],
+          [
+            1459.8315649999995,
+            1965.1119384765625
+          ],
+          [
+            1459.8315649999995,
+            1891.0103759765625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "d8ca3396a390d083c9f0415c49ee4844",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2e5bec7838b32ba73f5cc20d31b2f3e2",
+    "text": "• We conduct a set of experiments with different baseline models and parameter settings, which con- ﬁrms the effectiveness of DocBank for document layout analysis.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            236.1638888888889,
+            1990.9744873046875
+          ],
+          [
+            236.1638888888889,
+            2065.960693359375
+          ],
+          [
+            1459.8315649999995,
+            2065.960693359375
+          ],
+          [
+            1459.8315649999995,
+            1990.9744873046875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "d8ca3396a390d083c9f0415c49ee4844",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "0d2b80420eb8b7adca716ed52dea3dd3",
+    "text": "• The DocBank dataset is available at https://github.com/doc-analysis/DocBank.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            236.1638888888889,
+            2093.8857421875
+          ],
+          [
+            236.1638888888889,
+            2129.655029296875
+          ],
+          [
+            1430.7313232421875,
+            2129.655029296875
+          ],
+          [
+            1430.7313232421875,
+            2093.8857421875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "parent_id": "d8ca3396a390d083c9f0415c49ee4844",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "PageNumber",
+    "element_id": "b98b3dcf0676b29a1f0d796d6d2ca5d5",
+    "text": "950",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            805.5392456054688,
+            2157.149658203125
+          ],
+          [
+            805.5392456054688,
+            2190.8568252777777
+          ],
+          [
+            857.4345092773438,
+            2190.8568252777777
+          ],
+          [
+            857.4345092773438,
+            2157.149658203125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 2,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "00f2f0b142584b89c9b2fe99ab812971",
+    "text": "Documents",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            319.8411,
+            249.5597030618888
+          ],
+          [
+            319.8411,
+            273.6121766730002
+          ],
+          [
+            458.6405244486111,
+            273.6121766730002
+          ],
+          [
+            458.6405244486111,
+            249.5597030618888
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "00e05cc3dd23a8eee0b7e06052535fee",
+    "text": "(.tex)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            360.54528611111107,
+            279.16274750633363
+          ],
+          [
+            360.54528611111107,
+            303.2152211174447
+          ],
+          [
+            420.3841400749999,
+            303.2152211174447
+          ],
+          [
+            420.3841400749999,
+            279.16274750633363
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "d4f7278dd4ba720f2ff29f247e02d228",
+    "text": "Semantic structures with",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            593.8746083333333,
+            234.7581808396667
+          ],
+          [
+            593.8746083333333,
+            258.8106544507781
+          ],
+          [
+            902.5751557999998,
+            258.8106544507781
+          ],
+          [
+            902.5751557999998,
+            234.7581808396667
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "39716a82ef5e40403b1bb7ef2a8c6879",
+    "text": "colored fonts",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            666.9571243055556,
+            264.3612252841109
+          ],
+          [
+            666.9571243055556,
+            288.4136988952223
+          ],
+          [
+            827.9588320875,
+            288.4136988952223
+          ],
+          [
+            827.9588320875,
+            264.3612252841109
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "3d1e31fb5770458b704fd349fe6f21fe",
+    "text": "(structure-specific colors)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            594.7997034722222,
+            293.96426972855573
+          ],
+          [
+            594.7997034722222,
+            318.0167433396668
+          ],
+          [
+            902.5640546583334,
+            318.0167433396668
+          ],
+          [
+            902.5640546583334,
+            293.96426972855573
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c61104cb9d35ced101813696acbfd3b0",
+    "text": "T oken annotations by the",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1027.0248708333334,
+            249.5597030618888
+          ],
+          [
+            1027.0248708333334,
+            273.6121766730002
+          ],
+          [
+            1348.6767502444445,
+            273.6121766730002
+          ],
+          [
+            1348.6767502444445,
+            249.5597030618888
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "16fcf27b5d2e5d8c851296a127974655",
+    "text": "color to structure mapping",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1025.1746805555556,
+            279.16274750633363
+          ],
+          [
+            1025.1746805555556,
+            303.2152211174447
+          ],
+          [
+            1351.4002303333334,
+            303.2152211174447
+          ],
+          [
+            1351.4002303333334,
+            279.16274750633363
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "0b4c625158e89d87c02fd63a39317630",
+    "text": "Figure 2: Data processing pipeline",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            620.286111111111,
+            402.195436388889
+          ],
+          [
+            620.286111111111,
+            432.4984919444445
+          ],
+          [
+            1039.5591877777779,
+            432.4984919444445
+          ],
+          [
+            1039.5591877777779,
+            402.195436388889
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "54f59310d62be1925a1d85674a216a7b",
+    "text": "2 Task Deﬁnition",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            196.55149841308594,
+            485.54327392578125
+          ],
+          [
+            196.55149841308594,
+            526.1936755555553
+          ],
+          [
+            468.67095947265625,
+            526.1936755555553
+          ],
+          [
+            468.67095947265625,
+            485.54327392578125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "ebb8d01687684b09a3c52da28f4b3ded",
+    "text": "The document layout analysis task is to extract the pre-deﬁned semantic units in visually rich documents. t0, t1, ..., tn} composed of discrete token set t = , each token ti = Speciﬁcally, given a document { D = (w, (x0, y0, x1, y1)) consists of word w and its bounding box (x0, y0, x1, y1). And c0, c1, .., cm} C { deﬁnes the semantic categories that the tokens are classiﬁed into. We intend to ﬁnd a function F : ( , ) , where is the prediction set:",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            196.85011291503906,
+            544.90625
+          ],
+          [
+            196.85011291503906,
+            730.857177734375
+          ],
+          [
+            1474.349609375,
+            730.857177734375
+          ],
+          [
+            1474.349609375,
+            544.90625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "54f59310d62be1925a1d85674a216a7b",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Formula",
+    "element_id": "b6e4280789775ccfa4daf0a2d9788f2e",
+    "text": "= ( 0, ..., tn0 t0 , c0), ..., ( k, ..., tnk t0 , ck)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            540.492919921875,
+            749.64404296875
+          ],
+          [
+            540.492919921875,
+            794.757568359375
+          ],
+          [
+            1114.5855712890625,
+            794.757568359375
+          ],
+          [
+            1114.5855712890625,
+            749.64404296875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "07631af5d59d32ef278227a66862780a",
+    "text": "3 DocBank",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            197.3965606689453,
+            812.1492919921875
+          ],
+          [
+            197.3965606689453,
+            851.9936755555552
+          ],
+          [
+            385.1462097167969,
+            851.9936755555552
+          ],
+          [
+            385.1462097167969,
+            812.1492919921875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "be580bfaee8ee311116460725d270841",
+    "text": "We build DocBank with token-level annotations that supports both NLP and computer vision models. As shown in Figure 2, the construction of DocBank has three steps: Document Acquisition, Semantic Structures Detection, Token Annotation. Meanwhile, DocBank can be converted to the format that is used by computer vision models in a few steps. The current DocBank dataset totally includes 500K document pages, where the training set includes 400K document pages and both the validation set and the test set include 50K document pages.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            200.0,
+            872.0228271484375
+          ],
+          [
+            200.0,
+            1095.6578369140625
+          ],
+          [
+            1480.8634033203125,
+            1095.6578369140625
+          ],
+          [
+            1480.8634033203125,
+            872.0228271484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "07631af5d59d32ef278227a66862780a",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "2158b8504e70608197abd06ec858b2b3",
+    "text": "3.1 Document Acquisition",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            199.20445251464844,
+            1120.33837890625
+          ],
+          [
+            199.20445251464844,
+            1156.4083419444444
+          ],
+          [
+            561.2396240234375,
+            1156.4083419444444
+          ],
+          [
+            561.2396240234375,
+            1120.33837890625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "bdbab679b628a3f4546fa84d4a187643",
+    "text": "We download the PDF ﬁles on arXiv.com as well as the LATEX source ﬁles since we need to modify the source code to detect the semantic structures. The papers contain Physics, Mathematics, Computer Science and many other areas, which is beneﬁcial for the diversity of DocBank to produce robust models. We focus on English documents in this work and will expand to other languages in the future.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            200.0,
+            1168.47607421875
+          ],
+          [
+            200.0,
+            1316.8160400390625
+          ],
+          [
+            1467.330078125,
+            1316.8160400390625
+          ],
+          [
+            1467.330078125,
+            1168.47607421875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "2158b8504e70608197abd06ec858b2b3",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "83e553d399051f46d7a4c9c1e0400f01",
+    "text": "3.2 Semantic Structures Detection",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            196.26588439941406,
+            1341.515625
+          ],
+          [
+            196.26588439941406,
+            1378.5194530555555
+          ],
+          [
+            667.286865234375,
+            1378.5194530555555
+          ],
+          [
+            667.286865234375,
+            1341.515625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8aa598731b9b3e4454b8b40e05147a90",
+    "text": "DocBank is a natural extension of the TableBank dataset (Li et al., 2019), where other semantic units are also included for document layout analysis. In this work, the following semantic structures are annotated in DocBank: Abstract, Author, Caption, Equation, Figure, Footer, List, Paragraph, Reference, { Section, Table and Title . In TableBank, the tables are labeled with the help of the ‘fcolorbox’ command. } However, for DocBank, the target structures are mainly composed of text, where the ‘fcolorbox’ cannot be well applied. Therefore, we use the ‘color’ command to distinguish these semantic structures by changing their font colors into structure-speciﬁc colors. Basically, there are two types of commands to represent semantic structures. Some of the LATEX commands are simple words preceded by a backslash. For instance, the section titles in LATEX documents are usually in the format as follows:",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            200.0,
+            1387.42333984375
+          ],
+          [
+            200.0,
+            1733.1596030555554
+          ],
+          [
+            1471.5484619140625,
+            1733.1596030555554
+          ],
+          [
+            1471.5484619140625,
+            1387.42333984375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "parent_id": "83e553d399051f46d7a4c9c1e0400f01",
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Formula",
+    "element_id": "cb5d00127fd363e05756a5f0e1b6e92b",
+    "text": "s e c t i o n t h i s t i t l e o f The s e c t i o n",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            473.0166320800781,
+            1737.2982177734375
+          ],
+          [
+            473.0166320800781,
+            1773.1920166015625
+          ],
+          [
+            1174.520751953125,
+            1773.1920166015625
+          ],
+          [
+            1174.520751953125,
+            1737.2982177734375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2751cb3032581fd6f1f879bfbfb49631",
+    "text": "Other commands often start an environment. For instance, the list declaration in LATEX documents is shown as follows:",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            197.2043914794922,
+            1783.2216796875
+          ],
+          [
+            197.2043914794922,
+            1855.1984919444444
+          ],
+          [
+            1472.6715087890625,
+            1855.1984919444444
+          ],
+          [
+            1472.6715087890625,
+            1783.2216796875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "Formula",
+    "element_id": "ff6e65e27eff447f9078170b01df3149",
+    "text": "b e g i n i t e m i z e { \\ } i t e m i t e m F i r s t \\ i t e m Second i t e m \\ i t e m i z e end",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            631.6359252929688,
+            1858.3424072265625
+          ],
+          [
+            631.6359252929688,
+            2009.8155517578125
+          ],
+          [
+            1025.9832763671875,
+            2009.8155517578125
+          ],
+          [
+            1025.9832763671875,
+            1858.3424072265625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "cb986f744c4064ca1a781e7a2779173e",
+    "text": "itemize itemize end begin The command starts an environment while the command { } \\ { \\ } environment. The real command name is declared as the parameters of the ‘begin’ command and the ends that ‘end’ command.",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            189.4132537841797,
+            2018.951171875
+          ],
+          [
+            189.4132537841797,
+            2127.865158611111
+          ],
+          [
+            1474.5120849609375,
+            2127.865158611111
+          ],
+          [
+            1474.5120849609375,
+            2018.951171875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "474b344a79f7dd60bd6a700cbfe8fc7c",
+    "text": "(1)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            1424.5083333333332,
+            756.3311767578125
+          ],
+          [
+            1424.5083333333332,
+            789.2873808333333
+          ],
+          [
+            1465.9879150390625,
+            789.2873808333333
+          ],
+          [
+            1465.9879150390625,
+            756.3311767578125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  },
+  {
+    "type": "PageNumber",
+    "element_id": "30cb872f8daa18c4dbf2b2c97485f3fe",
+    "text": "951",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            805.2451782226562,
+            2156.3388671875
+          ],
+          [
+            805.2451782226562,
+            2190.8568252777777
+          ],
+          [
+            854.470458984375,
+            2190.8568252777777
+          ],
+          [
+            854.470458984375,
+            2156.3388671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 1654,
+        "layout_height": 2339
+      },
+      "filetype": "application/pdf",
+      "languages": [
+        "chi_sim",
+        "eng"
+      ],
+      "page_number": 3,
+      "filename": "英文论文Demo_前3页.pdf"
+    }
+  }
+]

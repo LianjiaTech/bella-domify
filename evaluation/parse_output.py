@@ -3,7 +3,7 @@
 #
 #    Copyright (C) 2024 Beike, Inc. All Rights Reserved.
 #
-#    @Create Author : luxu(luxu002@ke.com)
+#    @Create Author : luxu
 #    @Create Time   : 2024/9/11
 #    @Description   : 
 #
@@ -15,17 +15,15 @@ from fastapi.encoders import jsonable_encoder
 
 from constant import file_list
 from doc_parser.context import parser_context, ParserConfig
-from doc_parser.dom_parser.converter import Converter
 from doc_parser.dom_parser.domtree.domtree import DomTreeModel
+from doc_parser.dom_parser.parsers.pdf.converter import PDFConverter
 from doc_parser.dom_parser.provider.image_provider import ImageStorageProvider
 from services.provider.openai_vision_model_provider import OpenAIVisionModelProvider
 
-user_context.set("1000000023008327")
+from settings import settings_path
+from settings.ini_config import config, init_config
 
 import os
-
-
-os.environ["OPENAI_BASE_URL"] = "https://openapi-ait.ke.com/v1/"
 
 root_dir = os.getcwd().split("document_parse")[0] + "document_parse/"
 
@@ -77,8 +75,7 @@ def parse():
     documents_dir = root_dir + "evaluation/documents/"
 
     for file_name in file_list:
-
-        converter = Converter(documents_dir + file_name + ".pdf")
+        converter = PDFConverter(documents_dir + file_name + ".pdf")
         dom_tree = converter.dom_tree_parse(
             # start=0, end=10,    # 相当于[start:end]，前算，后不算
             remove_watermark=True,
@@ -86,8 +83,7 @@ def parse():
             debug_file_name=documents_dir + file_name + "-debug.pdf",
             parse_stream_table=False,
             filter_catalog=False,  # 默认过滤目录 False:不过滤
-            filter_cover=False,    # 默认过滤封面 False:不过滤
-            ignore_faq=True,
+            filter_cover=False     # 默认过滤封面 False:不过滤
         )
 
         output(dom_tree, file_name, "evaluation/parse_json/beike/")
@@ -106,6 +102,7 @@ class EmptyImageStorageProvider(ImageStorageProvider):
         return b""
 
 if __name__ == "__main__":
+    init_config(settings_path)
     parser_config = ParserConfig(image_provider=EmptyImageStorageProvider(),
                                  ocr_model_name=config.get('OCR', 'model_name'),
                                  ocr_enable=config.getboolean('OCR', 'enable'),
