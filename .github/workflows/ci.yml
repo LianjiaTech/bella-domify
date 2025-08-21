@@ -45,7 +45,6 @@ jobs:
           script: |
             cd /docker-compose/bella-domify
             git pull origin main
-            export IMAGE_TAG=latest           
-            docker-compose pull                        
-            docker-compose up -d --build               
+            export IMAGE_TAG=latest                      
+            docker compose up -d --build --pull always               
             docker image prune -af                     
