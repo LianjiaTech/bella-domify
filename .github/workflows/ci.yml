@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd /docker-compose/bella-domify
-            git pull origin master
+            git pull origin main
             export IMAGE_TAG=latest           
             docker-compose pull                        
             docker-compose up -d --build               
