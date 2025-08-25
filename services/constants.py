@@ -30,3 +30,4 @@ class ParseType(Enum):
 GROUP_ID_LONG_TASK = "document_parser_long_task_group"
 GROUP_ID_SHORT_TASK = "document_parser_short_task_group"
 GROUP_ID_IMAGE_TASK = "document_parser_image_task_group"
+GROUP_ID_DOC_TASK = "document_parser_doc_task_group"
