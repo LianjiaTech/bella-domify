@@ -4,7 +4,7 @@ from doc_parser.context import logger_context, parser_context
 from doc_parser.layout_parser import pptx_parser, docx_parser, pdf_parser
 from server.common.exception import BusinessError
 from services import parse_manager
-from services.constants import GROUP_ID_IMAGE_TASK, GROUP_ID_LONG_TASK, GROUP_ID_SHORT_TASK
+from services.constants import GROUP_ID_IMAGE_TASK, GROUP_ID_LONG_TASK, GROUP_ID_SHORT_TASK, GROUP_ID_DOC_TASK
 from utils import general_util
 
 logger = logger_context.get_logger()
@@ -120,6 +120,9 @@ def get_group_id(group_id_analysis_info):
 
     if file_extension in ["png", "jpeg", "jpg", "bmp"]:
         return GROUP_ID_IMAGE_TASK
+
+    if file_extension in ["doc", "docx"]:
+        return GROUP_ID_DOC_TASK
 
     if file_size_m > 2:  # 大于2Mb
         return GROUP_ID_LONG_TASK

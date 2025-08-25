@@ -3,7 +3,7 @@ from typing import List
 
 from doc_parser.context import logger_context
 from server.workers.listeners.file_api_listener import FileApiLongTaskListener, FileApiShortTaskListener, \
-    FileApiImageTaskListener
+    FileApiImageTaskListener, FileApiDocTaskListener
 from utils.kafka_tool import KafkaConsumer
 
 logger = logger_context.get_logger()
@@ -12,6 +12,7 @@ consumers: List[KafkaConsumer] = []
 consumers.extend(FileApiLongTaskListener.get_instance(1))
 consumers.extend(FileApiShortTaskListener.get_instance(1))
 consumers.extend(FileApiImageTaskListener.get_instance(1))
+consumers.extend(FileApiDocTaskListener.get_instance(1))
 
 # 线程池最大工作线程数
 executor = None
