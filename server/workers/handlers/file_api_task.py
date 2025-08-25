@@ -108,9 +108,12 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
 
 
 
-# 没有文件类型的限制，直接返回True
+# 检查支持的文件类型，排除音频文件
 def check_supported_file_type(file_name: str) -> bool:
-    return "." in file_name
+    if "." not in file_name:
+        return False
+    file_extension = general_util.get_file_type(file_name)
+    return file_extension in ["pptx","pdf","docx","csv","xlsx","xls","txt","md","txt", "md", "json", "jsonl", "py", "c", "cpp", "java", "js", "sh", "xml", "yaml", "html","png", "jpeg", "jpg", "bmp"]
 
 # 根据文件大小和页数获取group_id
 def get_group_id(group_id_analysis_info):
