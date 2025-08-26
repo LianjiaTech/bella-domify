@@ -36,13 +36,18 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
     logger.info(f'receive event from file api : {json.dumps(payload)}')
     data = payload.get('data')
 
-    # 当前只监听文件创建事件
-    if payload.get('event') != "file.created" or not data:
+    # 监听文件创建和更新事件
+    event = payload.get('event')
+    if not data or event not in ["file.created", "file.updated"]:
         return True
 
     # 只处理purpose为assistants类型的文件
     if data.get('purpose') != 'assistants':
         logger.info(f"File {data.get('id')} purpose is not 'assistants': {data.get('purpose')}")
+        return True
+
+    # 对于file.updated事件，只关注文件内容修改
+    if event == "file.updated" and payload.get('scope') != 'content':
         return True
 
     # 检查metadata是否为dict类型，如果不是则返回True
