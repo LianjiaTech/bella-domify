@@ -27,6 +27,7 @@ from shapely.geometry import box
 
 import parse_output as beike_parse_output
 from constant import file_list, parser_list
+from evaluation import EVALUATION_WORK_DIR
 
 
 def log_setting(log_file=""):
@@ -1136,7 +1137,7 @@ def evaluation_single(logger_badcase, file_name, parser=""):
         raise "未实现的解析引擎"
 
     # 标注结果获取
-    label_tree = load_json("label_json/" + file_name + '_GT_label.json')
+    label_tree = load_json(EVALUATION_WORK_DIR + "/label_json/" + file_name + '_GT_label.json')
     label_nodes = tree2list_label("1", label_tree["root"])
     label_order2text_dic = get_order2text(label_nodes)
     # 父子边

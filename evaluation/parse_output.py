@@ -18,6 +18,7 @@ from doc_parser.context import parser_context, ParserConfig
 from doc_parser.dom_parser.domtree.domtree import DomTreeModel
 from doc_parser.dom_parser.parsers.pdf.converter import PDFConverter
 from doc_parser.dom_parser.provider.image_provider import ImageStorageProvider
+from evaluation import EVALUATION_WORK_DIR
 from services.provider.openai_vision_model_provider import OpenAIVisionModelProvider
 
 from settings import settings_path
@@ -25,7 +26,7 @@ from settings.ini_config import config, init_config
 
 import os
 
-root_dir = os.getcwd().split("document_parse")[0] + "document_parse/"
+root_dir = EVALUATION_WORK_DIR
 
 
 def convert_to_json(obj):
@@ -72,10 +73,10 @@ def output(dom_tree_model, file_name, json_dir, file_suffix=".json"):
 
 
 def parse():
-    documents_dir = root_dir + "evaluation/documents/"
+    documents_dir = os.path.join(root_dir,"documents")
 
     for file_name in file_list:
-        converter = PDFConverter(documents_dir + file_name + ".pdf")
+        converter = PDFConverter(os.path.join(documents_dir, file_name + ".pdf"))
         dom_tree = converter.dom_tree_parse(
             # start=0, end=10,    # 相当于[start:end]，前算，后不算
             remove_watermark=True,
@@ -86,7 +87,7 @@ def parse():
             filter_cover=False     # 默认过滤封面 False:不过滤
         )
 
-        output(dom_tree, file_name, "evaluation/parse_json/beike/")
+        output(dom_tree, file_name, "/parse_json/beike/")
         print(f"解析完毕：{file_name}")
 
 
