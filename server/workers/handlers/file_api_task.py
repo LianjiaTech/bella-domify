@@ -6,6 +6,7 @@ from server.common.exception import BusinessError
 from services import parse_manager
 from services.constants import GROUP_ID_IMAGE_TASK, GROUP_ID_LONG_TASK, GROUP_ID_SHORT_TASK, GROUP_ID_DOC_TASK
 from utils import general_util
+from settings.ini_config import config
 
 logger = logger_context.get_logger()
 
@@ -118,7 +119,13 @@ def check_supported_file_type(file_name: str) -> bool:
     if "." not in file_name:
         return False
     file_extension = general_util.get_file_type(file_name)
-    return file_extension in ["pptx","pdf","docx","csv","xlsx","xls","txt","md","txt", "md", "json", "jsonl", "py", "c", "cpp", "java", "js", "sh", "xml", "yaml", "html","png", "jpeg", "jpg", "bmp"]
+    # 从配置文件读取支持的文件类型
+    try:
+        types_str = config.get('SUPPORTED_FILE_TYPES', 'types')
+        supported_types = [file_type.strip() for file_type in types_str.split(',') if file_type.strip()]
+        return file_extension in supported_types
+    except Exception as e:
+        raise ValueError(f"无法读取支持的文件类型配置: {e}")
 
 # 根据文件大小和页数获取group_id
 def get_group_id(group_id_analysis_info):
