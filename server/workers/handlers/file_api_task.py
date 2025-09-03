@@ -1,5 +1,5 @@
 import json
-
+from services.parse_manager import DOCUMENT_PARSE_FAIL
 from doc_parser.context import logger_context, parser_context
 from doc_parser.layout_parser import pptx_parser, docx_parser, pdf_parser
 from server.common.exception import BusinessError
@@ -83,7 +83,7 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
         file_size_m = check_file_size(file_info)
     except BusinessError as e:
         logger.error(f"File {file_id} size check failed: {e}")
-        parse_manager.callback_file_api(file_id, 'failed', str(e))
+        parse_manager.callback_file_api(file_id, DOCUMENT_PARSE_FAIL, str(e))
         return True
 
     # 根据文件类型，大小进行分类
@@ -94,7 +94,7 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
         group_id_analysis_info = check_page_count(contents, file_info, file_size_m)
     except BusinessError as e:
         logger.error(f"File {data.get('id')} BusinessError: {e}")
-        parse_manager.callback_file_api(file_id, 'failed', str(e))
+        parse_manager.callback_file_api(file_id, DOCUMENT_PARSE_FAIL, str(e))
         return True
 
     # 计算groupId
@@ -170,13 +170,18 @@ def check_page_count(contents, file_info, file_size_m: float):
 
     # 文件页数限制：小于5000页
     page_count = 0
-    if file_extension == 'pptx':
-        page_count = pptx_parser.get_page_count(contents)
-    elif file_extension == 'pdf':
-        page_count = pdf_parser.get_page_count(contents)
-    elif file_extension == 'docx':
-        paragraph_count = docx_parser.get_paragraph_count(contents)
-        page_count = paragraph_count / 10  # docx文件无法直接拿到页数，先用每页段落数较大值预估
+    try:
+        if file_extension == 'pptx':
+            page_count = pptx_parser.get_page_count(contents)
+        elif file_extension == 'pdf':
+            page_count = pdf_parser.get_page_count(contents)
+        elif file_extension == 'docx':
+            paragraph_count = docx_parser.get_paragraph_count(contents)
+            page_count = paragraph_count / 10  # docx文件无法直接拿到页数，先用每页段落数较大值预估
+    except Exception as e:
+        logger.error(f"文件页数检查失败. file_id:{file_id} file_name:{file_name} error:{e}")
+        raise BusinessError(f"文件格式错误或损坏，无法解析")
+
     if page_count > 5000:
         logger.error(f"文件页数超出限制. file_id:{file_id} file_name:{file_name} page_count:{page_count}")
         raise BusinessError("文件页数超出限制，解析中止")

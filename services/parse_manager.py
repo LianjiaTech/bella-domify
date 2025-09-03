@@ -199,7 +199,7 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
-        callback_file_api(file_id, 'failed', str(e))
+        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
         logger.info(f"Exception layout_parse_and_callback: {e}")
         return ""
     return layout_result_text, layout_result_json
@@ -229,7 +229,7 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
-        callback_file_api(file_id, 'failed', str(e))
+        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
         logger.info(f"Exception domtree_parse_and_callback: {e}")
         return {}
     return parse_result, markdown_res
@@ -361,17 +361,22 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     pdf_stream = None
 
     if file_extension in ['doc', 'docx']:
-        pdf_stream, file_name = convert_docx_to_pdf(file_name, contents)
+        try:
+            pdf_stream, file_name = convert_docx_to_pdf(file_name, contents)
 
-        # 如果是 DOCX 转换的 PDF，回流到 API
-        if pdf_stream:
-            pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id, file_meta)
-            if not pdf_upload_result or "error" in pdf_upload_result:
-                logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
-            else:
-                logger.info(f"PDF回流成功 file_id:{file_id}")
+            # 如果是 DOCX 转换的 PDF，回流到 API
+            if pdf_stream:
+                pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id, file_meta)
+                if not pdf_upload_result or "error" in pdf_upload_result:
+                    logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
+                else:
+                    logger.info(f"PDF回流成功 file_id:{file_id}")
 
-            pdf_stream.seek(0)
+                pdf_stream.seek(0)
+        except Exception as e:
+            logger.error(f"DOCX转换PDF失败 file_id:{file_id}, 错误信息: {e}")
+            callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+            return
 
     # 多进程并行解析
     manager = Manager()
@@ -395,6 +400,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
         p1.terminate()
         p1.join()
         logger.error(f"layout_parse 子进程超时并已终止 file_id:{file_id}")
+        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
         return
 
     p2.join(timeout)
@@ -402,6 +408,7 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
         p2.terminate()
         p2.join()
         logger.error(f"domtree_parse 子进程超时并已终止 file_id:{file_id}")
+        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
         return
 
     parse_result_raw = dict(return_dict)
@@ -423,14 +430,17 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     else:
         status_code = DOCUMENT_PARSE_FINISH
 
+    # 如果有domtree结果，需要上传到file_api
     if domtree_result:
-        # 如果有domtree结果转换为协议标准化的StandardDomTree
-        standard_dom_tree = StandardDomTree.from_domtree_dict(domtree=domtree_result, file_info=file_info)
-        standard_dom_tree_json = jsonable_encoder(standard_dom_tree.root)
-        upload_result = file_api_upload_domtree(file_id=file_id, io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)), file_meta=file_meta)
-        if not upload_result or "error" in upload_result:
-            raise Exception(f"上传domtree到file_api失败 file_id:{file_id}, 错误信息: {upload_result.get('error', '未知错误')}")
-        logger.info(f"上传domtree到file_api成功 file_id:{file_id}")
+        try:
+            # 转换为协议标准化的StandardDomTree并上传
+            standard_dom_tree = StandardDomTree.from_domtree_dict(domtree=domtree_result, file_info=file_info)
+            standard_dom_tree_json = jsonable_encoder(standard_dom_tree.root)
+            file_api_upload_domtree(file_id=file_id, io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)), file_meta=file_meta)
+            logger.info(f"上传domtree到file_api成功 file_id:{file_id}")
+        except Exception as e:
+            logger.error(f"domtree上传失败 file_id:{file_id}, 错误信息: {e}")
+            status_code = DOCUMENT_PARSE_FAIL
 
     callback_parse_progress(file_id, status_code, callbacks)
 
