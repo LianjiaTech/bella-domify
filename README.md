@@ -33,7 +33,14 @@
 - Python >= 3.9
 - 其他依赖项（详见requirements.txt）
 
-以服务形式启动不依赖贝壳OpenAI开源体系，但文档解析流程依赖贝壳开源的File-API（File-API上传的文件是document-parser的数据来源）
+以服务形式启动不依赖贝壳OpenAI开源体系，但文档解析流程依赖贝壳开源的（上传的文件是数据来源）,文件数据扭转如下
+
+![pipline](./assets/pipline.png)
+
+Bella-Rag地址：https://github.com/LianjiaTech/bella-rag
+Bella-Knowledge地址：https://github.com/LianjiaTech/bella-knowledge
+
+
 
 ## 环境配置
 
