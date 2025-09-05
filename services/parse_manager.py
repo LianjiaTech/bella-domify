@@ -191,15 +191,15 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         layout_result_json, layout_result_text = layout_parse(file_name, contents, file_id)
         # 解析失败，直接回调
         if not layout_result_json:
-            callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+            logger.warning(f'layout解析失败 file_id {file_id}')
             return layout_result_text
 
         if parser_context.parse_result_cache_provider:
             parser_context.parse_result_cache_provider.upload_parse_result(file_id, layout_result_json, ParseType.LAYOUT.value)
+
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
-        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
         logger.info(f"Exception layout_parse_and_callback: {e}")
         return ""
     return layout_result_text, layout_result_json
@@ -214,7 +214,7 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
         parse_succeed, parse_result, markdown_res = domtree_parse(file_name, contents, file_id)
         # 解析失败，直接回调
         if not parse_succeed:
-            callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+            logger.warning(f'domtree解析失败 file_id {file_id}')
             return {}
 
         if not parse_result and not markdown_res:
@@ -229,7 +229,6 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
         # 解析完毕回调
         callback_parse_progress(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
-        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
         logger.info(f"Exception domtree_parse_and_callback: {e}")
         return {}
     return parse_result, markdown_res
@@ -440,7 +439,6 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
             logger.info(f"上传domtree到file_api成功 file_id:{file_id}")
         except Exception as e:
             logger.error(f"domtree上传失败 file_id:{file_id}, 错误信息: {e}")
-            status_code = DOCUMENT_PARSE_FAIL
 
     callback_parse_progress(file_id, status_code, callbacks)
 
