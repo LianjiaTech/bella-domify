@@ -37,6 +37,10 @@ logger = logger_context.get_logger()
 
 # 开始解析
 DOCUMENT_PARSE_BEGIN = "document_parse_begin"
+# layout解析完毕
+DOCUMENT_PARSE_LAYOUT_FINISH = "document_parse_layout_finish"
+# domtree解析完毕
+DOCUMENT_PARSE_DOMTREE_FINISH = "document_parse_domtree_finish"
 # 全部解析完毕
 DOCUMENT_PARSE_FINISH = "document_parse_finish"
 # 解析失败
@@ -46,6 +50,8 @@ FILE_API_URL = config.get('FILEAPI', 'URL')
 
 percent_map = {
     DOCUMENT_PARSE_BEGIN: 0,
+    DOCUMENT_PARSE_LAYOUT_FINISH: 50,
+    DOCUMENT_PARSE_DOMTREE_FINISH: 50,
     DOCUMENT_PARSE_FINISH: 100,
     DOCUMENT_PARSE_FAIL: 100,
 }
@@ -191,6 +197,8 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
         if parser_context.parse_result_cache_provider:
             parser_context.parse_result_cache_provider.upload_parse_result(file_id, layout_result_json, ParseType.LAYOUT.value)
 
+        # 解析完毕回调
+        callback_parse_progress(file_id, DOCUMENT_PARSE_LAYOUT_FINISH, callbacks)
     except Exception as e:
         logger.info(f"Exception layout_parse_and_callback: {e}")
         return ""
@@ -218,6 +226,8 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
             parser_context.parse_result_cache_provider.upload_parse_result(file_id, parse_result, ParseType.DOMTREE.value)
             parser_context.parse_result_cache_provider.upload_parse_result(file_id, markdown_res, ParseType.MARKDOWN.value)
 
+        # 解析完毕回调
+        callback_parse_progress(file_id, DOCUMENT_PARSE_DOMTREE_FINISH, callbacks)
     except Exception as e:
         logger.info(f"Exception domtree_parse_and_callback: {e}")
         return {}
