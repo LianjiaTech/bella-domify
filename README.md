@@ -38,6 +38,7 @@
 ![pipline](./assets/pipline.png)
 
 Bella-Rag地址：https://github.com/LianjiaTech/bella-rag
+
 Bella-Knowledge地址：https://github.com/LianjiaTech/bella-knowledge
 
 
