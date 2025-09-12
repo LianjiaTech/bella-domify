@@ -12,11 +12,16 @@ class TxtConverter(BaseConverter):
 
     def dom_tree_parse(self, start: int = 0, end: int = None, pages: list = None, **kwargs):
         decode_type = detect_encoding(self.stream)
-        try:
-            content = self.stream.decode(decode_type)
-        # 解析失败，尝试使用gbk编码进行解析
-        except:
-            content = self.stream.decode('gbk')
+        encodings = [decode_type, 'gbk', 'utf-8', 'utf-16', 'latin1']
+
+        for encoding in filter(None, encodings):
+            try:
+                content = self.stream.decode(encoding)
+                break
+            except UnicodeDecodeError:
+                continue
+        else:
+            content = self.stream.decode('utf-8', errors='ignore')
 
         dom_tree = DomTree()
         # txt文件通常只有一页，所以不需要处理页码，整体作为一个block
