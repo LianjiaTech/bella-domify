@@ -46,6 +46,11 @@ DOCUMENT_PARSE_FINISH = "document_parse_finish"
 # 解析失败
 DOCUMENT_PARSE_FAIL = "document_parse_fail"
 
+# DOCX转PDF任务状态
+DOCX_TO_PDF_BEGIN = "docx_to_pdf_begin"
+DOCX_TO_PDF_FINISH = "docx_to_pdf_finish"
+DOCX_TO_PDF_FAIL = "docx_to_pdf_fail"
+
 FILE_API_URL = config.get('FILEAPI', 'URL')
 
 percent_map = {
@@ -54,6 +59,9 @@ percent_map = {
     DOCUMENT_PARSE_DOMTREE_FINISH: 50,
     DOCUMENT_PARSE_FINISH: 100,
     DOCUMENT_PARSE_FAIL: 100,
+    DOCX_TO_PDF_BEGIN: 0,
+    DOCX_TO_PDF_FINISH: 100,
+    DOCX_TO_PDF_FAIL: 100,
 }
 
 
@@ -360,22 +368,16 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     pdf_stream = None
 
     if file_extension in ['doc', 'docx']:
-        try:
-            pdf_stream, file_name = convert_docx_to_pdf(file_name, contents)
-
-            # 如果是 DOCX 转换的 PDF，回流到 API
-            if pdf_stream:
-                pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id, file_meta)
-                if not pdf_upload_result or "error" in pdf_upload_result:
-                    logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
-                else:
-                    logger.info(f"PDF回流成功 file_id:{file_id}")
-
-                pdf_stream.seek(0)
-        except Exception as e:
-            logger.error(f"DOCX转换PDF失败 file_id:{file_id}, 错误信息: {e}")
+        # 直接调用 DOCX2PDF 任务来处理转换和上报
+        convert_result = convert_docx_to_pdf_task(file_info, callbacks)
+        if not convert_result:
+            # 转换失败，直接返回（convert_docx_to_pdf_task 已经处理了回调）
             callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
             return
+        
+        # 转换成功，更新文件名并使用返回的PDF流
+        file_name = convert_result["pdf_file_name"]
+        pdf_stream = convert_result["pdf_stream"]
 
     # 多进程并行解析
     manager = Manager()
@@ -509,7 +511,12 @@ def callback_parse_progress(file_id, status_code, callbacks):
 
 
 def callback_file_api(file_id, status_code, message: str = ""):
-    postprocessor_name = "document_parser"
+    # 根据状态码选择对应的处理器名称
+    if status_code in [DOCX_TO_PDF_BEGIN, DOCX_TO_PDF_FINISH, DOCX_TO_PDF_FAIL]:
+        postprocessor_name = "docx_to_pdf_converter"
+    else:
+        postprocessor_name = "document_parser"
+        
     url = f"{FILE_API_URL}/v1/files/{file_id}/progress/{postprocessor_name}"
     headers = {
         "Authorization": f"Bearer {OPENAI_API_KEY}",
@@ -584,4 +591,62 @@ def pdf_parse(contents: bytes = None):
         parse_stream_table=False
     )
     return dom_tree, dom_tree.to_markdown()
+
+
+def convert_docx_to_pdf_task(file_info, callbacks: list):
+    """DOCX转PDF任务"""
+    file_id = file_info["id"]
+    file_name = file_info["filename"]
+    file_meta = file_info.get("file_meta", {})
+    logger.info(f"convert_docx_to_pdf_task 开始转换 file_id:{file_id}")
+    start_time = time.time()
+
+    # 检查文件类型
+    file_extension = general_util.get_file_type(file_name)
+    if file_extension not in ['doc', 'docx']:
+        logger.warning(f"文件类型不是DOCX/DOC，无需转换 file_id:{file_id}, 文件类型:{file_extension}")
+        callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
+        return None
+
+    callback_parse_progress(file_id, DOCX_TO_PDF_BEGIN, callbacks)
+    
+    try:
+        # 读取文件流内容
+        contents = file_api_retrieve_file(file_id)
+        
+        # 转换DOCX到PDF
+        pdf_stream, pdf_file_name = convert_docx_to_pdf(file_name, contents)
+        
+        if not pdf_stream:
+            logger.error(f"DOCX转换PDF失败 file_id:{file_id}")
+            callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
+            return None
+        
+        # 回流PDF到API
+        pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id, file_meta)
+        if not pdf_upload_result or "error" in pdf_upload_result:
+            logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
+            callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
+            return None
+        
+        logger.info(f"PDF回流成功 file_id:{file_id}")
+        callback_parse_progress(file_id, DOCX_TO_PDF_FINISH, callbacks)
+        
+        # 记录结束时间并计算总耗时
+        end_time = time.time()
+        total_time = end_time - start_time
+        minutes = int(total_time // 60)
+        seconds = int(total_time % 60)
+        logger.info(f"convert_docx_to_pdf_task 转换完成 file_id:{file_id}, 总耗时: {minutes}分钟{seconds}秒")
+        
+        return {
+            "pdf_file_name": pdf_file_name,
+            "pdf_stream": pdf_stream,
+            "upload_result": pdf_upload_result
+        }
+        
+    except Exception as e:
+        logger.error(f"DOCX转换PDF过程出错 file_id:{file_id}, 错误信息: {e}")
+        callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
+        return None
 
