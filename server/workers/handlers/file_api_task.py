@@ -3,6 +3,7 @@ from services.parse_manager import DOCUMENT_PARSE_FAIL
 from doc_parser.context import logger_context, parser_context
 from doc_parser.layout_parser import pptx_parser, docx_parser, pdf_parser
 from server.common.exception import BusinessError
+from server.common.file_validation import check_file_size
 from services import parse_manager
 from services.constants import GROUP_ID_IMAGE_TASK, GROUP_ID_LONG_TASK, GROUP_ID_SHORT_TASK, GROUP_ID_DOC_TASK
 from utils import general_util
@@ -147,17 +148,6 @@ def get_group_id(group_id_analysis_info):
 
     return GROUP_ID_SHORT_TASK
 
-def check_file_size(file_info: dict) -> float:
-    """仅检查文件大小，不涉及内容读取，返回文件大小(MB)"""
-    file_id = file_info["id"]
-    file_size = file_info["bytes"]
-    file_name = file_info["filename"]
-    file_size_m = file_size / (1000 * 1000)
-
-    if file_size_m > 20:
-        logger.error(f"文件大小超出限制. file_id:{file_id} file_name:{file_name} file_size:{file_size_m}M")
-        raise BusinessError("文件大小超出限制，解析中止")
-    return file_size_m
 
 # 检查文件大小和页数
 def check_page_count(contents, file_info, file_size_m: float):
