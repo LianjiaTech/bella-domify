@@ -96,4 +96,4 @@ def check_docx_file_type(file_name: str) -> bool:
     if "." not in file_name:
         return False
     file_extension = general_util.get_file_type(file_name)
-    return file_extension in ['doc', 'docx']
+    return file_extension in ['docx']
