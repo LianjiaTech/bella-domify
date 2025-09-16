@@ -137,9 +137,6 @@ def get_group_id(group_id_analysis_info):
     if file_extension in ["png", "jpeg", "jpg", "bmp"]:
         return GROUP_ID_IMAGE_TASK
 
-    if file_extension in ["docx"]:
-        return GROUP_ID_DOC_TASK
-
     if file_size_m > 2:  # 大于2Mb
         return GROUP_ID_LONG_TASK
 
