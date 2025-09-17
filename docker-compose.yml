@@ -2,7 +2,7 @@ services:
   # LocalStack - S3 模拟服务
   localstack:
     image: localstack/localstack:latest
-    container_name: localstack
+    container_name: localstack-bella-domify
     ports:
       - "4566:4566"
       - "4571:4571"
@@ -28,7 +28,7 @@ services:
   # Zookeeper - Kafka依赖
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
-    container_name: zookeeper
+    container_name: zookeeper-bella-domify
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -38,7 +38,7 @@ services:
   # Kafka
   kafka:
     image: confluentinc/cp-kafka:7.4.0
-    container_name: kafka
+    container_name: kafka-bella-domify
     ports:
       - "9092:9092"
     depends_on:
