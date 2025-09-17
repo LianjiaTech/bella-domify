@@ -66,11 +66,13 @@ def replace_inner_to_outer_url(url: str) -> str:
     if not url:
         return url
 
+    endpoint_param = endpoint
     if url.startswith("http:"):
         url = url.replace("http:", "https:")
+        endpoint_param = endpoint_param.replace("http:", "https:")
 
     # 替换内网地址为外网地址
-    return url.replace(endpoint, out_endpoint)
+    return url.replace(endpoint_param, out_endpoint)
 
 
 def get_sign_url_with_given_end_time(url, start_time: int, expire_seconds: int) -> str:
