@@ -16,6 +16,10 @@ file_api_long_task_config = {
 class FileApiLongTaskListener(BaseListener):
     def __init__(self, instance_num):
         super().__init__(instance_num, **file_api_long_task_config)
+    
+    @classmethod
+    def _get_base_config(cls):
+        return file_api_long_task_config
 
 
 
@@ -31,6 +35,10 @@ file_api_short_task_config = {
 class FileApiShortTaskListener(BaseListener):
     def __init__(self, instance_num):
         super().__init__(instance_num, **file_api_short_task_config)
+    
+    @classmethod
+    def _get_base_config(cls):
+        return file_api_short_task_config
 
 
 
@@ -46,6 +54,10 @@ file_api_image_task_config = {
 class FileApiImageTaskListener(BaseListener):
     def __init__(self, instance_num):
         super().__init__(instance_num, **file_api_image_task_config)
+    
+    @classmethod
+    def _get_base_config(cls):
+        return file_api_image_task_config
 
 
 
@@ -61,3 +73,7 @@ file_api_docx2pdf_task_config = {
 class FileApiDocx2PdfTaskListener(BaseListener):
     def __init__(self, instance_num):
         super().__init__(instance_num, **file_api_docx2pdf_task_config)
+    
+    @classmethod
+    def _get_base_config(cls):
+        return file_api_docx2pdf_task_config

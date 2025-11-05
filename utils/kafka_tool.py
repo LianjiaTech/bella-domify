@@ -107,6 +107,15 @@ class KafkaConsumer:
                     logger.info("Received topic: [%s] partition:[%s] message: %s",
                                 self.topic, msg.partition(), message_value)
                     payload: dict = json.loads(message_value)
+                    
+                    # 检查是否应该处理此消息（消息过滤）
+                    if hasattr(self, 'should_process_message') and not self.should_process_message(payload):
+                        # 不处理，但要提交offset避免重复消费
+                        self.consumer.commit(msg)
+                        logger.info("Message filtered, skipping: topic=[%s] partition=[%s] space_code=%s", 
+                                   self.topic, msg.partition(), payload.get('data', {}).get('space_code', ''))
+                        continue
+                    
                     err_cnt = payload.get('reconsume_times', 0)
                     try:
                         # 传递重试次数，仿照rocketMQ，取名，各自回调视情况需要接收
