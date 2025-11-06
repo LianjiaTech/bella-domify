@@ -28,9 +28,10 @@ def docx2pdf_task_callback(payload: dict, consumer_info: dict) -> bool:
     if not data or event not in ["file.created", "file.updated"]:
         return True
 
-    # 只处理purpose为assistants类型的文件
-    if data.get('purpose') != 'assistants':
-        logger.info(f"File {data.get('id')} purpose is not 'assistants': {data.get('purpose')}")
+    # 处理purpose为assistants或assistants-chat类型的文件
+    supported_purposes = ['assistants', 'assistants-chat']
+    if data.get('purpose') not in supported_purposes:
+        logger.info(f"File {data.get('id')} purpose is not in supported list {supported_purposes}: {data.get('purpose')}")
         return True
 
     # 对于file.updated事件，只关注文件内容修改
