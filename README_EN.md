@@ -49,11 +49,12 @@ The following environment variables need to be set:
 
 1. Install Dependencies
    ```shell
-   pip install document_parser
+   pip install bella-domify
    ```
 
 2. Configuration
    ```python
+    # ImageStorageProvider is ABC, you can implement your own image storage provider according to your business needs
    parser_config = ParserConfig(image_provider=ImageStorageProvider(),
                                ocr_model_name="gtp-4o",
                                # Whether to enable OCR capability
@@ -66,11 +67,13 @@ The following environment variables need to be set:
 
 3. Execute Parsing
    ```python
-   converter = Converter(stream=stream) # Pass in as file stream
-   dom_tree = converter.dom_tree_parse(
+   # Converter：PDFConverter、XlsExcelConverter、XlsxExcelConverter、TxtConverter etc.
+   converter = PDFConverter(stream=stream) # Pass in as bytes stream
+   dom_tree = converter.dom_tree_parse( 
        remove_watermark=True,   # Whether to enable watermark removal
-       parse_stream_table=False # Whether to parse streaming tables
+       parse_stream_table=False# Whether to parse streaming tables
    )
+   print(dom_tree)
    ```
 
 ### Running as a Service
