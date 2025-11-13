@@ -57,12 +57,13 @@ Bella-Knowledge地址：https://github.com/LianjiaTech/bella-knowledge
 1. 安装依赖
 
    ```shell
-   pip install document_parser
+   pip install bella-domify
    ```
 
 2. 配置
 
    ```python
+   # ImageStorageProvider是个抽象类，需要自己实现图片的存储，内部有upload和down方法
    parser_config = ParserConfig(image_provider=ImageStorageProvider(),
                                 ocr_model_name="gtp-4o",
                                 # 是否开启OCR能力
@@ -75,11 +76,13 @@ Bella-Knowledge地址：https://github.com/LianjiaTech/bella-knowledge
 
 3. 执行解析
    ```python
-   converter = Converter(stream=stream) # 以文件流的形式传入
+   # Converter类型有PDFConverter、XlsExcelConverter、XlsxExcelConverter、TxtConverter等
+   converter = PDFConverter(stream=stream) # 以文件流的形式传入
    dom_tree = converter.dom_tree_parse( 
        remove_watermark=True,   # 是否开启去水印
        parse_stream_table=False # 是否解析流式表格
    )
+   print(dom_tree)
    ```
 
 ### 服务化运行

@@ -42,25 +42,28 @@ def load_long_description(fname):
 
 
 def load_requirements(fname):
-    try:
-        # pip >= 10.0
-        from pip._internal.req import parse_requirements        
-    except ImportError:
-        # pip < 10.0
-        from pip.req import parse_requirements
+    """纯文件读取，不依赖 pip"""
+    if not os.path.isfile(fname):
+        return []  # 文件不存在就当成空依赖
 
-    reqs = parse_requirements(fname, session=False)
-    try:
-        requirements = [str(ir.requirement) for ir in reqs]
-    except AttributeError:
-        requirements = [str(ir.req) for ir in reqs]
+    with open(fname, encoding="utf-8") as f:
+        lines = f.readlines()
 
-    return requirements
+    reqs = []
+    for line in lines:
+        line = line.strip()
+        if line == "" or line.startswith("#"):  # 去掉空行和注释
+            continue
+        # 简单处理 --find-links 等命令行参数（如果有）
+        if line.startswith("-"):
+            continue
+        reqs.append(line)
+    return reqs
 
 
 if __name__ == "__main__":
     setup(
-        name="document_parser",
+        name="bella-domify",
         version=get_version("version.txt"),
         keywords=["document-doc_parser"],
         description=DESCRIPTION,
