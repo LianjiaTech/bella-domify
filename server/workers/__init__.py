@@ -73,6 +73,14 @@ def _start_config_manager():
     try:
         results = sync_with_s3_config(isolation_config_manager)
         logger.info(f"Initial S3 config sync results: {results}")
+
+        # 初始化 IsolationStateManager 状态
+        from server.workers.dynamic.dynamic_manager import isolation_state
+        isolated_spaces = isolation_config_manager.get_isolated_spaces()
+        for space in isolated_spaces:
+            isolation_state.add_isolated_space(space)
+        logger.info(f"Initialized IsolationStateManager with spaces: {isolated_spaces}")
+
     except Exception as e:
         logger.error(f"Error in initial S3 config sync: {e}")
 
@@ -92,7 +100,16 @@ def _on_config_changed(old_config, new_config):
         # 同步消费者
         results = sync_with_s3_config(isolation_config_manager)
         logger.info(f"Consumer sync results: {results}")
-        
+
+        # 同步到 IsolationStateManager
+        from server.workers.dynamic.dynamic_manager import isolation_state
+        for space in changes["added"]:
+            isolation_state.add_isolated_space(space)
+        for space in changes["removed"]:
+            isolation_state.remove_isolated_space(space)
+        logger.info(f"Updated IsolationStateManager: added={changes['added']}, removed={changes['removed']}")
+
+
     except Exception as e:
         logger.error(f"Error handling config change: {e}")
 

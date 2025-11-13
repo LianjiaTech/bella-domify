@@ -103,7 +103,11 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
     file_group_id = get_group_id(group_id_analysis_info)
     logger.info(f"计算groupId结果. file_id:{file_id} file_name:{file_name} file_group_id:{file_group_id}")
 
-    if consumer_info['group_id'] == file_group_id:
+    consumer_group_id = consumer_info['group_id']
+    # 如果是隔离消费者，提取基础group_id进行匹配
+    base_group_id = consumer_group_id.split('_isolated_')[0] if '_isolated_' in consumer_group_id else consumer_group_id
+    
+    if base_group_id == file_group_id:
         logger.info(f"parser开始解析. file_id:{file_id} file_group_id:{file_group_id}")
         file_meta = {
             "space_code": data.get("space_code", ""),
