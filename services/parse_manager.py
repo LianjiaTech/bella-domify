@@ -259,30 +259,6 @@ def file_api_get_file_info(file_id):
     return response_data
 
 
-# 根据ak_code获取相关信息
-def get_ak_code_info(ak_code: str):
-    try:
-        url = f"{OPENAPI_HOST}/console/apikey/fetchByCode?code={ak_code}"
-        headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
-
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        return json.loads(response.content)
-    except Exception as e:
-        logger.error(f"获取ak_code信息失败: {ak_code}, 错误: {e}")
-        return None
-
-
-# 获取parentCode字段的值
-def get_parent_akcode(ak_code: str):
-    ak_info = get_ak_code_info(ak_code)
-    if ak_info and isinstance(ak_info, dict) and ak_info.get("code") == 200:
-        data = ak_info.get("data")
-        if data and isinstance(data, dict):
-            return data.get("parentCode")
-    return None
-
-
 def file_api_upload_domtree(io, file_id, file_meta: dict = None):
     """
     向 file_api 上传文件的 dom-tree
@@ -385,6 +361,11 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
     ak_code = file_meta.get("ak_code", "")
     if ak_code:
         parser_context.register_ak_code(ak_code)
+    
+    # 设置ak_sha到context
+    ak_sha = file_meta.get("ak_sha", "")
+    if ak_sha:
+        parser_context.register_ak_sha(ak_sha)
 
     logger.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
     start_time = time.time()

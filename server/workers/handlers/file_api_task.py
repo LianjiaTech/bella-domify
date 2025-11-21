@@ -5,6 +5,7 @@ from doc_parser.layout_parser import pptx_parser, docx_parser, pdf_parser
 from server.common.exception import BusinessError
 from server.common.file_validation import check_file_size
 from services import parse_manager
+from utils.openapi_util import fetch_ak_sha_by_code
 from services.constants import GROUP_ID_IMAGE_TASK, GROUP_ID_LONG_TASK, GROUP_ID_SHORT_TASK, GROUP_ID_DOC_TASK
 from utils import general_util
 from settings.ini_config import config
@@ -110,11 +111,16 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
     
     if base_group_id == file_group_id:
         logger.info(f"parser开始解析. file_id:{file_id} file_group_id:{file_group_id}")
+        
+        # 获取ak_sha
+        ak_sha = fetch_ak_sha_by_code(ak_code)
+
         file_meta = {
             "space_code": data.get("space_code", ""),
             "cuid": data.get("cuid", ""),
             "cu_name": data.get("cu_name", ""),
-            "ak_code": ak_code
+            "ak_code": ak_code,
+            "ak_sha": ak_sha
         }
         file_info["file_meta"] = file_meta
         parse_manager.parse_result_layout_and_domtree(file_info, callbacks)

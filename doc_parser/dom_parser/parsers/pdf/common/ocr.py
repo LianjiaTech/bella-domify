@@ -4,6 +4,8 @@ import openai
 import requests
 
 from doc_parser.context import parser_context, logger_context
+from utils.openapi_util import report_usage_log
+from bella_openapi.bella_trace import TraceContext
 
 logger = logger_context.get_logger()
 
@@ -62,6 +64,25 @@ def llm_image2text(image_url, user, model=parser_context.ocr_model_name):
                 timeout=30  # 超时时间为30秒
             )
             logger.info(f"图片信息提取请求LLM中，【请求结果：{response}】")
+            
+            # 上报使用统计
+            if hasattr(response, 'usage') and response.usage:
+                try:
+                    usage = response.usage.model_dump()
+                    ak_code = parser_context.get_ak_code()
+                    ak_sha = parser_context.get_ak_sha()
+                    report_usage_log(
+                        user=user,
+                        model=model,
+                        usage=usage,
+                        ak_code=ak_code,
+                        ak_sha=ak_sha,
+                        bella_trace_id=TraceContext.trace_id,
+                        endpoint="/v1/chat/completions"
+                    )
+                except Exception as e:
+                    logger.warning(f"Failed to report usage log: {e}")
+
         except openai.RateLimitError:
             time.sleep(10)
         except requests.exceptions.Timeout:
