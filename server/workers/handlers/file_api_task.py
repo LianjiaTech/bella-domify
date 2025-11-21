@@ -69,6 +69,7 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
     file_id = data.get("id", "")
     file_name =data.get("filename", "")
     callbacks = metadata.get("callbacks", [])
+    ak_code = payload.get("ak_code", "")
 
     if not check_supported_file_type(file_name):
         logger.info(f"not supported file type: {file_name}")
@@ -112,7 +113,8 @@ def file_api_task_callback(payload: dict, consumer_info: dict) -> bool:
         file_meta = {
             "space_code": data.get("space_code", ""),
             "cuid": data.get("cuid", ""),
-            "cu_name": data.get("cu_name", "")
+            "cu_name": data.get("cu_name", ""),
+            "ak_code": ak_code
         }
         file_info["file_meta"] = file_meta
         parse_manager.parse_result_layout_and_domtree(file_info, callbacks)
