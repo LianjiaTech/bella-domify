@@ -49,6 +49,7 @@ def run_with_context_in_thread(func: Callable):
 class ParserContext:
     # 创建全局的 ContextVar 对象来存储用户信息，线程安全，明确指定类型为 Optional[str]
     _user_var: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar('user', default=None)
+    _ak_code_var: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar('ak_code', default=None)
 
     def __init__(self, config: [ParserConfig, dict] = None):
         self._register_all_config(config)
@@ -105,6 +106,22 @@ class ParserContext:
             用户标识
         """
         return self._user_var.get()
+
+    def register_ak_code(self, ak_code: str):
+        """
+        设置ak_code信息
+        Args:
+            ak_code: ak_code标识
+        """
+        self._ak_code_var.set(ak_code)
+
+    def get_ak_code(self) -> Optional[str]:
+        """
+        获取ak_code信息
+        Returns:
+            ak_code标识
+        """
+        return self._ak_code_var.get()
 
     def register_vision_model_list(self, model_list: list[str]):
         self.vision_model_list = model_list
