@@ -12,6 +12,10 @@ import logging
 
 import fitz
 
+from doc_parser.context import logger_context
+
+logger = logger_context.get_logger()
+
 from doc_parser.layout_parser.layout.simple_block import SimpleBlock
 from services.constants import TEXT, IMAGE
 from services.layout_parse_utils import _possible_holder_blocks, mark_holder_by_text_similarity, \
@@ -35,7 +39,7 @@ def layout_parse(file):
     try:
         pdf_document = fitz.Document(stream=file)
     except fitz.fitz.FileDataError as e:
-        logging.error('layout_parse解析失败。[文件类型]pdf [原因]非pdf类型或损坏的pdf文件 [Exception]:%s', e)
+        logger.error('layout_parse解析失败。[文件类型]pdf [原因]非pdf类型或损坏的pdf文件 [Exception]:%s', e)
         return ""
 
     # 遍历每一页

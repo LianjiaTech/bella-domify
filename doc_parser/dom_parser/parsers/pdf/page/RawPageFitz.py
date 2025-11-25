@@ -8,6 +8,10 @@ import logging
 from collections import namedtuple
 from typing import List
 
+from doc_parser.context import logger_context
+
+logger = logger_context.get_logger()
+
 from doc_parser.dom_parser.parsers.pdf.shape.Paths import Paths
 from .RawPage import RawPage
 from ..common.Element import Element
@@ -73,7 +77,7 @@ class RawPageFitz(RawPage):
         try:
             spans = self.page_engine.get_texttrace()
         except SystemError:
-            logging.warning('Ignore hidden text checking due to UnicodeDecodeError in upstream library.')
+            logger.warning('Ignore hidden text checking due to UnicodeDecodeError in upstream library.')
             spans = []
 
         if not spans: return text_blocks

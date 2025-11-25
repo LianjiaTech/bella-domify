@@ -13,6 +13,10 @@ Both raster images and vector graphics are considered:
 import logging
 import fitz
 import numpy as np
+
+from doc_parser.context import logger_context
+
+logger = logger_context.get_logger()
 from ..common.Collection import Collection
 from ..common.share import BlockType
 from ..common.algorithm import (recursive_xy_cut, inner_contours, xy_project_profile)
@@ -339,7 +343,7 @@ class ImagesExtractor:
             if pix.width==mask.width and pix.height==mask.height:
                 pix = fitz.Pixmap(pix, mask)  # now compose final pixmap
             else:
-                logging.warning('Ignore image due to inconsistent size of color and mask pixmaps: %s', item)
+                logger.warning('Ignore image due to inconsistent size of color and mask pixmaps: %s', item)
 
         # we may need to adjust something for CMYK pixmaps here -> 
         # recreate pixmap in RGB color space if necessary

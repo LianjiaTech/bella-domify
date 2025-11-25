@@ -12,6 +12,10 @@ import io
 import logging
 
 from pptx import Presentation
+
+from doc_parser.context import logger_context
+
+logger = logger_context.get_logger()
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER_TYPE
 
 from doc_parser.layout_parser.layout.simple_block import SimpleBlock
@@ -58,7 +62,7 @@ def layout_parse(file):
                         simple_block_list.append(SimpleBlock(type=TABLE, text=table_text))
 
             except Exception as e:
-                logging.error(f"处理元素时出错，type: {shape.shape_type}，errmsg：{str(e)}")
+                logger.error(f"处理元素时出错，type: {shape.shape_type}，errmsg：{str(e)}")
                 continue
 
     # SimpleBlock的list批量获取S3链接，并返回目标结构

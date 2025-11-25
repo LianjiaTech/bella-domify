@@ -8,6 +8,9 @@ import logging
 import math
 import re
 
+from doc_parser.context import logger_context
+logger = logger_context.get_logger()
+
 from doc_parser.dom_parser.parsers.pdf.table.Cell import Cell
 from doc_parser.dom_parser.parsers.pdf.table.TableBlock import TableBlock
 from doc_parser.dom_parser.parsers.pdf.text.Line import Line
@@ -348,7 +351,7 @@ class Blocks(ElementCollection):
             # keep only the line with largest area
             sorted_lines = sorted(group, key=lambda line: line.bbox.get_area())
             for line in sorted_lines[:-1]:
-                logging.warning('Ignore Line "%s" due to overlap', line.text)
+                logger.warning('Ignore Line "%s" due to overlap', line.text)
                 line.update_bbox((0,0,0,0))
 
         return self
