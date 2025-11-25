@@ -1,5 +1,4 @@
 import io
-import logging
 from abc import ABC, abstractmethod
 
 from PIL import Image
@@ -24,6 +23,8 @@ class ImageStorageProvider(ABC):
         :param user: 用户标识，用于OCR处理
         :return: (图片URL, OCR文本)
         """
+        from doc_parser.context import logger_context
+        logger = logger_context.get_logger()
 
         def is_image_large_enough(buf_data, min_size=28):
             """
@@ -41,7 +42,7 @@ class ImageStorageProvider(ABC):
                     width, height = img.size
                     return width > min_size and height > min_size
             except Exception as e:
-                logging.warning(f"检查图像尺寸失败: {e}")
+                logger.warning(f"检查图像尺寸失败: {e}")
                 return False
         image_url = ""
         from doc_parser.dom_parser.parsers.pdf.common.ocr import llm_image2text
@@ -53,7 +54,7 @@ class ImageStorageProvider(ABC):
             else:
                 ocr_text = ""
         except Exception as e:
-            logging.error(f"pic_parser Exception occurred: {e}")
+            logger.error(f"pic_parser Exception occurred: {e}")
             ocr_text = ""
 
         return image_url, ocr_text

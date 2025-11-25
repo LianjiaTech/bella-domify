@@ -12,6 +12,10 @@ import io
 import logging
 
 from docx import Document, ImagePart
+
+from doc_parser.context import logger_context
+
+logger = logger_context.get_logger()
 from docx.oxml import CT_Picture
 from docx.text.paragraph import Paragraph
 
@@ -60,7 +64,7 @@ def layout_parse(file):
                 if table_text:
                     simple_block_list.append(SimpleBlock(type=TABLE, text=table_text))
         except Exception as e:
-            logging.error(f"处理元素时出错，type: {element}，errmsg：{str(e)}")
+            logger.error(f"处理元素时出错，type: {element}，errmsg：{str(e)}")
             continue
 
     # SimpleBlock的list批量获取S3链接，并返回目标结构
