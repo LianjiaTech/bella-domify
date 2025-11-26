@@ -191,10 +191,19 @@ def worker(func, args, return_dict, key):
 
 
 # layout解析
-def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None, parser_context_param=None):
+def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user_info: dict = None,
+                              parser_context_param=None):
     try:
         parser_context.register_all(parser_context_param)
-        parser_context.register_user(user)
+        # 在子进程中重新设置用户信息
+        if user_info.get('user'):
+            parser_context.register_user(user_info['user'])
+        if user_info.get('ak_code'):
+            parser_context.register_ak_code(user_info['ak_code'])
+        if user_info.get('ak_sha'):
+            parser_context.register_ak_sha(user_info['ak_sha'])
+        logger_context.get_logger().info(
+            f"子进程验证 - ak_code: {parser_context.get_ak_code()}, ak_sha: {parser_context.get_ak_sha()}, user: {parser_context.get_user()}")
         # 获取版面解析结果
         layout_result_json, layout_result_text = layout_parse(file_name, contents, file_id)
         # 解析失败，直接回调
@@ -214,10 +223,21 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
 
 
 # domtree解析
-def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user: str = None,  parser_context_param=None):
+def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbacks: list, user_info: dict = None,
+                               parser_context_param=None):
     try:
         parser_context.register_all(parser_context_param)
-        parser_context.register_user(user)
+        # 在子进程中重新设置用户信息
+        if user_info:
+            if user_info.get('user'):
+                parser_context.register_user(user_info['user'])
+            if user_info.get('ak_code'):
+                parser_context.register_ak_code(user_info['ak_code'])
+            if user_info.get('ak_sha'):
+                parser_context.register_ak_sha(user_info['ak_sha'])
+        logger_context.get_logger().info(f"domtree子进程开始: file_id={file_id}")
+        logger_context.get_logger().info(
+            f"子进程验证 - ak_code: {parser_context.get_ak_code()}, ak_sha: {parser_context.get_ak_sha()}, user: {parser_context.get_user()}")
         # 获取domtree解析结果
         parse_succeed, parse_result, markdown_res = domtree_parse(file_name, contents, file_id)
         # 解析失败，直接回调
@@ -396,10 +416,19 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
 
     parse_contents = pdf_stream if pdf_stream else contents
 
+    # 准备 user_info 字典
+    user_info = {
+        'user': parser_context.get_user(),
+        'ak_code': parser_context.get_ak_code(),
+        'ak_sha': parser_context.get_ak_sha()
+    }
+
     p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, file_name, parse_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'layout_parse'))
+        layout_parse_and_callback, (file_id, file_name, parse_contents, callbacks, user_info, parser_context),
+        return_dict, 'layout_parse'))
     p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, file_name, parse_contents, callbacks, parser_context.get_user(), parser_context), return_dict, 'domtree_parse'))
+        domtree_parse_and_callback, (file_id, file_name, parse_contents, callbacks, user_info, parser_context),
+        return_dict, 'domtree_parse'))
     p1.start()
     p2.start()
 
