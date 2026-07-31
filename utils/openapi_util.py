@@ -13,7 +13,7 @@ def get_ak_code_info(ak_code: str):
     """
     try:
         url = f"{OPENAPI_HOST}/console/apikey/fetchByCode?code={ak_code}"
-        headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+        headers = {"Authorization": f"Bearer {OPENAPI_CONSOLE_KEY}"}
 
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -46,7 +46,7 @@ def fetch_ak_sha_by_code(ak_code: str) -> str:
         return ""
         
     headers = {
-        "Authorization": f"Bearer {OPENAI_API_KEY}"
+        "Authorization": f"Bearer {OPENAPI_CONSOLE_KEY}"
     }
     
     url = f'{OPENAPI_HOST}/console/apikey/fetchByCode'
