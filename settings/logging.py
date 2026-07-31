@@ -49,6 +49,8 @@ class NewLineFormatter(logging.Formatter):
 def init_logger():
     logger = logging.getLogger('document_parser')
     logger.setLevel(os.getenv("LOG_LEVEL", "INFO"))
+    if logger.handlers:
+        return logger
     formatter = UTC8TimeFormatter('[%(trace_id)s] -%(asctime)s - %(module)s - %(levelname)s - %(message)s', _DATE_FORMAT)
     console_handler = logging.StreamHandler()
     console_handler.setLevel(os.getenv("LOG_LEVEL", "INFO"))

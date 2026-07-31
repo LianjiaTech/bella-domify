@@ -185,6 +185,9 @@ def domtree_parse(file_name: str = None, file: bytes = None, task_id=""):
 
 
 def worker(func, args, return_dict, key):
+    # 子进程中重新注入 logger，确保 OCR 等子进程日志也写入文件
+    from settings.logging import init_logger
+    logger_context.register_logger(init_logger())
     # 在子进程中设置上下文变量的值
     result = func(*args)
     return_dict[key] = result
