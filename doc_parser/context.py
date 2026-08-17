@@ -24,27 +24,25 @@ class ParserConfig(BaseModel):
 
 def run_with_context_in_thread(func: Callable):
     """
-    在线程中运行函数前，传递当前线程的用户信息
+    在线程中运行函数前，传递当前线程的用户和鉴权信息。
 
     用法:
     Args:
         func: 要执行的函数
     Returns:
-        一个可调用对象，在被调用时会设置正确的用户上下文并执行原函数
+        一个可调用对象，在被调用时设置正确的上下文并执行原函数
     """
-    # 获取当前线程的用户信息
     current_user = parser_context.get_user()
+    current_ak_code = parser_context.get_ak_code()
+    current_ak_sha = parser_context.get_ak_sha()
 
-    # 定义一个包装函数，在执行时设置用户信息
     def wrapper(*args, **kwargs):
-        # 设置用户信息
         parser_context.register_user(current_user)
-        # 执行原函数
+        parser_context.register_ak_code(current_ak_code)
+        parser_context.register_ak_sha(current_ak_sha)
         return func(*args, **kwargs)
 
-    # 返回包装函数
     return wrapper
-
 
 class ParserContext:
     # 创建全局的 ContextVar 对象来存储用户信息，线程安全，明确指定类型为 Optional[str]
