@@ -18,6 +18,7 @@ TEXT = "text"
 TABLE = "table"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAPI_CONSOLE_KEY = os.getenv("OPENAPI_CONSOLE_KEY")
 OPENAPI_HOST = os.getenv("OPENAPI_HOST")
 
 
