@@ -31,6 +31,7 @@ from services.constants import ParseType
 from settings.ini_config import config
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf
+from utils.service_client_util import get_service_client_headers
 import urllib.parse
 
 logger = logger_context.get_logger()
@@ -199,12 +200,11 @@ def layout_parse_and_callback(file_id, file_name: str, contents: bytes, callback
     try:
         parser_context.register_all(parser_context_param)
         # 在子进程中重新设置用户信息
+        user_info = user_info or {}
         if user_info.get('user'):
             parser_context.register_user(user_info['user'])
-        if user_info.get('ak_code'):
-            parser_context.register_ak_code(user_info['ak_code'])
-        if user_info.get('ak_sha'):
-            parser_context.register_ak_sha(user_info['ak_sha'])
+        parser_context.register_ak_code(user_info.get('ak_code'))
+        parser_context.register_ak_sha(user_info.get('ak_sha'))
         logger_context.get_logger().info(
             f"子进程验证 - ak_code: {parser_context.get_ak_code()}, ak_sha: {parser_context.get_ak_sha()}, user: {parser_context.get_user()}")
         # 获取版面解析结果
@@ -231,13 +231,11 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
     try:
         parser_context.register_all(parser_context_param)
         # 在子进程中重新设置用户信息
-        if user_info:
-            if user_info.get('user'):
-                parser_context.register_user(user_info['user'])
-            if user_info.get('ak_code'):
-                parser_context.register_ak_code(user_info['ak_code'])
-            if user_info.get('ak_sha'):
-                parser_context.register_ak_sha(user_info['ak_sha'])
+        user_info = user_info or {}
+        if user_info.get('user'):
+            parser_context.register_user(user_info['user'])
+        parser_context.register_ak_code(user_info.get('ak_code'))
+        parser_context.register_ak_sha(user_info.get('ak_sha'))
         logger_context.get_logger().info(f"domtree子进程开始: file_id={file_id}")
         logger_context.get_logger().info(
             f"子进程验证 - ak_code: {parser_context.get_ak_code()}, ak_sha: {parser_context.get_ak_sha()}, user: {parser_context.get_user()}")
@@ -289,19 +287,22 @@ def file_api_upload_domtree(io, file_id, file_meta: dict = None):
     Args:
         io: 文件内容（二进制）
         file_id: 文件ID
-        file_meta: 包含space_code、cuid、cu_name的文件元数据信息
+        file_meta: 包含 ak_code、space_code、cuid、cu_name 的文件元数据信息。
+            ak_code 来自 Kafka 消息；未传 file_meta 时使用当前任务上下文。
 
     Returns:
         响应数据
     """
     url = f"{FILE_API_URL}/v1/files/dom-tree"
-    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+    ak_code = file_meta.get('ak_code') if file_meta is not None else parser_context.get_ak_code()
+    service_client_headers = get_service_client_headers(ak_code)
+    headers = service_client_headers or {"Authorization": f"Bearer {OPENAI_API_KEY}"}
 
     if file_meta:
         user_headers = {
             'X-BELLA-SPACE-CODE': str(file_meta.get('space_code', '')),
             'X-BELLA-OPERATOR-ID': str(file_meta.get('cuid', '')),
-            'X-BELLA-OPERATOR-NAME': urllib.parse.quote(str(file_meta.get('cu_name', '')))
+            'X-BELLA-OPERATOR-NAME': urllib.parse.quote(str(file_meta.get('cu_name', ''))),
         }
         headers.update({k: v for k, v in user_headers.items() if v})
 
@@ -311,13 +312,13 @@ def file_api_upload_domtree(io, file_id, file_meta: dict = None):
 
     # 发送请求
     response = requests.post(
-    url,
-    files={
-        "file": (domtree_filename, io, "application/json")
-    },
-    data={"file_id": file_id},
-    headers=headers,
-)
+        url,
+        files={
+            "file": (domtree_filename, io, "application/json")
+        },
+        data={"file_id": file_id},
+        headers=headers,
+    )
 
     # 解析响应
     try:
@@ -382,13 +383,11 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
 
     # 设置ak_code到context
     ak_code = file_meta.get("ak_code", "")
-    if ak_code:
-        parser_context.register_ak_code(ak_code)
+    parser_context.register_ak_code(ak_code)
     
     # 设置ak_sha到context
     ak_sha = file_meta.get("ak_sha", "")
-    if ak_sha:
-        parser_context.register_ak_sha(ak_sha)
+    parser_context.register_ak_sha(ak_sha)
 
     logger.info(f"parse_result_layout_and_domtree 开始解析 file_id:{file_id}")
     start_time = time.time()

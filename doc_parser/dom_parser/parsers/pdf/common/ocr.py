@@ -1,4 +1,5 @@
 import time
+from typing import Dict, Optional
 
 import openai
 import requests
@@ -10,7 +11,12 @@ from bella_openapi.bella_trace import TraceContext
 logger = logger_context.get_logger()
 
 
-def llm_image2text(image_url, user, model=parser_context.ocr_model_name):
+def llm_image2text(
+    image_url: str,
+    user: str,
+    model: str = parser_context.ocr_model_name,
+    extra_headers: Optional[Dict[str, str]] = None,
+) -> str:
     if not parser_context.ocr_enable:
         logger.info("OCR功能未开启")
         return ""
@@ -61,6 +67,7 @@ def llm_image2text(image_url, user, model=parser_context.ocr_model_name):
                 top_p=0.01,
                 model=model,
                 user=user,
+                extra_headers=extra_headers,
                 timeout=30  # 超时时间为30秒
             )
             logger.info(f"图片信息提取请求LLM中，【请求结果：{response}】")
