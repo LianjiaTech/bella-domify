@@ -2,7 +2,7 @@
 import json
 import requests
 from doc_parser.context import logger_context
-from services.constants import OPENAI_API_KEY, OPENAPI_HOST
+from services.constants import OPENAI_API_KEY, OPENAPI_CONSOLE_KEY, OPENAPI_HOST
 
 logger = logger_context.get_logger()
 
