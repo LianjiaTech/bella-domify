@@ -21,6 +21,7 @@ from doc_parser.context import logger_context
 
 logger = logger_context.get_logger()
 lock = multiprocessing.Lock()
+CONVERSION_TIMEOUT_SECONDS = 60
 
 
 def convert_docx_to_pdf(file_name: str, contents: bytes):
@@ -54,8 +55,10 @@ def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
     logger.info('Starting DOCX to PDF conversion')
 
     try:
-
-        with lock:
+        if not lock.acquire(timeout=CONVERSION_TIMEOUT_SECONDS):
+            logger.error("Conversion failed: timed out waiting for the DOCX conversion lock")
+            return None
+        try:
             process = subprocess.Popen(
                 ['unoconv', '-f', 'pdf', '--stdin', '--stdout'],
                 stdin=subprocess.PIPE,
@@ -64,11 +67,15 @@ def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
             )
 
             try:
-                pdf_data, error = process.communicate(input=docx_stream.read(), timeout=60)
+                pdf_data, error = process.communicate(input=docx_stream.read(), timeout=CONVERSION_TIMEOUT_SECONDS)
             except subprocess.TimeoutExpired:
                 process.kill()
-                logger.error("Conversion failed: Process timed out after 60 seconds")
+                process.wait(timeout=1)
+                logger.error("Conversion failed: process timed out")
                 return
+            finally:
+                for stream in (process.stdin, process.stdout, process.stderr):
+                    stream.close()
 
             if process.returncode != 0:
                 logger.error(f"Conversion failed: {error.decode('utf-8')}")
@@ -82,6 +89,8 @@ def convert_docx_to_pdf_in_memory(docx_stream: IOBase):
 
             logger.info('Conversion successful')
             return pdf_stream
+        finally:
+            lock.release()
 
     except Exception as e:
         logger.error(f"Conversion failed: {str(e)}")
