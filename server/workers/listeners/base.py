@@ -1,4 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor, TimeoutError
+from concurrent.futures import ThreadPoolExecutor
 
 from doc_parser.context import logger_context
 from utils.kafka_tool import KafkaConsumer
@@ -56,8 +56,7 @@ class BaseListener(KafkaConsumer):
             return message_space == self.space_filter
     
     @classmethod
-    def _create_isolated_instance(cls, space_code: str, instance_num: int = 1, 
-                                  max_workers: int = 3, callback_timeout: int = 300):
+    def _create_isolated_instance(cls, space_code: str, max_workers: int = 3):
         """创建业务专属消费者实例"""
         try:
             # 获取原始配置
@@ -66,7 +65,6 @@ class BaseListener(KafkaConsumer):
             # 修改配置用于专属消费者
             isolated_config = original_config.copy()
             isolated_config['group_id'] = f"{original_config['group_id']}_isolated_{space_code}"
-            isolated_config['callback_timeout'] = callback_timeout
             
             # 创建实例
             instance = cls.__new__(cls)
@@ -91,11 +89,4 @@ class BaseListener(KafkaConsumer):
             return instance
     
     def run_callback(self, payload, **kwargs) -> bool:
-        future = self.callback_executor.submit(self.callback, payload, **kwargs)
-        try:
-            # 设置超时时间，单位为秒
-            return future.result(timeout=self.callback_timeout)
-        except TimeoutError:
-            future.cancel()
-            logger.warn("callback执行超时 consumer topic: [%s] message: %s", self.topic, payload)
-            return False
+        return self.callback_executor.submit(self.callback, payload, **kwargs).result()

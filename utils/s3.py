@@ -7,9 +7,11 @@ import uuid
 from urllib.parse import urlparse, urlunparse
 
 import boto3
+from botocore.config import Config
 from fastapi import UploadFile
 
 from doc_parser.context import logger_context
+from services.constants import HTTP_TIMEOUT_SECONDS
 from settings.ini_config import config
 
 logger = logger_context.get_logger()
@@ -19,7 +21,10 @@ sk = config.get('S3', 'SK')
 bucket_name = config.get('S3', 'BUCKET_NAME')
 endpoint = config.get('S3', 'ENDPOINT')
 out_endpoint = config.get('S3', 'OUT_ENDPOINT')
-s3 = boto3.client("s3", aws_access_key_id=ak, aws_secret_access_key=sk, endpoint_url=endpoint)
+s3 = boto3.client(
+    "s3", aws_access_key_id=ak, aws_secret_access_key=sk, endpoint_url=endpoint,
+    config=Config(connect_timeout=HTTP_TIMEOUT_SECONDS, read_timeout=HTTP_TIMEOUT_SECONDS),
+)
 
 def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> str:
     # s3 上传文件
@@ -40,9 +45,7 @@ def upload_file(file: UploadFile = None, stream: bytes = None, filename="") -> s
 
 def upload_dict_content(data: dict, file_key: str) -> str:
     json_data = json.dumps(data)
-    s3.put_object(Bucket=bucket_name,
-                  Body=json_data,
-                  Key=file_key)
+    s3.put_object(Bucket=bucket_name, Body=json_data, Key=file_key)
     return file_key
 
 

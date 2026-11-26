@@ -56,9 +56,8 @@ class KafkaConsumer:
                  group_id,
                  topic,
                  callback,
-                 callback_timeout,
+                 callback_timeout=None,  # 兼容旧调用，回调不再设置总超时
                  producer=None,
-                 # callback_timeout + err_retry_max 需小于 retry_interval！防止重平衡
                  err_retry_max=DEFAULT_ERR_RETRY_MAX,
                  retry_interval=DEFAULT_RETRY_INTERVAL,
                  **kwargs):
@@ -79,7 +78,6 @@ class KafkaConsumer:
         self.retry_interval = retry_interval
         self.__closed = False
         self.lock = threading.Lock()
-        self.callback_timeout = callback_timeout
         self.producer = producer
 
     def consume_messages(self):

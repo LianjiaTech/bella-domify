@@ -107,12 +107,9 @@ class DynamicConsumerManager:
                 logger.error(f"Failed to create any consumers for space: {space_code}")
                 return False
     
-    def isolate_business(self, space_code: str, task_type: str, max_workers: int = 3, callback_timeout: int = 300) -> bool:
-        """便捷方法：为单个任务类型创建隔离消费者（用于静态配置）"""
-        config = {
-            'max_workers': max_workers,
-            'callback_timeout': callback_timeout
-        }
+    def isolate_business(self, space_code: str, task_type: str, max_workers: int = 3, callback_timeout=None) -> bool:
+        """为单个任务类型创建隔离消费者。callback_timeout 仅兼容旧调用。"""
+        config = {'max_workers': max_workers}
         
         return self.start_isolated_consumer(space_code, [task_type], config)
     
@@ -193,7 +190,7 @@ class DynamicConsumerManager:
                 return False
                 
             # 比较关键配置项
-            key_fields = ['max_workers', 'callback_timeout', 'task_types']
+            key_fields = ['max_workers', 'task_types']
             for field in key_fields:
                 if current_config.get(field) != target_config.get(field):
                     logger.info(f"Config changed for {space_code}.{field}: {current_config.get(field)} -> {target_config.get(field)}")
@@ -261,9 +258,7 @@ class DynamicConsumerManager:
             # 创建专属消费者实例
             consumer = consumer_class._create_isolated_instance(
                 space_code=space_code,
-                instance_num=1,
                 max_workers=config.get('max_workers', 3),
-                callback_timeout=config.get('callback_timeout', 5 * 60)
             )
             
             if consumer and consumer._enable:
@@ -306,7 +301,6 @@ def isolate_business(space_code: str, config: Optional[Dict] = None) -> bool:
     """隔离指定业务空间（完整模式）"""
     default_config = {
         'max_workers': 3,
-        'callback_timeout': 5 * 60,
         'task_types': ['short', 'long', 'image', 'docx']
     }
     

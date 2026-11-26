@@ -1,10 +1,23 @@
 # -*- coding: utf-8 -*-
 import json
+
+import httpx
 import requests
+from bella_openapi.config import openapi_config
+
 from doc_parser.context import logger_context
-from services.constants import OPENAI_API_KEY, OPENAPI_CONSOLE_KEY, OPENAPI_HOST
+from services.constants import HTTP_TIMEOUT_SECONDS, OPENAI_API_KEY, OPENAPI_CONSOLE_KEY, OPENAPI_HOST
 
 logger = logger_context.get_logger()
+
+
+def validate_token_by_whoami(token: str) -> bool:
+    response = httpx.get(
+        openapi_config.OPENAPI_HOST + '/v1/apikey/whoami',
+        headers={'Authorization': token},
+        timeout=HTTP_TIMEOUT_SECONDS,
+    )
+    return response.status_code == 200 and response.json()['code'] == 200
 
 
 def get_ak_code_info(ak_code: str):
@@ -15,7 +28,7 @@ def get_ak_code_info(ak_code: str):
         url = f"{OPENAPI_HOST}/console/apikey/fetchByCode?code={ak_code}"
         headers = {"Authorization": f"Bearer {OPENAPI_CONSOLE_KEY}"}
 
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT_SECONDS)
         response.raise_for_status()
         return json.loads(response.content)
     except Exception as e:
@@ -53,7 +66,7 @@ def fetch_ak_sha_by_code(ak_code: str) -> str:
     params = {'code': ak_code}
 
     try:
-        response = requests.get(url, headers=headers, params=params)
+        response = requests.get(url, headers=headers, params=params, timeout=HTTP_TIMEOUT_SECONDS)
         response.raise_for_status()
         data = response.json()
         if data.get('code') == 200 and 'data' in data:
@@ -111,7 +124,7 @@ def report_usage_log(
         }
 
         url = f'{OPENAPI_HOST}/v1/log'
-        response = requests.post(url, headers=headers, json=log_data, timeout=5)
+        response = requests.post(url, headers=headers, json=log_data, timeout=HTTP_TIMEOUT_SECONDS)
         response.raise_for_status()
 
         logger.info(f"Usage log reported successfully for user={user}, model={model}, total_tokens={usage.get('total_tokens', 0)}")
