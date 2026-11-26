@@ -3,14 +3,14 @@ import threading
 import time
 from concurrent.futures import Future
 
-from confluent_kafka import Producer, KafkaError, Consumer
+from confluent_kafka import Consumer, KafkaError, KafkaException, Producer, TopicPartition
 
 from doc_parser.context import logger_context
 from utils.inspect_util import has_parameter
 
 logger = logger_context.get_logger()
 
-# 默认最大重试次数
+# 默认最多处理三次，包含首次处理
 DEFAULT_ERR_RETRY_MAX = 3
 # 默认重试间隔，0没有间隔
 DEFAULT_RETRY_INTERVAL = 0
@@ -72,18 +72,17 @@ class KafkaConsumer:
         self.consumer = Consumer(base_conf)
         self.topic = topic
         self.group_id = group_id
-        self.consumer.subscribe([self.topic])
         self.callback = callback
         self.err_retry_max = err_retry_max
         self.retry_interval = retry_interval
         self.__closed = False
         self.lock = threading.Lock()
         self.producer = producer
+        self._failed_offsets = {}
+        self.consumer.subscribe([self.topic], on_revoke=self._clear_failed_offsets)
 
     def consume_messages(self):
-        """
-        三次重试，失败后打印错误日志，研发查看原因，手动补偿
-        """
+        """消费失败时从原位点重读，耗尽后暂停分区。"""
         try:
             while True:
                 with self.lock:
@@ -101,13 +100,26 @@ class KafkaConsumer:
                                      self.topic, msg.partition(), msg.error().code(),
                                      msg.value().decode("utf-8") if msg.value() else "None")
                 else:
+                    partition = (msg.topic(), msg.partition())
+                    offset = msg.offset()
+                    failure = self._failed_offsets.get(partition)
+                    if failure is not None:
+                        failed_offset, err_cnt = failure
+                        if err_cnt >= self.err_retry_max:
+                            continue
+                        # 防止同分区的后续消息越过失败位点。
+                        if offset != failed_offset:
+                            self.consumer.seek(TopicPartition(*partition, failed_offset))
+                            continue
+
                     message_value = msg.value().decode("utf-8")
                     logger.info("Received topic: [%s] partition:[%s] message: %s",
                                 self.topic, msg.partition(), message_value)
                     payload: dict = json.loads(message_value)
                     
                     # 检查是否应该处理此消息（消息过滤）
-                    if hasattr(self, 'should_process_message') and not self.should_process_message(payload):
+                    if (failure is None and hasattr(self, 'should_process_message')
+                            and not self.should_process_message(payload)):
                         # 不处理，但要提交offset避免重复消费
                         self.consumer.commit(msg)
                         logger.info(
@@ -115,46 +127,44 @@ class KafkaConsumer:
                             self.topic, msg.partition(), payload.get('data', {}).get('space_code', ''), self.group_id)
                         continue
                     
-                    err_cnt = payload.get('reconsume_times', 0)
+                    if failure is None:
+                        err_cnt = payload.get('reconsume_times', 0)
+                    kwargs = {}
+                    if has_parameter(self.callback, "reconsume_times"):
+                        kwargs["reconsume_times"] = err_cnt
+                    if has_parameter(self.callback, "consumer_info"):
+                        kwargs["consumer_info"] = {'topic': self.topic, 'group_id': self.group_id}
+
                     try:
-                        # 传递重试次数，仿照rocketMQ，取名，各自回调视情况需要接收
-                        kwargs = {}
-                        if has_parameter(self.callback, "reconsume_times"):
-                            kwargs["reconsume_times"] = err_cnt
+                        succeeded = self.run_callback(payload, **kwargs)
+                    except Exception:
+                        logger.exception("Kafka 回调异常 topic=%s partition=%s offset=%s group=%s",
+                                         *partition, offset, self.group_id)
+                        succeeded = False
 
-                        if has_parameter(self.callback, "consumer_info"):
-                            kwargs["consumer_info"] = {'topic': self.topic, 'group_id': self.group_id}
+                    if succeeded:
+                        self.consumer.commit(msg)
+                        self._failed_offsets.pop(partition, None)
+                        logger.info("consumer topic: [%s] partition:[%s] message: %s 消费成功 consumer_group=%s",
+                                    self.topic, msg.partition(), message_value, self.group_id)
+                        continue
 
-                        if self.run_callback(payload, **kwargs):
-                            # 手动提交偏移量
-                            self.consumer.commit(msg)
-                            logger.info("consumer topic: [%s] partition:[%s] message: %s 消费成功 consumer_group=%s",
-                                        self.topic, msg.partition(), message_value, self.group_id)
-                        else:
-                            err_cnt += 1
-                            logger.info("consumer topic: [%s] partition:[%s] message: %s  retry=%s",
-                                        self.topic, msg.partition(), message_value, err_cnt)
-
-                    except Exception as e:
-                        err_cnt += 1
-                        logger.warn("异常 consumer  topic: [%s] partition:[%s] message: %s  retry=%s",
-                                    self.topic, msg.partition(), message_value, err_cnt, exc_info=e, stack_info=True)
-                        # 如果是0则不会引入任何延迟
-                        time.sleep(self.retry_interval)
-
+                    err_cnt += 1
                     if err_cnt >= self.err_retry_max:
-                        logger.error("consumer fail topic: [%s] partition:[%s] 需要研发关注是否需要补偿: %s",
-                                     self.topic, msg.partition(), message_value)
-                        self.consumer.commit(msg)
-                    elif payload.get('reconsume_times', 0) != err_cnt:
-                        # 本次消费执行失败，重新发送kafka消息
-                        payload.update({'reconsume_times': err_cnt})
-                        self.reconsume_messages(json.dumps(payload))
-                        self.consumer.commit(msg)
+                        self.consumer.pause([TopicPartition(*partition)])
+                        logger.error("Kafka 消费失败，已暂停分区并保留位点 topic=%s partition=%s offset=%s group=%s",
+                                     *partition, offset, self.group_id)
+                    else:
+                        if self.retry_interval > 0:
+                            time.sleep(self.retry_interval)
+                        self.consumer.seek(TopicPartition(*partition, offset))
+                        logger.warning("Kafka 消费失败，将从原位点重试 topic=%s partition=%s offset=%s group=%s attempts=%s",
+                                       *partition, offset, self.group_id, err_cnt)
+                    self._failed_offsets[partition] = (offset, err_cnt)
 
         except KeyboardInterrupt:
             logger.error("用户中断")
-        except KafkaError as e:
+        except KafkaException as e:
             logger.error("Kafka 错误: %s", e)
         except Exception as e:
             if e.args and e.args[0] == 'Consumer closed' and self.__closed:
@@ -165,6 +175,10 @@ class KafkaConsumer:
             if not self.__closed:
                 logger.info("workers topic = %s final close", self.topic)
                 self.consumer.close()
+
+    def _clear_failed_offsets(self, _consumer, partitions):
+        for partition in partitions:
+            self._failed_offsets.pop((partition.topic, partition.partition), None)
 
     def stop(self):
         with self.lock:
