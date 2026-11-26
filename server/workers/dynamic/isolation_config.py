@@ -47,7 +47,6 @@ class IsolationConfigManager:
             "spaces": {},
             "default_config": {
                 "max_workers": 3,
-                "callback_timeout": 300,
                 "task_types": ["short", "long", "image", "docx"]
             },
             "version": "1.0.0",
@@ -182,7 +181,7 @@ class IsolationConfigManager:
                     
             # 验证默认配置
             default_config = config["default_config"]
-            if not all(k in default_config for k in ["max_workers", "callback_timeout", "task_types"]):
+            if not all(k in default_config for k in ["max_workers", "task_types"]):
                 logger.error("Invalid default_config format")
                 return False
                 

@@ -17,6 +17,8 @@ IMAGE = "image"
 TEXT = "text"
 TABLE = "table"
 
+HTTP_TIMEOUT_SECONDS = 30
+
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAPI_CONSOLE_KEY = os.getenv("OPENAPI_CONSOLE_KEY")
 OPENAPI_HOST = os.getenv("OPENAPI_HOST")

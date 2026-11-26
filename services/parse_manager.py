@@ -27,7 +27,7 @@ from doc_parser.layout_parser import pdf_parser, xlsx_parser, csv_parser, pic_pa
 from doc_parser.layout_parser import pptx_parser, txt_parser, xls_parser, docx_parser
 from server.protocol.standard_domtree import StandardDomTree
 from services.constants import OPENAI_API_KEY, OPENAPI_HOST
-from services.constants import ParseType
+from services.constants import HTTP_TIMEOUT_SECONDS, ParseType
 from settings.ini_config import config
 from utils import general_util
 from utils.docx2pdf_util import convert_docx_to_pdf
@@ -53,6 +53,7 @@ DOCX_TO_PDF_FINISH = "docx_to_pdf_finish"
 DOCX_TO_PDF_FAIL = "docx_to_pdf_fail"
 
 FILE_API_URL = config.get('FILEAPI', 'URL')
+PARSE_TIMEOUT_SECONDS = 15 * 60
 
 percent_map = {
     DOCUMENT_PARSE_BEGIN: 0,
@@ -267,7 +268,7 @@ def domtree_parse_and_callback(file_id, file_name: str, contents: bytes, callbac
 def file_api_retrieve_file(file_id):
     url = f"{FILE_API_URL}/v1/files/{file_id}/content"
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT_SECONDS)
     return response.content
 
 
@@ -275,7 +276,7 @@ def file_api_retrieve_file(file_id):
 def file_api_get_file_info(file_id):
     url = f"{FILE_API_URL}/v1/files/{file_id}"
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=HTTP_TIMEOUT_SECONDS)
     response_data = json.loads(response.content)
     return response_data
 
@@ -318,7 +319,9 @@ def file_api_upload_domtree(io, file_id, file_meta: dict = None):
         },
         data={"file_id": file_id},
         headers=headers,
+        timeout=HTTP_TIMEOUT_SECONDS,
     )
+    response.raise_for_status()
 
     # 解析响应
     try:
@@ -366,7 +369,9 @@ def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str, file_meta: dict = 
         },
         data={"file_id": file_id},
         headers=headers,
+        timeout=HTTP_TIMEOUT_SECONDS,
     )
+    response.raise_for_status()
 
     # 解析响应
     try:
@@ -377,6 +382,20 @@ def file_api_upload_pdf(pdf_stream: io.BytesIO, file_id: str, file_meta: dict = 
 
 
 def parse_result_layout_and_domtree(file_info, callbacks: list):
+    file_id = file_info["id"]
+    try:
+        result = _parse_file(file_info, callbacks)
+    except Exception:
+        _report_failed_task(file_id, DOCUMENT_PARSE_FAIL, callbacks)
+        raise
+
+    succeeded = result and (result["layout_result"] or result["domtree_result"])
+    status = DOCUMENT_PARSE_FINISH if succeeded else DOCUMENT_PARSE_FAIL
+    _require_terminal_progress(file_id, status, callbacks)
+    return result
+
+
+def _parse_file(file_info, callbacks):
     file_id = file_info["id"]
     file_name = file_info["filename"]
     file_meta = file_info.get("file_meta", {})
@@ -404,58 +423,19 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
         # 直接调用 DOCX2PDF 任务来处理转换和上报
         convert_result = convert_docx_to_pdf_task(file_info, callbacks)
         if not convert_result:
-            # 转换失败，直接返回（convert_docx_to_pdf_task 已经处理了回调）
-            callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
-            return
+            return None
         
         # 转换成功，更新文件名并使用返回的PDF流
         file_name = convert_result["pdf_file_name"]
         pdf_stream = convert_result["pdf_stream"]
 
-    # 多进程并行解析
-    manager = Manager()
-    return_dict = manager.dict()
-
     parse_contents = pdf_stream if pdf_stream else contents
-
-    # 准备 user_info 字典
     user_info = {
         'user': parser_context.get_user(),
         'ak_code': parser_context.get_ak_code(),
         'ak_sha': parser_context.get_ak_sha()
     }
-
-    p1 = multiprocessing.Process(target=worker, args=(
-        layout_parse_and_callback, (file_id, file_name, parse_contents, callbacks, user_info, parser_context),
-        return_dict, 'layout_parse'))
-    p2 = multiprocessing.Process(target=worker, args=(
-        domtree_parse_and_callback, (file_id, file_name, parse_contents, callbacks, user_info, parser_context),
-        return_dict, 'domtree_parse'))
-    p1.start()
-    p2.start()
-
-    # 设置超时时间（例如 60 秒）
-    timeout = 60 * 15  # 15min
-
-    # 等待子进程完成，超时后终止子进程
-    p1.join(timeout)
-    if p1.is_alive():
-        p1.terminate()
-        p1.join()
-        logger.error(f"layout_parse 子进程超时并已终止 file_id:{file_id}")
-        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
-        return
-
-    p2.join(timeout)
-    if p2.is_alive():
-        p2.terminate()
-        p2.join()
-        logger.error(f"domtree_parse 子进程超时并已终止 file_id:{file_id}")
-        callback_parse_progress(file_id, DOCUMENT_PARSE_FAIL, callbacks)
-        return
-
-    parse_result_raw = dict(return_dict)
-
+    parse_result_raw = _parse_in_parallel(file_id, file_name, parse_contents, callbacks, user_info)
     layout_result = parse_result_raw["layout_parse"][1] if parse_result_raw["layout_parse"] else None
     domtree_result = parse_result_raw["domtree_parse"][0] if parse_result_raw["domtree_parse"] else None
     markdown_result = parse_result_raw["domtree_parse"][1] if parse_result_raw["domtree_parse"] else None
@@ -466,25 +446,18 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
         parser_context.parse_result_cache_provider.upload_parse_result(file_id, domtree_result, ParseType.DOMTREE.value)
         parser_context.parse_result_cache_provider.upload_parse_result(file_id, markdown_result, ParseType.MARKDOWN.value)
 
-    # 解析完毕回调
-    if not layout_result and not domtree_result:
-        # 两个解析都没结果，返回失败
-        status_code = DOCUMENT_PARSE_FAIL
-    else:
-        status_code = DOCUMENT_PARSE_FINISH
-
-    # 如果有domtree结果，需要上传到file_api
+    # 解析结果先上传，再发送最终状态。
     if domtree_result:
-        try:
-            # 转换为协议标准化的StandardDomTree并上传
-            standard_dom_tree = StandardDomTree.from_domtree_dict(domtree=domtree_result, file_info=file_info)
-            standard_dom_tree_json = jsonable_encoder(standard_dom_tree.root)
-            file_api_upload_domtree(file_id=file_id, io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)), file_meta=file_meta)
-            logger.info(f"上传domtree到file_api成功 file_id:{file_id}")
-        except Exception as e:
-            logger.error(f"domtree上传失败 file_id:{file_id}, 错误信息: {e}")
-
-    callback_parse_progress(file_id, status_code, callbacks)
+        standard_dom_tree = StandardDomTree.from_domtree_dict(domtree=domtree_result, file_info=file_info)
+        standard_dom_tree_json = jsonable_encoder(standard_dom_tree.root)
+        uploaded = file_api_upload_domtree(
+            file_id=file_id,
+            io=io.StringIO(json.dumps(standard_dom_tree_json, ensure_ascii=False)),
+            file_meta=file_meta,
+        )
+        if not isinstance(uploaded, dict) or not uploaded or "error" in uploaded:
+            raise RuntimeError(f'DOM tree upload failed for {file_id}')
+        logger.info(f"上传domtree到file_api成功 file_id:{file_id}")
 
     # 记录结束时间并计算总耗时
     end_time = time.time()
@@ -497,6 +470,39 @@ def parse_result_layout_and_domtree(file_info, callbacks: list):
         "domtree_result": domtree_result,
         "markdown_result": markdown_result,
     }
+
+
+def _parse_in_parallel(file_id, file_name, contents, callbacks, user_info):
+    deadline = time.monotonic() + PARSE_TIMEOUT_SECONDS
+    with Manager() as manager:
+        results = manager.dict()
+        args = (file_id, file_name, contents, callbacks, user_info, parser_context)
+        started = []
+        try:
+            for key, func in (('layout_parse', layout_parse_and_callback),
+                              ('domtree_parse', domtree_parse_and_callback)):
+                process = multiprocessing.Process(target=worker, args=(func, args, results, key))
+                process.start()
+                started.append((key, process))
+
+            for key, process in started:
+                process.join(timeout=max(0, deadline - time.monotonic()))
+                if process.is_alive():
+                    raise TimeoutError(f'{key} 子进程超时 file_id={file_id}')
+            return dict(results)
+        finally:
+            for _, process in started:
+                if process.is_alive():
+                    process.terminate()
+            for _, process in started:
+                process.join(timeout=1)
+                if process.is_alive():
+                    process.kill()
+                    process.join(timeout=1)
+                if not process.is_alive():
+                    process.close()
+                else:
+                    logger.error("解析子进程未退出 file_id=%s pid=%s", file_id, process.pid)
 
 
 # 同步解析接口(file_name)
@@ -544,12 +550,28 @@ def parse_doc(file_name, contents: bytes, parse_type, strategy: dict):
     return ret
 
 
+class CallbackDeliveryError(RuntimeError):
+    pass
+
+
 def callback_parse_progress(file_id, status_code, callbacks):
-    # 解析完毕回调fileAPI
-    callback_file_api(file_id, status_code)
-    # 业务方回调
+    delivered = callback_file_api(file_id, status_code)
     for callback in callbacks:
-        callback_other_api(file_id, status_code, callback)
+        delivered = callback_other_api(file_id, status_code, callback) and delivered
+    return delivered
+
+
+def _require_terminal_progress(file_id, status_code, callbacks):
+    if not callback_parse_progress(file_id, status_code, callbacks):
+        raise CallbackDeliveryError(f'Failed to report {status_code} for {file_id}')
+
+
+def _report_failed_task(file_id, status_code, callbacks):
+    try:
+        _require_terminal_progress(file_id, status_code, callbacks)
+    except Exception as error:
+        logger.error("失败状态上报未完成 file_id=%s status=%s error=%s",
+                     file_id, status_code, type(error).__name__)
 
 
 def callback_file_api(file_id, status_code, message: str = ""):
@@ -571,10 +593,14 @@ def callback_file_api(file_id, status_code, message: str = ""):
         "percent": percent_map.get(status_code, 0)
     }
     try:
-        response = requests.post(url, headers=headers, json=data)
-        response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
+        response = requests.post(url, headers=headers, json=data, timeout=HTTP_TIMEOUT_SECONDS)
+        response.raise_for_status()
+        if not 200 <= response.status_code < 300:
+            logger.warning("File API回调返回非成功状态 file_id=%s status=%s http_status=%s",
+                           file_id, status_code, response.status_code)
+            return False
         logger.info(
-            f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
+            f"callback_file_api 调用成功 状态:{status_code} 状态码: {response.status_code} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
@@ -592,10 +618,14 @@ def callback_other_api(file_id, status_code, callback_url, message: str = ""):
         "percent": percent_map.get(status_code, 0)
     }
     try:
-        response = requests.post(callback_url, json=data)
-        response.raise_for_status()  # 如果响应状态码不是 200，抛出 HTTPError
+        response = requests.post(callback_url, json=data, timeout=HTTP_TIMEOUT_SECONDS)
+        response.raise_for_status()
+        if not 200 <= response.status_code < 300:
+            logger.warning("业务回调返回非成功状态 file_id=%s status=%s http_status=%s",
+                           file_id, status_code, response.status_code)
+            return False
         logger.info(
-            f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} 响应内容: {response.json()} ")
+            f"callback_other_api 调用成功 状态:{status_code} 状态码: {response.status_code} ")
         return True
 
     except requests.exceptions.HTTPError as http_err:
@@ -643,52 +673,36 @@ def convert_docx_to_pdf_task(file_info, callbacks: list):
     logger.info(f"convert_docx_to_pdf_task 开始转换 file_id:{file_id}")
     start_time = time.time()
 
-    # 检查文件类型
     file_extension = general_util.get_file_type(file_name)
     if file_extension not in ['doc', 'docx']:
         logger.warning(f"文件类型不是DOCX/DOC，无需转换 file_id:{file_id}, 文件类型:{file_extension}")
-        callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
+        _require_terminal_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
         return None
 
-    callback_parse_progress(file_id, DOCX_TO_PDF_BEGIN, callbacks)
-    
+    result = None
     try:
-        # 读取文件流内容
+        callback_parse_progress(file_id, DOCX_TO_PDF_BEGIN, callbacks)
         contents = file_api_retrieve_file(file_id)
-        
-        # 转换DOCX到PDF
         pdf_stream, pdf_file_name = convert_docx_to_pdf(file_name, contents)
-        
-        if not pdf_stream:
+        if pdf_stream:
+            uploaded = file_api_upload_pdf(pdf_stream, file_id, file_meta)
+            if not isinstance(uploaded, dict) or not uploaded or "error" in uploaded:
+                raise RuntimeError(f'PDF upload failed for {file_id}')
+            result = {
+                "pdf_file_name": pdf_file_name,
+                "pdf_stream": pdf_stream,
+                "upload_result": uploaded,
+            }
+        else:
             logger.error(f"DOCX转换PDF失败 file_id:{file_id}")
-            callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
-            return None
-        
-        # 回流PDF到API
-        pdf_upload_result = file_api_upload_pdf(pdf_stream, file_id, file_meta)
-        if not pdf_upload_result or "error" in pdf_upload_result:
-            logger.warning(f"PDF回流失败 file_id:{file_id}, 错误信息: {pdf_upload_result.get('error', '未知错误')}")
-            callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
-            return None
-        
-        logger.info(f"PDF回流成功 file_id:{file_id}")
-        callback_parse_progress(file_id, DOCX_TO_PDF_FINISH, callbacks)
-        
-        # 记录结束时间并计算总耗时
-        end_time = time.time()
-        total_time = end_time - start_time
-        minutes = int(total_time // 60)
-        seconds = int(total_time % 60)
-        logger.info(f"convert_docx_to_pdf_task 转换完成 file_id:{file_id}, 总耗时: {minutes}分钟{seconds}秒")
-        
-        return {
-            "pdf_file_name": pdf_file_name,
-            "pdf_stream": pdf_stream,
-            "upload_result": pdf_upload_result
-        }
-        
-    except Exception as e:
-        logger.error(f"DOCX转换PDF过程出错 file_id:{file_id}, 错误信息: {e}")
-        callback_parse_progress(file_id, DOCX_TO_PDF_FAIL, callbacks)
-        return None
+    except requests.RequestException:
+        _report_failed_task(file_id, DOCX_TO_PDF_FAIL, callbacks)
+        raise
+    except Exception as error:
+        logger.error(f"DOCX转换PDF过程出错 file_id:{file_id}, 错误信息: {error}")
 
+    status = DOCX_TO_PDF_FINISH if result else DOCX_TO_PDF_FAIL
+    _require_terminal_progress(file_id, status, callbacks)
+    if result:
+        logger.info("DOCX转换完成 file_id=%s duration=%.2fs", file_id, time.time() - start_time)
+    return result

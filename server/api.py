@@ -3,7 +3,6 @@ import json
 from typing import Optional
 from xmlrpc.client import boolean
 
-from bella_openapi.authorize import validate_token_by_whoami
 from bella_openapi.bella_trace import TraceContext
 from bella_openapi.exception import AuthorizationException
 from fastapi import APIRouter, Header, HTTPException
@@ -12,6 +11,7 @@ from fastapi import Form, Path, Query
 
 from doc_parser.context import logger_context, parser_context
 from services import parse_manager
+from utils.openapi_util import validate_token_by_whoami
 
 logger = logger_context.get_logger()
 

@@ -2,13 +2,13 @@ import time
 from typing import Dict, Optional
 
 import openai
-import requests
 
 from doc_parser.context import parser_context, logger_context
 from utils.openapi_util import report_usage_log
 from bella_openapi.bella_trace import TraceContext
 
 logger = logger_context.get_logger()
+MODEL_TIMEOUT_SECONDS = 5 * 60
 
 
 def llm_image2text(
@@ -68,7 +68,7 @@ def llm_image2text(
                 model=model,
                 user=user,
                 extra_headers=extra_headers,
-                timeout=30  # 超时时间为30秒
+                timeout=MODEL_TIMEOUT_SECONDS,
             )
             logger.info(f"图片信息提取请求LLM中，【请求结果：{response}】")
             
@@ -92,7 +92,7 @@ def llm_image2text(
 
         except openai.RateLimitError:
             time.sleep(10)
-        except requests.exceptions.Timeout:
+        except openai.APITimeoutError:
             logger.error("请求超时")
             break
         except Exception as e:
