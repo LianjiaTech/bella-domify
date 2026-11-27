@@ -82,7 +82,7 @@ class KafkaConsumer:
         self.consumer.subscribe([self.topic], on_revoke=self._clear_failed_offsets)
 
     def consume_messages(self):
-        """消费失败时从原位点重读，耗尽后暂停分区。"""
+        """消费失败时从原位点重读，耗尽后提交位点并继续消费。"""
         try:
             while True:
                 with self.lock:
@@ -105,8 +105,6 @@ class KafkaConsumer:
                     failure = self._failed_offsets.get(partition)
                     if failure is not None:
                         failed_offset, err_cnt = failure
-                        if err_cnt >= self.err_retry_max:
-                            continue
                         # 防止同分区的后续消息越过失败位点。
                         if offset != failed_offset:
                             self.consumer.seek(TopicPartition(*partition, failed_offset))
@@ -151,16 +149,19 @@ class KafkaConsumer:
 
                     err_cnt += 1
                     if err_cnt >= self.err_retry_max:
-                        self.consumer.pause([TopicPartition(*partition)])
-                        logger.error("Kafka 消费失败，已暂停分区并保留位点 topic=%s partition=%s offset=%s group=%s",
-                                     *partition, offset, self.group_id)
-                    else:
-                        if self.retry_interval > 0:
-                            time.sleep(self.retry_interval)
-                        self.consumer.seek(TopicPartition(*partition, offset))
-                        logger.warning("Kafka 消费失败，将从原位点重试 topic=%s partition=%s offset=%s group=%s attempts=%s",
-                                       *partition, offset, self.group_id, err_cnt)
+                        self.consumer.commit(msg)
+                        self._failed_offsets.pop(partition, None)
+                        logger.error("Kafka 消费失败，达到处理上限，提交位点并跳过消息 "
+                                     "topic=%s partition=%s offset=%s group=%s attempts=%s",
+                                     *partition, offset, self.group_id, err_cnt)
+                        continue
+
+                    if self.retry_interval > 0:
+                        time.sleep(self.retry_interval)
+                    self.consumer.seek(TopicPartition(*partition, offset))
                     self._failed_offsets[partition] = (offset, err_cnt)
+                    logger.warning("Kafka 消费失败，将从原位点重试 topic=%s partition=%s offset=%s group=%s attempts=%s",
+                                   *partition, offset, self.group_id, err_cnt)
 
         except KeyboardInterrupt:
             logger.error("用户中断")
